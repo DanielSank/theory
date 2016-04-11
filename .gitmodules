@@ -1,0 +1,3 @@
+[submodule "texlib"]
+	path = texlib
+	url = https://github.com/DanielSank/texlib.git
