@@ -1,0 +1,120 @@
+\documentclass[twocolumn]{article}
+
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\braket}[2]{\langle #1|#2\rangle}
+
+\title{Jaynes-Cummings Hamiltonian}
+\author{Daniel Sank}
+\date{9 August 2011}
+
+\begin{document}
+
+\maketitle
+The Hamiltonian is\begin{eqnarray*}
+H & = & H_{q}+H_{r}+H_{I}\\
+H_{q} & = & -\frac{1}{2}\omega_{q}\sigma_{z}\\
+H_{r} & = & \omega_{r}\left(a^{\dagger}a+\frac{1}{2}\right)\\
+H_{I} & = & \frac{\Omega}{2}\left(a^{\dagger}\sigma^{-}+a\sigma^{+}\right)\end{eqnarray*}
+
+
+
+\section{Schrodinger Picture}
+
+We first work the problem in the Schrodinger picture. To do this we
+regroup the Hamiltonian as follows\[
+H=\underbrace{\left[\omega_{r}\left(a^{\dagger}a-\frac{1}{2}\sigma^{z}\right)\right]}_{H_{1}}+\underbrace{\left[-\frac{1}{2}\delta\sigma^{z}+\frac{\Omega}{2}\left(a\sigma^{+}+a^{\dagger}\sigma^{-}\right)\right]}_{H_{2}}\]
+where $\delta\equiv\omega_{q}-\omega_{r}$. Look first at $H_{1}$.
+It does not couple the qubit and resonator, so its eigenstates are
+trivially the products of the eigenstates of the two systems independently.
+Now consider $H_{2}$. This term couples the systems together. However,
+$H_{1}$ and $H_{2}$ commute with one another, which means that there
+exists a basis of eigenvectors of the total Hamiltonian which simultaneously
+diagonalizes each of them individually. The eigenvectors of $H_{1}$
+are of the form $|g,n\rangle$ meaning {}``ground state of the qubit,
+n photons in the resonator,'' or $|e,m\rangle$ meaning {}``excited
+state of the qubit with m photons in the resonator.'' In order to
+build linear combinations of these states that are still eigenvectors
+of $H_{1}$ we have to make sure that the operator $a^{\dagger}a+\frac{1}{2}\sigma^{z}$
+has the same value on all terms in each linear combination. In other
+words, we have to work within the degenerate subspaces of $H_{1}$.
+A generic two term linear combination would be\[
+|g,n\rangle+|e,m\rangle\]
+and the values of $H_{1}$ acting on each term are\[
+H_{1}|g,n\rangle=n-\frac{1}{2}\qquad H_{1}|e,m\rangle=m+\frac{1}{2}\]
+Setting these two values equal to one another gives\[
+n-\frac{1}{2}=m+\frac{1}{2}\longrightarrow n=m+1\]
+Therefore, the eigenvectors of the total Hamiltonian can be written
+as pairwise linear combinations of states $|g,n\rangle$ and $|e,n-1\rangle$.
+In more physical terms, the interaction Hamiltonian conserves excitation
+number, so the eigenstates are combinations of states with equal total
+numbers of excitations.
+
+Now that we know that our eigenstates will be combinations of states
+with equal numbers of excitations, we have to find out exactly what
+the combinations are. To do this we write out the matrix form of $H$
+in the subspace of $|g,n\rangle$ and $|e,n-1\rangle$\[
+H^{(n)}=\underbrace{\left[\begin{array}{cc}
+\omega_{r}\left(n-1\right)+\frac{\omega_{q}}{2} & \frac{\Omega}{2}\sqrt{n}\\
+\frac{\Omega}{2}\sqrt{n} & \omega_{r}n-\frac{\omega_{q}}{2}\end{array}\right]}_{|e,n-1\rangle\qquad|g,n\rangle}\]
+
+
+in order to diagonalize this two by two matrix we break it down in
+terms of pauli operators.\[
+H^{(n)}=\omega_{r}\left(n-\frac{1}{2}\right)I+\frac{\delta}{2}\sigma^{z}+\frac{\Omega}{2}\sqrt{n}\sigma^{x}\]
+The eigenvalues of this Hamiltonian are given simply by the part proportional
+to identity plus or minus the length of the rest,\[
+E_{\pm}=\omega_{r}\left(n-\frac{1}{2}\right)\pm\frac{1}{2}\sqrt{\Omega^{2}n+\delta^{2}}\]
+and the eigenstates are\begin{eqnarray*}
+|\Psi^{-}\rangle & = & \cos\left(\frac{\alpha_{n}}{2}\right)|e,n-1\rangle+\sin\left(\frac{\alpha_{n}}{2}\right)|g,n\rangle\\
+|\Psi^{+}\rangle & = & -\sin\left(\frac{\alpha_{n}}{2}\right)|e,n-1\rangle+\cos\left(\frac{\alpha_{n}}{2}\right)|g,n\rangle\end{eqnarray*}
+where $\alpha_{n}\equiv\arctan\left(\Omega\sqrt{n}/\delta\right)$.
+If the qubit and resonator are far off resonance then $\delta$ is
+large, so $\alpha_{n}$ is small and the eigenstates are just products
+of the eigenstates we would have if the systems were uncoupled. If
+the systems are exactly on resonance then $\delta=0$ and $\alpha_{n}=\pi/2$
+so the eigenstates are equal superpositions of the original two.
+
+
+\section{Interaction picture}
+
+We work in the interaction picture, taking the intrinsic Hamiltonian
+to be $H_{0}=H_{r}+H_{q}$ and the interaction term to be $H_{I}$.
+The time dependent operators in the interaction picture are determined
+by the Heisenberg equation of motion, $id_{t}\mathcal{O}(t)=[\mathcal{O}(t),H_{0}]$.
+Applying this equation to the qubit and resonator operators yields\begin{eqnarray*}
+a(t) & = & a(0)e^{-i\omega_{r}t}\\
+\sigma^{-}(t) & = & \sigma^{-}(0)e^{-i\omega_{q}t}\end{eqnarray*}
+All other time dependences can be derived from these. For example,
+the time dependence of $\sigma^{x}$ is found to be\begin{eqnarray*}
+\sigma^{x}(t) & = & \sigma^{+}(t)+\sigma^{-}(t)\\
+& = & e^{i\omega_{q}t}\sigma^{+}+e^{-i\omega_{q}t}\sigma^{-}\\
+& = & e^{i\omega_{q}t}\frac{1}{2}\left(\sigma^{x}-i\sigma^{y}\right)+e^{-i\omega_{q}t}\frac{1}{2}\left(\sigma^{x}+i\sigma^{y}\right)\\
+& = & \cos\left(\omega_{q}t\right)\sigma^{x}+\sin\left(\omega_{q}t\right)\sigma^{y}\end{eqnarray*}
+Here all operators without time dependence are implied to be the Schrodinger
+picture operators, ie the operators at $t=0$.
+
+The interaction Hamiltonian must be written in the interaction picture.
+We do this using the time dependences listed above, \begin{equation}
+H_{I}(t)=\frac{\Omega}{2}\left(a\sigma^{+}e^{i\delta t}+a^{\dagger}\sigma^{-}e^{-i\delta t}\right) \end{equation}
+where $\delta\equiv\omega_{q}-\omega_{r}$. In the case that $\delta=0$
+the interaction Hamiltonian is time independent and we can solve the
+evolution easily. The interaction $H_{I}$ in this case is block diagonal,
+linking only states $|g,n\rangle$ and $|e,n-1\rangle$. The matrix
+is \begin{equation}
+H_{I}^{(n)}=\frac{\Omega}{2}\left[\begin{array}{cc}
+0 & \sqrt{n}\\
+\sqrt{n} & 0\end{array}\right]=\frac{\Omega}{2}\sqrt{n}\sigma^{x} \end{equation}
+Computing the evolution operator we get \begin{equation}
+U(t)=\exp\left[-iH_{I}t\right]=\cos\left(\frac{\Omega}{2}\sqrt{n}t\right)I-i\sin\left(\frac{\Omega}{2}\sqrt{n}t\right)\sigma^{x} \end{equation}
+Note that this is the evolution operator only for states with nonzero excitations. In the subspace of $|g,0\rangle$ the Hamiltonian is zero and the evolution operator is the identity.
+
+If the system starts out in the state $\ket{g \alpha}$ the effect of this evolution produces a state with two parts: one where the qubit remains in the ground state, and another with the qubit in the excited state. After time $t$ the term with the qubit in the ground state is \begin{eqnarray*}
+\ket{\Psi} &=& \ket{g0} + \sum_{n=1}^{\infty} \frac{\alpha^n}{\sqrt{n!}} \cos \left( \frac{\Omega}{2}\sqrt{n} t \right) \ket{gn} \\
+&=& \ket{g0} + \sum_{n=1}^{\infty} \frac{\alpha^n}{\sqrt{n!}} \left( 1 - \frac{\Omega^2 n t^2}{8}\right) \ket{gn} \\
+&=& \ket{g0} + \sum_{n=1}^{\infty} \frac{\left[ \alpha \left(1 - \Omega^2 t^2 / 8 \right) \right]^n}{\sqrt{n!}} \ket{gn} \\
+&=& \ket{g \beta} \end{eqnarray*}
+where $\beta = \alpha [1 - (\Omega t)^2 /8]$. Thus, the amplitude of the coherent state is reduced in the part of the system state in which the qubit is in the ground state.
+
+Now we compute the part with the qubit in the excited state. By 
+\end{document}
