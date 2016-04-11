@@ -1,0 +1,134 @@
+\documentclass[twocolumn]{article}
+
+\input{../TeX/macros.tex}
+\input{../TeX/packages.tex}
+\input{../TeX/citeinternalnote.tex}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\allowdisplaybreaks
+
+\title{Voltage at a mismatched load:\\
+Thinking in terms of available power}
+\author{Daniel Sank \\
+\small Google Quantum AI}
+\date{23 May 2015}
+
+\begin{document}
+
+\maketitle
+
+\section{introduction}
+In this note, we relate the voltage on a mismatched load to the available power of an attenuated voltage source.
+\textbf{All voltages in this document are RMS}.
+
+\section{Lumped source with matched load}
+
+Consider, as shown in Fig.\,\ref{fig:lumped_matched_load}, a voltage source $V_s$ with output impedance $Z_0$ connected to a matched resistor $R_l=Z_0$.
+The voltage measured across the load is $V_l = V_s/2$.
+The power delivered to this matched load, called the ``available power'' $P_a$, is
+\begin{equation}
+P_a = V_l^2 / Z_0 = (V_s/2)^2 / Z_0 \, .
+\end{equation}
+The term ``available power'' indicates that this is the largest amount of power which can be extracted from the source.\footnote{It is a simple exercise to prove that a voltage source delivers the maximum power when connected to a matched load.}
+Most importantly, $P_a$ is the power you would measure at room temperature with a spectrum analyzer.
+
+Similarly, $V_l$ here is the voltage you would measure with a matched voltage probe (oscilloscope).
+Therefore, we denote $V_l$ for the matched load case by the symbol $V_{\text{meas}}$.
+Note that $P_a = V_{\text{meas}}^2 / Z_0$.
+
+\begin{figure}
+\begin{centering}
+\begin{tikzpicture}
+\draw (0,0)
+to[V,v=$V_s$] (0,2)
+to[R=$Z_0$] (0,4)
+to[short,-*] (3,4) node[label={above:$V_l=V_s/2$}]{}
+to[R=${R_l=Z_0}$] (3,2)
+to[short] (3,0)
+to[short] (0,0);
+\end{tikzpicture}
+\par\end{centering}
+\caption{Voltage source with a matched load.}
+\label{fig:lumped_matched_load}
+\end{figure}
+
+\section{Transmission line source with matched load}
+
+In this section we connect the load voltage to the travelling wave voltage.
+If the source is connected to a transmission line with characteristic impedance $Z_0$, as shown in Fig.\,\ref{fig:tline_matched_load}, then the output impedance of the source plus line is still $Z_0$.
+Suppose we connect a load $R_l=Z_0$.
+By voltage division, the voltage at the load is $V_l = V_s/2$.
+The power dissipated into the load is therefore
+\begin{equation}
+P_l = V_l^2/Z_0 = (V_s/2)^2 / Z_0 \, .
+\end{equation}
+
+Because the reflection coefficient $\Gamma$ is zero,
+\begin{equation}
+\Gamma = \frac{R_l - Z_0}{R_l + Z_0} = 0 \, ,
+\end{equation}
+the load power $P_l$ must be equal the input power flow $P_{\text{in}}$ carried by the input travelling voltage wave with amplitude $V_{\text{in}}$.
+In other words,
+\begin{align}
+\frac{(V_s/2)^2}{Z_0} = P_l &= P_{\text{in}} = \frac{V_{\text{in}}^2}{Z_0} \\
+\text{so} \qquad V_{\text{in}} &= V_s/2 \, .
+\end{align}
+
+\begin{figure}
+\begin{centering}
+\begin{tikzpicture}
+\draw (0,0)
+to[V,v=$V_s$] (0,2)
+to[R=$Z_0$] (0,4)
+to[transmission line, n=tline, -*] (3,4) node[label={right:$V_m=V_s/2$}]{}
+to[R=${R_l=Z_0}$] (3,2)
+to[short] (3,0)
+to[short] (0,0)
+(tline.s) node[below]{$\begin{array}{c}V_{\text{in}}\longrightarrow \\ V_{\text{out}}\longleftarrow \end{array}$}
+;
+\end{tikzpicture}
+\par\end{centering}
+\caption{Voltage source with transmission line and matched load.}
+\label{fig:tline_matched_load}
+\end{figure}
+
+\subsection{Attenuator}
+
+If we add an attenuator with attenuation factor $A$ to the transmission line, then the power flowing into the load goes down by a factor of $A$.
+The source output impedance is still $Z_0$ so the system is equivalent to the one without the attenuator as long as we scale the source voltage to $V_s'=V_s \sqrt{A}$.
+
+\section{Arbitrary load}
+
+Now suppose we terminate the line with an arbitrary load $Z_l$.
+The voltage at the load is
+\begin{align}
+V_l
+&= V_{\text{in}} + V_{\text{out}} \\
+&= V_{\text{in}} (1 + \Gamma) \\
+&= V_{\text{in}} \frac{2 Z_l}{Z_l + Z_0} \\
+&= \frac{V_s'}{2} \frac{2 Z_l}{Z_l + Z_0} \\
+&= V_s \sqrt{A} \frac{Z_l}{Z_l + Z_0} \\
+&= 2 V_{\text{meas}} \sqrt{A} \frac{Z_l}{Z_l + Z_0} \\
+&= 2 \sqrt{P_a Z_0 A} \frac{Z_l}{Z_l + Z_0} \, . \label{eq:V_l}
+\end{align}
+
+\section{Thinking in terms of available power}
+
+There's an easy way to remember all of this by thinking only in terms of available power.
+The load voltage is related to the input wave voltage by
+\begin{equation}
+V_l = V_{\text{in}}(1 + \Gamma) = V_{\text{in}} \frac{2 Z_l}{Z_l + Z_0} \,
+\end{equation}
+The input wave voltage is related to the \emph{power available at the load}, denoted $P_{a,l}$ by
+\begin{equation}
+P_{a,l} = V_{\text{in}}^2 / Z_0 \, .
+\end{equation}
+Finally, the power available at the load is related to the source power by $P_{a,l} = P_a A$.
+Combining these results gives
+\begin{equation}
+V_l = 2 \sqrt{P_a Z_0 A} \frac{Z_l}{Z_l + Z_0}
+\end{equation}
+which agrees with Eq.\,(\ref{eq:V_l}).
+
+\end{document}
+

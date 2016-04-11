@@ -1,0 +1,47 @@
+\documentclass{article}
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
+
+\title{Diodes}
+\author{Daniel Sank}
+\date{24 January 2011}
+
+\begin{document}
+
+\maketitle
+
+The IV equation for a diode is
+\begin{equation}
+I_{d}=I_{0}(e^{V_{d}/V_{0}}-1)
+\end{equation}
+The input diode on the Vishay IL66/ILD66/ILQ66 photocouplers have values $I_{0}=5.1$ nA and $V_{0}=0.076$ V, giving a current of 10 mA for 1.1 V forward voltage drop.
+
+From the diode IV we can compute the diode's current dependent resistance,
+\begin{align}
+dI_{d}/dV_{d} &= \frac{I_{0}}{V_{0}}e^{V_{d}/V_{0}}=\frac{1}{V_{0}}(I_{d}+I_{0}) \\
+R(I_{d}) &= dV_{d}/dI_{d} \\
+&= \frac{V_{0}}{I_{d}+I_{0}} \, .
+\end{align}
+Consider a diode in series with a resistor.
+A source voltage $V$ is applied to this series circuit.
+The currents through the resistor and diode are
+\begin{equation}
+I_{d} = I_{0}(e^{V_d / V_0} - 1) \qquad I_R = (V - V_d) / R \, .
+\end{equation}
+Since the circuit is series, these currents must be the same, so
+\begin{equation}
+\frac{V - V_d}{R} = I_0 (e^{V_d / V_0} - 1)
+\end{equation}
+The interesting questions is, what are the diode current and voltage as a function of source voltage for a given resistor?
+Pick a value of $V$.
+Then, as a function of $V_{d}$ the left side of the equation defines a line with negative slope and y intercept of $V/R$.
+The right side defines an exponential curve with y-intercept of zero.
+These curves obviously cross for some value of $V_{d}$, and we can see that due to the exponential curve's large slope, the value of $V_{d}$ for which the curves cross is insensitive to $V$ once $V$ is above a certain value.
+This is why diodes can be though of having a fixed forward voltage drop once they are ``on''.
+Let's look at $dV_d / dV$,
+\begin{align}
+\frac{1}{R} \left( 1 - \frac{dV_d}{dV} \right) &= \frac{I_0}{V_0} e^{V_d / V_{0}} \frac{dV_d}{dV} \\
+\frac{d V_d}{dV} &= \frac{1}{1 + (I_d + I_0) R / V_0} \, .
+\end{align}
+
+\end{document}

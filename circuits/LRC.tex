@@ -1,0 +1,107 @@
+\documentclass{article}
+
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
+
+\title{Parallel LRC circuit}
+\author{Daniel Sank\\\small{University of California Santa Barbara}}
+\date{October 2012}
+
+\begin{document}
+
+\maketitle
+
+\section{Equations of motion}
+
+In the parallel RLC circuit the voltage accross each element is the same. We have the following relations\begin{equation}
+V=I_{R}R\quad V=\dot{I_{L}}L\quad V=Q_{C}/C\end{equation}
+The total current through the three elements must be zero\begin{equation}
+I_{R}+I_{C}+I_{L}=0\end{equation}
+Differentiating this equation and substituting the current-voltage relations into it gives\begin{eqnarray*}
+\frac{\dot{V}}{R}+\ddot{V}C+\frac{V}{L} & = & 0\\
+\ddot{V}+\frac{\dot{V}}{RC}+\frac{V}{LC} & = & 0\end{eqnarray*}
+We compare this to the general form of the damped oscillator equation\begin{equation}
+\ddot{\phi}+2\beta\dot{\phi}+\omega_{0}^{2}\phi=0\end{equation}
+in which case we have $Q=\omega_{0}/2\beta$. This gives us a bare frequency of $\omega_{0}=1/\sqrt{LC}$ and quality factor of \begin{equation}
+Q=\omega_{0}RC\end{equation}
+Note that if we keep a constant frequency, then $C\propto L^{-1}$ and we can write \begin{equation}
+Q\propto C\end{equation}
+Why does increasing $C$, with an accompanying decrease in $L$, lead
+to higher quality factor? Consider the energy of the circuit, \begin{equation}
+E=\frac{1}{2}CV_{\textrm{peak}}^{2}+\frac{1}{2}LI_{\textrm{peak}}^{2}\end{equation}
+For a given amount of energy in the circuit, if raise $C$ and lower $L$ we find that the amplitude of the voltage goes down and the amplitude of the current goes up. In the parallel LRC circuit it is the voltage that is constant across all elements, whereas the current divides itself amongst all three elements. By increasing $C$ the voltage across the resistor is lowered and the dissipation, given by $V^{2}/R$ is also lowered.
+
+
+\subsection{Impedance and loss tangent}
+
+The impedance of the parallel LRC circuit is\begin{equation}
+Z(\omega)=Z_{0}\frac{ix}{1-x^{2}+ix/Q}\end{equation}
+where $x\equiv\omega/\omega_{0}$, $\omega_{0}\equiv1/\sqrt{LC}$, $Z_{0}\equiv\sqrt{L/C}$ and $Q\equiv R/Z_{0}=\omega_{0}RC$. It's
+useful to work out the real and imaginary parts\begin{eqnarray*}
+\Re Z(\omega) & = & \frac{Z_{0}}{Q}\frac{x^{2}}{(1-x^{2})^{2}+(x/Q)^{2}}\\
+\Im Z(\omega) & = & Z_{0}\frac{x(1-x^{2})}{(1-x^{2})^{2}+(x/Q)^{2}}\end{eqnarray*}
+In order to understand the loss while driving the circuit you have to look at the loss tangent, which for a parallel circuit is the resistance over the reactance,\begin{equation}
+\tan\delta=\frac{\Re Z}{\Im Z}=\frac{1}{Q}\frac{x}{1-x^{2}}\end{equation}
+For low drive frequency, $x\ll1$ this becomes $\tan\delta\approx x/Q$.
+
+
+\section{Impedance near resonance}
+From the usual impedance rules you can find that the impedance of a parallel LRC circuit is \begin{equation}
+Z = \frac{R}{1-iQ_i \frac{1}{1+\delta x} +iQ_i(\delta x + 1)} \end{equation}
+where here $\omega_{LC} = 1/\sqrt{LC}$, $Q_i = \omega_{LC} R C$, and $\delta x = (\omega-\omega_{LC})/\omega_{LC}$. For frequencies near $\omega_{LC}$ $\delta x \ll 1$ so we can approximate $(1+\delta x)^{-1} \approx (1-\delta x)$. The impedance in this case is \begin{equation}
+Z = \frac{R}{1+2iQ_i \delta x} \end{equation}
+If we define $Z_{LC} = \sqrt{L/C}$ we can express this as \begin{equation}
+Z = \frac{Q_i Z_{LC}}{1+2iQ_i \delta x} \end{equation}
+
+\section{Driving}
+
+Consider a current source driving the circuit of the form $I_d(t) = I_0\cos(\Omega t)$. In phasor form this is $\hat{I_d} = I_0e^{i\Omega t}$. The voltage response is simply \begin{equation}
+V(t) = \Re \left[ I_0 e^{i\Omega t}Z(\Omega) \right] \end{equation}
+The mean square voltage is then \begin{eqnarray}
+\langle V^2 \rangle &=& \frac{1}{2} I_0^2 |Z(\Omega)^2| \\
+&=& \frac{1}{2} I_0^2 \frac{Q_i^2 Z_{LC}^2}{1+Q_i^2 \left( 1+\delta x - \frac{1}{1+\delta x} \right)^2} \end{eqnarray}
+Taking the derivative with respect to $\delta x$ and setting it to zero we find the mean square voltage is maximized when $x=0$ meaning that the largest voltage response happens when $\Omega = \pm \omega_{LC}$. This justifies the notation, as $\omega_0$ is now seen to be the driven resonance frequency. Note that this is also the point at which energy is being dissipated in the resistor at the highest rate. This is because the average dissipated power is $\langle V^2 \rangle/R$. Note that this is also the frequency at which the impedance is purely real.
+
+\subsection{Energy stored and power loss}
+
+We now compute the energy stored in the capacitor and inductor. Let the impedance of the circuit be written as $Z(\omega)=|Z(\omega)|e^{i\phi(\omega)}$. Then the voltage phasor across the parallel circuit is \begin{equation}
+\hat{V} = I_0e^{i\Omega t}|Z(\Omega)|e^{i\phi(\Omega)} \end{equation}
+so the time dependant voltage is \begin{equation}
+V(t) = I_0|Z(\Omega)|\cos \left( \Omega t + \phi(\Omega) \right) \end{equation}
+The energy in the capacitor is \begin{equation}
+E_C(t) = \frac{1}{2} C V(t)^2 = \frac{1}{2} C I_0^2 |Z(\Omega)|^2 \cos \left( \Omega t + \phi(\Omega) \right)^2 \end{equation}
+The current through the inductor is governed by the equation \begin{equation}
+\hat{I}_L = \hat{V}_L / Z_L = \hat{V}/i\Omega L \end{equation}
+giving a time dependent current of \begin{equation}
+I_L(t) = \frac{I_0 |Z(\Omega)|}{\Omega L} \sin \left( \Omega t + \phi(\Omega) \right) \end{equation}
+and therefore an energy of \begin{equation}
+E_L = \frac{1}{2} \frac{I_0^2 |Z(\Omega)|^2}{\Omega^2 L} \sin \left( \Omega t + \phi(\Omega) \right)^2 \end{equation}
+Adding these two energies together we get \begin{equation}
+E(t) = \frac{1}{2}|Z(\Omega)|^2 I_0^2 C \left( \cos(\Omega t + \phi(\Omega))^2 + \frac{1}{(\Omega/\omega_0)^2} \sin(\Omega t + \phi(\Omega))^2 \right) \end{equation}
+On resonance the energy in the circuit is constant, while off resonance the energy oscillates. 
+
+On resonance the steady state energy in the resonator is \begin{equation}
+E = \frac{1}{2}R^2 I_0^2 C \end{equation}
+where here we've used the fact that $Z(\omega_0)=R$. The power loss is \begin{equation}
+P = \langle V^2 \rangle /R = \frac{1}{2}I_0^2 R \end{equation}
+Thus, the quality factor is \begin{equation}
+\frac{\textrm{energy stored}}{\textrm{energy loss per radian}} = \omega_{LC}\frac{\frac{1}{2}R^2 I_0^2 C}{\frac{1}{2}I_0^2 R} = \omega_{LC} R C \end{equation}
+which justifies our definition of $Q_i$.
+
+\section{Loading}
+
+The driving of our circuit will come from a source with finite output impedance, eg. a 50$\Omega$ transmission line. We must understand the effect this external drive has on our circuit. Consider the case of Fig XX in which the external driving circuit with output impedance $R_e$ is coupled to the oscillator through a coupling capacitor $C_c$. The series circuit comprised by $R_e$ and $C_c$ is in parallel with the rest of the oscillator, so if we can find an equivalent \emph{parallel} circuit it will be easy to understand the effect on the oscillator. My circuits cheat sheet explains how to do this. The series circuit has a quality factor given by \begin{equation}
+Q_s = \frac{X_s}{R_e} = \frac{1}{R_e \omega C_c} \end{equation}
+The equivalent parallel circuit turns out to be a capacitor of capacitance $C_c$ and a resistor of resistance $R_l = R_e Q_s^2$ in the limit that $Q_s \gg 1$. We can therefore rewrite our circuit as shown in Fig XX. The effect of the driving circuit is now clear: the frequency will shift due to the added capacitance $C_c$ and the $Q$ will go down because of the added load resistance $R_l$. If $C_c \ll C$ the new resonance frequency is \begin{equation}
+\omega_0 = \frac{1}{\sqrt{L(C + C_c)}} =\omega_{LC} \left( 1 - \frac{1}{2}\frac{C_c}{C} \right) \equiv \omega_{LC} \left( 1 - \frac{1}{2}\eta \right) \end{equation}
+where we've defined $\eta = C_c/C$. 
+
+
+The new \emph{loaded} Q, called $Q_l$, is determined by the parallel combination of $R$ and $R_l$, \begin{equation}
+Q_l^{-1} = \frac{1}{\omega_0(C+C_c)} \frac{1}{R_{\textrm{total}}} \approx \frac{1}{\omega_0 C} \left( \frac{1}{R}+ \frac{1}{R_l} \right) = Q_i^{-1} + Q_c^{-1} \end{equation}
+where we've defined $Q_c \equiv \omega_0 R_l C$. This is called the \emph{coupling Q}. The loaded $Q$ is the parallel combination of $Q_i$ and $Q_c$. Other expressions for the coupling Q are \begin{equation}
+Q_c = \omega_0 R_l C = \omega_0 R_e C Q_s^2 = \frac{Q_s}{\eta} = \frac{2C}{\omega_0 Z_0 C_c^2}\end{equation}
+In the case of a transmission dip resonator $R_e = Z_0/2$ and we have \begin{equation}
+Q_c = \frac{2}{\eta^2}\frac{Z_c}{Z_0} \end{equation}
+
+\end{document}

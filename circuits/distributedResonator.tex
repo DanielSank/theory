@@ -1,0 +1,83 @@
+\documentclass{article}
+
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
+
+\title{Distributed Resonators}
+\author{Daniel Sank}
+\date{June 2013}
+
+\begin{document}
+
+\maketitle
+
+In this document we make the following notation conventions: \begin{eqnarray*}
+Z_0 &=& \textrm{characteristic impedance of a transmission line} \\
+\gamma &=& \alpha+i\beta = \textrm{propagation constant. eg. a right moving wave is } e^{-i\gamma} \\
+L &=& \textrm{Length of resonator} \\
+c &=& \textrm{capacitance per length of line} \\
+r &=& \textrm{resistance per length of line} \\
+l &=& \textrm{inductance per length of line} \end{eqnarray*}
+
+\section{Propagation parameters}
+
+Pozar chapter 2 shows how to get the relations between the physical parameters $l$, $c$ and $r$, and the wave parameters $Z_0$, $\alpha$, $\beta$. The relevant results are \begin{eqnarray*}
+Z_0 &=& \sqrt{l/c} \\
+\beta &=& \omega \sqrt{lc} \\
+\alpha &=& \frac{r}{2Z_0} \end{eqnarray*}
+The inverses for for the first two are \begin{eqnarray*}
+l &=& \beta \frac{Z_0}{\omega} \\
+c &=& \beta \frac{1}{Z_0 \omega} \end{eqnarray*}
+
+\section{Quarter wave resonator}
+
+\subsection{Energy stored and power loss}
+
+The energy stored in the quarter wave resonator is \begin{equation}
+E = \int_0^L \frac{1}{2} c V(x)^2 dx = \frac{1}{2}cV_0^2\int_0^L \cos\left( \frac{\pi}{2}x/L \right)^2 dx =  \frac{1}{4}Lc V_0^2 \end{equation}
+where $V_0$ is the voltage amplitude on the open end. The energy can similarly be expressed in terms of the current at the shorted end \begin{equation}
+E = \frac{1}{4}LlI_0^2 \end{equation}
+Setting these equal yields \begin{equation}
+cV_0^2 = lI_0^2 \end{equation}
+
+If the loss is caused by resistance in the line then the power dissipated at any point is \begin{equation}
+P(x,t) = I(x,t)^2 dx r \end{equation}
+The total power loss over the entire resonator at a particular point in time is \begin{equation}
+P(t) = \int_0^L I(x,t)^2 dx r \end{equation}
+Averaging over the sinusoidal time dependence will add a factor of $1/2$ giving \begin{equation}
+P = \frac{1}{2} \int_0^L r I(x)^2 dx = \frac{1}{4} L r I_0^2 \end{equation}
+where $I_0$ is the current amplitude at the shorted end. The quality factor is therefore \begin{equation}
+Q = \frac{\textrm{Energy stored}}{\textrm{Energy loss per radian}} = \omega \frac{\frac{1}{4}LcV_0^2} {\frac{1}{4}LrI_0^2}=\omega \frac{cV_0^2}{rI_0^2} = \omega \frac{l}{r}\end{equation}
+Using the relations above we can write this in terms of the propagation constants \begin{equation}
+Q = \omega \frac{l}{r} = \omega \frac{\beta Z_0}{\omega 2 Z_0 \alpha} = \frac{\beta}{2\alpha} \end{equation}
+which agrees with Pozar (6.31).
+
+\subsection{Lumped equivalence}
+
+Pozar shows that near resonance the impedance of a $\lambda/4$ resonator near resonance is \begin{equation}
+Z = \frac{Z_0} {\alpha L + i\pi \delta x /2} =\frac{Z_0/\alpha L}{1+i\pi \delta x/ 2 \alpha L} \label{eq:lambda4Impedance} \end{equation}
+This is to be compared with the impedance near resonance of a lumped parallel LRC circuit (as shows in the LRC writeup) \begin{equation}
+Z = \frac{R}{1 + i2Q_i \delta x} = \frac{R}{1 +i2\omega_0 R C \delta x} \end{equation}
+Equating these expressions immediately yields equivalent lumped parameters for the $\lambda/4$ resonator \begin{eqnarray}
+R &=& Z_0/\alpha L \\
+\pi/2\alpha L = 2 \omega_0 R C \rightarrow C &=& \frac{\pi}{4 \omega_0 Z_0} \\
+\rightarrow L &=& \frac{1}{\omega_0^2 C} = \frac{4 Z_0}{\pi \omega_0}\end{eqnarray}
+
+\subsection{Q value}
+
+The $Q$ for a parallel lumped $RLC$ circuit is $Q = \omega_0 RC$. To see if this equation is still correct with our effective lumped parameters for the $\lambda/4$ resonator we just plug in \begin{equation}
+Q \stackrel{?}{=} \omega_0 R C = \omega_0 \frac{Z_0}{\alpha L} \frac{\pi}{4 \omega_0 Z_0} = \frac{\pi}{4 \alpha L} \end{equation}
+On resonance we have $L = \pi/2\beta$ yielding \begin{equation}
+Q \stackrel{?}{=} \frac{\pi}{4 \alpha}\frac{2 \beta}{\pi} = \frac{\beta}{2\alpha} \end{equation}
+which agrees with the expression for $Q$ that we calculated explicitly above. Therefore, using the equivalent lumped parallel LRC model for the $\lambda/4$ resonator preserved the expression for $Q$.
+
+\subsection{Energy stored}
+
+The energy stored in the $\lambda/4$ resonator was computed above as $(1/4)Lc V_0^2$. Let's see if this matches the formula for a lumped parallel LRC, \begin{eqnarray*}
+E &=& \frac{1}{4} Lc V_0^2 \\
+&=& \frac{1}{4}\frac{\pi}{2\beta}\frac{\beta}{Z_0 \omega} V_0^2 \\
+&=& \frac{\pi}{8}\frac{1}{Z_0 \omega} V_0^2 \\
+&=& \frac{1}{2}C V_0^2 \end{eqnarray*}
+In the last line we took $\omega \approx \omega_0$ and substituted the expression for the $\lambda/4$ resonator's equivalent capacitance $C$. This shows that the usual formula for the energy stored in a lumped parallel LRC resonator is correct for the $\lambda/4$ resonator when using the equivalent lumped quantities.
+
+\end{document}
