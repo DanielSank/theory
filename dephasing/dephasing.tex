@@ -1,0 +1,351 @@
+\documentclass{article}
+
+\input{../../TeX/macros.tex}
+\input{../../TeX/packages.tex}
+
+\begin{document}
+
+\title{Ramsey Decay Envelope}
+\author{Daniel Sank\\University of California Santa Barbara\\presently at Google}
+\date{October 23, 2009}
+
+\maketitle
+
+
+\section{General Description}
+
+The sequence for a Ramsey experiment is
+\begin{equation}
+X_{\pi/2}\rightarrow\textrm{wait for time }t\rightarrow X_{-\pi/2} \, .
+\end{equation}
+The first pulse rotates the qubit from $\ket{0}$ to a point on the equator of the Bloch sphere.
+The qubit state then idles on the equator for time $t$.
+In the absence of noise the state is unchanged during this time, so the final pulse rotates the state back to $\ket{0}$.
+When there is noise the final state is not exactly $\ket{0}$.
+It is shown elsewhere that energy relaxation effects ($T_1$) and frequency fluctuation effects $(T_2)$ can be considered separately because their effects on the decay envelopes of various experiments factor apart; for example the decay of a Ramsey fringe for a qubit under the influence of energy decay with time constant $T_1$ and phase decay with time constant $T_\phi$ is $\exp(-t(2T_1 + T_\phi)$.
+Therefore, we consider only the effect of dephasing, ie. no energy relaxation.
+
+During the part of the sequence in which the qubit idles at the equator of the Bloch sphere, the $\ket{0}\rightarrow\ket{1}$ transition frequency, and therefore the precession frequency, fluctuates and causes the qubit state to diffuse (make a random walk)
+on the equator.
+Therefore, the second rotation results in a qubit state different from $|0\rangle$ and so the measured probability of finding $\ket{0}$ is not 1.
+The probability is what we can measure, and the decrease away from 1 is what we call the decay of the Ramsey curve.
+
+Note that if the qubit state is completely diffused on the equator then the expected value of the zero state probability after the second pulse is $\frac{1}{2}$.
+Therefore, we expect our calculations to yield a curve that goes from 1 to $\frac{1}{2}$ as the wait time goes from zero to infinity.
+
+\subsection{Note on conventions}
+
+In this document, spectral densities, e.g. $S(\omega)$, are single sided spectral densities.
+This is the thing you read off of a spectrum analyzer.
+It's defined for positive frequencies only.
+For real signals where the double sided spectral density is an even function, we have
+\begin{equation}
+S_{\text{single sided}}(\omega) = 2 S_{\text{double sided}}(\omega) \, .
+\end{equation}
+Importantly for the calculations done here, with single sided spectral density $S$ the Wiener-Khinchin theorem is
+\begin{equation}
+\langle f(t) f(0) \rangle = \int_0^\infty \frac{d\omega}{2\pi} S_f(\omega) \cos(\omega t)
+\end{equation}
+and conversely
+\begin{equation}
+S(\omega) = 2 \int_{-\infty}^\infty dt \, \langle f(0) f(t) \rangle \cos(\omega t) \, . 
+\end{equation}
+
+
+\section{Ramsey decay}
+
+\subsection{General noise spectral density}
+
+The fluctuations in the qubit frequency lead to phase noise according to the following formula
+\begin{equation}
+\phi(t)=\frac{\partial\omega_{01}}{\partial\lambda}\int_0^t\lambda(t')\, dt'
+\end{equation}
+where $\lambda$ is the physical quantity that is actually causing the qubit frequency noise, ie. $\lambda$ could be magnetic flux in the flux biased phase qubit.
+If $\lambda$ is Gaussian noise then $\phi(t)$ is also Gaussian distributed.
+Note that when we say ``distributed'' here we're implicitly referring to an ensemble of $\emph{experiments}$.
+In other words, if we were to measure $\phi(t)$ many times and then make a histogram, that curve would be a Gaussian.
+
+Now let's write down the measured probability as a function of $\phi$.
+The measured population is the projection of the Block vector on the $z$ axis, so we get
+\begin{equation}
+\textrm{z-Projection}(\phi)=\frac{1}{2}\left(1+\cos(\phi)\right) \, .
+\end{equation}
+When we measure the probability for a certain wait time $t$, we actually repeat the experiment many times and average them together.
+This averages over the possible values of $\phi$.
+Therefore we can say\begin{equation}
+p(t)
+= \langle\frac{1}{2}\left(1+\cos(\phi)\right)\rangle_{\phi}
+= \frac{1}{2}+\frac{1}{2}\langle\cos(\phi)\rangle_{\phi} \, .
+\end{equation}
+Denote the probability distribution of $\phi$ by $\Phi(\phi)$.
+Then we have
+\begin{align}
+\langle\cos\left(\phi\right)\rangle_{\phi}
+& \equiv \int_{-\infty}^{\infty}\cos(\phi)\Phi(\phi)\, d\phi \\
+& = \int_{-\infty}^{\infty}\exp(i\phi)\Phi(\phi)\, d\phi\qquad\textrm{because }\Phi\textrm{ is even} \\
+& = \langle\exp(i\phi)\rangle_{\phi} \, .
+\end{align}
+To proceed we need to develop a little math identity.
+
+Consider a variable $x$ with Gaussian distribution.
+Then averages of function of $x$ are given by
+\begin{equation}
+\langle f(x)\rangle_{x}=\frac{\int f(x)\exp(-\frac{1}{2}ax^{2})\, dx}{\int\exp(-\frac{1}{2}ax^{2})\, dx}
+\end{equation}
+It's easy to show that $\langle x^{2}\rangle_{x}=1/a$.
+It is also relatively easy to show, using elementary integrals, that $\langle\exp(Ax)\rangle_{x}=\exp(\frac{1}{2}A^{2}\frac{1}{a})$.
+Therefore,\begin{equation}
+\langle \exp(Ax)\rangle_{x}
+= \exp\left(\frac{1}{2}A^{2}\frac{1}{a}\right)
+= \exp \left( \frac{1}{2}\langle(Ax)^{2}\rangle_{x} \right) \, .
+\end{equation}
+
+Coming now back to the main calculation, we have
+\begin{equation}
+\langle\cos\left(\phi\right)\rangle_{\phi}
+= \langle\exp(i\phi)\rangle_{\phi}
+= \exp\left(-\frac{1}{2}\langle\phi^{2}\rangle_{\phi}\right) \, .
+\end{equation}
+Then, using the integral expression for $\phi$ from above we can
+get $\langle\phi^{2}\rangle_{\phi}$ as follows:
+\begin{align}
+\langle \phi^2 \rangle_{\phi}
+& = \left( \frac{\partial \omega_{01}}{\partial\lambda} \right)^2 \left\langle \int_{0}^{t}\lambda(t')\, dt' \, \int_0^t \lambda(t'') \, dt'' \right\rangle _{\textrm{experiments}} \\
+& = \left( \frac{\partial\omega_{01}} {\partial\lambda} \right)^2 \int_0^t dt' \int_0^t dt'' \langle\lambda(t') \lambda(t'') \rangle_{\textrm{experiments}} \\
+& = \left(\frac{\partial\omega_{01}} {\partial\lambda}\right)^2 \int_0^t dt' \int_0^t dt'' \int_0^{\infty} S_{\lambda}(f) \cos \left( 2\pi f(t''-t') \right) \, df \\
+& = \left(\frac{\partial\omega_{01}}{\partial\lambda} \right)^2 \int_0^{\infty} S_{\lambda}(f) \frac{\sin\left(\pi ft\right)^{2}}{\left(\pi f\right)^2} \, df \\
+\langle\phi^2 \rangle_{\phi} & = \left(\frac{\partial\omega_{01}}{\partial\lambda} \right)^2 t^2 \int_0^{\infty} S_{\lambda}(f) \textrm{sinc} \left(ft\right)^2 \, df
+\end{align}
+where $\textrm{sinc}(x)\equiv\sin(\pi x)/\pi x$.
+Putting it all together we get
+\begin{equation}
+p(t) = \frac{1}{2}+\frac{1}{2}\exp\left(-\frac{1}{2}\left(\frac{\partial\omega_{01}}{\partial\lambda}\right)^{2}t^{2}\int_{0}^{\infty}S_{\lambda}(f)\textrm{sinc}(ft)^{2}\, df\right)
+\end{equation}
+or writing $z=ft$
+\begin{equation}
+p(t) = \frac{1}{2} + \frac{1}{2} \exp \left( -\frac{1}{2} \left( \frac{\partial\omega_{01}}{\partial\lambda} \right)^2 t \int_0^\infty S_{\lambda} \left( z/t \right) \textrm{sinc}(z)^2 \, dz \right) \, .
+\end{equation}
+
+
+\subsection{White noise spectrum}
+
+Consider the case $S_{\lambda}(f) = S_{\lambda}$ over a frequency range $f_{min}$ to $f_{max}$.
+We then have
+\begin{equation}
+p(t) = \frac{1}{2} + \frac{1}{2}\exp \left( -\frac{1}{2}\left( \frac{d\omega_{10}}{d\lambda} \right)^2 t S_{\lambda} \int_{f_{min}t}^{f_{max}t} \left( \frac{\sin(\pi z)} {\pi z} \right)^2 dz \right) \, .
+\end{equation}
+Spectral densities almost always decrease with increasing frequency, so it's safe for the purposes of real computations to deal only with the case where we take $f_{\textrm{min}}=0$.
+In this case the integral can be approximated as
+\begin{equation}
+\int_0^{f_{\textrm{max}}t} \left( \frac{\sin(\pi z)}{\pi z} \right)^2 dz \approx \frac{1}{2+(f_{\textrm{max}}t)^{-1}} \, .
+\end{equation}
+The approximation has a maximum error of 20\% occuring near $f_{\textrm{max}}t = 1$. 
+Plugging this in, the argument of the exponential in the decay function becomes \begin{equation}
+-\frac{1}{2} \left( \frac{d\omega_{01}}{d\lambda} \right)^2 t S_{\lambda} \frac{1}{2+(f_{\textrm{max}}t)^{-1}} \, .
+\end{equation}
+To precisely predict the shape of the decay curve one would have to include this full time dependence 
+
+
+\subsection{1/f noise spectrum}
+
+Now consider the case where $S_{\lambda}(f)=S^{*}/f$.
+The integral we have to do is then
+\begin{equation}
+\int_{z=z_{min}}^{z_{max}}S^{*}\frac{t}{z}\textrm{sinc}^{2}\left(z\right)dz=tS^{*} \times I
+\end{equation}
+where $I$ is the integral over frequency,
+\begin{equation}
+I = \int_{z=z_{\textrm{min}}}^{z_{\textrm{max}}} \textrm{sinc}(z)^{2}\frac{dz}{z} \, .
+\end{equation}
+Making the substitution $x=\log z$ we get
+\begin{equation}
+I=\int_{x_{min}}^{x_{max}}\textrm{sinc}^{2}(e^{x})\, dx \, .
+\end{equation}
+Note that $x_{min}$ is a large negative number because $z_{min}\ll1$.
+We make one last change, taking $x\rightarrow-x$ we get
+\begin{align}
+I & = \int_{-x_{max}}^{-x_{min}}\textrm{sinc}^{2}\left(e^{-x}\right)\, dx\\
+& = \int_{-x_{max}}^{0}\textrm{sinc}^{2}\left(e^{-x}\right)\, dx+\int_{0}^{-x_{min}}\textrm{sinc}^{2}\left(e^{-x}\right) \, dx \, .
+\end{align}
+Let's look at the first integral.
+The question is: what value do we take for $x_{max}$?
+We can do the integral explicitly for the case $x_{max}=\infty$,
+\begin{equation}
+\int_{-\infty}^{0}\textrm{sinc}^{2}\left(e^{-x}\right)\, dx=-Ci(2\pi)=0.0226
+\end{equation}
+where $Ci(x)\equiv-\int_{x}^{\infty}\cos(x')/x'\, dx'$.
+This corresponds to the case where the upper cutoff frequency of the 1/f spectrum is high compared to the times in the experiment.
+We work in this limit for now.
+
+The second integral is\begin{align*}
+\int_{0}^{N}\textrm{sinc}^{2}\left(e^{-x}\right)\, dx & =
+-Ci(2\pi e^{-x})|_{0}^{N} \\
+&+ \frac{1}{4\pi^{2}}e^{2x}\left[1-\cos\left(2\pi e^{-x}\right)\right]|_{0}^{N} \\
+&+ \frac{1}{2\pi}e^{x}\sin\left(2\pi e^{-x}\right)|_{0}^{N}
+\end{align*}
+ where $N\equiv-x_{min}=-\log(f_{min}t)\gg1$. We have to look at
+each of these three terms for $x=0$ and as $x=N\rightarrow\infty$. 
+
+\begin{itemize}
+
+\item $-Ci(2\pi e^{-x})$
+\begin{itemize}
+\item $x=0$: $-Ci(2\pi)$ 
+\item $x=N\rightarrow\infty$: $-\left[\gamma+\log\left[2\pi e^{-N}\right]+O^{2}(e^{-N})\right]$
+where $\gamma$ is Euler's constant. 
+\end{itemize}
+
+\item $\frac{1}{4\pi^{2}}e^{2x}\left(1-\cos(2\pi e^{-x})\right)$
+\begin{itemize}
+\item $x=0$: The terms clearly goes to 0. 
+\item $x=N\rightarrow\infty$: Then we get
+\begin{align*}
+\frac{1}{4\pi^{2}}e^{2x}\left[1-\cos\left(2\pi e^{-x}\right)\right]
+& = \frac{1}{4\pi^{2}}e^{2N}\left[1-\left(1-\frac{1}{2}4\pi^{2}e^{-2N}+O^{4}(e^{-N})\right)\right] \\
+&= \frac{1}{2}+O^{4}(e^{-N})
+\end{align*}
+\end{itemize}
+
+\item $\frac{1}{2\pi}\sin\left(2\pi e^{-x}\right)$
+\begin{itemize}
+\item $x=0$: This terms also goes to 0. 
+\item $x=N\rightarrow\infty$: Expanding again,
+\begin{align*}
+\frac{1}{2\pi}\sin\left(2\pi e^{-N}\right) &= \frac{1}{2\pi}\left(2\pi e^{-N}+O^{3}(e^{-N})\right) \\
+& = 1+O^{3}(e^{-N})
+\end{align*}
+\end{itemize}
+\end{itemize}
+Putting this all together we get for the second integral,
+\begin{equation}
+\int_{0}^{-x_{min}}\textrm{sinc}^{2}\left(e^{-x}\right)\, dx=\frac{3}{2}-\gamma-\log\left(2\pi\right)-\log\left(e^{-N}\right)-\left[-Ci\left(2\pi\right)\right] \, .
+\end{equation}
+Adding this to the first integral cancels the $Ci(2\pi)$ term and
+we're left with,
+\begin{align}
+I & = \frac{3}{2}-\gamma-\log\left(2\pi\right) + N \\
+\textrm{substitute } N = -\log\left(f_{min}t\right) \qquad
+& = \frac{3}{2}-\gamma-\log\left(2\pi\right)-\log\left(f_{min}t\right) \\
+& = \log\left(\frac{\exp(\frac{3}{2}-\gamma)/2\pi}{f_{min}t}\right)\\
+& = \log\left(\frac{0.4005}{f_{min}t}\right)
+\end{align}
+This matches the result obtained numerically in John's bias noise
+paper.
+Putting everything together the Ramsey decay envelope is
+\begin{equation}
+p(t) = \frac{1}{2} + \frac{1}{2} \exp \left( -\frac{1}{2} \left( \frac{\partial\omega_{01}}{\partial\lambda} \right)^2 t^2 S^* \ln\left(\frac{0.4005}{f_{\textrm{min}} t} \right) \right) \, .
+\end{equation}
+We define $T_2$ by the equation $p(t)\propto\exp\left[-(t/T_{2})^{2}\right]$.
+The log factor is in the neighborhood of 24 for values of $t$ encountered
+in real experiments.
+Therefore $T_2$ is given by
+\begin{equation}
+T_2 = \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^{-1} \frac{1}{\sqrt{12S^{*}}} = \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^{-1} S^{*-1/2} * 0.289 \, .
+\end{equation}
+
+
+\section{Spin Echo}
+
+\subsection{General noise spectral density}
+
+The spin echo sequence works similarly to the Ramsey except that the
+qubit experiences a $\pi$-pulse halfway through.
+This means that any frequency detuning essentially switches sign halfway through the sequence.
+Therefore, the total phase noise experienced during the sequence is
+\begin{equation}
+\phi = \frac{\partial\omega_{10}}{\partial\lambda} \left( \int_0^{t/2} \lambda(t_1) dt_1 -\int_{t/2}^t \lambda(t_2) dt_2 \right) \, .
+\end{equation}
+Using the same arguments as for the Ramsey sequence we can write down the measured probability at the end of the sequence
+\begin{equation}
+p(t) = \frac{1}{2}+\frac{1}{2}\exp\left[-\frac{1}{2}\langle\phi^{2}\rangle_{\phi}\right] \, .
+\end{equation}
+The computation of $\langle\phi^{2}\rangle_{\phi}$ proceeds similarly to the Ramsey case:
+\begin{align}
+\langle\phi^{2}\rangle_{\phi}
+&= \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^2 \left\langle \left( \int_0^{t/2} \lambda(t_1) dt_1 - \int_{t/2}^t \lambda(t_2) dt_2 \right) \right. \nonumber \\
+& \left. \left( \int_0^{t/2} \lambda(t_3) dt_{3} - \int_{t/2}^t \lambda(t_4) dt_4 \right) \right \rangle \\
+& = \left( \frac{\partial \omega_{10}}{\partial\lambda} \right)^2
+\int_{f_{\textrm{min}}}^{\infty} df S_{\lambda}(f)
+\left[
+\int_0^{t/2} \int_0^{t/2} dt_1 \, dt_3 \cos[2\pi f (t_1 - t_3)] \right. \nonumber \\
+& + \int_{t/2}^t \int_{t/2}^t dt_{2} \, dt_{4} \cos[2\pi f (t_2-t_4)] \nonumber \\
+& - 2 \left. \int_{0}^{t/2}\int_{t/2}^{t} dt'dt'' \cos[2\pi f (t'-t'')] \right] \\
+& = \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^2 2 \int_{f_{\textrm{min}}}^{\infty} S_\lambda (f) \left[ \frac{\sin\left(\pi ft/2\right)^2}{\left(\pi f\right)^2} \left( 1 - \cos \left( \pi f t \right) \right) \right]df \label{eq:spinEchoRawIntegral} \\
+& = \left( \frac{\partial\omega_{10}}{\partial\lambda}\right)^2 t \int_{t f_{\textrm{min}}/2}^{\infty} S_\lambda \left( \frac{2z}{t} \right) \left[ \frac{\sin\left(\pi z\right)^{2}}{\left(\pi z\right)^2} \left(1 - \cos\left(2\pi z\right)\right)\right] dz \, .
+\end{align}
+We note that (\ref{eq:spinEchoRawIntegral}) matches equation (35b) in John's bias noise paper.
+Plugging this into the formula for $p(t)$ yields
+\begin{align}
+p(t)
+&= \frac{1}{2} + \frac{1}{2} \exp \left( - \frac{1}{2} \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^{2} t \int_{tf_{\textrm{min}}/2}^{\infty} \right. \nonumber \\
+& \left. S_{\lambda} \left( \frac{2z}{t} \right) \left[ \frac{\sin\left(\pi z\right)^{2}}{\left(\pi z\right)^{2}} \left(1 - \cos\left(2\pi z\right)\right) \right] dz \right) \, .
+\end{align}
+
+
+\subsection{1/f noise spectrum}
+
+In the case of 1/f noise where $S(f)=S^{*}/f$ the integral becomes
+\begin{equation}
+S^{*} \frac{t}{2} \int_{t f_{\textrm{min}}/2}^{\infty} \left[ \frac{\sin\left(\pi z\right)^2}{\left(\pi z\right)^2} \left(1 - \cos\left(2\pi z\right)\right) \right] \frac{dz}{z} = \frac{1}{2} t S^{*} \times I \, .
+\end{equation}
+We need to evaluate the integral $I$.
+Make the change of variables $x=\ln z$.
+Then $dz/z=dx$ and we get
+\begin{equation}
+I=\int_{\ln\left(tf_{\textrm{min}}/2\right)}^{\ln\left(tf_{\textrm{max}}/2\right)}\left(\frac{\sin\left(\pi e^{x}\right)}{\left(\pi e^{x}\right)}\right)^{2}\left(1-\cos\left(2\pi e^{x}\right)\right)dx \, .
+\end{equation}
+We now break the integral into two pieces
+\begin{align}
+I &=
+\underbrace{\int_{\ln\left(tf_{\textrm{min}}/2\right)}^{0}\left(\frac{\sin\left(\pi e^{x}\right)}{\left(\pi e^{x}\right)}\right)^{2}\left(1-\cos\left(2\pi e^{x}\right)\right)dx}_{I_{1}} \nonumber \\
+&+ \underbrace{\int_{0}^{\ln\left(tf_{\textrm{max}}/2\right)}\left(\frac{\sin\left(\pi e^{x}\right)}{\left(\pi e^{x}\right)}\right)^{2}\left(1-\cos\left(2\pi e^{x}\right)\right)dx}_{I_{2}} \, .
+\end{align}
+The second term $I_{2}$ is very small even if the upper limit of integration is extended to infinity.
+Numerically we find $I_{2}\approx0.032$.
+The first term requires only slightly more attention.
+Taking the experiment times $t$ to be in the range 10ns-1$\mu$s, and the total time of the experiment to be on the order of minutes or an hour\footnote{This is the total time over which all points in the experiment are averaged}, we find $\ln(tf_{\textrm{min}}/2)<-18$.
+Inspection of a plot of the integrand shows that this is sufficiently far to the left of zero that the integral is completely insensitive to the value of this lower limit.
+We therefore numerically integrate in $\textit{Mathematica}$ from $-10$ to with result
+\begin{equation}
+I_1 \approx 1.35
+\end{equation}
+The Spin-Echo decay curve for 1/f noise is therefore
+\begin{equation}
+p(t) = \frac{1}{2} + \frac{1}{2} \exp \left(-\frac{1}{4} \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^2 t^2 S^{*} * 1.38 \right) \, .
+\end{equation}
+This again has a Gaussian envelope but now with a different decay constant.
+Defining the decay rate by the equation
+\begin{equation}
+p(t) \propto \exp \left[ - \left( t / T_{\textrm{echo}} \right)^2 \right]
+\end{equation}
+we find
+\begin{equation}
+T_{\textrm{echo}}
+= \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^{-1} \frac{2}{\sqrt{1.35*S^{*}}}
+= \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^{-1} S^{*-1/2} * 1.72 \, .
+\end{equation}
+The echo time is therefore calculated to be approximately $1.72/0.289=6$ times larger than the Ramsey decay times.
+
+
+\section{Notes}
+
+Note that the white spectral density leads to exponential decay while $1/f$ noise leads to Gaussian decay.
+
+
+\section{Dimensionless versions}
+
+Consider noise which scales as $1/f^{\alpha}$.
+The Ramsey integral can be written as
+\begin{equation}
+\langle \phi^2 \rangle_{\textrm{Ramsey}}
+= t^{1+\alpha} \left( \frac{\partial\omega_{10}} {\partial\lambda} \right)^2 S^*_{\lambda} \int_{-\ln f_{\textrm{max}}t}^{-\ln f_{\textrm{min}}t} \left(\frac{\sin(\pi e^{-x})}{\pi e^{-x}}\right)^2 e^{x(\alpha-1)} dx \, .
+\end{equation}
+
+The spin-echo integral can be written as
+\begin{align}
+\langle \phi^2 \rangle_{\textrm{Echo}} =
+& t^{1+\alpha} \left( \frac{\partial\omega_{10}} {\partial\lambda} \right)^2 S^*_{\lambda} \nonumber \\
+& \int_{-\ln f_{\textrm{max}}t/2}^{-\ln f_{\textrm{min}}t/2} \frac{1}{2^{\alpha}} \left( \frac{\sin(\pi e^{-x})}{\pi e^{-x}}\right)^2 (1-\cos[2\pi e^{-x}]) e^{x(\alpha-1)} dx
+\end{align}
+
+\end{document}
