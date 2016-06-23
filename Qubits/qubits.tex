@@ -1,0 +1,29 @@
+\documentclass[twocolumn]{article}
+
+\input{../../TeX/macros.tex}
+\input{../../TeX/packages.tex}
+\input{../../TeX/citeinternalnote.tex}
+
+\title{Superconducting Qubits 101}
+\author{Daniel Sank \\
+\small Google Quantum AI \\
+\small Formerly Department of Physics, UCSB}
+\date{19 August 2012}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Understanding how to design a qubit device requires basic understanding how how control pulses and coupling to other qubits affect the device.
+This in turn requires knowledge of the relations between physical parameters like capacitance and inductance and parameters in the Hamiltonian.
+I have not found a good self-contained document explaining these relations from first principles.
+This write-up fills this gap.
+\end{abstract}
+
+\input{qubits-content.tex}
+
+\bibliographystyle{plain}
+\bibliography{../Bibliography/references-main,../Bibliography/references-local}
+
+\end{document}
