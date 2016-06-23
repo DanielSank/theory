@@ -1,0 +1,274 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twocolumn,english,aps,prl]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{esint}
+\usepackage{graphicx}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+\title{Flux Biased Phase Qubit}
+
+
+\author{Daniel Sank}
+
+
+\affiliation{Department of Physics, University of California, Santa Barbara, California
+93106, USA}
+
+
+\date{\today}
+\begin{abstract}
+I calculate the bias dependence of relevant qubit parameters, like resonance frequency. I also show the link between the quantum results and a classical circuit model.
+\end{abstract}
+\maketitle
+
+\section{Reduction to qubic well}
+
+The Hamiltonian for the phase qubit is \begin{eqnarray}
+H &=& \underbrace{\frac{Q^{2}}{2C}}_{\mathrm{Kinetic}}+\underbrace{E_{J}\left[\frac{\left(\delta-\varphi\right)^{2}}{2\lambda}-\cos\delta\right]}_{\textrm{Potential }U(\delta)} \label{eq:hamiltonian} \\
+\left[ \delta,Q \right] &=& i2e \label{eq:commutator}
+\end{eqnarray}
+where $\delta$ is the phase accross the junction, $\varphi\equiv2\pi\Phi_{\mathrm{bias}}/\Phi_{0}$
+is the dimensionless bias flux bias, $E_{J}\equiv\Phi_{0}I_{0}/2\pi$
+is the junction energy scale, and $\lambda\equiv L/L_{J_{0}}$ is
+the ratio of the shunt inductance to the junction inductance, where
+$L_{J_{0}}$ is the zero bias inductance of the junction. Note that
+$\delta$ and $Q$ aren't exactly cononically conjugate because their
+commutator is $[\delta,Q]=2ei$. At zero flux bias there is a potential
+minimum for $\delta=0$. As $\varphi$ is increased, this minimum
+moves up in energy and becomes more shallow. For a critical value
+of the flux bias, $\varphi_{c}$ the well disappears. It is near this
+condition that the well is sufficiently shallow and nonlinear to serve
+as a qubit. To find the critical flux we observe that the critical
+condition is reached when the extrema collide with the inflection
+point between them. The equation for the extrema is\begin{eqnarray}
+\frac{dU}{d\delta} & = & 0\nonumber \\
+\frac{\delta-\varphi}{\lambda} & = & -\sin\delta\label{eq:extrema}\end{eqnarray}
+and the equation for the inflection points is\begin{eqnarray}
+\frac{d^{2}U}{dU^{2}} & = & 0\nonumber \\
+\frac{1}{\lambda} & = & -\cos\delta_{c}\label{eq:criticalDelta}\\
+\delta_{c} & = & \frac{\pi}{2}+\sin^{-1}\left(1/\lambda\right)+(2\pi n)\nonumber \end{eqnarray}
+Since $\sin^{-1}\left(1/\lambda\right)$ is a small number for $\lambda\sim4.6$,
+the critical phase $\delta_{c}$ is slightly larger than $\pi/2$.
+Note that these equations imply\begin{align*}
+\sin\delta_{c} & =\sqrt{1-\lambda^{-2}}\\
+\cos\delta_{c} & =-1/\lambda\end{align*}
+which are important in going between the mathematical parameter $\delta_{c}$
+and the physically controllable parameter $\lambda$.
+
+We focus attention on the inflection point near $\delta=0$ by considering
+only $n=0$ in equation (\ref{eq:criticalDelta}). We find the critical
+flux by requiring the extrema to collide with the inflection point
+by substituting $\delta_{c}$ into (\ref{eq:extrema}). Solving for
+the flux,\begin{eqnarray}
+\delta_{c}-\varphi_{c} & = & -\lambda\sin(\delta_{c})\nonumber \\
+\varphi_{c} & = & \delta_{c}-\tan\delta_{c}\label{eq:criticalFlux}\\
+\textrm{or}\qquad\varphi_{c} & = & \frac{\pi}{2}+\sin^{-1}\left(1/\lambda\right)+\lambda\sqrt{1-\lambda^{-2}}\nonumber \end{eqnarray}
+Since $\lambda=4.6$ for normal phase qubits, we approximate $\sqrt{1-\lambda^{-2}}\approx1$
+and $\sin^{-1}(1/\lambda)\approx1$ to get
+
+\begin{eqnarray*}
+\varphi_{c} & \approx & \frac{\pi}{2}+\lambda\\
+\Phi_{\mathrm{c}} & \approx & \Phi_{0}\left(\frac{1}{4}+\frac{\lambda}{2\pi}\right)\approx0.98\Phi_{0}\end{eqnarray*}
+This condition tells us how much flux we need to be able to couple
+into the qubit circuit in order to acheive a useable qubit well. Note
+that the number of $\Phi_{0}$'s that we need increased linearly with
+the shunt inductance $L$.
+
+Now we expand the potential $U(\delta)$ in (\ref{eq:hamiltonian})
+near $\delta_{c}$ by defining $\delta=\delta_{c}+y$,\begin{eqnarray*}
+U(\delta) & =E_{J} & \left[\frac{\left(\delta_{c}+y-\varphi\right)^{2}}{2\lambda}-\cos\left(\delta_{c}+y\right)\right]\end{eqnarray*}
+Expanding for small $y$ and dropping terms that don't depend on $y$
+results in\begin{displaymath}
+U(\delta)=E_{J}\sin\delta_{c}\left[\epsilon^2 \frac{y}{2}-\frac{y^{3}}{6}\right]\end{displaymath}
+where\begin{align}
+\epsilon &= \sqrt{1-\delta_{c} \cot\delta_{c}}\sqrt{2(1-\varphi/\varphi_{c})}\label{eq:epsilonDef}\\
+\textrm{or}\qquad\epsilon &= \sqrt{\frac{\varphi_{c}}{\lambda\sqrt{1-\lambda^{-2}}}}\sqrt{2(1-\varphi/\varphi_{c})}\nonumber \end{align}
+This agrees with Tsuyoshi's (21) and (22). This potential curve has a local minimum at $y=-\epsilon$. Expanding
+around that point by writing $\delta=y+\epsilon$ gives\begin{equation}
+U(\delta)=E_{J}\sin\delta_{c}\left[\epsilon\frac{\delta^{2}}{2}-\frac{\delta^{3}}{6}\right]\label{eq:potential}\end{equation}
+For reference, similar analysis for the current biased junction results
+in
+\begin{displaymath}
+U_{I}(\delta)=E_{J}\left[\epsilon_{I} \frac{\delta^{2}}{2}-\frac{\delta^{3}}{6}\right]\quad\epsilon_{I}\equiv\sqrt{2(1-I/I_{0})}\end{displaymath}
+The flux biased case differs from the current biased case in two ways.
+First, the prefactor $E_{J}$ from the current biased case goes to
+$E_{J}\sin\delta_{c}$. This is effectively a change in the critical
+current, but the change is small since $\delta_{c}$ is close to $\pi/2$.
+This agrees with John's writeup {}``Mapping of Flux-Bias to Current-Bias
+Circuits in a Phase Qubit.'' The other change is a modification of
+the $\epsilon$ parameter by a the square root factor in the flux
+biased case. This factor is is really close to unity, but will result
+in a small modification of the plasma frequency as we'll see later.
+
+In what follows we will use the parameter $\epsilon$ to do computation,
+but for actually plotting curves it's better to use a scaled flux
+bias $x\equiv\varphi/\varphi_{c}$ to remove the dependence of the
+critical bias flux on the qubit loop inductance. Inserting this definition
+into (\ref{eq:epsilonDef}), using the definition of $\varphi_{c}$,
+and packaging the $\delta_{c}$ dependent prefactor into a scaling
+function gives \begin{eqnarray*}
+\epsilon & = & \sqrt{1-\delta_{c}\cot\delta_{c}}\sqrt{2}\left(1-x\right){}^{1/2}\\
+\epsilon & = & f(\delta_{c})\sqrt{2}\left(1-x\right)^{1/2}\end{eqnarray*}
+Note that $f$ can be expressed in terms of either $\delta_{c}$
+or $\lambda$ \begin{align}
+f(\delta_{c}) & =\sqrt{1-\delta_{c}\cot\delta_{c}}\\
+f(\lambda) & =\sqrt{1+\frac{\pi/2+\sin^{-1}(1/\lambda)}{\lambda\sqrt{1-\lambda^{-2}}}}\nonumber \end{align}
+
+
+
+\section{Qubit parameters}
+
+Now we derive equations for the dependence of qubit parameters like
+the number of states, nonlinearity and so forth. We will write the
+important relations in terms of $\epsilon$ and also in terms of $x$.
+The expressions with $\epsilon$ are useful for finding scaling relationships
+between the computed quantities, while the relationships using $x$
+are more useful for generating plots that match experimental data,
+since $x$ is proportional to the bias flux.
+
+The first quantity we want is the plasma frequency $f_{p}$. My Quantum
+Harmonic Oscillator Cheat Sheet says that for a system with Hamiltonian \begin{displaymath}
+H=\frac{1}{2}\alpha x^{2}+\frac{1}{2}\beta y^{2}\qquad[x,y]=i\gamma \end{displaymath}
+the plasma frequency is determined by \begin{displaymath}
+\hbar \omega_{p}=\gamma\sqrt{\alpha\beta} \end{displaymath}
+Comparison to (\ref{eq:potential}) neglecting the cubit term and (\ref{eq:commutator}) gives $\alpha=E_{J}\sin\left(\delta_{c}\right)\epsilon$,
+$\beta=1/C$, and $\gamma=2e$. Plugging into the formula for $f_{p}$
+results in\begin{eqnarray}
+f_{p} & = & f_{0}\sqrt{\sin\delta_{c}}\epsilon^{1/2}\nonumber \\
+f_{p} & = & f_{0}\sqrt{\sin\delta_{c}}\sqrt{f(\delta_{c})}2^{1/4}(1-x)^{1/4}\label{eq:plasmaFrequency}\end{eqnarray}
+where $f_{0}\equiv\left(2\pi\sqrt{L_{J_{0}}C}\right)^{-1}$ is a characteristic frequency of the device which is $\sim13\mathrm{GHz}$ for
+a $2\mu\mathrm{A}$ junction and 1pF shunt capacitor.
+
+Next we compute the barrier height. From Figure ?? this is clearly
+seen to be $\Delta U=U(2\epsilon)$. Plugging into (\ref{eq:potential})
+gives\begin{equation}
+\Delta U=\frac{2}{3}E_{J}\sin\left(\delta_{c}\right)\epsilon^{3}\label{eq:barrierHeight}\end{equation}
+which agrees with Tsuyoshi's result.
+
+The number of states in the well is given by $N=\Delta U/hf_{p}$.
+Plugging in expressions from (\ref{eq:plasmaFrequency}) and (\ref{eq:barrierHeight})
+gives\begin{eqnarray}
+N & = & \frac{2}{3}\frac{F_{0}}{f_{0}}\sqrt{\sin\delta_{c}}\epsilon^{5/2}\nonumber \\
+ & = & \frac{2}{3}\frac{F_{0}}{f_{0}}\sqrt{\sin\delta_{c}}2^{5/4}f(\delta_{c})^{5/2}(1-x)^{5/4}\label{eq:eqNumberOfStates}\end{eqnarray}
+where $F_{0}\equiv I_{0}/2\pi(2e)$ is a characteristic frequency
+of the junction, near 1000GHz for a $2\mu\mathrm{A}$ junction.
+
+The first transition frequency is found by perturbation theory to
+be (see Tsuyoshi's writeup)\begin{equation}
+f_{10}=f_{p}\left(1-\frac{5}{36}\frac{1}{N}\right)\label{eq:transitionFrequency}\end{equation}
+and the nonlinearity is\[
+f_{\mathrm{nl}}=f_{p}\frac{5}{36}\frac{1}{N}\]
+An important quantity is the fractional nonlinearity,\begin{eqnarray*}
+\frac{f_{\mathrm{nl}}}{f_{p}} & = & \left(\frac{36}{5}N-1\right)^{-1}\\
+ & = & \left(\frac{24}{5}\frac{F_{0}}{f_{0}}\sqrt{\sin\left(\delta_{c}\right)}2^{5/4}f(\delta_{c})^{5/2}(1-x)^{5/2}-1\right)^{-1}\end{eqnarray*}
+which, interestingly, improves as $\lambda$ is increased! This is
+good for the possibility of high inductance qubits.
+
+
+\section{Comparison to classical circuit model}
+
+While the transition frequency and nonlinearity depend on the cubic
+part of the potential and are therefore quantum in nature, the plasma
+frequency is a purely classical quantitiy. As such, we should be able
+to derive an expression for it from simple circuit modelling. In order
+to do this, we have to figure out how much inductance the junction
+has as a function of bias flux. Consider the circuit diagram in Figure
+??. As flux is coupled into the circuit, the circulating current will
+increase according to $\dot{\Phi}=L(I)\dot{I}$ where $L(I)$ is the
+total circuit inductance. This inductance is just the series inductance
+of the loop inductance $L$ and the junction inductance $L_{J_{0}}/\sqrt{1-(I/I_{0})^{2}}$.
+Inserting these expressions and integrating gives\begin{eqnarray}
+\Phi & = & \int_{0}^{I}\left(L+\frac{1}{\sqrt{1-(I/I_{0})^{2}}}\right)dI\\
+2\pi\frac{\Phi}{\Phi_{0}} & = & \lambda\frac{I}{I_{0}}+\sin^{-1}\left(I/I_{0}\right)\\
+\varphi & = & \lambda\sin\delta+\delta\label{eq:deltaVsPhi}\end{eqnarray}
+which is exactly equivalent to (\ref{eq:extrema}). If we want to
+compare to the quantumly derived expression for the plasma frequency,
+we have to get $\delta$ in terms of the bias parameter $x$. Writing
+$\varphi=x\varphi_{c}$ and using the definition (\ref{eq:criticalFlux})
+of $\varphi_{c}$ we get\begin{eqnarray}
+x\left(\delta_{c}-\tan\delta_{c}\right) & = & \lambda\sin\delta+\delta\\
+x & = & \frac{\delta-\tan\delta\left(\cos\delta/\cos\delta_{c}\right)}{\delta_{c}-\tan\delta_{c}}\label{eq:xOfDelta}\end{eqnarray}
+This is a relation between the flux bias and the phase accross the junction,
+with $\delta_{c}$ (or $\lambda$) as a parameter. It can't be analytically
+inverted to obtain $\delta$ as a function of $x$ even if we were
+to approximate the denominator for $\delta_{c}$ very close to $\pi/2$
+(large $\lambda$). It can, however, be numerically inverted in order
+to obtain curves for the junction inductance vs. bias. For our present
+purposes we don't need to invert because we can just insert equation
+(\ref{eq:xOfDelta}) into our expression for $f_{p}$ and compare
+with a classical model. The classical model is just that the circuit
+is a parallel LC, whose total inductance $L_{\mathrm{T}}$ is the
+parallel combination of the shunt inductance and the junction inductance,\begin{eqnarray*}
+L_{\mathrm{T}} & = & \frac{L_{J}L}{L_{J}+L}\\
+L_{\mathrm{T}} & = & L_{J_{0}}\frac{\lambda\sec\delta}{\lambda+\sec\delta}\end{eqnarray*}
+The classical frequency $\left(2\pi\sqrt{L_{\mathrm{T}}C}\right)^{-1}$
+then turns out to be\begin{eqnarray}
+f_{p,\mathrm{classical}} & = & f_{0}\sqrt{\cos\delta-\cos\delta_{c}}\label{eq:plasmaFrequencyClassical}\end{eqnarray}
+One could in principle show that this expression is equivalent to
+(\ref{eq:plasmaFrequency}) for $\delta$ near $\delta_{c}$ but it's
+easier to just plot $f_{p,\mathrm{classical}}$ and $f_{p}$ vs. $\delta$ (or $x$)
+for various values of either $\delta_{c}$ or $\lambda$, and you
+can see that they match up. This is done in Figure \ref{Fig:quantumClassicalCompare}.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.18]{quantumClassicalCompare.eps}
+\par\end{centering}
+
+\caption{Plasma frequencies shown for the quantum (red) and classical (blue) models. Here $\lambda=4.6$.}
+\label{Fig:quantumClassicalCompare}
+\end{figure}
+
+\section{Junction phase vs. operating frequency}
+We can use our formula linking $x$ and $\delta$ to obtain curves for the junction phase versus
+qubit operating frequency. This is done simply by numerically solving for $\delta$ as a function of $x$
+and then plotting both $\delta(x)$ and $f_{10}(x)$ parametrically on the same axes. This is done in
+Figure \ref{fig:deltaVsFreq}. 
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.18]{deltaVsFreq.eps}
+\par\end{centering}
+
+\caption{$\delta$ vs $f_{10}$. Assuming $\lambda=4.6$}
+\label{fig:deltaVsFreq}
+\end{figure}
+
+It may be useful to know the inductance of the junction during qubit operation. The inductance is given as $L_J=L_{J_{0}}\sec(\delta)$. We plot the scaling factor $\sec(\delta)$ versus qubit frequency in Figure \ref{fig:inductanceFactor}.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.18]{inductanceFactorVsFrequency.eps}
+\par\end{centering}
+
+\caption{$\sec(\delta)$ vs $f_{10}$. Assuming $\lambda=4.6$, $f_0=12.6$GHz, and $F_0=993$GHz.}
+\label{fig:inductanceFactor}
+\end{figure}
+
+
+\end{document}

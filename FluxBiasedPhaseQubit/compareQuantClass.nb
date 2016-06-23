@@ -1,0 +1,218 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      7126,        209]
+NotebookOptionsPosition[      6713,        192]
+NotebookOutlinePosition[      7060,        207]
+CellTagsIndexPosition[      7017,        204]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f\[Lambda]", "[", "\[Lambda]_", "]"}], ":=", 
+   SqrtBox[
+    RowBox[{"1", "+", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\[Pi]", "/", "2"}], ")"}], "+", 
+       RowBox[{"ArcSin", "[", 
+        RowBox[{"1", "/", "\[Lambda]"}], "]"}]}], 
+      RowBox[{"\[Lambda]", 
+       SqrtBox[
+        RowBox[{"1", "-", 
+         SuperscriptBox["\[Lambda]", 
+          RowBox[{"-", "2"}]]}]]}]]}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f\[Delta]", "[", "\[Delta]c_", "]"}], ":=", 
+   SqrtBox[
+    RowBox[{"1", "-", 
+     RowBox[{"\[Delta]c", " ", 
+      RowBox[{"Cot", "[", "\[Delta]c", "]"}]}]}]]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.51500973090625*^9, {3.51501017215625*^9, 3.515010217078125*^9}, {
+   3.515011118765625*^9, 3.515011166640625*^9}, 3.515011196859375*^9, {
+   3.515011876859375*^9, 3.515011877625*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"x\[Lambda]", "[", 
+    RowBox[{"\[Delta]_", ",", "\[Lambda]_"}], "]"}], ":=", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"\[Lambda]", " ", 
+      RowBox[{"Sin", "[", "\[Delta]", "]"}]}], "+", "\[Delta]"}], 
+    RowBox[{"\[Lambda]", 
+     SqrtBox[
+      RowBox[{"1", "-", 
+       SuperscriptBox["\[Lambda]", 
+        RowBox[{"-", "2"}]]}]], 
+     SuperscriptBox[
+      RowBox[{"f\[Lambda]", "[", "\[Lambda]", "]"}], "2"]}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"x\[Delta]", "[", 
+    RowBox[{"\[Delta]_", ",", "\[Delta]c_"}], "]"}], ":=", 
+   FractionBox[
+    RowBox[{"\[Delta]", "-", 
+     RowBox[{
+      RowBox[{"Sin", "[", "\[Delta]", "]"}], "/", 
+      RowBox[{"Cos", "[", "\[Delta]c", "]"}]}]}], 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"Tan", "[", "\[Delta]c", "]"}]}], " ", 
+     SuperscriptBox[
+      RowBox[{"f\[Delta]", "[", "\[Delta]c", "]"}], "2"]}]]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.51500790590625*^9, 3.515007952984375*^9}, {
+  3.51500870321875*^9, 3.515008747015625*^9}, {3.515009886734375*^9, 
+  3.51500991203125*^9}, {3.5150102445*^9, 3.515010267015625*^9}, {
+  3.51501083853125*^9, 3.515010846296875*^9}, {3.515011203046875*^9, 
+  3.51501125834375*^9}, {3.515011577703125*^9, 3.515011591421875*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"fp\[Delta]", "[", 
+    RowBox[{"\[Delta]_", ",", "\[Delta]c_"}], "]"}], ":=", 
+   RowBox[{
+    SqrtBox[
+     RowBox[{"Sin", "[", "\[Delta]c", "]"}]], 
+    SqrtBox[
+     RowBox[{"f\[Delta]", "[", "\[Delta]c", "]"}]], 
+    SuperscriptBox["2", 
+     RowBox[{"1", "/", "4"}]], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"x\[Delta]", "[", 
+        RowBox[{"\[Delta]", ",", "\[Delta]c"}], "]"}]}], ")"}], 
+     RowBox[{"1", "/", "4"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fp\[Lambda]", "[", 
+    RowBox[{"\[Delta]_", ",", "\[Lambda]_"}], "]"}], ":=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       SuperscriptBox["\[Lambda]", 
+        RowBox[{"-", "2"}]]}], ")"}], 
+     RowBox[{"1", "/", "4"}]], 
+    SqrtBox[
+     RowBox[{"f\[Lambda]", "[", "\[Lambda]", "]"}]], 
+    SuperscriptBox["2", 
+     RowBox[{"1", "/", "4"}]], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"x\[Lambda]", "[", 
+        RowBox[{"\[Delta]", ",", "\[Lambda]"}], "]"}]}], ")"}], 
+     RowBox[{"1", "/", "4"}]]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.5150079608125*^9, 3.51500800821875*^9}, {
+   3.515008148328125*^9, 3.515008149890625*^9}, {3.515008238640625*^9, 
+   3.515008248515625*^9}, {3.515008759375*^9, 3.515008812703125*^9}, 
+   3.51500971290625*^9, {3.515009787203125*^9, 3.51500979146875*^9}, {
+   3.515010272546875*^9, 3.51501029753125*^9}, {3.515011609046875*^9, 
+   3.515011673796875*^9}, {3.515011706671875*^9, 3.515011707453125*^9}, {
+   3.515011854640625*^9, 3.515011857828125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"fp\[Delta]", "[", 
+        RowBox[{
+         RowBox[{"2", "\[Pi]", " ", "\[Delta]"}], ",", "\[Delta]c"}], "]"}], 
+       ",", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"Cos", "[", 
+          RowBox[{"2", "\[Pi]", " ", "\[Delta]"}], "]"}], "-", 
+         RowBox[{"Cos", "[", "\[Delta]c", "]"}]}]]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Delta]", ",", "0.225", ",", "0.25"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Delta]c", ",", "1.8", ",", 
+     RowBox[{"\[Pi]", "/", "2"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.515008009765625*^9, 3.515008094609375*^9}, {
+  3.515008318875*^9, 3.515008345640625*^9}, {3.51500853890625*^9, 
+  3.515008554046875*^9}, {3.51500881684375*^9, 3.5150089131875*^9}, {
+  3.51500902553125*^9, 3.51500905975*^9}, {3.515009932890625*^9, 
+  3.515009945984375*^9}, {3.515010305625*^9, 3.51501035746875*^9}, {
+  3.515010452328125*^9, 3.5150104564375*^9}, {3.515010526625*^9, 
+  3.5150105534375*^9}, {3.5150108635*^9, 3.515010867265625*^9}, {
+  3.51501168684375*^9, 3.5150116874375*^9}, {3.515011741953125*^9, 
+  3.51501174615625*^9}, {3.515011931546875*^9, 3.515011945296875*^9}, {
+  3.515012006078125*^9, 3.515012008*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"fp\[Lambda]", "[", 
+        RowBox[{
+         RowBox[{"2", "\[Pi]", " ", "\[Delta]"}], ",", "\[Lambda]"}], "]"}], 
+       ",", 
+       SqrtBox[
+        RowBox[{
+         RowBox[{"Cos", "[", 
+          RowBox[{"2", "\[Pi]", " ", "\[Delta]"}], "]"}], "+", 
+         RowBox[{"1", "/", "\[Lambda]"}]}]]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Delta]", ",", "0.225", ",", "0.25"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Lambda]", ",", "4", ",", "1000"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.515011757734375*^9, 3.515011786140625*^9}, 
+   3.515011827765625*^9, {3.51501189928125*^9, 3.515011918265625*^9}, {
+   3.5150120285*^9, 3.51501203484375*^9}}]
+},
+WindowSize->{1680, 994},
+WindowMargins->{{1276, Automatic}, {0, Automatic}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 920, 27, 92, "Input"],
+Cell[1468, 49, 1315, 36, 93, "Input"],
+Cell[2786, 87, 1658, 45, 60, "Input"],
+Cell[4447, 134, 1383, 31, 93, "Input"],
+Cell[5833, 167, 876, 23, 93, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
