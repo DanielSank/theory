@@ -1,0 +1,11 @@
+Classical random walk with pure white noise has an interesting problem that x and velocity aren't easy to define. This is because the velocity fluctuates infinitely fast. It turns out that if you write down the sensible definitions of x and velocity they have a nonzero commutator,
+
+[x,v]=1
+
+This is extremely interesting because it's similar to 
+
+[x,p]=i(hbar)
+
+in quantum mechanics. Note that solutions to quantum problems come from Shrodinger's equation. If you change t to sqrt(-1)t you get the diffusion equation, which gives solutions to the random walk problem. So quantum mechanics and classical random processes with purely uncorrelated noise are related by a change from time to imaginary time. This is awsome.
+
+http://en.wikipedia.org/wiki/Path_integral_formulation

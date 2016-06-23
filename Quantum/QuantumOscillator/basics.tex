@@ -1,0 +1,58 @@
+\section{General Form}
+
+The general form of the Hamiltonian for a harmonic oscillator is \begin{equation}
+H = \frac{1}{2} \alpha u^2 + \frac{1}{2} \beta v^2 \qquad [u,v]= i \gamma . \end{equation}
+Using dimensionless operators \begin{align}
+X \equiv \frac{1}{\sqrt{2 \gamma}} \left( \frac{\alpha}{\beta}\right)^{1/4}\,u &\quad \textrm{and} \quad Y \equiv \frac{1}{\sqrt{2 \gamma}} \left( \frac{\beta}{\alpha} \right)^{1/4}\,v \\
+[X,Y] &= i/2 \end{align}
+we get a new form of the Hamiltonian \begin{equation}
+H = \gamma \sqrt{\alpha \beta} \left[ X^{2} + Y^{2} \right] .
+\end{equation}
+We also introduce raising and lowering operators $a$ and $a^{\dagger}$ defined by the following equations \begin{align}
+a = X+iY &\qquad a^{\dagger} = X-iY \nonumber \\
+X = \frac{1}{2}\left(a+a^{\dagger}\right) &\qquad Y = \frac{-i}{2}\left(a-a^{\dagger}\right) \\
+[ a, a^{\dagger} ] &= 1 . \end{align}
+Writing down the expression for $a^{\dagger}a$ and expanding it in terms of the $X$ and $Y$ operators, we find \begin{align*}
+\gamma \sqrt{\alpha \beta} ( a^{\dagger} a ) & = \gamma\sqrt{\alpha\beta} (X-iY)(X+iY)\\
+ & = \gamma\sqrt{\alpha\beta} \left(X^2 + iXY - iYX + Y^2 \right)\\
+ & = \gamma\sqrt{\alpha\beta} \left(X^2 + Y^{2} + i \left[ X,Y \right] \right)\\
+ & = \gamma\sqrt{\alpha\beta} \left(X^2 + Y^{2} - 1/2 \right)\\
+ & = H - \frac{1}{2}\gamma\sqrt{\alpha\beta} \\
+\textrm{so}\qquad H & = \left( a^{\dagger}a + \frac{1}{2} \right) \gamma\sqrt{\alpha\beta}. \end{align*}
+It will be shown below from Heisenberg's equations of motion that \begin{equation}
+\hbar\omega=\gamma\sqrt{\alpha\beta} \end{equation}
+which means that the Hamiltonian can be written as \begin{equation}
+H=\hbar\omega\left(a^{\dagger}a+\frac{1}{2}\right). \end{equation}
+
+\subsection{Zero point fluctuation}
+
+The zero point fluctuation of $X$ is \begin{equation}
+\bbraket{0}{X^2}{0} = \frac{1}{4}\bbraket{0}{a^2 + aa^{\dagger} + a^{\dagger}a + a^{\dagger^2}}{0} = 1/4 \end{equation}\
+which we write compactly as \begin{equation}
+\langle X^2 \rangle_0 = \langle Y^2 \rangle_0 = 1/4 . \end{equation}
+From this, we compute the zero point fluctuations of $u$ and $v$, \begin{equation}
+\langle u^2 \rangle_0 = \frac{1}{2}\gamma \sqrt{\beta / \alpha} \quad \langle v^2 \rangle_0 = \frac{1}{2}\gamma \sqrt{\alpha / \beta} . \end{equation}
+Defining $u_{\textrm{zpf}}^2 \equiv \langle u^2 \rangle_0 $ we have \begin{equation}
+X = \frac{1}{2}\frac{u}{u_{\textrm{zpf}}} \quad Y = \frac{1}{2}\frac{v}{v_{\textrm{zpf}}} \end{equation}
+
+\section{Algebra}
+
+From the commutator $ [a,a^{\dagger}]=1 $ and the conjugate variables formulae in \citeinternaltype \citeinternalref{quantumMechanics} it follows that \begin{equation}
+[a,T] = \frac{\partial T}{\partial a^{\dagger}} \qquad [a^{\dagger},T] = -\frac{\partial T}{\partial a}\end{equation}
+as long as $T$ is written in normal order form (all $a^{\dagger}$ operators to the left of all $a$ operators).
+This is extremely useful when computing dynamics in the Heisenberg or interaction picture, as will be shown in the next section.
+
+\section{Equations of Motion}
+
+The Heisenberg equation of motion for the $a$ operator is \begin{eqnarray*}
+i\hbar d_{t}a & = & [a,H] \\
+& = & \gamma\sqrt{\alpha\beta}[a,a^{\dagger}a+\frac{1}{2}] \\
+& = & \gamma\sqrt{\alpha\beta}\frac{\partial(aa^{\dagger})}{\partial a^{\dagger}} \\
+& = & \gamma\sqrt{\alpha\beta}\,a \end{eqnarray*}
+giving \begin{equation}
+\dot{a} = -i\frac{\gamma\sqrt{\alpha\beta}}{\hbar}a .\end{equation}
+Solving this simple differential equation yields \begin{equation}
+a(t) = a(0)\exp\left[-i \omega t \right] \quad \textrm{and} \quad a^{\dagger}(t) = a^{\dagger}(0)\exp\left[i \omega t \right] . \end{equation}
+where $\omega \equiv \gamma\sqrt{\alpha\beta}/\hbar$ as claimed above.
+Note that the evolution of $a$ in the phase plane is $\emph{clockwise}$, ie. the phasor convention we inherit from Schrodinger's (Heisenberg's) equation has a $-i$.
+This is important interpreting the meaning of positive and negative energy in a quantum calculation.

@@ -1,0 +1,68 @@
+\section{Driven Oscillator}
+
+Coherent states exist in nature because a classical harmonic drive applied to a harmonic oscillator system results in a coherent state. Consider the driving energy associated with applicatin of a spatially uniform force field: energy = -force{*}distance. Therefore, the term in the Hamiltonian is $H_{\textrm{drive}}=-\hat{x}*F(t)$. In dimensionless units we can just write this as $H_{\textrm{drive}}=-(a+a^{\dagger})*f_{x}(t)$ where $f_{x}$ has units of energy (we can do this because $\hat{x}\propto X\propto a+a^{\dagger}$). This kind of driving is called a {}``linear'' drive. We can also add a term proportional to the conjugate variable giving\begin{eqnarray*}
+H_{\textrm{drive}} & = & -(a+a^{\dagger})f_{x}(t)-(-i)(a-a^{\dagger})f_{y}(t)\\
+H_{\textrm{drive}} & = & a(-f_{x}+if_{y})+a^{\dagger}(-f_{x}-if_{y})\end{eqnarray*}
+If we define \begin{equation}
+f(t)=-f_{x}(t)+if_{y}(t) \end{equation}
+we can write the drive Hamiltonian as\begin{eqnarray*}
+H_{\textrm{drive}} & = & af(t)+a^{\dagger}f(t)^{*}\\
+H_{\textrm{drive}} & = & af(t)+\textrm{H.C.}\end{eqnarray*}
+The full Hamiltonian in the Heisenberg picture is \begin{equation}
+H(t)=\hbar\Omega\left[a^{\dagger}(t)a(t)+\frac{1}{2}\right]+f(t)a(t)+f^{*}(t)a^{\dagger}(t) \end{equation}
+Heisenberg's equation of motion for $a(t)$ is\begin{eqnarray*}
+i\hbar\dot{a}(t) & = & \left[a(t),H(t)\right]\\
+i\hbar\dot{a}(t) & = & \frac{\partial H(t)}{\partial a^{\dagger}(t)}\\
+i\hbar\dot{a}(t) & = & \hbar\Omega a(t)+f^{*}(t)\textrm{I}\\
+\textrm{or}\qquad\left(d_{t}+i\Omega\right)a(t) & = & -\frac{i}{\hbar}f^{*}(t)\textrm{I}\end{eqnarray*}
+
+\subsection{Solution by Green's function: Heisenberg Picutre (Merzbacher 335)}
+
+Fourier convention: \begin{equation}
+f(t)=\int e^{i\omega t}\tilde{f}(t)d\omega \end{equation}
+The equation for the Green's function is \begin{eqnarray*}
+\left(d_{t}+i\Omega\right)|G_{t_{0}}\rangle & = & -\frac{i}{\hbar}|\delta_{t_{0}}\rangle\\
+\int\left(d_{t}+i\Omega\right)|\omega\rangle\langle\omega|G_{t_{0}}\rangle\frac{d\omega}{2\pi} & = & -\frac{i}{\hbar}\int|\omega\rangle\langle\omega|\delta_{t_{0}}\rangle\frac{d\omega}{2\pi}\\
+\int i\left(\omega+\Omega\right)\tilde{G}_{t_{0}}(\omega)|\omega\rangle\frac{d\omega}{2\pi} & = & -\frac{i}{\hbar}\int|\omega\rangle e^{-i\omega t_{0}}\frac{d\omega}{2\pi}\\
+\left(\omega+\Omega\right)\tilde{G}_{t_{0}}(\omega) & = & -\frac{1}{\hbar}e^{-i\omega t_{0}}\\
+\tilde{G}_{t_{0}}(\omega) & = & -\frac{1}{\hbar\left(\omega+\Omega\right)}e^{-i\omega t_{0}}\\
+G_{t_{0}}(t) & = & -\int_{-\infty}^{\infty}\frac{e^{i\omega(t-t_{0})}}{\hbar\left(\omega+\Omega\right)}\frac{d\omega}{2\pi}\end{eqnarray*}
+There's a pole on the real line which means we have to impose damping to get a sensible result. We want the $\emph{retarded}$ Green's function to be zero if $t<t_{0}$ which means we want the poles to exist only when the imaginary part of $\omega$ is in the upper half plane. Therefore we add to the denominator a term $-i\epsilon$, \begin{eqnarray*}
+G_{t_{0}}^{R}(t) & = & -\int_{-\infty}^{\infty}\frac{e^{i\omega(t-t_{0})}}{\hbar\left(\omega+\Omega-i\epsilon\right)}\frac{d\omega}{2\pi}\\
+G_{\textrm{t}_{0}}^{R}(t) & = & -i2\pi\frac{1}{\hbar2\pi}e^{i(-\Omega+i\epsilon)(t-t_{0})}\Theta(t-t_{0})\\
+G_{\textrm{t}_{0}}^{R}(t) & = & -\frac{i}{\hbar}e^{-i\Omega(t-t_{0})}\Theta(t-t_{0}) \end{eqnarray*}
+You can check that the advanced Green's function, which you get by using $+i\epsilon$, is \begin{equation}
+G_{\textrm{t}_{0}}^{A}(t)=\frac{i}{\hbar}e^{-i\Omega(t-t_{0})}\Theta(t_{0}-t) \end{equation}
+The inhomogenious part of the solution is \begin{equation}
+\int_{-\infty}^{\infty}G_{t'}^{R}(t)f^{*}(t')dt' \end{equation}
+\begin{equation}
+a(t)=-\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\Omega(t-t')}f^{*}(t')dt' \end{equation}
+Note that the retarded Green's function has the effect of including influence from the driving force at intermittent times $t'$ only less than the evaluation time $t$. In words this means that the system cannot be affected by influences from the future.
+
+Consider the case that the driving force turns on at $T_{1}$ and turns off again at $T_{2}$. We can then write the full solution (homogeneous plus inhomogeneous) during the driving period as \begin{equation}
+a(t)=a(T_{1})e^{-i\Omega(t-T_{1})}-\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\Omega(t-t')}f^{*}(t')dt' \end{equation}
+This can be understood in a nice way in the context of coherent states. Recall that a coherent state has the property $a|\phi\rangle=\phi|\phi\rangle$. In free evolution $a(t)=a(0)e^{-i\Omega t}$ so $a(t)|\phi\rangle=\phi e^{-i\Omega t}|\phi\rangle$, which means that the eigenvalue associated to the coherent state is travelling in circles in the phase plane. If we drive the system then $a(t)$ gets the usual free evolution part, but also picks up the additional integral term which is just a complex number. Therefore the influence of driving is to translate the coherent state by an amount equal to the integral term we just derived.
+
+Another way to phrase this is found through the use of the advanced Green's function. Using it we can write a new expression for $a(t)$,\begin{eqnarray*}
+a(t) & = & a(T_{2})e^{-i\Omega(t-T_{2})}+\int_{-\infty}^{\infty}G_{t'}^{A}(t)f^{*}(t')dt'\\
+a(t) & = & a(T_{2})e^{-i\Omega(t-T_{2})}+\frac{i}{\hbar}\int_{t}^{\infty}e^{-i\Omega(t-t')}f^{*}(t')dt'\end{eqnarray*}
+Equating this with our previous expression for $a(t)$ yields\begin{eqnarray*}
+a(T_{2})e^{-i\Omega(t-T_{2})}+\frac{i}{\hbar}\int_{t}^{\infty}e^{-i\Omega(t-t')}f^{*}(t')dt' & = & a(T_{1})e^{-i\Omega(t-T_{1})}-\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\Omega(t-t')}f^{*}(t')dt'\\
+a(T_{2})e^{i\Omega T_{2}} & = & a(T_{1})e^{i\Omega T_{1}}-\frac{i}{\hbar}\int_{-\infty}^{\infty}e^{i\Omega t'}f^{*}(t')dt'\\
+a(T_{2}) & = & a(T_{1})e^{-i\Omega(T_{2}-T_{1})}-\frac{i}{\hbar}\int_{-\infty}^{\infty}e^{i\Omega t'}f^{*}(t')dt'\end{eqnarray*}
+This relation shows explicitly that during the driving period $a$ acquires the usual $e^{-i\Omega(T_{2}-T_{1})}$ dynamical phase we expect from free oscillation, plus the added effect of the driving.
+
+As a useful special case let's look at what happens if we drive only the $X$ quadrature with a sinusoidal drive, \begin{equation}
+f(t)=A\sin\left(\Omega t+\theta\right) \end{equation}
+from time $0$ to time $T$. The translation of the coherent state is then\begin{eqnarray*}
+\zeta & = & -\frac{i}{\hbar}\frac{A}{2i}\int_{0}^{T}e^{i\Omega t'}\left[e^{i(\Omega t'+\theta)}-e^{-i(\Omega t'+\theta)}\right]dt'\\
+\zeta & = & -\frac{A}{2\hbar}\int_{0}^{T}\left[e^{i(2\Omega t'+\theta)}-e^{-i\theta}\right]dt'\\
+\zeta & = & -\frac{A}{2\hbar}T\left[\frac{1}{\Omega T}\left(e^{i(\Omega T+\theta)}\sin\left(\Omega T\right)\right)-e^{-i\theta}\right]\end{eqnarray*}
+In the case $\Omega T\gg1$ this becomes \begin{equation}
+\zeta=\frac{1}{2}\frac{AT}{\hbar}e^{-i\theta} \end{equation}
+The phase of the drive determines the direction of the displacement, and the amplitude and time of the drive determine its magnitude.
+
+
+\subsection{Solution by propogator: Interaction Picture (Mezbacher 338)}
+
+Coming soon.

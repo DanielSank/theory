@@ -1,0 +1,43 @@
+\section{Time Dependent Perturbation Theory}
+
+In the interaction picture the equation of motion for $\ket{\Psi_{I}(t)}$ can be formally solved (in the case that $V_I(t)$ commutes with itself at all times... not sure if this is a necessary condition), \begin{equation}
+\ket{\Psi_{I}(t)} = \ket{\Psi_{I}(0)}+\frac{1}{i \hbar}\int_{0}^{t}dt'V_{I}(t')\ket{\Psi_{I}(t')} \end{equation}
+Plugging the left side into the right side gives \begin{equation}
+\ket{\Psi_{I}(t)}=\ket{\Psi_{I}(0)}+\frac{1}{i \hbar}\int_{0}^{t}dt'V_{I}(t')\left[\ket{\Psi_{I}(0)}+\frac{1}{i \hbar}\int_{0}^{t'}dt''V_{I}(t'')\ket{\Psi_I(t'')}\right]\end{equation}
+This can be iterated any number of times to produce a perturbation series.
+
+\subsection{First order}
+Keeping only terms to first order in the interaction $V$ we have \begin{equation}
+\ket{\Psi_{I}(t)}=\ket{\Psi_{I}(0)}+\frac{1}{i \hbar}\int_{0}^{t}dt'V_{I}(t')\ket{\Psi_{I}(0)}\end{equation}
+Note that this can be understood in terms of a propogator, \begin{equation}
+\ket{\Psi_{I}(t)}=U(t,0)\ket{\Psi_{I}(0)}\qquad\textrm{where}\qquad U(t,0)=1-\frac{i}{\hbar}\int_{0}^{t}dt'V_{I}(t')\end{equation}
+
+Let $\ket{n}$ label a complete set of states, for example, those which diagonalize $H_0$, and consider the case where $\ket{\Psi_I(0)}$ is one of these states $\ket{m}$. There is no loss of generality, as any initial state can be resolved into a superposition of such states. We compute the components of $\ket{\Psi_I(t)}$ in this basis,
+\begin{eqnarray}
+\braket{n}{\Psi_I(t)} = c^{(1)}_{n,m}(t) &=& \braket{n}{\Psi_I(0)} + \frac{1}{i\hbar}\int_{-\infty}^t dt' \bra{n}V_I(t')\ket{\Psi_I(0)} \\
+&=& \delta_{n,m} + \frac{1}{i \hbar}\int_{-\infty}^t dt' \bra{n}T^{\dagger}(t')V_S(t')T(t)\ket{m} \\
+c^{(1)}_{n,m}(t) &=& \delta_{n,m} + \frac{1}{i \hbar}\int_{-\infty}^t dt' e^{-i (\omega_m-\omega_n) t} \bra{n}V_S(t')\ket{m}
+\end{eqnarray}
+A common situation is one in which the time dependent perturbation can be written as a time dependant scalar times a time independent operator, ie. $V_S(t) = f(t)V_S$. In this case the transition amplitude becomes
+\begin{equation}
+c^{(1)}_{n,m}(t) = \delta_{n,m} + \frac{\braket{n}{V_S|m}}{i \hbar}\int_{-\infty}^t dt' f(t') e^{-i(\omega_m - \omega_n)t'} \end{equation}
+From this expression you can derive Fermi's Golden Rule for transition rates.
+
+\subsection{Second order}
+The second order term in the series is \begin{eqnarray}
+c^{(2)}_{n,m}(t) &=& \left(\frac{1}{i\hbar}\right)^2 \int_{-\infty}^{t}dt' \int_{-\infty}^{t'} dt'' \bra{n}V_I(t')V_I(t'')\ket{m} \\
+&=& \left(\frac{1}{i\hbar}\right)^2 \int_{-\infty}^{t}dt' \int_{-\infty}^{t'} dt'' \bra{n}T^{\dagger}(t')V_S(t')T(t')T^{\dagger}(t'')V_S(t'')T(t'')\ket{m} \\
+&=& \left(\frac{1}{i\hbar}\right)^2 \sum_{k} \int_{-\infty}^{t}dt' \int_{-\infty}^{t'} dt'' e^{i\omega_n t'} \braket{n}{V_S(t')|k} e^{-i \omega_k (t'-t'')} \braket{k}{V_S(t'')|m} e^{-i\omega_m t''}
+\end{eqnarray}
+
+A particularly interesting case is one where the perturbation is actually independent of time.
+
+\subsection{Kubo Formula (not finished)}
+In this language we can derive a useful expression for expectation
+values of operators in the interaction picture, \begin{eqnarray*}
+\braket{\Psi_{I}(t)}{A_{I}(t)|\Psi_{I}(t)} & = & \bra{T(t,0)\Psi_{I}(0)}A_{I}(t)\ket{T(t,0)\Psi_{I}(0)}\\
+& = & \bra{\Psi_{I}(0)}T^{\dagger}(t,0)A_{I}(t)T(t,0)\ket{\Psi_{I}(0)}\\
+& = & \bra{\Psi_{I}(0)}\left[1+\frac{1}{\hbar}\int_{0}^{t}dt'V_{I}(t')\right]A_{I}(t)\left[1-\frac{i}{\hbar}\int_{0}^{t}dt'V_{I}(t')\right]\ket{\Psi_{I}(0)}\end{eqnarray*}
+To first order in the interaction this is \begin{eqnarray*}
+\braket{\Psi_{I}(t)}{A_{I}(t)|\Psi_{I}(t)} & = & \braket{\Psi_{I}(0)}{A_{I}(t)-A_{I}(t)\left[\frac{i}{\hbar}\int_{0}^{t}dt'V_{I}(t')\right]+\left[\frac{i}{\hbar}\int_{0}^{t}dt'V_{I}(t')\right]A_{I}(t)|\Psi_{I}(0)}\\
+\braket{\Psi_{I}(t)}{A_{I}(t)|\Psi_{I}(t)} & = & \braket{\Psi_{I}(0)}{AI(t)-\frac{i}{\hbar}\int_{0}^{t}}\end{eqnarray*}

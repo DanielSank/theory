@@ -1,0 +1,24 @@
+\section{Rotating Frame}
+
+The basic qubit Hamiltonian is \begin{equation}
+H_q/\hbar = -\frac{\omega_q}{2}\sigma_z \end{equation}
+A quantum state under this Hamiltonian precesses around the Z axis. In the lab we are used to thinking about a rotating frame in which this precession is absent. We now show how do we do this mathematically.
+
+In the Schrodinger picture the time evolution operator for a Hamiltonian $H_0$ is \begin{equation}
+T = \exp \left[ -\frac{i}{\hbar}H_0 t \right]. \end{equation}
+Intuitively, we should just apply the inverse of this evolution to the Schrodinger state vector in order to remove the precession. We can then define a state in the rotating frame as \begin{equation}
+\ket{\Psi'(t)} = R\ket{\Psi(t)} \end{equation}
+where $R=T^{\dagger}$. Computing the time evolution of this new state we get \begin{eqnarray}
+i\hbar\partial_t \ket{\Psi'(t)} &=& i\hbar \dot{R}\ket{\Psi(t)} + Ri\hbar\partial_t\ket{\Psi(t)} \\
+&=& i\hbar \dot{R}R^{\dagger} \ket{\Psi'(t)} + R H_0 R^{\dagger} \ket{\Psi'(t)} \\
+&=& \left( i\hbar \dot{R}R^{\dagger} + RH_0R^{\dagger} \right) \ket{\Psi'(t)}. \end{eqnarray}
+This can be interpreted as a Schrodinger equation for a system with Hamiltonian \begin{equation}
+H_0' = i\hbar \dot{R}R^{\dagger} + RH_0R^{\dagger}. \end{equation}
+Note that this result is correct for \emph{any} $R$, not necessarily inverse of the Schrodinger evolution operator.
+
+In the case that $R=T^{\dagger}$ the resulting Hamiltonian is particularly simple, as expected \begin{eqnarray}
+H_0' &=& i\hbar (iH_0/\hbar)RR^{\dagger} + H_0 \\
+&=& 0. \end{eqnarray}
+Here we used the fact that $R$, like $T$ is unitary, and that $\partial_t T = -i(H_0/\hbar)T$. The point is that if we rotate the frame at the same rate as the Hamiltonian was rotating the states, the effective Hamiltonian becomes zero.
+
+An extremely important fact to note is that if we take the rotation operator $R$ to be the inverse of the time translation operator induced by the original Hamiltonian, then the effect on any other perturbation or coupling terms $V$ is $V\rightarrow RVR^{\dagger} = T^{\dagger}VT$, which is identical to the transformation found in the interaction picture.

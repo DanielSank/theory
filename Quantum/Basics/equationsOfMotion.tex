@@ -1,0 +1,49 @@
+\section{Equations of Motion}
+
+\subsection{Schrodinger Picture}
+
+\begin{equation}
+i\hbar\partial_{t}\ket{\Psi}=H_{S}(t)\ket{\Psi} \end{equation}
+For a Hamiltonian that commutes with itself at different times a
+formal solution to this equation is \begin{equation}
+\ket{\Psi(t)}=\exp[\frac{-i}{\hbar}\int_{t_{0}}^{t}H_{S}(t')~dt']\ket{\Psi(0)} \end{equation}
+Define \begin{equation}
+T(t,t_{0})=\exp[\frac{-i}{\hbar}\int_{t_{0}}^{t}H_{S}(t')~dt'] \end{equation}
+Note that \begin{equation}
+i\hbar\partial_{t}T(t,t_{0})=H_{S}(t)T(t,t_{0}) \end{equation}
+Also \begin{equation}
+T^{\dagger}(t,t_{0})=T^{-1}(t,t_{0})=T(t_{0},t). \end{equation}
+
+\subsection{Heisenberg Picture}
+
+Define \begin{equation}
+\ket{\Psi_{H}(t)}=T^{-1}(t,t_{0})\ket{\Psi_{S}(t)} \end{equation}
+Then \begin{equation}
+\ket{\Psi_{H}(t)}=\ket{\Psi_{S}(0)} \end{equation}
+so $\ket{\Psi_{H}}$ is constant. Now, we want matrix elements to be the same in either picture \begin{eqnarray*}
+\braket{\Psi_{S}(t)}{A_{S}|\Psi_{S}(t)} & = & \braket{\Psi_{H}}{A_{H}(t)|\Psi_{H}}\\
+\rightarrow A_{H}(t) & = & T^{\dagger}(t)A_{S}T(t)\end{eqnarray*}
+We can use this relation to find the equation of motion for $A_{H}(t)$. Differentiate the previous relation with respect to time to get \emph{Heisenberg's equation}, \begin{equation}
+i\hbar\partial_{t}A_{H}(t)=[A_{H}(t),H_{S}(t)] \end{equation}
+It is very important to note here that the Hamiltonian in Heisenberg's equation is the same Hamiltonian appearing in Schrodinger's equation. This is because \begin{equation}
+H_{H}(t)=T^{\dagger}(t)H_{S}(t)T(t)=H_{S}(t) \end{equation}
+
+\subsection{Interaction Picture}
+
+In this case we have a Hamiltonian with two parts \begin{equation}
+H_{S}(t)=H_{0}+V_{S}(t) \end{equation}
+Define \begin{equation}
+T(t)=\exp[\frac{-i}{\hbar}\int H_{0}(t')dt'] \end{equation}
+and \begin{equation}
+\ket{\Psi_{I}(t)}=T(t)^{-1}\ket{\Psi_{S}(t)} \end{equation}
+where \begin{equation}
+\ket{\Psi_{S}(t)}=\exp[\frac{-i}{\hbar}\int H_{S}(t)]\ket{\Psi_{S}(0)} \end{equation}
+Then we have \begin{equation}
+i\hbar\partial_{t}\ket{\Psi_{I}(t)}=V_{I}(t)\ket{\Psi_{I}(t)} \end{equation}
+where for any operator $A_{S}(t)$ in the Schrodinger picture we have defined \begin{equation}
+A_{I}(t)=T^{\dagger}(t)A_{S}(t)T(t) \end{equation}
+In the case of a time independent operator $A_S(t)=A_S$, we can take the time derivative of the previous equation to get, \begin{equation}
+i\hbar\partial_{t}A_{I}(t)=[A_{I}(t),H_{0}]=[A_{S}(t),H_{0}]_{I} \end{equation}
+More generally, for an operator which is time dependant in the Schrodinger picture we get \begin{equation}
+i\hbar\partial_t A_I(t) = [A_I(t),H_0]+i \hbar (\dot{A}_S(t))_I \end{equation}
+where $(\dot{A}_S(t))_I \equiv T^{\dagger}(t) (dA_S(t)/dt)T(t)$.

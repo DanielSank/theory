@@ -1,0 +1,34 @@
+\section{Commutators}
+
+\subsection{Products}
+
+\begin{eqnarray}
+\left[A,BC\right] & = & ABC-BCA \\
+& = & ABC-BAC+BAC-BCA \\
+& = & [A,B]C+B[A,C]. \end{eqnarray}
+This can be remembered by noting that $[A,\cdot]$ is like a derivative with respect to $A$.
+
+\subsection{Translation by an operator}
+
+A very common expression involves the translation of an operator $A$ by another operator $B$. The translation can be expressed as a sum\begin{equation}
+e^{A}Be^{-A}=\sum_{n=0}^{\infty}\frac{1}{n!}\underbrace{[A,[A,[A,\ldots[A,B]]]]}_{n\textrm{ times}}. \label{eq:translationSum} \end{equation}
+We can also derive a differential equation that helps in evaluating this sort of expression. Define \begin{equation}
+\mathcal{O}(\lambda) = e^{\lambda A} B e^{-\lambda A}. \end{equation}
+Differentiating both sides with respect to $\lambda$ gives \begin{equation}
+\frac{d\mathcal{O}}{d\lambda} = [A,\mathcal{O}(\lambda)]. \label{eq:translationDiffEq} \end{equation}
+It is sometimes useful to solve equation (\ref{eq:translationDiffEq}) and then set $\lambda=1$ instead of evaluating (\ref{eq:translationSum}) directly.
+
+\subsection{Baker-Campbell-Hausdorff}
+
+The BCH formula provides a summation representation of the product of two exponentiated operators,
+\begin{equation}
+e^{A}e^{B}=e^{A+B+\frac{1}{2}[A,B]+\frac{1}{12}\left([A,[A,B]]-[B,[A,B]]\right)+\cdots}. \end{equation}
+
+\subsection{Conjugate Variables}
+
+Two operators $\alpha$ and $\beta$ are ``conjugate'' if they have the commutator \begin{equation}
+[\alpha,\beta]=\eta \end{equation}
+where $\eta$ is a complex number. If an operator $A$ is normal ordered (all $\alpha$'s to the left of all $\beta$'s) then we have the following extremely useful formulae, \begin{equation}
+[\alpha,A] = \eta\frac{\partial A}{\partial\beta}\qquad\textrm{and}\qquad[\beta,A]=-\eta\frac{\partial A}{\partial\alpha} \end{equation}
+Conjugate variables also have a very simple translation property \begin{equation}
+e^{i\hat{\alpha}}\hat{\beta}e^{-i\hat{\alpha}}=\hat{\beta}+i\eta. \end{equation}

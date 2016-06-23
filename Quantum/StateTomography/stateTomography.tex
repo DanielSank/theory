@@ -1,0 +1,151 @@
+\documentclass[twocolumn,english,aps,prl]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{esint}
+
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\braket}[2]{\langle #1|#2\rangle}
+
+\makeatletter
+
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+\title{Quantum State Tomography}
+
+\author{Daniel Sank}
+
+\affiliation{University of California, Santa Barbara}
+
+
+\date{23 February, 2012}
+\begin{abstract}
+I explain how to actually do quantum state tomography
+\end{abstract}
+\maketitle
+
+\section{Formulation of the problem}
+
+In general we have a quantum system in a state, and we would like to know that state. Of course, to actually determine the state we have to prepare an ensemble of copies of the same state and average many measurements. Furthermore, because our system may entangle with degrees of freedom beyond our capability to measure, we can only describe our state by a density matrix, not by a usual state vector. The problem is then, given a system described by a density matrix $\rho$ how do we use our ability to control the system and perform a single-basis measurement to determine $\rho$?
+
+\section{General description}
+
+Suppose we have a quantum system in state $\ket{\Psi}$ and we perform a measurement with corresponding operator $A$. We know that the mean value we measure is \begin{equation}
+\bra{\Psi}A\ket{\Psi} \end{equation}
+Now suppose instead that we have a statistical mixture of states $\ket{\Psi_i}$ with probabilities $p_i$. The system is then described by a density matrix \begin{equation}
+\rho = \sum_i p_i \ket{\Psi_i}\bra{\Psi_i} \end{equation}
+If now now measure $A$ it's intuitive that the mean value we measure should be \begin{equation}
+\left[ A \right]_{\rho} = \sum_i p_i \bra{\Psi_i}A\ket{\Psi_i} \end{equation}
+We can do some algebra to cast this into a very useful form,
+\begin{eqnarray}
+\left[ A \right]_{\rho} &=& \sum_i p_i \bra{\Psi_i}A\ket{\Psi_i} \\
+& = & \sum_{i,n} p_i \braket{\Psi_i}{n}\braket{n}{A|\Psi_i} \\
+& = & \sum_{i,n} p_i \braket{n}{A|\Psi_i}\braket{\Psi_i}{n} \\
+& = & \sum_n \braket{n}{A\rho|n} \\
+& = & \textrm{Tr} \left[ A \rho \right]
+\end{eqnarray}
+In the case of the phase qubit our measurement operator would be $\sigma_z$, or perhaps more accurately \begin{equation}
+\frac{1}{2}\left(1 - \sigma_z \right) \equiv \sigma_1 \label{eq:1StateOperator} \end{equation}
+since we normally record the probability of occupying the excited state.
+
+Measuring just one number, ie. $\textrm{Tr} [ \sigma_1 ]$ does not give us enough information to determine $\rho$. What you'd like to do is measure $\sigma_x$ and $\sigma_y$ as well. How do we do this? You can picture in your mind that if we perform an $X_{\pi/2}$ rotation on the qubit, then a subsequent measurement in the z-axis is equivalent to a measurement along the y-axis prior to the rotation. Therefore, we just need to rotate the qubit state about the x and y axes, perform the usual z-axis measurement. This gives us three numbers which are exactly the components of the Bloch vector representation of the state. This would be enough to determine the state of the qubit.
+
+\section{Mathematical details of Measurement}
+
+\subsection{Representing density matrices}
+The density matrix of a two level system is represented by a 2x2 Hermitian matrix. A really convenient basis for the linear vector space of 2x2 Hermitian operators is \begin{equation}
+\left\{  \sigma_x \quad \sigma_y \quad \sigma_z \quad 1 \right\} \label{eq:basis} \end{equation}
+To see that this is a basis, note that any general Hermitian matrix \begin{displaymath}
+M = \left( \begin{array}{cc} A & x-iy \\ x+iy & B \end{array} \right) \end{displaymath}
+can be written as \begin{equation}
+M = x\sigma_x + y\sigma_y + \frac{1}{2}(A+B)\sigma_z + \frac{1}{2}(A-B)1 \end{equation}
+Density matrices have the extra constraints that their trace must be unity and must satisfy $\textrm{Tr}\rho^2 \le 1$. With these constraints the best representation of a qubit density matrix turns out to be \begin{equation}
+\rho = \frac{1}{2} \left[ x\sigma_x + y\sigma_y + z\sigma_z + 1 \right] \label{eq:densityRep} \end{equation}
+To see that this is a \emph{good} representation, you want to take expectation values of the various Pauli operators for a given $\rho$ and see that the answers are what you would intuitively guess based on the coefficients in (\ref{eq:densityRep}). This turns out to be extremely easy if we first discuss a neat property of the trace of products of operators.
+
+\subsection{Trace dot product}
+
+It turns out that \begin{equation}
+\textrm{Tr} \left[ A^{\dagger}B \right] \end{equation}
+is a dot product. This isn't really surprising because if you choose a basis and write it out you get \begin{eqnarray}
+\textrm{Tr} \left[ A^{\dagger} B \right] &=& \sum_n \braket{n}{A^{\dagger}B|n} \\ 
+&=& \sum_n (A^{\dagger}B)_{nn} \\
+&=& \sum_{n,j} (A^{\dagger})_{n,j}B_{jn} \\
+&=& \sum_{n,j} A_{jn}^* B_{jn} \end{eqnarray}
+This looks almost exactly like the usual inner product between complex vectors, just with an extra dimension in the sum.
+
+What's really nice about this inner product is that with it, the basis set (\ref{eq:basis}) is orthogonal (but not ortho\emph{normal}). In fact we find \begin{equation}
+\textrm{Tr} \left[ \sigma_i \sigma_j \right] = 2 \delta_{ij} \end{equation}
+where here we understand $i$ and $j$ to run from 0 to 3, with $\sigma_0$ being the identity and $\sigma_{1,2,3} = \sigma_{x,y,z}$.
+
+Furthermore, this inner product is perfectly suited to the problem of measuring a quantum state. When we do a measurement with corresponding operator $A$ the mean value we find is given by Eq. (\ref{eq:meanValue}). If the measured operator is Hermitian this is exactly the inner product of the measurement operator and the density matrix! Therefore, if we express the measured operator and the density matrix in the Pauli basis, we can compute the expected results of a measurement simply by reading off coefficients!
+
+As an example consider the general density matrix $\rho = \frac{1}{2}(1+\sum_{j=1}^3 r_j \sigma_j)$, and a measurement characterized by the operator $A=\sum_{k=1}^3 \alpha_k \sigma_k$. The mean result of the measurement is \begin{eqnarray}
+\left[ A \right]_{\rho} &=& \frac{1}{2}\textrm{Tr} \left[\sum_{k=1}^3 \alpha_k \sigma_k + \sum_{j,k=1}^3 r_j \alpha_k \sigma_j \sigma_k \right] \\
+&=& \frac{1}{2} \sum_{j,k=1}^3 r_j \alpha_k 2\delta_{j,k} \\
+&=& \sum_{j=1}^3 r_j \alpha_j \end{eqnarray}
+This is just he dot product of two vectors, one containing the $x$, $y$, and $z$ coefficients of the density matrix and the other containing the $x$, $y$, and $z$ coefficients of the measurement operator. Therefore, if we choose the measurement operator to be $\sigma_x$ the mean result of our measurement is just the $x$ coefficient of the density matrix. By measuring $\sigma_x$, $\sigma_y$ and $\sigma_z$ we can fully determine the density matrix.
+
+Note that the factor of $1/2$ in the expression of the density matrix makes up for the fact that the Pauli matrices are not normalized to unity.
+
+\subsection{Tomography}
+
+In most systems it is not possible to directly measure all three Pauli operators. With the phase qubit we can only measure $\sigma_z$. To make up for this we can simply rotate the qubit state prior to measurement. If we change the state by a unitary transformation $U$, the density matrix changes according to \begin{equation}
+\rho \rightarrow U \rho U^{\dagger} \end{equation}
+If we then make a measurement along the z-axis we get \begin{eqnarray}
+\textrm{meas }\sigma_z &=& \textrm{Tr} \left[ \sigma_z U \rho U^{\dagger} \right] \\
+&=& \textrm{Tr} \left[ U^{\dagger} \sigma_z U \rho \right] \\
+&=& \left[ U^{\dagger}\sigma_z U \right]_{\rho} \end{eqnarray}
+In the case of a $\pi/2$ pulse about the x axis, the rotation operator is \begin{equation}
+X_{\pi/2} = \frac{1}{\sqrt{2}} \left[ \begin{array}{cc} 1 & -i \\ -i & 1\end{array} \right] \end{equation}
+Plugging in gives \begin{eqnarray}
+\textrm{meas } \sigma_z &=& \textrm{Tr}\left[ X_{\pi/2}^{\dagger} \sigma_z X_{\pi/2} \rho \right] \\
+&=& \frac{1}{1} \textrm{Tr}\left[ \sigma_y \rho \right] \end{eqnarray}
+Thus, application of a $\pi/2$ rotation about the x-axis followed by measurement along the z-axis yields the y component of the density matrix. This is completely sensible based on a simple picture of rotation on the Bloch sphere. Clearly, application of a $\pi/2$ pulse along the -y axis would give us the x component of the density matrix. Therefore, by measuring the qubit along with z-axis with no pulse, $X_{\pi/2}$ and $Y_{-\pi/2}$, we completely determine the density matrix.
+
+\section{Real data processing}
+
+We've described the complete theory of quantum state tomography. We could set up our measurement programs to simply make the three measurements of the density matrix coefficients by applying the identity, $X_{\pi/2}$ and $Y_{-\pi/2}$ pulses as described above. This is enough information to extract the density matrix and is the simplest possible case. This three axis measurement scheme is called in our lab ``\emph{tomo}''.
+
+In real life the pulses we use to effect measurements along the $X$ and $Y$ axes are not perfect. Furthermore, our state measurement and readout may be imperfect. We may therefore want to use more sophisticated measurement protocols designed to deal with these issues. These protocols may over-constrain the problem of fitting a density matrix to the measured data and so we need an approach more flexible than just extracting one axis coefficient per pre-measurement rotation pulse.
+
+To explain the approach used in our fitting code let's first focus on a single measurement and figure out how to extract information from it. Suppose we apply rotation $U$ to the density matrix prior to measurement. We then measure the qubit state and record 1 if we the excited state and 0 if we get the ground state. The corresponding operator is $\sigma_1$ as given in Eq. (\ref{eq:1StateOperator}). The mean value of our measurement is \begin{eqnarray}
+\left[ \sigma_1 \right] _{U \rho U^{\dagger}} &=& \textrm{Tr} \left[ U^{\dagger} \sigma_1 U \rho \right] \\
+&=& U_{n \alpha}^{\dagger} \sigma^1_{\alpha\beta}U_{\beta \gamma}\rho_{\gamma n} \\
+&=& U_{n1}^{\dagger} U_{1 \gamma} \rho_{\gamma n} \\
+&=& U_{01}^{\dagger} U_{10} \rho_{00} + U_{01}^{\dagger} U_{11} \rho_{10} + \\
+& & U_{11}^{\dagger} U_{10} \rho_{01} + U_{11}^{\dagger} U_{11} \rho_{11} \\
+&=& U_{10}^* U_{10} \rho_{00} + U_{10}^* U_{11} \rho_{10} + \\
+& & U_{11}^* U_{10} \rho_{01} + U_{11}^* U_{11} \rho_{11} \end{eqnarray}
+Similarly, if we instead measure for the zero state we get \begin{eqnarray}
+\left[ \sigma_0 \right]_{U \rho U^{\dagger}} &=& U_{00}^* U_{00} \rho_{00} + U_{00}^* U_{01} \rho_{10} + \nonumber \\
+& & U_{01}^* U_{00} \rho_{01} + U_{01}^* U_{01} \rho_{11} \end{eqnarray}
+The crucial point is that we can express these equations as a matrix equation \begin{equation}
+\left( \begin{array}{cccc}
+U_{00}U_{00}^* & U_{00}U_{01}^* & U_{01}U_{00}^* & U_{01}U_{01}^* \\
+U_{10}U_{10}^* & U_{10}U_{11}^* & U_{11}U_{10}^* & U_{11}U_{11}^*
+\end{array} \right) \left( \begin{array}{c}
+\rho_{00} \\ \rho_{01} \\ \rho_{10} \\ \rho_{11} \end{array} \right) = 
+\left( \begin{array}{c} \left[\sigma_0 \right]_{U \rho U^{\dagger}} \\ \left[ \sigma_1 \right]_{U \rho U^{\dagger}} \end{array} \right)
+\end{equation}
+The numerical treatment of the problem is now obvious. The leftmost matrix is determined by the measurement protocol and the right hand side column contains the results of the measurements. One then uses a numerical algorithm to solve the linear equation for the density matrix elements. Each rotation operator adds two rows to the leftmost matrix, one for the measured $\ket{0}$ probability and one for the measured $\ket{1}$ probability. It is not necessary to actually measure both probabilities; we can just measure $P_1$ and assume $P_0 = 1-P_1$. If we do this, we still add the extra row for $\ket{0}$ and this won't screw up the data fitting because it adds exactly the same information as the actually measured data.
+
+\end{document}

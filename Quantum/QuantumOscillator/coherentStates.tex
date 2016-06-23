@@ -1,0 +1,29 @@
+\section{Coherent States}
+
+Suppose we want to find an eigenvector of the lowering operator. For starters we know that the state $\ket{0}$ is an eigenket of the lowering operator with eigenvalue $0$. We also know that to translate $a$ by an amount $\phi$ we should apply the operator $\exp[\phi a^{\dagger}]$. Therefore we guess that the general eigenket of $a$ is \begin{equation}
+\ket{\phi}=e^{\phi a^{\dagger}}\ket{0} \end{equation}
+With this definition we have, \begin{eqnarray*}
+a\ket{\phi} & = & a\exp[\phi a^{\dagger}]\ket{0}\\
+& = & \sum_{n=1}^{\infty}\frac{\phi^{n}}{n!}a(a^{\dagger})^{n}~\ket{0}\end{eqnarray*}
+Note that since $[a,(a^{\dagger})^{n}]=n(a^{\dagger})^{n-1}$ we have \begin{equation}
+a(a^{\dagger})^{n}=(a^{\dagger})^{n}a+n(a^{\dagger})^{n-1} \end{equation}
+So then \begin{equation}
+a\ket{\phi}=\sum_{n=1}^{\infty}\frac{\phi^{n}}{n!}[(a^{\dagger})^{n}a+n(a^{\dagger})^{n-1}]~\ket{0} \end{equation}
+And since $a\ket{0}=0$ we can drop the $(a^{\dagger})^{n}a$ term, leaving, \begin{eqnarray*}
+a\ket{\phi} & = & \sum_{n=1}^{\infty}\frac{\phi^{n}}{n!}[n(a^{\dagger})^{n-1}]~\ket{0}\\
+& = & \phi~\sum_{n=1}^{\infty}\frac{\phi^{n-1}}{(n-1)!}(a^{\dagger})^{n-1}~\ket{0}\\
+a\ket{\phi} & = & \phi\ket{\phi}\end{eqnarray*}
+So the kets $\ket{\phi}$ are eigenkets of $a$ as we hoped.
+HOWEVER, we have not checked normalization...
+XXX Check normalization.
+
+Another useful property is that \begin{eqnarray*}
+\partial_{\phi}\ket{\phi} & = & \sum_{n=1}^{\infty}\frac{n\phi^{n-1}}{n!}(a^{\dagger})^{n}~\ket{0} \\
+& = & \sum_{n=1}^{\infty}\frac{\phi^{n-1}}{(n-1)!}a^{\dagger}(a^{\dagger})^{n-1}~\ket{0}\\
+\partial_{\phi}\ket{\phi} & = & a^{\dagger}\ket{\phi}\end{eqnarray*}
+
+
+A very important identity that is used in the context of Wigner functions
+is \begin{equation}
+\int\frac{d\Re(\phi)d\Im(\phi)}{\pi}e^{-\phi^{*}\phi}\ket{\phi}\bra{\phi} \end{equation}
+
