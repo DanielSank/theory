@@ -1,0 +1,118 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{babel}
+
+\begin{document}
+
+\section*{Hawking Radiation}
+\begin{itemize}
+\item Radiation from black hole event horizon. Similar to the Unruh effect.
+\item Quantum effect
+\item Implies that information comes from black holes
+\item Blackbody spectrum with T\textasciitilde{}1/M
+\item Observation
+
+\begin{itemize}
+\item Never observed. Temperatures are too low in real life. ie, below CMB
+\item GLAST may be able to detect $\gamma$-ray signature of Hawking radiation
+from the black hole in the Milky Way
+\item Radiation from circular moving electrons in accelerators emit radiation
+analogous to the Unruh effect. Similar.
+
+\begin{itemize}
+\item Unruh effect is change of vacuum temperature for an accelerating observer.
+\item Note that sitting stationary at an even horizon $\emph{is}$ accelerating,
+just as sitting in your seat here you feel like you're accelerating.
+\end{itemize}
+\item Some possibility of seeing Hawking radiation by expoiting the similarity
+between an even horizon and sound waves moving in a fluid with position
+dependent local velocity.
+\item Fluids are hard to deal with, and most of them aren't quantum...
+\item Build a system with wave propogation, and quantum... SQUID transmission
+line!
+\end{itemize}
+\end{itemize}
+
+\section*{SQUID transmission line}
+\begin{itemize}
+\item Single DC SQUID has equations of motion that come from Kirchoff's
+laws. Use total and circulating current.
+
+\begin{itemize}
+\item Van Duzer 262
+\item Tinkham 204
+\end{itemize}
+\end{itemize}
+\begin{eqnarray*}
+\frac{1}{\omega_{p}^{2}}\frac{d^{2}\gamma_{+}}{dt^{2}}+\frac{1}{\omega_{c}}\frac{d\gamma_{+}}{dt}+\cos\gamma_{-}\sin\gamma_{+} & = & \frac{1}{2I_{c}}\\
+\frac{1}{\omega_{p}^{2}}\frac{d^{2}\gamma_{-}}{dt^{2}}+\frac{1}{\omega_{c}}\frac{d\gamma_{-}}{dt}+\cos\gamma_{+}\sin\gamma_{-}+\frac{2\gamma_{-}}{\beta_{L}} & = & \frac{1}{\beta_{L}}\frac{2\pi\phi_{\textrm{ext}}}{\Phi_{0}}\end{eqnarray*}
+where $\omega_{p}=(2\pi I_{c}/C_{J}\Phi_{0})^{1/2}$, $\omega_{c}=2\pi I_{c}R_{N}/\Phi_{0}$,
+and $\beta_{L}=2\pi LI_{c}/\Phi_{0}$.
+
+In the limit of small self inductance the SQUID looks like a Josephson
+junction with flux tunable critical current:\[
+\frac{1}{(\omega_{p}^{s})^{2}}\frac{d\gamma_{+}^{2}}{dt^{2}}+\sin\gamma_{+}=\frac{I}{I_{c}^{s}}\]
+where $I_{c}^{s}=2I_{c}\cos(\pi\phi_{\textrm{ext}}/\Phi_{0})$ and
+$\omega_{p}^{s}=\sqrt{2\pi I_{c}^{s}/(2C_{J}\Phi_{0})}$.
+
+If we also keep $\omega\ll\omega_{p}$ and $I\ll I_{c}$ the Josephson
+junction looks like an inductor, and the flux dependent critical current
+turns into a flux dependent inductance,\[
+L=\frac{\Phi_{0}}{2\pi}\frac{\arcsin(I/I_{c}^{s})}{I/I_{c}^{s}}\]
+In this limit the equations of motion become the telegrapher's equations\[
+\frac{\partial V}{\partial x}=-\frac{\partial(LI)}{dt}\qquad\frac{\partial I}{\partial x}=-C_{0}\frac{\partial V}{\partial t}\]
+which, according to Pozar, support waves. Using potentials $A$, and
+wave speed $c=a/\sqrt{LC_{0}}$ The wave equation is\[
+\left(\frac{\partial}{\partial t}\frac{1}{c^{2}}\frac{\partial}{\partial t}-\frac{\partial^{2}}{\partial x^{2}}\right)A=0\]
+Note that since $c$ depends on the inductance, it can vary in space
+and time (provokative eyebrow). Assume we have a wave dependence\[
+c=c(x-ut)\]
+where $u$ is the speed of waves on our flux bias line. Go to new
+coordinates that move with the bias wave\begin{eqnarray*}
+x' & = & x-ut\\
+t' & = & t\end{eqnarray*}
+Then we have\begin{eqnarray*}
+\frac{\partial}{\partial t} & = & \frac{\partial t'}{\partial t}\frac{\partial}{\partial t'}+\frac{\partial x'}{\partial t}\frac{\partial}{\partial x'}=\frac{\partial}{\partial t}-u\frac{\partial}{\partial x'}\\
+\frac{\partial}{\partial x} & = & \frac{\partial}{\partial x'}\end{eqnarray*}
+Then the wave equation becomes\[
+\left[\left(\frac{\partial}{\partial t'}-u\frac{\partial}{\partial x'}\right)\frac{1}{c^{2}}\left(\frac{\partial}{\partial t'}-u\frac{\partial}{\partial x'}\right)-\frac{\partial^{2}}{\partial x^{2}}\right]A=0\]
+This can be written in terms of a metric\[
+g_{\textrm{eff}}=\frac{1}{c^{2}}\left[\begin{array}{cc}
+1 & -u\\
+-u & u^{2}-c^{2}\end{array}\right]\]
+This is great, because now you have a tunable metric. In a SQUID system
+you can engineer things so that quantum fluctuations are important,
+and now you're doing physics with quantum mechanical metric! An experiment
+in this system would be the first {}``quantum gravity'' experiment
+ever.
+
+In particular this metric has an even horizon at each place/time at
+which $c(x,t)=u$, because at those places the time component vanishes,
+just like in Schwarzchild.
+
+
+\section*{Experimental Considerations}
+\begin{itemize}
+\item Measurement - To see if Hawking radiation is happening you need to
+detect photons. In particular, you need to do coincidence detection
+of microwave photons. This requires a single shot, tunable microwave
+photon detector... ie a phase qubit.
+\item Fab - They take the SQUID size to be 0.25 $\mu$m, with junctions
+that have $I_{c}=2\mu\textrm{A}$. Can we do that?
+
+\begin{itemize}
+\item Necessary impedances are in the normal operating ranges, ie 50$\Omega$.
+\end{itemize}
+\item Temperature - The Hawking temperature for this system is ideally \textasciitilde{}120mK
+$\emph{under the constraints imposed by the long wavelength limit etc. mentioned earlier in the paper}$.
+This temperature is expected to decrease 10\% every 1000 units of
+the transmission line due to dispersion effects. This is something
+we could measure in our refrigerator, and this marks one of the main
+advantages of using a SQUID transmission line.
+\end{itemize}
+
+\end{document}
