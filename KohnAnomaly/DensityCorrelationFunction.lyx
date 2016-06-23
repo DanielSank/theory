@@ -1,0 +1,680 @@
+#LyX 1.6.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+The Kohn Anomaly: Simple Theory
+\end_layout
+
+\begin_layout Author
+Daniel Sank, Max Hofmann, James Wenner
+\end_layout
+
+\begin_layout Date
+March 9, 2009
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+Phonons are essentially (plane wave) displacements of the ion cores in a
+ solid.
+ Since the ion cores are charged a phonon can be thought of as a travelling
+ perturbation in the charge density distribution in a solid.
+ Since electrons are also charged it's clear that electrons and phonons
+ should interact in some way, and that the presence of each should affect
+ the dispersion relation of the other.
+ The Kohn anomaly refers to singularities in phonon dispersion relations
+ at certain wave-vectors q, arising from an abrupt change in the ability
+ of the electrons to screen the charge displacements induced by phonons
+ at those wave-vectors.
+\end_layout
+
+\begin_layout Standard
+In order to demonstrate the presence of these singularities theoretically
+ we need to find some way of calculating the response of the electrons to
+ the charge perturbation caused by the phonons.
+ We do this using first order perturbation theory.
+ In particular we calculate the perturbed expectation value of the electron
+ density 
+\begin_inset Formula $\Psi^{\dagger}\Psi$
+\end_inset
+
+ where the perturbing Hamiltonian is the electrostatic energy caused by
+ the phonon distortion of the ionic cores in the solid.
+ In the lingo of quantum many body theory this quantity is called the 
+\begin_inset Quotes eld
+\end_inset
+
+density-density correlation function.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that we are treating the electrostatic perturbation caused by the phonon
+ as time independent.
+ This may seem strange given that in real processes phonons are really travellin
+g wave packets, but the time independent picture is justified by the fact
+ that electrons equilibrate much faster than phonon lifetimes, and so as
+ far as the electrons are concerned the affect of the phonon is time independent.
+ 
+\end_layout
+
+\begin_layout Section*
+Simple Calculation of Zero Frequency Correlation Function
+\end_layout
+
+\begin_layout Standard
+We use first order (nondegenerate) perturbation theory to calculate the
+ density response of the free electron gas to an externally applied charge
+ distribution.
+ Recall that in first order perturbation theory the shift in the states
+ is given by the formula,
+\begin_inset Formula \[
+|n^{1}\rangle=\sum_{m\neq n}\frac{\langle m^{0}|\hat{V}|n^{0}\rangle}{E_{n}^{0}-E_{m}^{0}}|m^{0}\rangle\]
+
+\end_inset
+
+Therefore, the expectation value of an operator 
+\begin_inset Formula $A$
+\end_inset
+
+ to first order is
+\begin_inset Formula \begin{eqnarray*}
+\langle A\rangle & = & \langle n|A|n\rangle=\langle n^{0}+n^{1}|A|n^{0}+n^{1}\rangle\\
+\langle A\rangle & = & \langle n^{0}|A|n^{0}\rangle+\langle n^{0}|A|n^{1}\rangle+\langle n^{1}|A|n^{0}\rangle+O(V^{2})\\
+\langle A\rangle-\langle A\rangle_{0} & = & 2\Re\langle n^{0}|A|n^{1}\rangle\\
+\langle A\rangle-\langle A\rangle_{0}\equiv\delta\langle A\rangle & = & 2\Re\left[\sum_{m\neq n}\frac{\langle m^{0}|V|n^{0}\rangle\langle n^{0}|A|m^{0}\rangle}{E_{n}^{0}-E_{m}^{0}}\right]\end{eqnarray*}
+
+\end_inset
+
+Our perturbing Hamiltonian will be the energy due to an externally applied
+ charge distribution,
+\begin_inset Formula \[
+V=\int d^{3}r\left[\rho_{\textrm{el}}(r)\right]\phi(r)=\int d^{3}r\left[\Psi^{\dagger}(r)\Psi(r)\right]\int dr'\frac{\rho_{\textrm{ext}}(r')}{|r-r'|}=\int d^{3}r\left(\Psi(r)\Psi(r)\right)\left[\rho*\frac{1}{r}\right](r)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho_{\textrm{el}}$
+\end_inset
+
+ is the charge density of the electrons, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is the externally applied (perturbing) charge distribution, and the * indicates
+ convolution.
+ By the convolution theorem 
+\begin_inset Formula ${\cal F}\left[f*g\right]={\cal F}\left[f\right]{\cal F}\left[g\right]$
+\end_inset
+
+, therefore
+\begin_inset Formula \[
+\left[\rho*\frac{1}{r}\right](r)=\int\frac{d^{3}k}{(2\pi)^{3}}e^{ikr}\rho(k)\frac{4\pi}{k^{2}}\]
+
+\end_inset
+
+where we've used the fact that that the Fourier transform of 
+\begin_inset Formula $\frac{1}{r}$
+\end_inset
+
+ is 
+\begin_inset Formula $\frac{4\pi}{k^{2}}$
+\end_inset
+
+.
+ Plugging this into our expression for V we get 
+\begin_inset Formula \begin{eqnarray*}
+V & = & \int d^{3}r\left(\Psi^{\dagger}(r)\Psi(r)\right)\left[\rho*\frac{1}{r}\right](r)=\int d^{3}r\left(\Psi^{\dagger}(r)\Psi(r)\right)\int\frac{d^{3}k}{(2\pi)^{3}}e^{ikr}\rho(k)\frac{4\pi}{k^{2}}\\
+V & = & \int d^{3}r\left(\Psi^{\dagger}(r)\Psi(r)\right)\int\frac{d^{3}k}{(2\pi)^{3}}e^{ikr}\rho(k)\frac{4\pi}{k^{2}}\end{eqnarray*}
+
+\end_inset
+
+Consider the case where 
+\begin_inset Formula $\rho(r)=\rho_{0}e^{iqr}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\rho(k)=\rho_{0}(2\pi)^{3}\delta(k-q)$
+\end_inset
+
+.
+ Then we can do the k integral easily, leaving,
+\begin_inset Formula \begin{eqnarray*}
+V & = & 4\pi\frac{\rho_{0}}{q^{2}}\int d^{3}r\left(\Psi^{\dagger}(r)\Psi(r)\right)e^{iqr}\end{eqnarray*}
+
+\end_inset
+
+Now Fourier transform the 
+\begin_inset Formula $\Psi$
+\end_inset
+
+'s, using 
+\begin_inset Formula $\Psi(r)=\int\frac{d^{3}k}{(2\pi)^{3}}e^{-ikr}a_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Psi^{\dagger}(r)=\int\frac{d^{3}k'}{(2\pi)^{3}}e^{ik'r}a_{k'}^{\dagger}$
+\end_inset
+
+,
+\begin_inset Formula \[
+V=4\pi\frac{\rho_{0}}{q^{2}}\int d^{3}r\int\frac{d^{3}k}{(2\pi)^{3}}\int\frac{d^{3}k'}{(2\pi)^{3}}e^{i(k-k'+q)r}a_{k}^{\dagger}a_{k'}\]
+
+\end_inset
+
+The integral over 
+\begin_inset Formula $r$
+\end_inset
+
+ can be done easily and gives 
+\begin_inset Formula $(2\pi)^{3}\delta(k-k'+q)$
+\end_inset
+
+.
+ We can then do the 
+\begin_inset Formula $k'$
+\end_inset
+
+ integral, and what's left is
+\begin_inset Formula \[
+V=4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}a_{k}^{\dagger}a_{k+q}\]
+
+\end_inset
+
+Change variables so that 
+\begin_inset Formula $k+q\rightarrow k$
+\end_inset
+
+ to get
+\begin_inset Formula \[
+V=4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}a_{k-q}^{\dagger}a_{k}\]
+
+\end_inset
+
+What we really want to calculate is 
+\begin_inset Formula $\langle m^{0}|V|n^{0}\rangle$
+\end_inset
+
+ where 
+\begin_inset Formula $|m^{0}\rangle$
+\end_inset
+
+ is an arbitrary state of the system and 
+\begin_inset Formula $|n^{0}\rangle$
+\end_inset
+
+ is the thermal state away from which we're perturbing.
+ Let's consider the case 
+\begin_inset Formula $T=0$
+\end_inset
+
+ so that 
+\begin_inset Formula $|n^{0}\rangle$
+\end_inset
+
+ is just the pure state with all states filled up to the Fermi level, and
+ all other states empty.
+ Denote this state by 
+\begin_inset Formula $|\Omega\rangle$
+\end_inset
+
+ from now on.
+ With this notation the matrix element we need is
+\begin_inset Formula \[
+\langle m^{0}|V|\Omega\rangle=4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}\langle m^{0}|a_{k-q}^{\dagger}a_{k}|\Omega\rangle\]
+
+\end_inset
+
+The inner product sitting in the integral is only nonzero if 
+\begin_inset Formula $|m^{0}\rangle=a_{k-q}^{\dagger}a_{k}|\Omega\rangle$
+\end_inset
+
+, and then only if 
+\begin_inset Formula $k<k_{f}$
+\end_inset
+
+ and 
+\begin_inset Formula $|k-q|>k_{F}$
+\end_inset
+
+ (we exclude the case 
+\begin_inset Formula $q=0$
+\end_inset
+
+ which is justified by charge neutrality of the system).
+ Therefore we can write
+\begin_inset Formula \[
+\langle m^{0}|V|\Omega\rangle=4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}\delta\left[|m^{0}\rangle,a_{k-q}^{\dagger}a_{k}|\Omega\rangle\right]\Theta(k_{F}-k)\Theta(|k-q|-k_{F})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inserting our result for 
+\begin_inset Formula $\langle m^{0}|V|\Omega\rangle$
+\end_inset
+
+ into our expression for the perturbed expectation value of 
+\begin_inset Formula $A$
+\end_inset
+
+ we ge
+\begin_inset Formula \begin{eqnarray*}
+\delta\langle A\rangle & = & 2\Re\left[4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}\sum_{m\neq\Omega}\frac{\delta\left[|m^{0}\rangle,a_{k-q}^{\dagger}a_{k}|\Omega\rangle\right]\Theta(k_{F}-k)\Theta(|k-q|-k_{F})\langle\Omega|A|m^{0}\rangle}{E_{\Omega}-E_{m}^{0}}\right]\\
+\delta\langle A\rangle & = & 2\Re\left[4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}\frac{\Theta\left(k_{F}-k\right)\Theta\left(|k-q|-k_{F}\right)\langle\Omega|A|a_{k-q}^{\dagger}a_{k}\Omega\rangle}{E_{k}^{0}-E_{k-q}^{0}}\right]\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $E_{k}^{0}\equiv\hbar^{2}k^{2}/2m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Remember that the operator who's perturbed expectation value we want to
+ know is the electron density 
+\begin_inset Formula $\Psi^{\dagger}(x)\Psi(x)$
+\end_inset
+
+.
+ Using Fourier transform we can write this operator as 
+\begin_inset Formula $A=\Psi^{\dagger}(x)\Psi(x)=\int\frac{d^{3}l}{(2\pi)^{3}}\int\frac{d^{3}s}{(2\pi)^{3}}e^{i(l-s)x}a_{l}^{\dagger}a_{s}$
+\end_inset
+
+, and inserting this into the equation for 
+\begin_inset Formula $\delta\langle A\rangle$
+\end_inset
+
+ gives, 
+\begin_inset Formula \[
+\delta\langle\Psi^{\dagger}(x)\Psi(x)\rangle=2\Re\left[4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}\int\frac{d^{3}l}{(2\pi)^{3}}\int\frac{d^{3}s}{(2\pi)^{3}}e^{i(l-s)x}\frac{\Theta(k_{F}-k)\Theta(|k-q|-k_{F})\langle\Omega|a_{l}^{\dagger}a_{s}a_{k-q}^{\dagger}a_{k}|\Omega\rangle}{E_{k}^{0}-E_{k-q}^{0}}\right]\]
+
+\end_inset
+
+Let's process the matrix element 
+\begin_inset Formula $\langle\Omega|a_{l}^{\dagger}a_{s}a_{k-q}^{\dagger}a_{k}|\Omega\rangle$
+\end_inset
+
+.
+ Some thought in a peaceful moment reveals that the matrix element is nonzero
+ only when certain relations between 
+\begin_inset Formula $l,s,k,$
+\end_inset
+
+ and 
+\begin_inset Formula $q$
+\end_inset
+
+ hold.
+ These relations, along with the resulting factors they produce in the integrand
+ are summarized here
+\begin_inset Formula \[
+\begin{cases}
+k<k_{F} & \quad\Theta\left(k_{F}-k\right)\\
+|k-q|>k_{F} & \quad\Theta\left(|k-q|-k_{F}\right)\\
+s=k-q & \quad(2\pi)^{3}\delta\left(s-(k-q)\right)\\
+l=k & \quad(2\pi)^{3}\delta(l-k)\end{cases}\]
+
+\end_inset
+
+When these conditions are met the matrix element equals unity.
+ Stuffing all of this into the previous line for 
+\begin_inset Formula $\delta\langle A\rangle$
+\end_inset
+
+ leaves us with
+\begin_inset Formula \[
+\delta\langle\Psi^{\dagger}(x)\Psi(x)\rangle=2\Re\left[4\pi\frac{\rho_{0}}{q^{2}}\int\frac{d^{3}k}{(2\pi)^{3}}e^{iqx}\frac{\Theta(k_{F}-k)\Theta(|k-q|-k_{F})}{E_{k}^{0}-E_{k-q}^{0}}\right]\]
+
+\end_inset
+
+This integral can be done by fairly elementary means.
+ The result is
+\begin_inset Formula \[
+\delta\langle\Psi^{\dagger}(x)\Psi(x)\rangle=(\textrm{constants})*\frac{\rho_{0}e^{iqx}}{q^{2}}\left\{ 1+\frac{k_{F}}{q}\left[1-\frac{q^{2}}{4k_{F}^{2}}\right]\log\bigg|\frac{q+2k_{F}}{q-2k_{F}}\bigg|\right\} \]
+
+\end_inset
+
+The relevant features of this result are as follows
+\end_layout
+
+\begin_layout Itemize
+The electron density response is linear in the perturbation
+\end_layout
+
+\begin_layout Itemize
+The amplitude of the response has a sharp peak at 
+\begin_inset Formula $q=2k_{F}$
+\end_inset
+
+ indicating that the response of the electron gas to the charge perturbation
+ of a phonon changes abruptly at this wavevector.
+\end_layout
+
+\begin_layout Itemize
+Since the electron-phonon coupling changes abruptly, we expect the properties
+ of the phonons and electrons to show interesting features when 
+\begin_inset Formula $q$
+\end_inset
+
+ is near 
+\begin_inset Formula $2k_{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Density Response Function using Time Dependent Perturbation Theory
+\end_layout
+
+\begin_layout Standard
+Another route to calculate the density response function is to use time
+ dependent perturbation theory.
+ Using the interaction picture formalism and keeping terms to first order
+ in the perturbing operator 
+\begin_inset Formula $V(t)$
+\end_inset
+
+ time dependent theory gives
+\begin_inset Formula \[
+\delta\langle A(t)\rangle=-\frac{i}{\hbar}\int_{-\infty}^{\infty}dt'\langle[A_{I}(t),V_{I}(t')]\rangle\]
+
+\end_inset
+
+where the subscript 
+\begin_inset Formula $I$
+\end_inset
+
+'s indicate operators in the interaction picture.
+ What are the forms of the operators 
+\begin_inset Formula $A_{I}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{I}$
+\end_inset
+
+? We want to calculate density response so
+\begin_inset Formula \[
+A_{S}=\Psi^{\dagger}\Psi(x)=\sum_{k,k'}e^{i(k-k')x}a_{k}^{\dagger}a_{k'}\]
+
+\end_inset
+
+The perturbing operator is
+\begin_inset Formula \[
+V_{S}=\int d^{3}r\rho_{electrons}(r)\phi(r)=\int d^{3}r\left[(-e)\Psi^{\dagger}\Psi\right](r)\int d^{3}r'\frac{\rho(r')}{|r-r'|}=(-e)\int d^{3}r\left[\Psi^{\dagger}\Psi\right](r)\left[\rho\otimes\frac{1}{r}\right](r)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\otimes$
+\end_inset
+
+ indicates convolution.
+ We consider the case where 
+\begin_inset Formula $\rho(r)=\rho_{0}e^{iqr}$
+\end_inset
+
+.
+ As usualy things simplify in the Fourier domain.
+ The Fourier transforms of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{1}{r}$
+\end_inset
+
+ are,
+\begin_inset Formula \begin{eqnarray*}
+\rho(k) & = & \rho_{0}(2\pi)^{3}\delta(k-q)\\
+\left[\frac{1}{r}\right](k) & = & \frac{4\pi}{k^{2}}\end{eqnarray*}
+
+\end_inset
+
+so by the convolution theorem we have,
+\begin_inset Formula \[
+\left[\rho\otimes\frac{1}{r}\right](r)=\int\frac{d^{3}k}{(2\pi)^{3}}e^{ikr}\rho(k)\left[\frac{1}{r}\right](k)=\int\frac{d^{3}k}{(2\pi)^{3}}e^{ikr}\rho_{0}(2\pi)^{3}\delta(k-q)\frac{4\pi}{k^{2}}=4\pi\rho_{0}\frac{e^{iqr}}{q^{2}}\]
+
+\end_inset
+
+and therefore the perturbation has a nice simple form
+\begin_inset Formula \[
+V_{S}=(-e)4\pi\rho_{0}\frac{1}{q^{2}}\int d^{3}r\left[\Psi^{\dagger}\Psi\right](r)e^{iqr}\]
+
+\end_inset
+
+which is just the Fourier transform of the electron density! Plugging this
+ into our formula for 
+\begin_inset Formula $\delta\langle A\rangle(t)$
+\end_inset
+
+ we get
+\begin_inset Formula \[
+\delta\langle A\rangle(t)=-\frac{i}{\hbar}(-e)4\pi\rho_{0}\frac{1}{q^{2}}\int dt'\int dr\langle[\Psi^{\dagger}(x)\Psi(x),\Psi^{\dagger}(r)\Psi(r)]\rangle e^{iqr}\]
+
+\end_inset
+
+With a little algebra involving the identity 
+\begin_inset Formula $[AB,C]=[A,B]C+B[A,C]$
+\end_inset
+
+ we can do the commutator,
+\begin_inset Formula \[
+[\Psi^{\dagger}(x)\Psi(x),\Psi^{\dagger}(r)\Psi(r)]=\delta(x-r)\left(\Psi^{\dagger}(x)\Psi(r)-\Psi^{\dagger}(r)\Psi(x)\right)\]
+
+\end_inset
+
+The delta function allows us to do the 
+\begin_inset Formula $r$
+\end_inset
+
+ integral easily, leaving
+\begin_inset Formula \begin{eqnarray*}
+\delta\langle A\rangle(t) & = & -\frac{i}{\hbar}(-e)4\pi\rho_{0}\frac{1}{q^{2}}\int dt'\int d^{3}r\delta(x-r)\langle\Psi^{\dagger}(x)\Psi(r)-\Psi^{\dagger}(r)\Psi(x)\rangle e^{iqr}\\
+ & = & -\frac{i}{\hbar}(-e)4\pi\rho_{0}\frac{1}{q^{2}}\int dt'\int d^{3}r\delta(x-r)\langle\Psi^{\dagger}(x)\Psi(x)-\Psi^{\dagger}(x)\Psi(x)\rangle e^{iqr}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Density Correlation Function at Zero Frequency from Time Ordered Function
+\end_layout
+
+\begin_layout Standard
+We calculated
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+D(q,\bar{\omega})=\frac{2}{(2\pi)^{2}}\left\{ 1+\frac{1}{2}\frac{m^{2}}{p_{F}q^{3}}[4\epsilon_{F}\epsilon_{q}-(\epsilon_{q}\pm i\bar{\omega})^{2}]\log\left[\frac{\epsilon_{q}\pm i\bar{\omega+v_{F}q}}{\epsilon_{q}\pm i\bar{\omega}-v_{F}q}\right]\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the plus/minus sign means to add the term once with upper sign and
+ once with lower sign.
+ Now take 
+\begin_inset Formula $i\bar{\omega}\rightarrow\omega+i\eta$
+\end_inset
+
+.
+ Then we get
+\begin_inset Formula \[
+D_{r}(q,\omega)=\frac{2}{(2\pi)^{2}}\left\{ 1+\frac{1}{2}\frac{m^{2}}{p_{F}q^{3}}[4\epsilon_{F}\epsilon_{q}-(\epsilon_{q}\pm\omega\pm i\eta)^{2}]\log\left[\frac{\epsilon_{q}\pm\bar{\omega+v_{F}q\pm i\eta}}{\epsilon_{q}\pm\omega-v_{F}q\pm i\eta}\right]\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $X^{\pm}=\epsilon_{q}\pm\omega+v_{F}q$
+\end_inset
+
+ and 
+\begin_inset Formula $Y^{\pm}=\epsilon_{q}\pm\omega-v_{F}q$
+\end_inset
+
+.
+ Then we can re-express as
+\begin_inset Formula \[
+D_{r}(q,\omega)=\frac{2}{(2\pi)^{2}}\left\{ 1+\frac{1}{2}\frac{m^{2}}{p_{F}q^{3}}[4\epsilon_{F}\epsilon_{q}-(\epsilon_{q}\pm\omega\pm i\eta)^{2}]\log\left[\frac{X^{\pm}\pm i\eta}{Y^{\pm}\pm i\eta}\right]\right\} \]
+
+\end_inset
+
+ The log terms, 
+\begin_inset Formula \[
+\log\left[\frac{X^{\pm}\pm i\eta}{Y^{\pm}\pm i\eta}\right]\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+can be re-expressed as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\log\left[\frac{(X^{\pm}\pm i\eta)(Y^{\pm}\mp i\eta)}{(Y^{\pm}\pm i\eta)(Y^{\pm}\mp i\eta)}\right]=\log\left[\frac{X^{\pm}Y^{\pm}\mp i\eta(X^{\pm}-Y^{\pm})}{Y^{2}}\right]\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where we've dropped real terms of order 
+\begin_inset Formula $\eta^{2}$
+\end_inset
+
+.
+ It can easily be found that if 
+\begin_inset Formula $X-Y>0$
+\end_inset
+
+, which is true for our case for either sign, we have
+\begin_inset Formula \[
+\lim_{\eta\rightarrow0^{+}}\log[XY\mp i\eta(X-Y)]=\log|XY|\mp i\pi\Theta(-XY)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore we have
+\begin_inset Formula \[
+D_{r}(q,\omega)=\frac{2}{(2\pi)^{2}}\left\{ 1+\frac{1}{2}\frac{m^{2}}{p_{F}q^{3}}[4\epsilon_{F}\epsilon_{q}-(\epsilon_{q}\pm\omega\pm i\eta)^{2}]\left(\log\left[\frac{X^{\pm}}{Y^{\pm}}\right]\mp i\pi\Theta(-X^{\pm}Y^{\pm})\right)\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remember that we still add together the terms with upper/lower sign.
+ Now consider the case 
+\begin_inset Formula $\omega=0$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula \[
+X^{+}=X^{-}=\epsilon_{q}+v_{F}q\qquad Y^{+}=Y^{-}=\epsilon_{q}-v_{F}q\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so summing the two terms leaves us with
+\begin_inset Formula \[
+D_{r}(q,\omega=0)=\frac{2}{(2\pi)^{2}}\left\{ 1+\frac{1}{2}\frac{m^{2}}{p_{F}q^{3}}[4\epsilon_{F}\epsilon_{q}-(\epsilon_{q})^{2}]\left(2\log\left[\frac{\epsilon_{q}+v_{F}q}{\epsilon_{q}-v_{F}q}\right]\right)\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recombining variables gives
+\begin_inset Formula \[
+D_{r}(q,\omega=0)=\frac{1}{2\pi^{2}}\left\{ 1+\frac{k_{F}}{q}\left[1-\frac{q^{2}}{4k_{F}^{2}}\right]\log\left[\frac{q+2k_{F}}{q-2k_{F}}\right]\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is the density response function at zero frequency.
+\end_layout
+
+\end_body
+\end_document
