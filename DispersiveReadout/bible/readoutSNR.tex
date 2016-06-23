@@ -1,0 +1,50 @@
+\subsection{Analysis of system SNR}
+
+
+\subsubsection{Signal}
+
+As that the probe tone is exactly in between $\omega_{\ket{0}}$ and $\omega_{\ket{1}}$, we measure the ground state $S_{21}$ circle with detuning $\delta y = \chi/\omega_0$ and the excited state $S_{21}$ circle with detuning $\delta y = -\chi/\omega_0$.
+The voltage phasors for $|0\rangle$ and $|1\rangle$ are thus complex conjugates of one another, and their separation is \begin{eqnarray}
+\Delta S_{21} &\equiv& S_{21,\ket{0}} - S_{21,\ket{1}} \nonumber \\
+&=& 2\Im S_{21}(\delta y = \tilde{\chi}) \nonumber \\
+&=& 4Q_l (1-S_{\text{min}}) \frac{\tilde{\chi}}{1+(2Q_l \tilde{\chi})^2} \, , \end{eqnarray}
+where $\tilde{\chi}\equiv \chi / \omega_0$.
+
+\subsubsection{Noise}
+
+The signal is the voltage difference \mbox{$\Delta V = V_{\textrm{in}}\Delta S_{21}$}. This is a DC voltage, so the signal power is \mbox{$\Delta V ^2 / Z_0$}. The noise is assumed uncorrelated and Gaussian distributed so the noise power is $V_N^{\textrm{rms}}/Z_0$. Therefore \begin{equation}
+\textrm{SNR} = \left| \frac{\Delta V}{V_N^{\textrm{rms}}} \right|^2 = \left| \frac{V_{\textrm{in}}\Delta S_{21}}{V_N^{\textrm{rms}}} \right|^2 \nonumber \, , \end{equation}
+where we've assumed the noise is the same for both qubit states. This SNR is the ratio of 
+
+
+Now we eliminate $V_{\textrm{in}}$ in favor of the output power. The input and output voltages are related by \footnote{signs} \begin{eqnarray}
+V_{\textrm{out}}^{|0\rangle} &=& V_{\textrm{in}} S_{21}(\tilde{\chi}) \nonumber \\
+\textrm{and} \quad V_{\textrm{out}}^{|1\rangle} &=& V_{\textrm{in}} S_{21}(-\tilde{\chi})\, . \nonumber \end{eqnarray}
+Since $S_{21}(\tilde{\chi}) = S_{21}(-\tilde{\chi})^*$ we can write $|V_\textrm{in}|=|V_{\textrm{out}}|/|S_{21}|$ and therefore \begin{equation}
+\textrm{SNR} = \left| \frac{V_{\textrm{out}}}{V_N^{\textrm{rms}}} \right| ^2 \left| \frac{\Delta S_{21}}{S_{21}} \right| ^2 = \frac{P_{\textrm{out}}}{P_N} \left| \frac{\Delta S_{21}}{S_{21}} \right|^2 \, . \end{equation}
+The first factor is a simple power signal to noise ratio, while the second is a geometric factor arising from the frequency dependence of the scattering phase and amplitude. Note that because of this geometric factor the SNR is not simply the ratio of the output and noise powers.
+
+BREAK
+
+Equations (\ref{eq:snrVsPamp}) and (\ref{eq:snrVsN}) are the main results. Equation (\ref{eq:snrVsPamp}) places a limit on the signal to noise ratio based on the saturation power of the amplifier, while equation (\ref{eq:snrVsN}) places a limit based on the number of photons we can put into the readout resonator without deleterious effects on the qubit state.
+
+\subsubsection{Optimal $\chi$}
+
+If the system is engineered such that the two resonator states lead to diametrically opposed points on the $S_{21}$ circle then we have $S_{21}(\tilde{\chi}) = \frac{1}{2}(1+i)$ (might have + and - $\chi$ mixed up here). This results in \begin{eqnarray*}
+|\Delta S_{21}|^2 &=& 1 \\
+|S_{21}(\tilde{\chi})|^2 &=& 1/2 \\
+S_{21}^{-1} - 1 &=& -i \end{eqnarray*}
+Plugging this into equation (\ref{eq:snrVsPamp}) we get \begin{equation}
+\textrm{SNR} = 8 \frac{P_{\textrm{out}}}{h\nu B} \end{equation}
+To similarly reduce equation (\ref{eq:snrVsN}) we first note that for values of $Q_c$ used in experiments the $Q_c$ dependent term in equation (\ref{eq:snrVsN}) dominates the 1. Using this and the values of the various $S$ parameters we get \begin{equation}
+\textrm{SNR} = \bar{n} \frac{f_0}{B}\frac{\pi}{r_e Q_c} \end{equation}
+
+
+\subsubsection{Design Formulae (prefactors WRONG - FIX!)}
+
+To get formulae useful for design we would like to plot the signal to noise ratio versus $\chi$ for two cases: one with $\bar{n} = \bar{n}_{\textrm{c}}$ and one with $P_{\textrm{amp}}$ at the paramp saturation. We can do this using Eqs. (\ref{eq:snrVsN}) and (\ref{eq:snrVsPamp}). First we just take Eq. (\ref{eq:snrVsN}) with $\bar{n}=\bar{n}_{\textrm{c}}=\Delta/\chi$, \begin{equation}
+\frac{\textrm{SNR}}{f_0 T} = 4\frac{\tilde{\Delta}}{\tilde{\chi}} \left| \frac{\Delta S_{21}}{S_{21}(\tilde{\chi})}\right|^2 \left| 1+2i \sqrt{Q_c/\pi} (S_{21}^{-1}-1) \right|^{-2} \end{equation}
+Now we would like to take Eq. (\ref{eq:snrVsPamp}) with $P_{\textrm{amp}}$ set to the paramp saturation power. For experimental work this would be most conveniently done with the amplifier input power specified in dBm. To facilitate this we express the dimensionless prefactor of Eq. (\ref{eq:snrVsPamp}) in dBm, \begin{equation}
+\frac{P_{\textrm{amp}}}{f_0(h f_0)} = 10^{P_{\textrm{dBm}}/10}\frac{1}{6.6}\frac{10^{13}}{(f_0/\textrm{GHz})} \end{equation}
+from which we can transform Eq. (\ref{eq:snrVsPamp}) into \begin{equation}
+\frac{\textrm{SNR}}{f_0 T} = 4 \left[ 10^{P_{\textrm{dBm}}/10}\frac{1}{6.6}\frac{10^{13}}{(f_0/\textrm{GHz})^2} \right] \left| \frac{\Delta S_{21}}{S_{21}(\tilde{\chi})} \right|^2 \end{equation}

@@ -1,0 +1,115 @@
+\subsection{Amplifier}
+
+In this section we study the effect of amplifying the dispersed photons.
+Before investigating the effect of the amplifier on the photon signal to noise ratio, we explicitly show that the amplifier does not affect the qubit state.
+Consider an arbitrary state $\ket{\Psi}$ for the qubit-resonator system \begin{equation}
+\ket{\Psi} = \sum_{\alpha \beta} c_{\alpha \beta} \ket{\alpha} \otimes \ket{\beta} . \end{equation}
+The density matrix for this state is \begin{equation}
+\rho = \sum_{\alpha \beta \gamma \delta} c_{\alpha \beta}c_{\gamma \delta}^* \ket{\alpha}\bra{\gamma}\otimes \ket{\beta}\bra{\delta} . \end{equation}
+Applying an arbitrary transformation $U$ to the resonator changes the density matrix to \begin{equation}
+\rho = \sum_{\alpha \beta \gamma \delta} c_{\alpha \beta}c_{\gamma \delta}^* U\ket{\alpha}\bra{\gamma}U^{\dagger} \otimes \ket{\beta}\bra{\delta} . \end{equation}
+Now we compute the reduced density matrix of the qubit by tracing over the resonator states \begin{align}
+\rho_{\text{qubit}} &= \text{Tr}_{\text{res}} \rho \\
+&= \sum_{n, \alpha \beta \gamma \delta} c_{\alpha \beta} c_{\gamma \delta}^* \bra{n}U\ket{\alpha}\bra{\gamma}U^{\dagger}\ket{n} \otimes \ket{\beta}\bra{\delta} \\
+&= \sum_{n, \alpha \beta \gamma \delta} c_{\alpha \beta} c_{\gamma \delta}^* \bbraket{\gamma}{U^{\dagger}}{n} \bbraket{n}{U}{\alpha} \otimes \ket{\beta}\bra{\delta} \\
+&= \sum_{\alpha \beta \gamma \delta} c_{\alpha \beta} c_{\gamma \delta}^* \bbraket{\gamma}{U^{\dagger}U}{\alpha} \otimes \ket{\beta}\bra{\delta} \\
+&= \sum_{\alpha \beta \gamma \delta} c_{\alpha \beta} c_{\gamma \delta}^* \braket{\gamma}{\alpha} \otimes \ket{\beta}\bra{\delta} \\
+&= \sum_{\alpha \beta \delta} c_{\alpha \beta} c_{\alpha \delta}^* \ket{\beta}\bra{\delta} .
+\end{align}
+The effect of $U$ has disappeared, indicating that the reduced density matrix for the qubit is unaffected by $U$.
+Therefore, the qubit state is unchanged by any subsequent actions on the photon, such as the action of an amplifier.
+
+\subsubsection{Phase sensitive amplifier}
+
+In this subsection, we calculate the signal to noise ratio of dispersed coherent states once they have been amplified by an ideal phase sensitive amplifier.
+A phase sensitive amplifier amplifies only one of the $\sin$ and $\cos$ quadratures of a signal.
+Representing the action of the amplifier by an operator $S$, the output for a single coherent state input is $S\ket{\alpha}$.
+For the phase sensitive amplifier, the operator $S$ is the squeezing operator \begin{equation}
+S(z) = \exp \left[ \frac{1}{2} \left( z^* a^2 - z a^{\dagger^2} \right) \right] \qquad z=re^{i\theta} . \end{equation}
+In the case $\theta = 0$, $S$ transforms the annihilation operator in a simple way: \begin{equation}
+S(r)aS(r)^{\dagger} = \mu a + \nu a^{\dagger} , \qquad \mu = \cosh(r) \quad \nu = \sinh(r) . \end{equation}
+Note that $S(r)^{\dagger} = S(-r)$, so \begin{equation}
+S(r)^{\dagger}aS(r) = S(-r)aS(-r)^{\dagger} = \mu a - \nu a^{\dagger} . \end{equation}
+For simplicity, we assume in the following computations that $\phi = \pm \pi/2$, so the two dispersed photon states are $\ket{\alpha}$ and $\ket{-\alpha}$.
+We compute the expectation value of $x$ for $S\ket{\alpha}$:
+\begin{align}
+\bbraket{S\alpha}{x}{S\alpha} &= \frac{1}{2} \bbraket{\alpha}{S^{\dagger} \left( a+a^{\dagger} \right)S}{\alpha} \\
+&= \frac{1}{2} \bbraket{\alpha}{\mu a -\nu a^{\dagger} + \mu a^{\dagger} - \nu a}{\alpha} \\
+&= \alpha ( \mu - \nu ) . \end{align}
+Note that for $r \ll 0$, $\mu - \nu$ is a large number, indicating that the amplifier provides gain.
+The signal is the distance between the two dispersed states, \begin{equation}
+\delta x =2\langle x \rangle = 2\alpha(\mu - \nu) . \end{equation}
+
+Next, we compute the expectation value of $x^2$:
+\begin{align}
+\bbraket{S\alpha}{x^2}{S\alpha} &= \frac{1}{4}\bbraket{\alpha}{S^{\dagger}\left[ \left( a+a^{\dagger} \right)^2 \right] S}{\alpha} \\
+&= \frac{1}{4} \bbraket{\alpha}{\left( \mu a-\nu a^{\dagger} + \mu a^{\dagger} - \nu a \right)^2}{\alpha} \\
+&= \frac{1}{4} \left( \mu - \nu \right)^2 + |\alpha|^2 \left(\mu - \nu \right)^2 . \end{align}
+The noise for an amplified state $S\ket{\alpha}$ is therefore \begin{align}
+\sigma^2 &\equiv \langle(x - \langle x \rangle)^2 \rangle \\
+&= \langle x^2 \rangle - \langle x \rangle^2 \\
+&= \frac{1}{4}(\mu - \nu)^2 . \end{align}
+Finally, the signal to noise ratio is \begin{align}
+\text{SNR} &= \frac{\delta x^2}{2 \sigma^2} \\
+&= \frac{4 \alpha^2 (\mu - \nu)^2}{2 \frac{1}{4} (\mu - \nu)^2} \\
+&= 8 \alpha^2 . \end{align}
+This is the same as the SNR we found before the amplification, as given by Eq.\,(\ref{eq:dispersedSNR}) in the case $\phi = \pi/2$.
+Therefore, the ideal phase sensitive amplifier does not change the SNR.
+
+
+\subsubsection{Phase insensitive amplifier}
+
+Phase preserving amplifiers (also called phase-insensitive amplifiers) are amplifiers which, like a traditional electronic amplifiers, amplify both the $\sin$ and $\cos$ quadratures of a signal.
+In other words, they preserve the phase of the input signal.
+It turns out that an ideal noiseless linear phase preserving amplifier which independently amplifies each frequency cannot exist \cite{Caves:amplifiers1982}.
+To preserve the commutation relations of the two quadratures of the photon state, the amplifier must mix at least two frequencies.
+Thus, the action of the phase preserving amplifier is represented by the two-mode squeezing operator $S_2$
+\begin{equation}
+S_2(z) = \exp \left[ z^* a b - z a^\dagger b^\dagger \right] \end{equation}
+where the $a$ and $a^{\dagger}$ operators correspond to the main mode called the ``signal'', and $b$ and $b^{\dagger}$ operators correspond to an auxiliary mode called the ``idler''.
+The $S_2$ operator transforms the creation an annihilation operators as follows:
+\begin{align}
+S_2^\dagger(z) a S_2(z) &= \mu a - e^{i\theta} \nu b^\dagger \\
+S_2^\dagger(z) b S_2(z) &= \mu b - e^{i\theta} \nu a^\dagger \\
+S_2^\dagger(z) a^\dagger S_2(z) &= \mu a^\dagger - e^{-i\theta} \nu b \\
+S_2^\dagger(z) b^\dagger S_2(z) &= \mu b^\dagger - e^{-i\theta} \nu a
+\end{align}
+where $z\equiv r e^{i \theta}$, $\mu = \cosh(r)$, and $\nu = \sinh(r)$.
+For simplicity, we assume that $z$ is real so that $\theta=0$.
+
+Now we calculate the gain and uncertainty in $x$ for the amplified state.
+First, let us calculate the expectation value of $x$ for an amplified state $S_2 \ket{\alpha}$ on the real axis,
+\begin{align}
+\bbraket{S_2 \alpha}{x}{S_2 \alpha} =&
+\frac{1}{2}\bbraket{\alpha}{S_2^\dagger (a + a^\dagger) S_2}{\alpha} \nonumber \\
+=& \frac{1}{2} \bbraket{\alpha}{\mu a - \nu b^\dagger + \mu a^\dagger - \nu b}{\alpha} \nonumber \\
+=& \mu \alpha .
+\end{align}
+Thus, the gain of the phase preserving amplifier is $\mu$.
+Next, we calculate $\langle x^2 \rangle$,
+\begin{align}
+\bbraket{S_2 \alpha}{x^2}{S_2 \alpha} =& 
+\bbraket{\alpha}{S_2^\dagger x S_2 S_2^\dagger x S_2}{\alpha} \nonumber \\
+=& \frac{1}{4}\bbraket{\alpha}{(\mu a - \nu b^\dagger + \mu a^\dagger - \nu b)^2}{\alpha} \nonumber \\
+=& \frac{1}{4}\bbraket{\alpha}{\mu^2 a^2 - 2\mu\nu a b^\dagger \nonumber \\
+& + \mu^2 (2a^\dagger a + 1) - 2 \mu \nu a b \nonumber \\ 
+& + \nu^2 b^\dagger b^\dagger - 2 \mu \nu b^\dagger a^\dagger + \nu^2 (2 b^\dagger b + 1) \nonumber \\
+& + \mu^2 a^\dagger a^\dagger - \mu \nu a^\dagger b \nonumber \\
+& + \nu^2 b}{\alpha} \nonumber \\
+=& \frac{1}{4} \left( \mu^2 \alpha^2 + \mu^2 (2 \alpha^2 + 1) + \mu^2 \alpha^2 + \nu^2 \right) \nonumber \\
+\approx & \mu^2 \left( \alpha^2 + \frac{1}{2} \right) .
+\end{align}
+The approximation in the last line is for large gain where $\mu \approx \nu$.
+We now compute the variance,
+\begin{equation}
+\sigma^2 \equiv \langle x^2 \rangle - \langle x \rangle^2 = \frac{1}{2} \mu^2.
+\end{equation}
+
+Finally we calculate the SNR,
+\begin{align}
+\text{SNR} =& \frac{\delta x^2}{2 \sigma^2} \\
+=& \frac{(2\mu \alpha)^2}{\mu^2} \\
+=& 4\alpha^2.
+\end{align}
+For the phase preserving amplifier, the SNR is half that of the phase sensitive amplifier.
+In particular, when using a phase preserving amplifier, the upper limit on the ratio of SNR to qubit dephasing is one half of the limit allowed by quantum mechanics.

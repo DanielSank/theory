@@ -1,0 +1,41 @@
+\section{Resonator energy to output power ratio}
+
+In this section we derive an equation relating the energy in the measurement resonator to the power leaving the system. This is an important quantity as output power is a limited resource due to the finite saturation power of quantum limited amplifiers.
+
+\subsection{Resonator internal energy}
+
+Now that we have a formula for $S_{21}$ in terms of the resonator properties we would like to relate it to the resonator's internal energy. To do this we must compute the voltage $V_d$ (see Fig.\,\ref{Fig:scatteringDiagram} at the resonator's driving node. This voltage can be found by voltage division; $V_d$ is just $V$ divided by the coupling capacitor and the resonator impedances, \begin{equation}
+V_d = V \frac{Z_r}{Z_{\kappa} + Z_r} = V \frac{Z_{\text{in}}-Z_{\kappa}}{Z_{\text{in}}} \, . \end{equation}
+The voltage $V$ at the shunt node is given by the sum of the incoming, reflected, and outgoing voltage amplitudes \begin{equation}
+V = V_{\text{in}} \left( 1 + S_{11} + S_{21} \right) \, . \label{eq:VinS} \end{equation}
+Using Eq.\,(\ref{eq:S11S21})  this simplifies to \begin{equation}
+V = 2 V_{\text{in}} S_{21} \, , \end{equation}
+which finally yields \begin{equation}
+V_d = 2V_{\text{in}}S_{21} \frac{Z_{\text{in}} - Z_{\kappa}}{Z_{\text{in}}} \, . \end{equation}
+The energy in the resonator is \begin{equation}
+E_{\text{res}}=\frac{1}{2}C|V_d|^2 = 2C \left| V_{\text{in}} S_{21} \right|^2 \left| \frac{Z_{\text{in}} - Z_{\kappa}}{Z_{\text{in}}} \right|^2 \end{equation}
+
+\subsection{Output power}
+
+The voltage wave amplitude travelling to the readout amplifier is by definition $V_{\text{in}}S_{21}$. The power going into the amplifier is therefore \begin{equation}
+P_{\text{out}} = \frac{1}{2} \left| V_{\text{in}} S_{21} \right|^2/Z_0 \, . \end{equation}
+
+\subsection{Ratio}
+
+The ratio of resonator energy to output power is \begin{equation}
+\frac{E_{\text{res}}}{P_{\text{out}}} = 4 Z_0 C \left| 1 - \frac{Z_{\kappa}}{Z_{\text{in}}} \right|^2 \, . \end{equation}
+From Eq. (\ref{eq:S21}) we can write $Z_0/Z_{\text{in}} = 2(S_{21}^{-1} - 1)$. Substituting this and using $C=1/\omega_r Z_{LC}$ we get \begin{equation}
+\frac{E_{\text{res}}}{P_{\text{out}}} = \frac{4}{\omega_r}\frac{Z_0}{Z_{LC}} \left| 1 - \frac{2Z_{\kappa}}{Z_0}\left( S_{21}^{-1}-1 \right) \right| ^2 \, . \label{eq:EOverP_1} \end{equation}
+Equation (\ref{eq:EOverP_1}) relates the resonator energy to the output power. However, as written it is not directly useful as it involves the impedance of the coupling capacitor $Z_{\kappa}$ which is not an experimentally measurable parameter. We replace it with the coupling quality factor $Q_c$ of the resonator via (see \citeinternaltype \citeinternalref{loadedMode}) \begin{equation}
+\frac{1}{C_{\kappa}} = \omega_r \sqrt{Q_c R_e Z_{LC}} \label{eq:CkappaQc} \, , \end{equation}
+where $R_e$ is the resistance external to $C_{\kappa}$ (in this case $Z_0/2$ because the input and output lines form parallel resistances). Substituting Eq.\,(\ref{eq:CkappaQc}) into Eq.\,(\ref{eq:EOverP_1}) we arrive at \begin{equation}
+\frac{E_{\text{res}}}{P_{\text{out}}} = \frac{4}{r_{LC} \omega_r} \left| 1 + i 2 \frac{\omega_r}{\omega} \sqrt{Q_c r_e r_{LC}} \left( S_{21}^{-1} - 1 \right) \right|^2 \, , \label{eq:EOverP} \end{equation}
+where we have defined $r_{LC}$ and $r_e$ by the equations $Z_{LC} \equiv r_{LC}Z_0$ and $R_e \equiv r_e Z_0$.
+
+In the optimal visibility where $S_{21}\approx\frac{1}{2}\left(1 \pm i \right)$ we find \begin{eqnarray}
+\frac{E_{\text{res}}}{P_{\text{out}}} &=& \frac{4}{r_{LC}\omega_r}\left| 1 + i2\frac{\omega_r}{\omega} \sqrt{Q_c r_e r_{LC}}(\pm i) \right|^2 \nonumber \\
+& \approx & 16 \frac{Q_c r_e }{\omega_r}\nonumber \\
+& \approx & 16 \frac{r_e}{\kappa_r} \label{eq:sec:resonatorEnergyToOutputPowerRatio:ratio_lambda4_optimal} \end{eqnarray}
+where we've assumed $\omega \approx \omega_r$ and $Q_c \gg 1$.
+For comparison, a resonator in free ring-down has $E_{\text{res}}/P_{\text{out}} = 1/\kappa$.
+In the driven circuit studied here, for a given output power, the resonator internal energy is $16 \, r_e$ times larger than in the free ring-down case.

@@ -1,0 +1,102 @@
+\documentclass[twocolumn]{article}
+
+\usepackage{import}
+\subimport{../../TeX/}{packages}
+\subimport{../../TeX/}{macros}
+
+\title{UCSB Dispersive Measurement Reference}
+\author{Daniel Sank\\\small{University of California Santa Barbara}\\\small{Presently Google Quantum AI}}
+
+\begin{document}
+
+\maketitle
+
+\section{Hamiltonian}
+
+We begin with a qubit capacitively coupled to a resonator through a coupling strength $g$.
+The Hamiltonian is \begin{equation}
+H = \omega_r (a^{\dagger}a + 1/2) - \frac{\omega_q}{2} \sigma_z + g \sigma_y (-i)(a-a^{\dagger}).
+\end{equation}
+For capacitive coupling, $g$ is given by
+\begin{equation}
+g/\hbar = \xi \frac{1}{2} \frac{C_g}{\sqrt{C_q C_r}} \sqrt{\omega_r \omega_q} \, .
+\end{equation}
+where $C_r$ and $C_q$ are the resonator and qubit capacitances, $\omega_r$ and $\omega_q$ are the resonator and qubit frequencies, $C_g$ is the coupling capacitance, and $\xi$ is a rescaling factor discussed below.
+For a lumped resonator, $C_r$ is just the physical capacitance of the resonator and $\xi=1$.
+For distributed resonators, $C_r$ is the capacitance of the equivalent lumped resonator.
+For $\lambda/4$ resonators, $C_r$ is related to the line impedance $Z_0$ and resonance frequency $\omega_r$ by
+\begin{equation}
+C_r = \frac{\pi}{4\omega_0 Z_0} .
+\end{equation}
+If the coupling capacitor is attached to the voltage anti-node of the resonator, then $\xi=1$.
+If, for a $\lambda/4$ resonator, the coupling capacitor is attached at a distance $l$ from the voltage anti-node, then $\xi = \cos(\pi l /2 L)$ where $L$ is the total length of the resonator.
+
+The detuning between the qubit and resonator is \begin{equation}
+\Delta \equiv \omega_q - \omega_r .
+\end{equation}
+
+In the dispersive limit where $\left| \Delta \right| \gg g$, it is possible to show that the Hamiltonian in the doubly rotating frame of both the qubit and resonator is \footnote{See Daniel Sank's thesis Chapter 3 for a pedagogical demonstration.}
+\begin{equation}
+H/\hbar = \chi \sigma_z n \, .\label{eq:interactionHamiltonian}
+\end{equation}
+
+The interaction Hamiltonian can be though of as a shift of the resonator induced by changing the qubit state.
+In this case, as the qubit goes from $\ket{0}$ to $\ket{1}$ the resonator frequency shifts by $-2 \chi$.
+
+In a two-level qubit
+\begin{equation}
+\chi = -g^2/\Delta \, .
+\end{equation}
+However, if the third level of the qubit is included, we find
+\begin{equation}
+\chi = -\frac{g^2}{\Delta} \frac{1}{1 + \Delta / \eta} . \label{eq:chi}
+\end{equation}
+where $\eta \equiv \omega_{12} - \omega_{01}$ is the anharmonicity of the qubit.\footnote{We should add a note here that the qubit is really not even well approximated as a three level system. A plot of $\chi$ versus $\bar{n}$ would be good.}
+
+
+\subsection{Transmon}
+For the transmon we have $\eta < 0$.
+The usual UCSB systems have $\Delta < 0$, i.e. resonator at higher frequency than qubit.
+Typical numbers are $\eta = -200\,\text{MHz}$ and $\Delta = -1\,\text{GHz}$.
+For this case, from Eq.\,(\ref{eq:chi}) we have $\chi > 0$, and therefore, from Eq.\,(\ref{eq:interactionHamiltonian}) we have $\omega_{r,\ket{1}} < \omega_{r,\ket{0}}$.
+In other words, for a transmon with the resonator frequency above the qubit frequency we find that the resonator frequency shifts downward as the qubit is excited from $\ket{0}$ to $\ket{1}$.
+
+
+\section{Optimal IQ separation}
+
+We achieve optimal separation of the dispersed signals for $\ket{0}$ and $\ket{1}$ in the IQ plane if the two IQ clouds are centred on diametrically opposite points of the resonance circle.
+The scattering parameter for a shunt resonator of loaded quality factor $Q_l$ is
+\begin{equation}
+S_{21} = \frac{S_\text{min} + 2 i Q_l \delta y}{1 + 2 i Q_l \delta y}
+\end{equation}
+where $\delta y \equiv (\omega - \omega_r) / \omega_r$ is the dimensionless detuning from the resonator's resonance frequency $\omega_r$.
+As a function of $\delta y$, $S_{21}$ forms a circle in the complex (IQ) plane.
+The points diametrically opposed on this circle with minimal frequency difference occur where the imaginary part is extremized.
+These points lie at $\delta y = \pm 1 / 2 Q_l$.
+Therefore, in order for the two qubit states to produce IQ clouds with maximum possible separation at the lowest $chi$, we want
+\begin{equation}
+\chi = \frac{\omega_r}{2 Q_l} = \frac{\kappa}{2} \, .
+\end{equation}
+
+
+\section{SNR}
+
+Consider two IQ clouds with centres separated by distance $\delta x$, and with 1-dimensional projections being Gaussian with standard deviation $\sigma$.
+We define the signal to noise ration (SNR) as
+\begin{equation}
+\text{SNR} \equiv \frac{\delta x^2}{2 \sigma^2} \, .
+\end{equation}
+
+In practice, these two clouds come from the qubit being in either $\ket{0}$ or $\ket{1}$.
+To distinguish which state the qubit is in, we measure the IQ point and guess that the qubit as in the state whose cloud's center is closest to the measured IQ value.
+As the Gaussian curves have finite separation and therefore overlap, this state discrimination procedure has a probability of error, which we call ``separation error'' and denote as $\epsilon_\text{sep}$.
+This probability is precisely the area of each Gaussian curve on the ``wrong'' side of the midpoint between the curves:
+\begin{equation}
+\epsilon_{\text{sep}} = \frac{1}{2} \left( 1 - \text{erf} \left[ \frac{\sqrt{\text{SNR}}}{2} \right] \right)
+\end{equation}
+where \begin{equation}
+\text{erf}(x)\equiv \frac{2}{\sqrt{\pi}} \int_0^x e^{-y^2}\, dy \, .
+\end{equation}
+
+
+\end{document}

@@ -1,0 +1,68 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,aps,prl]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{graphicx}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\makeatother
+
+
+\usepackage{babel}
+
+
+\begin{document}
+
+\title{Readout Line Filter}
+
+
+\author{Daniel Sank}
+
+
+\date{February 2013}
+
+\maketitle
+
+\section{Periodic impedance filter}
+
+From Pozar chapter 8 we can get a relation between the propagation constant of a transmission line with periodic admittance \begin{equation}
+\cos \beta d = \cos \theta - \frac{b}{2}\sin\theta \end{equation}
+where $\beta$ is the propagation constant in the modified line, $b$ is the admittance normalized to the characteristic impedance of the bare line, and $\theta$ is $k d$ where $k$ is the wave number in the bare line, and $d$ is the distance between admittances.
+
+Passbands cease to exist when the right hand side of this equation has absolute value greater than one. To figure out when this happens, first rewrite the equation as follows \begin{equation}
+\cos\beta d = M \cos(\theta + \phi) \end{equation}
+where $M^2 = 1+(b/2)^2$ and $\phi = \tan^{-1}(b/2)$. Now we set the right hand side equal to $\pm 1$ and solve \begin{eqnarray}
+M\cos(\theta + \phi) &=& \pm 1 \nonumber \\
+\theta &=& \cos^{-1}\left( \frac{\pm 1}{M}\right) - \tan^{-1}(b/2) \nonumber \\
+kd &=& \cos^{-1}\left( \frac{\pm 1}{\sqrt{1+(b/2)^2}} \right) - \tan^{-1}(b/2) \nonumber \\
+\omega d/v &=& \cos^{-1}\left( \frac{\pm 1}{\sqrt{1+(b/2)^2}} \right) - \tan^{-1}(b/2) \end{eqnarray}
+In the last line we replaced the bare transmission line wave number with the bare line transmission speed and the frequency of the wave. This equation tells us that for each possible value of $b$ and $d$ there is a certain frequency above which waves cannot propagate through the line. I think that from this equation you can choose parameters for the line so that there is a cutoff frequency somewhere between the qubit and the desired readout frequency.
+
+Note that this line will have dispersion. We should figure out how to engineer the parameters so that this isn't a problem for readout.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=9cm]{cutoff.eps} 
+\par\end{centering}
+\caption{Dependence of cutoff frequency on normalized shunt admittance. The case plotted here is for $b<0$ since that corresponds to inductive shunt and therefore a high pass filter.}
+\label{Fig:cutoff}
+\end{figure}
+
+
+\end{document}

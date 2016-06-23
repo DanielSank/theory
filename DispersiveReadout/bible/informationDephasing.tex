@@ -1,0 +1,33 @@
+\subsection{Information theoretic approach}
+
+The phase coherence of a state of a 2-level system is described by the off-diagonal terms in the density matrix, $\rho_{10}$ and $\rho_{01}$.
+The diagonal terms $\rho_{00}$ and $\rho_{11}$ are just the probabilities $P(0)$ and $P(1)$ that the qubit is in $\ket{0}$ or $\ket{1}$, respectively.
+From the requirement that the density matrix must be positive-semidefinite,\footnote{This guarantees positive eigenvalues} it can be shown that \begin{equation}
+\left| \rho_{10} \right| \leq \sqrt{\rho_{00} \rho_{11}} = \sqrt{P(0)P(1)} . \label{eq:sec:measurementInducedDephasing:inequality} \end{equation}
+Suppose we measure the qubit along the z-axis with a meter which yields a single real number with value $x$.
+Equation (\ref{eq:sec:measurementInducedDephasing:inequality}) yields a new inequality conditional on the measured value $x$, \begin{equation}
+\left| \rho_{10} \right|(x) \leq \sqrt{P(0|x) P(1|x)} \equiv I(x) . \label{eq:sec:measurementInducedDephasing:inequality_x} \end{equation}
+To quantify the amount of information about the qubit state we have learned from the measurement, we consider the probability, given the result $x$, that the qubit is in $\ket{0}$.
+Using Bayes's theorem, we can write \begin{equation}
+P(0|x) = \frac{P(x|0)P(0)}{P(x)}. \label{eq:sec:measurementInducedDephasing:bayes0} \end{equation}
+In English, Eq.\,(\ref{eq:sec:measurementInducedDephasing:bayes0}) reads ``The probability that the qubit is in $\ket{0}$ given that we measured $x$, is equal to the probability that we would measure $x$ if the qubit were in $\ket{0}$, times the probability that the qubit is in $\ket{0}$, divided by the probability that we would measure $x$.''
+We write a similar equation for $P(1|x)$, \begin{equation}
+P(1|x) = \frac{P(x|1)P(1)}{P(x)}. \label{eq:sec:measurementInducedDephasing:bayes1} \end{equation}
+Suppose we are given a qubit in the state $\left( \ket{0} + \ket{1} \right) / \sqrt{2}$.
+Then $P(0)=P(1)=1/2$.
+Combining these results we can rewrite right right hand side of Eq.\,\ref{eq:sec:measurementInducedDephasing:inequality_x} as \begin{equation}
+I(x) \equiv \sqrt{\frac{P(x|0)P(x|1)P(0)P(1)}{P(x)^2}} = \frac{\sqrt{P(x|0)P(x|1)}}{2 P(x)} . \end{equation}
+The coherence of the qubit is limited by the total information contained in the scattered photon.
+To recover this information, we must average over all possible detector values $x$, \begin{equation}
+\left| \rho_{10} \right| \leq \int_{x = -\infty}^{\infty} I(x) P(x) \, dx = \int_{x = -\infty}^{\infty} \frac{1}{2}\sqrt{P(x|0)P(x|1)}\,dx . \label{eq:sec:measurementInducedDephasing:integralForm} \end{equation}
+
+Suppose he measured voltages are Gaussian distributed, with the $\ket{0}$ and $\ket{1}$ having different means, \begin{equation}
+P(x|0) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left[ \frac{-(x-x_0)^2}{2\sigma^2} \right] \quad P(x|1) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left[ \frac{-(x-x_1)^2}{2\sigma^2} \right] . \end{equation}
+Plugging these expressions into Eq.\,(\ref{eq:sec:measurementInducedDephasing:integralForm}) yields \begin{eqnarray}
+\left| \rho_{10} \right| &\leq& \int_{x = -\infty}^{\infty} \frac{1}{2}\frac{1}{\sqrt{2\pi \sigma^2}} \exp \left[ \frac{-(x-x_0)^2 - (x-x_1)^2}{4 \sigma^2} \right] \, dx \nonumber \\
+&\leq& \frac{1}{2} \exp \left[- \frac{(x_0 - x_1)^2}{8\sigma^2} \right] \\
+&\leq& \frac{1}{2} \exp \left[- \frac{\text{SNR}}{4} \right] . \label{eq:sec:measurementInducedDephasing:measurementInducedDephasing} \end{eqnarray}
+In the last line we used Eq.\,(\ref{eq:sec:lollipops:SNR}) for the definition of SNR.
+Equation (\ref{eq:sec:measurementInducedDephasing:measurementInducedDephasing}) provides the quantitative link between the measurement SNR and qubit phase decoherence.
+As scattered photons are collected, the separation $x_0 - x_1$ increases and the upper bound on $\rho_{10}$ decreases.\footnote{Or, if the data is normalized to a constant value of $x_0 - x_1$, the widths $\sigma$ of the Gaussian curves decreases.}
+In other words, increased visibility between the qubit states decreases phase coherence.

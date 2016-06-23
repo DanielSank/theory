@@ -1,0 +1,11 @@
+Chow et al., arXiv:1311.6330
+ 2 us readout with paramp, single qubit
+ One qubit done dispersively with paramp, others with HEMT only
+ 90% and 91% measurement fidelity at 2us
+
+Saira et al., arXiv:1311.5530
+ Single channel measurement
+ 89% at 450ns pulse duration
+ Parameters in supplement, purcell limit ~100us, I think
+ 400 steady state photons
+ Square envelope measurement pulse? (see supplement)

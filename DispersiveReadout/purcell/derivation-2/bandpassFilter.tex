@@ -1,0 +1,29 @@
+\documentclass[english,aps,prl,twocolumn]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{import}
+
+\providecommand{\bra}[1]{\langle #1|}
+\providecommand{\ket}[1]{|#1\rangle}
+\providecommand{\braket}[2]{\langle #1|#2\rangle}
+\providecommand{\norm}[1]{\| #1\|}
+
+\renewcommand{\Re}[1]{\mathrm{Re \left( #1 \right) }}
+\renewcommand{\Im}[1]{\mathrm{Im \left( #1 \right) }}
+
+\begin{document} %Begin zee document!
+
+\author{Daniel Sank} \affiliation{University of California Santa Barbara}
+\title{Bandpass Filter}
+\date{May 2014}
+\maketitle
+
+\input{analysis}
+\subinputfrom{../}{numerics}
+
+\bibliographystyle{plain}
+\bibliography{../../../Bibliography/references-main,../../../Bibliography/references-local}
+
+\end{document}

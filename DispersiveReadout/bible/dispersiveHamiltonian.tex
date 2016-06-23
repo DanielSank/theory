@@ -1,0 +1,71 @@
+\section{Dispersive Hamiltonian}
+
+In this section we analyze the Hamiltonian of a qubit coupled to a linear resonator.
+We work in the limit where the difference $\Delta \equiv \omega_q - \omega_r$ between the qubit and resonator frequencies is large compared to the strength of the qubit-resonator coupling $g$, as this is the limit in which the resonator protects the qubit $T_1$.
+
+A detailed derivation of the Hamiltonian for a resonant circuit, starting from first principles, is given in \citeinternaltype \citeinternalref{qubitTheory}.
+There we derive the Hamiltonian $H_r$ for a harmonic oscillator, and $H_q$ for a qubit, finding \begin{eqnarray}
+H_r/\hbar &=& \omega_r a^{\dagger}a \\
+H_q/\hbar &=& - \omega_q (\sigma_z/2) . \end{eqnarray}
+In these equations, $\omega_r$ is the resonance frequency of the resonator and $\omega_q$ is the $\ket{0}\rightarrow \ket{1}$ transition frequency of the qubit.
+The operators $a^{\dagger}$ and $a$ are the normal raising and lowering operators for the harmonic oscillator, and $\sigma_z$ is the Pauli matrix represented as \begin{equation}
+\sigma_z = \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) \end{equation}
+where the qubit basis states are ordered $\left\{ \ket{0}, \ket{1} \right\}$.
+In \citeinternaltype \citeinternalref{qubitTheory} we also derive the interaction Hamiltonian $H_I$ which comes from the coupling between two circuits, finding \begin{equation}
+H_I/\hbar = g \sigma_y (-i)(a - a^{\dagger}) . \end{equation}
+where $g$ is the coupling strength in dimensions of frequency.
+We expand $\sigma_y$ in terms of spin raising and lowering operators, \begin{equation}
+\sigma_+ = \left( \begin{array}{cc} 0 & 0 \\ 1 & 0 \end{array} \right) \quad
+\sigma_- = \left( \begin{array}{cc} 0 & 1 \\ 0 & 0 \end{array} \right) \end{equation}
+finding \begin{equation}
+\sigma_y = i \left( \sigma_+ - \sigma_- \right) . \end{equation}
+Using this form, we find \begin{equation}
+H_I/\hbar = g \left(\sigma_+ a + \sigma_- a^{\dagger} - \sigma_+ a^{\dagger} - \sigma_- a \right) . \end{equation}
+The second and third terms in parentheses do not conserve excitation number and are discarded.\footnote{Discarding these terms is rigorously justified in the rotating frame where they acquire time evolution which is fast compared to the other terms.}
+We are left with \begin{equation}
+H_I/\hbar = g \left( \sigma_+ a + \sigma_- a^{\dagger} \right). \end{equation}
+Combining the three parts of the Hamiltonian, we find the Hamiltonian of the complete system \begin{equation}
+H/\hbar = \left( H_r + H_q + H_I \right)/\hbar = \omega_r\,a^{\dagger}a - \frac{\omega_q}{2} \sigma_z + g\left( \sigma_+ a + \sigma_- a^{\dagger} \right). \end{equation}
+
+The interaction can be simplified with a change of basis which eliminates the interaction to first order in $g/\Delta$.
+We rotate the Hamiltonian by the unitary operator \begin{equation}
+U = \exp \left[ \lambda T \right] \end{equation}
+where $\lambda \equiv -g / \Delta$ and $T \equiv \sigma_+ a - \sigma_- a^{\dagger}$.
+In the dispersive measurement system, $\left| \Delta \right| \gg g$, so $\lambda$ is a small dimensionless parameter.
+As such, we use it as an expansion parameter.
+Using the transformation operator $U$ and a series expansion from \citeinternaltype \citeinternalref{quantumMechanics} we can write \begin{eqnarray}
+U^{\dagger}HU &=& e^{-\lambda T} H e^{\lambda T} \\
+&=& H - \lambda \left[T, H \right] + \frac{\lambda^2}{2} \left[ T, \left[ T, H \right] \right] + \cdots , \label{eq:dispersiveHamiltonianExpansion} \end{eqnarray}
+which is a power series in $\lambda$.
+We compute the relevant commutators in Eq.\,(\ref{eq:dispersiveHamiltonianExpansion}) with standard methods (see \citeinternaltype \citeinternalref{quantumMechanics} for useful tricks).
+Some useful intermediate steps are \begin{eqnarray}
+\left[ T, n \right] &=& \sigma_+ a + \sigma_- a^{\dagger} \\
+\left[ T, \sigma_z \right] &=& 2 \left( \sigma_+ a + \sigma_- a^{\dagger} \right) \\
+\left[ T, \sigma_- a^{\dagger} + \sigma_+ a \right] &=& 2\left( \sigma_+ \sigma_- - \sigma_z n \right). \end{eqnarray}
+Evaluating Eq.\,(\ref{eq:dispersiveHamiltonianExpansion}) to the second order in $\lambda$ gives \begin{equation}
+\frac{U^{\dagger}HU}{\hbar} = \frac{H_q}{\hbar} + \frac{H_r}{\hbar} - \frac{g^2}{\Delta} \sigma_z n \end{equation}
+which can be interpreted as \begin{equation}
+H_I/\hbar \longrightarrow -\frac{g^2}{\Delta} \sigma_z n = \chi \sigma_z n \label{eq:dispersiveHamiltonianInteraction} \end{equation}
+where $\chi \equiv - g^2/\Delta$ is the so-called ``dispersive shift''.
+Note that if $\omega_r > \omega_q$, we have $\Delta < 0$, and therefore $\chi > 0$.
+If we denote the resonator's frequency when the qubit is in $\ket{0}$($\ket{1}$) as $\omega_{r,\ket{0}}$($\omega_{r,\ket{1}}$), then, in this case, we have $\omega_{r,\ket{1}} < \omega_{r,\ket{0}}$.
+
+We interpret the dispersive shift $\chi$ in two different ways.
+Writing the system Hamiltonian as \begin{equation}
+H/\hbar = \left( \omega_r + \chi \sigma_z \right) n - \frac{\omega_q}{2}\sigma_z , \end{equation}
+the dispersive shift appears as a qubit state dependent shift of the resonator frequency.
+The difference in resonator frequency for the two qubit states is $2\chi$.
+However, regrouping the terms as \begin{equation}
+H/\hbar = \omega_r n - \frac{\omega_q - 2 \chi n}{2} \sigma_z \label{eq:sec:dispersiveHamiltonian:acStark} \end{equation}
+the dispersive shift appears as a resonator photon number dependent shift of the qubit frequency.
+In the latter case we refer to the shift as the ``ac Stark effect'' \cite{Wallraff:2004, Schuster:acStarkDephasing2005}.
+Note that increasing $n$ lowers the qubit frequency when $\chi >0$.
+
+In the preceding analysis we assumed that the qubit had only two levels.
+In practice, superconducting qubits have additional levels.
+Reference \cite{Koch:transmon2007} finds that taking the third level of the qubit into account modifies the expression for $\chi$, yielding \begin{equation}
+\chi = -\frac{g^2}{\Delta} \frac{1}{1 + \Delta/\eta} \label{eq:dispersiveHamiltonianChi} \end{equation}
+where $\eta \equiv \omega_{21} - \omega_{10}$ is the anharmonicity of the qubit ($\eta < 0$ for a transmon).
+In the practical limit of $\left| \Delta \right| \gg \left| \eta \right|$, we find \begin{equation}
+\chi = -\frac{g^2}{\Delta^2} \eta . \end{equation}
+Note that $\chi \rightarrow 0$ as $\eta \rightarrow 0$, as expected for coupling of two harmonic oscillators.

@@ -1,0 +1,15 @@
+\section{Qubit measurement}
+
+In this section, we explain the link between the quantum mechanical effect in which the qubit state shifts the resonator frequency, and the classical scattering physics through which we infer the resonator's frequency.
+The crucial observation is that, in the dispersive limit, the interaction between the qubit and resonator commutes with $\sigma_z$.
+This guarantees that the interaction does not change the qubit's projection along the z-axis of the Bloch sphere.\footnote{See the section on measurement induced dephasing for a discussion of how the measurement does affect the qubit state.}
+Therefore, we can assume that, for a given qubit state, we can ignore the qubit and consider just the resonator at the frequency corresponding to that state.
+Because the resonator is linear, the problem becomes classical and we are left to study how best to distinguish the two possible resonator frequencies.
+
+Let the two resonator frequencies corresponding to the qubit $\ket{0}$ and $\ket{1}$ states be denoted $\omega_{r,\ket{0}}$ and $\omega_{r,\ket{1}}$.
+We calculated previously that these frequencies differ by $\omega_{r,\ket{0}} - \omega_{r,\ket{1}} = 2\chi$.
+If we probe the system at $\omega_{\text{probe}} = (\omega_{r,\ket{0}} + \omega_{r,\ket{1}})/2$, ie. between the two possible frequencies, the two possible values of $S_{21}$ are given by Eq.\,(\ref{eq:S21}) with $\delta y = \pm \chi$.
+In order to get the maximum visibility in the dispersed probe signal, we must choose parameters so that $S_{21}(\pm \chi)$ are at diametrically opposed points on the circle in Fig.\,\ref{Fig:S21Circle}.
+The top and bottom points (ie. those for which the imaginary part are extremized) are the diametrically opposed points requiring the smallest frequency separation.
+As noted previously, these points occur for $\delta y = \pm 1/2Q_l$ so the criterion for maximum visibility is \begin{equation}
+\chi = \frac{\omega_r}{2Q_l} = \frac{\kappa_r}{2}. \label{eq:chiVsKappa_r} \end{equation}

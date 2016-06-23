@@ -1,0 +1,91 @@
+\subsection{Physical mechanism approach}
+
+In this section, we calculate the photon dephasing by explicitly accounting for the physical interaction between the qubit and measurement photons.
+We start from the qubit-resonator interaction Hamiltonian \begin{equation}
+H_I/\hbar = -\chi n \sigma_z . \end{equation}
+Consider an initial quantum state \begin{align}
+\ket{\Psi_i}
+&= \ket{\alpha}(1/\sqrt{2})\left( \ket{g} + \ket{e} \right) . \end{align}
+% &= e^{-|\alpha|^2 / 2}e^{\alpha a^{\dagger}}\ket{0} \otimes \frac{1}{\sqrt{2}} \left( 1 + \sigma_x \right)\ket{g} . \end{align}
+While the resonator is in the ground state $\ket{0}$, the interaction Hamiltonian is identically zero.
+When we turn on the probe signal, the resonator photon number increases and the resonator emits travelling waves with a phase $\phi$ determined by Eq.\,(\ref{eq:S21}) and the the qubit state.
+Assuming we probe at a frequency in between the two possible resonator frequencies, the phases for the two qubit states have the same magnitude and opposite sign.
+Therefore, the output state is \begin{align}
+\ket{\Psi_f} &= \frac{1}{\sqrt{2}} \left( \ket{\alpha e^{i \phi}}\ket{g} + \ket{\alpha e^{-i \phi}}\ket{e} \right) . \label{eq:sec:measurementInducedDephasing:dispersedState} \end{align}
+
+%We subject this initial state to the time evolution for time $t$.
+%The time evolution operator is \begin{equation}
+%U(t) = \exp \left[ i \chi n \sigma_z \right] \end{equation}
+%which produces a final state \begin{align}
+%\ket{\Psi_f}
+%&= U \ket{\Psi_i} \\
+%\frac{1}{\sqrt{2}} \left( \ket{\alpha e^{i\chi t}}\ket{g} + \ket{\alpha e^{-i \chi t}}\ket{e} \right) . \end{equation}
+
+The distance between the two dispersed photon states is \begin{align}
+\delta x &=
+\langle x \rangle_{\alpha \exp(i \phi)} - \langle x \rangle_{\alpha \exp(-i \phi)} \\
+&= \frac{1}{2}\langle a + a^{\dagger} \rangle_{\alpha \exp(i \phi)} - \frac{1}{2}\langle a + a^{\dagger} \rangle_{\alpha \exp(-i \phi)} \\
+&= 2| \alpha | \sin \left( \phi \right) . \end{align}
+From \citeinternaltype \citeinternalref{quantumOscillator}, the variance along any axis through the center of a coherent state is \begin{equation}
+\sigma^2 = 1/4 . \end{equation}
+Therefore, the signal to noise ratio for the two dispersed photon states is \begin{align}
+\text{SNR}
+&\equiv \frac{\delta x^2}{2 \sigma^2} \\
+&= \frac{\left( 2 | \alpha | \sin \left( \phi \right) \right)^2}{1/2} \\
+&= 8 \left| \alpha \right|^2 \sin \left(\phi \right)^2 . \label{eq:dispersedSNR}
+\end{align}
+
+
+\subsubsection{Qubit dephasing - full calculation}
+
+Now we would like to look at the phase coherence of the qubit.
+To do this, we start with the density matrix for the entangled state $\ket{\Psi_f}$, and then find the reduced density matrix of the qubit with the resonator removed.
+The part of the density describing the qubit phase coherence is \begin{align}
+\rho_{01} &= \frac{1}{2} \left( \ket{\alpha e^{i \phi}} \bra{\alpha e^{-i \phi}} \otimes \ket{g}\bra{e} \right) \\
+&= \frac{1}{2} \exp\left[-\left| \alpha \right|^2 \right]
+\sum_{n,m}
+\frac{ \left( \alpha e^{i \phi} \right)^n}{\sqrt{n!}}
+\frac{ \left( \alpha^* e^{i \phi} \right)^m}{\sqrt{m!}}
+\ket{n}\bra{m} \otimes \ket{g}\bra{e} . \end{align}
+To find the reduced density matrix of the qubit, we trace over the resonator states \begin{align}
+\text{Tr}_{\text{res}}\rho_{10} &=
+\frac{1}{2} \exp \left[-\left| \alpha \right|^2 \right]
+\sum_{n,m,k}
+\frac{ \left( \alpha e^{i \phi} \right)^n}{\sqrt{n!}}
+\frac{ \left( \alpha^* e^{i \phi} \right)^m}{\sqrt{m!}} \braket{k}{n}\braket{m}{k} \otimes \ket{g}\bra{e} \\
+&= \frac{1}{2} \exp \left[- \left| \alpha \right|^2 \right] \exp \left[\left| \alpha \right|^2 e^{2 i \phi} \right] \ket{g}\bra{e} \\
+&= \frac{1}{2} \exp \left[- \left| \alpha \right|^2 \right] \exp \left[\left| \alpha \right|^2
+\left( \cos\left( 2 \phi \right) + i \sin \left( 2 \phi \right) \right) \right] \ket{g}\bra{e} . \end{align}
+Note that the effect of the trace is to select only those terms for which the resonator ``has a definite photon number''.
+To find the qubit phase coherence, we look for the magnitude of the off diagonal element \begin{align}
+\left| \text{Tr}_{\text{res}}\rho_{10} \right| &=
+\frac{1}{2} \exp \left[- \left| \alpha \right|^2 \right] \exp \left[\left| \alpha \right|^2 \cos\left( 2 \phi \right) \right] \\
+&= \frac{1}{2} \exp \left[ -\left| \alpha \right|^2 \left( 1 - \cos \left( 2\phi\right) \right) \right] \\
+&= \frac{1}{2} \exp \left[ - \frac{\text{SNR}}{4} \right] \label{eq:photonLimitSNR}
+\end{align}
+which is exactly the same expression we found in Eq.\,(\ref{eq:sec:measurementInducedDephasing:measurementInducedDephasing}) using the information theory approach.
+Therefore, we have shown that the qubit dephasing incurred by dispersive measurement is equivalently understood as either an effect of the information extracted from the system, or as an effect of the entanglement between the qubit and the photon.
+
+Note that we have demonstrated that decoherence is really just an a result of considering a sub-part of an entangled quantum system.
+
+
+\subsubsection{Qubit dephasing - simple calculation}
+
+The trace over resonator states in the full calculation is just a mathematically rigorous way to select components of the state with definite photon number.
+This suggests a simpler approach to the problem: we could just do a weighted average of the qubit density matrix over the resonator photon number states.
+From this point of view, the qubit dephasing comes simply from the random ac Stark shift imposed by the ``uncertainty'' in the resonator photon number.
+Here is the calculation:
+
+\begin{align}
+\rho_{01}
+&= \sum_n \rho_{01}(n) P(n) \\
+&= \sum_n \frac{1}{2} e^{i 2 n \phi} e^{-\bar{n}} \frac{\bar{n}^n}{n!} \\
+&= \frac{1}{2} e^{-\bar{n}} \sum_n \frac{\left( e^{i 2 \phi}\bar{n}\right)^n}{n!} \\
+&= \frac{1}{2} e^{-\bar{n}} \exp \left[ \bar{n} e^{i 2 \phi} \right] \\
+&= \frac{1}{2} e^{-|\alpha|^2} \exp \left[ |\alpha|^2 e^{i 2 \phi} \right] \\
+&= \frac{1}{2} \exp \left[ -|\alpha|^2 \left( 1 - e^{i 2 \phi} \right) \right] . \end{align}
+Taking the aboslute value leaves \begin{align}
+|\rho_{01}|
+&= \frac{1}{2} \exp \left[ -|\alpha|^2 \left( 1 - \cos\left(2 \phi \right) \right) \right] \\
+&= \frac{1}{2} \exp \left[ - \frac{\text{SNR}}{4} \right]  \end{align}
+which matches the full calculation.

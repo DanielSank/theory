@@ -1,0 +1,23 @@
+\section{Reference}
+
+\begin{equation}
+\kappa_r = \frac{\omega_r}{Q_r} = \textrm{energy decay rate of resonator} \end{equation}
+
+\begin{equation}
+\text{Maximum visibility:}\quad \chi = \kappa_r / 2 \end{equation}
+
+The critical photon number is \begin{equation}
+n_{\textrm{crit}} = \frac{1}{4} \left( \Delta / g \right)^2 \end{equation}
+
+\subsection{Statistics}
+
+Consider a system with two states $|l\rangle$ and $|R\rangle$. We measure a variable $x$, which if the system is in state $|L\rangle$ has probability distribution \begin{equation}
+P_L(x) = G_{\sigma}(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{t^2}{2\sigma^2}} \end{equation}
+If the system is in $|R\rangle$ then the probability distribution for $x$ is shifted by $s$ to the right. The probability of misidentifying the state from a single meaurement of $x$ is then \begin{eqnarray}
+\textrm{prob. error} &=& \frac{1}{\sigma\sqrt{2\pi}} \int_{s/2}^{\infty} e^{-t^2/2\sigma^2}dt \\
+\textrm{let } y=\frac{t}{\sqrt{2}\sigma} &\rightarrow& \frac{1}{\sigma\sqrt{2\pi}}\int_{s/2\sqrt{2}\sigma} ^{\infty} e^{-y^2} dy\sqrt{2}\sigma \\
+&=& \frac{1}{2} \textrm{erfc} \left( \frac{s}{2\sqrt{2}\sigma} \right) \end{eqnarray}
+Here $\textrm{erfc}(x)\equiv (2/\sqrt{\pi}) \int_x^{\infty} e^{-t^2}dt$. Defining the signal to noise ratio by the equation \begin{equation}
+\textrm{SNR} = 2 \frac{s^2}{\sigma_L^2 + \sigma_R^2} \end{equation}
+and taking into account our assumption that the distributions produced by the two states have the same width, we get \begin{equation}
+\textrm{prob. error} = \frac{1}{2} \textrm{erfc}\left( \frac{\sqrt{\textrm{SNR}}}{2\sqrt{2}} \right) \end{equation}
