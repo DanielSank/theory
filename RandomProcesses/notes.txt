@@ -1,0 +1,25 @@
+Wikipedia_March2011
+
+Background
+
+The earliest work on SDEs was done to describe Brownian motion in Einstein's famous paper, and at the same time by Smoluchowski. However, one of the earlier works related to Brownian motion is credited to Bachelier (1900) in his thesis 'Theory of Speculation'. This work was followed upon by Langevin. Later Ito and Stratonovich put SDEs on more solid mathematical footing.
+[edit] Terminology
+
+In physical science, SDEs are usually written as Langevin equations. These are sometimes confusingly called "the Langevin equation" even though there are many possible forms. These consist of an ordinary differential equation containing a deterministic part and an additional random white noise term. A second form is the Smoluchowski equation and, more generally, the Fokker-Planck equation. These are partial differential equations that describe the time evolution of probability distribution functions. The third form is the stochastic differential equation that is used most frequently in mathematics and quantitative finance (see below). This is similar to the Langevin form, but it is usually written in differential form. SDEs come in two varieties, corresponding to two versions of stochastic calculus.
+[edit] Stochastic Calculus
+
+Brownian motion or the Wiener process was discovered to be exceptionally complex mathematically. The Wiener process is non-differentiable; thus, it requires its own rules of calculus. There are two dominating versions of stochastic calculus, the Ito stochastic calculus and the Stratonovich stochastic calculus. Each of the two has advantages and disadvantages, and newcomers are often confused whether the one is more appropriate than the other in a given situation. Guidelines exist (e.g. Øksendal, 2003) and conveniently, one can readily convert an Ito SDE to an equivalent Stratonovich SDE and back again. Still, one must be careful which calculus to use when the SDE is initially written down.
+[edit] Numerical Solutions
+
+Numerical solution of stochastic differential equations and especially stochastic partial differential equations is a young field relatively speaking. Almost all algorithms that are used for the solution of ordinary differential equations will work very poorly for SDEs, having very poor numerical convergence. A textbook describing many different algorithms is Kloeden & Platen (1995).
+
+Methods include the Euler–Maruyama method, Milstein method and Runge–Kutta method (SDE).
+[edit] Use in Physics
+
+In physics, SDEs are typically written in the Langevin form and referred to as "the Langevin equation." For example, a general coupled set of first-order SDEs is often written in the form:
+
+    \dot{x}_i = \frac{dx_i}{dt} = f_i(\mathbf{x}) + \sum_{m=1}^ng_i^m(\mathbf{x})\eta_m(t),\,
+
+where \mathbf{x}=\{x_i|1\le i\le k\} is the set of unknowns, the fi and gi are arbitrary functions and the ?m are random functions of time, often referred to as "noise terms". This form is usually usable because there are standard techniques for transforming higher-order equations into several coupled first-order equations by introducing new unknowns. If the gi are constants, the system is said to be subject to additive noise, otherwise it is said to be subject to multiplicative noise. This term is somewhat misleading as it has come to mean the general case even though it appears to imply the limited case where : g(x) \propto x. Additive noise is the simpler of the two cases; in that situation the correct solution can often be found using ordinary calculus and in particular the ordinary chain rule of calculus. However, in the case of multiplicative noise, the Langevin equation is not a well-defined entity on its own, and it must be specified whether the Langevin equation should be interpreted as an Ito SDE or a Stratonovich SDE.
+
+In physics, the main method of solution is to find the probability distribution function as a function of time using the equivalent Fokker-Planck equation (FPE). The Fokker-Planck equation is a deterministic partial differential equation. It tells how the probability distribution function evolves in time similarly to how the Schrödinger equation gives the time evolution of the quantum wave function or the diffusion equation gives the time evolution of chemical concentration. Alternatively numerical solutions can be obtained by Monte Carlo simulation. Other techniques include the path integration that draws on the analogy between statistical physics and quantum mechanics (for example, the Fokker-Planck equation can be transformed into the Schrödinger equation by rescaling a few variables) or by writing down ordinary differential equations for the statistical moments of the probability distribution function.

@@ -1,0 +1,70 @@
+\documentclass{article}
+
+\input{../../../TeX/macros.tex}
+\input{../../../TeX/packages.tex}
+
+\title{Generating functions for the first passage problem}
+\author{Daniel Sank}
+
+
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+
+The problem is to compute ``first passage'' times for a process.
+By first passage time we mean the average time taken before a process arrives at a particular state \emph{for the first time}.
+This is a hard problem, but we will reduce it to the problem of computing the unconstrained probability for a process to be in a particular state after a certain time, which is much easier.
+For example, with a Markov process, the probability distribution after $n$ steps is just given by the $n^{\text{th}}$ power of the process matrix.
+First passage times are more difficult because it's not immediately clear how to mathematically account for the fact that the process ends once it arrives at the target state.
+
+
+\section{Constrained and unconstrained probabilities}
+
+Denote by $p_{ji}(n)$ the probability that a process goes from state $\ket{i}$ to state $\ket{j}$ after $n$ steps.
+Here we are talking about unconstrained probabilities, ie. the processes never ends but keeps progressing freely at each step.
+Denote by $f_{ji}$ the probability that, starting from state $\ket{i}$, a process winds up in state $\ket{j}$ \emph{for the first time} after $n$ steps.
+The mean first passage time is $\sum_{n}nf_{ji}(n)$.
+The trouble is that we don't know how to compute $f_{ji}$.
+The key to our calculation is that we will relate $f_{ji}$ to $p_{ji}$.
+
+We can break up any trajectory which starts at $\ket{i}$ and ends at $\ket{j}$ into two parts: the process makes its first arrival at $\ket{j}$, and then wanders around and eventually comes back to $\ket{j}$.
+Mathematically this is expressed as
+\begin{equation}
+p_{ji} = \sum_{k=1}^n f_{ji}(k)p_{jj}(n-k) \quad (j\neq i) \, .
+\end{equation}
+In English, the probability of starting at $\ket{i}$ and then winding up at $\ket{j}$ after $n$ steps is equal to the sum of the probability that you go from $\ket{i}$ to $\ket{j}$ for the first time in $k$ steps, and then wander around for $n-k$ steps, eventually finishing at $\ket{j}$, summed over all possible intermediate path lengths $k$.
+
+The obvious problem with this formula is that it involves the thing we want to know $f_{ji}(n)$, on the right hand side.
+How do we fix this? Note that the sum is a convolution.
+This suggests that we can decouple the convolved quantities via some kind of Fourier transform.
+In fact we use the so called "generating functions" or "z-transform",
+\begin{equation}
+P_{ji}(z)=\sum_{n=0}^{\infty}z^{n}p_{ji}(n)\qquad F_{ji}(z)=\sum_{n=1}^{\infty}z^{n}f_{ji}(n) \, .
+\end{equation}
+The mean first passage time is just
+\begin{equation}
+\langle n \rangle \equiv \sum_n n f_{ji}(n) = \left. \frac{d}{dz}\right|_{z=1}F_{ji}(z)
+\end{equation}
+so if we can compute $F_{ji}(z)$ we will have a solution to our problem.
+Note that higher derivatives of $F$ provide higher moments of the first passage problem.
+This is why $F$ is called a ``generating function''.
+
+To relate $P_{ji}(z)$ and $F_{ji}(z)$ we insert the convolution into the definition of $P_{ji}(z)$
+\begin{align*}
+P_{ji}(z)
+& = \sum_{n=0}^{\infty}z^{n}\sum_{k=1}^{n}f_{ji}(k)p_{jj}(n-k)\\
+& = \sum_{n=0}^{\infty}\sum_{k=1}^{n}z^{n-k}p_{jj}(n-k)\, z^{k}f_{ji}(k)\\
+& = \sum_{n=0}^{\infty}z^{n}p_{jj}(n)\sum_{k=1}^{\infty}z^{k}f_{ji}(k)\\
+& = P_{jj}(z)F_{ji}(z)\\
+\textrm{therefore}\quad F_{ji}(z) & = P_{ji}(z)/P_{jj}(z) \, .
+\end{align*}
+Therefore, the mean first passage time is
+\begin{equation}
+\langle n \rangle = \lim_{z \rightarrow 1} \frac{d}{dz} \frac{P_{ji}(z)}{P_{jj}(z)} \, .
+\end{equation}
+This is a truly remarkable result: we have now expressed the solution to the first passage problem entirely in terms of the unconstrained process.
+For the simple case of a Markov process the generating functions $P$ are easy to compute because they are geometric sums of $p$.
+
+\end{document}
