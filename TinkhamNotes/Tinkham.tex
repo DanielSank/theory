@@ -1,0 +1,87 @@
+\documentclass{article}
+
+\input{../../TeX/macros.tex}
+\input{../../TeX/packages.tex}
+
+\begin{document}
+
+\section*{Chapter 3}
+
+
+\subsection*{Cooper Pair Wavefunction}
+
+
+\subsubsection*{Wavefunction in second quantization}
+
+We would like to understand where 3.2 comes from. The Hamiltonian
+is\[
+H=\sum_{\sigma,k}\epsilon_{k,\sigma}+\sum_{p,q,\xi,\alpha,\beta}V(\xi)a_{p-\xi,\alpha}^{\dagger}a_{q+\xi,\beta}^{\dagger}a_{q,\beta}a_{p,\alpha}\]
+We would like to see what 3.1 looks like in $2^{\textrm{nd}}$ quantization.
+The wavefunction we want to represent is a filled Fermi sea plus two
+particles in a state with 2-body wavefunction given by\[
+\Psi(r_{1},r_{2})=\sum_{k}g_{k}\cos\left(k\cdot(x-y)\right)\left(\alpha_{x}\beta_{y}-\beta_{x}\alpha_{y}\right)\]
+where here $\alpha$ and $\beta$ are the spin states and $x$ and
+$y$ refer to the two particles. This wavefunction was chosen so that
+the two particles make up a zero momentum state, and have a symmetric
+spatial dependence so that their overlap is maximized. This maximization
+of spatial overlap was chosen to anticipate the attractive interaction
+between electrons.
+
+\begin{flushleft}
+In second quantization we have\[
+a_{\phi,\alpha}^{\dagger}a_{\psi,\beta}^{\dagger}|0\rangle\rightarrow\phi(r_{1})\psi(r_{2})\alpha_{1}\beta_{2}-\psi(r_{1})\phi(r_{2})\beta_{1}\alpha_{2}\]
+We can use this relation to turn our 2-body wavefunction into its
+second quantized form as follows here:\begin{eqnarray*}
+\cos\left(k\cdot(x-y)\right)\left(\alpha_{1}\beta_{2}-\beta_{1}\alpha_{2}\right) & = & \frac{1}{2}\left[e^{ik\cdot x}e^{-ik\cdot y}+e^{-ik\cdot x}e^{-k\cdot y}\right]\left(\alpha_{1}\beta_{2}-\beta_{1}\alpha_{2}\right)\end{eqnarray*}
+Rename $e^{ikx}=\phi(x)$ and $e^{-ikx}=\psi(x)$. Then we have\begin{eqnarray*}
+\cos\left(k\cdot(x-y)\right)\left(\alpha_{1}\beta_{2}-\beta_{1}\alpha_{2}\right) & = & \frac{1}{2}\left[\phi(x)\psi(y)+\psi(x)\phi(y)\right]\left(\alpha_{1}\beta_{2}-\beta_{1}\alpha_{2}\right)\\
+ & = & \frac{1}{2}\left[\left(\phi(x)\psi(y)\alpha_{x}\beta_{y}-\psi(x)\phi(y)\beta_{x}\alpha_{y}\right)+\left(\psi(x)\phi(y)\alpha_{x}\beta_{y}-\phi(x)\psi(y)\beta_{x}\alpha_{y}\right)\right]\\
+ & \rightarrow & \frac{1}{2}\left[a_{\phi,\alpha}^{\dagger}a_{\psi,\beta}^{\dagger}+a_{\psi,\alpha}^{\dagger}a_{\phi,\beta}^{\dagger}\right]|0\rangle\\
+ & = & \frac{1}{2}\left[a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\right]\end{eqnarray*}
+Notice that these terms are equal if the sign of $k$ is reversed.
+Now we stuff this formula into the wavefunction,\begin{eqnarray*}
+\Psi(x,y) & = & \sum_{k>k_{F}}g_{k}\cos\left(k\cdot(x-y)\right)\left(\alpha_{x}\beta_{y}-\beta_{x}\alpha_{y}\right)\\
+ & = & \sum_{k>k_{F}}g_{k}\frac{1}{2}\left[a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\right]\end{eqnarray*}
+Let $\sum_{k_{F}^{+}}$ indicate a sum over half of $k$-space, ie.
+the half with $k_{x}>0$. Then\[
+\sum_{k>k_{F}}=\sum_{k^{+}>k_{F}}+\sum_{k^{-}>k_{F}}\]
+So\begin{eqnarray*}
+\sum_{k>k_{F}}g_{k}\frac{1}{2}\left[a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\right] & = & \sum_{k^{+}>k_{F}}g_{k}\frac{1}{2}\left[a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\right]+\sum_{k^{-}>k_{F}}g_{k}\frac{1}{2}\left[a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\right]\\
+ & = & \sum_{k^{+}>k_{F}}g_{k}\frac{1}{2}a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+\sum_{k^{+}>k_{F}}g_{k}\frac{1}{2}a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}+\cdots\\
+ &  & \qquad\cdots+\sum_{k^{-}>k_{F}}g_{k}\frac{1}{2}a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+\sum_{k^{-}>k_{F}}g_{k}\frac{1}{2}a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\\
+ & = & \sum_{k^{+}>k_{F}}g_{k}\frac{1}{2}a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+\sum_{k^{+}>k_{F}}g_{k}\frac{1}{2}a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}+\cdots\\
+ &  & \cdots+\sum_{k^{+}>k_{F}}g_{-k}\frac{1}{2}a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}+\sum_{k^{+}>k_{F}}g_{-k}\frac{1}{2}a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}\end{eqnarray*}
+Then, using the fact that $g_{k}=g_{-k}$ we have\begin{eqnarray*}
+\sum_{k>k_{F}}g_{k}\frac{1}{2}\left[a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\right] & = & \sum_{k^{+}>k_{F}}g_{k}a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}+\sum_{k^{+}>k_{F}}g_{k}a_{-k,\alpha}^{\dagger}a_{k,\beta}^{\dagger}\\
+ & = & \sum_{k>k_{F}}g_{k}a_{k,\alpha}^{\dagger}a_{-k,\beta}^{\dagger}\end{eqnarray*}
+which agrees with 3.11.
+\par\end{flushleft}
+
+
+\subsubsection*{Schrodinger's equation with the cooper pair wavefunction}
+
+
+\section*{BCS ground state}
+
+The BCS ground state is\begin{eqnarray*}
+|\Psi_{G}\rangle & = & \prod_{k}(u_{k}+v_{k}c_{k\uparrow}^{\dagger}c_{-k\downarrow}^{\dagger})|0\rangle\\
+\langle\Psi_{G}| & = & \langle0|\prod_{k}(u_{k}^{*}+v_{k}^{*}c_{-k\downarrow}c_{k\uparrow})\end{eqnarray*}
+You can see that this thing has terms with anywhere from zero to ??
+
+We would like to calculate $\bar{N}$.\begin{eqnarray*}
+\bar{N} & = & \langle\Psi_{G}|\hat{N}|\Psi_{G}\rangle=\sum_{k,\sigma}\langle\Psi_{G}|\hat{n}_{k,\sigma}|\Psi_{G}\rangle\\
+ & = & \sum_{k,\sigma}\langle0|\prod_{p}(u_{p}^{*}+v_{p}^{*}c_{-p\downarrow}c_{p\uparrow})|n_{k,\sigma}|\prod_{q}(u_{q}+v_{q}c_{q\uparrow}^{\dagger}c_{-q\downarrow}^{\dagger})|0\rangle\\
+ & = & \sum_{k,\sigma}\langle0|(u_{k}^{*}+v_{k}^{*}c_{-k\downarrow}c_{k\uparrow})\prod_{p\neq k}(u_{p}^{*}+v_{p}^{*}c_{-p\downarrow}c_{p\uparrow})|n_{k,\sigma}|(u_{k}+v_{k}c_{k\uparrow}^{\dagger}c_{-k\downarrow}^{\dagger})\prod_{q\neq k}(u_{q}+v_{q}c_{q\uparrow}^{\dagger}c_{-q\downarrow}^{\dagger})|0\rangle\\
+ & = & \sum_{k,\sigma}\langle0|(u_{k}^{*}+v_{k}^{*}c_{-k\downarrow}c_{k\uparrow})n_{k,\sigma}(u_{k}+v_{k}c_{k\uparrow}^{\dagger}c_{-k\downarrow}^{\dagger})\times\prod_{{q\neq k \brace p\neq k}}(u_{p}^{*}+v_{p}^{*}c_{-p\downarrow}c_{p\uparrow})(u_{q}+v_{q}c_{q\uparrow}^{\dagger}c_{-q\downarrow}^{\dagger})|0\rangle\end{eqnarray*}
+The two terms in parentheses in the product always commute because
+they involve even numbers of fermion operators. Therefore, we can
+group together terms where $p=q$ to get, \begin{eqnarray*}
+\bar{N} & = & \sum_{k,\sigma}\langle0|(u_{k}^{*}+v_{k}^{*}c_{-k\downarrow}c_{k\uparrow})n_{k,\sigma}(u_{k}+v_{k}c_{k\uparrow}^{\dagger}c_{-k\downarrow}^{\dagger})\times\prod_{p\neq k}(u_{p}^{*}+v_{p}^{*}c_{-p\downarrow}c_{p\uparrow})(u_{p}+v_{p}c_{p\uparrow}^{\dagger}c_{-p\downarrow}^{\dagger})|0\rangle\\
+ & = & \sum_{k,\sigma}\left[\langle0|(u_{k}^{*}+v_{k}^{*}c_{-k\downarrow}c_{k\uparrow})n_{k,\sigma}(u_{k}+v_{k}c_{k\uparrow}^{\dagger}c_{-k\downarrow}^{\dagger})|0\rangle\langle0|\prod_{p\neq k}(u_{p}^{*}+v_{p}^{*}c_{-p\downarrow}c_{p\uparrow})(u_{p}+v_{p}c_{p\uparrow}^{\dagger}c_{-p\downarrow}^{\dagger})|0\rangle\right]\\
+ & = & \sum_{k,\sigma}\left[|v_{k}|^{2}\langle0|c_{-k\downarrow}c_{k\uparrow}n_{k,\sigma}c_{k\uparrow}^{\dagger}c_{-k\downarrow}^{\dagger}|0\rangle\langle0|\prod_{p\neq k}\left(|u_{p}|^{2}+|v_{p}|^{2}c_{-p\downarrow}c_{p\uparrow}c_{p\uparrow}^{\dagger}c_{-p\downarrow}^{\dagger}\right)|0\rangle\right]\\
+ & = & \sum_{k}\left[2|v_{k}|^{2}\prod_{p\neq k}1\right]\\
+\bar{N} & = & 2\sum_{k}|v_{k}|^{2}\end{eqnarray*}
+An entirely similar computation shows that\[
+\langle N^{2}\rangle=\]
+ Therefore the variance in the particle number is $\sigma_{N}^{2}=\langle N^{2}\rangle-\langle N\rangle^{2}=$
+\end{document}

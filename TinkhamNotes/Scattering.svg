@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Scattering.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="317.81712"
+     inkscape:cy="403.07733"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="994"
+     inkscape:window-x="1276"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleOutL"
+       style="overflow:visible">
+      <path
+         id="path4040"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective10"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3768"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3790"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3816"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3841"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3841-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3877"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       id="path2816"
+       d="M 45.714286,772.36218 C 238.57143,578.07647 238.57143,578.07647 238.57143,578.07647"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+    <path
+       id="path2818"
+       d="M 611.58699,769.39841 C 438.96778,579.06201 438.96778,579.06201 438.96778,579.06201"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.66490984;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 238.73808,579.08656 c 2.30984,-10.98395 4.61969,-18.74246 6.92953,-12.58826 2.30984,6.15421 4.61968,22.64036 6.92952,26.71699 2.30984,4.07664 4.61968,-6.66849 6.92952,-17.3982 2.30985,-10.72971 4.61969,-15.15581 6.92953,-7.1897 2.30984,7.96612 4.61968,23.67899 6.92952,25.46774 2.30984,1.78875 4.61968,-11.42087 6.92951,-21.39463 2.30984,-9.97376 4.61968,-10.8605 6.92953,-1.45496 2.30984,9.40554 4.61968,23.61041 6.92952,23.02764 2.30984,-0.58278 4.61968,-15.63922 6.92952,-24.39067 2.30984,-8.75145 4.61969,-6.05736 6.92953,4.34782 2.30984,10.40518 4.61968,22.43784 6.92952,19.51078 2.30984,-2.92705 4.61968,-19.12628 6.92952,-26.24621 2.30985,-7.11993 4.61969,-0.97099 6.92951,9.94729 2.30985,10.91828 4.61969,20.2161 6.92953,15.08163 2.30984,-5.13446 4.61968,-21.71904 6.92952,-26.87453 2.30984,-5.15548 4.61968,4.16079 6.92953,15.08164 2.30984,10.92086 4.61968,17.04908 6.92952,9.94729 2.30984,-7.10179 4.61968,-23.29623 6.92952,-26.24622 2.30985,-2.94998 4.61969,9.09801 6.92953,19.51079 2.30983,10.41278 4.61967,13.08486 6.92952,4.34782 2.30984,-8.73705 4.61968,-23.78413 6.92951,-24.39067 2.30984,-0.60653 4.61967,13.60982 6.92954,23.02764 2.30984,9.41781 4.61968,8.50881 6.92951,-1.45496 2.30983,-9.96377 4.61968,-23.15989 6.92952,-21.39463 2.30987,1.76527 4.6197,17.48525 6.92953,25.46774 2.30984,7.98248 4.61967,3.5349 6.92952,-7.1897 2.30985,-10.7246 4.6197,-21.45273 6.92952,-17.3982 2.30985,4.05452 4.61969,20.54309 6.92953,26.71699 2.30984,6.1739 4.61969,-1.60431 6.92953,-12.58826"
+       title="t sin(t)"
+       id="path2960" />
+    <path
+       id="path2816-1"
+       d="M 238.00173,577.31328 C 111.51105,347.55292 111.51105,347.55292 111.51105,347.55292"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#TriangleOutL)" />
+    <path
+       id="path2816-1-7"
+       d="M 440.43658,580.31501 C 589.91901,359.70347 589.91901,359.70347 589.91901,359.70347"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#TriangleOutL)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="131.31982"
+       y="733.15399"
+       id="text3804"><tspan
+         sodipodi:role="line"
+         id="tspan3806"
+         x="131.31982"
+         y="733.15399">k</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="151.38455"
+       y="406.03885"
+       id="text3804-4"><tspan
+         sodipodi:role="line"
+         id="tspan3806-0"
+         x="151.38455"
+         y="406.03885">k+ξ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="495.69809"
+       y="392.9826"
+       id="text3804-4-9"><tspan
+         sodipodi:role="line"
+         id="tspan3806-0-4"
+         x="495.69809"
+         y="392.9826">p-ξ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="535.09399"
+       y="749.56647"
+       id="text3804-4-8"><tspan
+         sodipodi:role="line"
+         id="tspan3806-0-2"
+         x="535.09399"
+         y="749.56647">p</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="324.9823"
+       y="543.49536"
+       id="text3804-4-4"><tspan
+         sodipodi:role="line"
+         id="tspan3806-0-5"
+         x="324.9823"
+         y="543.49536">ξ</tspan></text>
+  </g>
+</svg>
