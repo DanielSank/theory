@@ -1,0 +1,470 @@
+#LyX 1.6.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Current Biased Josephson Junction
+\end_layout
+
+\begin_layout Author
+Daniel Sank
+\end_layout
+
+\begin_layout Section*
+Hamiltonian and Cubic Approximation
+\end_layout
+
+\begin_layout Standard
+The Hamiltonian for the current biased Junction is
+\begin_inset Formula \[
+H=\frac{\hat{Q}^{2}}{2C}-\frac{I_{0}\Phi_{0}}{2\pi}\cos(\hat{\delta})-\frac{I\Phi_{0}}{2\pi}\hat{\delta}\]
+
+\end_inset
+
+with 
+\begin_inset Formula $[\hat{\delta},\hat{Q}]=2ei$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $[\hat{x},\hat{p}]=i\hbar$
+\end_inset
+
+, so our 
+\begin_inset Formula $\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ variables are like position and momentum if we take 
+\begin_inset Formula $\hbar\rightarrow2e$
+\end_inset
+
+.
+ We operate in the regim where 
+\begin_inset Formula $I\approx I_{0}$
+\end_inset
+
+.
+ Let's look at the potential in that case.
+ The right way to do problems like this is to 
+\begin_inset Quotes eld
+\end_inset
+
+Taylor expand around the case 
+\begin_inset Formula $I=I_{0}$
+\end_inset
+
+.
+\begin_inset Quotes erd
+\end_inset
+
+ The potential is,
+\begin_inset Formula \[
+U(\delta)=-K_{J}\cos(\delta)-K_{J}\alpha\delta\]
+
+\end_inset
+
+where 
+\begin_inset Formula $K_{J}\equiv I_{0}\Phi_{0}/2\pi$
+\end_inset
+
+, and 
+\begin_inset Formula $\alpha=I/I_{0}$
+\end_inset
+
+.
+ The first and second derivatives of the potential are
+\begin_inset Formula \begin{eqnarray*}
+U'(\delta) & = & K_{J}\sin(\delta)-K\alpha\\
+U''(\delta) & = & K_{J}\cos(\delta)\end{eqnarray*}
+
+\end_inset
+
+The extrema of the potential are at 
+\begin_inset Formula $\delta^{*}$
+\end_inset
+
+ defined by 
+\begin_inset Formula \begin{eqnarray*}
+U'(\delta^{*}) & = & 0\\
+\sin(\delta^{*})-\alpha & = & 0\end{eqnarray*}
+
+\end_inset
+
+To solve this, first consider what happens when 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+.
+ Then the derivative vanishes at 
+\begin_inset Formula $\delta^{*}=\delta_{0}=\frac{\pi}{2}(+n2\pi)$
+\end_inset
+
+.
+ Therefore we take 
+\begin_inset Formula $\delta^{*}=\frac{\pi}{2}+\epsilon$
+\end_inset
+
+ where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ must be small, and expand
+\begin_inset Formula \begin{eqnarray*}
+\sin(\delta^{*})-\alpha & = & \sin(\frac{\pi}{2}+\epsilon)-\alpha=\left(1-\frac{\epsilon^{2}}{2}+\cdots\right)-\alpha=0\\
+\epsilon & = & \pm\sqrt{2}\sqrt{1-\alpha}\\
+\rightarrow\quad\delta^{*}=\delta_{\pm} & = & \frac{\pi}{2}\pm\sqrt{2}\sqrt{1-\alpha}\end{eqnarray*}
+
+\end_inset
+
+Now look at the second derivative.
+ You can see that 
+\begin_inset Formula $U''(\delta_{0})=0$
+\end_inset
+
+, and is decreasing at that point.
+ Therefore, we see that the extremum at 
+\begin_inset Formula $\delta_{+}$
+\end_inset
+
+ is a maximum, and the extremum at 
+\begin_inset Formula $\delta_{-}$
+\end_inset
+
+ is a minimum.
+\end_layout
+
+\begin_layout Standard
+Now let's approximate the potential near the extrema.
+ We Taylor expand the potential at 
+\begin_inset Formula $\delta_{0}$
+\end_inset
+
+, the point at which the potential is flat in the case 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+.
+ Work with 
+\begin_inset Formula $\epsilon\equiv\delta-\frac{\pi}{2}$
+\end_inset
+
+.
+ 
+\begin_inset Formula \begin{eqnarray*}
+U(\delta) & = & U(\frac{\pi}{2}+\epsilon)=-K_{J}\left[\cos(\epsilon+\frac{\pi}{2})+\alpha(\epsilon+\frac{\pi}{2})\right]\\
+ & = & -K_{J}\left[\frac{\epsilon^{3}}{6}-\epsilon+\alpha\left(\epsilon+\frac{\pi}{2}\right)\right]=K_{J}\left[-\frac{\epsilon^{3}}{6}+(1-\alpha)\epsilon-\alpha\frac{\pi}{2}\right]\end{eqnarray*}
+
+\end_inset
+
+This is a nice simple cubic potential.
+ Let's find the height from the bottom of the well at 
+\begin_inset Formula $\delta_{-}$
+\end_inset
+
+ to the peak at 
+\begin_inset Formula $\delta_{+}$
+\end_inset
+
+ (note that under this cubic approximation we still HAVE a well and a peak
+ at 
+\begin_inset Formula $\delta_{-}$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta_{+}$
+\end_inset
+
+ respectively).
+ Also notice that for 
+\begin_inset Formula $\delta=\delta_{\pm}$
+\end_inset
+
+ we have 
+\begin_inset Formula $\epsilon=\epsilon_{\pm}=\pm\sqrt{2}\sqrt{1-\alpha}$
+\end_inset
+
+.
+\begin_inset Formula \begin{eqnarray*}
+U(\delta_{+}) & = & K_{J}\left[-\frac{\epsilon_{+}^{3}}{6}+(1-\alpha)\epsilon_{+}-\alpha\frac{\pi}{2}\right]\\
+U(\delta_{-}) & = & K_{J}\left[-\frac{\epsilon_{-}^{3}}{6}+(1-\alpha)\epsilon_{-}-\alpha\frac{\pi}{2}\right]\\
+\Delta U\equiv U(\delta_{+})-U(\delta_{-}) & = & K_{J}\left[\frac{1}{6}\left(\epsilon_{-}^{3}-\epsilon_{+}^{3}\right)+(1-\alpha)\left(\epsilon_{+}-\epsilon_{-}\right)\right]\\
+\Delta U & = & K_{J}\left[\frac{1}{6}\left(-2\epsilon_{+}^{3}\right)+\left(1-\alpha\right)\left(2\epsilon_{+}\right)\right]=K\left[-\frac{1}{3}2\sqrt{2}\left(1-\alpha\right)^{3/2}+2\left(1-\alpha\right)\sqrt{2}\sqrt{1-\alpha}\right]\\
+\Delta U & = & K_{J}\left[\frac{2}{3}2\sqrt{2}\left(1-\alpha\right)^{3/2}\right]\\
+\Delta U & = & I_{0}\Phi_{0}\frac{2\sqrt{2}}{3\pi}\left(1-\alpha\right)^{3/2}\end{eqnarray*}
+
+\end_inset
+
+We find the frequency of the well by evaluating 
+\begin_inset Formula $U''(\delta)$
+\end_inset
+
+ at 
+\begin_inset Formula $\delta_{-}$
+\end_inset
+
+.
+\begin_inset Formula \[
+U''(\delta_{-})=-K_{J}\epsilon_{-}=K_{J}\sqrt{2}\sqrt{1-\alpha}\]
+
+\end_inset
+
+Thus, close to the bottom of the well, we can write 
+\begin_inset Formula $U(\delta)=\frac{1}{2}\left(K_{J}\sqrt{2}\sqrt{1-\alpha}\right)\delta^{2}$
+\end_inset
+
+, so the Hamiltonian is 
+\begin_inset Formula $\frac{1}{2}\frac{1}{C}Q^{2}+\frac{1}{2}\left(K_{J}\sqrt{2}\sqrt{1-\alpha}\right)\delta^{2}$
+\end_inset
+
+.
+ Recalling that 
+\begin_inset Formula $[\hat{\delta},\hat{Q}]=2ei$
+\end_inset
+
+ we can steal the frequency of oscillations from the Quantum Oscillator
+ cheat sheet,
+\begin_inset Formula \begin{eqnarray*}
+\omega_{p} & = & \frac{2e}{\hbar}\sqrt{\frac{K_{J}\sqrt{2}\sqrt{1-\alpha}}{C}}\\
+\omega_{p} & = & 2^{1/4}2\pi\frac{2e}{h}\sqrt{\frac{K_{J}}{C}}(1-\alpha)^{1/4}\\
+\omega_{p} & = & 2^{1/4}2\pi\frac{1}{\Phi_{0}}\sqrt{\frac{I_{0}\Phi_{0}}{2\pi C}}(1-\alpha)^{1/4}\\
+\omega_{p} & = & 2^{1/4}\sqrt{\frac{2\pi I_{0}}{\Phi_{0}C}}(1-\alpha)^{1/4}\end{eqnarray*}
+
+\end_inset
+
+We have now found two useful results,
+\begin_inset Formula \begin{eqnarray*}
+\Delta U & = & I_{0}\Phi_{0}\frac{2\sqrt{2}}{3\pi}(1-\alpha)^{3/2}=K_{J}\frac{4\sqrt{2}}{3}(1-\alpha)^{3/2}\\
+\omega_{p} & = & 2^{1/4}\sqrt{\frac{2\pi I_{0}}{\Phi_{0}C}}(1-\alpha)^{1/4}=2^{1/4}\sqrt{\frac{1}{L_{J0}C}}(1-\alpha)^{1/4}\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $L_{J0}\equiv\Phi_{0}/2\pi I_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
+External Drive and Two Level Approximation
+\end_layout
+
+\begin_layout Standard
+Let's rewrite the Hamiltonian in a form so that it looks like a driven Harmonic
+ Oscillator.
+ Our cubic well has quantized metastable levels.
+ The energy splitting between the two lowest levels turns out to be 
+\begin_inset Formula \[
+\omega_{01}\approx\omega_{p}\left(1-\frac{5}{36}\frac{\hbar\omega_{p}}{\Delta U}\right)\]
+
+\end_inset
+
+as stated in John's noise paper.
+ This is not proven here, we're taking it on faith for now.
+ In the Hamiltonian
+\begin_inset Formula \begin{eqnarray*}
+H & = & \frac{1}{2}\frac{\hat{Q}^{2}}{C}+\frac{I_{0}\Phi_{0}}{2\pi}\cos(\hat{\delta})-\frac{I\Phi_{0}}{2\pi}\hat{\delta}\end{eqnarray*}
+
+\end_inset
+
+the last term is a linear drive, ie.
+ it is proportional to the position operator 
+\begin_inset Formula $\delta$
+\end_inset
+
+.
+ Take the current drive to be
+\begin_inset Formula \[
+I(t)=I_{dc}+I_{lf}(t)+I_{\mu wc}(t)\cos(\omega_{01}t)+I_{\mu ws}(t)\sin(\omega_{01}t)=I_{dc}+\Delta I(t)\]
+
+\end_inset
+
+For fixed 
+\begin_inset Formula $I_{dc}$
+\end_inset
+
+ we can solve for the states in the anharmonic well.
+ Consider the lowest two states 
+\begin_inset Formula $|0\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $|1\rangle$
+\end_inset
+
+ with energies 
+\begin_inset Formula $E_{0}(I_{lf})$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{1}(I_{lf})$
+\end_inset
+
+.
+ If there were no current drive the Hamiltonian would be
+\begin_inset Formula \[
+H=\left[\begin{array}{cc}
+E_{0}(I_{lf})\\
+ & E_{1}(I_{lf})\end{array}\right]\]
+
+\end_inset
+
+However, with the current drive added on we have
+\begin_inset Formula \[
+H=\left[\begin{array}{cc}
+E_{0}(I_{lf})-\frac{\Phi_{0}}{2\pi}\langle0|\delta|0\rangle\Delta I & \frac{\Phi_{0}}{2\pi}\langle0|\delta|1\rangle\Delta I\\
+\frac{\Phi_{0}}{2\pi}\langle1|\delta|0\rangle\Delta I & E_{1}(I_{lf})-\frac{\Phi_{0}}{2\pi}\langle1|\delta|1\rangle\Delta I\end{array}\right]\]
+
+\end_inset
+
+Now we want to know what these matrix elements are.
+ To do this we have to go over to raising/lowering operators.
+ Write the Hamiltonian without drive as
+\begin_inset Formula \[
+H=\frac{1}{2}U''\delta^{2}+\frac{1}{2}\frac{1}{C}Q^{2}\]
+
+\end_inset
+
+Then, using the notation of the Quantum Oscillator Cheat Sheet we have
+\begin_inset Formula \begin{eqnarray*}
+\alpha & = & U''\\
+\beta & = & 1/C\\
+u & = & \delta\\
+v & = & Q\\
+\gamma & = & 2e\end{eqnarray*}
+
+\end_inset
+
+Then the annihilation operator is
+\begin_inset Formula \begin{eqnarray*}
+a & = & \sqrt{\frac{1}{2(2e)\sqrt{U''/C}}}\left(\sqrt{U''}\delta+i\sqrt{1/C}Q\right)\\
+a & = & \sqrt{\frac{U''\sqrt{C}}{2(2e)\sqrt{U''}}}\left(\delta+i\sqrt{1/U''C}Q\right)\\
+a & = & \sqrt{\frac{\sqrt{U''C}}{2(2e)}}\left(\delta+i\sqrt{1/U''C}Q\right)\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $U''$
+\end_inset
+
+ is the well curvature defined above.
+ What's important is that
+\begin_inset Formula \begin{eqnarray*}
+a+a^{\dagger} & = & 2\sqrt{\frac{\sqrt{U''C}}{2(2e)}}\delta\\
+\delta & = & \frac{1}{2}\sqrt{\frac{2(2e)}{\sqrt{U''C}}}(a+a^{\dagger})\end{eqnarray*}
+
+\end_inset
+
+so that
+\begin_inset Formula \[
+\langle0|\delta|1\rangle=\frac{1}{2}\sqrt{\frac{2(2e)}{\sqrt{U''C}}}=\sqrt{\frac{e}{\sqrt{U''C}}}\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $U''C=(I_{0}\Phi_{0}/2\pi)\sqrt{2}\sqrt{1-\alpha}C$
+\end_inset
+
+ so 
+\begin_inset Formula $\sqrt{U''C}=2^{1/4}(1-\alpha)^{1/4}\sqrt{(I_{0}\Phi_{0}C/2\pi)}=\omega_{p}\sqrt{\Phi_{0}C/2\pi I_{0}}\sqrt{I_{0}\Phi_{0}C/2\pi}=\omega_{p}\Phi_{0}C/2\pi$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula \[
+\langle0|\delta|1\rangle=\sqrt{\frac{e2\pi}{\omega_{p}\Phi_{0}C}}=\sqrt{\underbrace{\left(\frac{\pi\hbar}{\Phi_{0}}\right)}_{\textrm{e}}\frac{2\pi}{\omega_{p}\Phi_{0}C}}=\frac{2\pi}{\Phi_{0}}\sqrt{\frac{\hbar}{2\omega_{10}C}}\]
+
+\end_inset
+
+Notice that here an 
+\begin_inset Formula $\omega_{p}$
+\end_inset
+
+ turned into an 
+\begin_inset Formula $\omega_{01}$
+\end_inset
+
+.
+ This is suspect.
+ Clearly 
+\begin_inset Formula $\langle0|\delta|0\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle1|\delta|1\rangle$
+\end_inset
+
+ are zero.
+ Therefore the Hamiltonian is
+\begin_inset Formula \[
+H=\left[\begin{array}{cc}
+E_{0}(I_{lf}) & \sqrt{\hbar/2\omega_{10}C}\Delta I\\
+\sqrt{\hbar/2\omega_{10}C}\Delta I & E_{1}(I_{lf})\end{array}\right]\]
+
+\end_inset
+
+In the rotating frame where 
+\begin_inset Formula $\exp\left(-i\omega_{10}t\right)|1\rangle\rightarrow|1\rangle$
+\end_inset
+
+ and removing non-resonant terms we get
+\begin_inset Formula \[
+H=\left(\sqrt{\hbar/2\omega_{10}C}/2\right)\left[\sigma_{x}I_{\mu wc}(t)+\sigma_{y}I_{\mu ws}(t)\right]+\sigma_{z}I_{lf}(t)(\partial E_{10}/\partial I_{dc})/2\]
+
+\end_inset
+
+The low frequency part of the bias changes the level splitting and the high
+ frequency parts compose the quadratures of the transitions between the
+ two levels.
+\end_layout
+
+\end_body
+\end_document
