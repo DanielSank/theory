@@ -1,0 +1,69 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twocolumn,english,aps,prl]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{esint}
+\usepackage{graphicx}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+\title{Scattering parameters capacitively coupled to transmission line}
+\author{Daniel Sank}
+\affiliation{University of California, Santa Barbara}
+\date{31 August 2012}
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\maketitle
+
+\section{Impedance of Parallel LRC resonator}
+
+The impedance looking into a parallel LRC resonator is \begin{equation}
+Z_{LRC} = \frac{Q_i Z_{LC}}{1+i2Q_i x} \end{equation}
+where $\omega_0 = 1/\sqrt{LC}$, $Q_i = \omega_0 R C$, $Z_{LC} = \sqrt{L/C}$, and $x = \omega-\omega_0 / \omega_0$.
+
+\section{Impedance looking into coupling capacitor}
+\begin{eqnarray}
+Z &=& \frac{-i}{\omega C_c} + \frac{Q_i Z_{LC}}{1+i2Q_i x} \\
+&=& \frac{-i/\omega C_c (1+i2Q_i x)}{1+i2Q_i x} + \frac{Q_i Z_{LC}}{1+i2Q_i x} \\
+&=& \frac{-i/\omega C_c + 2Q_i x/\omega C_c + Q_i Z_{LC}}{1+i2Q_i x} \end{eqnarray}
+Now define $Q_c = 1/\omega R_e C_c$ where $R_e$ is the resistance of the external circuit connected to the coupling capacitor. Depending on whether this is a reflection or transmission setup this will be either $Z_0/2$ or $Z_0$ ($Z_0$ is the characteristic impedance of the transmission lines in use). Using this new definition we get \begin{eqnarray}
+Z      &=& \frac{-i R_e Q_c + 2Q_i Q_c R_e x + Q_i Z_{LC}}{1+i2Q_i x} \\
+Y      &=& \frac{1+i2Q_i x}{-i R_e Q_c + 2Q_i Q_c R_e x + Q_i Z_{LC}} \\
+       &=& i\frac{1+i2Q_i x}{R_e Q_c + i 2Q_i Q_c R_e x + iQ_i Z_{LC}} \\
+Z_0 Y  &=& i\frac{1+i2Q_i x}{Q_c \frac{R_e}{Z_0} + i 2Q_i Q_c \frac{Re}{Z_0} x + iQ_i \frac{Z_{LC}}{Z_0}} \\ \
+       &=& \frac{i}{Q_c} \frac{Z_0}{R_e} \frac{1+i2Q_i x}{1 + i2Q_i x + i\frac{Q_i Z_{LC}}{Q_c R_e}}
+\end{eqnarray}
+
+\section{Computation of $S_{21}$}
+For a shunt admittance between two matched microwave ports, the equation for $S_21$ is given in the front inside cover of Pozar's book as \begin{equation}
+S_{21} = \frac{2}{2+Z_0 Y} \end{equation}
+Now all we have to do is plug in our expression for $Z_0 Y$. First we can simplify our expression for $Z_0 Y$ as follows \begin{equation}
+Z_0 Y = i \alpha \frac{1 + i\beta}{1+i\beta + i \gamma} \end{equation}
+where \begin{equation}
+\alpha = \frac{1}{Q_c}\frac{Z_0}{R_e} \quad \beta = 2Q_i x \quad \gamma = \frac{Q_i Z_{LC}}{Q_c R_e} \end{equation}
+Then we get \begin{equation}
+S_{21}^{-1} = 1 + i\frac{\alpha}{2} \frac{1+i\beta}{1+i\beta + i\gamma}  \end{equation}
+
+\end{document}

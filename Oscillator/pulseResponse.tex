@@ -1,0 +1,241 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{esint}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%Some extra stuff to use in the document
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\braket}[2]{\langle #1|#2\rangle}
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+\title{Oscillator Pulse Response}
+
+
+\author{Daniel Sank}
+
+
+\date{19 April 2011}
+
+\maketitle
+
+\section{Conventions}
+
+The fourier convention used here is\begin{eqnarray*}
+f(\omega) & = & \int f(t)e^{-i\omega t}dt\\
+f(t) & = & \int f(\omega)e^{i\omega t}\frac{d\omega}{2\pi}\end{eqnarray*}
+
+
+
+\section{Input-output}
+
+If you have a wave travelling down a transmission with some impedance
+$Z(\omega)$ at the termination, then you have the following relation\[
+V_{\textrm{in}}(\omega)+V_{\textrm{out}}(\omega)=V(\omega)\]
+where $V(\omega)$ is the voltage accross the termination impedance
+and $V_{\textrm{in/out}}$ are the ingoing and outgoing voltage amplitudes.
+The input and output amplitudes are related by\[
+V_{\textrm{out}}(\omega)=\Gamma(\omega)V_{\textrm{in}}(\omega)\]
+with the reflection coefficient $\Gamma$ given by\[
+\Gamma(\omega)=\frac{Z(\omega)/Z_{0}-1}{Z(\omega)/Z_{0}+1}\]
+where $Z_{0}$ is the characteristic impedance of the line. Using
+these relations we can write down the voltage accross the termination
+impedance in terms of the incoming voltage amplitude,\[
+V(\omega)=V_{\textrm{in}}(\omega)\left[1+\Gamma(\omega)\right]\]
+To find $V(t)$ we basically just inverse fourier transform this expression.
+To do that we have to work out $\Gamma(\omega)$ and $V_{\textrm{in}}(\omega)$.
+
+
+\section{Harmonic oscillator termination}
+
+Consider the case that the termination is a harmonic oscillator. Then
+the termination impedance is \begin{equation}
+Z(\omega)/Z_{0}=\frac{ix}{1-x^{2}+i\epsilon x} \end{equation}
+where $x\equiv\omega/\omega_{0}$, $\omega_{0}\equiv1/\sqrt{LC}$, and $\epsilon\equiv1/Q$. We can plug this into the expression for gamma, (ALL SUBSEQUENT OCURRANCES OF $\eta$ should be replaced by 1)\begin{eqnarray*}
+\Gamma(\omega) & = & \frac{Z(\omega)/Z_{0}-1}{Z(\omega)/Z_{0}+1}\\
+\Gamma(\omega) & = & \frac{\frac{ix\eta}{1-x^{2}+i\epsilon x}-1}{1+\frac{ix\eta}{1-x^{2}+i\epsilon x}}\\
+\Gamma(\omega) & = & -\frac{1-x^{2}+i\epsilon x-i\eta x}{1-x^{2}+i\epsilon x+i\eta x}\\
+1+\Gamma(\omega) & = & 2\frac{i\eta x}{1-x^{2}+i\epsilon x+i\eta x}\end{eqnarray*}
+This is actually a very interesting equation. The imaginary parts
+in the denominator are the effective damping terms. Note that one
+of them depends on the intrinsic quality factor of the resonator,
+expressed by $\epsilon$, while the other term comes from the transmission
+line characteristic impedance via $\eta\equiv\omega_{0}L/Z_{0}$.
+This means that there is an effective daming that gets larger as the
+line impedance gets smaller because the line is damping the resonator.
+This is usually discussed via the {}``coupling $Q$,'' which would
+be $1/\eta$. This suggests that we should collect the two damping
+terms into one, which we define as\[
+\gamma\equiv\epsilon+\eta\]
+giving\[
+1+\Gamma(\omega)=2\frac{i\eta x}{1-x^{2}+i\gamma x}\]
+For calculation it's extremely useful to factorize the denominator
+in order to find the poles of the expression. The denominator factors
+as follows,\begin{eqnarray*}
+1-x^{2}+i\gamma x & = & 0\\
+x^{2}-i\gamma x-1 & = & 0\\
+x_{\pm} & =\frac{1}{2} & \left[i\gamma\pm\sqrt{-\gamma^{2}+4}\right]\\
+x_{\pm} & = & \frac{i\gamma}{2}\pm\sqrt{1-\frac{\gamma^{2}}{4}}\end{eqnarray*}
+Therefore the denominator is\[
+-(x^{2}-i\gamma x-1)=-(x-x_{-})(x-x_{+})\]
+So in the end we get\[
+1+\Gamma(\omega)=-2\frac{i\eta x}{(x-x_{+})(x-x_{-})}\]
+
+
+
+\section{Gaussian input}
+
+For a gaussian input voltage pulse given by\[
+V(t)=V_{0}\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left[-t/2\sigma^{2}\right]\]
+the frequency space representation turns out to be\[
+V(\omega)=V_{0}\sqrt{2\pi\sigma^{2}}\exp\left[-\omega^{2}/2\Sigma^{2}\right]\]
+where $\Sigma\equiv1/\sigma$. Now, usually our pulse will be modulated
+by a high frequency (GHz) sinewave, ie,\[
+V(t)=V_{0}\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left[-t/2\sigma^{2}\right]\cos\left[\Omega t\right]\]
+We can easily figure out what this looks like in frequency space using
+the convolution theorem. Let $G_{\sigma}$stand for a gaussian with
+width $\sigma$. Then we get \begin{eqnarray*}
+V(t) & = & \textrm{const}*G_{\sigma}(t)*\frac{1}{2}\left[e^{i\Omega t}+e^{-i\Omega t}\right]\\
+V(\omega) & = & (1/\textrm{const})*\frac{1}{2}\int G_{\Sigma}(\omega')2\pi\left[\delta(\omega'-\Omega-\omega)+\delta(\omega'+\Omega-\omega)\right]\frac{d\omega'}{2\pi}\\
+V(\omega) & = & (1/\textrm{const})*\frac{1}{2}\left[G_{\Sigma}(\omega+\Omega)+G_{\Sigma}(\omega-\Omega)\right]\end{eqnarray*}
+Plugging in the value of the constant and writing everything explicitly
+we get\[
+V(\omega)=V_{0}\sqrt{2\pi\sigma^{2}}\frac{1}{2}\left(\exp\left[-(\omega-\Omega)^{2}/2\Sigma^{2}\right]+\exp\left[-(\omega+\Omega)^{2}/2\Sigma^{2}\right]\right)\]
+
+
+
+\section{Computation}
+
+Now we can stuff everything into the inverse fourier transform. From
+above we had\begin{eqnarray*}
+V(\omega) & = & V_{\textrm{in}}(\omega)\left[1+\Gamma(\omega)\right]\\
+V(t) & = & \int V_{\textrm{in}}(\omega)\left[1+\Gamma(\omega)\right]e^{i\omega t}\frac{d\omega}{2\pi}\\
+V(t) & = & -2\int V_{\textrm{in}}(\omega)\frac{i\eta x}{(x-x_{-})(x-x_{+})}e^{i\omega t}\frac{d\omega}{2\pi}\\
+V(t) & = & -2\omega_{0}\int V_{\textrm{in}}(\omega_{0}x)\frac{i\eta x}{(x-x_{-})(x-x_{+})}e^{ix\tau}\frac{dx}{2\pi}\end{eqnarray*}
+ where $x\equiv\omega/\omega_{0}$ and $\tau\equiv\omega_{0}t$.
+
+
+\subsection{Impulse response}
+
+Here we work out the response for the case of an impulse input, $V_{0}\delta(t)$.
+Note that $V_{0}$ has units of voltage/time. In this case the termination
+voltage is\begin{eqnarray*}
+V(t) & = & -2V_{0}\omega_{0}\int e^{-ix\tau_{0}}\frac{i\eta x}{(x-x_{+})(x-x_{-})}e^{ix\tau}\frac{dx}{2\pi}\\
+V(t) & = & -2V_{0}\omega_{0}\int\frac{i\eta x}{(x-x_{+})(x-x_{-})}e^{ix(\tau-\tau_{0})}\frac{dx}{2\pi}\end{eqnarray*}
+Recall the values of $x_{\pm}$,\[
+x_{\pm}=\frac{i\gamma}{2}\pm\sqrt{1-\frac{\gamma^{2}}{4}}\]
+Both of the poles are therefore in the upper half of the complex plane.
+This means that in the case $\tau<\tau_{0}$, where we must close
+the integration contour in the lower half plane, the integral is zero.
+This makes sense because there shouldn't be any response of the system
+before the delta function impulse occurs at $\tau_{0}$. In the case
+that $\tau>\tau_{0}$ we just use the residue theorem,\begin{eqnarray*}
+V(t) & = & -2V_{0}\omega_{0}\int\frac{i\eta x}{(x-x_{+})(x-x_{-})}e^{ix(\tau-\tau_{0})}\frac{dx}{2\pi}\\
+\frac{V(t)}{-2V_{0}\omega_{0}} & = & i\left(\frac{i\eta x_{-}}{(x_{-}-x_{+})}\right)e^{ix_{-}\tau}+i\left(\frac{i\eta x_{+}}{(x_{+}-x_{-})}\right)e^{ix_{+}\tau}\\
+\frac{V(t)}{-2V_{0}\omega_{0}} & = & \frac{i}{2\sqrt{1-\frac{\gamma^{2}}{4}}}\left[-\left(i\eta x_{-}\right)e^{ix_{-}\tau}+\left(i\eta x_{+}\right)e^{ix_{+}\tau}\right]\end{eqnarray*}
+where here $\tau\equiv\tau-\tau_{0}$. Since $\left(ix_{+}\right)^{*}=ix_{-}$
+you can see that the the stuff in square brackets is a difference
+of two expressions which are complex conjugates of one another. Therefore,
+the expression in brackets is purely imaginary. Since there's a factor
+of $i$ out front the entire expression is real as it should be. In
+fact we can use these observations to simplify the expression,\begin{eqnarray*}
+\frac{V(t)}{-2V_{0}\omega_{0}} & = & \frac{i}{2\sqrt{1-\frac{\gamma^{2}}{4}}}2i\Im\left[i\eta x_{+}e^{ix_{+}\tau}\right]\\
+\frac{V(t)}{2V_{0}\omega_{0}} & = & \frac{1}{\sqrt{1-\frac{\gamma^{2}}{4}}}\Im\left[i\eta x_{+}e^{ix_{+}\tau}\right]\end{eqnarray*}
+Writing $x_{+}$ as $i\gamma/2+r$ we get\begin{eqnarray*}
+\frac{V(t)}{2V_{0}\omega_{0}} & = & \frac{1}{\sqrt{1-\frac{\gamma^{2}}{4}}}\Im\left[i\eta x_{+}e^{i(i\gamma/2+r)\tau}\right]\\
+\frac{V(t)}{2V_{0}\omega_{0}} & = & \frac{1}{r}e^{-\gamma\tau/2}\Im\left[i\eta x_{+}e^{ir\tau}\right]\end{eqnarray*}
+Now writing the stuff in parentheses as $\alpha+i\beta$ the bracketed
+expression becomes $\Im\left\{ \left[\alpha+i\beta\right]\left[\cos\left(r\tau\right)+i\sin\left(r\tau\right)\right]\right\} =\alpha\sin\left(r\tau\right)+\beta\cos\left(r\tau\right)$.
+Therefore the voltage signal is\[
+V(t)=2V_{0}\omega_{0}\frac{1}{r}e^{-\gamma\tau/2}\left[\alpha\sin\left(r\tau\right)+\beta\cos\left(r\tau\right)\right]\]
+which is just a decaying sinusoid with phase and initial amplitude
+determined by $\alpha$ and $\beta$.
+
+Now we determine $\alpha$ and $\beta$.\begin{eqnarray*}
+i\eta x_{+} & = & \frac{-\gamma\eta}{2}+i\eta\sqrt{1-\gamma^{2}/4}\\
+\textrm{so}\qquad\alpha=-\gamma\eta/2 & \quad\textrm{and}\quad & \beta=\eta\sqrt{1-\gamma^{2}/4}\end{eqnarray*}
+Now using simple trig identities we can write $\alpha\sin\left(r\tau\right)+\beta\cos\left(r\tau\right)$
+as $M\cos\left(r\tau+\phi\right)$ where\begin{eqnarray*}
+M & = & \sqrt{\alpha^{2}+\beta^{2}}=\eta\\
+\tan\left(\phi\right) & = & -\frac{\alpha}{\beta}=\frac{\gamma\eta/2}{\eta\sqrt{1-\gamma^{2}/4}}=\frac{\gamma}{2\sqrt{1-\gamma^{2}/4}}\end{eqnarray*}
+The full expression is therefore \[
+V(t)=\left\{ \begin{array}{cc}
+2V_{0}\omega_{0}\frac{\eta}{\sqrt{1-\gamma^{2}/4}}e^{-\gamma\tau/2}\cos\left(\sqrt{1-\gamma^{2}/4}\tau+\phi\right) & t>0\\
+0 & t<0\end{array}\right.\]
+This is a very sensible result. The oscillator voltage oscillates
+with a frequency given by the damped frequency of the oscillator,
+$\omega_{0}\sqrt{1-\gamma^{2}/4}$ where the damping coefficient $\gamma$
+is the combination of the intrinsic oscillator damping and the damping
+from the transmission line. There is an overall decay given by the
+same constant. Remember that $V_{0}$ has units of voltage/time because
+we used a delta function input pulse.
+
+
+\subsection{Gaussian input}
+
+Now that we've solved the case of a delta function input we should
+be able to get the response to a Gaussian input pulse by use of the
+convolution theorem.
+
+
+\subsection{Fourier transform from time domain convolution}
+
+Since we've found the delta function response $g(t)$ we can write
+the solution to the problem as a convolution\begin{eqnarray*}
+V(t) & = & \int_{t'=-\infty}^{t}V_{\textrm{in}}(t')g(t-t')dt'\\
+V(t) & = & \int_{t'=-\infty}^{\infty}V_{\textrm{in}}(t')g(t-t')\Theta(t-t')dt'\\
+\mathrm{or}\quad V(t) & = & \int_{t'=-\infty}^{\infty}V_{\mathrm{in}}(t-t')g(t')\Theta(t')dt'\end{eqnarray*}
+Rather than actually do this convolution we can go to the frequency
+domain,\begin{eqnarray*}
+V_{\mathrm{in}}(t-t') & = & \int_{\omega}V_{\mathrm{in}}(\omega)e^{i(t-t')\omega}\frac{d\omega}{2\pi}\\
+g(t') & = & \int_{\omega}g(\omega)e^{i\omega t'}\frac{d\omega}{2\pi}\\
+\Theta(t') & = & \int_{\omega}\Theta(\omega)e^{i\omega t'}\frac{d\omega}{2\pi}\end{eqnarray*}
+Stuffing these into the convolution integral gives\begin{eqnarray*}
+V(t) & = & \int_{\omega}\int_{\omega'}\int_{\omega''}\int_{t'}V_{\mathrm{in}}(\omega)e^{i(t-t')\omega}g(\omega')e^{i\omega't'}\Theta(\omega'')e^{i\omega''t'}\frac{d\omega}{2\pi}\frac{d\omega'}{2\pi}\frac{d\omega''}{2\pi}\\
+V(t) & = & \int_{\omega}\int_{\omega'}\int_{\omega''}V_{\mathrm{in}}(\omega)e^{i\omega t}g(\omega')\Theta(\omega'')\frac{d\omega}{2\pi}\frac{d\omega'}{2\pi}\frac{d\omega''}{2\pi}\int_{t'}e^{it'(-\omega+\omega'+\omega'')}\\
+V(t) & = & \int_{\omega}\int_{\omega''}e^{i\omega t}V_{\mathrm{in}}(\omega)g(\omega-\omega'')\Theta(\omega'')\frac{d\omega}{2\pi}\frac{d\omega''}{2\pi}\\
+\mathrm{or}\qquad V(t) & = & \int_{\omega}\int_{\omega'}e^{i\omega t}V_{\mathrm{in}}(\omega)g(\omega-\omega')\Theta(\omega')\frac{d\omega}{2\pi}\frac{d\omega'}{2\pi}\end{eqnarray*}
+where in the last line we just relabeled an integration index. We
+need to write down these three functions in frequency space. We already
+know two of them,\begin{eqnarray*}
+V(\omega) & = & V_{0}\sqrt{2\pi\sigma^{2}}\frac{1}{2}\left(\exp\left[-(\omega-\Omega)^{2}/2\Sigma^{2}\right]+\exp\left[-(\omega+\Omega)^{2}/2\Sigma^{2}\right]\right)\\
+g(\omega) & = & -2\frac{i\eta x}{(x-x_{+})(x-x_{-})}\end{eqnarray*}
+and the Fourier transform of the theta function is easy to compute\[
+\Theta(\omega)=\lim_{\xi\rightarrow0}\left(\frac{-i}{\omega-i\xi}\right)\]
+If we now eliminate the dimensions in the integral we have\begin{eqnarray*}
+V(t) & = & \omega_{0}^{2}\int_{x}\int_{x'}e^{ix\tau}V_{\mathrm{in}}(\omega_{0}x)g(\omega_{0}x-\omega_{0}x')\Theta(\omega_{0}x')\frac{dx}{2\pi}\frac{dx'}{2\pi}\end{eqnarray*}
+This is almost exactly the same integral we had at the beginning of
+this section with the only difference being the presence of the extra
+convolution between the green's function and the theta function. Putting
+everything together we get\begin{eqnarray*}
+V(t) & = & -2\omega_{0}^{2}\lim_{\xi\rightarrow0}\int_{x}\int_{x'}e^{ix\tau}V_{\mathrm{in}}(\omega_{0}x)\frac{-i}{\omega_{0}(x-x')-i\xi}\frac{i\eta x'}{(x'-x_{+})(x'-x_{-})}\frac{dx}{2\pi}\frac{dx'}{2\pi}\\
+V(t) & = & -2\omega_{0}\lim_{\xi\rightarrow0}\int_{x}\int_{x'}e^{ix\tau}V_{\mathrm{in}}(\omega_{0}x)\frac{1}{(x-x')-i\xi}\frac{\eta x'}{(x'-x_{+})(x'-x_{-})}\frac{dx}{2\pi}\frac{dx'}{2\pi}\end{eqnarray*}
+where we've changed $\xi/\omega_{0}\rightarrow\xi$ because we're
+going to take it to zero anyway. Let's do the integral over $x$ first.\[
+V(t)=-2\omega_{0}\lim_{\xi\rightarrow0}\int_{x'}\frac{\eta x'}{(x'-x_{+})(x'-x_{-})}\frac{dx'}{2\pi}\int_{x}e^{ix\tau}V_{\mathrm{in}}(\omega_{0}x)\frac{1}{(x-x')-i\xi}\frac{dx}{2\pi}\]
+This is a bit weird because the poles in the $x$ integral depend
+on the current value of $x'$.
+\end{document}

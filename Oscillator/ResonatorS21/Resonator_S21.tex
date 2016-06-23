@@ -1,0 +1,81 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\usepackage{amstext}
+\usepackage{babel}
+
+\begin{document}
+
+\title{Electrical Resonator}
+
+\maketitle
+It is shown in John's writeup that the S parameter for a shunt resonator
+is\[
+S_{21}=-\frac{1}{1+R_{c}/R}\frac{1}{1+i2Q\left(\frac{\omega-\omega_{0}}{\omega_{0}}\right)}\]
+where
+\begin{itemize}
+\item $R$ is the shunt resistance intrinsic to the resonator
+\item $Q=R'/\omega_{0}L$
+\item $R'=R||\frac{|Zc|^{2}}{2R_{0}}$. This is the effective shunt resistance
+in the resonator.
+\item $R_{0}$ is the resistance of the leads (50 Ohms for transmission
+line)
+\item $Z_{c}=1/i\omega C_{c}$
+\item $C_{c}$ is the coupling capacitance.
+\item $R_{c}=\frac{|Z_{c}|^{2}}{2R_{0}}$ is the transformed dissipation
+due to the leads. This is the shunt resistance seen by the resonator
+due to the leads.
+\item $\omega_{0}=1/\sqrt{LC'}$
+\item $C'=C+2C_{c}$ is the effective capacitance of the resonator
+\end{itemize}
+In the case that $R_{c}\ll R$ the leading factor is unity and we
+have\[
+S_{21}+\frac{1}{2}=\frac{-1+\frac{1}{2}+iQ\left(\frac{\omega-\omega_{0}}{\omega_{0}}\right)}{1+i2Q\left(\frac{\omega-\omega_{0}}{\omega_{0}}\right)}=\left(\frac{1}{2}\right)\frac{-1+ix}{1+ix}\]
+where $x\equiv2Q\frac{\omega-\omega_{0}}{\omega_{0}}$. That is, $x$
+measures the distance from resonance in units of the resonant frequency
+times $Q$. This is quite a handy form for $S_{21}$ because it's
+a linear fractional (or Mobius) function. This is a well studied function
+with many nice properties. For all $x$ we have\[
+\left|\frac{-1+ix}{1+ix}\right|=1\]
+Furthermore we have\begin{eqnarray*}
+\theta=\arg\left[\frac{-1+ix}{1+ix}\right] & = & \arg(-1+ix)-\arg(1+ix)\\
+ & = & \arg(1-ix)-\pi-\arg(1+ix)\\
+ & = & -2\arg(1+ix)-\pi\\
+ & = & -2\arctan(x)-\pi\end{eqnarray*}
+
+
+%
+\begin{figure}
+\caption{Polar plot of $S_{21}$}
+
+
+
+\end{figure}
+
+
+As $x$ runs from negative to positive infinity, the phase $\theta$
+goes from $0$ to $-2\pi$. It's better to think of $\theta$ as running
+from 0 to $-\pi=\pi$, and then back to 0. For what value of $x$
+is the phase $-\pi/2$?\begin{eqnarray*}
+-\frac{\pi}{2} & = & -2\arctan(x)-\pi\\
+-\frac{\pi}{4} & = & \arctan(x)\\
+\rightarrow\quad x & = & -1\\
+\textrm{or}\quad\omega & = & \omega_{0}-\frac{\omega_{0}}{2Q}\end{eqnarray*}
+Similarly, the value of $x$ for which $\theta=\frac{\pi}{2}$ is\begin{eqnarray*}
+\frac{\pi}{2} & = & -2\arctan(x)-\pi\\
+-\frac{3\pi}{4} & = & \arctan(x)\\
+\rightarrow\quad x & = & 1\\
+\textrm{or}\quad\omega & = & \omega_{0}+\frac{\omega_{0}}{2Q}\end{eqnarray*}
+The distance between these two frequencies is\[
+\omega_{0}/Q\]
+which is the full width at half max, FWHM. We prove this as follows.
+For $x=0$ we get $|S_{21}|^{2}=1$, which is the maximum. For $x=\pm1$
+we get $\theta=\pm\frac{\pi}{2}$ which puts us at the vertical extrema
+of the $S_{21}$circle. Since the circle radius is $\frac{1}{2}$,
+the length of the vector $|S_{21}|$ at these points is $\sqrt{2}/2$,
+and therefore $|S_{21}|^{2}=1/2=\frac{1}{2}|S_{21}|_{\textrm{max}}^{2}$.
+\end{document}

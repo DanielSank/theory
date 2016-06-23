@@ -1,0 +1,305 @@
+\documentclass{article}
+
+\input{../../TeX/macros.tex}
+\input{../../TeX/packages.tex}
+
+\title{Harmonic Oscillator}
+\author{Daniel Sank \\ \small{University of California Santa Barbara} \\ \small{Presently Google Quantum AI}}
+\date{23 February 2009}
+
+\begin{document}
+\maketitle
+
+\section{Impulse Response}
+
+The equation for a damped harmonic oscillator is \begin{equation}
+\ddot{\phi}(t)+2\beta\dot{\phi}(t)+\omega_{0}^{2}\phi(t)=j(t) \end{equation}
+In the usual way we turn this into an abstract equation \begin{equation}
+(D_{t}^{2}+2\beta D_{t}+\omega_{0}^{2})\ket{\phi}=\ket{j} \end{equation}
+Our Fourier convention will be
+\begin{equation}
+\braket{t}{\omega}=e^{i\omega t}
+\end{equation}
+which is the common choice in electrical engineering.
+However, it is the \emph{opposite} of what is normally used in physics, notably in Schrodinger's equation.
+With this convention $-iD_t$ is Hermitian.
+Going to the $\ket{\omega}$ basis we get
+\begin{align}
+\bbraket{\omega}{D_t^2 + 2\beta D_t + \omega_0^2}{\phi} &= \braket{\omega}{j} \\
+(-\omega^{2} + 2 i \beta\omega + \omega_{0}^{2}) \phi(\omega) & = j(\omega)\\
+\phi(\omega) & = \frac{j(\omega)}{-\omega^{2} + 2 i \beta \omega + \omega_{0}^{2}} \, .
+\end{align}
+Taking $j(t)=A\delta(t-t_{0})$ we get $\braket{\omega}{j} = A e^{-i \omega t_{0}}$.
+We can factor the denominator as $-(\omega-\omega_{+})(\omega-\omega_{-})$
+where
+\begin{equation}
+\omega_{+} = i \beta + \omega_0' \qquad \omega_{-} = i \beta - \omega_0' \label{eq:omega_plus_minus}
+\end{equation}
+and
+\begin{equation}
+\omega_0' = \omega_0 \sqrt{ 1 - \left( \beta / \omega_0 \right) ^2 } \, .
+\end{equation}
+Therefore we have \begin{equation}
+\phi(\omega) = \frac{-A e^{-i \omega t_0}}{(\omega - \omega_{+})(\omega-\omega_{-})} \, .
+\end{equation}
+Upon Fourier transform
+\begin{equation}
+\phi(t) = 
+\int\frac{-Ae^{i \omega(t - t_0)}}{(\omega-\omega_{+})(\omega-\omega_{-})} \,
+\frac{d\omega}{2\pi} \, .
+\end{equation}
+Consider the case $t < t_0$.
+In that case we close the contour in the lower half plane.
+Since both poles $\omega_\pm$ are in the upper half plane the integral is zero.
+This reflects causality: the oscillator can't know about the impulse before it happens.
+For the case $t > t_{0}$ we close in the upper half plane.
+Now the contour encloses the poles and we will get a nonzero result.
+Let $\tau \equiv t - t_0$.
+Then the residue theorem gives
+\begin{align}
+\phi(t) &=
+\frac{-A 2\pi i}{2 \pi}
+\left(
+\frac{e^{i \omega_+ \tau}}{\omega_+ - \omega_-} +
+\frac{e^{i \omega_- \tau}}{\omega_- - \omega_+}
+\right) \\
+&= \frac{A}{\omega_0'} e^{- \beta \tau} \sin(\omega_0' \tau)
+\end{align}
+We see that the system oscillates with a frequency close to $\omega_0$ and decays with a rate given by the amplitude damping parameter $\beta$.
+Note that this solution is valid only when $\omega_0 > \beta$.
+
+In the limit $\beta \ll \omega_0$ we find $E(t) = E_{0}e^{-2 \beta t}$, where $E_0=\frac{1}{2} m A^{2}$ is the initial energy of the system.
+Note that $A$ is the initial velocity.
+
+Defining the quality factor $Q$ by
+\begin{equation}
+Q \equiv \frac{\textrm{Energy stored}}{\textrm{Energy dissipated per radian}} \, ,
+\end{equation}
+we find
+\begin{equation}
+Q
+= \frac{E(t)}{dE/d\textrm{rad}}
+= \frac{E(t)}{-(dE/dt)(dt/d\textrm{rad})}
+= \frac{E(t)}{2\beta E(t)\frac{1}{\Delta\omega}}
+= \frac{\Delta\omega}{2\beta}\approx\frac{\omega_{0}}{2\beta} \, .
+\end{equation}
+This relation is also written
+\begin{equation}
+Q \approx \omega_0 / \kappa
+\end{equation}
+where $\kappa$ is the energy decay rate of the oscillator.
+
+
+\section{Frequency Response}
+
+Now we investigate the case in which $j(t)=A\cos(\Omega t)$.
+In this case
+\begin{equation}
+j(\omega)=\frac{A}{2}(2\pi)\left[\delta(\omega-\Omega)+\delta(\omega+\Omega)\right] \, .
+\end{equation}
+Therefore, by modifying equations from the previous section we have
+\begin{align}
+\phi(\omega)
+& = \frac{-A}{2}(2\pi) \int \frac{d\omega}{2\pi} e^{i \omega t} \frac{\delta(\omega-\Omega)+\delta(\omega+\Omega)}{\omega^{2} - 2i\beta\omega - \omega_0^2} \\
+& =
+\frac{-A}{2}
+\left[
+\frac{e^{i \Omega t}}{\Omega^{2} - 2i\beta\Omega - \omega_0^2} +
+\frac{e^{-i \Omega t}}{\Omega^2 + 2i\beta\Omega - \omega_0^2}
+\right] \\
+&= \Re \left[ e^{i \Omega t} \frac{-A}{\Omega^2 - 2i\beta\Omega - \omega_0^2}
+\right] \label{eq:phasor_form}
+\end{align}
+This is a very special form known as {}``phasor'' form.
+The idea of phasors is that in a linear system driven by a sinusoidal drive, all variables will oscillate with the same frequency as the drive.
+Any dynamical variable, in our case $\phi$, differs from the drive only in amplitude and phase.
+We see this here: the time dependence of $\phi$ is sinusoidal at angular frequency $\Omega$.
+The crucial relation is that if we have two signals at the same frequency which can be expressed as \begin{equation}
+f(t) = \Re[ e^{i\omega t} \hat{f}] \qquad
+g(t) = \Re[ e^{i\omega t} \hat{g}]
+\end{equation}
+where $\hat{f}$ and $\hat{g}$ are complex numbers, then we have \begin{equation}
+\langle f(t)g(t)\rangle_{t}=\frac{1}{2}\Re[\hat{f}^{*}\hat{g}] \end{equation}
+where the left hand is a time average.
+Our expression for $\phi(t)$ has this form if we take
+\begin{equation}
+\hat{\phi} = \frac{-A}{\Omega^{2} - 2i\beta\Omega - \omega_0^2} \, .
+\end{equation}
+Therefore, \begin{equation}
+\langle\phi(t)^{2}\rangle_{t} = \frac{1}{2} \frac{A^{2}}{(\Omega^{2}-\omega_0^{2})^{2}+(2\beta\Omega)^{2}} \, .
+\end{equation}
+This function maximizes for $\Omega=\pm\sqrt{\omega_{0}^{2}-2\beta^{2}}$.
+Note that this is not the same as the free oscillation frequency found from the impulse response.
+
+\subsection{Resonance}
+
+We define the resonance frequency as that frequency at which power flow from the drive to the system is unidirectional.
+This happens when $\dot{\phi}(t)$ is in phase with $j(t)$.
+Velocity and position are a quarter cycle out of phase, so the resonance occurs when the position is a quarter cycle shifted from the drive.
+In other words, the resonance happens when the denominator of the phasor is imaginary, which occurs for
+\begin{equation}
+(\text{resonance}) \qquad \Omega = \pm \omega_0 \, .
+\end{equation}
+
+\subsection{Phase shift}
+
+It is useful to look at the relative phase shift between the drive and the response.
+To do this we need to find the argument of $\hat{\phi}$.
+Note that
+\begin{equation}
+f(t)
+= \Re[e^{i \Omega t}\hat{f}]
+= \Re[e^{i \Omega t}|f|e^{i\theta}]
+=|f|\cos(\Omega t + \theta)]
+\end{equation}
+where $\theta$ is the phase of $\hat{f}$.
+Therefore, a positive $\theta$ indicates that the response leads the source, and a negative $\theta$ indicates that the response lags the source.
+
+\subsection{Lorentzian approximation}
+
+We now express the resonance in the so-called Lorentzian form.
+\begin{align}
+\phi(t)
+&= \Re \left[ e^{i\Omega t} \frac{-A}{\Omega^2 - \omega_0^2 - 2i\beta \Omega} \right] \nonumber \\
+&= \frac{A \cos \left( \Omega t + \delta \right)}{\sqrt{\left( \Omega^2 - \omega_0^2 \right)^2 + (2 \beta \Omega)^2}}
+\end{align}
+where $\delta$ is a phase we don't care about.
+We can re-express this approximately as
+\begin{equation}
+\phi(t) \approx \frac{A \beta / \Omega}{\left( \Omega - \omega_0 \right)^2 + 2\beta^2} \, . 
+\end{equation}
+
+
+\section{Phasor form}
+
+Let us go back to the phasor form of the solution from Eq.\,(\ref{eq:phasor_form})
+\begin{equation}
+\phi(t) = \Re \left[ e^{i \Omega t} \frac{-A}{\Omega^2 - 2 i \beta \Omega - \omega_0^2} \right] \, .
+\end{equation}
+Factoring the denominator we get
+\begin{equation}
+\phi(t) = \Re \left[ e^{i \Omega t} \frac{-A}{(\Omega - \omega_+)(\Omega - \omega_-)} \right]
+\end{equation}
+where $\omega_{\pm}$ are defined by Eq.\,(\ref{eq:omega_plus_minus}).
+We now use the method of partial fractions to split the double-pole into a sum of two single poles.
+Assume the double pole can be written as
+\begin{equation}
+\frac{1}{(\Omega - \omega_+)(\Omega - \omega_-)}
+= \frac{x}{\Omega - \omega_+} + \frac{y}{\Omega - \omega_-} \, .
+\end{equation}
+Multiplying through by $(\Omega - \omega_+)(\Omega - \omega_-)$ and setting either $x$ or $y$ to 1 yields two equations:
+\begin{align}
+1 &= x (\omega_+ - \omega_-) = x 2 \omega_0' \\
+1 &= y (\omega_- - \omega_+) = -y 2 \omega_0'
+\end{align}
+from which we find
+\begin{equation}
+\phi(t) = -A \Re
+\left[ e^{i \Omega t} \left(
+\frac{1}{2 \omega_0' (\Omega - \omega_+)} -
+\frac{1}{2 \omega_0' (\Omega - \omega_-)}
+\right) \right] \, .
+\end{equation}
+If the drive frequency $\Omega$ is near the resonance we can drop the second term,
+\begin{equation}
+\phi(t) \approx -A \Re
+\left[
+\frac{e^{i \Omega t}}{2 \omega_0' (\Omega - i\beta - \omega_0')}
+\right] \, .
+\end{equation}
+Define $\alpha(t)$ as the complex quantity of which $\phi(t)$ is the real part,
+\begin{align}
+\alpha(t) &= \frac{-A e^{i \Omega t}}{2 \omega_0'(\Omega - i \beta - \omega_0')} \\
+(\Omega - i \beta - \omega_0') \alpha(t) &= - \frac{A}{2\omega_0'} e^{i \Omega t} \, .
+\end{align}
+Noting that $\dot{\alpha}(t) = i \Omega \alpha(t)$, we can write
+\begin{equation}
+\dot{\alpha}(t) = i \omega_0' \alpha(t) - \beta \alpha(t) - \frac{A}{2 \omega_0'} e^{i \Omega t} \, .
+\end{equation}
+
+
+
+\section{Rotating Mode Formalism}
+
+There's an interesting way to write down the equations for a harmonic oscillator that's useful when you have coupled problems or problems with time varied parameters.
+An as example consider a parallel LRC circuit.
+As dynamical variables take the flux in the inductor, $\Phi$, and the charge on the capacitor, $Q$.
+See figure ??.
+The two first order equations of motion are\begin{equation}
+\dot{\Phi}=Q/C\qquad\dot{Q}+Q/(RC)=-\Phi/L \end{equation}
+Note that if $R\rightarrow\infty$ these can be written in a nearly Hamiltonian form \begin{equation}
+\frac{d}{dt}\left[ \begin{array}{c} \Phi \\ Q\end{array} \right] =
+\left[\begin{array}{cc} 0 & 1/C \\ -1/L & 0 \end{array} \right]
+\left[\begin{array}{c} \Phi\\ Q\end{array}\right] \end{equation}
+If the off-diagonal elements were equal to one another this would be a true Hamiltonian.
+This is easy to do if we simply re-scale the variables, \begin{equation}
+X \equiv \left( C/L \right)^{1/4} \Phi \qquad Y \equiv \left( L/C \right)^{1/4} Q \end{equation}
+Now we find, in the case that $R\rightarrow\infty$ \begin{displaymath}
+\frac{d}{dt}\left[ \begin{array}{c} X \\ Y \end{array} \right] = \omega_{0} \left[ \begin{array}{cc} 0 & 1 \\ -1 & 0 \end{array}\right]
+\left[ \begin{array}{c} X \\ Y \end{array} \right] \end{displaymath}
+where $\omega_{0}\equiv1/\sqrt{LC}$.
+This is great because we have the anti-symmetric Hamiltonian matrix.
+Adding the loss back in gives \begin{displaymath}
+\frac{d}{dt} \left[ \begin{array}{c} X \\ Y \end{array} \right] =
+\omega_0 \left[ \begin{array}{cc} 0 & 1 \\ -1 & -1/Q \end{array} \right]
+\left[ \begin{array}{c} X \\ Y \end{array} \right] \end{displaymath}
+where $Q\equiv \omega_0 R C$.
+
+We can make one further simplification if we want to get rid of the $\omega_0$ out front.
+Make one more rescaling,\begin{equation}
+\xi\equiv\omega_{0}t \end{equation}
+Then \begin{equation}
+\frac{d}{dt}=\omega_{0}\frac{d}{d\xi}\end{equation}
+Therefore the equations of motion for $X$ and $Y$ are \begin{equation}
+\frac{d}{d\xi}\left[\begin{array}{c} X\\ Y\end{array}\right] = 
+\left[\begin{array}{cc} 0 & 1\\ -1 & -1/Q \end{array}\right]
+\left[\begin{array}{c} X\\ Y\end{array}\right]\end{equation}
+
+\subsection{Normal Modes}
+We can now find the normal modes of this equation.
+To do so we must find the eigenvalues and eigenvectors of the matrix, \begin{equation}
+\left[ \begin{array}{cc} 0 & 1 \\ -1 & -\epsilon \end{array} \right] \end{equation}
+where here $\epsilon \equiv 1/Q$.
+The eigenvalue equation is \begin{equation}
+\lambda^2 + \epsilon \lambda + 1 = 0 \end{equation}
+from which the eigenvalues are found to be \begin{equation}
+\lambda_{\pm} = \pm i \sqrt{1 - \frac{\epsilon^2}{4}} - \frac{\epsilon}{2} \end{equation}
+Now, we want to find eigenvectors $a^+$ and $a^-$ that satisfy the equations \begin{equation}
+\dot{a}^+=\lambda_+ a^+ \quad \textrm{and} \quad \dot{a}^-=\lambda_- a^- \end{equation}
+where the overdots denote differentiation with respect to $\xi$.
+Write $a$ (denoting here either one of the eigenvectors) as $a = X+\alpha Y$.
+Then taking the derivative with respect to $\xi$ of both sides gives \begin{eqnarray}
+\dot{a} &=& \dot{X}+\alpha \dot{Y}\\
+&=& Y+\alpha(-X-\epsilon Y)\\
+&=& -\alpha \left( X+\left[ \epsilon - \frac{1}{\alpha} \right] Y \right) \end{eqnarray}
+Since we're expecting $a$ to satisfy $\dot{a} = \lambda a$ we get \begin{eqnarray}
+\dot{a} &=& \lambda a \\
+-\alpha \left( X+\left[ \epsilon - \frac{1}{\alpha} \right] Y \right) &=& \lambda \left( X + \alpha Y \right) \\
+\rightarrow \quad \lambda=-\alpha &\quad& 1-\epsilon \alpha = \lambda \alpha \end{eqnarray}
+where the last line follows by equating coefficients of $X$ and $Y$.
+We can check that these relations are self consistent by plugging the first into the second \begin{eqnarray}
+1+\epsilon \lambda &=& -\lambda^2 \\
+1+\epsilon \left( -\frac{\epsilon}{2} \pm i \sqrt{1-\frac{\epsilon^2}{4}} \right) &=&
+-\left(-\frac{\epsilon}{2}\pm i \sqrt{1-\frac{\epsilon^2}{4}} \right) \\
+1-\frac{\epsilon^2}{2}\pm i \epsilon \sqrt{\cdots} &=&
+-\frac{\epsilon^2}{4}\pm i \epsilon\sqrt{\cdots} + 1 -\frac{\epsilon^2}{4}\\
+0 &=& 0 \end{eqnarray}
+so the relations are indeed consistent.
+
+Now we can write down the eigenvectors along with their time dependence, \begin{eqnarray}
+a^- = \frac{1}{\sqrt{2}}\left( X -\lambda_- Y \right) &\qquad&
+a^+ = \frac{1}{\sqrt{2}}\left( X -\lambda_+ Y \right) \\
+a^-(t) = a^-(0) e^{\omega_0 \lambda_- t} &\qquad& a^+(t) = a^+(0) e^{\omega_0 \lambda_+ t} \end{eqnarray}
+Here we've put the $\omega_0$'s back in because we're using $t$ instead of $\xi$.
+
+In the case that $Q \gg 1$ the eigenvalues simplify to \begin{equation}
+\lambda_{\pm} = \pm i -\frac{\epsilon}{2} \end{equation}
+so that we get \begin{eqnarray}
+a^- = \frac{1}{\sqrt{2}}\left[ X + \left( i + \frac{\epsilon}{2} \right) Y \right] &\qquad&
+a^+ = \frac{1}{\sqrt{2}}\left[ X + \left(-i + \frac{\epsilon}{2} \right) Y \right] \\
+a^-(t) = a^-(0) \exp \left[ \omega_0 \left(-i - \frac{\epsilon}{2}\right) t \right]
+& \qquad &
+a^+(t) = a^+(0) \exp \left[ \omega_0 \left( i - \frac{\epsilon}{2}\right) t \right] \end{eqnarray}
+Note that the time evolution has the same sense from what is typically used in quantum mechanics for the $a$ and $a^{\dagger}$ operators.
+
+\end{document}
