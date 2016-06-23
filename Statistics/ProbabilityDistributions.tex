@@ -1,0 +1,103 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,a4paper,twoside,english]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{esint}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+\title{Statistics}
+
+
+\author{Daniel Sank}
+
+\maketitle
+
+\section{Fundamental Information}
+
+This chapter is devoted to laying out the basic useful facts about
+probability distributions and random variables. 
+
+
+\subsection{Change of Variables in Probability Distributions}
+
+Consider a random variable $X$ with probability distribution $p_{X}(x)$.
+Remember that $p_{X}(x)$ is the probability that the random variable
+$X$ takes the value $x$. Now define a new random variable $Y$ which
+is related to $X$ by $y=f(x)$. What is $p_{Y}(y)$? Let's ask, \textquotedbl{}what
+is the probability that $Y$ takes a value in the set $S$?\textquotedbl{}
+Clearly an answer to this question is
+
+\begin{eqnarray*}
+P(Y\in S) & = & P(X\in f^{-1}(S))\\
+\int_{S}p_{Y}(y) & = & \int_{f^{-1}(S)}p_{X}(x)\end{eqnarray*}
+
+
+Using the change of variables formula on the right hand side gives
+\[
+P(Y\in S)=\int_{S}p_{Y}(y)=\int_{f^{-1}(S)}p_{X}(x)=\int_{y\in S}p_{X}(f^{-1}(y))|\det[Df^{-1}](y)|\]
+ Therefore we have \[
+p_{Y}(y)=p_{X}(f^{-1}(y))~|\det[Df^{-1}](y)|\]
+ Remember that if $f^{-1}$ is not single valued you have to make
+sure to keep track of all the places that $X$ attains a value such
+that $f(x)\in S$.
+
+
+\subsubsection{Application in Programming}
+
+Suppose you have a computer that can generate random numbers $X$
+in the interval $[0,1]$ with a uniform distribution. How do you make
+a routine that spits out numbers $Y$ with a specified distribution
+$p_{Y}(y)$? We can use the above formula to solve this problem. Formally
+the problem is \[
+p_{Y}(y)=p_{X}(f^{-1}(y))~\det|[Df^{-1}](y)|\]
+ given $p_{Y}(y)$ find the function $f$.
+
+Define \[
+x=f^{-1}(y)=\int_{-\infty}^{y}p_{Y}(y')~dy'\]
+ Then $f^{-1}:R\rightarrow[0,1]$ because $p_{Y}$ is a normalized
+probability distribution, so $x\in[0,1]$. In principle we can solve
+for $y=f(x)$. Then \[
+p_{Y}(y)=p_{X}(x=f^{-1}(y))|\det[Df^{-1}](y)|=1*p_{Y}(y)\]
+ as it should be. So, the function $f$ that you want is the inverse
+of $\int_{-\infty}^{y}p_{Y}(y')~dy'$.
+
+
+\subsection{Some more basic stuff}
+
+
+\section{Common Distributions}
+
+
+\subsection{Uniform distribution}
+
+Consider a random variable $X$ distributed uniformly over $[a,b]$.
+The distribution is\[
+p_{X}(x)=\left\{ \begin{array}{c}
+\frac{1}{b-a}\qquad\textrm{for }a<x<b\\
+0\qquad\textrm{otherwise}\end{array}\right.\]
+The variance is\[
+\sigma^{2}=\frac{(b-a)^{2}}{12}\]
+
+\end{document}
