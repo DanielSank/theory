@@ -1,0 +1,213 @@
+\section{IQ demodulation system}
+
+An IQ mixer takes signals at high frequency and brings them to lower frequency so they can be more easily measured.
+Figure \ref{fig:IQ_mixer} shows a schematic of an IQ mixer.
+The local oscillator (LO) signal $\cos(\Omega t$) is used to mix the RF signal down to a lower frequency.
+The down-mixed signals are low-pass filtered so that the following digitization step is not subjected to aliasing effects.
+The signal is then sampled in an analog to digital converter (ADC) and further processed using digital signal processing (DSP) techniques.
+
+\quickfig{0.8\columnwidth}
+{signal_processing_chain.pdf}
+{Complete signal processing chain. Microwave frequency signal (and noise) come into the IQ mixer via the RF port. This signal is mixed with a local oscillator (LO) to convert to a lower intermediate frequency (IF). The IF signal is then filtered to remove the remaining high frequency component (see text) and digitally sampled. Detection of the amplitude and phase of each frequency component is done via discrete Fourier transform in digital logic.}
+{fig:IQ_mixer}
+
+
+\section{Coherent signal - dc case}
+
+Suppose in the incoming RF signal were $M \cos(\Omega t + \phi)$.
+Then the $I$ and $Q$ signals would be
+\begin{align}
+I(t) &= \frac{M}{2} \cos(\phi) + \frac{M}{2} \cos(2\Omega t + \phi) \\
+Q(t) &= -\frac{M}{2} \sin(\phi) + \frac{M}{2} \sin(2\Omega t + \phi) \, .
+\end{align}
+We pass these signals through low pass filters to remove the $2 \Omega$ terms, yielding
+\begin{align}
+I_F(t) &= \frac{M}{2} \cos(\phi) \\
+Q_F(t) &= -\frac{M}{2} \sin(\phi) \, .
+\end{align}
+As we can see, the dc $I$ and $Q$ voltages can be thought of as the Cartesian coordinates giving the amplitude and phase of the original signal.
+Therefore, the mixer has done its job of allowing us to find the amplitude and phase of a high frequency signal by making only low frequency measurements.
+
+
+\section{Coherent signal - ac case}
+
+In practice we use the IQ mixer to detect amplitude and phase of several simultaneous sinusoidal signals.
+For example, we might have
+\begin{equation}
+RF(t) = M_1 \cos([\Omega + \omega_1] t + \phi_1 ) + M_2 \cos([\Omega + \omega_2] t + \phi_2) \, .
+\end{equation}
+In order to find the amplitude and phase of both frequency components we must use slightly more complex signal processing.
+The $I_F$ and $Q_F$ wave forms in this case are
+\begin{align}
+I_F(t) &= \frac{M_1}{2} \cos(\omega_1 t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 t + \phi_2) \\
+Q_F(t) &= -\frac{M_1}{2} \sin(\omega_1 t + \phi_1) - \frac{M_2}{2} \sin(\omega_2 t + \phi_2) \, .
+\end{align}
+In order to find both amplitudes and both phases, we need to essentially perform a Fourier transform.
+To do this, we digitize the wave forms, yielding
+\begin{align}
+I_n &= \frac{M_1}{2} \cos(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 n \delta t + \phi_2) \\
+Q_n &= - \frac{M_1}{2} \sin(\omega_1 n \delta t + \phi_1) - \frac{M_2}{2} \sin(\omega_2 n \delta t + \phi_2)
+\end{align}
+where $\delta t$ is the digital sampling interval.
+Then, in digital logic we construct the complex series $z_n$ defined by $z_n \equiv I_n + i Q_n$.
+For the signals written above this is
+\begin{equation}
+z_n =
+\frac{M_1}{2} \exp \left( i \left[ \omega_1 n \delta t + \phi_1 \right] \right)
++ \frac{M_2}{2} \exp \left( i \left[ \omega_2 n \delta t + \phi_2 \right] \right) \, .
+\end{equation}
+If we now, in digital logic, compute the sum
+\begin{equation}
+Z(\omega_k) = \frac{1}{N}\sum_{n=0}^{N-1} z_n e^{-i \omega_k n \delta t}
+\end{equation}
+we recover the amplitude and phase for the component at frequency $\omega_k$.
+For example, if we were to compute $Z(\omega_1)$ we would get $(M_1/2) \exp(i \phi_1)$.
+
+
+\section{Noise}
+
+In practice the signal always comes with noise.
+The effect of the noise is to make $Z(\omega)$ a random variable instead of a deterministic value.
+Note that we are not saying that $Z$ is a random function of $\omega$ or that $Z(\omega)$ is a probability distribution.
+Instead, we are saying that \emph{for each }$\omega$ $Z$ is random and will be different for each realization of the experiment.
+
+We can guess from intuition that in the presence of noise $Z(\omega)$ is Gaussian distributed in the IQ plane with mean equal to the deterministic value $(M/2)\exp(i \phi)$.
+The goal of this note is the compute the statistical distribution of $Z$ in the presence of noise.
+
+Because each step in the processing chain is linear we consider a case with only noise and no coherent signal.
+Denote the noise $\xi(t)$.
+The $I$ and $Q$ signals are
+\begin{align}\
+I(t) &= \xi(t) \cos(\Omega t) \\
+Q(t) &= - \xi(t) \sin(\Omega t) \, .
+\end{align}
+We express the effect of the filter as a convolution with the time response function $h$,
+\begin{equation}
+I_F(t) = \int_{-\infty}^\infty dt' \, \xi(t') \cos(\Omega t') h(t - t')
+\end{equation}
+and similarly for $Q_F$.
+Note that, because the filter is causal, $h(t)=0$ for $t<0$.
+The sampling simply selects the value of $I_F$ and $Q_F$ at the times $\{ n \delta t \}$,
+\begin{equation}
+I_n = \int_{-\infty}^\infty dt' \, \xi(t') \cos(\Omega t') h(n \delta t - t')
+\end{equation}
+and similarly for $Q_n$.
+Following the construction described above for the digital part of the processing chain we have
+\begin{equation}
+Z(\omega) =
+\frac{1}{N}\sum_{n=0}^{N-1} \int_{-\infty}^\infty dt' \, \xi(t') e^{-i \Omega t'} h(n \delta t - t') e^{-i \omega n \delta t} \, .
+\end{equation}
+Our problem is therefore to compute the statistics of this expression.
+
+Changing variables $n \delta t - t' \rightarrow t'$ produces
+\begin{equation}
+Z(\omega) = \frac{1}{N} \sum_{n=0}^{N-1} \int_{-\infty}^\infty dt' \, \xi(n \delta t - t') e^{-i \Omega (n \delta t - t')} h(t') e^{-i \omega n \delta t}  \, .
+\end{equation}
+At this stage we can do a sanity check by computing the average value of $Z(\omega)$.
+Remember, this is an \emph{ensemble} average.
+In other words, we are computing the average value of $Z(\omega)$ which we would find by converting many instances of demodulated white noise in IQ points and then taking the mean of all those points.
+In any case, the result is
+\begin{align}
+\stataverage{Z(\omega)}
+&= \frac{1}{N} \sum_{n=0}^{N-1} \int_{-\infty}^\infty dt' \, \underbrace{\stataverage{\xi(n \delta t - t')}}_0 e^{-i \Omega (n \delta t - t')} h(t') e^{-i \omega n \delta t} \\
+&= 0 \, .
+\end{align}
+This makes sense as we expect the noise should not change the average value of the demodulated IQ point, but should only add some randomness centered about the deterministic value.
+
+\subsection{$Z^2$ strategy}
+
+I do not know how to compute the statistics of $Z(\omega)$ directly, so we take an alternative approach by computing instead the mean square of $Z(\omega)$.\footnote{This idea is inspired by communication with A. Korotkov.}
+Assuming that we know the form of the distribution to be Gaussian, finding the second moment is enough information to solve the problem.
+
+We proceed by directly constructing $|Z(\omega)|^2$ and taking the statistical average (statistical average is denoted by $\langle \cdot \rangle$).
+\begin{align}
+\langle \left| Z(\omega) \right| ^2 \rangle
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty dt' \, dt'' \, \frac{1}{N^2} \sum_{n,m=0}^{N-1} \nonumber \\
+& e^{i\Omega (t' - t'')} h(t') h(t'') \langle \xi(n\delta t - t') \xi(m\delta t - t'') \rangle e^{-i(\Omega + \omega)(n - m)\delta t} \, .
+\end{align}
+We now use the Wiener-Khinchin theorem which says that for a stationary stochastic process $\xi(t)$ the statistical average $\langle \xi(\tau) \xi(0) \rangle$  is related to the power spectral density $S_\xi$ via the following equation:
+\begin{equation}
+\langle \xi(\tau) \xi(0) \rangle = \frac{1}{2}\int_{-\infty}^\infty \frac{d\omega}{2\pi} S_\xi(\omega) e^{i \omega \tau} \, .
+\end{equation}
+Using this formula for $\langle \xi(n\delta t - t') \xi(m\delta t - t'')$ yields
+\begin{align}
+\stataverage{|Z(\omega)|^2}
+&= \frac{1}{2} \int_{-\infty}^\infty \int_{-\infty}^\infty dt' \, dt'' \, \int_{-\infty}^\infty \frac{d\omega'}{2\pi}\frac{1}{N^2} \sum_{n,m=0}^{N-1} \nonumber \\
+& e^{i\Omega (t' - t'')} h(t') h(t'') S_\xi(\omega') e^{i\omega' ((n-m)\delta t - (t' - t''))} e^{-i(\Omega + \omega)(n - m)\delta t} \\
+&= \frac{1}{2} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S_\xi(\omega') \left| \frac{1}{N} \sum_{n=0}^{N-1} e^{-i(\Omega + \omega - \omega') n \delta t} \right|^2 \\
+&= \frac{1}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S_\xi(\omega') \underbrace{
+\frac{1}{N} \left( \frac{\sin([\Omega + \omega - \omega'] \delta t N / 2)}{\sin([\Omega + \omega - \omega']\delta t / 2)} \right)^2
+}_{N^{\text{th}}\text{ order Fejer kernel}} \\
+&= \frac{1}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S_\xi(\omega') \mathcal{F}_N([\Omega + \omega - \omega'] \delta t / 2) \\
+\end{align}
+where $\mathcal{F}_N$ is the $N^{\text{th}}$ order Fejer kernel.
+Changing variables $\Omega - \omega' \rightarrow \omega'$ we get
+\begin{equation}
+\langle |Z(\omega)|^2 \rangle =
+\frac{1}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(-\omega')|^2 S_\xi(\Omega - \omega') \mathcal{F}_N([\omega' + \omega]\delta t / 2) \, .
+\end{equation}
+So far the results have been exact and precise results can be found by numeric evaluation of the integrals.
+We now make a series of relatively weak assumptions to arrive at a practical formula.
+The Fejer kernel $\mathcal{F}_N(x)$ has weight concentrated near $x=0$.
+Therefore, we integrate over $S_\xi$ only for frequencies near $\Omega$ and so, in this integral, we can approximate $S_\xi$ as a constant $S(\Omega - \omega') \approx S_\xi(\Omega)$, giving
+\begin{equation}
+\langle |Z(\omega)|^2 \rangle =
+\frac{1}{2N} S_\xi(\Omega) \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(-\omega')|^2 \mathcal{F}_N([\omega' + \omega]\delta t / 2) \, .
+\end{equation}
+We can already see here that the noise statistics of the demodulated IQ point depends only on the RF spectral density near the LO frequency.
+This makes sense; the IQ mixer is designed to take signal content near the LO frequency and bring it down to a lower IF where it can be processed.
+The anti-aliasing filters remove all frequency components which are too far away from the LO.
+
+The first null of $\mathcal{F}_N(x)$ occurs at $x = 2\pi / N$, and most of the weight is contained in the first few lobes.
+For typical experiments with $N \gtrsim 50$ and $\delta t = 2 \, \text{ns}$, the first nulls are therefore at
+\begin{equation}
+\frac{\omega'_{\text{null}}}{2\pi}
+= - \frac{\omega}{2\pi} \pm \frac{1}{N \delta t}
+= - \frac{\omega}{2\pi} \pm 10 \, \text{MHz} \, .
+\end{equation}
+This means that the integral over $\omega'$ is dominated by frequencies in the range $[\omega - 10\,\text{MHz}, \omega + 10 \, \text{MHz}]$.
+Assuming $h(\omega)$ is roughly constant over this small range, we can replace $h(-\omega')$ with $h(\omega)$,\footnote{Note that $h(-\omega) = h(\omega)$.} finding
+\begin{align}
+\langle |Z(\omega)|^2 \rangle
+&= \frac{1}{2N}S_\xi(\Omega)|h(\omega)|^2
+\underbrace{
+\int_{-\infty}^\infty \frac{d\omega'}{2\pi} \mathcal{F}_N([\omega' + \omega] \delta t / 2 N)
+}_{1 / \delta t} \\
+&= \frac{S_\xi(\Omega)}{2 T} |h(\omega)|^2
+\end{align}
+where $T \equiv N \delta t$ is the total measurement time.
+
+\subsection{Signal to noise ratio}
+
+As shown in Ref. \cite{Sank:whiteNoiseDFT}, if a Gaussian complex variable has mean squared modulus $R^2$, then the real and imaginary parts of that variable are Gaussian distributed with standard deviation $R / \sqrt{2}$.
+Therefore, taking our result for $\stataverage{|Z(\omega)|^2}$, we know that the real and imaginary parts of $Z(\omega)$ are Gaussian distributed with standard deviations
+\begin{equation}
+\sigma = \sqrt{S_\xi(\Omega) |h(\omega)|^2 / 4 T} \, .
+\end{equation}
+As discussed at the beginning, a signal $M \cos([\Omega + \omega] t + \phi)$ becomes $(M/2)e^{i \phi}$ in the IQ plane.
+Of course there we ignored the effect of the filter which is simply to scale the amplitude to
+\begin{equation}
+Z(\omega) = \frac{M |h(\omega)|}{2} e^{i \phi} \, .
+\end{equation}
+Suppose, as illustrated in Figure \ref{fig:IQ_clouds}, we are using the IQ demodulation system to distinguish between two or more signals, each with a different phase but with all the same amplitude $M$.
+Due to the noise, each of the possible amplitude/phases leads to a cloud of points in the IQ plane with radial distance $M |h(\omega)|/2$ from the origin.
+The distance between two clouds' centers is $g(M/2)|h(\omega)|$ where $g$ is a geometrical factor which depends on the phases of the clouds.
+If the arc angle between two clouds is $\theta$ and each cloud's center is equidistant from the origin then $g = 2 \sin(\theta / 2)$.
+For example, if the two phases are $\pm\pi/2$ then $g=2 \sin(\pi/2) = 2$.
+Geometrically this is because the distance between the clouds' centers is twice bigger than the distance of either cloud from the origin.
+
+The signal to noise ratio (SNR) is
+\begin{align}
+\text{SNR}
+& \equiv \frac{\text{separation}^2}{2 \times (\text{cloud std deviation})^2} \\
+&= \frac{(g M |h(\omega)|/2)^2}{2 S_\xi(\Omega) |h(\omega)|^2 / 4T} \\
+&= \frac{(g M)^2 T}{2 S_\xi(\Omega)}\, .
+\end{align}
+Note that the SNR does not depend on $h$.
+To remember this result, note that the power in a sinusoid of amplitude $M$ is $M^2/2$, so the ratio of the analog signal power to the analog noise power is $M^2 / 2 S_\xi B$ where $B$ is the noise bandwidth.
+Then reason that the noise bandwidth is just the reciprocal of the measurement time $T$.
+
+\quickfig{0.8\columnwidth}
+{IQ_clouds.pdf}
+{Two IQ clouds. The separation between the clouds' centers is proportional to their radial magnitude $M$, but scaled by a geometrical factor $g$. Projected onto the line connecting their centers, each cloud becomes a Gaussian distribution with width $\sqrt{S_\xi(\Omega)|h(\omega)|^2/4T}$.}
+{fig:IQ_clouds}

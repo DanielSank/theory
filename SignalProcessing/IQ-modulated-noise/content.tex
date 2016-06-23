@@ -1,0 +1,75 @@
+\section{Definitions}
+
+We define the correlation function of two processes $f$ and $g$ by
+\begin{equation}
+R_{fg}(t, \tau) \equiv  \langle f(t) g(t+\tau)^* \rangle \, .
+\end{equation}
+If the processes are wide sense stationary the dependence of $t$ vanishes and we write e.g. $R_{ff}(\tau)$ without the $t$.
+
+
+\section{Calculation}
+
+The output of the RF port of the IQ mixer is
+\begin{equation}
+V(t) = I(t) \cos(\Omega t) - Q(t) \sin(\Omega t) \, .
+\end{equation}
+To understand this signal we must construct the process $Z(t)$ defined by
+\begin{equation}
+Z(t) = I(t) + i Q(t) \, .
+\end{equation}
+The process $V(t)$ can then be written as
+\begin{align}
+V(t)
+&= \Re \left[ Z(t) e^{i \Omega t} \right] \\
+&= \frac{1}{2} \left[ Z(t) e^{i \Omega t} + Z(t)^* e^{-i \Omega t} \right] \, .
+\end{align}
+We can now write the correlation function of $V$ as ($V$ is real valued and we assume the $Z$ is wide sense stationary because $I$ and $Q$ are)
+\begin{align}
+R_{VV}
+&= \langle V(t) V(t+\tau) \rangle \\
+&= \frac{1}{4} \langle
+Z(t)Z(t+\tau) e^{i\Omega (2t + \tau)}
++ Z(t)^* Z(t+\tau)^* e^{-i\Omega (2t + \tau)} \\
+& + Z(t) Z(t+\tau)^* e^{-i \Omega \tau}
++ Z(t)^* Z(t+\tau) e^{i \Omega \tau}
+\rangle \\
+&= \frac{1}{2} \Re \left[ R_{ZZ}(\tau) e^{-i \Omega \tau}
++ R_{ZZ^*}(\tau) e^{i \Omega (2t + \tau)} \right]
+\end{align}
+Because $R_VV$ depends on $t$, it is impossible in general to construct a spectral density for $V$.
+However, we can see that if $R_{ZZ^*}$ were to vanish, then the $t$ dependence would be gone and we would be able to define a spectral density.
+It turns out that this happens in a common practical case, as we now show.
+
+The cross-correlation of $Z$ and $Z^*$ is
+\begin{align}
+R_{ZZ^*}\
+&= \langle (I(t) + i Q(t))(I(t+\tau) + i Q(t+\tau)) \rangle \\
+&= R_{II}(\tau) - R_{QQ}(\tau) + i \left( R_{IQ}(\tau) + R_{IQ}(-\tau) \right)
+\end{align}
+where we've used the fact that $R_{QI}(\tau) = R_{IQ}(-\tau)$.
+We now see that if $R_{II} = R_{QQ}$ and $R_{IQ}(\tau) = - R_{IQ}(-\tau)$, then $R_{ZZ^*} = 0$.
+In the case that the noise injected in the the $I$ and $Q$ ports have the same spectral density (e.g. they come from the same model DAC chip) and are uncorrelated (e.g. the noise coming out of the two DAC chips is uncorrelated) these conditions are satisfied!
+
+Now let us write out $R_{ZZ}$,
+\begin{align}
+R_{ZZ}(\tau)
+&= \langle Z(t) Z(t+\tau)^* \rangle \\
+&= \langle (I(t) + i Q(t))(I(t+\tau) - i Q(t+\tau)) \rangle \\
+&= R_{II}(\tau) + R_{QQ}(\tau) - i \left( R_{IQ}(\tau) - R_{IQ}(-\tau) \right) \, .
+\end{align}
+With the condition above satisfied this becomes
+\begin{equation}
+R_{ZZ}(\tau) = 2 \left( R_{II}(\tau) - i R_{IQ}(\tau) \right) \, .
+\end{equation}
+Using this form we can write down the autocorrelation of $V$
+\begin{align}
+R_{VV}(\tau)
+&= \frac{1}{2} \left( R_{ZZ}(\tau) e^{-i \Omega \tau} \right) \\
+&= R_{II}(\tau) \cos(\Omega \tau) - R_{IQ}(\tau) \sin(\Omega \tau) \, . 
+\end{align}
+Finally, Fourier transforming gives
+\begin{equation}
+S_{ff}(\omega) =
+\frac{1}{2} \left[ S_{II}(\omega - \Omega) + S_{II}(\omega + \Omega) \right]
++ \frac{1}{2i} \left[ S_{IQ}(\omega - \Omega) - S_{IQ}(\omega + \Omega) \right] \, .
+\end{equation}

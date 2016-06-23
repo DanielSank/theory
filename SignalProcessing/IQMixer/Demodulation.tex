@@ -1,0 +1,45 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{babel}
+
+\begin{document}
+Consider an input signal\[
+s(t)=\cos\left[\left(\Omega+\omega\right)t+\phi_{s}\right]\]
+where $\omega$ can be positive or negative. When this signal arrives
+at the IQ mixer it is multiplied by the local oscillator to form the
+$I$ and $Q$ signals\begin{eqnarray*}
+I(t) & = & \cos\left[\Omega t\right]s(t)\\
+Q(t) & = & \sin\left[\Omega t\right]s(t)\end{eqnarray*}
+This results in up and downconverted signals. The upconverted signal
+is filtered away so that we're left with\begin{eqnarray*}
+I(t) & = & \frac{1}{2}\cos\left[\omega t+\phi_{s}\right]\\
+Q(t) & = & -\frac{1}{2}\sin\left[\omega t+\phi_{s}\right]\end{eqnarray*}
+It is extremely convenient to combine these signals, in our minds,
+into a complex signal\begin{eqnarray*}
+Z(t) & = & I(t)+iQ(t)\\
+Z(t) & = & e^{-i\phi}e^{-i\omega t}\end{eqnarray*}
+This has the very nice phasor form that makes further computation
+natural. You can see that $Z$ travels in circles in the complex plane.
+The direction of travel depends on whether $\omega$ is positive or
+negative. In the experiment we want to measure $\omega$ and $\phi$.
+This is accomplished by the Fourier transform. In order to do a Fourier
+transform we have to work with real and imaginary parts.
+
+The signals are then digitized by the ADC. The result of the digitization
+is\begin{eqnarray*}
+I_{n} & = & \cos\left[2\pi nf/f_{\textrm{AD}}+\phi_{s}\right]\\
+Q_{n} & = & -\sin\left[2\pi nf/f_{\textrm{AD}}+\phi_{s}\right]\end{eqnarray*}
+where $f=\omega/2\pi$ and $f_{\textrm{AD}}$ is the sampling frequency
+of the analog to digital converter. It is also useful to write this
+in terms of the number of samples $N$, and the total sampling time
+$T$,\begin{eqnarray*}
+I_{n} & = & \cos\left[2\pi qn/N+\phi_{s}\right]\\
+Q_{n} & = & -\sin\left[2\pi qn/N+\phi_{s}\right]\end{eqnarray*}
+where $q\equiv fT$ is the unitless frequency of the signal. These
+I and Q channels are then digitally Fourier transformed at specific
+frequencies.
+\end{document}

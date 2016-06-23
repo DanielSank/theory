@@ -1,0 +1,63 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{babel}
+
+\begin{document}
+Any (real) signal can be written as\[
+f(t)=\int_{0}^{\infty}S(\omega)\cos\left(\omega t+\phi(\omega)\right)\frac{d\omega}{2\pi}\]
+where $S(\omega)$ is the spectral density, and $\phi(\omega)$ is
+the phase of each frequency component. This formula is as general
+as possible. It's useful to go to exponentials:\begin{eqnarray*}
+f(t) & = & \int_{0}^{\infty}\frac{S(\omega)}{2}\left[e^{i(\omega t+\phi(\omega))}+e^{-i(\omega t+\phi(\omega))}\right]\frac{d\omega}{2\pi}\\
+ & = & \int_{0}^{\infty}\frac{S(\omega)}{2}e^{i(\omega t+\phi(\omega))}\frac{d\omega}{2\pi}+\int_{0}^{\infty}\frac{S(\omega)}{2}e^{-i(\omega t+\phi(\omega))}\frac{d\omega}{2\pi}\\
+ & = & \int_{0}^{\infty}\frac{S(\omega)}{2}e^{i(\omega t+\phi(\omega))}\frac{d\omega}{2\pi}+\int_{-\infty}^{0}\frac{S(-\omega)}{2}e^{-i(-\omega t+\phi(-\omega))}\frac{d\omega}{2\pi}\\
+ & = & \int_{-\infty}^{\infty}\frac{d\omega}{2\pi}e^{i\omega t}\begin{cases}
+S(\omega)e^{i\phi(\omega)}/2 & \qquad\textrm{for }\omega>0\\
+S(-\omega)e^{-i\phi(-\omega)}/2 & \qquad\textrm{for }\omega<0,\end{cases}\end{eqnarray*}
+By definition of the Fourier transform $\tilde{f}(\omega)$,\[
+f(t)=\int_{-\infty}^{\infty}\frac{d\omega}{2\pi}\tilde{f}(\omega)e^{i\omega t}\]
+we see that for our signal we have\[
+\tilde{f}(\omega)=\frac{1}{2}\begin{cases}
+S(\omega)e^{i\phi(\omega)} & \qquad\omega>0\\
+S(-\omega)e^{-i\phi(-\omega)} & \qquad\omega<0\end{cases}\]
+To phase shift each frequency component we want $\phi(\omega)\rightarrow\phi(\omega)+\pi/2$.
+This is achieved if we multiply $\tilde{f}(\omega)$ by $i$ for positive
+frequencies and by $-i$ for negative frequencies, as we now show.\begin{eqnarray*}
+\tilde{f}(\omega)*\left[i\Theta(\omega)-i\Theta(-\omega)\right] & = & \frac{1}{2}\begin{cases}
+i*S(\omega)e^{i\left(\phi(\omega)\right)} & \qquad\omega>0\\
+-i*S(-\omega)e^{-i\left(\phi(-\omega)\right)} & \qquad\omega<0\end{cases}\\
+\tilde{f}_{\textrm{new}}(\omega) & = & \frac{1}{2}\begin{cases}
+S(\omega)e^{i\left(\phi(\omega)+\pi/2\right)} & \qquad\omega>0\\
+S(-\omega)e^{-i\left(\phi(-\omega)+\pi/2\right)} & \qquad\omega<0\end{cases}\end{eqnarray*}
+where we've used the fact that $i=e^{i\pi/2}$ and $-i=e^{-i\pi/2}$.
+Now look at the time signal you get from this new Fourier transform,\begin{eqnarray*}
+f_{\textrm{new}}(t) & = & \int_{-\infty}^{\infty}\frac{d\omega}{2\pi}e^{i\omega t}\tilde{f}_{\textrm{new}}(\omega)\\
+ & = & \int_{-\infty}^{0}\frac{d\omega}{2\pi}\frac{S(-\omega)}{2}e^{i\omega t}e^{-i\left(\phi(-\omega)+\pi/2\right)}+\int_{0}^{\infty}\frac{d\omega}{2\pi}\frac{S(\omega)}{2}e^{i\omega t}e^{i\left(\phi(\omega)+\pi/2\right)}\end{eqnarray*}
+Now change variables $\omega\rightarrow-\omega$ in the first integral,\begin{eqnarray*}
+f_{\textrm{new}}(t) & = & \int_{0}^{\infty}\frac{d\omega}{2\pi}\frac{S(\omega)}{2}e^{-i\left(\omega t+\phi(\omega)+\pi/2\right)}+\int_{0}^{\infty}\frac{d\omega}{2\pi}\frac{S(\omega)}{2}e^{i\left(\omega t+\phi(\omega)+\pi/2\right)}\\
+ & = & \int_{0}^{\infty}\frac{d\omega}{2\pi}S(\omega)\cos\left(\omega t+\phi(\omega)+\pi/2\right)\end{eqnarray*}
+So we see that we've phase shifted each component. That's nice, but
+we had to do a somewhat unnatural thing in the frequency domain in
+order to make this happen. We had to multiply the positive frequency
+part of the Fourier transform $\tilde{f}$ by $i$ and the negative
+frequency part by $-i$, ie. by multiplying by $\left[i\Theta(\omega)-i\Theta(-\omega)\right]$.
+A useful quesiton is, what does this do in the time domain? Well,
+we know that multiplication in frequency space turns into convolution
+in the time domain,\[
+\int\frac{d\omega}{2\pi}\tilde{f}(\omega)\tilde{g}(\omega)e^{i\omega t}=\int dt'f(t-t')g(t)\]
+and we know the Fourier transform of the step function\[
+\int_{-\infty}^{\infty}\frac{d\omega}{2\pi}\Theta(\omega)e^{i\omega t}=i\frac{1}{2\pi t}\]
+Therefore\begin{eqnarray*}
+f_{\textrm{new}}(t)=\int\frac{d\omega}{2\pi}\tilde{f}(\omega)*\left[i\Theta(\omega)-i\Theta(-\omega)\right]e^{i\omega t} & = & i\int dt'f(t-t')\frac{i}{2\pi t'}-i\int dt'f(t-t')\frac{-i}{2\pi t'}\\
+f_{\textrm{new}}(t) & = & -\frac{1}{\pi}\int dt'f(t-t')\frac{1}{t'}\end{eqnarray*}
+That means that to phase shift each frequency component you have to
+convolve with $1/t$ in the time domain. Weird. I think this is called
+a Hilbert transform.
+\end{document}

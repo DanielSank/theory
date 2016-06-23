@@ -1,0 +1,26 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+\usepackage{babel}
+
+\begin{document}
+Once each sideband has been phase shifted by its corresponding resonator the readout signal is \begin{equation}
+s(t) = \sum_{n=0}^{3} \cos \left( \left[\Omega + \omega_n \right] t + \phi_n \right) \end{equation}
+Readout of these phases is accomplished by a two stage demodulation circuit shown in Figure (??). In the first stage the GHz signal is down-converted to MHz $I$ and $Q$ signals using an IQ mixer with the same local oscillator as was used in the upconversion stage. The resulting $I$ and $Q$ signals are \begin{equation}
+I(t) = \sum_{n=0}^{3} \cos \left( \omega_n t + \phi_n \right) \qquad Q(t) = \sum_{n=0}^{3} \sin \left( \omega_n t +\phi_n \right) \end{equation}
+Extraction of the phases $\phi_n$ can be done by further processing of the $I$ and $Q$ waveforms. Thinking of $I$ and $Q$ as the real and imaginary parts of a complex signal, $z(t) = I(t) + iQ(t) = \sum_{n=0}^3 \exp \left[ i \omega_n t + i\phi_n \right]$, it is clear that we can extract the $m^{\textrm{th}}$ phase shift via Fourier transform, \begin{equation}
+\int z(t) \exp \left[ -i \omega_m t \right] dt \propto \exp \left[i \phi_m \right] \label{eq:demod} \end{equation}
+Equating real and imaginary parts in equation \ref{eq:demod} yields \begin{eqnarray}
+I_m = \cos \left( \phi_m \right) & \propto & \int I(t) \cos \left( \omega_m t \right) \nonumber \\
+& & + \int Q(t) \sin \left( \omega_m t \right) \nonumber \\
+Q_m = \sin \left( \phi_m \right) & \propto & \int Q(t) \cos \left( \omega_m t \right) \nonumber \\
+& & - \int I(t) \sin \left( \omega_m t \right) \label{eq:complexInt} \end{eqnarray}
+Thus, for each sideband frequency $\omega_m$ four real integrals must be performed to extract the phase $\phi_m$.
+
+In our system this second demodulation stage is done digitally in a custom FPGA controlled demodulator board. The $I(t)$ and $Q(t)$ waveforms are fed into the two input ports of the board and digitized at 500M$s$/sec. As each sample pair comes in it is multiplied by digitally synthesized $\sin$ and $\cos$ waveforms and summed, producing the four integrals in Eq. (\ref{eq:complexInt}). This summation occurs in real time as the data is sampled so that the computation of $I_m$ and $Q_m$ is complete by the time the readout pulse is finished. To compute all of the $\phi_n$ simultaneously, the digitized $I(t)$ and $Q(t)$ waveforms are fed into multiple digital multiplication/summation channels at the same time, one for each frequency $\omega_n$. Thus, once the readout signal is finished, all of the $\phi_n$ values are known, and are then reported to the computer via ethernet.
+
+The demodulator board can also be operated in ``oscilloscope mode'' in which case the digitized $I(t)$ and $Q(t)$ waveforms are recorded and reported to the computer without any further processing.
+\end{document}

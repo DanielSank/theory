@@ -1,0 +1,186 @@
+\section{Basic Definitions in Vector Spaces}
+In this section we define and study the basic objects with which we will work.
+It is assumed that the reader has already learned about these basic objects and so we focus on more complicated examples that may be new.
+
+\subsection{Vector Spaces}
+
+\newtheorem{definition}{Definition}
+\begin{definition}[Vector Space]
+A vector space \textbf{V} consists of three things: a collection of vectors $\ket{v}$, an addition operation denoted by $+$, and a scalar field.\footnote{A scalar field is a set of objects that can be added and multiplied such that every element has both an additive and multiplicative inverse.  The most common examples are the real numbers and the complex numbers.}
+In addition the following properties must be satisfied:
+\begin{enumerate}
+\item If $\ket{v}$ and $\ket{w}$ are two vectors in \textbf{V} then their sum $\ket{v} + \ket{w}$ is another vector in \textbf{V}.
+In symbols, $\ket{v} + \ket{w} = \ket{v+w} \in$ \textbf{V}.
+In English this equation is read ``The sum of the vector named `v' and another vector named `w' is a third vector named `$v+w$'.''
+We will usually write the vector that is the sum $\ket{v} + \ket{w}$ as $\ket{v+w}$.
+\item Multiplication of a vector by a scalar yields a vector: if $\ket{v}$ is a vector in \textbf{V} and a is a scalar then $a\ket{v}$ is a vector in \textbf{V}.
+\item There is a vector $\ket{0}$ called ``zero'' or ``the zero vector'' such that for any vector $\ket{v}$ in \textbf{V} we have $\ket{v} + \ket{0} = \ket{v}$.
+\item For every vector $\ket{v}$ there is an additive inverse of $\ket{v}$ denoted $\ket{-v}$ that satisfies the equation $\ket{v} + \ket{-v} = \ket{0}$.
+\item All the usual associativity and distributativity rules must hold.
+For example,
+\begin{equation}
+(a+b)(\ket{v} + \ket{w}) = a\ket{v} + a\ket{w} + b\ket{v} + b\ket{w} \qquad \heartsuit
+\end{equation}
+\end{enumerate}
+\end{definition}
+
+The usual way to refer to a vector space $\VS{}$ consisting of vectors $\ket{v}$ with scalars \cal{\textbf{S}} is to say that $\VS{}$ is the \textbf{vector space of $\ket{v}$ over \cal{S}}.
+Any vector space over the real numbers is called a \textbf{real vector space}, while a vector space over the complex numbers is called a \textbf{complex vector space}.
+
+The symbol $\ket{\phantom{v}}$, called a \textbf{ket}, indicates a vector.
+The symbol inside the ket, whether it be the letter $v$, the name John, or any other symbol, must be understood as a lable, a name, for the vector.
+Keep in mind that $\ket{v+w}$ is simply a shorthand for writing the vector that is the sum $\ket{v} + \ket{w}$.
+
+\subsubsection{Examples of vector spaces}
+\begin{enumerate}
+\item The set of all real valued functions defined on the interval [0,1] taken over the field of the real numbers.  This is a vector space because if a and b are numbers and f and g are functions defined on [0,1] then \mbox{(a + b) (f + g) = af + ag + bf + bg} which is another function defined on [0,1].
+\item The set of complex numbers $\ket{z}$, over the field of real numbers.
+\item The set of all polynomials of degree seven, over the real numbers.
+\item The set of ordered n-tuples of real numbers (x$_{1}$,x$_{2}$,\ldots ,x$_{n}$), over the real numbers.
+In this case we define addition by the equation
+\begin{equation}
+(x_{1},x_{2},\ldots ,x_{n}) + (y_{1},y_{2},\ldots ,y_{n}) = (x_{1}+y_{1},x_{2}+y_{2},\ldots ,x_{n}+y_{n})\\
+\end{equation}
+The space of n-tuples of real numbers is called \textbf{R}$^{n}$.
+\end{enumerate}
+
+It turns out that the vector space of example 1 has an infinite dimension so we won't worry about it just yet.
+The other three vector spaces have finite dimension.
+The one that interests us the most is the one described in example 4, the set of ordered n-tuples, because it can be used to represent any finite dimensional real vector space imaginable.
+For example, the vector space of example 2, the complex numbers, can be represented by the set of 2-tuples where the first entry represents the real part of the complex number and the second entry represents the imaginary part.
+In this representation a complex number $z$ is represented as
+\begin{equation}
+z = x + iy \sim (x,y)
+\end{equation}
+where the symbol $\sim$ is to be read as ``is represented by''.
+Obviously the way to add two vectors in this representation is by adding the components, because two complex numbers are added by adding their real and imaginary parts.
+
+Another reason that the tuple spaces \textbf{R}$^{n}$ are so important is that they can be used to represent general configurations or \textit{states} of physical systems.
+This statement is best understood through our example of the coupled masses.
+
+\begin{flushleft} $\clubsuit$ \end{flushleft}
+The configuration of the system is given by two numbers, the displacements of the masses from their equilibrium positions.
+Knowledge of these two numbers for all times constitutes solution of the problem.
+In symbols, we say that we've solved the problem if we find the functions
+\begin{equation}
+x_{1}(t) \qquad \textrm{and} \qquad x_{2}(t).
+\end{equation}
+It is useful to talk about the configuration or \textit{state} of the system.
+By the word \textit{state} we mean any set of information that tells us how the system is arranged.
+To denote the state of the system at time $t$ we use the symbol
+\begin{displaymath}
+\ket{\Psi (t)}.
+\end{displaymath}
+Since our system is characterised by the positions of two masses the state $\ket{\Psi (t)}$ can be represented by a 2-tuple,
+\begin{equation} \label{eq:Psirep}
+\ket{\Psi (t)} \sim (x_{1}(t),x_2(t))
+\end{equation}
+where again $\sim$ means ``is represented by''.
+We have transformed a group of objects that math knows nothing about, i.e. two boxes, three springs, and two walls, to a set of two numbers which we can work on with our mathematical tools.
+We will see that the set of possible states $\ket{\Psi (t)}$ of the system forms a vector space.\begin{flushright} $\clubsuit$ \end{flushright}
+
+\subsection{Bases and Dimension}
+
+The next objects we must talk about are bases for vector spaces.
+Even though the idea of a vector space basis is not new to readers of this document we will define them here if only because they will be so important in everything that follows.
+
+\begin{definition}[Basis]
+Consider a finite dimensional vector space \textbf{V}.
+A basis for \textbf{V}, denoted by the symbol $e$, is a set of vectors \mbox{$\ket{e_1}, \ket{e_2}, \ldots, \ket{e_n}$} with the following three properties:
+\begin{enumerate}
+\item For each $i$ $\ket{e_i}$ is a member of \textbf{V}.
+\item Any vector $\ket{v}$ in \textbf{V} can be represented as a linear combination,
+\begin{displaymath}
+\ket{v} = v^{e}_{1}\ket{e_1} + v^{e}_{2}\ket{e_2} + \cdots + v^{e}_{n}\ket{e_n} = \sum_{i=1}^{n} v^{e}_{i}\ket{e_i}
+\end{displaymath}
+where the numbers $v_i^e$ are scalars.
+\item The linear combination in 2 is unique. \qquad $\heartsuit$
+\end{enumerate}
+\end{definition}
+
+For any $\ket{v}$ the linear combination in property \textit{2} above is called the \textbf{decomposition of $\ket{v}$ with respect to the basis $e$}.
+The numbers $v^{e}_i$ are called the \textbf{components of $\ket{v}$ in basis $e$}.
+
+Note that in the definition above the letter $e$ refers to the \textit{set} of vectors \mbox{$\ket{e_i} \ldots \ket{e_n}$} while the symbol $\ket{e_i}$ refers to one particular basis vector.
+However most books use $\ket{e_i}$ to refer to the basis itself.
+This is a slight abuse of notation which is unfortunately standard.
+In this document we will use either a letter with no subscript, such as $e$, or the ket notation, such as $\ket{e_i}$, to refer to bases.
+Of course, not all bases will be named $e$, we could name a basis $f$, $G$, \textit{Victor}, or anything we want.
+
+We have spoken previously of vector spaces having finite or infinite dimension but we have not defined these terms precisely.
+We do so now.
+The definition of dimension depends crucially upon the fact, proven in linear algebra courses, that for any vector space $\VS{}$ every basis for $\VS{}$ has the same number of elements.
+
+\begin{definition}[Dimension]
+Given a vector space \textbf{V} with basis $e$ the dimension of \textbf{V} is the number of elements in the set $e$. \qquad $\heartsuit$
+\end{definition}
+
+This definition of dimension may seem to depend on the choice of basis for $\VS{}$ but since every basis of a given vector space has the same number of elements the dimension of a vector space $\VS{}$ depends only on $\VS{}$ and not the choice of basis.
+
+\subsubsection{Examples of Bases and Dimension}
+\begin{enumerate}
+\item The vectors $\ket{e_1} = \ket{1} = 1$ and $\ket{e_2} = \ket{i} = i$ form a basis for the vector space of complex numbers over the field of real numbers.
+Clearly $1$ and $i$ are both complex numbers so that property \textit{1} is satisfied.
+Any complex number z can be decomposed as
+\begin{displaymath}
+z = Re(z) \ket{1} + Im(z) \ket{i}
+\end{displaymath}
+where $\Im(z)$ and $\Re(z)$ are both real numbers, so property \textit{2} is satisfied.
+Since this decomposition is unique property \textit{3} is also satisfied.
+There are two basis vectors, so the space \textbf{C} over the real numbers is two dimensional. \footnote{In this example it is crucial that we are talking about the vector space of complex numbers over the field of \textbf{real} numbers.  It is because of this that \textbf{C} turned out to be a 2 dimensional space.  If we had chosen to take the vector space \textbf{C} over the complex numbers we would see that a basis could be formed by just the vector $\ket{1}$, because then any complex number z could be decomposed as z = z$\ket{1}$.  In this case \textbf{C} is one dimensional.  This example shows that the field over which a vector space is defined is very important in the structure of the vector space.}
+\item The polynomials $1, x,$ and $x^{2}$ form a basis for the space of polynomials of degree two: by definition any polynomial of degree two has the form $a_0 + a_{1}x + a_{2}x^{2}$ where the coefficients $a_i$ are uniquely determined by the polynomial in question.
+The dimension is 3.
+\item For the vector space \textbf{R}$^{n}$ we have the obvious basis
+\begin{displaymath}
+(1,0,\ldots ,0), (0,1,\ldots ,0), \ldots , (0,0,\ldots ,1)
+\end{displaymath}
+The dimension of \textbf{R}$^{n}$ is n.
+\end{enumerate}
+
+Now let's apply this idea of bases to our physical problem.
+\begin{flushleft} $\clubsuit$ \end{flushleft}
+Equation (\ref{eq:Newton}) for the motion of our physical system and equation (\ref{eq:Psirep}) for the representation of a state imply that the set of possible configurations of our system is a vector space as we now show.
+We said that the two numbers needed to specify the state of the system were $x_{1}(t)$ and $x_{2}(t)$.
+These numbers can be regarded as the components of $\ket{\Psi (t)}$ in a basis $X$ consisting of two vectors $\ket{X_1}$ and $\ket{X_2}$.
+$\ket{X_1}$ corresponds to a state of the system in which the first mass is displaced one unit of distance to the right of its equilibrium position and mass number two is at it's equilibrium position.
+$\ket{X_2}$ is defined analogously.
+Remember that $X$ refers to the set of basis vectors while $\ket{X_1}$ and $\ket{X_2}$ refer to the basis vectors themselves, ie. $X=\{\ket{X_1},\ket{X_2}\}$.
+With this basis we see that any state can be written as
+\begin{equation} \label{eq:Psirep2}
+\ket{\Psi (t)} = x_{1}(t)\ket{X_1} + x_{2}(t)\ket{X_2} \, .
+\end{equation}
+It is now clear that the set of possible states of our system forms a vector space.
+Given two states $\ket{\Psi}$ and $\ket{\Phi}$ defined by the equations \mbox{$\ket{\Psi} = a\ket{X_1} + b\ket{X_2}$} and \mbox{$\ket{\Phi} = c\ket{X_1} + d\ket{X_2}$} we can add these states together to get
+\begin{displaymath}
+\ket{\Psi} + \ket{\Phi} = \ket{\Psi + \Phi} = (a+c)\ket{X_1} + (b+d)\ket{X_2} \, .
+\end{displaymath}
+Using this basis we can now think of equation (\ref{eq:Newton}) in terms of matrices,
+\begin{equation} \label{eq:equationOfMotionMatrix}
+\left[ \begin{array}{c} \ddot{x}_1(t) \\ \ddot{x}_2(t) \end{array} \right] = \omega^{2}_{0}\left[ \begin{array}{cc} -2 & 1 \\ 1 & -2 \end{array} \right] \left[ \begin{array}{c} x_{1}(t) \\ x_{2}(t) \end{array} \right] \, .
+\end{equation}
+This matrix equation is exactly equivalent to (\ref{eq:Newton}) as you can check by carrying out the matrix multiplication.
+Note that the fact that the differential equations in (\ref{eq:Newton}) are coupled manifests itself in the off-diagonal elements in the matrix of (\ref{eq:equationOfMotionMatrix}).
+This suggests that \emph{if we could find a different basis in which the matrix were diagonal, then the differential equations would decouple and the problem would be easily solved}.
+Setting up the mathematical tools to understand how to find such a basis is the object of the next section.
+
+There is one more very important remark to be made before we move on.
+It might not make any sense at this point, but read it anyway before going on to the next section.
+If it doesn't make sense now don't worry, it will very soon.
+Equation (\ref{eq:equationOfMotionMatrix}) is a matrix equation written down in a particular basis $X$.
+We could rewrite the equation in a more abstract form without reference to any basis.
+Let $\ket{\ddot{\Psi}(t)}$ be a vector representing the acceleration of the system at time $t$.
+Then we can write
+\begin{equation}\label{eq:equationOfMotionAbstract}
+\ket{\ddot{\Psi}(t)} = P \ket{\Psi (t)}
+\end{equation}
+where $P$ is a linear transformation whose representation in basis $X$ is given by the matrix shown in equation (\ref{eq:equationOfMotionMatrix}).
+It is crucial that you understand that $P$ is not the matrix in equation (\ref{eq:equationOfMotionMatrix}).
+It is some linear transformation on the vector space of configurations of the physical system.
+It is \emph{represented} by the matrix in equation (\ref{eq:equationOfMotionMatrix}) in the basis $X$.
+In order to decouple the differential equations we want to find a different basis $Y$ in which the matrix representation of $P$ is diagonal.
+\begin{flushright} $\clubsuit$ \end{flushright}
+
+\subsection{Exercises}
+\begin{itemize}
+\item[1)] Show that if we work in a new basis $Y$ in which the matrix in equation (\ref{eq:equationOfMotionMatrix}) were diagonal then the equations decouple and are easily solved.
+\end{itemize}

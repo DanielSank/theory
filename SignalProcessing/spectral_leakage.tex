@@ -1,0 +1,76 @@
+\documentclass[twocolumn]{article}
+
+\input{../../TeX/packages}
+\input{../../TeX/macros}
+
+\title{Spectral Leakage}
+\author{Daniel Sank \\ \small{Google Quantum AI}}
+
+\begin{document}
+\maketitle
+
+
+\section{Fourier series}
+
+Consider a continuous signal $x(t)$ measured over a time interval $[-T/2, T/2]$.
+This signal can be represented as a \textbf{Fourier series}
+\begin{equation}
+x(t) = \sum_{k=-\infty}^\infty c_k e^{i 2 \pi k t / T}
+\end{equation}
+where
+\begin{equation}
+c_k \equiv \frac{1}{T} \int_{-T/2}^{T/2} dt \, x(t) \, e^{-i 2 \pi k t / T} \, .
+\end{equation}
+The index $k$ gives the frequency of each component in units of cycles of the signal over the measured interval.
+In other words, the term with $k=1$ has frequency $k/T$.
+This is important to remember, the frequency resolution of a Fourier series is precisely the inverse of the measurement time $T$.
+We call the frequencies $\{k/T\}$ the \textbf{Fourier frequencies}.
+
+A complex sinusoid with frequency equal to one of the Fourier frequencies has a delta function Fourier series.
+For example, the signal $s(t) = \exp \left[ i 2 \pi l t / T \right]$ has Fourier series $c_k = \delta_{kl}$.
+
+\subsection{Shift in frequency}
+
+Consider a signal $s(t)$ with Fourier series coefficients $s_k$.
+Multiplying $s(t)$ by a complex exponential shifts the Fourier coefficients.
+If we construct a new signal $u(t) \equiv s(t) \exp[i2\pi l t / T]$, then the Fourier series is
+\begin{align}
+u_k
+&= \int_{-T/2}^{T/2} s(t) e^{i 2 \pi l t / T} e^{-i 2 \pi k t/ T} \nonumber \\
+&= \int_{-T/2}^{T/2} s(t) e^{-i 2 \pi (k-l) t/ T} \nonumber \\
+&= c_{k-l} \, .
+\end{align}
+
+
+\section{Non-commensurate frequency}
+
+Consider a signal $x(t) = \exp[i 2 \pi \xi t / T]$ where $\xi$ is an arbitrary real number.
+The Fourier series coefficients of this signal are
+\begin{align}
+c_k
+&= \frac{1}{T} \int_{-T/2}^{T/2} dt \, e^{i 2 \pi \xi t / T} e^{-i 2 \pi k t / T} \nonumber \\
+&= \frac{1}{T} \left. \left( \frac{\exp\left[i 2 \pi (\xi - k) t / T \right]}{i 2 \pi (\xi - k) / T} \right) \right|_{-T/2}^{T/2} \nonumber \\
+&= \frac{1}{T} \left( \frac{\exp\left[i \pi (\xi - k) \right] - \exp\left[-i \pi (\xi - k) \right]}{i 2 \pi (\xi - k) / T} \right) \nonumber \\
+&= \frac{\sin \left(\pi (\xi - k) \right)}{\pi (\xi - k)} \, .
+\end{align}
+This function has several important properties.
+First, if $\xi$ is an integer, then all $c_k = \delta_{\xi k}$.
+This is not surprising because if $\xi$ is an integer then $x(t)$ precisely matches one of the component functions $\exp\left(i 2 \pi k t / T \right)$.
+This situation is illustrated by the black curve in Figure \ref{fig:leakage} where we have put $\xi=0$.
+The underlying $\sin(\pi x)/(\pi x)$ function goes to zero at every $k$ except for $k=0$.
+If $\xi$ is not an integer then the $\sin(\pi x) / (\pi x)$ function shifts such that $c_k \neq 0$ for \emph{all} $k$.
+This is illustrated by the blue curve in Figure \ref{fig:leakage} where we have used $\xi = 0.2$.
+Note that most of the amplitude of the signal sits near the real frequency $\xi$, but has leaked into neighboring frequency bins.
+This phenomenon, wherein a signal at a precise frequency $\xi$ shows up with amplitude at other bins nearby is called \emph{spectral leakage}.
+In summary, given a complex sinusoid at a frequency $\xi$ not commensurate with the measurement window, the Fourier series leaks into the bins near $\xi$ according to
+
+\quickfig{0.8\columnwidth}{spectral_leakage.pdf}
+{Fourier series of a complex sinusoid $\exp\left(i 2 \pi \xi t / T\right)$ for integer and non-integer frequencies. Lines show the $\sin(\pi x) / (\pi x)$ function for $\xi=0$ (black) and $\xi=0.2$ (blue). The dots indicate the values of the curves at the Fourier frequencies.}
+{fig:leakage}
+
+
+\section{Widows}
+
+
+
+\end{document}

@@ -1,0 +1,234 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\usepackage{amstext}
+\usepackage{esint}
+\usepackage{babel}
+
+\begin{document}
+
+\title{Signal Analysis}
+
+
+\author{Daniel Sank}
+
+\maketitle
+
+\section{Introduction}
+
+Most of us know how to deal with Fourier transforms (FT) and Fourier
+series (FS). The Fourier transform is the correct way to describe
+a continuous signal defined over the entire real line, and the Fourier
+series is the correct way to describe a continuous signal defined
+over an interval. In the lab, however, data are measured at discrete
+times and for finite total duration. Therefore, you can't really use
+the FT or the FS to describe real data. The correct description for
+discrete data over a finite interval is the $\textbf{discrete Fourier transform}$
+(DFT). The purpose of this document is to explain the DFT by describing
+it as a modification of the FS. I'm taking that approach simply so
+that I can start from something you already understand.
+
+I think the proper order to understand these transforms is FT, FS,
+(DTFT optional), DFT. I'm assuming that the reader has basic knowledge
+of the FT and FS, but has never looked at the DFT or the DTFT before.
+If you need a refresher on the FT you can take a look at the Wikipedia
+article, or for a ground up approach take a look at $\textit{Linear Algebra and the Fourier Transform}$.
+
+
+\section{Fourier Series}
+
+We begin with a complete study of the Fourier series, the transform
+appropriate for continuous signals over a finite interval. Once you
+understand the subtleties of the Fourier series the discrete Fourier
+transform will be a relatively simple step.
+
+
+\subsection{Fundamentals}
+
+
+\subsubsection{Definition}
+
+Given a function $F(t)$ defined over an interval $t\in[0,T]$ the
+$\textbf{Fourier coefficients}$ of that function are defined as\[
+\tilde{f}(n)=\frac{1}{T}\int_{t=0}^{T}f(t)e^{-i2\pi nt/T}\, dt\]
+The original function can be expressed as a $\textbf{Fourier series}$
+involving exponentials and the Fourier coefficients,\[
+f(t)=\sum_{n=-\infty}^{\infty}\tilde{f}(n)e^{i2\pi nt/T}\]
+This pair of equations hold true for any function defined on the interval
+$[0,T]$ as long as it has a finite number of discontinuities. Notice
+that the sum involves oscillating functions $e^{i2\pi nt/T}$ which
+have frequencies $n/T$. We refer to these frequencies as the $\textbf{Fourier frequencies}$.
+Note that for real signals we have $\tilde{f}(-n)=\tilde{f}(n)^{*}$.
+Using this equality we have\begin{eqnarray*}
+f(t) & = & \tilde{f}(0)+\sum_{n=1}^{\infty}\tilde{f}(n)e^{i2\pi nt/T}+\tilde{f}(n)^{*}e^{-i2\pi nt/T}\\
+ & = & \tilde{f}(0)+2\sum_{n=1}^{\infty}\Re\left[\tilde{f}(n)\right]\cos\left(2\pi nt/T\right)-\Im\left[\tilde{f}(n)\right]\sin\left(2\pi nt/T\right)\end{eqnarray*}
+
+
+Before we move on to real things, there's a change of variables and
+notation that we should do to make our lives simpler. We've defined
+everything over a time interval of length $T$. It's a lot better
+to work in the dimensionless variable $t/T$. If we make this change
+but $\emph{retain the variable name t}$, the transform pair looks
+like this,\begin{eqnarray*}
+\tilde{f}(n) & = & \int_{t=0}^{1}f(t)e^{-i2\pi nt}\, dt\\
+f(t) & = & \sum_{n=-\infty}^{\infty}\tilde{f}(n)e^{i2\pi nt}\end{eqnarray*}
+This is an abuse of notation, both because we're using $t$ for a
+dimensionless quantity, and because this function $f$, which is a
+function of a dimenisonless variable, isn't really the same function
+as before. We'll use this notation anyway because it's handy. You
+just have to remember that $t$ is in units of $T$ and that our frequencies
+are therefore in units of $1/T$.
+
+
+\subsubsection{Power}
+
+The total power in our signal is defined as\[
+\text{Power}=\int_{0}^{1}|f(t)|^{2}\, dt\]
+Using the series representation we have\begin{eqnarray*}
+\text{Power} & = & \int\left[\sum_{n}\tilde{f}(n)e^{i2\pi nt}\right]\left[\sum_{m}\tilde{f}(m)^{*}e^{-i2\pi t}\right]\, dt\\
+ & = & \sum_{n,m}\tilde{f}(n)\tilde{f}(m)^{*}\int_{0}^{1}e^{i2\pi(n-m)t}\, dt\\
+ & = & \sum_{n,m}\tilde{f}(n)\tilde{f}(m)^{*}\delta_{n,m}\\
+\text{Power}=\int_{0}^{1}|f(n)|^{2}\, dt & = & \sum_{n}|f(n)|^{2}\end{eqnarray*}
+which is called Parseval's theorem. It just says that you can find
+the power in your signal by summing the mod squares of the Fourier
+coefficients. This motivates the definition of the $\textbf{physicist's power spectrum}$
+as\[
+S_{p}(n)=|\tilde{f}(n)|^{2}\]
+which gives the power at each positive and negative frequency.
+
+Let's look at a particular case. Consider a sinusoidal signal at the
+$m^{\textrm{th}}$ Fourier frequency: $f(t)=A\cos\left(2\pi mt\right)$.
+The power of this signal, found by integrating its square over one
+period, is\begin{eqnarray*}
+\textrm{Power} & = & \int_{t=0}^{1}\left[A\cos\left(2\pi mt\right)\right]^{2}\, dt\\
+\textrm{Power} & = & A^{2}/2\end{eqnarray*}
+This power can also be found from the Fourier coefficients. Compute
+the Fourier components for this signal, assuming $m\neq0$,\begin{eqnarray*}
+\tilde{f}(n) & = & \int_{0}^{1}A\cos\left(2\pi nt\right)e^{-i2\pi nt}\, dt\\
+ & = & \frac{A}{2}\int\left[e^{i2\pi mt}+e^{-i2\pi mt}\right]e^{-i2\pi nt}\\
+ & = & \frac{A}{2}\left[\delta_{n,m}+\delta_{n,-m}\right]\end{eqnarray*}
+Then $S_{p}=\left(\frac{A}{2}\right)^{2}\left[\delta_{n,m}+\delta_{n,-m}\right]$.
+You can see that the physicist's power spectrum has components at
+$m$ and $-m$. If you sum these components you get $A^{2}/2$, the
+total power in the sinusoid. This shows that the power of a sinusoid
+at frequency $m$ shows up in the physicist's spectrum as $m$ and
+$-m$. If you don't want to think about negative frequencies you can
+invent the $\textbf{engineer's power spectral density}$ defined as\[
+S_{e}(n)=2S_{p}(n)\]
+for positive $n$ only, and then say that the power of the sinusoid
+at frequency $n$ is just $S_{e}(n)$. You can get away with this
+when you have a real (no imaginary part) signal because $\tilde{f}(-n)=\tilde{f}(n)$
+which means that $S_{p}(-n)=S_{p}(n)$, and therefore,\[
+\textrm{Power at frequency }n=S_{p}(n)+S_{p}(-n)=2S_{p}(n)=S_{e}(n)\]
+
+
+
+\subsection{Noncommensurate Frequencies}
+
+We saw that the Fourier coefficients for a cosine wave with amplitude
+$A$ at frequency $m$ are $\tilde{f}(n)=\frac{A}{2}\left(\delta_{n,m}+\delta_{n,-m}\right)$.
+This is nice because it means that if a signal has a frequency component
+at the $m^{\textrm{th}}$ frequency, then that signal component shows
+up only exactly in the $m^{\textrm{th}}$ Fourier coefficient. In
+short, that's the whole point of a Fourier decomposition. But what
+happens if a signal has a component at a frequency that's $\emph{not}$
+one of the Fourier frequencies? Let's compute the coefficients of
+the signal\[
+f(t)=A\cos\left(2\pi\nu t\right)\]
+where $\nu$ is a number that could be an integer (Fourier frequency)
+or not.\begin{eqnarray*}
+\tilde{f}(n) & = & \int_{t=0}^{1}A\cos\left(2\pi\nu t\right)e^{-i2\pi nt}\, dt\\
+\tilde{f}(n) & = & \frac{A}{2}\int\left[e^{i2\pi(\nu-n)t}+e^{-i2\pi(\nu+n)}\right]\, dt\\
+\tilde{f}(n) & = & \frac{A}{2}\left[e^{i2\pi(\nu-n)/2}\textrm{sinc}\left(\nu-n\right)+e^{-i2\pi(\nu+n)/2}\textrm{sinc}\left(\nu+n\right)\right]\end{eqnarray*}
+where $\textrm{sinc}(x)\equiv\sin(\pi x)/\pi x$. It looks like the
+Fourier coefficients of the sinusoid are nonzero everywhere instead
+of at just $\pm\nu$. But note that if $\nu$ is an integer then $\textrm{sinc}\left(\nu-n\right)=\delta_{\nu-n}$
+because the sinc function vanishes at all integers other than zero.
+In this case the coefficients $\tilde{f}(n)$ are exactly the same
+as what we found previously. You can think of it as if the sinc function
+were there the whole time, but because it was centered at an integer,
+its existence was invisible to our Fourier coefficients.
+
+
+\subsubsection{Leakage}
+
+So, what happens if $\nu$ is not an integer? Then $\textrm{sinc}(\nu-n)$
+is nonzero for $\emph{all}$ integers $n$ and the Fourier coefficients
+of our sinusoid are nonzero for every frequency! For example, if we
+had a signal $\sin(2\pi*2.5*t)$, then $\tilde{f}(2)=0.63$. This
+is called $\textbf{spectral leakage}$ because energy at frequency
+2.5 is leaking into the nearby frequency of 2. Since the sinc function
+decays for large argument, you can see that the energy of noncommensurate
+frequencies leaks only into other nearby Fourier frequencies. How
+much power is actually added into our acquired signal by this noncommensurate
+frequency component? We can find out by simply doing the integral
+in the time domain,\begin{eqnarray*}
+\textrm{Power} & = & \int_{t=0}^{1}A^{2}\cos\left(2\pi\nu t\right)^{2}\, dt\\
+\textrm{Power} & = & \frac{A^{2}}{2}\left(1+\textrm{sinc}\left(4\nu\right)\right)\end{eqnarray*}
+where, again, $\textrm{sinc}(x)\equiv\sin(\pi x)/\pi x$. Here again
+we see that if $\nu$ is an integer then the sinc function vanishes
+and the power is what we expect for a sinusoid, namely $A^{2}/2$
+(notice that for $\nu=0$ the power is $A^{2}$, which is correct
+for the DC component). If $\nu$ is not an integer then the power
+that shows up in our measured signal differs from the signal's actual
+power. The error is less severe for frequencies farther away from
+DC, due to the decay of the sinc function.%
+\footnote{It's a fun, if challenging, exercise to show that you can recover
+this expression for the power of a noncommensurate sinusoid by explicitly
+summing the squares of the Fourier coefficients computed above. If
+you want to do it you may want to look up the {}``Poisson summation
+formula.''%
+}
+
+
+\subsubsection{Windowing}
+
+We can gain some insight into what's going on with these noncommensurate
+frequencies by connecting our Fourier series to the Fourier transform.
+The integral defining the Fourier coefficients of a function $f$
+is exactly the same as the integral you would do to get the Fourier
+$\emph{transform}$, at frequency $n$, of $f$ multiplied by a square
+function: \[
+\tilde{f}(n)=\int_{t=0}^{1}f(t)e^{-i2\pi nt}\, dt=\int_{t=-\infty}^{\infty}f(t)*\textrm{rect}_{[0,1]}e^{-i2\pi nt}\, dt\]
+Since the FT of a square function is a sinc, $\tilde{f}(n)$ will
+wind up being the convolution of the Fourier transform of $f$ with
+a sinc function. If the signal is periodic with the period of the
+tophat, then it's Fourier transform has a bunch of sinc functions
+sitting at equally spaced frequencies in such a way that they don't
+interfere with one another because they sit at each others zero points.
+If the signal has a component that doesn't have this periodicity,
+then the sinc function from that sinusoid will corrupt nearby frequencies
+in frequency space. Some figures here would be really nice.
+
+The sinc function is pretty undesirable as a smearing function because
+it decays rather slowly. It would be nice the function involved in
+our spectral leakage decayed faster. Now that we understand the existence
+of the sinc as being due to the fact that we 'windowed' our original
+signal with a square function it is clear that if we want a different
+smearing function we have to use a different window. This is what
+is actually done with real data: you multiply your finite duration
+time trace by a $\textbf{windowing function}$ that goes to zero at
+the endpoints of the time interval. This eliminates the discontinuities
+at the endpoints and improves life in the frequency domain. Of course,
+as you expect, multiplying your data by a window has other effects
+that need to be understood. It's all fairly simple now that we went
+through the case with the square window. We know that in the frequency
+domain, the noncommensurate frequencies will get smeared into neighboring
+frequencies with weight given by the FS of the window function.
+
+Let's look at all of this quantitatively. Let's assume we're measuring
+a finite duration segment of a continuous signal. That signal can
+be written as a Fourier integral\[
+f(t)=\int\tilde{f}(\nu)e^{i2\pi\nu t}\, d\nu\]
+We can now write down exactly what our Fourier coefficients will look
+like, adding in a window function which we leave unspecified for now\begin{eqnarray*}
+\tilde{f}(n) & = & \int_{t=0}^{1}f(t)w(t)e^{-i2\pi nt}\, dt\\
+ & = & \int_{t=0}^{1}\left[\int\tilde{f}(\nu)e^{i2\pi\nu t}\right]w(t)e^{-i2\pi nt}\, dt\\
+ & = & \int d\nu\tilde{f}(\nu)\int_{t=0}^{1}e^{-i2\pi(n-\nu)t}w(t)\, dt\\
+\tilde{f}(n) & = & \int d\nu\tilde{f}(\nu)\tilde{w}(n-\nu)\end{eqnarray*}
+
+\end{document}

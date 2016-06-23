@@ -1,0 +1,190 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose, tmargin=2cm, bmargin=2cm, lmargin=2cm, rmargin=2cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{amstext}
+\usepackage{esint}
+
+\makeatother
+
+
+\author{Daniel Sank}
+\title{Fourier Rules}
+\date{October 4, 2010}
+
+
+\begin{document}
+
+
+\maketitle
+
+\section*{Useful formulae}
+
+\begin{itemize}
+\item $\textbf{Trigonometry}$\begin{eqnarray*}
+A\cos(x)+B\sin(x) & = & M\cos(x+\phi)\\
+\textrm{if}\qquad M^{2}=A^{2}+B^{2} & \textrm{and} & \tan(\phi)=-\frac{B}{A}\end{eqnarray*}
+ \begin{eqnarray*}
+\cos\left(\alpha+\beta\right) & = & \cos\left(\alpha\right)\cos\left(\beta\right)-\sin\left(\alpha\right)\sin\left(\beta\right)\\
+\sin\left(\alpha+\beta\right) & = & \sin\left(\alpha\right)\cos\left(\beta\right)+\cos\left(\alpha\right)\sin\left(\beta\right)\end{eqnarray*}
+ \begin{eqnarray*}
+\sin\left(\alpha\right)\sin\left(\beta\right) & = & \frac{1}{2}\left[\cos\left(\alpha-\beta\right)-\cos\left(\alpha+\beta\right)\right]\\
+\cos\left(\alpha\right)\cos\left(\beta\right) & = & \frac{1}{2}\left[\cos\left(\alpha-\beta\right)+\cos\left(\alpha+\beta\right)\right]\\
+\sin\left(\alpha\right)\cos\left(\beta\right) & = & \frac{1}{2}\left[\sin\left(\alpha+\beta\right)+\sin\left(\alpha-\beta\right)\right]\end{eqnarray*}
+ \begin{eqnarray*}
+\cos\left(x\right)=\sin\left(x+\frac{\pi}{2}\right) & \textrm{and} & \sin\left(x\right)=\cos\left(x-\frac{\pi}{2}\right)\end{eqnarray*}
+
+\end{itemize}
+
+\section*{Fourier transform rules in $t$ and $\nu$}
+
+Checked every line in this section February 2014.
+
+\begin{itemize}
+\item \textbf{Fourier transform pair} \begin{eqnarray*}
+\tilde{f}(\nu) & = & \int f(t)e^{-i2\pi\nu t}~dt\\
+f(t) & = & \int\tilde{f}(\nu)e^{i2\pi\nu t}~d\nu\end{eqnarray*}
+
+\item \textbf{Delta function} \begin{eqnarray*}
+\int dt\: e^{i2\pi(\nu-\nu')t} & = & \delta(\nu-\nu')\\
+\int d\nu\: e^{i2\pi(t-t')\nu} & = & \delta(t-t')\end{eqnarray*}
+
+\item \textbf{Convolution} \begin{eqnarray*}
+\int_{t}f(t)g(t)~e^{-i2\pi Nt}~dt & = & \int_{\nu}\tilde{f}(\nu)\tilde{g}(N-\nu)~d\nu=(\tilde{g}*\tilde{f})(N)\\
+\int_{t}(f*g)(t)~e^{-i2\pi\nu t}~dt & = & \tilde{f}(\nu)\tilde{g}(\nu)\\
+\int_{\nu}\tilde{f}(\nu)\tilde{g}(\nu)~e^{i2\pi\nu\tau}~d\nu & = & \int_{t}f(t)g(\tau-t)~dt=(f*g)(\tau)\\
+\int_{\nu}(\tilde{f}*\tilde{g})(\nu)~e^{i2\pi\nu t}~d\nu & = & f(t)g(t)\end{eqnarray*}
+
+\item $\textbf{Cross Correlation}$\[
+\int_{\tau}d\tau e^{-i2\pi N\tau}\left(f\star g\right)(\tau)=\int_{\tau}d\tau e^{-i2\pi N\tau}\left(\int_{t}f(t)^{*}g(t+\tau)dt\right)=\tilde{f}(N)^{*}\tilde{g}(N)\]
+
+\item $\textbf{Weiner Kinchein}$ Consider the cross correlation theorem
+with $f=g$. Defining the physicist's power spectrum as $S_{p}(\nu)=\tilde{f}^{*}(\nu)\tilde{f}(\nu)$
+we have\begin{eqnarray*}
+\int_{\tau}e^{-i2\pi N\tau}(f\star f)(\tau)d\tau & = & \int_{\tau}e^{-i2\pi N\tau}\left(\int_{t}f(t)^{*}f(t+\tau)dt\right)d\tau=\tilde{f}(N)^{*}\tilde{f}(N)=S_{p}(N)\\
+\int_{N}S_{p}(N)e^{i2\pi N\tau}dN & = & \int_{t}f(t)^{*}f(t+\tau)\: dt\end{eqnarray*}
+\end{itemize}
+
+\subsection*{Real Signals}
+
+Consider $f(t)\in\Re$. Then $\tilde{f}(\nu)^{*}=\tilde{f}(-\nu)$.
+Then $S_{p}(N)=\tilde{f}(N)^{*}\tilde{f}(N)=\tilde{f}(-N)\tilde{f}(N)=S_{p}(-N)$.
+Therefore we only need to look at positive frequencies to have all
+available information about $f$. Define the engineer power spectrum
+$S_{e}(N)=2S_{p}(N)$. Then for example we get \begin{eqnarray*}
+\int_{\tau}\left(\int_{t}f(t)f(t+\tau)~dt\right)\: e^{-i2\pi N\tau}\: d\tau & = & \frac{1}{2}S_{e}(N)\\
+\int_{N=0}^{\infty}S_{e}(N)\:\cos(2\pi N\tau)\: dN & = & \int_{t}f(t)f(t+\tau)\: dt\end{eqnarray*}
+
+\subsection*{Finite Time Series}
+
+Consider a set of experimental data represented by $f(t)$ for $t\in[0,T]$,
+ie. we aquire data for a time $T$. Then it makes sense to define
+the Fourier transforms as\[
+\tilde{f}(\nu)=\frac{1}{\sqrt{T}}\int_{t=0}^{T}f(t)e^{-i2\pi\nu t}dt\]
+ We still take\[
+S_{p}(\nu)=\tilde{f}(\nu)^{*}\tilde{f}(\nu)\]
+ Note that $S_{p}$ now has units of $[f^{2}T]$ or $f^{2}/\textrm{Hz}$.
+This is called a $\textbf{power spectral density}$. Now the WK theorem
+reads\[
+\int_{N=0}^{\infty}S_{e}(N)\:\cos\left(2\pi N\tau\right)\: dN=\frac{1}{T}\int_{t}f(t)f(t+\tau)\: dt\]
+ The thing on the right hand side is the autocorrelation function
+of $f$. The prefactor normalizes the correlation. Because we now
+have this normalization we can replace this autocorrelation with an
+$\emph{ensemble}$ average:\[
+\frac{1}{T}\int_{t}f(t)f(t+\tau)\: dt=\langle f(0)f(\tau)\rangle\]
+ where the equality of these two {}``averages'' is the definition
+of an $\textbf{ergodic}$ process, and the enemble average can be
+written as $\langle f(0)f(\tau)\rangle$ if we assume the process
+is $\textbf{stationary}$. All in all this gives us\begin{eqnarray*}
+\int_{N=0}^{\infty}S_{e}(N)\:\cos\left(2\pi N\tau\right)\: dN & = & \langle f(0)f(\tau)\rangle\\
+2\int_{-\infty}^{\infty}e^{-i2\pi Nt}\langle f(0)f(t)\rangle dt & = & S_{e}(N)\end{eqnarray*}
+
+
+\section*{Fourier transform rules in $t$ and $\omega$}
+
+Checked every line February 2014.
+
+\begin{itemize}
+\item \textbf{Fourier transform pair} \begin{eqnarray*}
+\tilde{f}(\omega) & = & \int f(t)e^{-i\omega t}~dt\\
+f(t) & = & \int\tilde{f}(\omega)e^{i\omega t}~\frac{d\omega}{2\pi}\end{eqnarray*}
+
+\item \textbf{Delta function} \begin{eqnarray*}
+\int dt~e^{i(\omega-\omega')t} & = & 2\pi\delta(\omega-\omega')\\
+\int\frac{d\omega}{2\pi}~e^{i\omega(t-t')} & = & \delta(t-t')\end{eqnarray*}
+
+\item \textbf{Convolution} \begin{eqnarray*}
+\int_{t}f(t)g(t)~e^{-i\Omega t}dt & = & \int_{\omega}\tilde{f}(\omega)\tilde{g}(\Omega-\omega)\frac{d\omega}{2\pi}=\frac{1}{2\pi}(\tilde{g}*\tilde{f})(\Omega)\\
+\int_{\omega}\tilde{f}(\omega)\tilde{g}(\omega)~e^{i\omega\tau}\frac{d\omega}{2\pi} & = & \int_{t}f(t)g(\tau-t)dt=(f*g)(\tau)\\
+\int_{t}(f*g)(t)~e^{-i\omega t}~dt & = & \tilde{f}(\omega)\tilde{g}(\omega)\\
+\int_{\omega}(\tilde{f}*\tilde{g})(\omega)~e^{i\omega t}~\frac{d\omega}{2\pi} & = & 2\pi f(t)g(t)\end{eqnarray*}
+
+\item \textbf{Cross Correlation}\begin{equation}
+\int d\tau e^{-i\Omega\tau}\left(f\star g\right)(\tau) = \int d\tau e^{-i\Omega\tau}\left(\int f(t)^{*}g(t+\tau)dt\right)=\tilde{f}^{*}(\Omega)\tilde{g}(\Omega) \nonumber \end{equation}
+
+\item \textbf{Weiner Kinchein} Consider the cross correlation theorem in
+the case where $g=f$. Defining the physicist power spectrum by $S_{p}^{\infty}(\Omega)=\tilde{f}(\Omega)^{*}\tilde{f}(\Omega)$
+we have \begin{eqnarray*}
+\int_{\tau}\left(\int_{t}f^{*}(t)f(t+\tau)~dt\right)~e^{-i\Omega\tau}~d\tau & = & S_{p}^{\infty}(\Omega)\\
+\int_{\Omega}S_{p}^{\infty}(\Omega)~e^{i\Omega\tau}~\frac{d\Omega}{2\pi} & = & \int_{t}f^{*}(t)f(t+\tau)~dt\end{eqnarray*}
+\end{itemize}
+
+\subsection*{Real Signals - $\tilde{f}(\omega)^{*}=\tilde{f}(-\omega)$}
+All results in this subsection pertain to real functions of time.
+
+\begin{itemize}
+
+\item $\textbf{Weiner Kinchein:}$ Consider $f(t)\in\Re$. Then $\tilde{f}(\omega)^{*}=\tilde{f}(-\omega)$.
+Then $S_{p}^{\infty}(\Omega)=\tilde{f}(\Omega)^{*}\tilde{f}(\Omega)=\tilde{f}(-\Omega)\tilde{f}(-\Omega)^{*}=S_{p}^{\infty}(-\Omega)$.
+Therefore we only need to look at positive frequencies to have all
+available information about $f$. Define the engineer power spectrum
+$S_{e}^{\infty}(\Omega)=2S_{p}^{\infty}(\Omega)$. Then for example
+we get \begin{eqnarray*}
+\int_{\tau}\left(\int_{t}f(t)f(t+\tau)~dt\right)\: e^{-i\Omega\tau}\: d\tau & = & \frac{1}{2}S_{e}^{\infty}(\Omega)\\
+\int_{\Omega=0}^{\infty}S_{e}^{\infty}(\Omega)\:\cos(\Omega\tau)\:\frac{d\Omega}{2\pi} & = & \int_{t}f(t)f(t+\tau)\: dt\\
+\textrm{or}\qquad\lim_{T\rightarrow\infty}\frac{1}{T}\int_{\Omega=0}^{\infty}S_{e}^{T}(\Omega)\cos(\Omega\tau)\,\frac{d\Omega}{2\pi} & = & \lim_{T\rightarrow\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(t)f(t+\tau)\, dt\end{eqnarray*}
+
+\item $\textbf{Sine/Cosine Representation}$
+For real functions $f$ there is a particularly useful decomposition into sine and cosine functions.
+\begin{eqnarray*}
+f(t) & = & \int\frac{d\omega}{2\pi}\tilde{f}(\omega)e^{i\omega t}\\
+ & = & \int_{0}^{\infty}\frac{d\omega}{2\pi}\left[e^{i\omega t}\tilde{f}(\omega)+e^{-i\omega t}\tilde{f}(\omega)^{*}\right]\\
+ & = & \int_{0}^{\infty}\frac{d\omega}{2\pi}\cos(\omega t)\left[\tilde{f}(\omega)^{*}+\tilde{f}(\omega)\right]+i\sin(\omega t)\left[\tilde{f}(\omega)-\tilde{f}(\omega)^{*}\right]\\
+ & = & 2 \int_{0}^{\infty}\frac{d\omega}{2\pi}\left[\Re\tilde{f}(\omega)\cos(\omega t)-\Im\tilde{f}(\omega)\sin(\omega t)\right]\end{eqnarray*}
+ or alternately\[
+f(t)= 2 \int_{0}^{\infty}\frac{d\omega}{2\pi}\sqrt{S_{p}(\omega)}\cos\left(\omega t+\phi(\omega)\right)\]
+ where\[
+S_{p}(\omega)=\Re\tilde{f}(\omega)^{2}+\Im\tilde{f}(\omega)^{2}=|\tilde{f}(\omega)|^{2}\qquad\textrm{and}\qquad\tan\left(\phi(\omega)\right)=\frac{\Im\tilde{f}}{\Re\tilde{f}}\]
+
+\item $\textbf{Weiner Kinchein revisit:}$ Consider a set of experimental data
+represented by $f(t)$ for $t\in[0,T]$, ie. we aquire data for a
+time $T$. Then it makes sense to define the Fourier transforms as\[
+\tilde{f}(\omega)=\frac{1}{\sqrt{T}}\int_{t=0}^{T}f(t)e^{-i\omega t}dt\]
+ We still take\[
+S_{p}(\omega)=\tilde{f}(\omega)^{*}\tilde{f}(\omega)\]
+ Note that $S_{p}$ now has units of $[f^{2}T]$ or $f^{2}/\textrm{Hz}$.
+This is called a $\textbf{power spectral density}$. Now the WK theorem
+reads\[
+\int_{\Omega=0}^{\infty}S_{e}(\Omega)\:\cos\left(\Omega\tau\right)\:\frac{d\Omega}{2\pi}=\frac{1}{T}\int_{t}f(t)f(t+\tau)\: dt\]
+ The thing on the right hand side is the autocorrelation function
+of $f$. The prefactor normalizes the correlation. Because we now
+have this normalization we can replace this autocorrelation with an
+$\emph{ensemble}$ average:\[
+\frac{1}{T}\int_{t}f(t)f(t+\tau)\: dt=\langle f(0)f(\tau)\rangle\]
+ where the equality of these two {}``averages'' is the definition
+of an $\textbf{ergodic}$ process, and the enemble average can be
+written as $\langle f(0)f(\tau)\rangle$ if we assume the process
+is $\textbf{stationary}$. All in all this gives us\[
+\int_{\Omega=0}^{\infty}S_{e}(\Omega)\:\cos\left(\Omega\tau\right)\:\frac{d\Omega}{2\pi}=\langle f(0)f(\tau)\rangle\]
+
+\end{itemize}
+
+\section{Delta functions}
+
+\begin{equation}
+\int T \frac{\sin \left( \omega T / 2 \right)}{\left( \omega T / 2 \right)} \frac{d\omega}{2\pi} = 1 \end{equation}
+
+\end{document}

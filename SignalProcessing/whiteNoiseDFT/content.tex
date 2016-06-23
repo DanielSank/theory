@@ -1,0 +1,168 @@
+When demodulating a signal with a discrete Fourier transform (DFT) one must carefully analyze the effect of noise.
+The incoming signal will in general be given by \begin{equation}
+V_{n}=s_{n}+\xi_{n} \end{equation}
+where $s_{n}$ is the desired signal and $\xi_{n}$ is the noise.
+
+\section{White noise}
+
+We consider first the case of white noise.
+At true white noise process has the unique property that the correlation between noise values at two different points in time is identically zero.
+This property is crucial to the calculation, as will be seen below.
+However, in most signal processing applications, such a process does not truly exist.
+A noise source with constant spectral density at all frequencies would emit an infinite power, which is not physically possible.
+Johnson-Nyquist noise, which is typically considered to be white, rolls off above a certain cutoff frequency \cite{Nyquist:noise1928}.
+Even the ``quantum noise'' attributed to quantum measurement statistics is usually not white in practice because the transfer functions of detection hardware shape the noise spectral density.
+This is particularly true in the context of digital acquisition hardware where anti-aliasing filters restrict the noise spectral density to frequencies below one half the sampling rate.
+In those systems, the assumption that the noise samples are uncorrelated is clearly incorrect.
+Nevertheless, we consider white noise here for several reasons.
+First, the calculation of the statistics of the DFT of true white noise can be done analytically.
+This will provide formulae against which we compare numerical results obtained for the realistic case of correlated noise.
+Second, applications with true white noise do exist.
+For example, repeated measurements of a quantum 2 level system will involve white noise from the randomness of the quantum measurement.
+On each repetition of the experiment, a given superposition state $\alpha \ket{0} + \beta \ket{1}$ yields a random result 0 or 1.
+The values measured on subsequent experiments are uncorrelated in principle, with correlations arising only through correlated errors in state preparation and measurement.
+
+Assuming that the noise is Gaussian distributed with a white power spectrum, the random variables $\xi_{n}$ are distributed according to a Gaussian curve and each value of $\xi_{n}$ is independent of all the others.
+When we say that $\xi_{n}$ is Gaussian distributed what we mean is that if you pick a value of $n$ the value of $\xi_{n}$ is random, but is distributed as \begin{equation}
+p_{\xi_{n}}(\xi)=\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left[-\frac{\xi^{2}}{2\sigma^{2}}\right]\equiv G_{\sigma}(\xi) \nonumber . \end{equation}
+The DFT of this signal is\begin{equation}
+V_{k}=\sum_{n=1}^{N}\left(s_{n}+\xi_{n}\right)e^{-i2\pi kn/N} . \end{equation}
+The DFT is linear, so we may compute each term separately.
+The noise part is  \begin{equation}
+\xi_{k}=\sum_{n=1}^{N}\xi_{n}e^{-i2\pi kn/N} . \end{equation}
+
+Because each DFT coefficient $\xi_k$ is given as a sum, its distribution is given as the convolution of the terms in the sum.
+This gives us a clear path to work the calculation: write down the distributions of the terms in the sum, then convert to the Fourier domain and compute the convolution, and finally Fourier transform back to the time domain.
+
+Consider first only the distribution of the real part,\begin{eqnarray}
+\Re\xi_{k} & = & \sum_{n=1}^{N}\xi_{n}\cos\left[2\pi nk/N\right] \nonumber \\
+\Re\xi_{k} & = & \sum_{n=1}^{N}x_{n}\label{eq:sum}\end{eqnarray}
+where we've defined $x_{n}\equiv\xi_{n}\cos\left[2\pi nk/N\right]$.
+Note that the summands $x_{n}$ are random variables.
+What is the distribution of $x_{n}$?
+For any random variable $x$ with distribution $p_{x}(x)$ the distribution of the scaled variable $Ax$ is simply $p_{Ax}(y)=\frac{1}{A}p_{x}(y/A)$.
+Therefore the distribution of the summand $x_{n}$ is\begin{equation}
+p_{x_{n}}(x) = \frac{1}{c_{n,k}}p_{\xi_{n}}(x/c_{n,k})=\frac{1}{c_{n,k}}G_{\sigma}(x/c_{n,k}) \end{equation}
+where we've abbreviated $c_{n,k}\equiv\cos\left[2\pi nk/N\right]$.
+Because of the form of the Gauss function this simplifies to \begin{equation}
+p_{x_{n}}(x)=G_{\sigma c_{n,k}}(x) . \label{eq:summandDistribution} \end{equation}
+
+We want to compute the distribution of the summed quantity in (\ref{eq:sum}).
+To do this we use the fact that the probability distribution of a quantity that is a sum of random variables is the convolution of the distributions of the summands.
+Using this fact on (\ref{eq:sum}) gives\begin{equation}
+p_{\Re\xi_{k}}=p_{x_{1}}\otimes p_{x_{2}}\otimes\cdots\otimes p_{x_{N}}\label{eq:convolution}\end{equation}
+where $\otimes$ denotes convolution.
+This multiple convolution is made easy by going to the Fourier transform, because the Fourier transform of a convolution is the product of the Fourier transforms of the things being convolved.
+In other words,\begin{equation}
+\mathcal{F}\left[p_{\Re\xi_{k}}\right]=\prod_{n=1}^{N}\mathcal{F}\left[p_{x_{n}}\right] . \label{eq:convolutionProduct} \end{equation}
+Inserting the form of $p_{x_{n}}$ from (\ref{eq:summandDistribution}) gives\begin{equation}
+\mathcal{F}\left[p_{\Re\xi_{k}}\right]=\prod_{n=1}^{N}\mathcal{F}\left[G_{\sigma c_{n,k}}\right] . \label{eq:convolvedGaussians}\end{equation}
+This is particularly convenient because the Fourier transform of a Gaussian function is just another Gaussian with the reciprocal width,\begin{displaymath}
+\mathcal{F}\left[G_{\sigma}(x)\right] = G_{1/\sigma} . \end{displaymath}
+Therefore (\ref{eq:convolvedGaussians}) becomes\begin{equation}
+\mathcal{F}\left[p_{\Re\xi_{k}}\right]=\prod_{n=1}^{N}G_{1/(\sigma c_{n,k})} . \end{equation}
+Writing this out explicitly we get\begin{eqnarray*}
+\mathcal{F}\left[p_{\Re\xi_{k}}\right](q) & = & \prod_{n=1}^{N}\sqrt{\frac{\sigma^{2}c_{n,k}^{2}}{2\pi}}\exp\left[-\frac{q^{2}}{2}\sigma^{2}c_{n,k}^{2}\right]\\
+& = & \left(\frac{\sigma^{2}}{2\pi}\right)^{N/2}\left(\prod_{n=1}^{N}c_{n,k}\right)\cdots\\
+&  & \cdots\exp\left[-\frac{q^{2}}{2}\sigma^{2}\sum_{n=1}^{N}\cos\left[2\pi nk/N\right]^{2}\right] . \end{eqnarray*}
+The factors preceding the exponential are independent of $q$ and are therefore just a normalization constant.
+The exponential part is just a gaussian in $q$ with width $\left(\sigma^{2}\sum_{n=1}^{N}\cos\left[2\pi nk/N\right]^{2}\right)^{-1/2}$.
+The sum can be done explicitly and is equal to $N/2$.
+Therefore \begin{equation}
+\mathcal{F}\left[p_{\Re\xi_{k}}\right]\propto G_{\left(\sigma^{2}N/2\right)^{-1/2}}\end{equation}
+and performing the inverse Fourier transform gives us\begin{equation}
+p_{\Re\xi_{k}}=G_{\sigma\sqrt{N/2}} . \label{eq:unNormalizedRealPartDistribution} \end{equation}
+We have therefore computed the probability distribution of the real part of the Fourier transform of a white noise signal.
+The imaginary part has exactly the same distribution.
+Note that the result is independent of the demodulation frequency $k$ which is a reflection of the fact that we're considering uncorrelated white noise.
+
+Intuition (and experience) says that more data gives better signal to noise ratio, but we found that the distribution of the noise Fourier transform becomes $\emph{wider}$ as more data points are collected.
+The reason for this discrepancy is that we didn't normalize the Fourier transform.
+When measuring a single tone signal $s_{n}$, we have to normalize the DFT in order to get a measured Fourier amplitude that is independent of the number of measured points, \begin{equation}
+s_{k}=\frac{1}{N}\sum_{n=1}^{N}s_{n}e^{-i2\pi nk/N} . \end{equation}
+If we use this normalized quantity in the calculation of the noise Fourier amplitude,\begin{equation}
+\xi_{k}=\frac{1}{N}\sum_{n=1}^{N}\xi_{n}e^{-i2\pi kn/N}\end{equation}
+then the distribution of the real part winds up being\begin{equation}
+p_{\Re\xi_{k}}=G_{\sigma / \sqrt{2N}}\label{eq:normalizedRealPartDistribution}\end{equation}
+which becomes sharper as $N$ increases, in agreement with the idea that the noise should go down as more data is collected.
+
+There is a simple way to remember these results.
+The incoming noise signal had a squared width given by $\sigma^{2}$.
+This is proportional to the power per bandwidth of the incoming signal.
+If we measure $N$ points of this noise signal the total power should scale with $N$.
+Then, if we only look at one of the two resulting components, ie. the real part, we should find half the power.
+Therefore, the squared width of the distribution of the real part should be $\sigma^{2}N/2$ which agrees with (\ref{eq:unNormalizedRealPartDistribution}). 
+
+\subsection{Distribution of $r^2$}
+
+We have shown that the real and imaginary parts of the Fourier transform are Gaussian distributed random variables with width $\sigma/\sqrt{2N}$.
+We now calculate the distribution of the mod square of the Fourier transform.
+Define the mod square as \begin{equation}
+r^2 = \Re \xi_k ^2 + \Im \xi_k ^2 . \end{equation}
+To compute the distribution of the mod square we first compute the distributions of the squares of the real and imaginary parts.
+We will then use the convolution rule to find the distribution of their sum. For the sake of compact notation let $x \equiv \Re \xi _k$.
+
+To compute the distribution of the square of a random variable we use the general formula for computing the distribution of a variable defined as an arbitrary function of another random variable. For a variable $Y$ defined by $y = g(x)$ we have \begin{equation}
+p_Y(y) = p_X \left( g^{-1}(y) \right) \left| Dg^{-1}(y) \right| \end{equation}
+In our case where $g(x) = x^2$, we find $dg^{-1}(x)/dx \propto 1/\sqrt{x}$.
+This leads to \begin{eqnarray}
+p_{X^2}(\alpha) &\propto& G_{\sigma / \sqrt{2N}}(g^{-1}(\alpha)) \, \frac{1}{\sqrt{\alpha}} \\
+&\propto& \exp \left[ -\frac{\alpha}{\sigma^2 / N} \right] \frac{1}{\sqrt{\alpha}} \label{eq:xSquaredDistribution} \end{eqnarray}
+for positive $\alpha$ and zero otherwise.
+From symmetry considerations it's clear that the square of the imaginary part has the same distribution.
+The distribution of the mod square is therefore given by the convolution of the function found in Eq. (\ref{eq:xSquaredDistribution}) with itself; the result is \begin{equation}
+p_{r^2}(\alpha) = \frac{1}{\sigma^2/N} \exp\left[-\frac{\alpha}{\sigma^2/N}\right] . \end{equation}
+Therefore the distribution of the squared modulus of the Fourier component is exponentially distributed.
+
+From this last result we can compute the mean of the square of the Fourier coefficient,\begin{equation}
+\langle |\xi_k|^2 \rangle = \frac{\sigma^2}{N} . \end{equation}
+
+\subsection{Distribution of $r$}
+
+From the distribution of $r^2$ we compute the distribution of $r$ using the transformation rule.
+Taking $g(x) = \sqrt{x}$ and using the transformation rule, we find
+\begin{equation}
+P_r(r) = \left( \frac{2}{\sigma^2/N} \right) r \exp \left[ - \frac{r^2}{\sigma^2/N} \right] \, .
+\end{equation}
+From this it follows that
+\begin{equation}
+\langle \left \lvert \xi_k \right \rvert \rangle = \frac{\sigma}{2} \sqrt{\frac{\pi}{N}} \, .
+\end{equation}
+
+\section{Correlated noise}
+
+We now turn to the case of correlated noise.
+Because the noise is correlated, the values $\xi_n$ are no longer statistically independent.
+This means that we cannot use the multiple convolutions trick we used in the white noise case.
+
+We begin by stepping back to the definition of the DFT.
+The real part of the DFT of the noise is \begin{equation}
+\Re \xi_k = \sum_{n=1}^{N} \xi_n \cos \left[ 2\pi n k / N \right] . \end{equation}
+The Fourier coefficients $\Re \xi_k$ are expressed as a sum of random variables.
+Therefore, the central limit theorem guarantees that the distribution of $\Re \xi_k$ can be approximated by a Gaussian distribution as long as $N$ is sufficiently large.
+In particular, $N$ must be large enough that the correlations time of $\xi_n$ is small compared to $N$.
+Working under the assumption that we are in this limit, $\Re \xi_k$ are Gaussian distributed and we need only compute the variance.
+Note, however, that even if this assumption is not completely valid, a Gaussian distribution with the calculated variance should at least approximate the true distribution.
+
+The variance of $\Re \xi_k$ is
+\begin{align}
+\langle \Re \xi_k \Re \xi_l \rangle &= \frac{1}{N^2} \sum_{n,m=0}^{N-1} \langle \xi_n \xi_m \rangle \nonumber \\
+& \cos\left(2 \pi n k / N \right) \cos \left( 2 \pi m l / N \right) ,
+\end{align}
+where $\langle \cdot \rangle$ indicates an ensemble average.
+Our crucial observation is that $\langle \xi_n \xi_m \rangle$ is, by definition, the auto-correlation function of the noise.
+The Wiener-Khinchin theorem relates the auto-correlation function of a process $x$ to its spectral density \begin{align}
+\rho_x(\tau) & \equiv \langle x(0) x(\tau) \rangle \\
+& = \int_0^{\infty} S^e_x(\omega)\,\cos\left( \omega \tau \right) \frac{d\omega}{2\pi} . \label{eq:sec:correlatedNoise:wienerKhinchin} \end{align}
+The superscript $e$ on $S^e_x$ is a reminder that this is an ``engineer's'' spectral density, defined for only positive frequency.
+In other words, the total power $P$ in the process is \begin{equation}
+P = \int_{0}^{\infty} S^e_x(\omega) \frac{d\omega}{2\pi} . \end{equation}
+Note that $\rho(\tau) = \rho(-\tau)$.
+Denoting the digital sampling time interval by $\delta t$ and assuming that the autocorrelation is invarient under time shift of both measurements, we can rewrite the correlation as \begin{equation}
+\langle \xi_n \xi_m \rangle = \langle \xi(n\delta t) \xi(m\delta t \rangle = \rho_{\xi}(\delta t \left| n - m \right|) . \end{equation}
+Using this expression we can finally write the variance of $\Re \xi_k$ as \begin{align}
+\langle \Re \xi_k \Re \xi_l \rangle &= \nonumber \\
+\frac{1}{N^2} \sum_{n,m=0}^{N-1} & \rho_{\xi}(\delta t \left| n - m \right|) \cos \left( 2\pi n k / N \right) \cos \left( 2\pi m l / N \right) . \label{eq:sec:correlatedNoise:doubleSum} \end{align}
+
+In practice, $\rho_{\xi}$ is calculated via Eq.\,(\ref{eq:sec:correlatedNoise:wienerKhinchin}), with $S^e$ determined by the transfer function of analog filters placed before the digitizer inputs.
+Once $\rho_{\xi}$ is known, the double sum in Eq.\,(\ref{eq:sec:correlatedNoise:doubleSum}) can be done numerically (although see Ref.\,\cite{Schoukens:DFTNoise1986} for examples where the sum can be done analytically).
