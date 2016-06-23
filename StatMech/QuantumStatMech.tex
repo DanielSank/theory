@@ -1,0 +1,72 @@
+%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,aps,manuscript]{revtex4}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amstext}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\@ifundefined{textcolor}{}
+{%
+ \definecolor{BLACK}{gray}{0}
+ \definecolor{WHITE}{gray}{1}
+ \definecolor{RED}{rgb}{1,0,0}
+ \definecolor{GREEN}{rgb}{0,1,0}
+ \definecolor{BLUE}{rgb}{0,0,1}
+ \definecolor{CYAN}{cmyk}{1,0,0,0}
+ \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+ \definecolor{YELLOW}{cmyk}{0,0,1,0}
+ }
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+\title{Thermodynamic Green's Functions}
+
+\maketitle
+
+\section{Fundamentals}
+
+
+\subsection{Definitions}
+
+\[
+G(\alpha,\alpha')=\frac{1}{i}\langle T\left(\psi(\alpha)\psi^{\dagger}(\alpha')\right)\rangle\]
+
+
+\[
+G_{2}(\alpha\beta,\alpha'\beta')=\frac{1}{i^{2}}\langle T\left(\psi(\alpha)\psi(\beta)\psi^{\dagger}(\beta')\psi^{\dagger}(\alpha')\right)\rangle\]
+Here $T$ is the time order operator that puts everything so that
+the earliest times are on the right. It introduces a minus for each
+elementry permutation when dealing with fermions. For example,\begin{eqnarray*}
+T\left(\psi(\alpha)\psi^{\dagger}(\alpha')\right) & = & \psi(\alpha)\psi^{\dagger}(\alpha')\quad\textrm{for}\; t_{\alpha}>t_{\alpha'}\\
+ &  & \pm\psi^{\dagger}(\alpha')\psi(\alpha)\quad\textrm{for}\; t_{\alpha}<t_{\alpha'}\end{eqnarray*}
+We also define correlation functions\begin{eqnarray*}
+G^{>}(\alpha,\alpha') & = & \frac{1}{i}\langle\psi(\alpha)\psi^{\dagger}(\alpha')\rangle\\
+G^{<}(\alpha,\alpha') & =\pm & \frac{1}{i}\langle\psi^{\dagger}(\alpha')\psi(\alpha)\rangle\end{eqnarray*}
+The notation indicates that $G^{>}=G$ in the case that $t_{\alpha}>t_{\alpha'}$
+and that $G^{<}=G$ in the case that $t_{\alpha}<t_{\alpha'}$.
+
+
+\subsection{Boundary Condition}
+
+\[
+G^{<}(\alpha,\alpha')|_{t_{\alpha}=0}=\pm e^{\beta\mu}G^{>}(\alpha,\alpha')|_{t_{\alpha}=-i\beta}\]
+This is proved by algebra on the definitions,\begin{eqnarray*}
+G^{<}(\alpha,\alpha')|_{t_{\alpha}=0} & = & \pm\frac{1}{i}\langle\psi^{\dagger}(\alpha')\psi(\alpha)\rangle\\
+ & = & \pm\frac{1}{i}\frac{\textrm{Tr}\left[e^{-\beta(H-\mu N)}\psi^{\dagger}(r_{\alpha'},t_{\alpha'})\psi(r_{\alpha},0)\right]}{\textrm{Tr}\left[e^{-\beta(H-\mu N)}\right]}\\
+\textrm{cyclicity of the trace} & = & \pm\frac{1}{i}\frac{\textrm{Tr}\left[e^{-\beta(H-\mu N)}\left\{ e^{\beta(H-\mu N)}\psi(r_{\alpha},0)e^{-\beta(H-\mu N)}\psi^{\dagger}(r_{\alpha'},t_{\alpha'})\right\} \right]}{\textrm{Tr}\left[e^{-\beta(H-\mu N)}\right]}\\
+ & = & \pm\frac{1}{i}\langle e^{\beta(H-\mu N)}\psi(r_{\alpha},0)e^{-\beta(H-\mu N)}\psi^{\dagger}(r_{\alpha'},t_{\alpha'})\rangle\end{eqnarray*}
+Assuming that $N$ and $H$ commute we can use\[
+e^{-\beta\mu N}\psi(r_{\alpha},0)e^{\beta\mu N}=e^{\beta\mu}\psi(r_{\alpha},0)\]
+and\[
+e^{\beta H}\psi(r_{\alpha},0)e^{-\beta H}=\psi(r_{\alpha},-i\beta)\]
+to get\begin{eqnarray*}
+G^{<}(\alpha,\alpha')|_{t_{\alpha}=0} & = & \pm\frac{1}{i}e^{\beta\mu}\langle\psi(r_{\alpha},-i\beta)\psi^{\dagger}(r_{\alpha'},t_{\alpha'})\rangle\\
+G^{<}(\alpha,\alpha')|_{t_{\alpha}=0} & = & \pm e^{\beta\mu}G^{>}(\alpha,\alpha')|_{t_{\alpha}=-i\beta}\end{eqnarray*}
+
+\end{document}
