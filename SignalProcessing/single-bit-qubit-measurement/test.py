@@ -175,6 +175,7 @@ def test_theory(n, dt, plotfunc=plt.loglog):
     fig = plt.figure()
     ax = fig.add_subplot(111)
 
+    # Sequence of uncorrelated +1 and -1.
     x = (2 * np.random.binomial(1, 0.5, n)) - 1
 
     cs, frequencies = pasp.self_cross_spectrum(x, dt)
