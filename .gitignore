@@ -1,2 +1,4 @@
 *.pdf
 build/
+*.pyc
+
