@@ -6,6 +6,7 @@
 \author{Daniel Sank \\ \small{Google Quantum AI}}
 
 \title{Spectral density of frequency fluctuations using a qubit as a 1-bit detector}
+\date{March 2016}
 
 \begin{document}
 
@@ -124,7 +125,6 @@ The first part is just the spectral density of the underlying angle noise.
 The second part is a frequency independent (i.e. white) noise coming from the fact that for the case $\delta \phi = 0$ we have an \emph{uncorrelated} $1/2$ probability that each measurement shot yields a different qubit state than the previous shot.
 Note that using the full $\sin$ functions would make this result considerably more complicated.
 
-
 The physical, single sided power spectral density $S$ relates to the discrete Fourier transform via
 \begin{equation}
 S_{\delta \phi}(f) = \frac{2T}{N^2} \left| \tilde{\delta \phi}_{k=fT} \right|^2
@@ -141,48 +141,7 @@ S_{\delta \phi}(f) = \frac{2 \delta t^2}{T} \langle \left| \tilde{x}_{k=fT} \rig
 This says that the white noise floor coming from the quantum ``shot noise'' is reduced by taking data faster.
 From this formula we now know how to convert the discrete Fourier transform of the measured $\pm 1$ values to the underlying power spectral density of the qubit angle fluctuations.
 
-\subsection{Full distribution}
-
-Now we attempt to compute the full distribution of $\tilde{x}_k$.
-In fact, we try to compute the distribution of the real part
-\begin{equation}
-\Re \tilde{x}_k = \sum_{n=0}^{N-1} x_n \cos(2\pi n k / N) = \sum_{n=0}^{N-1} \xi_n
-\end{equation}
-where we have defined $\xi_n \equiv x_n \cos(2\pi n k / N)$.
-Using the scaling laws for probability distributions we find
-\begin{align}
-P_{\xi_n}(\xi) &= P_{x_n}(\xi / \cos(2\pi n k / N)) \nonumber \\
-= \frac{1}{2} \bigg[ & \delta \left( \frac{\xi}{\cos(2\pi n k / N)} - 1 \right) (1 + \sin(\delta \phi_n)) \nonumber \\
-+ & \delta \left( \frac{\xi}{\cos(2 \pi n k / N)} + 1 \right) (1 - \sin(\delta \phi_n)) \bigg]
-\end{align}
-The distrubution of a sum of random variables is equal to the convolution of the distributions of the things being summed.
-Therefore,
-\begin{equation}
-P_{\Re\tilde{x}_k} = \bigotimes_{n=0}^{N-1} P_{\xi_n}
-\end{equation}
-where $\otimes$ indicates convolution.
-Convolution is difficult, so instead we work with the Fourier transform.\footnote{We use the Fourier transform convention $\mathcal{FT}(f)(\nu) = \int dx \, f(x) e^{-i 2 \pi x \nu}$.}
-The Fourier transform of a convolution is the product of the Fourier transforms, so
-\begin{equation}
-\mathcal{FT}(P_{\Re \tilde{x}_k}) = \prod_{n=0}^{N-1} \mathcal{FT}(P_{\xi_n}) \, .
-\end{equation}
-Fortunately the Fourier transform of $P_{\xi_n}$ is quite simple
-\begin{align}
-\mathcal{FT}(P_{\xi_n})(\nu) = \frac{1}{2}
-\bigg[
-& e^{-i 2 \pi \nu \cos(2\pi n k / N)}(1 + \sin(\delta \phi_n)) \nonumber \\
-+ & e^{ i 2 \pi \nu \cos(2\pi n k / N)}(1 - \sin(\delta \phi_n))
-\bigg] \nonumber \\
-= & \cos(2\pi \nu \cos(2\pi n k / N)) \nonumber \\
-- i & \sin(2\pi \nu \cos(2 \pi n k / N))\sin(\delta \phi_n) \, .
-\end{align}
-Finally we have
-\begin{align}
-\mathcal{FT}(P_{\Re \tilde{x}_k})(\nu) = & \prod_{n=0}^{N-1} \nonumber \\
-& \cos(2 \pi \nu \cos(2 \pi n k / N)) \nonumber \\
-& - i \sin(2 \pi \nu \cos(2 \pi n k / N))\sin(\delta \phi_n) \, .
-\end{align}
-At this point I am stuck, but since we have the mean square calculation we don't really need this anyway.
+% \input{full_distribution}
 
 \section{Data processing}
 
