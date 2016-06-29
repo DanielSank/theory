@@ -222,6 +222,7 @@ def test_theory(n, dt, plotfunc=plt.loglog):
 
     ax.grid(which='both')
     lgnd = ax.legend(loc='lower left', numpoints=1, prop={'size':30})
-    ax.set_xlabel('Frequency')
-    ax.set_ylabel('Cross spectrum')
+    ax.set_xlabel('Frequency', fontsize=32)
+    ax.set_ylabel('Cross spectrum', fontsize=32)
+    ax.tick_params(axis='both', which='major', labelsize=32)
 
