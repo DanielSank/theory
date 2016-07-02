@@ -1,0 +1,15 @@
+The various methods are divided into two basic types.
+Methods of the first type use control pulse sequences such that the probability to find the qubit in the excited state at the end of the sequence is a function of the length of the sequence and of a particular integral of the noise spectral density.
+In general, if the qubit is subjected to a particular pulse sequence like a spin-echo or Rabi sequence, the probability of finding the qubit in $\ket{1}$ is
+\begin{equation}
+p_{\ket{1}}(t) = \frac{1}{2} \left( 1 + \exp \left[ -\frac{1}{2} \avg{\phi^2}(t) \right] \right)
+\end{equation} 
+where
+\begin{equation}
+\avg{\phi^2 (t)} \equiv \left( \frac{d \omega_q}{d \lambda} \right)^2 t \int_{f_\text{min} t}^{f_\text{max} t} S_\lambda (z/t) W(f,t) \, dz
+\end{equation}
+and $W(f, t)$ is a weight function which depends on the pulse sequence.
+For example, for the Rabi sequence with a Rabi oscillation frequency of $f_\text{Rabi}$ we have
+\begin{equation}
+W_\text{Rabi}(f,t) = \left( \frac{z / (f_\text{Rabi} t)}{1 - \left(z / f_\text{Rabi} t \right)^2} \right) \left( \frac{\sin(\pi z)}{\pi z} \right)^2 \, .
+\end{equation}
