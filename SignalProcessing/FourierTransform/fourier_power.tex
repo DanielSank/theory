@@ -1,0 +1,70 @@
+\documentclass{article}
+
+\input{../../TeX/packages}
+\input{../../TeX/macros}
+
+\title{What does the Fourier transform tell us about spectral density?}
+\author{Daniel Sank \\ \small{Google Quantum AI}}
+
+\begin{document}
+
+\maketitle
+
+Consider a noise process $X$.
+The mean power over a time interval $\{-T/2,T/2\}$ is defined as
+\begin{equation}
+P = \frac{1}{T} \avg{\int_{-T/2}^{T/2} \abs{x(t)} \, dt}
+\end{equation}
+where the average is taken over realizations $x(t)$ of the noise.
+This realization can be written as a Fourier transform,
+\begin{equation}
+x(t) \equiv
+\tilde{x}(\omega) e^{i \omega t} \, \frac{d \omega}{2\pi} \, .
+\end{equation}
+Let's use this to rewrite the mean power:
+\begin{align}
+P
+&= \frac{1}{T}\avg{
+\int_{-T/2}^{T/2} dt
+\int \frac{d\omega}{2\pi}
+\int \frac{d\omega'}{2\pi}
+\tilde{x}(\omega) \tilde{x}(\omega')^*
+e^{i(\omega - \omega')t}} \nonumber \\
+&= \int \int \frac{d\omega}{2\pi} \frac{d\omega'}{2\pi}
+\avg{\tilde{x}(\omega)\tilde{x}(\omega')^*}
+\frac{\sin(T(\omega - \omega')/2)}{T (\omega - \omega')/2} \, .
+\end{align}
+Suppose we filter the signal so that only frequencies near $\pm \Omega$ remain, which we represent by restricting the frequency integrals to a range, say, of $\{\Omega-\Delta \omega, \Omega+\Delta \omega\}$ and $\{-\Omega - \Delta \omega, -\Omega + \delta \omega\}$.
+This gives four little squares in the $\omega/\omega'$ plane over which we ned to do the integral.
+However the $\sin(x)/x$ function is strongly peaked at $x=0$, so we actually only need to integrate over the patches where $\omega$ and $\omega'$ are both positive or both negative.
+Focusing on the positive case and defining $\omega = \Omega + p$ and $\omega' = \Omega + q$, we have
+\begin{align}
+P_+ &=
+\int_{-\Delta \omega/2}^{\Delta\omega/2}
+\int_{-\Delta \omega/2}^{\Delta\omega/2}
+\frac{dp}{2\pi} \frac{dq}{2\pi}
+\avg{\tilde{x}(\Omega+p)\tilde{x}(\Omega+q)^*} \frac{\sin(T(p-q)/2)}{T(p-q)/2} \nonumber \\
+(\text{assume }\Delta \omega \ll T) \quad &=
+\frac{1}{T} \int_{-\Delta \omega/2}^{\Delta \omega / 2}
+\frac{dp}{2\pi} \avg{\tilde{x}(\Omega + p) \tilde{x}(\Omega + p)^*} \nonumber \\
+&= \frac{\avg{\abs{\tilde{x}(\Omega)}^2}}{T} \frac{\Delta \omega}{2 \pi}
+\end{align}
+where in the last line we assumed that $\tilde{x}$ is relatively constant over frequency width $\Delta \omega$.
+If we were to repeat the computation for the $-\Omega$ region we'd get the same answer, so in the end the power is
+\begin{equation}
+P = 2 \frac{\avg{\abs{\tilde{x}(\Omega)}^2}}{T} \frac{\Delta \omega}{2\pi} \, .
+\end{equation}
+Therefore, we can \emph{estimate} the power in a certain frequency band as twice the mod square of the Fourier transform of the acquired signal, divided by the acquisition time.
+The factor of two comes in because we're used a double sided Fourier transform.
+
+If we define a spectral density $S$ as the power per bandwidth of the signal, then we've shown here that
+\begin{equation}
+2 \frac{\abs{\tilde{x}(\Omega)}^2}{T} \text{ is an estimator for } S(\omega) \, .
+\end{equation}
+
+Note we implicitly assumed that $\Omega \gg 1/T$ when we said that the four frequency regions could be considered separately.
+Our analysis fails at frequencies lower than $1/T$.
+This is a recurring theme in signal analysis: the acquisition time sets the frequency resolution.
+We'll see more about this later one when we study spectral leakage.
+
+\end{document}
