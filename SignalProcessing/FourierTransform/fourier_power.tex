@@ -13,13 +13,13 @@
 Consider a noise process $X$.
 The mean power over a time interval $\{-T/2,T/2\}$ is defined as
 \begin{equation}
-P = \frac{1}{T} \avg{\int_{-T/2}^{T/2} \abs{x(t)} \, dt}
+P = \frac{1}{T} \avg{\int_{-T/2}^{T/2} \abs{x(t)}^2 \, dt}
 \end{equation}
 where the average is taken over realizations $x(t)$ of the noise.
-This realization can be written as a Fourier transform,
+A given realization can be written as a Fourier transform,
 \begin{equation}
 x(t) \equiv
-\tilde{x}(\omega) e^{i \omega t} \, \frac{d \omega}{2\pi} \, .
+\int \tilde{x}(\omega) e^{i \omega t} \, \frac{d \omega}{2\pi} \, .
 \end{equation}
 Let's use this to rewrite the mean power:
 \begin{align}
