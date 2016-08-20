@@ -36,6 +36,22 @@ def white_noise_modulus_cdf(r, sigma, n):
     return 1 - np.exp(-r**2 / q)
 
 
+def white_noise_modulus_squared_pdf(r_squared, sigma, n):
+    """Probability density of the mod square of a white noise DFT coefficient.
+
+    Args:
+        r_squared (float): Mod square at which to compute the PDF.
+        sigma (float): Standard deviation of the time domain signal from whence
+            came the DFT coefficients.
+        n (int): Number of points in the time domain signal
+
+    Returns:
+        (float): Probability density at the provided mod square value.
+    """
+    q = sigma**2 / n
+    return (1 / q) * np.exp(-r_squared / q)
+
+
 def white_noise_product_modulus_pdf(r, sigma, n):
     """PDF of modulus of product of two white noise DFT coefficients.
 
@@ -107,6 +123,26 @@ def test_white_noise_modulus_pdf(n):
 
     plt.semilogy(bin_centers, h, '.', markersize=8)
     plt.semilogy(bin_centers, expected, 'r-')
+
+
+def test_white_noise_modulus_squared_pdf(n, sigma=1, plot_func=plt.semilogy):
+    """Like the previous function, but for the mod square."""
+    x = np.random.normal(0, sigma, n)
+    ft_x = np.fft.fft(x) / n
+    r_x_squared = np.abs(ft_x)**2
+
+    h, bin_edges = np.histogram(r_x_squared, bins=500)
+    bin_width = bin_edges[1] - bin_edges[0]
+    bin_centers = np.convolve(
+            bin_edges, np.array([0.5, 0.5]), mode='valid')
+
+    expected = white_noise_modulus_squared_pdf(
+            bin_centers,
+            sigma,
+            n) * n * bin_width
+
+    plot_func(bin_centers, h, '.', markersize=8)
+    plot_func(bin_centers, expected, 'r-')
 
 
 def test_white_noise_product_modulus_pdf(n):
