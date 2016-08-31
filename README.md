@@ -5,8 +5,7 @@ If something won't build, doesn't make sense, or if you would like to ask any qu
 
 ## How to download
 
-`$ git clone https://github.com/DanielSank/theory`
+`$ git clone https://github.com/DanielSank/theory.git --recursive`
 
-Note that this repository uses a git [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-If you clone this repository with a vanilla git setup, you'll have a `TeX` subdirectory with nothing in it.
-You can either configure git to automatically pull the submodule contents, or you can do it manually as described in the link.
+The `--recursive` flag ensures that git pulls down the necessary submodules (I use a submodule for my TeX packages and macros).
+More information about submodules is available here: [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
