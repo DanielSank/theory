@@ -5,7 +5,7 @@ If something won't build, doesn't make sense, or if you would like to ask any qu
 
 ## How to download
 
-`$ git clone https://github.com/DanielSank/theory.git --recursive`
+`$ git clone --recursive https://github.com/DanielSank/theory.git`
 
 The `--recursive` flag ensures that git pulls down the necessary submodules (I use a submodule for my TeX packages and macros).
 More information about submodules is available here: [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
