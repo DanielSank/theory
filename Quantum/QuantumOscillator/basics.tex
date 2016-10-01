@@ -2,11 +2,17 @@
 
 The general form of the Hamiltonian for a harmonic oscillator is \begin{equation}
 H = \frac{1}{2} \alpha u^2 + \frac{1}{2} \beta v^2 \qquad [u,v]= i \gamma . \end{equation}
-Using dimensionless operators \begin{align}
-X \equiv \frac{1}{\sqrt{2 \gamma}} \left( \frac{\alpha}{\beta}\right)^{1/4}\,u &\quad \textrm{and} \quad Y \equiv \frac{1}{\sqrt{2 \gamma}} \left( \frac{\beta}{\alpha} \right)^{1/4}\,v \\
-[X,Y] &= i/2 \end{align}
-we get a new form of the Hamiltonian \begin{equation}
-H = \gamma \sqrt{\alpha \beta} \left[ X^{2} + Y^{2} \right] .
+Using dimensionless operators
+\begin{align}
+X \equiv \frac{1}{\sqrt{2 \gamma}} \left( \frac{\alpha}{\beta}\right)^{1/4}\,u
+&\quad \textrm{and} \quad
+Y \equiv \frac{1}{\sqrt{2 \gamma}} \left( \frac{\beta}{\alpha} \right)^{1/4}\,v 
+\end{align}
+we get
+\begin{equation}
+H = \gamma \sqrt{\alpha \beta} \left[ X^{2} + Y^{2} \right],
+\qquad
+[X,Y] = i/2 \, .
 \end{equation}
 We also introduce raising and lowering operators $a$ and $a^{\dagger}$ defined by the following equations \begin{align}
 a = X+iY &\qquad a^{\dagger} = X-iY \nonumber \\
@@ -18,18 +24,27 @@ Writing down the expression for $a^{\dagger}a$ and expanding it in terms of the 
  & = \gamma\sqrt{\alpha\beta} \left(X^2 + Y^{2} + i \left[ X,Y \right] \right)\\
  & = \gamma\sqrt{\alpha\beta} \left(X^2 + Y^{2} - 1/2 \right)\\
  & = H - \frac{1}{2}\gamma\sqrt{\alpha\beta} \\
-\textrm{so}\qquad H & = \left( a^{\dagger}a + \frac{1}{2} \right) \gamma\sqrt{\alpha\beta}. \end{align*}
-It will be shown below from Heisenberg's equations of motion that \begin{equation}
-\hbar\omega=\gamma\sqrt{\alpha\beta} \end{equation}
-which means that the Hamiltonian can be written as \begin{equation}
-H=\hbar\omega\left(a^{\dagger}a+\frac{1}{2}\right). \end{equation}
+\textrm{so}\qquad H & = \gamma\sqrt{\alpha\beta} \left( a^{\dagger}a + \frac{1}{2} \right) \, .
+\end{align*}
+It will be shown below from Heisenberg's equations of motion that the frequency of oscillation $\omega$ is related to the other constants via
+\begin{equation}
+\hbar\omega=\gamma\sqrt{\alpha\beta} \, ,
+\end{equation}
+which means that the Hamiltonian can be written
+\begin{equation}
+H=\hbar\omega\left(a^{\dagger}a+\frac{1}{2}\right) \, .
+\end{equation}
 
 \subsection{Zero point fluctuation}
 
-The zero point fluctuation of $X$ is \begin{equation}
-\bbraket{0}{X^2}{0} = \frac{1}{4}\bbraket{0}{a^2 + aa^{\dagger} + a^{\dagger}a + a^{\dagger^2}}{0} = 1/4 \end{equation}\
-which we write compactly as \begin{equation}
-\langle X^2 \rangle_0 = \langle Y^2 \rangle_0 = 1/4 . \end{equation}
+The zero point fluctuation of $X$ is
+\begin{equation}
+\bbraket{0}{X^2}{0} = \frac{1}{4}\bbraket{0}{a^2 + aa^{\dagger} + a^{\dagger}a + a^{\dagger^2}}{0} = 1/4
+\end{equation}
+which we write compactly as
+\begin{equation}
+\langle X^2 \rangle_0 = \langle Y^2 \rangle_0 = 1/4 \, .
+\end{equation}
 From this, we compute the zero point fluctuations of $u$ and $v$, \begin{equation}
 \langle u^2 \rangle_0 = \frac{1}{2}\gamma \sqrt{\beta / \alpha} \quad \langle v^2 \rangle_0 = \frac{1}{2}\gamma \sqrt{\alpha / \beta} . \end{equation}
 Defining $u_{\textrm{zpf}}^2 \equiv \langle u^2 \rangle_0 $ we have \begin{equation}
@@ -51,8 +66,12 @@ i\hbar d_{t}a & = & [a,H] \\
 & = & \gamma\sqrt{\alpha\beta}\,a \end{eqnarray*}
 giving \begin{equation}
 \dot{a} = -i\frac{\gamma\sqrt{\alpha\beta}}{\hbar}a .\end{equation}
-Solving this simple differential equation yields \begin{equation}
-a(t) = a(0)\exp\left[-i \omega t \right] \quad \textrm{and} \quad a^{\dagger}(t) = a^{\dagger}(0)\exp\left[i \omega t \right] . \end{equation}
+Solving this simple differential equation yields
+\begin{equation}
+a(t) = a(0)\exp\left[-i \omega t \right],
+\quad
+a^{\dagger}(t) = a^{\dagger}(0)\exp\left[i \omega t \right] \, .
+\end{equation}
 where $\omega \equiv \gamma\sqrt{\alpha\beta}/\hbar$ as claimed above.
 Note that the evolution of $a$ in the phase plane is $\emph{clockwise}$, ie. the phasor convention we inherit from Schrodinger's (Heisenberg's) equation has a $-i$.
 This is important interpreting the meaning of positive and negative energy in a quantum calculation.
