@@ -12,13 +12,18 @@ From Kirchoff's laws the equation of motion for the harmonic circuit is found to
 \ddot{\Phi} + \omega_{LC}^2 \Phi = 0 \end{equation}
 where $\omega_{LC}=1/\sqrt{LC}$. This equation of motion is reproduced by the Lagrangian \footnote{Lagrange's equation of motion is $\frac{d}{dt}\left( \frac{\partial L}{\partial \dot{\Phi}} \right) - \frac{\partial L}{\partial \Phi} = 0$.} \begin{equation}
 \mathcal{L} = \frac{1}{2}C\dot{\Phi}^2 - \frac{1}{2L}\Phi^2 \end{equation}
-where $\Phi$ is the flux through the inductor. The momentum conjugate to the flux $\Phi$ is \begin{equation}
-p = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C\dot{\Phi}. \end{equation}
-As $\dot{\Phi}$ is the voltage across the LC circuit, the canonical momentum $p$ is just the charge $Q$ on the capacitor.
+where $\Phi$ is the flux through the inductor. The momentum conjugate to the flux $\Phi$ is
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C\dot{\Phi} = Q \, .
+\end{equation}
+We have denoted the canonical momentum as $Q$ because $\dot{\Phi}$ is the voltage across the LC circuit, so $C \dot{\Phi} = Q$ is the charge on the capacitor.
 Therefore, $\Phi$ and $Q$ are so-called canonically conjugate variables.
 
-The Hamiltonian of the system is \begin{equation}
-H = p\dot{\Phi} - \mathcal{L} = \frac{Q^2}{2C} + \frac{\Phi^2}{2L}. \label{eq:shoHamiltonian} \end{equation}
+The Hamiltonian is
+\begin{equation}
+H = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} \dot{\Phi} - \mathcal{L}
+= \frac{Q^2}{2C} + \frac{\Phi^2}{2L} \, . \label{eq:shoHamiltonian}
+\end{equation}
 If the circuit is sufficiently decoupled from noisy environmental degrees of freedom, it behaves quantum mechanically and we should think of $\Phi$ and $Q$ as operators.
 As they are canonically conjugate we have $[\Phi,Q]=i\hbar$.
 Equation (\ref{eq:shoHamiltonian}) and the commutation relation provide the complete starting point for the study of the LC oscillator in quantum mechanics and the system is studied in generality and detail in \citeinternaltype \citeinternalref{quantumOscillator}.
@@ -28,15 +33,20 @@ H = \hbar \omega_{LC} \left( \frac{1}{2} + a^\dagger a \right)
 \end{equation}
 where
 \begin{equation}
-a \equiv \frac{1}{\sqrt{2\hbar}}\left(
-\frac{1}{\sqrt{Z_{LC}}} \Phi +
-i \sqrt{Z_{LC}} Q \right)
+a \equiv
+\frac{1}{2} \frac{\Phi}{\Phi_\text{zpf}}
++ \frac{1}{2} \frac{Q}{Q_\text{zpf}}
+\end{equation}
+where
+\begin{equation}
+\Phi_\text{zpf} \equiv \sqrt{\frac{\hbar Z_{LC}}{2}} \, ,
+\quad
+Q_\text{zpf} \equiv \sqrt{\frac{\hbar}{2 Z_{LC}}}
 \end{equation}
 and
 \begin{equation}
 Z_{LC} \equiv \sqrt{L/C} \, .
 \end{equation}
-This is the conventional form for a quantum harmonic oscillator.
 
 \begin{figure}
 \begin{centering}
@@ -45,3 +55,4 @@ This is the conventional form for a quantum harmonic oscillator.
 \caption{A parallel LC circuit. The main circuit is shown in solid line, while the driving circuit is shown in dotted line.}
 \label{Fig:singleCircuit}
 \end{figure}
+
