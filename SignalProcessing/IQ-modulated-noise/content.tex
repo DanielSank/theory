@@ -40,7 +40,7 @@ Because $R_{VV}$ depends on $t$, it is impossible in general to construct a spec
 However, we can see that if $R_{ZZ^*}$ were to vanish, then the $t$ dependence would be gone and we would be able to define a spectral density.
 It turns out that this happens in a common practical case, as we now show.
 
-The cross-correlation of $Z$ and $Z^*$ is
+The cross-correlation of $Z$ and $Z^*$ is\footnote{We neglect the $*$'s on the subscripts here because $I$ and $Q$ are real.}
 \begin{align}
 R_{ZZ^*}\
 &= \langle (I(t) + i Q(t))(I(t+\tau) + i Q(t+\tau)) \rangle \\
@@ -57,7 +57,7 @@ R_{ZZ}(\tau)
 &= \langle (I(t) + i Q(t))(I(t+\tau) - i Q(t+\tau)) \rangle \\
 &= R_{II}(\tau) + R_{QQ}(\tau) - i \left( R_{IQ}(\tau) - R_{IQ}(-\tau) \right) \, .
 \end{align}
-With the condition above satisfied this becomes
+With the condition above satisfied this becomes (using $R_{QQ} = R_{II}$)
 \begin{equation}
 R_{ZZ}(\tau) = 2 \left( R_{II}(\tau) - i R_{IQ}(\tau) \right) \, .
 \end{equation}
@@ -68,8 +68,14 @@ R_{VV}(\tau)
 &= R_{II}(\tau) \cos(\Omega \tau) - R_{IQ}(\tau) \sin(\Omega \tau) \, . 
 \end{align}
 Finally, Fourier transforming gives
-\begin{equation}
-S_{ff}(\omega) =
+\begin{align}
+S_{VV}(\omega) &=
 \frac{1}{2} \left[ S_{II}(\omega - \Omega) + S_{II}(\omega + \Omega) \right]
-+ \frac{1}{2i} \left[ S_{IQ}(\omega - \Omega) - S_{IQ}(\omega + \Omega) \right] \, .
-\end{equation}
++ \frac{1}{2i} \left[ S_{IQ}(\omega - \Omega) - S_{IQ}(\omega + \Omega) \right] \\
+&= \frac{1}{2}S_{II}(\omega-\Omega) \, .
+\end{align}
+where in the last line we assumed that $I$ and $Q$ are uncorrelated and that $S_{II}(\omega + \Omega) = 0$, which is true when $\Omega$ is a large RF carrier frequency and $I$ is a lower frequency drive line.
+
+\textbf{Summary:} Given a spectral density $S_{I,Q}(\omega)$ on the $I$ and $Q$ lines driving an IQ mixer, and an LO frequency of $\Omega$, the spectral density of the RF output is $S_\text{RF}(\omega) = S_{I,Q}(\omega - \Omega)/2$.
+Of course, in a real application you have to take the conversion loss of the mixer into account!
+
