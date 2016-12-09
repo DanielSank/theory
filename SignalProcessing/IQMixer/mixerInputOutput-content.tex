@@ -2,20 +2,28 @@
 
 When an IQ mixer is used for modulation (up-conversion) a carrier tone is put into the LO port, and modulating signals are put into the I and Q ports. The input tone $\cos ( \Omega t)$ is multiplied by the I channel, a quarter cycle phase shifted copy of the tone $-\sin ( \Omega t)$ is multiplied by the Q channel, and then both results are summed and put out the RF port.
 
-Consider a case where $I=\cos(\omega t + \phi)$ and $Q=\sin(\omega t + \phi)$. The output of the device is then \begin{eqnarray}
-s(t) &=& \cos(\Omega t)\cos(\omega t + \phi) - \sin(\Omega t)\sin(\omega t + \phi) \nonumber \\
-&=& \frac{1}{2} \left[ \cos([\Omega + \omega]t + \phi) + \cos([\Omega-\omega]t - \phi) \right. \nonumber \\ 
-& & \left. + \cos([\Omega+\omega]t + \phi) - \cos([\Omega-\omega]t-\phi) \right] \label{eq:mixer_input_output:modulation} \nonumber \\
-&=& \cos([\Omega+\omega]t + \phi)
-\end{eqnarray}
-Think of the incoming $I$ and $Q$ channels as coordinates in an IQ plane. In this picture the inputs we chose form a counter-clockwise rotating circle with frequency $\omega$ and phase $\phi$. As we've computed, this counter-clockwise rotating circle produces a positively detuned sideband at the output of the mixer. The rotation rate of the input IQ signal translates directly to the detuning of the output signal away from the carrier, and the phase of the input circle translates directly to the phase of the output signal. In fact this observation leads us to a really convenient way to remember this result. If we treat the IQ plane as a complex number plane, then the trajectory of our counter-clockwise moving point can be written simply as \begin{equation}
+Consider a case where $I=\cos(\omega t + \phi)$ and $Q=\sin(\omega t + \phi)$. The output of the device is then
+\begin{align}
+s(t) &= \cos(\Omega t)\cos(\omega t + \phi) - \sin(\Omega t)\sin(\omega t + \phi) \nonumber \\
+&= \frac{1}{2} \left[ \cos([\Omega + \omega]t + \phi) + \cos([\Omega-\omega]t - \phi) \right. \nonumber \\
+&  \left. + \cos([\Omega+\omega]t + \phi) - \cos([\Omega-\omega]t-\phi) \right] \label{eq:mixer_input_output:modulation} \\
+&= \cos([\Omega+\omega]t + \phi) \nonumber
+\end{align}
+Think of the incoming $I$ and $Q$ channels as coordinates in an IQ plane.
+In this picture the inputs we chose form a counter-clockwise rotating circle with frequency $\omega$ and phase $\phi$.
+As we've computed, this counter-clockwise rotating circle produces a positively detuned sideband at the output of the mixer.
+The rotation rate of the input IQ signal translates directly to the detuning of the output signal away from the carrier, and the phase of the input circle translates directly to the phase of the output signal.
+In fact this observation leads us to a really convenient way to remember this result.
+If we treat the IQ plane as a complex number plane, then the trajectory of our counter-clockwise moving point can be written simply as \begin{equation}
 z_{IQ}(t) = \exp[i(\omega t + \phi)] \label{eq:mixer_input_output:modulation_complex_rep} \end{equation}
 Then, to recover the output signal, we just multiply by $\exp[i\Omega t]$ and take the real part,
 \begin{align}
 z(t)\exp[i\Omega t] &= \exp[i(\omega t + \phi)]\exp[i\Omega t] \nonumber \\
 \Re \left( z(t)\exp[i\Omega t] \right ) &= \cos[(\Omega+\omega)t+\phi] \nonumber \, .
 \end{align}
-From equation (\ref{eq:mixer_input_output:modulation}) you can see that if we reverse the orientation of our rotating signal by setting $Q=-\sin(\omega t + \phi)$, the output would have been negatively detuned, and would have had a negative phase shift. This is consistent with our complex representation: the clockwise rotating signal $\cos[\omega t + \phi] - \sin[\omega t + \phi]$ has complex representation $z(t) = \exp[-i(\omega t + \phi)]$. Multiplying by $\exp[i\Omega t]$ and taking the real part gives $\cos[(\omega-\omega)t - \phi]$, which is the correct real signal.
+From equation (\ref{eq:mixer_input_output:modulation}) you can see that if we reverse the orientation of our rotating signal by setting $Q=-\sin(\omega t + \phi)$, the output would have been negatively detuned, and would have had a negative phase shift.
+This is consistent with our complex representation: the clockwise rotating signal $\cos[\omega t + \phi] - \sin[\omega t + \phi]$ has complex representation $z(t) = \exp[-i(\omega t + \phi)]$.
+Multiplying by $\exp[i\Omega t]$ and taking the real part gives $\cos[(\omega-\omega)t - \phi]$, which is the correct real signal.
 
 \leveldown{Conversion loss}
 
@@ -28,7 +36,7 @@ We put a tone with power $P_\text{in}$ into the input of a 90 deg hybrid, and co
 We then get a single tone out of the RF port of the mixer with power $P_\text{out}$.
 The conversion gain is $P_\text{out}/P_\text{in}$.
 \emph{Note that we assumed that the outputs of the hybrid, i.e. the signals going into the $I$ and $Q$ ports, each have power $P_\text{in}/2$}.
-With that assumption, we find
+With that assumption, we find \footnote{Remember that a signal $\cos(\omega t)$ has power $P=1/2$, i.e. the mean square of a sinusoid is $1/2$.}
 \begin{align}
 I(t) &= \sqrt{Z P_\text{in}} \cos(\omega t) \quad Q(t) = \sqrt{Z P_\text{in}} \sin(\omega t) \nonumber \\
 \rightarrow \text{RF}(t) &= \sqrt{Z P_\text{in}} \cos((\Omega + \omega) t) \nonumber \\
@@ -44,27 +52,41 @@ if we view the inputs to the $I$ and $Q$ ports of an IQ mixer as real and imagin
 
 \levelup{Demodulation to baseband}
 
-Consider a high frequency signal $s(t) = \cos [ (\Omega+\omega)t + \phi ]$ coming into the RF port of an IQ mixer. Into the LO port we put $\cos(\Omega t + \delta)$. If we filter away the high frequency part of the outputs, the output of the $I$ port is \begin{eqnarray}
-I(t) &=& \cos [ (\Omega + \omega)t + \phi ]\cos [ \Omega t + \delta ] \nonumber \\
-&=& \frac{1}{2}\left( \cos [(2\Omega + \omega)t + \phi + \delta ] + \cos [ \omega t + \phi - \delta ] \right) \nonumber \\
-&=& \frac{1}{2} \cos [ \omega t + \phi - \delta ] \end{eqnarray}
-Similarly the $Q$ port output is \begin{eqnarray}
-Q(t) &=& \cos [ (\Omega + \omega)t + \phi ](-1)\sin [ \Omega t + \delta ] \nonumber \\
-&=& \frac{1}{2}\left( \sin [(2\Omega + \omega)t + \phi + \delta ] + \sin [ \omega t + \phi - \delta ] \right) \nonumber \\
-&=& \frac{1}{2} \sin [ \omega t + \phi - \delta ] \end{eqnarray}
-
-These signals can be though of as the real and imaginary parts of a complex signal \begin{eqnarray}
-z(t) &=& \exp \left[i \left( \omega t + \phi - \delta \right) \right] \\
-I(t) = \frac{1}{2}\Re z(t) & \quad & Q(t) = \frac{1}{2}\Im z(t) \end{eqnarray}
-Note that the phase of the complex signal is the difference between the phase of the high frequency signal and the phase of the local oscillator. Conveniently, we we think of the incoming high frequency signal as the real part of a complex signal \begin{equation}
-z_{\textrm{hf}}=\Re \exp \left[ i \left( \Omega + \omega \right)t +\phi \right]  \end{equation}
-and the action of the demodulating IQ mixer, plus the low pass filtering, can then be written as multiplication by $\exp \left[ -i( \Omega t + \delta ) \right]$.
+Consider a high frequency signal $s(t) = \cos [ (\Omega+\omega)t + \phi ]$ coming into the RF port of an IQ mixer. Into the LO port we put $\cos(\Omega t + \delta)$. If we filter away the high frequency part of the outputs, the output of the $I$ port is
+\begin{align}
+I(t) &= \cos [ (\Omega + \omega)t + \phi ] \cos [ \Omega t + \delta ] \nonumber \\
+&= \frac{1}{2}\left( \underbrace{\cos [(2\Omega + \omega)t + \phi + \delta ]}_\text{filtered} + \cos [ \omega t + \phi - \delta ] \right) \nonumber \\
+&= \frac{1}{2} \cos [ \omega t + \phi - \delta ]
+\end{align}
+Similarly the $Q$ port output is
+\begin{align}
+Q(t) &= \cos [ (\Omega + \omega)t + \phi ](-1)\sin [ \Omega t + \delta ] \nonumber \\
+&= \frac{1}{2}\left( \underbrace{\sin [(2\Omega + \omega)t + \phi + \delta ]}_\text{filtered} + \sin [ \omega t + \phi - \delta ] \right) \nonumber \\
+&= \frac{1}{2} \sin [ \omega t + \phi - \delta ] \, .
+\end{align}
+These signals can be though of as the real and imaginary parts of a complex signal
+\begin{align}
+z(t) &= (1/2) \exp \left[i \left( \omega t + \phi - \delta \right) \right] \\
+I(t) = \frac{1}{2}\Re z(t) & \quad Q(t) = \frac{1}{2}\Im z(t) \, .
+\end{align}
+Note that the phase of the complex signal is the difference between the phase of the high frequency signal and the phase of the local oscillator. Conveniently, we we think of the incoming high frequency signal as the real part of a complex signal
+\begin{equation}
+z_{\textrm{hf}}=\Re \exp \left[ i \left( \Omega + \omega \right)t +\phi \right]
+\end{equation}
+and the action of the demodulating IQ mixer, plus the low pass filtering, can then be written as multiplication by $(1/2) \exp \left[ -i( \Omega t + \delta ) \right]$.
+Of course, for a real mixer, we must add the $(N-3)\,\text{dB}$ attenuators to the $I$ and $Q$ ports, making the action of the downconversion and filtering equivalent to multiplication by
+\begin{align*}
+& 10^{-(N-3)/20} (1/2) \exp \left[ -i (\Omega t + \delta) \right] \\
+&= 10^{-(N+3)/20} \exp \left[ -i ( \Omega t + \delta) \right] \, .
+\end{align*}
 
 \leveldown{Summary}
 
-When a high frequency signal at frequency $\Omega+\omega$ and phase $\phi$ is demodulated by an IQ mixer with an LO signal of frequency $\Omega$ and phase $\delta$, the I and Q outputs are given by the real and imaginary parts of \begin{eqnarray}
-z(t)_{\textrm{demod}} &=& \underbrace{\exp \left[-i \left( \Omega t + \delta \right) \right]}_{\textrm{effect of mixer}} \underbrace{\exp \left[ i\left( \Omega + \omega \right) t + i \phi \right]}_{\textrm{incoming signal}} \nonumber \\
-&=& \exp \left[ i \left( \omega t + \phi-\delta \right) \right] \nonumber \end{eqnarray}
+When a high frequency signal at frequency $\Omega+\omega$ and phase $\phi$ is demodulated by an IQ mixer with an LO signal of frequency $\Omega$ and phase $\delta$, the I and Q outputs are given by the real and imaginary parts of
+\begin{align}
+z(t)_{\textrm{demod}} &\propto \underbrace{\exp \left[-i \left( \Omega t + \delta \right) \right]}_{\textrm{effect of mixer}} \underbrace{\exp \left[ i\left( \Omega + \omega \right) t + i \phi \right]}_{\textrm{incoming signal}} \nonumber \\
+&= 10^{-(N+3)/20} \exp \left[ i \left( \omega t + \phi-\delta \right) \right] \, . \nonumber
+\end{align}
 
 \levelup{Demodulation to DC}
 
