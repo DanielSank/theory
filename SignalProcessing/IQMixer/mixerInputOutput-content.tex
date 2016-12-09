@@ -19,15 +19,24 @@ From equation (\ref{eq:mixer_input_output:modulation}) you can see that if we re
 
 \leveldown{Conversion loss}
 
+\quickfig{\columnwidth}{conversion_loss}{Conversion loss when used as an upconverter.}{fig:mixer_input_output:conversion_loss}
+
 In the description so far, we made a somewhat arbitrary assumption about how the RF output depends on $I$ and $Q$; we multiplied $I$ and $Q$ by the LO, which was assumed to have unity amplitude, and then summed the results.
 This is not an accurate model of a real mixer.
-The ratio between the RF and $I/Q$ levels in a real mixer is specified by the ``conversion loss'', which is defined as follows.
-Suppose we put a tone with power $P_\text{in}$ into the input of a 90 deg hybrid, and connect the outputs of the hybrid to the $I$ and $Q$ ports of the mixer.
-We then get a single tone out of the RF port of the mixer.
-Call the RF power $P_\text{out}$.
-The conversion gain is $G = P_\text{out}/P_\text{in}$.
-\emph{Assuming} that the outputs of the hybrid, i.e. the signals going into the $I$ and $Q$ ports, each have power $P_\text{in}/2$, then the mixer, as we modelled it so far, would have a conversion gain of $-3\,\text{dB}$.
-Therefore, given a particular mixer's rated conversion loss of $N\,\text{dB}$, we can model the mixer by adding to our model attenuators on the $I$ and $Q$ ports, each with value $(N-3) \, \text{dB}$.
+The ratio between the RF and $I/Q$ levels in a real mixer is specified by the ``conversion loss'', which is defined as follows (see Fig.\,\ref{fig:mixer_input_output:conversion_loss} for illustration).
+We put a tone with power $P_\text{in}$ into the input of a 90 deg hybrid, and connect the outputs of the hybrid to the $I$ and $Q$ ports of the mixer.
+We then get a single tone out of the RF port of the mixer with power $P_\text{out}$.
+The conversion gain is $P_\text{out}/P_\text{in}$.
+\emph{Note that we assumed that the outputs of the hybrid, i.e. the signals going into the $I$ and $Q$ ports, each have power $P_\text{in}/2$}.
+With that assumption, we find
+\begin{align}
+I(t) &= \sqrt{Z P_\text{in}} \cos(\omega t) \quad Q(t) = \sqrt{Z P_\text{in}} \sin(\omega t) \nonumber \\
+\rightarrow \text{RF}(t) &= \sqrt{Z P_\text{in}} \cos((\Omega + \omega) t) \nonumber \\
+\rightarrow P_\text{out} &= P_\text{in} / 2 \, . \nonumber
+\end{align}
+Therefore our model has a conversion gain of $-3\,\text{dB}$.
+So, given a rated conversion loss of $N\,\text{dB}$, we can model the mixer by adding to our model attenuators on the $I$ and $Q$ ports, each with value $(N-3) \, \text{dB}$.
+For example, for a rated loss of $3\,\text{dB}$, we add $0\, \text{dB}$ attenuation to the IF ports, because our model already gives $3\,\text{dB}$ loss.
 
 \levelstay{Summary}
 if we view the inputs to the $I$ and $Q$ ports of an IQ mixer as real and imaginary coordinates, then the map between the input and the output signals is \begin{equation}
