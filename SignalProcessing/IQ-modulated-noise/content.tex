@@ -2,14 +2,28 @@
 
 The derivation here was taken from \cite{MattL:modulated_noise:2015}.
 
+\section{Conventions}
+
+There are two possibly confusing conventions in this document
+\begin{itemize}
+\item We define the correlation function as
+\begin{equation}
+R_{fg}(t) = \avg{f(t) g(t+\tau)^*}
+\end{equation}
+\item We define the spectral density as
+\begin{equation}
+S_{ff}(\omega) = \int_{-\infty}^\infty R_{ff}(t) e^{i \omega t}\,dt
+\end{equation}
+\end{itemize}
+
+If the processes are wide sense stationary the dependence of $t$ vanishes and we write e.g. $R_{ff}(\tau)$ without the $t$.
+
 \section{Definitions}
 
 We define the correlation function of two processes $f$ and $g$ by
 \begin{equation}
 R_{fg}(t, \tau) \equiv  \langle f(t) g(t+\tau)^* \rangle \, .
 \end{equation}
-If the processes are wide sense stationary the dependence of $t$ vanishes and we write e.g. $R_{ff}(\tau)$ without the $t$.
-
 
 \section{Calculation}
 
