@@ -22,12 +22,12 @@ Suppose in the incoming RF signal were $M \cos(\Omega t + \phi)$.
 Then the $I$ and $Q$ signals would be
 \begin{align}
 I(t) &= \frac{M}{2} \cos(\phi) + \frac{M}{2} \cos(2\Omega t + \phi) \\
-Q(t) &= -\frac{M}{2} \sin(\phi) + \frac{M}{2} \sin(2\Omega t + \phi) \, .
+Q(t) &= \frac{M}{2} \sin(\phi) - \frac{M}{2} \sin(2\Omega t + \phi) \, .
 \end{align}
 We pass these signals through low pass filters to remove the $2 \Omega$ terms, yielding
 \begin{align}
 I_F(t) &= \frac{M}{2} \cos(\phi) \\
-Q_F(t) &= -\frac{M}{2} \sin(\phi) \, .
+Q_F(t) &= \frac{M}{2} \sin(\phi) \, .
 \end{align}
 As we can see, the dc $I$ and $Q$ voltages can be thought of as the Cartesian coordinates giving the amplitude and phase of the original signal.
 Therefore, the mixer has done its job of allowing us to find the amplitude and phase of a high frequency signal by making only low frequency measurements.
@@ -44,13 +44,13 @@ In order to find the amplitude and phase of both frequency components we must us
 The $I_F$ and $Q_F$ wave forms in this case are
 \begin{align}
 I_F(t) &= \frac{M_1}{2} \cos(\omega_1 t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 t + \phi_2) \\
-Q_F(t) &= -\frac{M_1}{2} \sin(\omega_1 t + \phi_1) - \frac{M_2}{2} \sin(\omega_2 t + \phi_2) \, .
+Q_F(t) &= \frac{M_1}{2} \sin(\omega_1 t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 t + \phi_2) \, .
 \end{align}
 In order to find both amplitudes and both phases, we need to essentially perform a Fourier transform.
 To do this, we digitize the wave forms, yielding
 \begin{align}
 I_n &= \frac{M_1}{2} \cos(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 n \delta t + \phi_2) \\
-Q_n &= - \frac{M_1}{2} \sin(\omega_1 n \delta t + \phi_1) - \frac{M_2}{2} \sin(\omega_2 n \delta t + \phi_2)
+Q_n &= + \frac{M_1}{2} \sin(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 n \delta t + \phi_2)
 \end{align}
 where $\delta t$ is the digital sampling interval.
 Then, in digital logic we construct the complex series $z_n$ defined by $z_n \equiv I_n + i Q_n$.
