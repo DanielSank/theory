@@ -52,7 +52,9 @@ if we view the inputs to the $I$ and $Q$ ports of an IQ mixer as real and imagin
 
 \levelup{Demodulation to baseband}
 
-Consider a high frequency signal $s(t) = \cos [ (\Omega+\omega)t + \phi ]$ coming into the RF port of an IQ mixer. Into the LO port we put $\cos(\Omega t + \delta)$. If we filter away the high frequency part of the outputs, the output of the $I$ port is
+Consider a high frequency signal $s(t) = \cos [ (\Omega+\omega)t + \phi ]$ coming into the RF port of an IQ mixer.
+Into the LO port we put $\cos(\Omega t + \delta)$.
+If we filter away the high frequency part of the outputs, the output of the $I$ port is
 \begin{align}
 I(t) &= \cos [ (\Omega + \omega)t + \phi ] \cos [ \Omega t + \delta ] \nonumber \\
 &= \frac{1}{2}\left( \underbrace{\cos [(2\Omega + \omega)t + \phi + \delta ]}_\text{filtered} + \cos [ \omega t + \phi - \delta ] \right) \nonumber \\
@@ -61,46 +63,51 @@ I(t) &= \cos [ (\Omega + \omega)t + \phi ] \cos [ \Omega t + \delta ] \nonumber 
 Similarly the $Q$ port output is
 \begin{align}
 Q(t) &= \cos [ (\Omega + \omega)t + \phi ](-1)\sin [ \Omega t + \delta ] \nonumber \\
-&= \frac{1}{2}\left( \underbrace{\sin [(2\Omega + \omega)t + \phi + \delta ]}_\text{filtered} + \sin [ \omega t + \phi - \delta ] \right) \nonumber \\
-&= \frac{1}{2} \sin [ \omega t + \phi - \delta ] \, .
+&= \frac{1}{2}\left( \underbrace{\sin [(2\Omega + \omega)t + \phi + \delta ]}_\text{filtered} - \sin [ \omega t + \phi - \delta ] \right) \nonumber \\
+&= - \frac{1}{2} \sin [ \omega t + \phi - \delta ] \, .
 \end{align}
 These signals can be though of as the real and imaginary parts of a complex signal
 \begin{align}
-z(t) &= (1/2) \exp \left[i \left( \omega t + \phi - \delta \right) \right] \\
-I(t) = \frac{1}{2}\Re z(t) & \quad Q(t) = \frac{1}{2}\Im z(t) \, .
+z(t) &= (1/2) \exp \left[-i \left( \omega t + \phi - \delta \right) \right] \\
+I(t) = \Re z(t) & \quad Q(t) = \Im z(t) \, .
 \end{align}
-Note that the phase of the complex signal is the difference between the phase of the high frequency signal and the phase of the local oscillator. Conveniently, we we think of the incoming high frequency signal as the real part of a complex signal
+Note that the phase of the complex signal is the difference between the phase of the high frequency signal and the phase of the local oscillator.
+Conveniently, we we think of the incoming high frequency signal as the real part of a complex signal
 \begin{equation}
-z_{\textrm{hf}}=\Re \exp \left[ i \left( \Omega + \omega \right)t +\phi \right]
+z_{\textrm{hf}} = \exp \left[ -i \left( \left( \Omega + \omega \right)t +\phi \right) \right]
 \end{equation}
-and the action of the demodulating IQ mixer, plus the low pass filtering, can then be written as multiplication by $(1/2) \exp \left[ -i( \Omega t + \delta ) \right]$.
+and the action of the demodulating IQ mixer, plus the low pass filtering, can then be written as multiplication by $(1/2) \exp \left[ i( \Omega t + \delta ) \right]$.
 Of course, for a real mixer, we must add the $(N-3)\,\text{dB}$ attenuators to the $I$ and $Q$ ports, making the action of the downconversion and filtering equivalent to multiplication by
 \begin{align*}
-& 10^{-(N-3)/20} (1/2) \exp \left[ -i (\Omega t + \delta) \right] \\
-&= 10^{-(N+3)/20} \exp \left[ -i ( \Omega t + \delta) \right] \, .
+& 10^{-(N-3)/20} (1/2) \exp \left[ i (\Omega t + \delta) \right] \\
+&= 10^{-(N+3)/20} \exp \left[ i ( \Omega t + \delta) \right] \, .
 \end{align*}
 
 \leveldown{Summary}
 
 When a high frequency signal at frequency $\Omega+\omega$ and phase $\phi$ is demodulated by an IQ mixer with an LO signal of frequency $\Omega$ and phase $\delta$, the I and Q outputs are given by the real and imaginary parts of
 \begin{align}
-z(t)_{\textrm{demod}} &\propto \underbrace{\exp \left[-i \left( \Omega t + \delta \right) \right]}_{\textrm{effect of mixer}} \underbrace{\exp \left[ i\left( \Omega + \omega \right) t + i \phi \right]}_{\textrm{incoming signal}} \nonumber \\
-&= 10^{-(N+3)/20} \exp \left[ i \left( \omega t + \phi-\delta \right) \right] \, . \nonumber
+z(t)_{\textrm{demod}} &\propto \underbrace{\exp \left[i \left( \Omega t + \delta \right) \right]}_{\textrm{effect of mixer}} \underbrace{\exp \left[ -i\left( \Omega + \omega \right) t - i \phi \right]}_{\textrm{incoming signal}} \nonumber \\
+&= 10^{-(N+3)/20} \exp \left[ -i \left( \omega t + \phi-\delta \right) \right] \, . \nonumber
 \end{align}
 
 \levelup{Demodulation to DC}
 
-Now that we have baseband I and Q signals we want to extract the phase and amplitude of the original high frequency signal. Symbolically what we would like to do is multiply our complex baseband signal by $\exp \left[ -i \omega t \right]$ and integrate. The result would be a complex number $A \exp \left[ i \left( \phi - \delta \right) \right]$ with amplitude proportional amplitude of the original signal. Of course, we can't produce complex numbers in real life, but if we work out the real and imaginary parts we can figure out how to emulate the complex algebra by effecting two separate real signal processes.
+Now that we have baseband I and Q signals we want to extract the phase and amplitude of the original high frequency signal.
+Symbolically what we would like to do is multiply our complex baseband signal by $\exp \left[ i \omega t \right]$ and integrate.
+The result would be a complex number $A \exp \left[ -i \left( \phi - \delta \right) \right]$ with amplitude proportional amplitude of the original signal.
+Of course, we can't produce complex numbers in real life, but if we work out the real and imaginary parts we can figure out how to emulate the complex algebra by effecting two separate real signal processes.
 
 First express the complex representation of the IF signal in terms of $I(t)$ and $Q(t)$ \begin{equation}
 z(t) = I(t) + iQ(t). \end{equation}
 Multiplying by the desired exponential gives \begin{align}
-z(t) \exp \left(-i \omega t \right) &= \nonumber \\
-        & I(t) \cos (\omega t) + Q(t) \sin (\omega t) \nonumber \\
-+ i [ - & I(t) \sin (\omega t) + Q(t) \cos (\omega t) ] \end{align}
-From this expression we can see that the final $I$ and $Q$ coordinates are given by \begin{eqnarray}
-I &=& \sum I(t)\cos(\omega t) + Q(t) \sin(\omega t) \\
-Q &=& \sum Q(t)\cos(\omega t) - I(t) \sin(\omega t) \end{eqnarray}
+z(t) \exp \left(i \omega t \right) &= \nonumber \\
+        & I(t) \cos (\omega t) - Q(t) \sin (\omega t) \nonumber \\
++ i [   & I(t) \sin (\omega t) + Q(t) \cos (\omega t) ] \end{align}
+From this expression we can see that the final $I$ and $Q$ coordinates are given by \begin{align}
+I &= \sum I(t)\cos(\omega t) - Q(t) \sin(\omega t) \\
+Q &= \sum Q(t)\cos(\omega t) + I(t) \sin(\omega t) \, .
+\end{align}
 There are thus four integrals that have to be done in the FPGA board to compute the IQ result. Note that since each signal is multiplied and summed with either sine or cosine the data flow can be greatly simplified in the software. In other words, there are four integrals to do, but only two digital functions to generate \footnote{In fact we can use the same lookup table to generate the sine and cosine by offsetting one quarter cycle in the table}.
 
 \levelstay{Demodulation Mixer Imbalance}
