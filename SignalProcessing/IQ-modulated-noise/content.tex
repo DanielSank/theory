@@ -8,7 +8,7 @@ There are two possibly confusing conventions in this document
 \begin{itemize}
 \item We define the correlation function as
 \begin{equation}
-R_{fg}(t) = \avg{f(t) g(t+\tau)^*}
+R_{fg}(t, \tau) = \avg{f(t) g(t+\tau)^*}
 \end{equation}
 \item We define the spectral density as
 \begin{equation}
@@ -18,12 +18,8 @@ S_{ff}(\omega) = \int_{-\infty}^\infty R_{ff}(t) e^{i \omega t}\,dt
 
 If the processes are wide sense stationary the dependence of $t$ vanishes and we write e.g. $R_{ff}(\tau)$ without the $t$.
 
-\section{Definitions}
-
-We define the correlation function of two processes $f$ and $g$ by
-\begin{equation}
-R_{fg}(t, \tau) \equiv  \langle f(t) g(t+\tau)^* \rangle \, .
-\end{equation}
+I've thoroughly checked that the math in this document is correct.
+However, to use the results here, make sure your other conventions match the ones here, or modify the results given here appropriately.
 
 \section{Calculation}
 
