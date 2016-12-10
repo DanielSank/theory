@@ -1,3 +1,7 @@
+\section{Reference}
+
+The derivation here was taken from \cite{MattL:modulated_noise:2015}.
+
 \section{Definitions}
 
 We define the correlation function of two processes $f$ and $g$ by
@@ -76,6 +80,13 @@ S_{VV}(\omega) &=
 \end{align}
 where in the last line we assumed that $I$ and $Q$ are uncorrelated and that $S_{II}(\omega + \Omega) = 0$, which is true when $\Omega$ is a large RF carrier frequency and $I$ is a lower frequency drive line.
 
-\textbf{Summary:} Given a spectral density $S_{I,Q}(\omega)$ on the $I$ and $Q$ lines driving an IQ mixer, and an LO frequency of $\Omega$, the spectral density of the RF output is $S_\text{RF}(\omega) = S_{I,Q}(\omega - \Omega)/2$.
+\section{Interpretation for upconverting IQ mixer}
+
+Suppose we have a spectral density $S_{I,Q}(\omega)$ on the $I$ and $Q$ lines driving an IQ mixer, and an LO frequency of $\Omega$.
+Model the mixer as
+\begin{equation}
+\text{RF}(t) = I(t)\cos(\Omega t) - Q(t)\sin(\Omega t) \, .
+\end{equation}
+Then the spectral density of the RF output is $S_\text{RF}(\omega) = (1/2) S_{I,Q}(\omega - \Omega)$.
 Of course, in a real application you have to take the conversion loss of the mixer into account!
 
