@@ -1,16 +1,20 @@
 \section{IQ demodulation system}
 
+\quickfig{0.8\columnwidth}
+{signal_processing_chain.pdf}
+{Complete signal processing chain. Microwave frequency signal (and noise) come into the IQ mixer via the RF port. This signal is mixed with a local oscillator (LO) to convert to a lower intermediate frequency (IF). The IF signal is then filtered to remove the remaining high frequency component (see text) and digitally sampled. Detection of the amplitude and phase of each frequency component is done via discrete Fourier transform in digital logic.}
+{fig:IQ_mixer}
+
 An IQ mixer takes signals at high frequency and brings them to lower frequency so they can be more easily measured.
 Figure \ref{fig:IQ_mixer} shows a schematic of an IQ mixer.
 The local oscillator (LO) signal $\cos(\Omega t$) is used to mix the RF signal down to a lower frequency.
 The down-mixed signals are low-pass filtered so that the following digitization step is not subjected to aliasing effects.
 The signal is then sampled in an analog to digital converter (ADC) and further processed using digital signal processing (DSP) techniques.
 
-\quickfig{0.8\columnwidth}
-{signal_processing_chain.pdf}
-{Complete signal processing chain. Microwave frequency signal (and noise) come into the IQ mixer via the RF port. This signal is mixed with a local oscillator (LO) to convert to a lower intermediate frequency (IF). The IF signal is then filtered to remove the remaining high frequency component (see text) and digitally sampled. Detection of the amplitude and phase of each frequency component is done via discrete Fourier transform in digital logic.}
-{fig:IQ_mixer}
-
+We model the mixer as
+\begin{equation}
+I(t) = \text{RF}(t) \cos(\Omega t) \qquad Q(t) = - \text{RF}(t) \sin(\Omega t) \, .
+\end{equation}
 
 \section{Coherent signal - dc case}
 
