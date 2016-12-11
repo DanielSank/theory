@@ -1,4 +1,4 @@
-\section{IQ demodulation system}
+\levelstay{IQ demodulation system}
 
 \quickfig{0.8\columnwidth}
 {signal_processing_chain.pdf}
@@ -16,7 +16,7 @@ We model the mixer as
 I(t) = \text{RF}(t) \cos(\Omega t) \qquad Q(t) = - \text{RF}(t) \sin(\Omega t) \, .
 \end{equation}
 
-\section{Coherent signal - dc case}
+\leveldown{Coherent signal - dc case}
 
 Suppose in the incoming RF signal were $M \cos(\Omega t + \phi)$.
 Then the $I$ and $Q$ signals would be
@@ -33,7 +33,7 @@ As we can see, the dc $I$ and $Q$ voltages can be thought of as the Cartesian co
 Therefore, the mixer has done its job of allowing us to find the amplitude and phase of a high frequency signal by making only low frequency measurements.
 
 
-\section{Coherent signal - ac case}
+\levelstay{Coherent signal - ac case}
 
 In practice we use the IQ mixer to detect amplitude and phase of several simultaneous sinusoidal signals.
 For example, we might have
@@ -69,7 +69,7 @@ we recover the amplitude and phase for the component at frequency $\omega_k$.
 For example, if we were to compute $Z(\omega_1)$ we would get $(M_1/2) \exp(i \phi_1)$.
 
 
-\section{RF noise}
+\levelup{RF noise}
 
 In practice the incoming RF signal always comes with noise.
 The effect of the noise is to make $Z(\omega)$ a random variable instead of a deterministic value.
@@ -119,7 +119,7 @@ In any case, the result is
 \end{align}
 This makes sense as we expect the noise should not change the average value of the demodulated IQ point, but should only add some randomness centered about the deterministic value.
 
-\subsection{$Z^2$}
+\leveldown{Calculation of $Z^2$}
 
 I do not know how to compute the statistics of $Z(\omega)$ directly, so we take an alternative approach by computing instead the mean square of $Z(\omega)$.\footnote{This idea is inspired by communication with A. Korotkov.}
 Assuming that we know the form of the distribution to be Gaussian, finding the second moment is enough information to solve the problem.
@@ -182,7 +182,7 @@ Assuming $h(\omega)$ is roughly constant over this small range, we can replace $
 \end{align}
 where $T \equiv N \delta t$ is the total measurement time.
 
-\subsection{Signal to noise ratio}
+\levelstay{Signal to noise ratio}
 
 As shown in Ref. \cite{Sank:whiteNoiseDFT}, if a Gaussian complex variable has mean squared modulus $R^2$, then the real and imaginary parts of that variable are Gaussian distributed with standard deviation $R / \sqrt{2}$.
 Therefore, taking our result for $\stataverage{|Z(\omega)|^2}$, we know that the real and imaginary parts of $Z(\omega)$ are Gaussian distributed with standard deviations
