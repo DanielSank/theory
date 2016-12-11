@@ -1,0 +1,69 @@
+\levelstay{IQ demodulation system}
+
+\quickfig{0.8\columnwidth}
+{signal_processing_chain.pdf}
+{Complete signal processing chain. Microwave frequency signal (and noise) come into the IQ mixer via the RF port. This signal is mixed with a local oscillator (LO) to convert to a lower intermediate frequency (IF). The IF signal is then filtered to remove the remaining high frequency component (see text) and digitally sampled. Detection of the amplitude and phase of each frequency component is done via discrete Fourier transform in digital logic.}
+{fig:IQ_mixer}
+
+An IQ mixer takes signals at high frequency and brings them to lower frequency so they can be more easily measured.
+Figure \ref{fig:IQ_mixer} shows a schematic of an IQ mixer.
+The local oscillator (LO) signal $\cos(\Omega t$) is used to mix the RF signal down to a lower frequency.
+The down-mixed signals are low-pass filtered so that the following digitization step is not subjected to aliasing effects.
+The signal is then sampled in an analog to digital converter (ADC) and further processed using digital signal processing (DSP) techniques.
+
+We model the mixer as
+\begin{equation}
+I(t) = \text{RF}(t) \cos(\Omega t) \qquad Q(t) = - \text{RF}(t) \sin(\Omega t) \, .
+\end{equation}
+
+\leveldown{Coherent signal - dc case}
+
+Suppose in the incoming RF signal were $M \cos(\Omega t + \phi)$.
+Then the $I$ and $Q$ signals would be
+\begin{align}
+I(t) &= \frac{M}{2} \cos(\phi) + \frac{M}{2} \cos(2\Omega t + \phi) \\
+Q(t) &= \frac{M}{2} \sin(\phi) - \frac{M}{2} \sin(2\Omega t + \phi) \, .
+\end{align}
+We pass these signals through low pass filters to remove the $2 \Omega$ terms, yielding
+\begin{align}
+I_F(t) &= \frac{M}{2} \cos(\phi) \\
+Q_F(t) &= \frac{M}{2} \sin(\phi) \, .
+\end{align}
+As we can see, the dc $I$ and $Q$ voltages can be thought of as the Cartesian coordinates giving the amplitude and phase of the original signal.
+Therefore, the mixer has done its job of allowing us to find the amplitude and phase of a high frequency signal by making only low frequency measurements.
+
+
+\levelstay{Coherent signal - ac case}
+
+In practice we use the IQ mixer to detect amplitude and phase of several simultaneous sinusoidal signals.
+For example, we might have
+\begin{equation}
+RF(t) = M_1 \cos([\Omega + \omega_1] t + \phi_1 ) + M_2 \cos([\Omega + \omega_2] t + \phi_2) \, .
+\end{equation}
+In order to find the amplitude and phase of \emph{both} frequency components we must use slightly more complex signal processing.
+The $I_F$ and $Q_F$ wave forms in this case are
+\begin{align}
+I_F(t) &= \frac{M_1}{2} \cos(\omega_1 t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 t + \phi_2) \\
+Q_F(t) &= \frac{M_1}{2} \sin(\omega_1 t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 t + \phi_2)
+\end{align}
+which can be thought of as a superposition of two rotations, one at frequency $\omega_1$ and another at frequency $\omega_2$, each with its own amplitude and phase.
+In order to find both amplitudes and both phases, we essentially do two Fourier integrals.
+To do this, we digitize the wave forms, yielding
+\begin{align}
+I_n &= \frac{M_1}{2} \cos(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 n \delta t + \phi_2) \\
+Q_n &= \frac{M_1}{2} \sin(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 n \delta t + \phi_2)
+\end{align}
+where $\delta t$ is the digital sampling interval.
+Then, in digital logic we construct the complex series $z_n$ defined by $z_n \equiv I_n + i Q_n$.
+For the signals written above this is
+\begin{equation}
+z_n =
+\frac{M_1}{2} \exp \left( i \left[ \omega_1 n \delta t + \phi_1 \right] \right)
++ \frac{M_2}{2} \exp \left( i \left[ \omega_2 n \delta t + \phi_2 \right] \right) \, .
+\end{equation}
+If we now, in digital logic, compute the sum
+\begin{equation}
+Z(\omega_k) = \frac{1}{N}\sum_{n=0}^{N-1} z_n e^{-i \omega_k n \delta t}
+\end{equation}
+we recover the amplitude and phase for the component at frequency $\omega_k$.
+For example, if we were to compute $Z(\omega_1)$ we would get $(M_1/2) \exp(i \phi_1)$.
