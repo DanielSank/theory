@@ -48,10 +48,19 @@ Recomputing the IQ plane SNR we find
     &= \frac{1}{2}
        \frac{\left( g M \abs{h(\omega)} / 2 \right)^2}
             {S_\xi(\Omega) \abs{h(\omega)}^2 / 4T + \sigma_\text{IF}^2 \, \delta t / T} \nonumber \\
-    &= \frac{1}{2}
-       \frac{T \left( g M \abs{h(\omega)} \right)^2}
-            {S_\xi(\Omega) \abs{h(\omega)}^2 + 4 \sigma_\text{IF}^2 \, \delta t} \nonumber \\
     &= \frac{T \left( g M \right)^2 / 2}
             {S_\xi(\Omega) + 4 \sigma_\text{IF}^2 \, \delta t / \abs{h(\omega)}^2} \nonumber
   \, .
 \end{align}
+
+The model of the mixer we used does not take into account conversion loss.
+If we instead model the mixer as
+\begin{equation}
+  I(t) = A \cdot \text{RF}(t) \cos(\Omega t) \qquad Q(t) = - A \cdot \text{RF}(t) \sin(\Omega t) \, ,
+\end{equation}
+then we find
+\begin{equation}
+  \text{SNR} = \frac{g^2 T (M^2/2)}{S_\xi(\Omega) + 4 \sigma_\text{IF}^2 \, \delta t / A^2 \abs{h(\omega)}^2}
+  \, .
+\end{equation}
+
