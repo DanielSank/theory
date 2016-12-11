@@ -40,17 +40,18 @@ For example, we might have
 \begin{equation}
 RF(t) = M_1 \cos([\Omega + \omega_1] t + \phi_1 ) + M_2 \cos([\Omega + \omega_2] t + \phi_2) \, .
 \end{equation}
-In order to find the amplitude and phase of both frequency components we must use slightly more complex signal processing.
+In order to find the amplitude and phase of \emph{both} frequency components we must use slightly more complex signal processing.
 The $I_F$ and $Q_F$ wave forms in this case are
 \begin{align}
 I_F(t) &= \frac{M_1}{2} \cos(\omega_1 t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 t + \phi_2) \\
-Q_F(t) &= \frac{M_1}{2} \sin(\omega_1 t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 t + \phi_2) \, .
+Q_F(t) &= \frac{M_1}{2} \sin(\omega_1 t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 t + \phi_2)
 \end{align}
-In order to find both amplitudes and both phases, we need to essentially perform a Fourier transform.
+which can be thought of as a superposition of two rotations, one at frequency $\omega_1$ and another at frequency $\omega_2$, each with its own amplitude and phase.
+In order to find both amplitudes and both phases, we essentially do two Fourier integrals.
 To do this, we digitize the wave forms, yielding
 \begin{align}
 I_n &= \frac{M_1}{2} \cos(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \cos(\omega_2 n \delta t + \phi_2) \\
-Q_n &= + \frac{M_1}{2} \sin(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 n \delta t + \phi_2)
+Q_n &= \frac{M_1}{2} \sin(\omega_1 n \delta t + \phi_1) + \frac{M_2}{2} \sin(\omega_2 n \delta t + \phi_2)
 \end{align}
 where $\delta t$ is the digital sampling interval.
 Then, in digital logic we construct the complex series $z_n$ defined by $z_n \equiv I_n + i Q_n$.
@@ -68,15 +69,15 @@ we recover the amplitude and phase for the component at frequency $\omega_k$.
 For example, if we were to compute $Z(\omega_1)$ we would get $(M_1/2) \exp(i \phi_1)$.
 
 
-\section{Noise}
+\section{RF noise}
 
-In practice the signal always comes with noise.
+In practice the incoming RF signal always comes with noise.
 The effect of the noise is to make $Z(\omega)$ a random variable instead of a deterministic value.
 Note that we are not saying that $Z$ is a random function of $\omega$ or that $Z(\omega)$ is a probability distribution.
 Instead, we are saying that \emph{for each }$\omega$ $Z$ is random and will be different for each realization of the experiment.
 
-We can guess from intuition that in the presence of noise $Z(\omega)$ is Gaussian distributed in the IQ plane with mean equal to the deterministic value $(M/2)\exp(i \phi)$.
-The goal of this note is the compute the statistical distribution of $Z$ in the presence of noise.
+We can guess from intuition that in the presence of noise, $Z(\omega)$ is Gaussian distributed in the IQ plane with mean equal to the deterministic value $(M/2)\exp(i \phi)$.
+The goal of this note is the compute the fluctuations of $Z$ in the presence of noise.
 
 Because each step in the processing chain is linear we consider a case with only noise and no coherent signal.
 Denote the noise $\xi(t)$.
@@ -118,7 +119,7 @@ In any case, the result is
 \end{align}
 This makes sense as we expect the noise should not change the average value of the demodulated IQ point, but should only add some randomness centered about the deterministic value.
 
-\subsection{$Z^2$ strategy}
+\subsection{$Z^2$}
 
 I do not know how to compute the statistics of $Z(\omega)$ directly, so we take an alternative approach by computing instead the mean square of $Z(\omega)$.\footnote{This idea is inspired by communication with A. Korotkov.}
 Assuming that we know the form of the distribution to be Gaussian, finding the second moment is enough information to solve the problem.
@@ -215,3 +216,6 @@ Then reason that the noise bandwidth is just the reciprocal of the measurement t
 {IQ_clouds.pdf}
 {Two IQ clouds. The separation between the clouds' centers is proportional to their radial magnitude $M$, but scaled by a geometrical factor $g$. Projected onto the line connecting their centers, each cloud becomes a Gaussian distribution with width $\sqrt{S_\xi(\Omega)|h(\omega)|^2/4T}$.}
 {fig:IQ_clouds}
+
+\input{IF_noise}
+

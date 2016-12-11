@@ -1,0 +1,57 @@
+\section{IF noise}
+
+Now suppose that something injects noise onto the $I$ and $Q$ lines at the IF.
+Let the noise on $I$ be $v_I(t)$ and the noise on $Q$ be $v_Q(t)$.
+Assume $v_I$ and $v_Q$ are uncorrelated with each other and for now assume they are also uncorrelated in time (i.e. they are white noise).
+We now calculate the effect of this nosie on the statistics of $Z$.
+
+Defining $v_z \equiv v_I + i v_Q$, we have
+\begin{equation}
+Z(\omega) =
+\underbrace{\frac{1}{N}\sum_{n=0}^{N-1}\int_{-\infty}^\infty dt' \xi(t')
+e^{-i \Omega t'} h(n \delta t - t') e^{-i \omega n \delta t}
+}_\text{RF noise}
++
+\underbrace{
+\frac{1}{N} \sum_{n=0}^{N-1} v_z(n \delta t) e^{-i \omega n \delta t}
+}_\text{IF noise}
+\, .
+\end{equation}
+The real part of the IF contribution is
+\begin{equation}
+  \Re \left( Z_\text{IF} (\omega) \right) = \frac{1}{N} \sum_{n=0}^{N-1}
+      v_I(n \delta t) \cos(\omega n \delta t)
+    - v_Q(n \delta t) \sin(\omega n \delta t)
+  \, .
+\end{equation}
+From \cite{Sank:whiteNoiseDFT} we know that the distribution of each term in the sum is a Gaussian with width $\sigma_\text{IF} / \sqrt{2N}$ where $\sigma_\text{IF}$ is the standard deviation of both $v_I$ and $v_Q$, assuming they're equal.
+The sum, therefore, is also a Gaussian but with width $\sigma_\text{IF} / \sqrt{N}$.
+Taking $N = T / \delta t$, we have
+\begin{equation}
+  \sigma_{\Re Z_\text{IF}} = \sigma_\text{IF} \sqrt{\delta t / T} \, .
+\end{equation}
+Note that a faster sampling rate decreases the noise, which makes sense as the noise is uncorrelated in time.
+
+\section{Total noise}
+
+The real part of $Z(\omega)$, including the contributions from RF and IF, is the sum of the the real parts we calculated for the RF and IF.
+Since both real parts are Gaussian, their sum is again Gaussian, and the width is the quadrature sum of the RF and IF widths:
+\begin{equation}
+  \sigma_{\Re Z}^2 =
+    \frac{S_\xi(\Omega) \abs{h(\omega)}^2}{4T}
+    + \sigma_\text{IF}^2 \frac{\delta t}{T} \, .
+\end{equation}
+Recomputing the IQ plane SNR we find
+\begin{align}
+  \text{SNR}
+    &= \frac{\text{separation}^2}{2 \times \left( \text{cloud std deviation} \right)^2} \nonumber \\
+    &= \frac{1}{2}
+       \frac{\left( g M \abs{h(\omega)} / 2 \right)^2}
+            {S_\xi(\Omega) \abs{h(\omega)}^2 / 4T + \sigma_\text{IF}^2 \, \delta t / T} \nonumber \\
+    &= \frac{1}{2}
+       \frac{T \left( g M \abs{h(\omega)} \right)^2}
+            {S_\xi(\Omega) \abs{h(\omega)}^2 + 4 \sigma_\text{IF}^2 \, \delta t} \nonumber \\
+    &= \frac{T \left( g M \right)^2 / 2}
+            {S_\xi(\Omega) + 4 \sigma_\text{IF}^2 \, \delta t / \abs{h(\omega)}^2} \nonumber
+  \, .
+\end{align}
