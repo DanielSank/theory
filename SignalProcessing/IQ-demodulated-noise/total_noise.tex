@@ -4,7 +4,7 @@ The real part of $Z(\omega)$, including the contributions from RF and IF, is the
 Since both real parts are Gaussian, their sum is again Gaussian, and the width is the quadrature sum of the RF and IF widths:
 \begin{equation}
   \sigma_{\Re Z}^2 =
-    \frac{A^2 S_\xi(\Omega) \abs{h(\omega)}^2}{4T}
+    \frac{A^2 S^e_\xi(\Omega) \abs{h(\omega)}^2}{4T}
     + \sigma_\text{IF}^2 \frac{\delta t}{T} \, .
 \end{equation}
 Recomputing the IQ plane SNR we find
@@ -13,9 +13,9 @@ Recomputing the IQ plane SNR we find
     &= \frac{\text{separation}^2}{2 \times \left( \text{cloud std deviation} \right)^2} \nonumber \\
     &= \frac{1}{2}
        \frac{\left( g A M \abs{h(\omega)} / 2 \right)^2}
-            {A^2 S_\xi(\Omega) \abs{h(\omega)}^2 / 4T + \sigma_\text{IF}^2 \, \delta t / T} \nonumber \\
+            {A^2 S^e_\xi(\Omega) \abs{h(\omega)}^2 / 4T + \sigma_\text{IF}^2 \, \delta t / T} \nonumber \\
     &= g^2 \frac{T \left( M^2 / 2 \right)}
-        {\underbrace{S_\xi(\Omega)}_\text{RF noise} + \underbrace{4 \sigma_\text{IF}^2 \, \delta t / A^2 \abs{h(\omega)}^2}_\text{IF noise}}
+        {\underbrace{S^e_\xi(\Omega)}_\text{RF noise} + \underbrace{4 \sigma_\text{IF}^2 \, \delta t / A^2 \abs{h(\omega)}^2}_\text{IF noise}}
   \, .
 \end{align}
 

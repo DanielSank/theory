@@ -59,34 +59,34 @@ We proceed by directly constructing $|Z(\omega)|^2$ and taking the statistical a
 &= A^2 \int_{-\infty}^\infty \int_{-\infty}^\infty dt' \, dt'' \, \frac{1}{N^2} \sum_{n,m=0}^{N-1} \nonumber \\
 & e^{i\Omega (t' - t'')} h(t') h(t'') \langle \xi(n\delta t - t') \xi(m\delta t - t'') \rangle e^{-i(\Omega + \omega)(n - m)\delta t} \, .
 \end{align}
-We now use the Wiener-Khinchin theorem which says that for a stationary stochastic process $\xi(t)$ the statistical average $\langle \xi(\tau) \xi(0) \rangle$  is related to the power spectral density $S_\xi$ via the following equation:
+We now use the Wiener-Khinchin theorem which says that for a stationary stochastic process $\xi(t)$ the statistical average $\langle \xi(\tau) \xi(0) \rangle$  is related to the single-sided power spectral density $S^e_\xi$ via the following equation:
 \begin{equation}
-\langle \xi(\tau) \xi(0) \rangle = \frac{1}{2}\int_{-\infty}^\infty \frac{d\omega}{2\pi} S_\xi(\omega) e^{i \omega \tau} \, .
+\langle \xi(\tau) \xi(0) \rangle = \frac{1}{2}\int_{-\infty}^\infty \frac{d\omega}{2\pi} S^e_\xi(\omega) e^{i \omega \tau} \, .
 \end{equation}
 Using this formula for $\langle \xi(n\delta t - t') \xi(m\delta t - t'')$ yields
 \begin{align}
 \stataverage{|Z(\omega)|^2}
 &= \frac{A^2}{2} \int_{-\infty}^\infty \int_{-\infty}^\infty dt' \, dt'' \, \int_{-\infty}^\infty \frac{d\omega'}{2\pi}\frac{1}{N^2} \sum_{n,m=0}^{N-1} \nonumber \\
-& e^{i\Omega (t' - t'')} h(t') h(t'') S_\xi(\omega') e^{i\omega' ((n-m)\delta t - (t' - t''))} e^{-i(\Omega + \omega)(n - m)\delta t} \\
-&= \frac{A^2}{2} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S_\xi(\omega') \left| \frac{1}{N} \sum_{n=0}^{N-1} e^{-i(\Omega + \omega - \omega') n \delta t} \right|^2 \\
-&= \frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S_\xi(\omega') \underbrace{
+& e^{i\Omega (t' - t'')} h(t') h(t'') S^e_\xi(\omega') e^{i\omega' ((n-m)\delta t - (t' - t''))} e^{-i(\Omega + \omega)(n - m)\delta t} \\
+&= \frac{A^2}{2} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S^e_\xi(\omega') \left| \frac{1}{N} \sum_{n=0}^{N-1} e^{-i(\Omega + \omega - \omega') n \delta t} \right|^2 \\
+&= \frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S^e_\xi(\omega') \underbrace{
 \frac{A^2}{N} \left( \frac{\sin([\Omega + \omega - \omega'] \delta t N / 2)}{\sin([\Omega + \omega - \omega']\delta t / 2)} \right)^2
 }_{N^{\text{th}}\text{ order Fejer kernel}} \\
-&= \frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S_\xi(\omega') \mathcal{F}_N([\Omega + \omega - \omega'] \delta t / 2) \\
+&= \frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S^e_\xi(\omega') \mathcal{F}_N([\Omega + \omega - \omega'] \delta t / 2) \\
 \end{align}
 where $\mathcal{F}_N$ is the $N^{\text{th}}$ order Fejer kernel.
 Changing variables $\Omega - \omega' \rightarrow \omega'$ we get
 \begin{equation}
 \langle |Z(\omega)|^2 \rangle =
-\frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(-\omega')|^2 S_\xi(\Omega - \omega') \mathcal{F}_N([\omega' + \omega]\delta t / 2) \, .
+\frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(-\omega')|^2 S^e_\xi(\Omega - \omega') \mathcal{F}_N([\omega' + \omega]\delta t / 2) \, .
 \end{equation}
 So far the results have been exact and precise results can be found by numeric evaluation of the integrals.
 We now make a series of relatively weak assumptions to arrive at a practical formula.
 The Fejer kernel $\mathcal{F}_N(x)$ has weight concentrated near $x=0$.
-Therefore, we integrate over $S_\xi$ only for frequencies near $\Omega$ and so, in this integral, we can approximate $S_\xi$ as a constant $S(\Omega - \omega') \approx S_\xi(\Omega)$, giving
+Therefore, we integrate over $S^e_\xi$ only for frequencies near $\Omega$ and so, in this integral, we can approximate $S^e_\xi$ as a constant $S(\Omega - \omega') \approx S^e_\xi(\Omega)$, giving
 \begin{equation}
 \langle |Z(\omega)|^2 \rangle =
-\frac{A^2}{2N} S_\xi(\Omega) \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(-\omega')|^2 \mathcal{F}_N([\omega' + \omega]\delta t / 2) \, .
+\frac{A^2}{2N} S^e_\xi(\Omega) \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(-\omega')|^2 \mathcal{F}_N([\omega' + \omega]\delta t / 2) \, .
 \end{equation}
 We can already see here that the noise statistics of the demodulated IQ point depends only on the RF spectral density near the LO frequency.
 This makes sense; the IQ mixer is designed to take signal content near the LO frequency and bring it down to a lower IF where it can be processed.
@@ -103,11 +103,11 @@ This means that the integral over $\omega'$ is dominated by frequencies in the r
 Assuming $h(\omega)$ is roughly constant over this small range, we can replace $h(-\omega')$ with $h(\omega)$,\footnote{Note that $h(-\omega) = h(\omega)$.} finding
 \begin{align}
 \langle |Z(\omega)|^2 \rangle
-&= \frac{A^2}{2N}S_\xi(\Omega)|h(\omega)|^2
+&= \frac{A^2}{2N}S^e_\xi(\Omega)|h(\omega)|^2
 \underbrace{
 \int_{-\infty}^\infty \frac{d\omega'}{2\pi} \mathcal{F}_N([\omega' + \omega] \delta t / 2 N)
 }_{1 / \delta t} \\
-&= A^2 \frac{S_\xi(\Omega)}{2 T} |h(\omega)|^2
+&= A^2 \frac{S^e_\xi(\Omega)}{2 T} |h(\omega)|^2
 \end{align}
 where $T \equiv N \delta t$ is the total measurement time.
 
@@ -116,7 +116,7 @@ where $T \equiv N \delta t$ is the total measurement time.
 As shown in Ref. \cite{Sank:whiteNoiseDFT}, if a Gaussian complex variable has mean squared modulus $R^2$, then the real and imaginary parts of that variable are Gaussian distributed with standard deviation $R / \sqrt{2}$.
 Therefore, taking our result for $\stataverage{|Z(\omega)|^2}$, we know that the real and imaginary parts of $Z(\omega)$ are Gaussian distributed with standard deviations
 \begin{equation}
-\sigma = A \sqrt{S_\xi(\Omega) |h(\omega)|^2 / 4 T} \, .
+\sigma = A \sqrt{S^e_\xi(\Omega) |h(\omega)|^2 / 4 T} \, .
 \end{equation}
 As discussed at the beginning, a signal $M \cos([\Omega + \omega] t + \phi)$ becomes $(M/2)e^{i \phi}$ in the IQ plane.
 Of course there we ignored the effect of the filter which is simply to scale the amplitude to
@@ -134,17 +134,17 @@ The signal to noise ratio (SNR) is
 \begin{align}
 \text{SNR}
 & \equiv \frac{\text{separation}^2}{2 \times (\text{cloud std deviation})^2} \\
-&= \frac{(g A M |h(\omega)|/2)^2}{2 A^2 S_\xi(\Omega) |h(\omega)|^2 / 4T} \\
-&= \frac{g^2 (M^2/2) T}{S_\xi(\Omega)} \\
-&= g^2 \frac{P_\text{signal} T}{S_\xi(\Omega)}
+&= \frac{(g A M |h(\omega)|/2)^2}{2 A^2 S^e_\xi(\Omega) |h(\omega)|^2 / 4T} \\
+&= \frac{g^2 (M^2/2) T}{S^e_\xi(\Omega)} \\
+&= g^2 \frac{P_\text{signal} T}{S^e_\xi(\Omega)}
 \, .
 \end{align}
 Note that the SNR does not depend on $h$.
-To remember this result, note that the input power of the sinusoid signal of amplitude $M$ is $M^2/2$, so the ratio of the analog signal power to the analog noise power is $(M^2 / 2) / S_\xi B$ where $B$ is the noise bandwidth.
+To remember this result, note that the input power of the sinusoid signal of amplitude $M$ is $M^2/2$, so the ratio of the analog signal power to the analog noise power is $(M^2 / 2) / S^e_\xi B$ where $B$ is the noise bandwidth.
 Then reason that the noise bandwidth is just the reciprocal of the measurement time $T$.
 
 \quickfig{0.8\columnwidth}
 {IQ_clouds.pdf}
-{Two IQ clouds. The separation between the clouds' centers is proportional to their radial magnitude $A M/2$, but scaled by a geometrical factor $g$. Projected onto the line connecting their centers, each cloud becomes a Gaussian distribution with width $A \sqrt{S_\xi(\Omega)|h(\omega)|^2/4T}$.}
+{Two IQ clouds. The separation between the clouds' centers is proportional to their radial magnitude $A M/2$, but scaled by a geometrical factor $g$. Projected onto the line connecting their centers, each cloud becomes a Gaussian distribution with width $A \sqrt{S^e_\xi(\Omega)|h(\omega)|^2/4T}$.}
 {fig:IQ_clouds}
 
