@@ -1,0 +1,21 @@
+\levelstay{Total noise}
+
+The real part of $Z(\omega)$, including the contributions from RF and IF, is the sum of the the real parts we calculated for the RF and IF.
+Since both real parts are Gaussian, their sum is again Gaussian, and the width is the quadrature sum of the RF and IF widths:
+\begin{equation}
+  \sigma_{\Re Z}^2 =
+    \frac{A^2 S_\xi(\Omega) \abs{h(\omega)}^2}{4T}
+    + \sigma_\text{IF}^2 \frac{\delta t}{T} \, .
+\end{equation}
+Recomputing the IQ plane SNR we find
+\begin{align}
+  \text{SNR}
+    &= \frac{\text{separation}^2}{2 \times \left( \text{cloud std deviation} \right)^2} \nonumber \\
+    &= \frac{1}{2}
+       \frac{\left( g A M \abs{h(\omega)} / 2 \right)^2}
+            {A^2 S_\xi(\Omega) \abs{h(\omega)}^2 / 4T + \sigma_\text{IF}^2 \, \delta t / T} \nonumber \\
+    &= g^2 \frac{T \left( M^2 / 2 \right)}
+            {S_\xi(\Omega) + 4 \sigma_\text{IF}^2 \, \delta t / A^2 \abs{h(\omega)}^2}
+  \, .
+\end{align}
+
