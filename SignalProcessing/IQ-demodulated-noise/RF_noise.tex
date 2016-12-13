@@ -70,7 +70,7 @@ Using this formula for $\langle \xi(n\delta t - t') \xi(m\delta t - t'')$ yields
 & e^{i\Omega (t' - t'')} h(t') h(t'') S^e_\xi(\omega') e^{i\omega' ((n-m)\delta t - (t' - t''))} e^{-i(\Omega + \omega)(n - m)\delta t} \\
 &= \frac{A^2}{2} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S^e_\xi(\omega') \left| \frac{1}{N} \sum_{n=0}^{N-1} e^{-i(\Omega + \omega - \omega') n \delta t} \right|^2 \\
 &= \frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S^e_\xi(\omega') \underbrace{
-\frac{A^2}{N} \left( \frac{\sin([\Omega + \omega - \omega'] \delta t N / 2)}{\sin([\Omega + \omega - \omega']\delta t / 2)} \right)^2
+\frac{1}{N} \left( \frac{\sin([\Omega + \omega - \omega'] \delta t N / 2)}{\sin([\Omega + \omega - \omega']\delta t / 2)} \right)^2
 }_{N^{\text{th}}\text{ order Fejer kernel}} \\
 &= \frac{A^2}{2N} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} |h(\omega' - \Omega)|^2 S^e_\xi(\omega') \mathcal{F}_N([\Omega + \omega - \omega'] \delta t / 2) \\
 \end{align}
