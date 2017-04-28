@@ -1,7 +1,7 @@
 \documentclass[twocolumn]{article}
 
-\input{../../../TeX/packages.tex}
-\input{../../../TeX/macros.tex}
+\input{../../TeX/packages.tex}
+\input{../../TeX/macros.tex}
 
 \title{Discrete Fourier Transform for Experimental Data}
 \author{Daniel Sank\\\small{University of California, Santa Barbara}\\\small{Presently Google Quantum AI}}
@@ -94,9 +94,13 @@ Fourier coefficients can be computed for $k$ outside this range, but they are al
 X(k) = X(k+mN) \quad \textrm{for all integers }m \, . \label{eq:translational_symmetry}
 \end{equation}
 
-\quickwidefig{1.75\columnwidth}{baseband.pdf}
-{Illustration of the baseband and higher bands.}
-{fig:baseband}
+\begin{figure*}[t]
+\begin{centering}
+\includegraphics[width=\textwidth]{baseband.pdf}
+\par\end{centering}
+\caption{Illustration of the baseband and higher bands.}
+\label{fig:baseband}
+\end{figure*}
 
 
 \subsubsection{DFT of a baseband complex exponential}
@@ -263,7 +267,7 @@ X(k) & = e^{i\pi(\xi-k)(N-1)/N}\frac{\sin\left(\pi\left(\xi-k\right)\right)}{\si
 This says that the power is spread out over several values of $k$ just like in the Fourier series case. In Figure 1 we show the numerically computed $|\textrm{DFT}|^2$ of a noncommensurate exponential along with the expected curve.
 
 
-\quickwidefig{0.8\columnwidth}{leakage.pdf}
+\quickfig{\columnwidth}{leakage.pdf}
 {Numerically computed DFT (power) of a noncommensurate exponential
 with theory curve. The signal is $\exp\left[i2\pi n\xi/N\right]$
 with $N=20$ and $\xi=12.2$. The mod square of the DFT is shown in
