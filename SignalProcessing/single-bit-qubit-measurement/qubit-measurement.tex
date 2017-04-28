@@ -222,25 +222,25 @@ Note also that the solid lines indicate the theoretical \emph{mean} values of th
 \subsection{Interleaving effect on signal}
 
 The interleaving procedure is designed to remove the sampling noise and preserve the signal we're trying to measure, which in many cases is $1/f$ noise.
-It turns out that the interleaving procedure preserves the form of correlated noise, with a small exception.
-At frequencies approaching the Nyquist limit set by the discrete sampling rate, the noise cannot be distinguished from uncorrelated noise and so the interleaving procedure suppresses the values of the spectrum in those bins.
+It turns out that the interleaving procedure preserves the form of correlated noise, with a small exception: at frequencies approaching the Nyquist limit set by the discrete sampling rate, the sampled noise cannot be distinguished from uncorrelated noise, and because the interleaving procedure removes uncorrelated noise, the power spectral density in those bins is suppressed.
 
-In Figure \ref{fig:full_simulation} we show a full simulation of using the qubit to measure frequency noise.
-We synthesize a $1/f$ noise time sequence and use this as frequency noise for a qubit.
-We then simulate the experiment described at the beginning of this document.
-We directly compute the spectrum of the synthesized $1/f$ noise
+Figure \ref{fig:full_simulation} shows a full simulation.
+We first synthesize a $1/f$ noise time sequence and plot its spectral density.
+Then we use this as time sequence as frequency noise for a qubit.
+We simulate the experiment described at the beginning of this document, generating a sequence of 0 and 1 measurement results.
+We apply the interleaving and averaging method to this sequence and see that it matches the expected $1/f$ power spectral density well.
+We also apply the interleaved processing method to a string of uncorrelated 0's and 1's and find that the interleaving/averaging procedure suppresses this uncorrelated noise as expected.
 
 \quickfig{\columnwidth}{simulation.pdf}
 {Full simulation of the qubit experiment.
-We synthesize $1/f$ noise and use it as frequency noise for the qubit.
-We compute the spectrum of this noise directly, convert it to equivalent angle noise on the qubit, and plot (blue circles).
-Next, we take the sequence of simulated qubit measurements and use our interleaving procedure to extract the spectrum of the frequency noise (red circles).
+(blue dots) spectrum of synthesized $1/f$ noise.
+(red circles) spectrum extracted via interleaving/averaging method when using the synthsized $1/f$ noise as frequency noise in a qubit and simulating the Ramsey-like experiment described above.
 Note that the extracted spectrum covers only half of the bandwidth of the synthesized noise because the interleaving procedure reduces the effective sampling rate by 2.
-We also show the white noise coming from using the qubit as a 1-bit ADC in three ways.
+We also show the white noise associated with using the qubit as a 1-bit ADC in three ways.
 First, we show the white noise we would have if we did not interleave (green line).
 Note that this noise is larger than the $1/f$ noise we're trying to measure.
-Second, we plot the theoretical (black line) prediction for the white noise after averaging.
-Finally, we plot the simulated white noise after averaging (black circles).}
+Second, we feed an uncorrelated string of 0's and 1's into the interleaving/averaging procedure (black circles).
+Finally, we plot the analytic prediction prediction for the uncorrelated string (black line).}
 {fig:full_simulation}
 
 \end{document}
