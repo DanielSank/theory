@@ -1,0 +1,23 @@
+\begin{frame}
+\frametitle{Logic gate}
+\begin{columns}
+  \begin{column}{0.5\textwidth}
+    \begin{figure}
+      \includegraphics{coupled_circuits.pdf}
+    \end{figure}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+    \begin{align*}
+      H_g =& \frac{C_g}{C_1 C_2} (Q_1 Q_2) \\
+      &Q = \sqrt{\hbar \omega C / 2} (-i)(a - a^\dagger) \\
+      H_g / \hbar =& \underbrace{\frac{1}{2} \frac{C_g}{\sqrt{C_1 C_2}} \sqrt{\omega_1 \omega_2}}_g (\sigma_{y,1} \sigma_{y,2} )
+    \end{align*}
+  \end{column}
+\end{columns}
+Rotating frame + rotating wave approximation (thesis appendix):
+\begin{displaymath}
+  H_g = g \left[ \begin{array}{cccc}0&0&0&0\\0&0&1&0\\0&1&0&0\\0&0&0&0 \end{array} \right]
+  \qquad \ket{01} \leftrightarrow \ket{10}
+\end{displaymath}
+Can create entangled state $\ket{01} + \ket{10}$.
+\end{frame}

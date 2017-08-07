@@ -1,0 +1,54 @@
+\documentclass{beamer}
+
+\usefonttheme[onlymath]{serif}
+
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be coloured
+  linkcolor=blue,% hyperlink text will be green
+  linkbordercolor=,% hyperlink border will be red
+}
+\makeatletter
+\Hy@AtBeginDocument{%
+  \def\@pdfborder{0 0 1}% Overrides border definition set with colorlinks=true
+  \def\@pdfborderstyle{/S/U/W 1}% Overrides border style set with colorlinks=true
+                                % Hyperlink border style will be underline of width 1pt
+}
+\makeatother
+
+\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{import}
+\usepackage{graphicx}
+\newcommand{\ket}[1]{\left \lvert #1 \right \rangle}
+
+% https://tex.stackexchange.com/questions/85033/colored-symbols
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+
+\setbeamertemplate{itemize items}[square]
+
+\title{Superconducting Qubits:\\Why we care and how they work}
+\author{Daniel Sank}
+\date{July 2017\\Presented August 2017}
+
+\begin{document}
+\maketitle
+
+\begin{frame}\frametitle{make symbols work}$\hbar$\end{frame}
+\subimport*{./Introduction/}{content.tex}
+\subimport*{./SuperconductingQubits/}{content.tex}
+\subimport*{./}{lab.tex}
+\subimport*{./}{jobs.tex}
+\subimport*{./}{references.tex}
+
+
+\end{document}
+ 
