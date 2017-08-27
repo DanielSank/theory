@@ -6,3 +6,8 @@ To build this presentation:
 
 1. In `Introduction` and `SuperconductingQubits` directories:
     
+    ```
+    $ python make_figures.py
+    ```
+
+1. Build `seminar.tex`.
