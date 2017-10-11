@@ -224,10 +224,13 @@ def test_theory(n, dt, plotfunc=plt.loglog):
     sigma = 1
 
     # Simulation csd, not averaged
-    plotfunc(frequencies,
-             np.abs(cs),
-             '.',
-             markersize=8,
+    indices = np.unique(
+            np.logspace(0, np.log10(len(frequencies)-1), 1000).astype(int))
+    plotfunc(frequencies[indices],
+             np.abs(cs[indices]),
+             'o',
+             markersize=12,
+             alpha=0.4,
              label='no averaging - simulated')
 
     # Theoretical csd (mean), not averaged
@@ -244,6 +247,7 @@ def test_theory(n, dt, plotfunc=plt.loglog):
              marker='o',
              linewidth=0,
              markersize=12,
+             alpha=1.0,
              label='Log averaged - simulated')
 
     # Theoretical csd, averaged
@@ -262,4 +266,3 @@ def test_theory(n, dt, plotfunc=plt.loglog):
     ax.set_xlabel('Frequency', fontsize=32)
     ax.set_ylabel('Cross spectrum', fontsize=32)
     ax.tick_params(axis='both', which='major', labelsize=32)
-

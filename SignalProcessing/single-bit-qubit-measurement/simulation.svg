@@ -10,10 +10,10 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="162.99213"
+   height="228.86919"
    version="1.1"
-   viewBox="0 0 226.77166 130.39373"
-   width="283.46457"
+   viewBox="0 0 316.48218 183.09539"
+   width="395.60272"
    id="svg2"
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="simulation.svg">
@@ -38,17 +38,21 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1855"
-     inkscape:window-height="1056"
+     inkscape:window-height="1176"
      id="namedview2221"
      showgrid="false"
      units="mm"
      inkscape:zoom="1.1229928"
-     inkscape:cx="284.43804"
-     inkscape:cy="182.56483"
+     inkscape:cx="195.94301"
+     inkscape:cy="215.42304"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <defs
      id="defs4"
      style="stroke-linecap:butt;stroke-linejoin:round">
@@ -61,7 +65,7 @@
   <g
      style="stroke-linecap:butt;stroke-linejoin:round"
      id="axes_1"
-     transform="matrix(0.15009465,0,0,0.15009465,-9.9907639,-7.7289657)">
+     transform="matrix(0.21975358,0,0,0.21975358,-18.581834,-15.128933)">
     <g
        style="stroke-linecap:butt;stroke-linejoin:round"
        id="patch_2">

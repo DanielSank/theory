@@ -2,6 +2,7 @@
 
 filenames = [
     'simulation',
+    'interleaved_noise',
 ]
 
 
