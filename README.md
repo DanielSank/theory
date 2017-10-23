@@ -10,6 +10,12 @@ If something won't build, doesn't make sense, or if you would like to ask any qu
 The `--recursive` flag ensures that git pulls down the necessary submodules (I use a submodule for my TeX packages and macros).
 More information about submodules is available here: [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
+## Contributing
+
+* Directories names are `Capital-With-Dashes`.
+
+* File names are `camel_case`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
+
 ## TeX style guide
 
 1. Label elements as `type:location:description`.
