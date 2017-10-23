@@ -1,51 +1,56 @@
-%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[english]{article}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\documentclass{article}
 \usepackage{amstext}
-\usepackage{esint}
-\usepackage{babel}
 
 \begin{document}
 
 \title{Statistics of Measurement}
 
 \maketitle
-We perform an experiment in which we measure a random variable $X$
-which can take values $[0,1]$. On the $i^{\textrm{th}}$ experiment
-the probability distribution for $X_{i}$ is\[
-W(X_{i})=p_{i}\delta(X_{i}-1)+(1-p_{i})\delta(X_{i})\]
-ie, the random variable has a probability $p$ of attaining the value
-one, and a probability of $1-p$ of attaining the value zero.
+We perform an experiment in which we measure a random variable $X$ which can take values $[0,1]$.
+On the $i^{\textrm{th}}$ experiment, the probability distribution for $X_{i}$ is
+\begin{equation}
+W(X_i) = p_i\ \delta(X_i - 1) + (1 - p_i) \delta(X_i) \, ,
+\end{equation}
+i.e. the random variable has a probability $p$ of attaining the value one, and a probability of $1-p$ of attaining the value zero.
 
 
-\section*{What are the statistical properties of $X_{i}$?}
+\section*{What are the statistical properties of $X_i$?}
 
-The mean of $X_{i}$ is\[
-\langle X_{i}\rangle=\int W(X_{i})X_{i}dX_{i}=p_{i}\]
-as we expect. The dispersion is\[
-\langle(\Delta X_{i})^{2}\rangle=\langle(X_{i}-\langle X_{i}\rangle)^{2}\rangle=\langle X_{i}^{2}\rangle-\langle X_{i}\rangle^{2}\]
-It's clear that the random variable $X^{2}$ has exactly the same
-realization as $X$, so we have $\langle X_{i}^{2}\rangle=\langle X_{i}\rangle=p_{i}$.
-This is also clear by use of the defining formula for averages:\[
-\langle X_{i}^{2}\rangle=\int W(X_{i})X_{i}^{2}dX_{i}=p_{i}\]
-Then we have\[
-\langle(\Delta X_{i})^{2}\rangle=\langle X_{i}^{2}\rangle-\langle X_{i}\rangle^{2}=p_{i}-p_{i}^{2}=p_{i}(1-p_{i})\]
+The mean of $X_i$ is
+\begin{equation}
+\langle X_i \rangle = \int W(X_i) X_i dX_i = p_{i}
+\end{equation}
+as we expect.
+The dispersion is
+\begin{equation}
+\langle(\Delta X_i)^2 \rangle = \langle(X_i - \langle X_i \rangle)^2 \rangle = \langle X_i^2 \rangle - \langle X_i \rangle^2 \, .
+\end{equation}
+It's clear that the random variable $X^2$ has exactly the same realization as $X$, so we have $\langle X_i^{2} \rangle = \langle X_i \rangle = p_i$.
+This is also clear by use of the defining formula for averages:
+\begin{equation}
+\langle X_i^2 \rangle = \int W(X_i) X_i^2 dX_i = p_i \, .
+\end{equation}
+Then we have
+\begin{equation}
+\langle(\Delta X_i)^2 \rangle = \langle X_i^2 \rangle - \langle X_i \rangle^2 = p_i - p_i^2 = p_i(1 - p_i) \, .
+\end{equation}
 This is our first result.
 
 
 \section*{Constant $p$}
 
-Consider a case where $p$ is constant accross all experiments. Imagine
-you take a bunch of data, ie. you have a string of zeros and ones.
-From this string, how do you figure out what $p$ is? Use Bayes's
-theorem, which says \[
-W(A|B)=\frac{W(B|A)W(A)}{W(B)}\]
-In our case we take $A$ to be the event that $p$ has a certain value,
-and we take $B$ to be the event in which your measured string of
-zeros and ones takes a particular value. Then we can write this as\[
-W(p|\textrm{data})=\frac{W(\textrm{data}|p)W(p)}{W(\textrm{data})}\]
+Consider a case where $p$ is constant accross all experiments.
+Imagine you take a bunch of data, ie. you have a string of zeros and ones.
+From this string, how do you figure out what $p$ is?
+Use Bayes's theorem, which says
+\begin{equation}
+W(A|B)=\frac{W(B|A)W(A)}{W(B)} \, .
+\end{equation}
+In our case we take $A$ to be the event that $p$ has a certain value, and we take $B$ to be the event in which your measured string of zeros and ones takes a particular value.
+Then we can write this as
+\begin{equation}
+W(p|\textrm{data})=\frac{W(\textrm{data}|p)W(p)}{W(\textrm{data})}
+\end{equation}
 This is useful because $W(\textrm{data}|p)$ is easy to compute. Let
 $M$ be the number of experiments, and $n$
 \end{document}
