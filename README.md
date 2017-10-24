@@ -12,11 +12,9 @@ More information about submodules is available here: [git submodules](https://gi
 
 ## Contributing
 
-* Directories names are `Capital-With-Dashes`.
+* Directories names are `lower-case-with-dashes`.
+Acryonyms are still capitalized, e.g. `SNR-calculations`.
 
-* File names are `camel_case`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
+* File names are `lower_case_with_underscores`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
 
 ## TeX style guide
-
-1. Label elements as `type:location:description`.
-
