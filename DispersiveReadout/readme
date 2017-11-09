@@ -1,5 +1,0 @@
-This directory contains reference information and theory for dispersive qubit readout.
-
-Subdirectories:
- Purcell: Specifics on Purcell filter design and theory. Calculation of
-          expected T1 limit.
