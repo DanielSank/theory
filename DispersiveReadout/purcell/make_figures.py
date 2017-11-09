@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 filenames = [
-    'screenshotSPICE',
-    'purcellTheoryVsNumerical'
+    'screenshot_SPICE',
+    'purcell_theory_vs_numerical'
 ]
 
 import os
