@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 filenames = [
-    'mutualInductance',
-    'parallelSeriesEquivalent',
-    'loadedMode'
+    'mutual_inductance',
+    'parallel_series_equivalent',
+    'loaded_mode'
 ]
 
 import os
