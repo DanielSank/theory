@@ -1,4 +1,4 @@
-\documentclass[twocolumn,english,aps,prl]{revtex4}
+\documentclass[twocolumn]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{amstext}
@@ -9,38 +9,17 @@
 \newcommand{\ket}[1]{|#1\rangle}
 \newcommand{\braket}[2]{\langle #1|#2\rangle}
 
-\makeatletter
-
-\@ifundefined{textcolor}{}
-{%
- \definecolor{BLACK}{gray}{0}
- \definecolor{WHITE}{gray}{1}
- \definecolor{RED}{rgb}{1,0,0}
- \definecolor{GREEN}{rgb}{0,1,0}
- \definecolor{BLUE}{rgb}{0,0,1}
- \definecolor{CYAN}{cmyk}{1,0,0,0}
- \definecolor{MAGENTA}{cmyk}{0,1,0,0}
- \definecolor{YELLOW}{cmyk}{0,0,1,0}
- }
-
-\makeatother
-
-\usepackage{babel}
+\title{Quantum State Tomography}
+\date{23 February, 2012}
+\author{Daniel Sank \\ \small{University of California, Santa Barbara}}
 
 \begin{document}
 
-\title{Quantum State Tomography}
+\maketitle
 
-\author{Daniel Sank}
-
-\affiliation{University of California, Santa Barbara}
-
-
-\date{23 February, 2012}
 \begin{abstract}
 I explain how to actually do quantum state tomography
 \end{abstract}
-\maketitle
 
 \section{Formulation of the problem}
 
