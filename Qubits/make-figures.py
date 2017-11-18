@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 filenames = [
-    'singleCircuitWithDrive',
-    'coupledCircuits_capacitive',
-    'coupledCircuits_inductive'
+    'single_circuit_with_drive',
+    'coupled_circuits_capacitive',
+    'coupled_circuits_inductive',
 ]
 
 
