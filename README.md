@@ -12,11 +12,12 @@ More information about submodules is available here: [git submodules](https://gi
 
 ## Contributing
 
-* Directories names are `Capital-With-Dashes`.
+* Directories names are `AllCapsCamelCase`.
 
-* File names are `camel_case`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
+* File names are `lower_case_with_underscores`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
 
 ## TeX style guide
 
-1. Label elements as `type:location:description`.
+1. Label elements as `type:path.to.artifact`.
+Type is something like `eq`.
 
