@@ -1,4 +1,4 @@
-\section{Power spectra of IF signals}
+\levelstay{Power spectra of IF signals}
 
 Consider a noise process $\xi(t)$.
 The mixer produces two IF signals $I(t)$ and $Q(t)$
@@ -8,7 +8,7 @@ The mixer produces two IF signals $I(t)$ and $Q(t)$
 \end{align}
 where $\Omega$ is the LO frequency.
 
-\subsection{Spectra}
+\leveldown{Spectra}
 
 Let's look at the auto and cross correlations of $\xi_I$ and $\xi_Q$.
 First consider the autocorrelation of $\xi_I$:
@@ -36,13 +36,13 @@ S_{\xi_I}^e(\omega)
 \end{align}
 where in the last line we assumed $\omega \ll \Omega$ and that $S_{\xi}$ changes little over the range $\left[ \Omega - \omega , \Omega + \omega \right]$.
 
-\subsection{Cross spectrum}
+\levelstay{Cross spectrum}
 
 Using similar arguments we find that the cross spectrum of $I$ and $Q$ is approximately zero.
 Intuitively this happens because when $\Omega \tau$ is an integer multiple of $2\pi$ $\xi_I$ has maximum mean square but $\xi_Q$ is identically zero.
 Averaging over a time $\delta t$ such that $\delta t \gg 1 / \Omega$ leads to most of the spectrum of $\xi_I$ coming from times where $\xi_Q$ is zero and the result is that $\xi_I$ and $\xi_Q$ are uncorrelated.
 
-\subsection{Summary}
+\levelstay{Summary}
 
 The low frequency spectra of the IF signals $I(t)$ and $Q(t)$ is the same as the spectral density of $\xi$ near the LO.
 The IF signals $I$ and $Q$ are approximately uncorrelated.
