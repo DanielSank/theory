@@ -10,6 +10,8 @@
 
 \maketitle
 
+\levelstay{Basics}
+
 Consider a noise process $X$.
 The mean power over a time interval $\{-T/2,T/2\}$ is defined as
 \begin{equation}
@@ -61,10 +63,35 @@ If we define a spectral density $S$ as the power per bandwidth of the signal, th
 \begin{equation}
 2 \frac{\abs{\tilde{x}(\Omega)}^2}{T} \text{ is an estimator for } S(\omega) \, .
 \end{equation}
-
 Note we implicitly assumed that $\Omega \gg 1/T$ when we said that the four frequency regions could be considered separately.
 Our analysis fails at frequencies lower than $1/T$.
 This is a recurring theme in signal analysis: the acquisition time sets the frequency resolution.
 We'll see more about this later one when we study spectral leakage.
 
+\levelstay{Weiner Kinchein}
+
+Now that we've defined the power spectral density $S$, let's relate it to the time domain properties of $f(t)$.
+\begin{align*}
+  \int_{-\infty}^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau}
+  =& \int_{-\infty}^\infty \frac{d\Omega}{2\pi} \frac{2}{T} e^{i \Omega \tau} \left\lvert \tilde{x}(\Omega) \right \rvert^2 \\
+  =& \int_{-\infty}^\infty \frac{d\Omega}{2\pi} \frac{2}{T} e^{i \Omega \tau}
+    \left( \int_{-T/2}^{T/2} dt f(t) e^{-i \Omega t} \right)
+    \left( \int_{-T/2}^{T/2} dt' f(t')^* e^{i \Omega t'} \right) \\
+  =& \frac{2}{T} \int_{-T/2}^{T/2} dt \int_{-T/2}^{T/2} dt' f(t) f(t')^* \delta(\tau + t' - t) \\
+  T \to \infty \qquad =& \frac{2}{T} \int_{-T/2}^{T/2} dt f(t) f(t - \tau)^* \\
+  =& 2 \avg{f(0)f(-\tau)^*} \\
+  =& 2 \avg{f(\tau) f(0)^*}
+\end{align*}
+As $S(-\omega) = S(\omega)$, we can rewrite this as
+\begin{align*}
+  \int_{-\infty}^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau}
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} + \int_{-\infty}^0 \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} \\
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} + \int_{\infty}^0 - \frac{d\Omega}{2\pi} S(-\Omega) e^{-i \Omega \tau} \\
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} + \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{-i \Omega \tau} \\
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) 2 \cos(\Omega \tau) \\
+\end{align*}
+so (Weiner-Kinchein for real signals)
+\begin{equation*}
+\int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) \cos(\Omega \tau) = \avg{f(0)^* f(\tau)} \, .
+\end{equation*}
 \end{document}
