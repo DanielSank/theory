@@ -49,11 +49,26 @@ From this, we compute the zero point fluctuations of $u$ and $v$, \begin{equatio
 \langle u^2 \rangle_0 = \frac{1}{2}\gamma \sqrt{\beta / \alpha} \quad \langle v^2 \rangle_0 = \frac{1}{2}\gamma \sqrt{\alpha / \beta} . \end{equation}
 Defining $u_{\textrm{zpf}}^2 \equiv \langle u^2 \rangle_0 $ we have \begin{equation}
 X = \frac{1}{2}\frac{u}{u_{\textrm{zpf}}} \quad Y = \frac{1}{2}\frac{v}{v_{\textrm{zpf}}} \end{equation}
-
 With these definitions, we can write the lowering operator as
 \begin{equation}
-a = \frac{u}{2 u_\text{zpf}} + i \frac{v}{2 v_\text{zpf}} \, .
+a = \frac{u}{2 u_\text{zpf}} + i \frac{v}{2 v_\text{zpf}}
 \end{equation}
+and
+\begin{equation}
+  u = u_\text{zpf}(a + a^\dagger) \qquad v = -i v_\text{zpf} (a - a^\dagger) \, .
+\end{equation}
+
+An interesting case is the electical LC oscillator with Hamiltonian
+\begin{equation*}
+  H = \frac{\Phi^2}{2L} + \frac{Q^2}{2C} \qquad [\Phi, Q] = i \hbar \, .
+\end{equation*}
+In our generalized language, we have $u = \Phi$, $v=Q$, $\alpha=1/L$, $\beta = 1/C$.
+Using this and defining $R_K \equiv h/e^2$, this gives zero point fluctuation
+\begin{align*}
+  \avg{\Phi^2}
+  &= \frac{\hbar}{2} \sqrt{\frac{L}{C}} \\
+  &= 2 \left( \frac{\Phi_0}{2\pi} \right)^2 \frac{Z}{R_K/2\pi} \, .
+\end{align*}
 
 \section{Algebra}
 
