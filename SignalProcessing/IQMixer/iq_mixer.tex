@@ -1,42 +1,18 @@
-%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[twocolumn,english,aps]{revtex4}
+\documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{amstext}
 \usepackage{graphicx}
 \usepackage{esint}
 
-\makeatletter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\@ifundefined{textcolor}{}
-{%
- \definecolor{BLACK}{gray}{0}
- \definecolor{WHITE}{gray}{1}
- \definecolor{RED}{rgb}{1,0,0}
- \definecolor{GREEN}{rgb}{0,1,0}
- \definecolor{BLUE}{rgb}{0,0,1}
- \definecolor{CYAN}{cmyk}{1,0,0,0}
- \definecolor{MAGENTA}{cmyk}{0,1,0,0}
- \definecolor{YELLOW}{cmyk}{0,0,1,0}
- }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\makeatother
-
-\makeatother
-
-\usepackage{babel}
+\title{How an IQ mixer Works}
+\date{22 February 2010}
+\author{Daniel Sank}
 
 \begin{document}
 
-\title{How an IQ mixer Works}
+\maketitle
 
-
-\author{Daniel Sank}
-
-
-\date{22 February 2010}
 \begin{abstract}
 We use IQ mixers in the lab to generate arbitrary waveforms to control
 the qubits. In this note I show how the mixer works, and in particular
@@ -44,7 +20,6 @@ that it can be used to generate arbitrary waveforms with bandwidth
 centered around the input RF carrier frequency, and with total bandwidth
 of twice that of the DACs driving the I and Q channels. 
 \end{abstract}
-\maketitle
 
 \section{Why an IQ mixer?}
 
@@ -92,7 +67,7 @@ The basic layout of the mixer is shown in Figure 1. The RF input is
 supplied by a microwave source, in our case the Anritsu, and the modulating
 signals $I(t)$ and $Q(t)$ come from the GHz DACs. %
 \begin{figure}
-\includegraphics[scale=0.5]{SignalGenerationCircuit}
+\includegraphics[scale=0.5]{diagram}
 \caption{The block diagram on an IQ mixer}
 \end{figure}
 
