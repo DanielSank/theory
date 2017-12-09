@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 filenames = [
-    'transmonSensitivity',
-    'wavefunctions'
+    'transmon_sensitivity',
+    'wave_functions'
 ]
 
 
