@@ -1,0 +1,309 @@
+\input{introduction}
+
+\input{driving}
+
+\section{Coupling}
+
+\subsection{Capacitive coupling}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=6cm]{coupled_circuits_capacitive.pdf}
+\par\end{centering}
+\caption{Two circuits coupled through a capacitor $C_g$.}
+\label{Fig:coupledCircuits_capacitive}
+\end{figure}
+
+The circuit shown in Fig.\,\ref{Fig:coupledCircuits_capacitive} has the following Lagrangian \begin{align}
+\mathcal{L} = & \frac{1}{2}C_1\dot{\Phi}_1^2 + \frac{1}{2}C_2\dot{\Phi}_2^2 \nonumber \\
+& + \frac{1}{2}C_g \left( \dot{\Phi}_1 - \dot{\Phi_2} \right)^2 \nonumber \\
+& - \frac{1}{2L_1}\Phi_1^2 - \frac{1}{2L_2}\Phi_2^2 \, . \end{align}
+The kinetic term can be rewritten as \begin{equation}
+T = \frac{1}{2}
+\left( \begin{array}{cc} \dot{\Phi}_1 & \dot{\Phi}_2 \end{array} \right)
+\left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
+\left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticInFlux} \end{equation}
+where $C_1' \equiv C_1+C_g$ and similarly for $C_2'$. The canonical momenta are \begin{eqnarray}
+p_1 = \frac{dL}{d\dot{\Phi}_1} = C_1'\dot{\Phi}_1 - C_g\dot{\Phi}_2 \nonumber \\
+p_2 = \frac{dL}{d\dot{\Phi}_2} = C_2'\dot{\Phi}_2 - C_g\dot{\Phi}_1 \end{eqnarray}
+which can be written as \begin{equation}
+\left( \begin{array}{c} p_1 \\ p_2 \end{array} \right) =
+\left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
+\left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \end{equation}
+Note the recurrence of the matrix from equation (\ref{eq:kineticInFlux}). Naming this matrix $M$ we can write \begin{eqnarray}
+T &=& \frac{1}{2}
+      \left( \begin{array}{cc} \dot{\Phi}_1&\dot{\Phi}_2 \end{array} \right)
+      M
+      \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticWithM} \\
+\left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) &=& M^{-1} \left( \begin{array}{c} p_1 \\ p_2 \end{array} \right) \label{eq:fluxToMomenta} \end{eqnarray}
+Substituting equation (\ref{eq:fluxToMomenta}) into (\ref{eq:kineticWithM}) and using the facts that matrix transposition commutes with matrix inversion and that $M$ is symmetric we get
+\begin{equation}
+T = \frac{1}{2} \left( \begin{array}{cc} p_1&p_2 \end{array} \right) M^{-1} \left( \begin{array}{c} p_1 \\ p_2 \end{array} \right) \, .
+\end{equation}
+The inverse of the 2x2 matrix $M$ is
+\begin{align}
+M^{-1} &= \frac{1}{C_1C_2 + C_g(C_1 + C_2)} \left( \begin{array}{cc} C_2' & C_g \\ C_g & C_1' \end{array} \right) \nonumber \\
+&\equiv \left( \begin{array}{cc} 1/C_1'' & 1/C_g'' \\ 1/C_g'' & 1/C_2'' \end{array} \right) \, .
+\end{align}
+Finally, the kinetic term of the Langrangian is \begin{equation}
+T = \frac{p_1^2}{2C_1''} + \frac{p_2^2}{2C_2''} + \frac{p_1p_2}{C_g''} \, . \label{eq:kineticInP}
+\end{equation}
+
+Let us now understand the quantities $C_1''$ and $C_2''$ in a simple way.
+The capacitance to ground from the signal node of circuit 1 is \begin{eqnarray}
+C_{1,\textrm{total}} &=& C_1||(C_g \textrm{ in series with } C_2) \nonumber \\
+&=& C_1 + \frac{C_g C_2}{C_g+C_2} \nonumber \\
+&=& \frac{C_1 C_2 + C_g(C_1+C_2)}{C_g+C_2} \nonumber \end{eqnarray}
+which is exactly equal to our expression for $C_1''$.
+Therefore we've found that \textbf{the effective capacitance associated with the the canonical charge is just the capacitance to ground of the conjugate flux's signal node}.
+
+The quantities $p_1$ and $p_2$ have dimensions of charge so we will rename them $\tilde{Q}_1$ and $\tilde{Q}_2$.
+The tildes remind us that they are not the usual single qubit charges.
+
+The coupling term in the Hamiltonian, eq.\,(\ref{eq:kineticInP}), is \begin{equation}
+H_g = \frac{ \tilde{Q}_1 \tilde{Q}_2} {C_g''}. \label{eq:sec:coupling:H_g} \end{equation}
+We would like to re-express it in terms of Pauli operators.
+If we use the (very good) approximation that the normal modes are harmonic we can rewrite the charge operators as \begin{equation}
+\tilde{Q} = -i Q_{\textrm{zpf}} (a - a^{\dagger}) \, . \end{equation}
+The parameter $Q_{\textrm{zpf}}$ is the rms zero point fluctuations in charge and is given by (see \citeinternaltype \citeinternalref{quantumOscillator}) \begin{equation}
+Q_{\textrm{zpf}} = \sqrt{\frac{\hbar}{2Z}} = \sqrt{\frac{\hbar \omega C}{2}} \, . \end{equation}
+Substitution of this expression for the $\tilde{Q}$ coordinates turns the coupling Hamiltonian into
+\begin{align}
+H_g &= \frac{Q_{1,\textrm{zpf}}Q_{2,\textrm{zpf}}}{C_g''}(-i)(a_1-a_1^{\dagger})(-i)(a_2-a_2^{\dagger}) \nonumber \\
+&= \frac{\hbar}{2}\sqrt{\omega_1\omega_2 C_1'' C_2''}\frac{C_g}{C_1C_2 + C_g(C_1+C_2)}(\sigma_y \otimes \sigma_y) \nonumber \\
+&= \frac{1}{2}\frac{C_g}{\sqrt{C_1' C_2'}} \hbar\sqrt{\omega_1\omega_2} (\sigma_y \otimes \sigma_y) \nonumber
+\end{align}
+where we have again used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_y$}.
+We combine the prefactors into a parameter $g$ and write the Hamiltonian as \begin{equation}
+H_g = g \left( \sigma_y \otimes \sigma_y \right) \end{equation}
+where $g$, called the ``coupling strength'', is defined as \begin{equation}
+g \equiv \frac{1}{2} \frac{C_g}{\sqrt{C_1' C_2'}} \hbar\sqrt{\omega_1\omega_2} \, . \end{equation}
+Taking $C_1 \approx C_2$ and $\omega_1 \approx \omega_2$, then using $C = 1 / \omega Z_{LC}$ we find
+\begin{equation}
+g \propto Z_{LC} \, .
+\end{equation}
+
+\subsection{Summary - Simple derivation}
+
+The energy in the coupling capacitor is
+\begin{equation}
+E_g = \frac{1}{2} C_g \left( V_1 - V_2 \right)^2 \, . \nonumber
+\end{equation}
+Keeping only the term which couples the qubits, we find \begin{equation}
+E_g = -C_g V_1 V_2 = -C_g \frac{Q_1}{C_1} \frac{Q_2}{C_2} . \end{equation}
+This matches Eq.\,(\ref{eq:sec:coupling:H_g}), up to the sign, in the practical limit $C_1,C_2 \gg C_g$.
+
+\subsection{Inductive Coupling}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=6cm]{coupled_circuits_inductive.pdf}
+\par\end{centering}
+\caption{Two circuits coupled through a mutual inductance $M$.}
+\label{Fig:coupledCircuits_inductive}
+\end{figure}
+
+
+Consider the circuit shown in Figure \ref{Fig:coupledCircuits_inductive}.
+From Kirchoff's laws we find that the equations of motion for the system are
+\begin{align}
+\omega_1^2 Q_1 &= -\ddot{Q}_1 - \left(M/L_1\right) \ddot{Q}_2 \\
+\omega_2^2 Q_2 &= -\ddot{Q}_2 - \left(M/L_2\right) \ddot{Q}_1
+\end{align}
+These equations of motion can be derived from the following Lagrangian
+\begin{equation}
+\mathcal{L} = \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2}
+- \frac{L_1}{2}\dot{Q}_1^2
+- \frac{L_2}{2}\dot{Q}_2^2
+- M \dot{Q}_1 \dot{Q}_2 \, . \label{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}
+\end{equation}
+
+In this Lagrangian the charges have appeared as the coordinate variables.
+This is annoying because in all of our previous analysis we regarded the fluxes as the coordinates and the charges as the conjugate momenta.
+To convert to using flux as the coordinate, we note that the $\dot{Q}$ are the loop currents, and we relate the currents to the fluxes using the definition of inductance and mutual inductance:
+\begin{align}
+\Phi_1 &= L_1 I_1 + M I_2 \\
+\Phi_2 &= M I_1 + L_2 I_2 \, .
+\end{align}
+These equations are rewritten as a matrix equation
+\begin{align}
+\left( \begin{array}{c} \Phi_1 \\ \Phi_2 \end{array} \right) &=
+\left[ \begin{array}{cc} L_1 & M \\ M & L_2 \end{array} \right]
+\left( \begin{array}{c} I_1 \\ I_2 \end{array} \right) \\
+\ket{\Phi} &= \mathbf{M} \ket{I} \label{eq:sec.coupling.subsec.inductiveCoupling:fluxToI} \, .
+\end{align}
+Next, using $\dot{Q}=I$, note that the dotted terms in Eq.\,(\ref{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}) can also be written as a matrix expression:
+\begin{equation}
+-\frac{1}{2} \bbraket{I}{\mathbf{M}}{I} \, .
+\end{equation}
+Therefore, by using Eq.\,(\ref{eq:sec.coupling.subsec.inductiveCoupling:fluxToI}) in Eq.\,(\ref{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}) we can rewrite the Lagrangian as
+\begin{equation}
+\mathcal{L} =
+\frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2}
+- \frac{1}{2} \bbraket{\Phi}{\mathbf{M}^{-1}}{\Phi} \, .
+\end{equation}
+To get a true Lagrangian we have to express the charges in terms of flux.
+Using the definition of capacitance, $C = Q/V$, and noting that the \emph{total} flux through each inductor is the time integral of the voltage, we have
+\begin{equation}
+\frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}C \dot{\Phi}^2 \, .
+\end{equation}
+Using this and expanding $\mathbf{M}^{-1}$ we finally arrive at
+\begin{align}
+\mathcal{L} &=
+\frac{1}{2}C_1 \dot{\Phi}_1^2 + \frac{1}{2}C_2 \dot{\Phi}_2^2 \\
+&- \left( \frac{1}{1 - M^2 / L_1L_2} \right)
+\left( \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \right) \\
+&+ \left( \frac{1}{1 - M^2 / L_1 L_2} \right) \frac{M}{L_1 L_2} \Phi_1 \Phi_2 \, .
+\end{align}
+Thus we have reformulated the Lagrangian with the fluxes as the coordinates.
+
+The conjugate momenta are
+\begin{equation}
+p = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q \, .
+\end{equation}
+The Hamiltonian is
+\begin{align}
+H &= \sum_i Q_i \dot{\Phi}_i - \mathcal{L} \\
+&= \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2} \\
+&+ \left( \frac{1}{1 - M^2 / L_1L_2} \right)
+\left( \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \right) \\
+&+ \left( \frac{1}{1 - M^2 / L_1 L_2} \right) \frac{M}{L_1 L_2} \Phi_1 \Phi_2 \, .
+\end{align}
+
+
+\section{Rotating Frame}
+
+The driving and coupling Hamiltonians we have written down are not well suited for calculations because they do not commute with the intrinsic qubit Hamiltonian, which is typically proportional to either $\sigma_x$ or $\sigma_z$.
+This non-commutativity is the mathematical manifestation of the physical fact that, in the lab frame, the qubit state processes about an axis in the Block sphere.
+For this reason, it is much easier to reason in a frame that rotates about that axis at a frequency near or equal to the resonance frequency of the device, i.e. in a rotating frame.
+In this section we show how to re-express the driving and coupling Hamiltonians in a rotating frame.
+
+The single qubit Hamiltonian for single nearly harmonic qubits like the transmon is \begin{equation}
+H_q/\hbar = -\frac{\omega_q}{2}\sigma_z \end{equation}
+where $\omega_q = \omega_0 + \delta\omega$. Think of $\omega_0$ as an idle point frequency and $\delta \omega$ as a dynamic detuning.
+The Schrodinger picture time evolution operator is $T=\exp \left[-i H/\hbar \right]$.
+In order to remove the idle point precession of the qubit state, we take as the rotation operator \begin{equation}
+R = T^{\dagger} = \exp \left[ -i \frac{\omega_0}{2} t \sigma_z \right], \end{equation}
+eg. we rotate the frame by the idle frequency of the qubit.
+We compute the remaining effective Hamiltonian $H'$ according to \citeinternalref{quantumMechanics} \begin{eqnarray}
+H'/\hbar &=& i\dot{R}R^{\dagger} + R \frac{H_q}{\hbar} R \\
+&=& i \left(-i \frac{\omega_0}{2} \right)\sigma_z RR^{\dagger} + R\frac{H_q}{\hbar}R^{\dagger} \\
+&=& -\frac{\delta\omega}{2}\sigma_z. \end{eqnarray}
+This is precisely the Hamiltonian of a qubit with frequency $\delta\omega$.
+In other words, if we go into a frame rotating at the idle frequency of the qubit, what remains is just the qubit precession at the detuning frequency.
+In particular if the frame rotates at the same frequency as the qubit the Hamiltonian becomes zero.
+
+\subsection{Operators}
+
+Since we are going to want to work in a frame in which the qubit intrinsic Hamiltonian is zero it will be useful to find the form of various operators in that frame.
+We list here the transformation of the Pauli operators under a frame rotating about the z-axis at frequency $\omega_r$.
+The rotation operator is $R=\exp \left[-i \frac{1}{2} \omega_r t \sigma_z \right]$ \citeinternalref{quantumMechanics} and the transformed Pauli operators are \begin{align}
+R\sigma_xR^{\dagger} & = \cos(\omega_r t)\sigma_x + \sin(\omega_r t) \sigma_y \nonumber \\
+R\sigma_yR^{\dagger} & = \cos(\omega_r t)\sigma_y - \sin(\omega_r t) \sigma_x \nonumber \\
+R\sigma_zR^{\dagger} & = \sigma_z \nonumber \\
+R\sigma_+R^{\dagger} & = e^{i\omega_r t}\sigma_+ \nonumber \\
+R\sigma_-R^{\dagger} & = e^{-i\omega_r t}\sigma_- \, . \nonumber \end{align}
+
+\subsection{Driving}
+
+We now consider the driving Hamiltonian in the rotating frame.
+From section \ref{sec:driving} we have the general driving Hamiltonian in the lab frame
+\begin{equation}
+H_d = h_d f(t) \sigma \, .
+\end{equation}
+For charge driving, we have $\sigma = \sigma_y$, $V_d(t) = V_d f(t)$, and $h_d = \bbraket{1}{Q}{0} V_d/(1 + C/C_d)$.
+For flux driving, we have $\sigma = \sigma_x$, $I_d(t) = I_d f(t)$, and $h_d = (M/L) \bbraket{1}{\Phi}{0} I_d$.
+We consider the flux case to for the sake of a specific example.
+We use the rotation operator \begin{equation}
+R = \exp \left[ -i \frac{\omega_r}{2} t \sigma_z \right] \end{equation}
+to find the transformed driving Hamiltonian \begin{align}
+RH_d R^{\dagger}/h_d
+&= e^{-i \frac{\omega_r}{2} t \sigma_z} f(t)\sigma_x e^{i \frac{\omega_r}{2} t \sigma_z} \nonumber \\
+&= f(t)\left[ \cos\left(\omega_r t\right)\sigma_x + \sin\left(\omega_r t\right)\sigma_y \right]. \label{eq:drivingH}
+\end{align}
+Now suppose $f(t)$ is a sinusoid with an envelope $e(t)$,
+\begin{align}
+& f(t)
+= e(t)\cos \left( \omega_d t + \phi_d \right) \\
+&= e(t) \left[ \cos \left( \phi_d \right) \cos \left( \omega_d t \right) - \sin \left( \phi_d \right) \sin \left( \omega_d t \right) \right] \\
+&= e(t) \left[ I \cos\left(\omega_d t\right) + Q \sin \left(\omega_d t\right) \right] \label{eq:drivingFunctionIQ}
+\end{align}
+where $I \equiv \cos(\phi_d)$ and $Q \equiv - \sin(\phi_d)$.
+Multiplying everything in Eq. (\ref{eq:drivingH}) together and throwing out the high frequency terms we get
+\begin{align}
+& RH_dR^{\dagger}/h_d \\
+&= \frac{e(t)}{2} \left[ \cos(\delta\omega t + \phi_d)\sigma_x - \sin(\delta\omega t + \phi_d)\sigma_y \right] \\
+&= \frac{e(t)}{2} \left[ e^{-i(\delta \omega t + \phi_d)} \sigma_+ + e^{i(\delta \omega t + \phi_d)} \sigma_- \right]
+\end{align}
+where $\delta\omega \equiv \omega_d - \omega_r$. In matrix form this reads
+\begin{equation}
+RH_dH^{\dagger}/h_d = \frac{e(t)}{2} \left( \begin{array}{cc} 0 & e^{i(\delta\omega t + \phi_d)} \\ e^{-i(\delta\omega t + \phi_d)} & 0 \end{array}\right) \, . \label{eq:drivingH_matrixForm}
+\end{equation}
+If the drive is on resonance with the frame, and therefore on resonance with the qubit, then we are left with
+\begin{align}
+RH_dR^{\dagger}/h_d
+&= \frac{e(t)}{2}\left( \begin{array}{cc} 0 & e^{i\phi_d} \\ e^{-i\phi_d} & 0 \end{array}\right) \\
+&= \frac{e(t)}{2} \left[ I \sigma_x + Q \sigma_y \right] .
+\end{align}
+This is a rotation about a time independent axis in the xy plane of the Bloch sphere.
+If the rotating frame frequency is the same as the qubit frequency, then the qubit Hamiltonian is zero and our on-resonance drive leads to a purely latitudinal rotation on the Bloch sphere with the angle of the rotation axis in the xy plane given by $\phi$.
+If the qubit frequency does not match the rotating frame then the qubit Hamiltonian has a residual $\sigma_z$ component and the the rotation axis will be out of the xy plane.
+
+\subsubsection{$\pi$ pulse}
+
+For a resonant drive with $\phi_d=0$ we have \begin{equation}
+RH_dR^{\dagger} = -\frac{e(t)}{2}\frac{V_d \left| \bbraket{1}{Q}{0} \right|} {1 + C/C_d} \sigma_x. \end{equation}
+The evolution of the qubit under this drive is given by the unitary operator \begin{equation}
+U(t) = \exp \left[ i \left( \frac{1}{2 \hbar} \frac{V_d \left| \bbraket{1}{Q}{0} \right|} {1 + C/C_d} \int dt \, e(t) \right) \sigma_x \right]. \end{equation}
+This results in a pi pulse when $U(t)=\sigma_x$. Since \begin{equation}
+\exp \left[ i \alpha \sigma_x \right] = \cos(\alpha)\textrm{I} + i \sin(\alpha)\sigma_x \end{equation}
+we see that the pi pulse occurs when \begin{equation}
+\frac{1}{2\hbar} \frac{V_d \left| \bbraket{1}{Q}{0} \right|} {1 + C/C_d} \int e(t) dt = \frac{\pi}{2} \, . \end{equation}
+This relation is used to determine the appropriate drive capacitance $C_d$ when designing a device.
+The accessible values of $V_0$ are determined by the dynamic range of available pulse generators, the level of attenuation needed to remove noise from the drive lines.
+The value of $C_d$, is then chosen to be large enough that a $\pi$-pulse can be done in an acceptably short time while preserving the qubit coherence as discussed above.
+The value of $Q_{\textrm{zpf}}$ is determined by the type of qubit.
+
+\subsubsection{Programming for experiment}
+
+Now that we know what the driving Hamiltonian looks like in the rotating frame we can investigate how to program our IF inputs to the IQ mixer to acheive a rotation on the Bloch sphere.
+From \citeinternalref{IQMixer} we know that an input IQ signal $e(t)\exp\left[i\omega t + \phi\right]$ produces an RF signal $ e(t)\cos\left[(\omega_c+\omega)t + \phi \right]$, where $\omega_c$ is the carrier frequency. Using trig identities we can rewrite this RF signal as \begin{equation}
+e(t) \left[ I\cos(\left[\omega_c+\omega\right] t) + Q\sin(\left[\omega_c+\omega\right]t)\right] \nonumber \end{equation}
+where $I=\cos(\phi)$ and $Q=-\sin(\phi)$.
+This exactly matches the form we assumed for $f(t)$ in eq. (\ref{eq:drivingFunctionIQ}) if we take $\omega_c + \omega = \omega_d$.
+Therefore if we choose $\omega$ such that $\omega + \omega_c = \omega_q$ and work in the rotating frame of the qubit, the driving Hamiltonian is \begin{equation}
+H_d/h_d = \frac{e(t)}{2}\left[I\sigma_x + Q\sigma_y\right]. \end{equation}
+In practice we don't want to have to remember to account for the carrier frequency when programming a pulse so we define a mix function which multiplies our complex signal by $\exp\left[i(\omega_{q} - \omega_c)\right]$.
+That way if we program a signal $\exp\left[i\phi\right]$ the driving Hamiltonian in the frame of the qubit is produced in the following steps \begin{align}
+&\textrm{program} e(t) e^{i\phi} \nonumber \\
+&\stackrel{\textrm{mix function}}{\longrightarrow} e(t) e^{i([\omega_q-\omega_c]t + \phi)} \nonumber \\
+&\stackrel{\textrm{physical mixer}}{\longrightarrow} \Re \left[ e(t) e^{i(\omega_q t + \phi)} \right] = e(t) \cos\left(\omega_q t + \phi \right) \nonumber \\
+&\stackrel{\textrm{Hamiltonian}}{\longrightarrow} \frac{e(t)}{2}\left[ I \sigma_x + Q \sigma_y \right]. \nonumber
+\end{align}
+Thus our choice of angle $\phi$ directly maps to the angle of the rotation on the Bloch sphere.
+
+\subsection{Coupling}
+
+We found that the coupling Hamiltonian in the Schro-dinger picture is \begin{equation}
+H_g = g \left( \sigma_y \otimes \sigma_y \right) \end{equation}
+which can be expanded as \begin{eqnarray}
+H_g &=& -g (\sigma^+ - \sigma^-) \otimes (\sigma^+ - \sigma^-) \nonumber \\
+&=& g \left(-\sigma^+ \sigma^+ - \sigma^- \sigma^- + \sigma^+ \sigma^- + \sigma^- \sigma^+ \right). \end{eqnarray}
+Rotating the qubits' frames at $\omega_{r1}$ and $\omega_{r2}$ respectively and throwing away high frequency terms we get \begin{equation}
+H_g = g \left( e^{i \delta\omega_{r12} t} \sigma^+ \sigma^- + e^{-i \delta\omega_{r12} t} \sigma^- \sigma^+ \right) \end{equation}
+where $\delta\omega_{r12}\equiv \omega_{r1} - \omega_{r2}$.
+If both frames rotate at the same frequency the interaction simplifies to \begin{equation}
+H_g = g \left( \sigma^+ \sigma^- + \sigma^- \sigma^+ \right). \end{equation}
+The matrix form, with basis states \begin{equation}
+\left[ \ket{00}, \ket{01}, \ket{10}, \ket{11} \right] \nonumber \end{equation}
+(ie the states defined by Kronecker product) is \begin{equation}
+H_g = g \left[ \begin{array}{cccc} 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{array} \right]. \end{equation}
+This shows that direct on-resonance capacitive coupling produces a swap interaction in which excitations oscillate between the two coupled qubits.
+This is an entangling interaction.
+
+%\subsubsection{Do LO phases matter?}
+
+%We can now answer the question of whether we need to keep LO oscillator phases stable across multiple repetitions of a multiple qubit experiment. Consider an experiment in which we have to capacitively coupled qubits and an adjustable coupling $g(t)$. We put the qubits on resonance and rotate each qubit's frame at  qubit frequency. As previously explained in this doubly rotating frame the intrinsic qubit Hamiltonians are zero and the coupling Hamiltonian is $g(t)\left( \sigma^+ \sigma^- + \sigma^- \sigma^+ \right)$. We now subject the system to one of the following control sequences \begin{eqnarray}
+%X_{\pi/2}^{(1)} \rightarrow & \textrm{turn g on for a swap} & \rightarrow X_{\pi/2}^{(2)} \rightarrow \textrm{measure qubit 2} \nonumber \\
+%X_{-\pi/2}^{(1)} \rightarrow & \textrm{turn g on for a swap} & \rightarrow X_{\pi/2}^{(2)} \rightarrow \textrm{Measure qubit 2} \nonumber \end{eqnarray}
+%In the first case we will measure $\ket{1}$ but in the second we will measure $\ket{0}$.  As explained in the section on driving in the rotating frame, the difference in the leading $X$ pulses is just a difference in the phase of the drive voltage. This phase could come from an intentional choice of our I and Q signals, or from a change in the LO phase. Therefore, in general LO phase drift will mess up experiments. This could be verified by the pulse sequence we've considered here, measuring ramsey fringes on qubit 2 as a function of the drive phase on qubit 1.

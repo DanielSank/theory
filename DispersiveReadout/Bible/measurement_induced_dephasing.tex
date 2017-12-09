@@ -1,0 +1,22 @@
+\section{Measurement induced dephasing} \label{sec:measurementInducedDephasing}
+
+As photons enter the resonator and acquire a qubit state dependent phase shift, they carry some information on the qubit state.
+By transferring quantum information from the qubit to the photons, the measurement process partially collapses the qubit state \cite{Murch:trajectories2013}.
+In dispersive measurement, the photon's phase shift carries information about the qubit's projection along the z-axis of the Bloch sphere.
+Therefore, the partial collapse induced by the scattered photons can be understood as qubit dephasing, similar in principle to the example of the phonon-induced decoherence of the transistor in Chapter \ref{ch:Introduction}.
+The dephasing is only partial because the state of the qubit cannot be unambiguously determined from a single scattered photon, as will become clear shortly.
+
+In the following discussion, we derive a relation between the measurement visibility and the qubit dephasing induced by the measurement process.
+We do this in two ways.
+First, we use a general ``information theory'' approach.
+We work from mathematical constraints on the form of the quantum density matrix with no reference to a particular qubit system or measurement strategy.
+This approach is the most general, making no connection to the actual mechanism by which the qubit dephases.
+Second, we work from explicit form of the dispersive interaction.
+We compute the entangled qubit-photon state and understand the qubit dephasing as a consequence of the entanglement.
+This approach offers a simple interpretation in which the qubit dephasing comes from the random ac Stark shift imposed by the uncertainty in the the number of photons in the resonator.
+
+\input{information_dephasing}
+
+\input{photon_dephasing}
+
+\input{amplifier}

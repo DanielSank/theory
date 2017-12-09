@@ -1,0 +1,48 @@
+\levelstay{Power spectra of IF signals}
+
+Consider a noise process $\xi(t)$.
+The mixer produces two IF signals $I(t)$ and $Q(t)$
+\begin{align}
+\xi_I(t) &= \xi(t) \cos(\Omega t) \\
+\xi_Q(t) &= -\xi(t) \sin(\Omega t)
+\end{align}
+where $\Omega$ is the LO frequency.
+
+\leveldown{Spectra}
+
+Let's look at the auto and cross correlations of $\xi_I$ and $\xi_Q$.
+First consider the autocorrelation of $\xi_I$:
+\begin{align}
+\stataverage{\xi_I(t) \xi_I(t+\tau)}
+&= \stataverage{ \xi(t) \xi(t+\tau) \cos(\Omega t) \cos(\Omega (t + \tau))} \\
+&= \frac{1}{2} \stataverage{ \xi(t) \xi(t+\tau) \left( \cos(\Omega (2t + \tau)) + \cos(\Omega \tau) \right) } \, .
+\end{align}
+If we average over a time $\delta t$ such that $\delta t \gg 1/\Omega$, then the $\cos(\Omega (2t + \tau))$ term averages away.
+If we additionally assume that $\xi$ is wide sense stationary, then
+\begin{equation}
+\stataverage{\xi(t) \xi(t+\tau)} = \stataverage{\xi(0)\xi(\tau)} \equiv K_{\xi}(\tau)
+\end{equation}
+and we get
+\begin{equation}
+K_{\xi_I}(\tau) \equiv \stataverage{\xi_I(0) \xi_I(\tau)} = \frac{1}{2} \stataverage{\xi(0)\xi(\tau)} \cos(\Omega \tau) \, .
+\end{equation}
+The the single sided spectral density (which we call the ``engineer's'' spectral density with a superscript $^e$) is
+\begin{align}
+S_{\xi_I}^e(\omega)
+&= 2 \int_{-\infty}^\infty dt \, \cos(\omega \tau) K_{\xi_I}(\tau) \\
+&= \int_{-\infty}^\infty dt \, \cos(\omega \tau) \cos(\Omega \tau) K_{\xi}(\tau) \\
+&= \frac{1}{2} \int_{-\infty}^\infty dt \, \left( \cos((\Omega + \omega) \tau) + \cos((\Omega - \omega) \tau) \right) K_{\xi}(\tau) \\
+&= \frac{1}{4} \left( S_{\xi}^e(\Omega - \omega) + S_{\xi}^e(\Omega + \omega) \right) \approx \frac{S_{\xi}^e(\Omega)}{2}
+\end{align}
+where in the last line we assumed $\omega \ll \Omega$ and that $S_{\xi}$ changes little over the range $\left[ \Omega - \omega , \Omega + \omega \right]$.
+
+\levelstay{Cross spectrum}
+
+Using similar arguments we find that the cross spectrum of $I$ and $Q$ is approximately zero.
+Intuitively this happens because when $\Omega \tau$ is an integer multiple of $2\pi$ $\xi_I$ has maximum mean square but $\xi_Q$ is identically zero.
+Averaging over a time $\delta t$ such that $\delta t \gg 1 / \Omega$ leads to most of the spectrum of $\xi_I$ coming from times where $\xi_Q$ is zero and the result is that $\xi_I$ and $\xi_Q$ are uncorrelated.
+
+\levelstay{Summary}
+
+The low frequency spectra of the IF signals $I(t)$ and $Q(t)$ is the same as the spectral density of $\xi$ near the LO.
+The IF signals $I$ and $Q$ are approximately uncorrelated.

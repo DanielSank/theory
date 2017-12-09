@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
 filenames = [
-    'single_circuit_with_drive',
-    'coupled_circuits_capacitive',
-    'coupled_circuits_inductive',
+    'cliff',
 ]
 
 

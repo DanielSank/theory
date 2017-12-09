@@ -1,0 +1,249 @@
+\documentclass[twocolumn]{article}
+
+\input{../../TeX/packages.tex}
+\input{../../TeX/macros.tex}
+
+\author{Daniel Sank \\ \small{Google Quantum AI}}
+
+\title{Spectral density of frequency fluctuations using a qubit as a 1-bit detector}
+\date{March 2016}
+
+\begin{document}
+
+\maketitle
+
+\section{Background}
+
+Qubits are subjected to noise in their resonance frequency $\omega_q$ which leads to phase decoherence.
+Traditionally, this noise has been characterized by the decay curve measured in Ramsey-like control sequences.
+These sequences use a train of control pulses separated by a characteristic time $t$; by repeating the sequence for each value of $t$ many times, we construct a $t$-dependent probability $p_{\ket{1}}(t)$ for the qubit to be in $\ket{1}$ at the end of the sequence.
+For example, the Ramsey sequence is simply two $X_{\pi/2}$ pulses separated by a time $t$.
+During the control sequence, the qubit acquires a phase error $\delta \phi(t)$, and the probability of finding the qubit in $\ket{1}$ can be written as
+\begin{equation}
+p_{\ket{1}}(t) = \frac{1}{2} \left( 1 + \exp \left[ - \frac{1}{2} \avg{ \delta \phi^2(t)} \right] \right) \, .
+\end{equation}
+The phase variance $\avg{\delta \phi^2 (t)}$ depends on an integral of the frequency noise spectral density with details of the integral depending on the exact pulse sequence used.
+Sequences can be constructed such that $\avg{\delta \phi^2(t)}$ depends on the noise spectrum over a narrow range of frequency.
+By varying the characteristic time scale of the sequence one can tune the frequency range in which the noise contributes to $p_{\ket{1}}(t)$ and therefore reconstruct the noise spectrum.
+However, the time scale of the sequence cannot be made longer than the coherence life time of the qubit, so this strategy for measuring the noise works only down to frequencies $f \lesssim 1/T_1$ where $T_1$ is the energy relaxation time of the qubit.
+For typical 2D transmon qubits with $T_1 \approx 40\,\mu\text{s}$, we therefore have a minimum accessible frequency of $25\,\text{KHz}$.
+
+To access lower frequencies, we must use a measurement method with a time scale longer than a single qubit lifetime.
+One such method is the ``sigle shot Ramsey'' described in Ref. \cite{Yan:fluxNoise2012}.
+There the qubit is used as a sort of oscilloscope for its frequency noise.
+In this document we give a detailed analysis of the signal to noise ratio of the single shot Ramsey method.
+
+First, we reivew the Single shot Ramsey method.
+We start the experiment at time $t$ with the qubit in state $\ket{0}$.
+We apply a $\pi / 2$ pulse about the $Y$ axis, yielding the state
+\begin{displaymath}
+\frac{1}{\sqrt{2}} \left( \ket{0} + \ket{1} \right) \, .
+\end{displaymath}
+We then wait a time $\tau$; during this time the qubit acquires a noisy phase $\delta \phi$ given by
+\begin{equation}
+\delta \phi = \int_t^{t+\tau} \delta \omega_q (t') dt'
+\end{equation}
+where $\delta \omega(t)$ is the time dependent noisy frequency of the qubit.
+After the qubit acquires this noisy phase $\delta \phi$, we do a second $\pi / 2$ pulse, but this time we do it about the $X$ axis.
+If $\delta \phi = 0$, then the rotation about the $X$ axis does nothing and the final state is
+\begin{equation}
+\frac{1}{\sqrt{2}} \left( \ket{0} + \ket{1} \right) \, .
+\end{equation}
+On the other hand, if $\delta \phi = +\pi/2$ then after the second $\pi/2$ pulse we wind up in $\ket{0}$, and if $\delta \phi = -\pi/2$ then after the second $\pi/2$ pulse we would wind up in $\ket{1}$.
+We can therefore see that the measurement of the qubit state, yielding either $\ket{0}$ or $\ket{1}$ gives some kind of information about $\delta \phi$.
+More generally, that the probability $P$ to find the qubit in $\ket{0}$ at the end of the procedure is
+\begin{equation}
+P = \frac{1}{2} \left( 1 + \sin (\delta \phi) \right) \, .
+\end{equation}
+We used orthogonal axes for the two pulses to get the $\sin$ function because it makes $P$ maximally sensitive to $\delta \phi$.
+Note that if we were to run the argument again but this time starting the qubit in $\ket{1}$, we would find that $P$ is the probability to find the qubit in $\ket{1}$ again in the end.
+So really we should think of $P$ as the probability to find the qubit in the \emph{same} state that it started in.
+
+With this single run of the control sequence and single measurement shot, we have sampled the Bernoulli probability distribution with probability $P$ for $\ket{1}$ and probability $1-P$ for $\ket{0}$ exactly once.
+This single sample does not give complete information about the value of $\delta \phi$ during the period $[t, t+\tau]$ as we have only a single bit of information for a continuous varialbe $\delta \phi$.
+However, as we will see below, a time sequence of measurement shots built up by repeating this proceduce many times contains enough information to extract the spectral density of the frequency noise.
+
+We repeat this measurement over and over and build up a sequence of measured states $\{ \Psi_n \}$.
+We then construct a new sequence $\{ x_n \}$, where $x_n=1$ if $\Psi_n = \Psi_{n-1}$ and $x_n = -1$ if $\Psi_n \neq \Psi_{n-1}$.
+In other words, $x_n=1$ if there is no state switch, and $x_n = -1$ if there is a state switch \footnote{In another variation, we could reset to the qubit to $\ket{0}$ after each repetition. In that case, we would put $x_n=1$ if we measure $\ket{1}$ and $x_n=-1$ if we measure $\ket{0}$. In other words, if we reset the qubit state after each repetition we do not have to correct each measured state for the initial state coming from the measured result of the previous repetition.}
+The power spectral density of the sequence $\{ x_n \}$ tells us \emph{something} about the power spectral density of $\delta \phi$, and therefore it tells us something about the power spectral density of $\delta \omega$.
+
+However, we must figure out exactly \emph{what} the power spectral density of $\{ x_n \}$ tells us.
+The probability distribution for $x_n$ is
+\begin{align}
+P_{x_n}(x) = &
+\delta (x - 1) \frac{1}{2}( 1 + \sin(\delta \phi_n)) \nonumber \\
++& \delta (x + 1) \frac{1}{2}( 1 - \sin(\delta \phi_n) \label{eq:P_x_n}
+\end{align}
+where
+\begin{equation}
+\delta \phi_n = \int_{t_n}^{t_n + \tau} \delta \omega(t') dt' \, .
+\end{equation}
+Our strategy is to compute the spectral density of $\{ x_n \}$ and see how it depends on the spectral density of $\delta \omega$.
+Note that if we had no noise at all, i.e. $\delta \phi = 0$, then there is always a probability of $1/2$ to get a state switch and the sequence $\{ x_n \}$ would have exactly the statistics of a sequence of uncorrelated coin flips, i.e. it would be white noise.
+We call this the ``sampling noise''.
+Fluctuations in the qubit frequency coming from flux noise should add additional noise on top of the sampling noise background.
+Our job is to calculate the relation between the spectral density of qubit frequency fluctuations and the measured spectral density of $\{ x_n \}$.
+
+\section{Calculation}
+
+The discrete Fourier transform of $\{ x_n \}$, is
+\begin{equation}
+\tilde{x}_k \equiv \sum_{n=0}^{N-1} x_n e^{-i 2 \pi n k / N} \, . \label{eq:DFT}
+\end{equation}
+Each term in the sum is a random variable drawn from the distribution (\ref{eq:P_x_n}).
+The value $X_k$ is therefore also a random variable and we should compute its statistics.
+This is actually quite difficult so I offer two possible approaches.
+
+\subsection{Mean square}
+
+Instead of computing the full statistics of $X_k$ we compute its mean square,
+\begin{equation}
+\langle | \tilde{x}_k |^2 \rangle = \sum_{n,m = 0}^{N-1} \langle x_n x_m \rangle e^{-i 2 \pi (n-m) k / N} \, .
+\end{equation}
+The average over $x_n x_m$ can be done by hand because each factor can only take two possible values $\pm 1$.
+Writing out every combination we get
+\begin{align}
+\langle x_n x_m \rangle = &\frac{1}{4} \times \left( \right. \nonumber \\
+  &(1 + \sin(\delta \phi_n))(1 + \sin(\delta \phi_m)) \nonumber \\
++ &(1 - \sin(\delta \phi_n))(1 - \sin(\delta \phi_m)) \nonumber \\
+- &(1 + \sin(\delta \phi_n))(1 - \sin(\delta \phi_m)) \nonumber \\
+- &(1 - \sin(\delta \phi_n))(1 + \sin(\delta \phi_m)) \left. \right) \nonumber \\
+&= \sin(\delta \phi_n)\sin(\delta \phi_m) \, .
+\end{align}
+This calculation is not quite right because in the case where $n=m$ the average $\langle x_n x_m \rangle$ must always be equal to 1.
+Therefore, the correct expression is
+\begin{equation}
+\langle x_n x_m \rangle = \sin(\delta \phi_n) \sin(\delta \phi_m) + \cos(\phi_n)^2 \delta_{n,m} \, .
+\end{equation}
+Therefore \begin{align}
+\langle |\tilde{x}_k|^2 \rangle = & \sum_{n,m = 0}^{N-1} \nonumber \\
+& \left( \sin(\delta \phi_n) \sin(\delta \phi_m) + \cos(\delta \phi_n)^2 \delta_{n,m} \right) \nonumber \\
+& \times e^{-i 2 \pi (n-m) k / N} \, .
+\end{align}
+Let suppose that $\delta \phi_n \ll 1$ so that we can expand the $\sin$ functions to first order.
+Doing this we get
+\begin{align}
+\langle |\tilde{x}_k|^2 \rangle
+&= \sum_{n,m=0}^{N-1} \left( \delta \phi_n \delta \phi_m + \delta_{n,m} \right) e^{-i 2 \pi (n-m) k / N} \nonumber \\
+&= \left| \sum_{n=0}^{N-1} \delta \phi_n e^{-i 2 \pi n k / N} \right|^2 + N \nonumber \\
+&= \left| \tilde{\delta \phi}_k \right|^2 + N
+\end{align}
+where $\tilde{\delta \phi}_k$ means the $k^\text{th}$ Fourier coefficient of $\{ \delta \phi_n \}$.
+This result makes sense.
+The first part is just the spectral density of the underlying angle noise.
+The second part is the sampling noise, coming from the fact that for the case $\delta \phi = 0$ we have an \emph{uncorrelated} $1/2$ probability that each measurement shot yields a different qubit state than the previous shot.
+Note that using the full $\sin$ functions would make this result considerably more complicated.
+
+The physical, single sided power spectral density $S$ relates to the discrete Fourier transform via
+\begin{equation}
+S_{\delta \phi}(f) = \frac{2T}{N^2} \left| \tilde{\delta \phi}_{k=fT} \right|^2
+\end{equation}
+where $T$ is the length of time over which the data sequence is measured.
+Therefore we find
+\begin{equation}
+S_{\delta \phi}(f) = \frac{2T}{N^2} \langle \left| \tilde{x}_{k=fT} \right|^2 \rangle - \frac{2T}{N} \, .
+\end{equation}
+Defining the sampling interval as $\delta t$ and using $T = N \delta t$ we can rewrite this result as
+\begin{equation}
+S_{\delta \phi}(f) = \frac{2 \delta t^2}{T} \langle \left| \tilde{x}_{k=fT} \right|^2 \rangle - 2 \delta t \, .
+\end{equation}
+This says that the noise floor from the sampling noise is reduced by taking data faster.
+From this formula we now know how to convert the discrete Fourier transform of the measured $\pm 1$ values to the underlying power spectral density of the qubit angle fluctuations.
+
+% \input{full_distribution}
+
+\section{Data processing}
+
+Because the sampling noise exceeds the level of the noise we're trying to measure, we need to somehow remove it.
+Fortunately, because this noise is completely uncorrelated, it is removed if we split the time sequence into two interleaved sequences and compute their cross-spectrum.
+This is similar to the idea of sampling a signal with two detectors and computing the cross spectrum to remove the detectors' input noise.
+
+Split the measured bit sequence into two subsequences:
+\begin{align}
+A &= \{ a_0, a_1, \ldots a_{N/2} \} = \{z_0, z_2, \ldots, z_{N-2} \} \nonumber \\
+B &= \{ b_0, b_1, \ldots b_{N/2} \} = \{z_1, z_3, \ldots, z_{N-1} \} \, .
+\end{align}
+We compute the DFT of each of these sequences, $\tilde{A}$ and $\tilde{B}$, multiply them, average over data sets or frequency bins, and then take the modulus.
+We'll see how this affects the signal and noise in the following analysis.
+
+\subsection{Interleaving effect on noise}
+
+In this section we analyze the behavior of the sampling noise when processed by our interleaving procedure.
+Consider a data sequence made entirely of the sampling noise, i.e. a sequence of uncorrelated $\pm1$'s.
+Each coefficient in the normalized DFT of a sequence of uncorrelated values (i.e. white noise) has Gaussian distributed real and imaginary parts, each with standard deviation $\sigma / \sqrt{2N}$, where $\sigma$ is the standard deviation in the time domain.
+When we multiply corresponding coefficients from the two interleaved sequences, the magnitudes multiply and the phases add.
+The phases are uniformly distributed and independent, so the final phase is also uniformly distributed.
+
+The magnitude requires more analysis.
+Denote the DFTs as $\tilde{A}$ and $\tilde{B}$, and denote the product as $\tilde{C}_k = \tilde{A}_k \tilde{B}_k^*$.
+The modulus of $\tilde{A}_k$ is distributed as
+\begin{equation}
+P_r(r>0) = \left( \frac{2}{\sigma^2 / (N/2)} \right) r \exp \left( - \frac{r^2}{\sigma^2 / (N/2)} \right) \, .
+\end{equation}
+The distribution of a product $Z = XY$ of two random variables is given by
+\begin{equation}
+P_Z(z) = \int_{-\infty}^\infty P_X(x) P_Y(z/x) \frac{dx}{|x|} \, ,
+\end{equation}
+so the distribution of the modulus of the product of the DFT's of the two interleaved sequences is (let $q \equiv \sigma^2 / (N/2)$)
+\begin{align}
+P_{\left\lvert \tilde{C}_k \right \rvert}(z)
+&= \int_{-\infty}^\infty \frac{dx}{|x|} P_r(x) P_r(z/x) \nonumber \\
+&= \left( \frac{2}{q} \right)^2
+z \int_0^\infty \frac{dx}{x} \,
+\exp \left( - \frac{x^2 + (z/x)^2}{q} \right) \nonumber \\
+&= \left( \frac{2}{\sigma^2 / (N/2)} \right)^2
+z K_0 \left( \frac{2z}{\sigma^2 / (N/2)} \right)
+\end{align}
+where $K_0$ is the $0^\text{th}$ modified Bessel function of the second kind.
+Note that for our binary noise signal with values $\pm 1$ the variance is $\sigma^2 = 1$.
+The mean of $\left \lvert \tilde{C}_k \right \rvert$ is therefore
+\begin{equation}
+\langle P_{\left \lvert \tilde{C}_k \right\rvert}(z) \rangle
+= \int_0^\infty dz \, z \, P_{\left \lvert \tilde{C}_k \right \rvert}(z)
+= \frac{\pi}{4} \sigma^2 = \frac{\pi}{4}\, .
+\end{equation}
+Therefore, the mean cross spectrum for the sampling noise is (multiply by $2 \delta t$)
+\begin{equation}
+\text{Mean noise cross spectrum} = \frac{\pi}{2} \delta t \, \sigma^2 = \frac{\pi}{2} \delta t \, .
+\end{equation}
+
+If we now average over neighboring bins or over data sets, this noise cross spectral power is multiplied by $1/\sqrt{M}$ where $M$ is the number of points averaged.
+As broadband noise is often viewed on a log-log plot, when averaging bins together we like to increase the number of averaged bins proportional with the frequency, as this leads to a uniform density of points in the plot.
+This is illustrated in Figure \ref{fig:interleaved_noise}.
+
+\quickfig{\columnwidth}{interleaved_noise.pdf}
+{Spectral density of sequence of uncorrelated $\pm 1$ values using interleaved processing procedure.
+We arbitrarily chose $\delta t = 0.3$.
+Note the $1/\sqrt{f}$ dependence of the noise after averaging; this is results of $\sqrt{N}$ statistics of averaging the noise, combined with the choice of the averaging bandwidth linearly proportional to frequency.
+Note also that the solid lines indicate the theoretical \emph{mean} values of the un-averaged and averaged noise spectra.}
+{fig:interleaved_noise}
+
+\subsection{Interleaving effect on signal}
+
+The interleaving procedure is designed to remove the sampling noise and preserve the signal we're trying to measure, which in many cases is $1/f$ noise.
+It turns out that the interleaving procedure preserves the form of correlated noise, with a small exception: at frequencies approaching the Nyquist limit set by the discrete sampling rate, the sampled noise cannot be distinguished from uncorrelated noise, and because the interleaving procedure removes uncorrelated noise, the power spectral density in those bins is suppressed.
+
+Figure \ref{fig:full_simulation} shows a full simulation.
+We first synthesize a $1/f$ noise time sequence and plot its spectral density.
+Then we use this as time sequence as frequency noise for a qubit.
+We simulate the experiment described at the beginning of this document, generating a sequence of 0 and 1 measurement results.
+We apply the interleaving and averaging method to this sequence and see that it matches the expected $1/f$ power spectral density well.
+We also apply the interleaved processing method to a string of uncorrelated 0's and 1's and find that the interleaving/averaging procedure suppresses this uncorrelated noise as expected.
+
+\quickfig{\columnwidth}{simulation.pdf}
+{Full simulation of the qubit experiment.
+(blue dots) spectrum of synthesized $1/f$ noise.
+(red circles) spectrum extracted via interleaving/averaging method when using the synthsized $1/f$ noise as frequency noise in a qubit and simulating the Ramsey-like experiment described above.
+Note that the extracted spectrum covers only half of the bandwidth of the synthesized noise because the interleaving procedure reduces the effective sampling rate by 2.
+We also show the white noise associated with using the qubit as a 1-bit ADC in three ways.
+First, we show the white noise we would have if we did not interleave (green line).
+Note that this noise is larger than the $1/f$ noise we're trying to measure.
+Second, we feed an uncorrelated string of 0's and 1's into the interleaving/averaging procedure (black circles).
+Finally, we plot the analytic prediction prediction for the uncorrelated string (black line).}
+{fig:full_simulation}
+
+\bibliographystyle{plain}
+\bibliography{../../Bibliography/references_main}
+
+\end{document}
