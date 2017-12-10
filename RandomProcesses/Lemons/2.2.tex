@@ -1,0 +1,47 @@
+\levelstay{Perfect Linear Correlation}
+
+\leveldown{Problem}
+
+Two random variables $X$ and $Y$ are related by $Y=mX+b$.
+This means that every realization $x_i$ of $X$ is related to a realization $y_i$ of $Y$ by $y_i = m x_i + b$ where $m$ and $b$ are sure variables.
+Prove that $\text{cor}\{X, Y\} = m / \sqrt{m^2} = \text{sgn}\{m\}$, where $\text{sgn}\{m\}$ is the sign of $m$.
+
+\levelstay{Solution}
+
+The correlation is defined as
+\begin{displaymath}
+  \text{corr}\{X, Y\} \equiv \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X) \text{Var}(Y)}} \, ,
+\end{displaymath}
+where the covariance is defined as
+\begin{displaymath}
+  \text{Cov}(X,Y) \equiv \avg{XY} - \avg{X}\avg{Y} \, .
+\end{displaymath}
+The mean of $XY$ is
+\begin{align*}
+  \avg{XY}
+  &= \avg{ mX^2 + bX} \\
+  &= m \avg{X^2} + b \avg{X}
+\end{align*}
+so the covariance is
+\begin{align*}
+  \text{Cov}(X,Y)
+  &= m \avg{X^2} + b\avg{X} - \avg{X} \avg{mX+b} \\
+  &= m \avg{X^2} + b\avg{X} - \avg{X} \left( m \avg{X} + b \right) \\
+  &= m \avg{X^2} - m \avg{X}^2 \\
+  &= m \text{Var}(X) \, .
+\end{align*}
+It remains to compute $\text{Var}(Y)$:
+\begin{align*}
+  \text{Var}(Y)
+  &= \avg{Y^2} - \avg{Y}^2 \\
+  &= \avg{m^2 X^2 + 2 m b X + b^2} - \avg{mX + b}^2 \\
+  &= m^2 \avg{X^2} + 2mb \avg{X} + b^2 - m^2 \avg{X}^2 - 2mb\avg{X} - b^2 \\
+  &= m^2 \avg{X^2} - m^2 \avg{X}^2 \\
+  &= m^2 \text{Var}(X) \, .
+\end{align*}
+Putting everything together, we get
+\begin{equation*}
+  \text{corr}\{X, Y\} = \frac{m \text{Var}(X)}{\sqrt{m^2 \text{Var}(X)^2}}
+  = \text{sgn}(m)
+\end{equation*}
+because $\text{Var}(X) \ge 0$.

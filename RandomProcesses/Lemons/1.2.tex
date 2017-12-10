@@ -1,0 +1,22 @@
+\levelstay{Independent Failure Modes}
+
+\leveldown{Problem}
+
+A system consists of $n$ spearate components, each one of which fails independently of the others with probability $P_i$, where $i=1 \ldots n$.
+Since each component mus either fail or not fail, the probability that the $i$th component does not fail is $1 - P_i$.
+
+\begin{itemize}
+  \item[a.] Suppose the components are connected in parallel so that the failure of all components is necessary to cause the system to fail.
+What is the probability that the system fails?
+What is the probability that the system functions?
+
+  \item[b.] Suppose the components are connected in series so that the failure of any one component causes the system to fail.
+What is the probability that the system fails?
+\end{itemize}
+
+\levelstay{Solution}
+
+In the parallel case, the probability that the system fails is the product of the indpependent probabilities of each component to fail, i.e. $\prod_i P_i$.
+The probability that the system functions is therefore $1 - \prod_i P_i$.
+
+In the series case, the probability that the system fails is 1 minus the probability that no component fails, i.e. $1 - \prod_i (1 - P_i)$.

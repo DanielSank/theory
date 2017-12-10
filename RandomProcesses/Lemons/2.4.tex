@@ -1,0 +1,52 @@
+\levelstay{Density Fluctuation}
+
+\leveldown{Problem}
+
+The molecular number density is $\rho = N/V$ of a gas contained in a small open region of volume $V$ within a larger closed volume $V_0$ fluctuates as the number of molecules $N$ in $V$ changes.
+To quantify fluctuations in the density $\rho$, let the larger volume $V_0$ contain exactly $N_0$ molecules. The number $N$ can be considered a sum of statistically independent auxilliary ``indicator'' random variables $X_i$, defined so that $X_i=1$ when molecule $i$ is within volume $V$ and $X_i=0$ when it is not.
+Then,
+\begin{equation*}
+  N = \sum_{i=1}^{N_0}X_i \, .
+\end{equation*}
+Assume, as is reasonable, that when the gas is in equilibrium,
+\begin{equation*}
+  P(X_i=1) = V/V_0
+\end{equation*}
+and
+\begin{equation*}
+  P(X_i=0) = \frac{V_0 - V}{V_0}
+\end{equation*}
+for all $i$.
+\begin{itemize}
+  \item[a.] Compute $\avg{X_i}$ and $\text{var}(X_i)$ in terms of the constants $V$ and $V_0$.
+  \item[b.] Determine $\avg{N}$, $\text{var}(N)$, and the coefficient of variation
+    \begin{displaymath}
+      \sqrt{\text{var}(N)} / \avg{N}
+    \end{displaymath}
+    in terms of $N_0$, $V_0$, and $V$.
+\end{itemize}
+
+\levelstay{Solution}
+The average of $X_i$ is obviously $V/V_0$.
+The variance is
+\begin{align*}
+  \text{var}(X_i)
+  &= \avg{X_i^2} - \avg{X_i}^2 \\
+  &= \left( 1^2 \cdot P(X_i=1) + 0^2 \cdot P(X_i=0)\right)
+   - \left( 1 \cdot P(X_i=1) + 0 \cdot P(X_i=0)\right)^2 \\
+  &= \frac{V}{V_0} - \left( \frac{V}{V_0} \right)^2 \\
+  &= \frac{V}{V_0} \left( 1 - \frac{V}{V_0} \right) \, .
+\end{align*}
+Therefore
+\begin{align*}
+  a. \qquad \qquad
+  \avg{X_i} &= V/V_0 \\
+  \text{var}(X_i) &= (V/V_0)(1 - (V/V_0)) \, .
+\end{align*}
+It follows trivially that
+\begin{align*}
+  b. \qquad \qquad
+  \avg{N} &= N_0 \avg{X_i} = N_0 (V/V_0) \\
+  \text{var}(N) &= N_0 \text{var}(X_i) = N_0 \left( \frac{V}{V_0} \right) \left( 1 - \frac{V}{V_0} \right) \\
+  \text{coeff. of variation} &= \frac{1}{\sqrt{N_0}} \sqrt{\frac{1 - V/V_0}{V/V_0}} \, .
+\end{align*}

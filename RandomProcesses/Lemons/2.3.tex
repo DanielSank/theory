@@ -1,0 +1,49 @@
+\levelstay{Resistors in Series}
+
+\leveldown{Problem}
+
+You are given a box of $n$ carbon resistors.
+On each the manufacturer has color-coded a nominal resistance, which we understand to be a mean $\avg{R_i}$, and a dimensionless ``tolerance'' or ``precision'' $t_i$ whose definition we take to be
+\begin{displaymath}
+  t_i = \frac{\sqrt{\text{var}(R_i)}}{\avg{R_i}} \times 100\%
+\end{displaymath}
+where $i=1\ldots n$.
+Assume the resistances $R_i$ are statistically independent random variables.
+
+\begin{itemize}
+  \item[a.] Write expressions for the mean, variance, and tolerance of the total reistance $R$ of a series combination of $n$ identitally defined resistors in terms of the mean $\avg{R_i}$ and tolerance $i_i$ of one resistor.
+
+  \item[b.] Suppose the box contains 10 nominally 5-Ohm resistors, each with a 20\% tolerance.
+    Calculate the mean, variance, and tolerance of the resistance of their series combination.
+    Is the tolerance of this combination less than the tolerance of the separate resistors?
+    It should be.
+\end{itemize}
+
+\levelstay{Solution}
+
+Let $S$ denote the series resistance of $n$ identitally defined resistors, i.e.
+\begin{equation*}
+  S \equiv \sum_{i=1}^n R \, .
+\end{equation*}
+We know trivially that $\avg{S} = n \avg{R}$ and $\text{Var}(S) = n\text{Var}(R)$.
+The tolerance of $S$ is
+\begin{equation*}
+  \text{tol}(S) = \frac{\sqrt{\text{Var}(S)}}{\avg{S}} \times 100\%
+  = \frac{\sqrt{n \text{Var}(R)}}{n \avg{R}} \times 100\%
+  = \frac{1}{\sqrt{n}} t \, .
+\end{equation*}
+Therefore, we have
+\begin{align*}
+  a. \qquad \qquad
+  \avg{S} &= n \avg{R} \\
+  \text{Var}(S) &= n \left( \frac{t \avg{R}}{100 \%} \right)^2 \\
+  \text{tol}(S) &= \frac{t}{\sqrt{n}} \, .
+\end{align*}
+
+Now we compute numbers in the case that we have ten resistors with $\avg{R} = 5 \, \Omega$ and $t = 20\%$:
+\begin{align*}
+  b. \qquad \qquad
+  \avg{S} &= 10 \cdot 5 \, \Omega = 50 \, \Omega \\
+  \text{Var}(S) &= 10 \cdot \left( \frac{20\% \cdot 5 \Omega}{100\%} \right)^2 = 10 \, \Omega^2 \\
+  \text{tol}(S) &= \frac{20\%}{\sqrt{10}} \approx 6.3\% \, .
+\end{align*}
