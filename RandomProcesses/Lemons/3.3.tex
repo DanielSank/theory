@@ -1,0 +1,39 @@
+\levelstay{Multistep Walk}
+
+\leveldown{Problem}
+
+Let the independent displacements $X_i$ of an $n$-step random walk be identically distributed so that $\avg{X_i} = \mu$ and $\text{var}(X_i) = \sigma^2$.
+The net displacement is given by $X = \sum_{i=1}^n X_i$.
+\begin{itemize}
+  \item[a.] Find $\avg{X}$, $\text{var}(X)$, and $\avg{X^2}$ as functions of $n$.
+  \item[b.] A steady wind blows the Brownian particle, causing its steps to the right to be larger than those to the left.
+    That is, the two possible outcomes of each step are $X_1 = \Delta x_r$ and $X_2 = -\Delta x_l$ where $\Delta x_r > \Delta x_l > 0$.
+    Assume the probability of a step to the right is the same as the probability of a step to the left.
+    Find $\avg{X}$, $\text{var}(X)$, and $\avg{X^2}$ after $n$ steps.
+\end{itemize}
+
+\leveldown{Solution}
+
+\begin{align*}
+  a. \qquad \qquad
+  \avg{X} &= n \mu \\
+  \text{var}(X) &= n \sigma^2 \\
+  \avg{X^2} &= \text{var}(X) + \avg{X}^2 = n \sigma^2 + (n\mu)^2 \, .
+\end{align*}
+
+For part $b$, we have to recompute statistics of $X_i$:
+\begin{align*}
+  \avg{X_i} &= (1/2) \Delta x_r - (1/2) \Delta x_l = (1/2) \left( \Delta x _r - \Delta x_l \right) \\
+  \avg{X_i^2} &= (1/2) \Delta x_r^2 + (1/2) \Delta x_l^2 = (1/2) \left( \Delta x_r^2 + \Delta x_l^2 \right) \\
+  \text{var}(X_i)
+  &= (1/2)(\Delta x_r^2 + \Delta x_l^2 ) - (1/4)(\Delta x_r - \Delta x_l)^2 \\
+  &= (1/4)(\Delta x_r^2 + \Delta x_l^2) + (1/2) \Delta x_r \Delta x_l \\
+  &= (1/4)(\Delta x_r + \Delta x_l)^2 \, .
+\end{align*}
+Now we have trivially
+\begin{align*}
+  b. \qquad \qquad
+  \avg{X} &= n \avg{X_i} = (n/2)(\Delta x_r - \Delta x_l) \\
+  \text{var}(X) &= n \text{var}(X_i) = (n/4)(\Delta x_r^2 + \Delta x_l^2) \\
+  \avg{X^2} &= \frac{n}{4} (\Delta x_r^2 + \Delta x_l^2) + \frac{n^2}{4}(\Delta x_r - \Delta x_l)^2 \, .
+\end{align*}

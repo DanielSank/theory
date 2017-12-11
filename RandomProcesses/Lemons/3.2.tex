@@ -1,0 +1,20 @@
+\levelstay{Random Walk with Hesitation}
+
+\leveldown{Problem}
+
+Suppose at each interval $\Delta t$ there are three equally probable outcomes:
+particle displaces to the left a distance $\Delta x$,
+particle displaces to the right a distance $\Delta x$,
+or particle hesitates and stays where it is.
+Show that the standard deviation of the net displacement $X$ after $n$ time intervals, each of duration $\Delta t$, is $\sqrt{\avg{X}} = \Delta x \sqrt{2n/3}$.
+
+\leveldown{Solution}
+
+$X$ is the sum of random variables $X_i$ each having probability distribution $1/3$ to go left, go right, or do nothing.
+We know that $\text{var}(X) = n \text{var}(X_i)$, so we just have to compute $\text{var}(X_i)$.
+\begin{align*}
+  \text{var}(X_i)
+  &= \avg{X_i^2} - \avg{X_i}^2 \\
+  &= (2/3)\Delta x^2 \, .
+\end{align*}
+Therefore, $\sqrt{\text{var}(X)} = \sqrt{n (2/3) \Delta x^2} = \Delta x \sqrt{2n/3}$.

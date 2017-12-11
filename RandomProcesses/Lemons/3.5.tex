@@ -1,0 +1,39 @@
+\levelstay{Frequency of Heads}
+
+\leveldown{Problem}
+
+Suppose the number of heads $N$ in $n$ coin flips is given by
+\begin{equation*}
+  N = \sum_{i=1}^n X_i \, ,
+\end{equation*}
+where $X_i$ means that the $i$th flip has turned up heads and $X_i=0$ that it has turned up tails.
+Assume these two outcomes are equally probable.
+\begin{itemize}
+  \item[a.] Find $\avg{X_i}$ and $\text{var}(X_i)$.
+  \item[b.] Find $\avg{N}$ and $\text{var}(N)$.
+  \item[c.] Find $\avg{N/n}$ and $\text{var}(N/n)$.
+  \item[d.] Is the answer to part c consistent with the behavior of the frequency of heads $f(1)=N/n$ in figure 1.1 (on page 3)?
+\end{itemize}
+
+\leveldown{Solution}
+
+Obviously, $\avg{X_i} = 1/2$ and $\avg{X_i^2} = 1/2$.
+Therefore
+\begin{align*}
+  a. \qquad \qquad
+  \avg{X_i} &= 1/4 \\
+  \text{var}(X_i) &= 1/4 \\
+  b. \qquad \qquad
+  \avg{N} &= n \avg{X_i} = n/2 \\
+  \text{var}(N) &= n \, \text{var}(X_i) = n / 4 \, .
+\end{align*}
+Define $S \equiv N/n = \sum_{i=1}^n X_i/n$.
+Clearly, $\avg{S} = \avg{N}/n = 1/2$.
+Also
+\begin{align*}
+  c. \qquad \qquad
+  \text{var}(S)
+  &= \sum_{i=1}^n \text{var}(X_i/n) \\
+  &= n \, \text{var}(X_i) / n^2 \\
+  &= 1/4n \, .
+\end{align*}
