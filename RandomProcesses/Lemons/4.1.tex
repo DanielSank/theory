@@ -1,0 +1,56 @@
+\levelstay{Single-Slit Diffraction}
+
+\leveldown{Problem}
+
+According to the probability interpretation of light, formulated by Max Born in 1962, light intensity at a point is proportional to the probability that a photon exists at that point.
+\begin{itemize}
+  \item[a.] What is the probability density $p(x)$ that a single photon passes through a narrow slit and arrives at a position $x$ on a screen parallel to and at a distance $d$ beyond the barrier?
+    Each angle of forward propagation $\theta$ is the uniform random variable $U(0, \pi/2)$.
+    See Figure 4.5.
+    Hint: Each differential range of realizations $(\theta + d\theta, \theta)$ maps into a differential range of realizations $(x+dx, x)$ in such a way that $p(\theta)d\theta = p(x)dx$, where the relationship between $\theta$ and $x$ is clear from the geometry.
+  \item[b.] The light intensity produced by diffraction through a single, narrow slit, as found in alnmost any introductory physics text, is proportional to
+    \begin{displaymath}
+      \frac{1}{r^2} \frac{\sin^2 \left[ (\pi a / \lambda) \sin \theta \right]}{\sin^2 \theta}
+    \end{displaymath}
+    where $r$ is the distance from the center of the slit to an arbitrary place on the screen, $a$ is the slit width, and $\lambda$ the light wavelength.
+    Show that for slits so narrow that $\pi a / \lambda \ll 1$, the above light intensity is proportional to the photon probability density arrived at in part a.
+\end{itemize}
+
+\levelstay{Solution}
+
+The hint is an informal statement about the change of variables theorem applied to probability.
+To understand what's going on clearly, note that the probability that an event happens in the shaded region in $X$ is
+\begin{displaymath}
+  \int P_x(x) dx = \int P_x(f^{-1}(y)) \text{det}(Df^{-1})(y) dy \, .
+\end{displaymath}
+Therefore, the probability density for the variable $y$ is defined by the equation
+\begin{displaymath}
+  P_y(y) = P_x(f^{-1}(y)) \text{det}(Df^{-1})(y) \, .
+\end{displaymath}
+
+\quickfig{0.6\columnwidth}
+{{4.1_maps}.pdf}
+{Given a probability density $P_x$ and a map $f$ to another variable $Y$, we have a new probability density $P_y = P_x \circ f^{-1}$.}
+{fig:4.1_maps}
+
+In our problem, $\theta$ plays the role of $X$ and $x$ plays the role of $Y$ (I'm sorry, this is stupidly confusing and we should change the variable names).
+Given the equation $x = d \tan(\theta)$, we see that $\tan$ plays the role of $f$.
+Therefore,
+\begin{equation*}
+  P_x(x) = \frac{1}{\pi} \frac{d}{dx} \tan^{-1}(x/d)
+\end{equation*}
+where the $1/\pi$ is the normalization of the uniform variable $\theta$, which goes from $-\pi/2$ to $\pi/2$.
+Using $(d/dx)\tan^{-1}(x) = 1/(1 + x^2)$, we find
+\begin{equation*}
+  \qquad P_x(x) = \frac{1}{\pi} \frac{1}{d \left( 1 + (x/d)^2 \right)}
+\end{equation*}
+which solves part a.
+
+For part b, use $\sin(x) \approx x$ for $x \ll 1$.
+Then the expression given in the book becomes
+\begin{align*}
+  \frac{1}{r^2} \frac{((\pi a / \lambda) \sin \theta)^2}{\sin^2 \theta}
+  &= \frac{1}{r^2} (\pi a / \lambda)^2 \\
+  &= \left( \frac{\pi a}{\lambda} \right)^2 \frac{1}{d^2 + x^2} \, .
+\end{align*}
+This expression has the same dependence on $x$ as does the result from part a.

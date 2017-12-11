@@ -1,0 +1,59 @@
+\levelstay{Exponential Random Variable}
+
+\leveldown{Problem}
+
+Also according to Born's iterpretation of light, the intensity of light exiting a slab of uniformly absorbing media is proportional to the probability that a photon will survive passage through the slab.
+If, as is reasonable to assume, the light absorbed $dI(x)$ in a differentially thin slab is proportional to its local intensity $I(x)$ and to the slab thickness $dx$, then $dI(x) = -\lambda I(x)dx$ and $I(x) \propto e^{-\lambda x}$.
+When normalized, the intensity of suriving photons becomes the photon probability density
+\begin{align*}
+  p(x) &= \lambda e^{-\lambda x} \quad x \geq 0 \\
+       &= \quad x < 0 \, .
+\end{align*}
+The random variable so defined is called the \textit{exponential random variable} $E(\lambda)$.
+\begin{itemize}
+  \item[a.] Show that $\avg{E(\lambda)} = 1 / \lambda$.
+  \item[b.] Find the moment-generating function $M_E(t)$ of $E(\lambda)$ for $t<\lambda$.
+  \item[c.] Use the moment-generating function to find $\text{var}(E(\lambda))$.
+  \item[d.] Also, find $\avg{E(\lambda)^n}$ for arbitrary integer $n$.
+\end{itemize}
+
+\levelstay{Solution}
+
+For the average, just compute
+\begin{align*}
+  \avg{E(\lambda)}
+  &= \int_0^\infty x \lambda e^{-\lambda x} \, dx \\
+  &= \lambda \int_0^\infty - \frac{d}{d\lambda}  e^{-\lambda x} \, dx \\
+  &= - \lambda \frac{d}{d\lambda} \frac{1}{\lambda} \\
+  &= \frac{\lambda}{\lambda^2} \\
+  &= \frac{1}{\lambda} \, .
+\end{align*}
+
+For the moment-generating function, we just integrate:
+\begin{align*}
+  M_E(t)
+  &\equiv \int_0^\infty e^{t x} \lambda e^{-\lambda x} \, dx \\
+  &= \lambda \int_0^\infty e^{(t-\lambda) x} \, dx \\
+  &= \frac{\lambda}{\lambda - t} \, .
+\end{align*}
+Now we use the moment-generating function to find $\avg{E(\lambda)^2}$:
+\begin{align*}
+  \avg{E(\lambda)^2}
+  &= \lim_{t \to 0} \left( \frac{d}{dt} \right)^2 M_E(t) \\
+  &= \lim_{t \to 0} \left( \frac{d}{dt} \right)^2 \frac{\lambda}{\lambda - t} \\
+  &= -\lambda \lim_{t \to 0} \frac{d}{dt} (\lambda - t)^{-2} \\
+  &= 2 \lambda \lim_{t \to 0} \frac{d}{dt} (\lambda - t)^{-3} \\
+  &= \frac{2}{\lambda^2} \, .
+\end{align*}
+Therefore the variance is
+\begin{equation*}
+  \text{var}(E(\lambda)) = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2} \, .
+\end{equation*}
+To prove part d, we just compute:
+\begin{align*}
+  \avg{E(\lambda)^n}
+  &= \lambda \lim_{t \to 0} \left( \frac{d}{dt} \right)^n (\lambda - t)^{-1} \\
+  &= \lambda \lim_{t \to 0} n! (\lambda - t)^{-(n+1)} \\
+  &= \lambda n! \lambda^{-(n+1)} \\
+  &= n! \lambda^{-n} \, .
+\end{align*}
