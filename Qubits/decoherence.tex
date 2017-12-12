@@ -1,0 +1,66 @@
+\levelstay{Decoherence}
+
+Consider a two level system with Hamiltonian
+\begin{equation*}
+  H_S / \hbar = - \frac{\Omega}{2} \sigma_z
+\end{equation*}
+and an interaction with some other operator of the form
+\begin{equation*}
+  V / \hbar = g(F \otimes \sigma_x) \, .
+\end{equation*}
+It turns out (see Annealer Handbook appendix) that
+\begin{equation*}
+  \Gamma_\uparrow = g^2 S_F(- \Omega) \qquad \Gamma_\downarrow = g^2 S_F(\Omega)
+\end{equation*}
+where $S_F(\Omega)$ is the spectral density of $F$ defined as
+\begin{equation*}
+  S_F(\Omega) \equiv \int_{-\infty}^\infty dt \avg{F(t) F(0)} e^{i \Omega t} \, .
+\end{equation*}
+
+\leveldown{Driving}
+
+From Sank thesis appendix, the drive Hamiltonian in the lab frame is
+\begin{equation*}
+  H_d = h_d f(t) \sigma
+\end{equation*}
+with
+\begin{center}
+  \begin{tabular}{r | c | c}
+    & \textbf{Charge} & \textbf{Flux} \\
+    \hline
+    $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
+    \hline
+    $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
+    \hline
+    $h_d$ & $Q_\text{zpf} V_d/(1+C/C_d)$ & $\Phi_\text{zpf} I_d (M/L)$
+  \end{tabular}
+\end{center}
+For a resonant drive with envelope $e(t)$, i.e. $f(t) = e(t) \cos(\omega t + \phi)$, we find in the rotating frame
+\begin{equation*}
+  H_d \, (\text{rotating frame}) = h_d \frac{e(t)}{2} \left( \cos(\phi) \sigma_x + \sin(\phi) \sigma_y \right) \, .
+\end{equation*}
+The unitary operator driving the qubit is
+\begin{align*}
+  U(t)
+  &= \exp \left( -\frac{i}{\hbar} \int_0^t H_d(t') \, dt' \right) \\
+  &= \exp \left( -\frac{i}{\hbar} \frac{h_d}{2} \sigma \int_0^t e(t') dt' \right) \, .
+\end{align*}
+A $\pi$-pulse occurs when the argument of the exponent is equal to $\pm i \sigma \pi / 2$, i.e. when
+\begin{equation*}
+  \frac{1}{2} \frac{h_d}{\hbar} \int_0^t e(t') \, dt' = \pi / 2 \, .
+\end{equation*}
+It turns out that
+\begin{align*}
+  \text{(charge)} \quad \frac{\hbar}{h_d} &=
+  2 \sqrt{\frac{Z}{2 (R_K / 8\pi)}} \frac{\Phi_0/2\pi}{V_d} \left( 1 + \frac{C}{C_d} \right) \\
+  \text{(flux)} \quad \frac{\hbar}{h_d} &=
+  \left( \frac{L}{M} \right) \frac{2e}{I_d} \sqrt{\frac{2(R_K/8\pi)}{Z}}
+\end{align*}
+where $Z$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, giving $R_K/8\pi = 1,027 \, \Omega$.
+Combining results and assuming that $e(t)$ is a constant over a time interval $\Delta t$,  we get a pi pulse when
+\begin{align*}
+  \text{(charge)} \, \sqrt{2} \frac{1}{1 + C/C_d} \sqrt{\frac{(R_K/8\pi)}{Z}} \frac{V_d e(t) \Delta t}{\Phi_0} &= 1 \\
+  \text{(flux)} \, \frac{\sqrt{2}}{2 \pi} \left( \frac{M}{L} \right) \sqrt{\frac{Z}{(R_K/8\pi)}} \frac{I_d e(t) \Delta t}{2e} &= 1 \, .
+\end{align*}
+Note that $V_d e(t)$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d e(t)$.
+Using $e(t)$ separately from the dimensionful parts of the drive signal is kind of confusing, but we did that to make it easier to write dimensionless formulae.
