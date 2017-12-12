@@ -73,3 +73,15 @@ For a capacitively coupled qubit in the harmonic limit, the loaded $Q$ from the 
   Q_c (\text{inductive}) &= \left( \frac{L_q}{M_d} \right)^2 \frac{R_e}{Z_q}
 \end{align*}
 where $C_q$ and $L_q$ are the capacitance and inductance of the qubit, $C_d$ is a driving capacitance, $M_d$ is a driving mutual inductance, and $R_e$ is the external line resistance, usually $50 \, \Omega$.
+
+Eliminating the capacitances and inductances in favor of quality factor, we find
+\begin{align*}
+  \text{(charge)} \quad
+    \sqrt{\frac{2}{Q_c}}
+    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d e(t) \Delta t}{\Phi_0} &= 1 \\
+  \text{(flux)} \quad
+    \frac{1}{2\pi} \sqrt{\frac{2}{Q_c}}
+    \sqrt{\frac{R_e}{(R_K/8\pi)}} \frac{I_d e(t) \Delta t}{2e} &= 1 \, .
+\end{align*}
+These equations link the loaded quality factor of the (harmonic) qubit to the external ($50 \, \Omega$) resistance, the pi-pulse length, and the driving amplitude.
+Note that the qubit impedance does not show up.
