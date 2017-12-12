@@ -64,3 +64,12 @@ Combining results and assuming that $e(t)$ is a constant over a time interval $\
 \end{align*}
 Note that $V_d e(t)$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d e(t)$.
 Using $e(t)$ separately from the dimensionful parts of the drive signal is kind of confusing, but we did that to make it easier to write dimensionless formulae.
+
+\levelstay{Decay}
+
+For a capacitively coupled qubit in the harmonic limit, the loaded $Q$ from the drive line is (see Daniel's loaded mode writeup)
+\begin{align*}
+  Q_c (\text{capacitive}) &= \left( \frac{C_q}{C_d} \right)^2 \frac{Z_q}{R_e} \\
+  Q_c (\text{inductive}) &= \left( \frac{L_q}{M_d} \right)^2 \frac{R_e}{Z_q}
+\end{align*}
+where $C_q$ and $L_q$ are the capacitance and inductance of the qubit, $C_d$ is a driving capacitance, $M_d$ is a driving mutual inductance, and $R_e$ is the external line resistance, usually $50 \, \Omega$.
