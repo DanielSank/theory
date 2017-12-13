@@ -52,9 +52,9 @@ A $\pi$-pulse occurs when the argument of the exponent is equal to $\pm i \sigma
 It turns out that
 \begin{align*}
   \text{(charge)} \quad \frac{\hbar}{h_d} &=
-  2 \sqrt{\frac{Z}{2 (R_K / 8\pi)}} \frac{\Phi_0/2\pi}{V_d} \left( 1 + \frac{C}{C_d} \right) \\
+  \sqrt{2} \left( 1 + \frac{C}{C_d} \right) \sqrt{\frac{Z}{(R_K / 8\pi)}} \frac{\Phi_0/2\pi}{V_d} \\
   \text{(flux)} \quad \frac{\hbar}{h_d} &=
-  \left( \frac{L}{M} \right) \frac{2e}{I_d} \sqrt{\frac{2(R_K/8\pi)}{Z}}
+  \sqrt{2} \left( \frac{L}{M} \right) \sqrt{\frac{(R_K/8\pi)}{Z}} \frac{2e}{I_d}
 \end{align*}
 where $Z$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, giving $R_K/8\pi = 1,027 \, \Omega$.
 Combining results and assuming that $e(t)$ is a constant over a time interval $\Delta t$,  we get a pi pulse when
@@ -74,14 +74,34 @@ For a capacitively coupled qubit in the harmonic limit, the loaded $Q$ from the 
 \end{align*}
 where $C_q$ and $L_q$ are the capacitance and inductance of the qubit, $C_d$ is a driving capacitance, $M_d$ is a driving mutual inductance, and $R_e$ is the external line resistance, usually $50 \, \Omega$.
 
-Eliminating the capacitances and inductances in favor of quality factor, we find
+Eliminating the capacitances and inductances in favor of quality factor and assuming $C_q \gg C_d$, we find
 \begin{align*}
   \text{(charge)} \quad
-    \sqrt{\frac{2}{Q_c}}
-    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d e(t) \Delta t}{\Phi_0} &= 1 \\
+    \frac{1}{2\pi} \sqrt{\frac{2}{Q_c}}
+    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d e(t) \Delta t}{\Phi_0/2\pi} &= 1 \\
   \text{(flux)} \quad
     \frac{1}{2\pi} \sqrt{\frac{2}{Q_c}}
     \sqrt{\frac{R_e}{(R_K/8\pi)}} \frac{I_d e(t) \Delta t}{2e} &= 1 \, .
 \end{align*}
 These equations link the loaded quality factor of the (harmonic) qubit to the external ($50 \, \Omega$) resistance, the pi-pulse length, and the driving amplitude.
 Note that the qubit impedance does not show up.
+
+In the Annealer-Handbook, it is shown that given the driving Hamiltonian
+\begin{displaymath}
+  H_d = h_d f(t) \sigma_{x,y} \, ,
+\end{displaymath}
+the up/down transition rate due to drive noise is
+\begin{equation*}
+  \Gamma = \left( \frac{h_d}{\hbar} \right)^2 S_f(\omega_q) \, .
+\end{equation*}
+Plugging in the values for $h_d/\hbar$ for each case gives
+\begin{align*}
+  \text{(charge)} \, \Gamma =&
+    \frac{1}{2} \left( \frac{C_d}{C_q} \right)^2
+    \left( \frac{R_K/8\pi}{Z_q} \right) \left( \frac{V_d}{\Phi_0/2\pi} \right)^2
+    S_f(\omega_q) \\
+  \text{(flux)} \, \Gamma =&
+    \frac{1}{2} \left( \frac{M}{L_q} \right)^2
+    \left( \frac{Z_q}{R_K/8\pi} \right) \left( \frac{I_d}{2e} \right)^2
+    S_f(\omega_q) \, .
+\end{align*}
