@@ -1,0 +1,94 @@
+\levelstay{Resonator energy to output power ratio: reflection}
+
+We derive an equation relating the energy in the measurement resonator to the power leaving the system for a reflection circuit.
+This ratio is an important quantity as output power is a limited resource due to the finite saturation power of quantum limited amplifiers, and resonator energy is a limited resource because of readout-induced transitions.
+
+\leveldown{Resonator internal energy}
+
+Denote the impedance of the resonator as $Z_r$ and the impedance of the capacitor coupling the resonator to the outside by $Z_c$.
+The incoming voltage wave with amplitude $V_\text{in}$ reflects from the coupling capacitor, resulting in an outgoing wave with amplitude $\Gamma V_\text{in}$ where reflection coefficient $\Gamma$ is
+\begin{equation}
+  \Gamma = \frac{Z_l - Z_0}{Z_l + Z_0}
+\end{equation}
+and where $Z_l$ is the load impedance $Z_l = Z_c + Z_r$.
+Rearranging, we can write
+\begin{equation}
+  \frac{Z_l}{Z_0} = \frac{1 + \Gamma}{1 - \Gamma} \, .
+\end{equation}
+The voltage at the coupling capacitor is therefore
+\begin{equation}
+  V = V_\text{in} + \Gamma V_\text{in} = V_\text{in}(1 + \Gamma) \, .
+\end{equation}
+The voltage $V_d$ at the resonator is, by voltage division,
+\begin{equation}
+  V_d = V \left( \frac{Z_r}{Z_r + Z_c} \right) \, .
+\end{equation}
+The average energy in the resonator is therefore
+\begin{equation}
+  E
+  = \frac{1}{2} C |V_d|^2
+  = \frac{1}{2} C \abs{V_\text{in}}^2 \abs{1 + \Gamma}^2 \abs{\frac{Z_r}{Z_r + Z_c}}^2 \, .
+\end{equation}
+
+\levelstay{Reflected power}
+
+The power reflecting from the system is
+\begin{equation}
+  P = \frac{1}{2} \abs{V_\text{in} \Gamma}^2 / Z_0 \, .
+\end{equation}
+
+\levelstay{Ratio}
+We can now compute the ratio of output power to energy stored in the resonator:
+\begin{align}
+  \frac{P}{E}
+    &= \frac{(1/2) \abs{V_\text{in}}^2 \abs{\Gamma}^2}
+            {Z_0 (1/2) C \abs{V_\text{in}}^2 \abs{1 + \Gamma}^2}
+       \abs{\frac{Z_r + Z_c}{Z_r}}^2 \\
+    &= \frac{1}{Z_0 C} \frac{\abs{\Gamma}^2}{\abs{1 + \Gamma}^2}
+       \abs{1 - \frac{Z_c}{Z_l}}^{-2} \\
+    &= \frac{1}{Z_0 C} \frac{\abs{\Gamma}^2}{\abs{1 + \Gamma}^2}
+       \abs{1 - \frac{Z_c}{Z_0} \left( \frac{1-\Gamma}{1+\Gamma} \right)}^{-2} \, .
+\end{align}
+From the appendix of Daniel's thesis, we know that the loaded $Q$ of a resonator that is capacitively coupled to a resistance $R$ through a capacitance $C_c$ is
+\begin{equation}
+  Q_l = \left( \frac{C}{C_c} \right)^2 \frac{Z_{LC}}{R}
+\end{equation}
+where $Z_{LC} \equiv \sqrt{L/C}$ is the characteristic impedance of the resonance.
+Rearranging this for the impedance of the coupling capacitor $Z_c$, we get
+\begin{equation}
+  \frac{Z_c}{R} = i \sqrt{Q_l \frac{Z_{LC}}{R}} \, .
+\end{equation}
+Going back to the reflection measurement setup, we have $R \to Z_0$, so plugging in gives
+\begin{align}
+  \frac{P}{E}
+    &= \frac{1}{Z_0 C} \frac{\abs{\Gamma}^2}{\abs{1 + \Gamma}^2}
+       \abs{1 - i \sqrt{Q_l \frac{Z_{LC}}{Z_0}}
+       \left( \frac{1-\Gamma}{1+\Gamma} \right)}^{-2} \, .
+\end{align}
+
+Now let us consider the case of optimized readout where $\Gamma = \pm i$.\footnote{I didn't check this and someone should!}
+In the $\Gamma = i$ case, we get $(1-\Gamma)/(1+\Gamma)=-i$ and $\abs{1+\Gamma}^2=2$, so
+\begin{align}
+  \frac{P}{E}
+  &= \frac{1}{Z_0 C} \frac{1}{2} \abs{1 - i \sqrt{Q_l \frac{Z_{LC}}{Z_0}} (-i)}^{-2} \\
+  &= \frac{1}{Z_0 C} \frac{1}{2} \abs{1 - \sqrt{Q_l \frac{Z_{LC}}{Z_0}}}^{-2} \\
+  (\text{assume } Q_l \gg 1) \quad &= \frac{1}{Z_0 C} \frac{1}{2} \frac{Z_0}{Q_l Z_{LC}} \\
+  &= \frac{1}{2} \frac{\omega_r}{Q_l} \\
+  &= \frac{\kappa}{2} \, .
+\end{align}
+
+In Reference \cite{Sank:demodulated_noise_stack_exchange}, it is shown that the signal to noise ratio in the IQ plane is related to the analog signal power $P$ and noise spectral density $S$ according to
+\begin{equation}
+  \text{SNR} = \frac{P T g^2}{S}
+\end{equation}
+where $T$ is the acquisition time and $g$ is a geometrical factor defined as the ratio between the IQ cloud amplitude measured from the origin and the amplitude \emph{separation} of the two clouds.
+For reflection measurement we have $g=2$, giving
+\begin{align}
+  \text{SNR}
+    &= 4 \frac{PT}{S} \\
+    (\text{use } P = \kappa E/2) \quad &= 4 \frac{\kappa E T}{2S} \\
+    &= 2 \kappa n T
+\end{align}
+where in the last line we used $E = \hbar \omega n$ and $S = \hbar \omega$.
+The spectral density $\hbar \omega$ is correct when the system noise is dominated by a quantum limited phase preserving amplifier.
+Of course, in reality there will be some added noise from following stages and some loss of signal before the quantum limited amplifier.
