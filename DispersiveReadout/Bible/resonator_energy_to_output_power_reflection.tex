@@ -3,6 +3,13 @@
 We derive an equation relating the energy in the measurement resonator to the power leaving the system for a reflection circuit.
 This ratio is an important quantity as output power is a limited resource due to the finite saturation power of quantum limited amplifiers, and resonator energy is a limited resource because of readout-induced transitions.
 
+A circuit diagram of the system is shown in Figure \ref{Fig:dispersive_readout.reflection_circuit}.
+
+\quickfig{\columnwidth}
+{reflection_circuit.pdf}
+{Reflection circuit.}
+{Fig:dispersive_readout.reflection_circuit}
+
 \leveldown{Resonator internal energy}
 
 Denote the impedance of the resonator as $Z_r$ and the impedance of the capacitor coupling the resonator to the outside by $Z_c$.
@@ -77,11 +84,6 @@ In the $\Gamma = i$ case, we get $(1-\Gamma)/(1+\Gamma)=-i$ and $\abs{1+\Gamma}^
   &= \frac{\kappa}{2} \, .
 \end{align}
 
-In Reference \cite{Sank:demodulated_noise_stack_exchange}, it is shown that the signal to noise ratio in the IQ plane is related to the analog signal power $P$ and noise spectral density $S$ according to
-\begin{equation}
-  \text{SNR} = \frac{P T g^2}{S}
-\end{equation}
-where $T$ is the acquisition time and $g$ is a geometrical factor defined as the ratio between the IQ cloud amplitude measured from the origin and the amplitude \emph{separation} of the two clouds.
 For reflection measurement we have $g=2$, giving
 \begin{align}
   \text{SNR}
@@ -89,6 +91,4 @@ For reflection measurement we have $g=2$, giving
     (\text{use } P = \kappa E/2) \quad &= 4 \frac{\kappa E T}{2S} \\
     &= 2 \kappa n T
 \end{align}
-where in the last line we used $E = \hbar \omega n$ and $S = \hbar \omega$.
-The spectral density $\hbar \omega$ is correct when the system noise is dominated by a quantum limited phase preserving amplifier.
-Of course, in reality there will be some added noise from following stages and some loss of signal before the quantum limited amplifier.
+which is 8 times larger than the tranmission circuit case.

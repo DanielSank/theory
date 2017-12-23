@@ -42,3 +42,20 @@ In the optimal visibility where $S_{21}\approx\frac{1}{2}\left(1 \pm i \right)$ 
 where we've assumed $\omega \approx \omega_r$ and $Q_c \gg 1$.
 For comparison, a resonator in free ring-down has $E_{\text{res}}/P_{\text{out}} = 1/\kappa$.
 In the driven circuit studied here, for a given output power, the resonator internal energy is $16 \, r_e$ times larger than in the free ring-down case.
+
+For the simple transmission circuit, $r_e = 1/2$, so we have
+\begin{equation*}
+  \frac{P_\text{out}}{E_\text{res}} = \frac{\kappa_r}{8} \, .
+\end{equation*}
+
+In Reference \cite{Sank:demodulated_noise_stack_exchange}, it is shown that the signal to noise ratio in the IQ plane is related to the analog signal power $P$ and noise spectral density $S$ according to
+\begin{equation}
+  \text{SNR} = \frac{P T g^2}{S}
+\end{equation}
+where $T$ is the acquisition time and $g$ is a geometrical factor defined as the ratio between the IQ cloud amplitude measured from the origin and the amplitude \emph{separation} of the two clouds.
+For the transmission case we have $g^2=2$, so
+\begin{equation*}
+  \text{SNR} = \frac{n \kappa_r T}{4} \, .
+\end{equation*}
+where we used $E = \hbar \omega n$ and $S = \hbar \omega$, which applies when the system noise is dominated by a quantum limited phase preserving amplifier.
+Of course, in reality there will be some added noise from following stages and some loss of signal before the quantum limited amplifier.

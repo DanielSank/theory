@@ -2,6 +2,7 @@
 
 filenames = [
     'basic_circuit',
+    'reflection_circuit',
     'lollipop',
     'S21_circle'
 ]
