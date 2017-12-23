@@ -52,7 +52,10 @@ In Reference \cite{Sank:demodulated_noise_stack_exchange}, it is shown that the 
 \begin{equation}
   \text{SNR} = \frac{P T g^2}{S}
 \end{equation}
-where $T$ is the acquisition time and $g$ is a geometrical factor defined as the ratio between the IQ cloud amplitude measured from the origin and the amplitude \emph{separation} of the two clouds.
+where $T$ is the acquisition time and $g$ is a geometrical factor defined as
+\begin{equation*}
+  g \equiv \frac{\text{distance between clouds}}{\text{distance from cloud to origin}} \, .
+\end{equation*}
 For the transmission case we have $g^2=2$, so
 \begin{equation*}
   \text{SNR} = \frac{n \kappa_r T}{4} \, .
