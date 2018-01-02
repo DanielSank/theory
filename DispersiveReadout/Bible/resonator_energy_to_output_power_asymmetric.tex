@@ -1,0 +1,60 @@
+\levelstay{Resonator energy to output power ratio: asymmetric}
+
+Near resonance, the impedance of a parallel LRC oscillator is
+\begin{equation}
+  Z = \frac{Q Z_{LC}}{1 + i \delta}
+\end{equation}
+where $Z_{LC} \equiv \sqrt{L/C}$ is the characteristic impedance of the resonator, $Q = R/Z$ is the quality factor, and $\delta \equiv 2 Q (\omega - \omega_r)/\omega_r$ is the normalized detuning from the resonator's resonance frequency $\omega_r \equiv 1/\sqrt{LC}$.
+Note that the interesting features happen for $-1 \leq \delta \leq 1$.
+The resonator in Figure ?? has a loaded $Q$ value of
+\begin{equation}
+  Q_l = \left( \frac{C}{C_\kappa} \right)^2 \frac{Z_{LC}}{R_e} \, .
+\end{equation}
+The voltage across the resonator is
+\begin{align*}
+  V_r
+  &= I Z \\
+  &= I \frac{Q_l Z_{LC}}{1 + i \delta}
+\end{align*}
+so the enegy in the resonator is
+\begin{equation}
+  E_r = \frac{1}{2} C \abs{V_r}^2 = \frac{1}{2} C \abs{I}^2 \frac{Q_l^2 Z_{LC}^2}{1 + \delta^2} \, .
+\end{equation}
+The output voltage $V_\text{out}$ across $R_e$ is (use voltage division)
+\begin{align}
+  V_\text{out}
+  & = V \frac{R_e}{R_e + 1/i\omega C_\kappa} \\
+  & \approx V i \omega C_\kappa R_e \\
+  & = I i \sqrt{Q_l Z_{LC} R_e} \left( \frac{1 + \delta/2Q_l}{1 + i \delta} \right) \\
+  & \approx I i \sqrt{Q_l Z_{LC} R_e} \left( \frac{1}{1 + i \delta} \right) \\
+  \frac{V_\text{out}}{V_\text{out}(\delta=0)} &= \frac{1}{1 + i \delta} \, .
+\end{align}
+The signal is the separation between the two possible output voltages, which in the case that we probe in between the two resonances, is
+\begin{equation}
+  V_\text{signal}
+  = \abs{2 \Im \left( \frac{1}{1 + i \delta} \right)}
+  = \frac{2 \delta}{1 + \delta^2} \, .
+\end{equation}
+The IQ plane SNR is $g^2 P T / S$ where $P$ is the analog power, assumed to be the same, of each signal tone $g$ is a geometrical factor defined as the ratio between the IQ plane separation and the distance of each cloud from the origin.
+Therefore,
+\begin{equation}
+  g^2 = \frac{\abs{V_\text{signal}}^2}{\abs{V_\text{out}/V_\text{out}(\delta=0)}^2}
+      = 4 \delta^2 \, .
+\end{equation}
+
+The power coming out of the system is
+\begin{align}
+  P
+  &= \frac{1}{2} \frac{\abs{V_\text{out}}^2}{R_e} \nonumber \\
+  &= \frac{1}{2} \abs{I}^2 Q_l Z_{LC} \frac{1}{1 + \delta^2} \nonumber \\
+  &= \frac{E_r}{Q_l C Z_r} \nonumber \\
+  &= \kappa E_r \, .
+\end{align}
+Therefore, the IQ SNR is
+\begin{align}
+  \text{SNR}_\text{IQ}
+  &= \frac{g^2 PT}{S} \nonumber \\
+  &= \frac{4 \delta^2 E_r \kappa T}{S} \nonumber \\
+  &= 4 \delta^2 n \kappa T \,.
+\end{align}
+where we've assumed $S=\hbar \omega$ and $E_r = \hbar \omega n$.
