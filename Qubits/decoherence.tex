@@ -25,14 +25,16 @@ From Sank thesis appendix, the drive Hamiltonian in the lab frame is
 \end{equation*}
 with
 \begin{center}
-  \begin{tabular}{r | c | c}
-    & \textbf{Charge} & \textbf{Flux} \\
+  \begin{tabular}{|r|c|c|}
     \hline
+    & \textbf{Charge} & \textbf{Flux} \\
+    \hline \hline
     $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
     \hline
     $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
     \hline
-    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $\Phi_\text{zpf} I_d (M_d/L_q)$
+    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $\Phi_\text{zpf} I_d (M_d/L_q)$ \\
+    \hline
   \end{tabular}
 \end{center}
 For a resonant drive with envelope $w(t)$, i.e. $f(t) = w(t) \cos(\omega t + \phi)$, we find in the rotating frame
@@ -121,8 +123,8 @@ The results of this section are summarized in the table.
     \hline \hline
     $h_d/\hbar$
       &
-      & $\frac{1}{\sqrt{2}} \xi z^{-1/2} D$
-      & $\frac{1}{\sqrt{2}} \xi z^{1/2} D$
+      & $(1/\sqrt{2}) \xi z^{-1/2} D$
+      & $(1/\sqrt{2}) \xi z^{1/2} D$
       \\
     \hline
     $Q_c$
@@ -132,19 +134,33 @@ The results of this section are summarized in the table.
       \\
     \hline
     $\pi$-pulse
-      & $\frac{1}{\pi} \frac{h_d}{\hbar} w \Delta t = 1$
-      & $\frac{1}{\pi\sqrt{2}} \xi z^{-1/2} D w \Delta t \geq 1$
-      & $\frac{1}{\pi\sqrt{2}} \xi z^{1/2}  D w \Delta t \geq 1$
+      & $(1/\pi) \frac{h_d}{\hbar} w \Delta t = 1$
+      & $(1/\pi\sqrt{2}) \xi z^{-1/2} D w \Delta t \geq 1$
+      & $(1/\pi\sqrt{2}) \xi z^{1/2}  D w \Delta t \geq 1$
       \\
       &
-      & $\frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}} r_e^{-1/2} D w \Delta t \geq 1$
-      & $\frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}} r_e^{1/2}  D w \Delta t \geq 1$
+      & $(1/\pi\sqrt{2}) \sqrt{1/Q_c} r_e^{-1/2} D w \Delta t \geq 1$
+      & $(1/\pi\sqrt{2}) \sqrt{1/Q_c} r_e^{1/2}  D w \Delta t \geq 1$
       \\
     \hline
     $\Gamma_{\uparrow\downarrow}$
       & $(h_d/\hbar)^2 S$
-      & $\frac{1}{2} \xi^2 z^{-1} S_D(\omega_q)$
-      & $\frac{1}{2} \xi^2 z      S_D(\omega_q)$
+      & $(1/2) \xi^2 z^{-1} S_D(\omega_q)$
+      & $(1/2) \xi^2 z      S_D(\omega_q)$
+      \\
+      &
+      & $(1/2) r_e^{-1} S_D / Q_c$
+      & $(1/2) r_e      S_D / Q_c$
+      \\
+    \hline
+    $1/\Gamma \Delta t$
+      &
+      & $(\sqrt{2}/\pi) z^{1/2}  \xi^{-1} Dw/S_D$
+      & $(\sqrt{2}/\pi) z^{-1/2} \xi^{-1} Dw/S_D$
+      \\
+      &
+      & $(\sqrt{2}/\pi) \sqrt{Q_c r_e} (Dw/S_D)$
+      & $(\sqrt{2}/\pi) \sqrt{Q_c/r_e} (Dw/S_D)$
       \\
     \hline
   \end{tabular}
