@@ -32,38 +32,43 @@ with
     \hline
     $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
     \hline
-    $h_d$ & $Q_\text{zpf} V_d/(1+C/C_d)$ & $\Phi_\text{zpf} I_d (M/L)$
+    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $\Phi_\text{zpf} I_d (M_d/L_q)$
   \end{tabular}
 \end{center}
-For a resonant drive with envelope $e(t)$, i.e. $f(t) = e(t) \cos(\omega t + \phi)$, we find in the rotating frame
+For a resonant drive with envelope $w(t)$, i.e. $f(t) = w(t) \cos(\omega t + \phi)$, we find in the rotating frame
 \begin{equation*}
-  H_d \, (\text{rotating frame}) = h_d \frac{e(t)}{2} \left( \cos(\phi) \sigma_x + \sin(\phi) \sigma_y \right) \, .
+  H_d \, (\text{rotating frame}) = h_d \frac{w(t)}{2} \left( \cos(\phi) \sigma_x + \sin(\phi) \sigma_y \right) \, .
 \end{equation*}
-The unitary operator driving the qubit is
+The angle $\phi$ is a phase reference for the drive signal and we can shoose it to be whatever want.
+For convenience, we choose $\phi=0$ for the flux case and $\phi=\pi/2$ for the charge case, allowing us to write the unitary operator driving the qubit as
 \begin{align*}
   U(t)
   &= \exp \left( -\frac{i}{\hbar} \int_0^t H_d(t') \, dt' \right) \\
-  &= \exp \left( -\frac{i}{\hbar} \frac{h_d}{2} \sigma \int_0^t e(t') dt' \right) \, .
+  &= \exp \left( -\frac{i}{\hbar} \frac{h_d}{2} \sigma \int_0^t w(t') dt' \right)
 \end{align*}
+where $\sigma$ stands for $\sigma_x$ for the flux case and $\sigma_y$ for the charge case.
 A $\pi$-pulse occurs when the argument of the exponent is equal to $\pm i \sigma \pi / 2$, i.e. when
 \begin{equation*}
-  \frac{1}{2} \frac{h_d}{\hbar} \int_0^t e(t') \, dt' = \pi / 2 \, .
+  \frac{1}{2} \frac{h_d}{\hbar} \int_0^t w(t') \, dt' = \pi / 2
 \end{equation*}
+or assuming $w(t)$ is a constant $w$,
+\begin{equation}
+  \frac{1}{\pi} \frac{h_d}{\hbar} w \Delta t = 1 \, .
+\end{equation}
 It turns out that
 \begin{align*}
-  \text{(charge)} \quad \frac{\hbar}{h_d} &=
-  \sqrt{2} \left( 1 + \frac{C}{C_d} \right) \sqrt{\frac{Z}{(R_K / 8\pi)}} \frac{\Phi_0/2\pi}{V_d} \\
+  \text{(charge)} \quad \frac{h_d}{\hbar} &=
+  \frac{1}{\sqrt{2}} \left(\frac{C_d}{C_q} \right) \sqrt{\frac{(R_K / 8\pi)}{Z}} \frac{V_d}{\Phi_0/2\pi} \\
   \text{(flux)} \quad \frac{\hbar}{h_d} &=
-  \sqrt{2} \left( \frac{L}{M} \right) \sqrt{\frac{(R_K/8\pi)}{Z}} \frac{2e}{I_d}
+  \frac{1}{\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z}{(R_K/8\pi)}} \frac{I_d}{2e}
 \end{align*}
 where $Z$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, giving $R_K/8\pi = 1,027 \, \Omega$.
-Combining results and assuming that $e(t)$ is a constant over a time interval $\Delta t$,  we get a pi pulse when
+Combining results and assuming that $w(t)$ is a constant over a time interval $\Delta t$,  we get a pi pulse when
 \begin{align*}
-  \text{(charge)} \, \sqrt{2} \frac{1}{1 + C/C_d} \sqrt{\frac{(R_K/8\pi)}{Z}} \frac{V_d e(t) \Delta t}{\Phi_0} &= 1 \\
-  \text{(flux)} \, \frac{\sqrt{2}}{2 \pi} \left( \frac{M}{L} \right) \sqrt{\frac{Z}{(R_K/8\pi)}} \frac{I_d e(t) \Delta t}{2e} &= 1 \, .
+  \text{(charge)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{C_d}{C_q} \right) \sqrt{\frac{(R_K/8\pi)}{Z}} \frac{V_d w \Delta t}{\Phi_0/2\pi} &= 1 \\
+  \text{(flux)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z}{(R_K/8\pi)}} \frac{I_d w \Delta t}{2e} &= 1 \, .
 \end{align*}
-Note that $V_d e(t)$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d e(t)$.
-Using $e(t)$ separately from the dimensionful parts of the drive signal is kind of confusing, but we did that to make it easier to write dimensionless formulae.
+Note that $V_d w$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d w(t)$.
 
 \levelstay{Decay}
 
@@ -72,19 +77,20 @@ For a capacitively coupled qubit in the harmonic limit, the loaded $Q$ from the 
   Q_c (\text{capacitive}) &= \left( \frac{C_q}{C_d} \right)^2 \frac{Z_q}{R_e} \\
   Q_c (\text{inductive}) &= \left( \frac{L_q}{M_d} \right)^2 \frac{R_e}{Z_q}
 \end{align*}
-where $C_q$ and $L_q$ are the capacitance and inductance of the qubit, $C_d$ is a driving capacitance, $M_d$ is a driving mutual inductance, and $R_e$ is the external line resistance, usually $50 \, \Omega$.
+where $R_e$ is the external line resistance, usually $50 \, \Omega$.
 
-Eliminating the capacitances and inductances in favor of quality factor and assuming $C_q \gg C_d$, we find
+Eliminating the capacitances and inductances in favor of quality factor, we find
 \begin{align*}
   \text{(charge)} \quad
-    \frac{1}{2\pi} \sqrt{\frac{2}{Q_c}}
-    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d e(t) \Delta t}{\Phi_0/2\pi} &= 1 \\
+    \frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}}
+    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d w \Delta t}{\Phi_0/2\pi} &= 1 \\
   \text{(flux)} \quad
-    \frac{1}{2\pi} \sqrt{\frac{2}{Q_c}}
-    \sqrt{\frac{R_e}{(R_K/8\pi)}} \frac{I_d e(t) \Delta t}{2e} &= 1 \, .
+    \frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}}
+    \sqrt{\frac{R_e}{(R_K/8\pi)}} \frac{I_d w \Delta t}{2e} &= 1 \, .
 \end{align*}
 These equations link the loaded quality factor of the (harmonic) qubit to the external ($50 \, \Omega$) resistance, the pi-pulse length, and the driving amplitude.
-Note that the qubit impedance does not show up.
+Note that although $\hbar$ is present via $R_K$, the qubit parameters are absent!
+Therefore, this equation is quantum, but does not involve the internal structure of the qubit in any way.
 
 In the Annealer-Handbook, it is shown that given the driving Hamiltonian
 \begin{displaymath}
@@ -98,10 +104,53 @@ Plugging in the values for $h_d/\hbar$ for each case gives
 \begin{align*}
   \text{(charge)} \, \Gamma =&
     \frac{1}{2} \left( \frac{C_d}{C_q} \right)^2
-    \left( \frac{R_K/8\pi}{Z_q} \right) \left( \frac{V_d}{\Phi_0/2\pi} \right)^2
-    S_f(\omega_q) \\
+    \left( \frac{R_K/8\pi}{Z_q} \right) \frac{S_{V_d}(\omega_q)}{(\Phi_0/2\pi)^2} \\
   \text{(flux)} \, \Gamma =&
     \frac{1}{2} \left( \frac{M}{L_q} \right)^2
-    \left( \frac{Z_q}{R_K/8\pi} \right) \left( \frac{I_d}{2e} \right)^2
-    S_f(\omega_q) \, .
+    \left( \frac{Z_q}{R_K/8\pi} \right) \frac{S_{I_d}(\omega_q)}{(2e)^2} \, .
 \end{align*}
+
+\levelstay{Summary}
+
+The results of this section are summarized as follows
+\begin{table*}
+  \centering
+  \begin{tabular}{|r|c|c|c|}
+    \hline
+    & General & Charge & Flux \\
+    \hline \hline
+    $h_d/\hbar$
+      &
+      & $\frac{1}{\sqrt{2}} \xi z^{-1/2} \frac{V_d}{\Phi_0/2\pi}$
+      & $\frac{1}{\sqrt{2}} \xi z^{1/2} \frac{I_d}{2e}$
+      \\
+    \hline
+    $Q_c$
+      &
+      & $\xi^{-2} \frac{Z_q}{R_e}$
+      & $\xi^{-2} \frac{R_e}{Z_q}$
+      \\
+    \hline
+    $\pi$-pulse
+      & $\frac{1}{\pi} \frac{h_d}{\hbar} w \Delta t = 1$
+      & $\frac{1}{\pi\sqrt{2}} \xi z^{-1/2} \frac{V_d w \Delta t}{\Phi_0/2\pi} = 1$
+      & $\frac{1}{\pi\sqrt{2}} \xi z^{1/2} \frac{I_d w \Delta t}{2e} = 1$
+      \\
+      &
+      & $\frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}} r_e^{-1/2} \frac{V_d w \Delta t}{\Phi_0/2\pi} = 1$
+      & $\frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}} r_e^{1/2} \frac{I_d w \Delta t}{2e} = 1$
+      \\
+    \hline
+    $\Gamma_{\uparrow\downarrow}$
+      & $(h_d/\hbar)^2 S$
+      & $\frac{1}{2} \xi^2 z^{-1} \frac{S_{V_d}(\omega_q)}{(\Phi_0/2\pi)^2}$
+      & $\frac{1}{2} \xi^2 z \frac{S_{I_d}(\omega_q)}{(2e)^2}$
+      \\
+    \hline
+  \end{tabular}
+  \caption{caption}
+\end{table*}
+where $z \equiv Z_q/(R_K/8\pi)$, $r_e \equiv R_e / (R_K/8\pi)$, and
+\begin{displaymath}
+  \xi = \frac{C_d}{C_q} \quad \text{or} \quad \frac{M_d}{L_q} \, .
+\end{displaymath}
