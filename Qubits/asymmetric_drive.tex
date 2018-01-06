@@ -1,0 +1,77 @@
+\levelstay{Asymmetric Drive}
+
+\quickfig{\columnwidth}
+{SQUID_drive.pdf}
+{Qubit driven through mutual inductance coupled to an asymmetric SQUID.}
+{fig:asymmetric_SQUID_drive}
+
+Consider the circuit shown in Figure ?? where the qubit's junction is replaced by a dc SQUID.
+If the critical currents of the two SQUID junctions are different, it is possible to do X/Y driving through the mutual inductance $M$ between the drive line and the SQUID.
+
+A current through the bias line induces a circulating flux $\Phi$ in the SQUID loop.
+Denote the critical currents of the junctions as $I_L$ and $I_R$.
+The current flowing from one port of the SQUID to the other is the sum of the currents through the two junctions, i.e.
+\begin{equation}
+  I = I_L \sin(\delta_L) + I_R \sin(\delta_R) \, .
+\end{equation}
+Define the dimensionless bias phase $\phi \equiv \Phi / 2\pi$.
+The quantization condition around the SQUID loop says that
+\begin{equation}
+  \delta_L - \delta_R + \phi = 0 \, .
+\end{equation}
+Defining $\delta$ by the equation $\delta_L = \delta + \phi/2$ and using the quantization condition gives
+\begin{equation}
+  I = I_L \sin(\delta + \phi/2) + I_R \sin(\delta - \phi/2) \, .
+\end{equation}
+To find out how strongly the bias current drives qubit transitions, we compute $dI/d\phi$:
+\begin{align*}
+  \frac{dI}{d\phi}
+  =& \frac{d}{d\phi} \left( I_L \sin(\delta + \phi/2) + I_R \sin(\delta - \phi/2) \right) \\
+  =& \frac{1}{2} \left( I_L \cos(\delta + \phi/2) - I_R \cos(\delta - \phi/2) \right) \\
+  =& \frac{1}{2}
+  \left(
+              I_L \cos(\delta) \cos(\phi/2) - I_L \sin(\delta)\sin(\phi/2) \right. \\
+    & \left. -I_R \cos(\delta) \cos(\phi/2) + I_R \sin(\delta)\sin(\phi/2)
+  \right) \, .
+\end{align*}
+We need to evaluate $dI/d\phi$ at the equilibrium value of phase $\bar{\delta}$ defined by having zero dc current, i.e.
+\begin{equation*}
+  0 = I_L \sin(\bar{\delta} + \phi/2) + I_R \sin(\bar{\delta} - \phi/2) \, .
+\end{equation*}
+Expanding the trig functions in the condition for $\bar{\delta}$ and plugging the result into the equation for $dI/d\phi$ gives
+\begin{equation}
+  \left( \frac{dI}{d\phi} \right)(\delta=\bar{\delta})
+  = (I_L - I_R) \cos(\bar{\delta})
+  = I_L - I_R
+\end{equation}
+where in the last line we used the fact that $\bar{\delta}$ is \emph{defined} by the condition of zero dc current, so $\sin(\bar{\delta}) = 0$ and therefore $\cos(\bar{\delta})=1$.
+
+Define the junction asymmetry parameter $\alpha$ as
+\begin{displaymath}
+  \alpha \equiv \frac{I_L - I_R}{I_L + I_R} \, .
+\end{displaymath}
+The inductance of the SQUID under zero external flux bias is
+\begin{equation*}
+  L_{\text{SQUID},0} = \frac{\Phi_0/2\pi}{I_L + I_R}
+\end{equation*}
+so we can write
+\begin{equation*}
+  I_L - I_R = \alpha (\Phi_0/2\pi) / L_{\text{SQUID},0}
+\end{equation*}
+and therefore
+\begin{equation}
+  \frac{dI}{d\phi} = \frac{\alpha (\Phi_0/2\pi)}{L_{\text{SQUID},0}} \, .
+\end{equation}
+The dimensionless flux $\phi$ is related to the bias current $I_d$ via
+\begin{equation*}
+  \phi = \frac{I_d M}{\Phi_0/2\pi}
+\end{equation*}
+so
+\begin{equation}
+  \frac{dI}{dI_d} = \alpha \frac{M}{L_{\text{SQUID},0}} \, .
+\end{equation}
+Comparing this to the case where the bias line is directly coupled to the qubit loop, where we would have
+\begin{equation*}
+  \frac{dI}{dI_d} = \frac{M}{L} \, ,
+\end{equation*}
+we can see that there's a formal equivalence with $M \rightarrow \alpha M$ and $L \rightarrow L_{\text{SQUID},0}$.

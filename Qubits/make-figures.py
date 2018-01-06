@@ -4,6 +4,7 @@ filenames = [
     'single_circuit_with_drive',
     'coupled_circuits_capacitive',
     'coupled_circuits_inductive',
+    'SQUID_drive',
 ]
 
 
