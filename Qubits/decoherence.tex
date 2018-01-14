@@ -1,25 +1,8 @@
-\levelstay{Decoherence}
+\levelstay{Decoherence and control}
 
-Consider a two level system with Hamiltonian
-\begin{equation*}
-  H_S / \hbar = - \frac{\Omega}{2} \sigma_z
-\end{equation*}
-and an interaction with some other operator of the form
-\begin{equation*}
-  V / \hbar = g(F \otimes \sigma_x) \, .
-\end{equation*}
-It turns out (see Annealer Handbook appendix) that
-\begin{equation*}
-  \Gamma_\uparrow = g^2 S_F(- \Omega) \qquad \Gamma_\downarrow = g^2 S_F(\Omega)
-\end{equation*}
-where $S_F(\Omega)$ is the spectral density of $F$ defined as
-\begin{equation*}
-  S_F(\Omega) \equiv \int_{-\infty}^\infty dt \avg{F(t) F(0)} e^{i \Omega t} \, .
-\end{equation*}
+\leveldown{Introduction}
 
-\leveldown{Driving}
-
-From Sank thesis appendix, the drive Hamiltonian in the lab frame is
+As mentioned previously, for both capacitive and inductive driving, we can write the driving Hamiltonian in the lab frame as
 \begin{equation*}
   H_d = h_d f(t) \sigma
 \end{equation*}
@@ -37,80 +20,132 @@ with
     \hline
   \end{tabular}
 \end{center}
-For a resonant drive with envelope $w(t)$, i.e. $f(t) = w(t) \cos(\omega t + \phi)$, we find in the rotating frame
+Using the forms of $h_d$, $Q_\text{zpf}$ and $\Phi_\text{zpf}$, we can rewrite $h_d$ as
+\begin{align*}
+  \text{(charge)} \quad \frac{h_d}{\hbar} &=
+  \frac{1}{\sqrt{2}} \left(\frac{C_d}{C_q} \right) \sqrt{\frac{(R_K / 8\pi)}{Z_q}} \frac{V_d}{\Phi_0/2\pi} \\
+  \text{(flux)} \quad \frac{h_d}{\hbar} &=
+  \frac{1}{\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z_q}{(R_K/8\pi)}} \frac{I_d}{2e}
+\end{align*}
+where $Z_q$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, giving $R_K/8\pi = 1,027 \, \Omega$.
+
+\levelstay{Pi pulse length}
+
+For a resonant drive with envelope $f(t) = \cos(\omega t + \phi)$, we found in the rotating frame
 \begin{equation*}
-  H_d \, (\text{rotating frame}) = h_d \frac{w(t)}{2} \left( \cos(\phi) \sigma_x + \sin(\phi) \sigma_y \right) \, .
+  H_d \, (\text{rotating frame}) = \frac{h_d}{2} \left( \cos(\phi) \sigma_x + \sin(\phi) \sigma_y \right) \, .
 \end{equation*}
 The angle $\phi$ is a phase reference for the drive signal and we can shoose it to be whatever want.
 For convenience, we choose $\phi=0$ for the flux case and $\phi=\pi/2$ for the charge case, allowing us to write the unitary operator driving the qubit as
 \begin{align*}
   U(t)
-  &= \exp \left( -\frac{i}{\hbar} \int_0^t H_d(t') \, dt' \right) \\
-  &= \exp \left( -\frac{i}{\hbar} \frac{h_d}{2} \sigma \int_0^t w(t') dt' \right)
+  &= \exp \left( -\frac{i}{\hbar} \int_0^{\Delta t} H_d(t') \, dt' \right) \\
+  &= \exp \left( -\frac{i}{\hbar} \frac{h_d}{2} \sigma \Delta t \right)
 \end{align*}
 where $\sigma$ stands for $\sigma_x$ for the flux case and $\sigma_y$ for the charge case.
 A $\pi$-pulse occurs when the argument of the exponent is equal to $\pm i \sigma \pi / 2$, i.e. when
 \begin{equation*}
-  \frac{1}{2} \frac{h_d}{\hbar} \int_0^t w(t') \, dt' = \pi / 2
+  \frac{1}{2} \frac{h_d}{\hbar} \Delta t = \pi / 2 \, .
 \end{equation*}
-or assuming $w(t)$ is a constant $w$,
-\begin{equation}
-  \frac{1}{\pi} \frac{h_d}{\hbar} w \Delta t = 1 \, .
-\end{equation}
-It turns out that
+Using the forms of $h_d/\hbar$ given above, we get the condition for a pi pulse as
 \begin{align*}
-  \text{(charge)} \quad \frac{h_d}{\hbar} &=
-  \frac{1}{\sqrt{2}} \left(\frac{C_d}{C_q} \right) \sqrt{\frac{(R_K / 8\pi)}{Z}} \frac{V_d}{\Phi_0/2\pi} \\
-  \text{(flux)} \quad \frac{\hbar}{h_d} &=
-  \frac{1}{\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z}{(R_K/8\pi)}} \frac{I_d}{2e}
+  \text{(charge)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{C_d}{C_q} \right) \sqrt{\frac{(R_K/8\pi)}{Z_q}} \frac{V_d \Delta t}{\Phi_0/2\pi} &= 1 \\
+  \text{(flux)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z_q}{(R_K/8\pi)}} \frac{I_d \Delta t}{2e} &= 1 \, .
 \end{align*}
-where $Z$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, giving $R_K/8\pi = 1,027 \, \Omega$.
-Combining results and assuming that $w(t)$ is a constant over a time interval $\Delta t$,  we get a pi pulse when
-\begin{align*}
-  \text{(charge)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{C_d}{C_q} \right) \sqrt{\frac{(R_K/8\pi)}{Z}} \frac{V_d w \Delta t}{\Phi_0/2\pi} &= 1 \\
-  \text{(flux)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z}{(R_K/8\pi)}} \frac{I_d w \Delta t}{2e} &= 1 \, .
-\end{align*}
-Note that $V_d w$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d w(t)$.
+Note that $V_d$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d$.
 
-\levelstay{Decay}
+\levelstay{Decay from spontaneous emission}
 
-For a capacitively coupled qubit in the harmonic limit, the loaded $Q$ from the drive line is (see Daniel's loaded mode writeup)
+In the case of a nearly harmonic qubit like the transmon, the effect of dissipation from the drive line is can be computed from classical electronics arguments.
+The quality factor $Q_d$ induced by the driving circuit is
 \begin{align*}
-  Q_c (\text{capacitive}) &= \left( \frac{C_q}{C_d} \right)^2 \frac{Z_q}{R_e} \\
-  Q_c (\text{inductive}) &= \left( \frac{L_q}{M_d} \right)^2 \frac{R_e}{Z_q}
+  Q_d (\text{capacitive}) &= \left( \frac{C_q}{C_d} \right)^2 \frac{Z_q}{R_e} \\
+  Q_d (\text{inductive}) &= \left( \frac{L_q}{M_d} \right)^2 \frac{R_e}{Z_q}
 \end{align*}
 where $R_e$ is the external line resistance, usually $50 \, \Omega$.
-
-Eliminating the capacitances and inductances in favor of quality factor, we find
+Using these formulae, we can eliminate the capacitances and inductances from the formulae for the pi pulse length, arriving at
 \begin{align*}
   \text{(charge)} \quad
-    \frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}}
-    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d w \Delta t}{\Phi_0/2\pi} &= 1 \\
+    \frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_d}}
+    \sqrt{\frac{(R_K/8\pi)}{R_e}} \frac{V_d \Delta t}{\Phi_0/2\pi} &= 1 \\
   \text{(flux)} \quad
-    \frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_c}}
-    \sqrt{\frac{R_e}{(R_K/8\pi)}} \frac{I_d w \Delta t}{2e} &= 1 \, .
+    \frac{1}{\pi\sqrt{2}} \sqrt{\frac{1}{Q_d}}
+    \sqrt{\frac{R_e}{(R_K/8\pi)}} \frac{I_d \Delta t}{2e} &= 1 \, .
 \end{align*}
 These equations link the loaded quality factor of the (harmonic) qubit to the external ($50 \, \Omega$) resistance, the pi-pulse length, and the driving amplitude.
 Note that although $\hbar$ is present via $R_K$, the qubit parameters are absent!
 Therefore, this equation is quantum, but does not involve the internal structure of the qubit in any way.
 
-In the Annealer-Handbook, it is shown that given the driving Hamiltonian
+\levelstay{Up/down transition rates from noise}
+
+If the qubit with Hamiltonian
+\begin{equation*}
+  H_q / \hbar = - \frac{\Omega}{2} \sigma_z \, ,
+\end{equation*}
+interacts with some other system through an interaction term
+\begin{equation*}
+  V / \hbar = g(F \otimes \sigma_x) \, .
+\end{equation*}
+then the qubit experiences up and down transition rates due to noise in the $F$ operator with rate (REFERENCE)
+\begin{equation*}
+  \Gamma_\uparrow = g^2 S_F(- \Omega) \qquad \Gamma_\downarrow = g^2 S_F(\Omega)
+\end{equation*}
+where $S_F(\Omega)$ is the (two sided) spectral density of $F$ defined as
+\begin{equation*}
+  S_F(\Omega) \equiv \int_{-\infty}^\infty dt \avg{F(t) F(0)} e^{i \Omega t} \, .
+\end{equation*}
+In the case that $F$ is classical, e.g. the driving voltage or current used for controlling the qubit, it is common to work with the ``engineer's'' spectral density defined as $\Seng_F \equiv 2 S_F$, defined only for positive frequencies.
+$\Seng$ is the quantity one measures with e.g. a spectrum analyzer.
+
+Given the driving Hamiltonian
 \begin{displaymath}
   H_d = h_d f(t) \sigma_{x,y} \, ,
 \end{displaymath}
-the up/down transition rate due to drive noise is
+the up/down transition rate due to drive noise is therefore
 \begin{equation*}
-  \Gamma = \left( \frac{h_d}{\hbar} \right)^2 S_f(\omega_q) \, .
+  \Gamma = \left( \frac{h_d}{\hbar} \right)^2 S_f(\omega_q) = \frac{1}{2} \left( \frac{h_d}{\hbar} \right)^2 \Seng_f(\omega_q) \, .
 \end{equation*}
 Plugging in the values for $h_d/\hbar$ for each case gives
 \begin{align*}
   \text{(charge)} \, \Gamma =&
-    \frac{1}{2} \left( \frac{C_d}{C_q} \right)^2
-    \left( \frac{R_K/8\pi}{Z_q} \right) \frac{S_{V_d}(\omega_q)}{(\Phi_0/2\pi)^2} \\
+    \frac{1}{4} \left( \frac{C_d}{C_q} \right)^2
+    \left( \frac{R_K/8\pi}{Z_q} \right) \frac{\Seng_{V_d}(\omega_q)}{(\Phi_0/2\pi)^2} \\
   \text{(flux)} \, \Gamma =&
-    \frac{1}{2} \left( \frac{M}{L_q} \right)^2
-    \left( \frac{Z_q}{R_K/8\pi} \right) \frac{S_{I_d}(\omega_q)}{(2e)^2} \, .
+    \frac{1}{4} \left( \frac{M}{L_q} \right)^2
+    \left( \frac{Z_q}{R_K/8\pi} \right) \frac{\Seng_{I_d}(\omega_q)}{(2e)^2} \, .
 \end{align*}
+Eliminating the coupling capacitance and inductance in favor of $Q_d$ gives
+\begin{align}
+  \text{(charge)} \quad \Gamma =& \frac{1}{4} \frac{1}{Q_d} \left( \frac{R_K/8\pi}{R_e}\right) \frac{\Seng_{V_d}}{(\Phi_0/2\pi)^2} \\
+  \text{(flux)} \quad \Gamma =& \frac{1}{4} \frac{1}{Q_d} \left( \frac{R_e}{R_K/8\pi} \right) \frac{\Seng_{I_d}}{(2e)^2} \, .
+\end{align}
+
+\levelstay{Universal formulae - Power}
+
+Using the $Q$ induced by the driving circuit as a universal parameter and referring to the available signal and noise power from the drive circuit, we can write our design formulae in a remarkably concise way.
+
+Consider the $\Gamma$ formula in the charge coupled case.
+Plugging in the formula for the loaded $Q$ due to the drive circuit, we find
+\begin{align*}
+  \Gamma
+  & = \frac{1}{4} \frac{1}{Q_d} \frac{R_K / 8\pi}{R_e} \frac{\Seng_{V_d}}{(\Phi_0 / 2\pi)^2} \\
+  & = \frac{1}{4} \frac{1}{Q_d \hbar R_e} \Seng_{V_d} \, .
+\end{align*}
+Noting that $\Seng_{V_d}$ is the spectral density of voltage at the drive capacitor and that the drive capacitor is effectively an open circuit, we can write $\Seng_{V_d} = 4 \Seng_a R_e$ where $\Seng_a$ is the available noise power spectral density from the drive circuit.
+This gives
+\begin{equation}
+  \Gamma = \frac{\Seng_a}{Q_d \hbar} \, .
+\end{equation}
+This wonderfully simple result applies unchanged to the inductive drive case.
+
+Through similar reasoning, we can write the pi pulse time in terms of the signal power $P_a$ available from the drive circuit as
+\begin{equation}
+  \Delta t = \frac{\pi}{2} \sqrt{ \frac{Q_d \hbar}{P_a}} \, .
+\end{equation}
+Combining these results gives the universal design rule
+\begin{equation}
+  \Gamma \Delta t = \frac{\pi}{2} \frac{\Seng_a}{\sqrt{Q_d \hbar P_a}} \, .
+\end{equation}
 
 \levelstay{Summary}
 
@@ -127,42 +162,32 @@ The results of this section are summarized in the table.
       & $(1/\sqrt{2}) \xi z^{1/2} D$
       \\
     \hline
-    $Q_c$
+    $Q_d$
       &
       & $\xi^{-2} (Z_q/R_e)$
       & $\xi^{-2} (R_e/Z_q)$
       \\
     \hline
     $\Delta t$
-      & $(\pi/2) \sqrt{Q \hbar / P}$
-      & $(1/\pi\sqrt{2}) \xi z^{-1/2} D w \Delta t \geq 1$
-      & $(1/\pi\sqrt{2}) \xi z^{1/2}  D w \Delta t \geq 1$
+      & $(\pi/2) \sqrt{Q_d \hbar / P_a}$
+      & $(1/\pi\sqrt{2}) \xi z^{-1/2} D \Delta t \geq 1$
+      & $(1/\pi\sqrt{2}) \xi z^{1/2}  D \Delta t \geq 1$
       \\
       &
-      & $(1/\pi\sqrt{2}) \sqrt{1/Q_c} r_e^{-1/2} D w \Delta t \geq 1$
-      & $(1/\pi\sqrt{2}) \sqrt{1/Q_c} r_e^{1/2}  D w \Delta t \geq 1$
+      & $(1/\pi\sqrt{2}) \sqrt{1/Q_d} r_e^{-1/2} D \Delta t \geq 1$
+      & $(1/\pi\sqrt{2}) \sqrt{1/Q_d} r_e^{1/2}  D \Delta t \geq 1$
       \\
     \hline
-    $\Gamma_{\uparrow\downarrow}$
-      & $2 S / Q \hbar$
-      & $(1/2) \xi^2 z^{-1} S_D(\omega_q)$
-      & $(1/2) \xi^2 z      S_D(\omega_q)$
+    $\Gamma$
+      & $\Seng_a / Q_d \hbar$
+      & $(1/4) \xi^2 z^{-1} \Seng_D$
+      & $(1/4) \xi^2 z      \Seng_D$
       \\
       &
-      & $(1/2) r_e^{-1} S_D / Q_c$
-      & $(1/2) r_e      S_D / Q_c$
-      \\
-    \hline
-    $1/\Gamma \Delta t$
-      & $\sqrt{\hbar Q P}/ \pi S$
-      & $(\sqrt{2}/\pi) z^{1/2}  \xi^{-1} Dw/S_D$
-      & $(\sqrt{2}/\pi) z^{-1/2} \xi^{-1} Dw/S_D$
-      \\
-      &
-      & $(\sqrt{2}/\pi) \sqrt{Q_c r_e} (Dw/S_D)$
-      & $(\sqrt{2}/\pi) \sqrt{Q_c/r_e} (Dw/S_D)$
+      & $(1/4) r_e^{-1} \Seng_D / Q_d$
+      & $(1/4) r_e      \Seng_D / Q_d$
       \\
     \hline
   \end{tabular}
-  \caption{Summary of results for a qubit driven by charge or flux. In this table, $z\equiv Z_q/(R_K/8\pi)$ and $r_e \equiv R_e / (R_K/8\pi)$. We denote by $\xi$ the dimensionless coupling, i.e. $\xi \equiv C_d/C_q$ for charge and $\xi \equiv M_d/L_q$ for flux. Similarly, $D$ denotes a drive \emph{amplitude} with dimensions of 1/time, i.e. $D \equiv V_d/(\Phi_0 / 2\pi)$ for charge and $I_d/2e$ for flux. $S_D$ indicates drive spectral density at the qubit, and also has dimensions of 1/time. For the ``General'' column, $S$ and $P$ denote \emph{available} noise power spectral density and signal power ($S$ has dimensions of energy and $P$ has dimensions of power). Note that $D$ and $S_D$ are not available quantities, they correspond to the current/voltage at the drive capacitor or inductor.}
+  \caption{Summary of results for a qubit driven by charge or flux. In this table, $z\equiv Z_q/(R_K/8\pi)$ and $r_e \equiv R_e / (R_K/8\pi)$. We denote by $\xi$ the dimensionless coupling, i.e. $\xi \equiv C_d/C_q$ for charge and $\xi \equiv M_d/L_q$ for flux. Similarly, $D$ denotes a drive \emph{amplitude} with dimensions of 1/time, i.e. $D \equiv V_d/(\Phi_0 / 2\pi)$ for charge and $I_d/2e$ for flux. $\Seng_D$ indicates drive spectral density at the qubit, and also has dimensions of 1/time. For the ``General'' column, $\Seng_a$ and $P_a$ denote \emph{available} noise power spectral density and signal power ($\Seng_a$ has dimensions of energy and $P_a$ has dimensions of power). Note that $D$ and $\Seng_D$ are not available quantities; they correspond to the current/voltage at the drive capacitor or inductor.}
 \end{table*}
