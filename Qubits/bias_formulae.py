@@ -57,37 +57,6 @@ def current_dc_at_short(V_source_available, attenuation, Z_0):
     return 2 * V_source_available / np.sqrt(attenuation) / Z_0
 
 
-def gamma(Q, noise_power_spectral_density_available):
-    return noise_power_spectral_density_available / (Q * HBAR)
-
-
-def pi_pulse_length(Q, signal_power_available):
-    return (PI/2) * (Q * HBAR / signal_power_available)**0.5
-
-
-def gamma_pi_pulse_length_product(
-        Q,
-        signal_power,
-        noise_power_spectral_density_available,
-        attenuation=1):
-    """Gamma up/down from bias noise as a function of desired pi pulse length
-
-    Args:
-        Q (float): Loaded Q from bias circuit
-        signal_power (Value[W]): Available signal power
-        noise_power_spectral_density_available (Value[W/Hz]): Available noise
-            power spectral density
-
-    Returns (float): Product of up/down gamma induced by noise and the length
-        of a pi pulse.
-
-    TODO: This formula may be off by a factor of 2 due to confusion over the
-        definition of spectral density used to compute gamma.
-    """
-    return (PI / 2) * noise_power_spectral_density_available / (
-            Q * HBAR * signal_power * attenuation)**0.5
-
-
 class Junction(object):
     """A Josephson junction
     
@@ -160,6 +129,9 @@ class Transmon(object):
 
     def gamma_vs_Q(self, S_noise_power_available, Q):
         return S_noise_power_available / (Q * HBAR)
+
+    def pi_length_vs_Q(self, signal_power_available, Q):
+        return (PI/2) * (HBAR * Q / signal_power_available)**0.5
 
     def df_10_dPhi(self, f_10):
         """Returns df_10 / dPhi assuming symmetric junctions"""
