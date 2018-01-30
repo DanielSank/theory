@@ -12,35 +12,55 @@ The Schrodinger picture time evolution operator is $T=\exp \left[-i H/\hbar \rig
 In order to remove the idle point precession of the qubit state, we take as the rotation operator \begin{equation}
 R = T^{\dagger} = \exp \left[ -i \frac{\omega_0}{2} t \sigma_z \right], \end{equation}
 eg. we rotate the frame by the idle frequency of the qubit.
-We compute the remaining effective Hamiltonian $H'$ according to \citeinternalref{quantumMechanics} \begin{eqnarray}
-H'/\hbar &=& i\dot{R}R^{\dagger} + R \frac{H_q}{\hbar} R \\
-&=& i \left(-i \frac{\omega_0}{2} \right)\sigma_z RR^{\dagger} + R\frac{H_q}{\hbar}R^{\dagger} \\
-&=& -\frac{\delta\omega}{2}\sigma_z. \end{eqnarray}
+We compute the remaining effective Hamiltonian $H'$ according to \citeinternalref{quantumMechanics}
+\begin{align}
+  H'/\hbar
+  =& i\dot{R}R^{\dagger} + R \frac{H_q}{\hbar} R \nonumber \\
+  =& i \left(-i \frac{\omega_0}{2} \right)\sigma_z RR^{\dagger} + R\frac{H_q}{\hbar}R^{\dagger} \nonumber \\
+  =& -\frac{\delta\omega}{2}\sigma_z.
+\end{align}
 This is precisely the Hamiltonian of a qubit with frequency $\delta\omega$.
 In other words, if we go into a frame rotating at the idle frequency of the qubit, what remains is just the qubit precession at the detuning frequency.
 In particular if the frame rotates at the same frequency as the qubit the Hamiltonian becomes zero.
 
 \leveldown{Operators}
 
-Since we are going to want to work in a frame in which the qubit intrinsic Hamiltonian is zero it will be useful to find the form of various operators in that frame.
+As we are now working in a rotating frame, it will be useful to find the form of various operators in that frame.
 We list here the transformation of the Pauli operators under a frame rotating about the z-axis at frequency $\omega_r$.
-The rotation operator is $R=\exp \left[-i \frac{1}{2} \omega_r t \sigma_z \right]$ \citeinternalref{quantumMechanics} and the transformed Pauli operators are \begin{align}
-R\sigma_xR^{\dagger} & = \cos(\omega_r t)\sigma_x + \sin(\omega_r t) \sigma_y \nonumber \\
-R\sigma_yR^{\dagger} & = \cos(\omega_r t)\sigma_y - \sin(\omega_r t) \sigma_x \nonumber \\
-R\sigma_zR^{\dagger} & = \sigma_z \nonumber \\
-R\sigma_+R^{\dagger} & = e^{i\omega_r t}\sigma_+ \nonumber \\
-R\sigma_-R^{\dagger} & = e^{-i\omega_r t}\sigma_- \, . \nonumber \end{align}
+The rotation operator is $R=\exp \left[-i \frac{1}{2} \omega_r t \sigma_z \right]$ \citeinternalref{quantumMechanics} and the transformed Pauli operators are
+\begin{align*}
+  R\sigma_xR^{\dagger} & = \cos(\omega_r t)\sigma_x + \sin(\omega_r t) \sigma_y \\
+  R\sigma_yR^{\dagger} & = \cos(\omega_r t)\sigma_y - \sin(\omega_r t) \sigma_x \\
+  R\sigma_zR^{\dagger} & = \sigma_z \\
+  R\sigma_+R^{\dagger} & = e^{i\omega_r t}\sigma_+ \\
+  R\sigma_-R^{\dagger} & = e^{-i\omega_r t}\sigma_- \, .
+\end{align*}
 
 \levelstay{Driving}
 
 We now consider the driving Hamiltonian in the rotating frame.
 From section \ref{sec:driving} we have the general driving Hamiltonian in the lab frame
 \begin{equation}
-H_d = h_d f(t) \sigma \, .
+H_d = h_d f(t) \sigma
 \end{equation}
-For charge driving, we have $\sigma = \sigma_y$, $V_d(t) = V_d f(t)$, and $h_d = \bbraket{1}{Q}{0} V_d/(1 + C/C_d)$.
-For flux driving, we have $\sigma = \sigma_x$, $I_d(t) = I_d f(t)$, and $h_d = (M/L) \bbraket{1}{\Phi}{0} I_d$.
-We consider the flux case to for the sake of a specific example.
+where $h_d$ and $\sigma$ are defined for the charge and flux coupled cases as in the following table:
+\begin{center}
+  \begin{tabular}{|r|c|c|}
+    \hline
+    & \textbf{Charge} & \textbf{Flux} \\
+    \hline \hline
+    $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
+    \hline
+    $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
+    \hline
+    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $\Phi_\text{zpf} I_d (M_d/L_q)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+In this table, $V_d$ and $I_d$ are arbitrary voltage and current scales, introduced to make the time dependent part of the drive $f(t)$ dimensionless.
+$C_q$ and $L_q$ refer to the qubit capacitance and inductance, which we assume to be much larger than the drive capacitance $C_d$ and the drive inductance $M_d$.
+
+We now work through the flux coupled case.
 We use the rotation operator \begin{equation}
 R = \exp \left[ -i \frac{\omega_r}{2} t \sigma_z \right] \end{equation}
 to find the transformed driving Hamiltonian \begin{align}
@@ -56,7 +76,7 @@ Now suppose $f(t)$ is a sinusoid with an envelope $e(t)$,
 &= e(t) \left[ I \cos\left(\omega_d t\right) + Q \sin \left(\omega_d t\right) \right] \label{eq:drivingFunctionIQ}
 \end{align}
 where $I \equiv \cos(\phi_d)$ and $Q \equiv - \sin(\phi_d)$.
-Multiplying everything in Eq. (\ref{eq:drivingH}) together and throwing out the high frequency terms we get
+Multiplying everything in Eq. (\ref{eq:drivingH}) together and throwing out the high frequency terms (rotating wave approximation), we get
 \begin{align}
 & RH_dR^{\dagger}/h_d \\
 &= \frac{e(t)}{2} \left[ \cos(\delta\omega t + \phi_d)\sigma_x - \sin(\delta\omega t + \phi_d)\sigma_y \right] \\
@@ -73,25 +93,12 @@ RH_dR^{\dagger}/h_d
 &= \frac{e(t)}{2} \left[ I \sigma_x + Q \sigma_y \right] .
 \end{align}
 This is a rotation about a time independent axis in the xy plane of the Bloch sphere.
-If the rotating frame frequency is the same as the qubit frequency, then the qubit Hamiltonian is zero and our on-resonance drive leads to a purely latitudinal rotation on the Bloch sphere with the angle of the rotation axis in the xy plane given by $\phi$.
+If the rotating frame frequency is the same as the qubit frequency, then the qubit Hamiltonian is zero and our on-resonance drive leads to a purely latitudinal rotation on the Bloch sphere with the angle of the rotation axis in the xy plane given by $\phi_d$.
 If the qubit frequency does not match the rotating frame then the qubit Hamiltonian has a residual $\sigma_z$ component and the the rotation axis will be out of the xy plane.
 
-\leveldown{$\pi$ pulse}
+See below for a discussion of the relationship between drive voltage $V_d$ and the length of a pi-pulse applied to the qubit.
 
-For a resonant drive with $\phi_d=0$ we have \begin{equation}
-RH_dR^{\dagger} = -\frac{e(t)}{2}\frac{V_d \left| \bbraket{1}{Q}{0} \right|} {1 + C/C_d} \sigma_x. \end{equation}
-The evolution of the qubit under this drive is given by the unitary operator \begin{equation}
-U(t) = \exp \left[ i \left( \frac{1}{2 \hbar} \frac{V_d \left| \bbraket{1}{Q}{0} \right|} {1 + C/C_d} \int dt \, e(t) \right) \sigma_x \right]. \end{equation}
-This results in a pi pulse when $U(t)=\sigma_x$. Since \begin{equation}
-\exp \left[ i \alpha \sigma_x \right] = \cos(\alpha)\textrm{I} + i \sin(\alpha)\sigma_x \end{equation}
-we see that the pi pulse occurs when \begin{equation}
-\frac{1}{2\hbar} \frac{V_d \left| \bbraket{1}{Q}{0} \right|} {1 + C/C_d} \int e(t) dt = \frac{\pi}{2} \, . \end{equation}
-This relation is used to determine the appropriate drive capacitance $C_d$ when designing a device.
-The accessible values of $V_0$ are determined by the dynamic range of available pulse generators, the level of attenuation needed to remove noise from the drive lines.
-The value of $C_d$, is then chosen to be large enough that a $\pi$-pulse can be done in an acceptably short time while preserving the qubit coherence as discussed above.
-The value of $Q_{\textrm{zpf}}$ is determined by the type of qubit.
-
-\levelstay{Programming for experiment}
+\leveldown{Programming for experiment}
 
 Now that we know what the driving Hamiltonian looks like in the rotating frame we can investigate how to program our IF inputs to the IQ mixer to acheive a rotation on the Bloch sphere.
 From \citeinternalref{IQMixer} we know that an input IQ signal $e(t)\exp\left[i\omega t + \phi\right]$ produces an RF signal $ e(t)\cos\left[(\omega_c+\omega)t + \phi \right]$, where $\omega_c$ is the carrier frequency. Using trig identities we can rewrite this RF signal as \begin{equation}
@@ -101,21 +108,40 @@ This exactly matches the form we assumed for $f(t)$ in eq. (\ref{eq:drivingFunct
 Therefore if we choose $\omega$ such that $\omega + \omega_c = \omega_q$ and work in the rotating frame of the qubit, the driving Hamiltonian is \begin{equation}
 H_d/h_d = \frac{e(t)}{2}\left[I\sigma_x + Q\sigma_y\right]. \end{equation}
 In practice we don't want to have to remember to account for the carrier frequency when programming a pulse so we define a mix function which multiplies our complex signal by $\exp\left[i(\omega_{q} - \omega_c)\right]$.
-That way if we program a signal $\exp\left[i\phi\right]$ the driving Hamiltonian in the frame of the qubit is produced in the following steps \begin{align}
-&\textrm{program} e(t) e^{i\phi} \nonumber \\
-&\stackrel{\textrm{mix function}}{\longrightarrow} e(t) e^{i([\omega_q-\omega_c]t + \phi)} \nonumber \\
-&\stackrel{\textrm{physical mixer}}{\longrightarrow} \Re \left[ e(t) e^{i(\omega_q t + \phi)} \right] = e(t) \cos\left(\omega_q t + \phi \right) \nonumber \\
-&\stackrel{\textrm{Hamiltonian}}{\longrightarrow} \frac{e(t)}{2}\left[ I \sigma_x + Q \sigma_y \right]. \nonumber
-\end{align}
+That way if we program a signal $\exp\left[i\phi\right]$ the driving Hamiltonian in the frame of the qubit is produced in the following steps
+\begin{align*}
+  (\text{program}) & \quad e(t) e^{i\phi} \\
+  (\text{mix function}) & \quad e(t) e^{i([\omega_q-\omega_c]t + \phi)} \\
+  (\text{physical mixer}) & \quad \Re \left[ e(t) e^{i(\omega_q t + \phi)} \right] = e(t) \cos\left(\omega_q t + \phi \right) \\
+  (\text{Hamiltonian}) & \quad \frac{e(t)}{2}\left[ I \sigma_x + Q \sigma_y \right] \, .
+\end{align*}
 Thus our choice of angle $\phi$ directly maps to the angle of the rotation on the Bloch sphere.
 
 \levelup{Coupling}
 
-We found that the coupling Hamiltonian in the Schro-dinger picture is \begin{equation}
-H_g = g \left( \sigma_y \otimes \sigma_y \right) \end{equation}
-which can be expanded as \begin{eqnarray}
-H_g &=& -g (\sigma^+ - \sigma^-) \otimes (\sigma^+ - \sigma^-) \nonumber \\
-&=& g \left(-\sigma^+ \sigma^+ - \sigma^- \sigma^- + \sigma^+ \sigma^- + \sigma^- \sigma^+ \right). \end{eqnarray}
+We found that the coupling Hamiltonian in the Schro-dinger picture is
+\begin{equation}
+H_g = g \left( \sigma \otimes \sigma \right)
+\end{equation}
+where $\sigma$ and $g$ are defined as in the following table:
+\begin{center}
+  \begin{tabular}{|r|c|c|}
+    \hline
+    & \textbf{Charge} & \textbf{Flux} \\
+    \hline \hline
+    $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
+    \hline
+    $2g/\hbar \sqrt{\omega_1 \omega_2}$ & $C_g / \sqrt{C_1 C_2}$ & $M/\sqrt{L_1L_2}$ \\
+    \hline
+  \end{tabular}
+\end{center}
+In the charge case, the coupling Hamiltonian can be expanded as
+\begin{align}
+  H_g
+    =& -g (\sigma^+ - \sigma^-) \otimes (\sigma^+ - \sigma^-) \nonumber \\
+    =& g \left(-\sigma^+ \sigma^+ - \sigma^- \sigma^- \right. \nonumber \\
+     & \left. + \sigma^+ \sigma^- + \sigma^- \sigma^+ \right) \, .
+\end{align}
 Rotating the qubits' frames at $\omega_{r1}$ and $\omega_{r2}$ respectively and throwing away high frequency terms we get \begin{equation}
 H_g = g \left( e^{i \delta\omega_{r12} t} \sigma^+ \sigma^- + e^{-i \delta\omega_{r12} t} \sigma^- \sigma^+ \right) \end{equation}
 where $\delta\omega_{r12}\equiv \omega_{r1} - \omega_{r2}$.
@@ -123,7 +149,15 @@ If both frames rotate at the same frequency the interaction simplifies to \begin
 H_g = g \left( \sigma^+ \sigma^- + \sigma^- \sigma^+ \right). \end{equation}
 The matrix form, with basis states \begin{equation}
 \left[ \ket{00}, \ket{01}, \ket{10}, \ket{11} \right] \nonumber \end{equation}
-(ie the states defined by Kronecker product) is \begin{equation}
-H_g = g \left[ \begin{array}{cccc} 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{array} \right]. \end{equation}
+(i.e. the states defined by Kronecker product) is
+\begin{equation}
+  H_g =
+  g \left[ \begin{array}{cccc}
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 0
+  \end{array} \right] \, .
+\end{equation}
 This shows that direct on-resonance capacitive coupling produces a swap interaction in which excitations oscillate between the two coupled qubits.
 This is an entangling interaction.
