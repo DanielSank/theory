@@ -6,6 +6,7 @@ filenames = [
     'coupled_circuits_inductive',
     'SQUID_drive',
     'inductive_drive',
+    'gamma_and_pulse_length',
 ]
 
 

@@ -134,18 +134,25 @@ Plugging in the formula for the loaded $Q$ due to the drive circuit, we find
 Noting that $\Seng_{V_d}$ is the spectral density of voltage at the drive capacitor and that the drive capacitor is effectively an open circuit, we can write $\Seng_{V_d} = 4 \Seng_a R_e$ where $\Seng_a$ is the available noise power spectral density from the drive circuit.
 This gives
 \begin{equation}
-  \Gamma = \frac{\Seng_a}{Q_d \hbar} \, .
+  \boxed{\Gamma = \frac{\Seng_a}{Q_d \hbar} \, .}
 \end{equation}
 This wonderfully simple result applies unchanged to the inductive drive case.
 
 Through similar reasoning, we can write the pi pulse time in terms of the signal power $P_a$ available from the drive circuit as
 \begin{equation}
-  \Delta t = \frac{\pi}{2} \sqrt{ \frac{Q_d \hbar}{P_a}} \, .
+  \boxed{\Delta t = \frac{\pi}{2} \sqrt{ \frac{Q_d \hbar}{P_a}}\, .}
 \end{equation}
-Combining these results gives the universal design rule
-\begin{equation}
-  \Gamma \Delta t = \frac{\pi}{2} \frac{\Seng_a}{\sqrt{Q_d \hbar P_a}} \, .
-\end{equation}
+It is tempting to combine these equations into a single design rule $\Gamma \Delta t = (\pi/2) \sqrt{Q_d \hbar / P_a}$, but this is highly misleading as it fails to capture the fact that $\Gamma$ and $\Delta t$ scale differently with $Q_d$.
+In other words, for a given value of $Q_d$, we \emph{cannot} independently fix \emph{either} $\Delta t$ or $\Gamma$.
+
+An example application of these formulae, we plot in Figure \ref{fig:gamma_and_pulse_length} the $\Gamma$ and pi pulse lengths for a nearly harmonic circuit as a function of the attenuation between the driver and the qubit.
+
+\quickfig{\columnwidth}
+{gamma_and_pulse_length.pdf}
+{$\Gamma$ and pi pulse length $\Delta t$ for a nearly harmonic qubit.
+We use $Q_d = 40 \times 10^6$, corresponding to $T_1=1\,\text{ms}$ for a qubit with resonance frequency 6\,GHz.
+We assume a noise spectral density of $8\,\text{nV}/\sqrt{\text{Hz}}$ and a maximum signal power corresponding to $1\,\text{V}_\text{pp}$.}
+{fig:gamma_and_pulse_length}
 
 \levelstay{Summary}
 
