@@ -1,0 +1,66 @@
+Consider an initial state of two qubits
+\begin{equation}
+  \ket{\psi(0)} = \frac{1}{\sqrt{2}} \left( \ket{0} + \ket{1} \right)\ket{0} \, .
+\end{equation}
+Suppose the qubits interact through an interaction Hamiltonian
+\begin{equation}
+  H = \frac{g}{2} \left( \sigma_x \otimes \sigma_x + \sigma_y \otimes \sigma_y \right)
+    = g \left(
+        \begin{array}{cccc}
+          0 & 0 & 0 & 0 \\
+          0 & 0 & 1 & 0 \\
+          0 & 1 & 0 & 0 \\
+          0 & 0 & 0 & 0
+        \end{array}
+      \right)
+    \, .
+\end{equation}
+The propogator for this Hamiltonian is
+\begin{equation}
+U(t) =
+  \left(
+  \begin{array}{cccc}
+    1 & 0 & 0 & 0 \\
+    0 & \cos(gt) & -i \sin(gt) & 0 \\
+    0 & -i \sin(gt) & \cos(gt) & 0 \\
+    0 & 0 & 0 & 1
+  \end{array}
+  \right)
+  \, .
+\end{equation}
+Applying $U(t)$ to the initial state $\ket{\Psi(0)}$, we get
+\begin{equation}
+  \ket{\Psi(t)} =
+  \frac{1}{\sqrt{2}}
+  \left(
+    \begin{array}{c}
+      1 \\ 1 \\ 0 \\ 0
+    \end{array}
+  \right) \, .
+\end{equation}
+The density matrix is therefore
+\begin{equation}
+  \rho(t) = \frac{1}{2}
+  \left(
+  \begin{array}{cccc}
+    1 & \cos(gt) & i \sin(gt) & 0 \\
+    \cos(gt) & \cos(gt)^2 & i \cos(gt) \sin(gt) & 0 \\
+    -i \sin(gt) & -i \cos(gt) \sin(gt) & \sin(gt)^2 & 0 \\
+    0 & 0 & 0 & 0
+  \end{array}
+  \right) \, .
+\end{equation}
+We can take the partial trace over the second qubit (most significant bit) by keeping the right terms.
+Doing this leaves the density matrix of the first qubit as
+\begin{equation}
+  \rho =
+  \frac{1}{2}
+  \left(
+    \begin{array}{cc}
+      1 + \sin(gt)^2 & \cos(gt) \\
+      \cos(gt) & \cos(gt)^2
+    \end{array}
+  \right)
+  \, .
+\end{equation}
+This demonstrates decoherence by ``measurement'' through an auxilliary qubit.

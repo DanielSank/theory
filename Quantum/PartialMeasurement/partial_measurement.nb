@@ -1,0 +1,142 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4026,        132]
+NotebookOptionsPosition[      3528,        112]
+NotebookOutlinePosition[      3868,        127]
+CellTagsIndexPosition[      3825,        124]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"sx", " ", "=", " ", 
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"0", "1"},
+      {"1", "0"}
+     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sy", "=", 
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"0", 
+       RowBox[{"-", "\[ImaginaryI]"}]},
+      {"\[ImaginaryI]", "0"}
+     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"X", " ", "=", " ", 
+   RowBox[{"KroneckerProduct", "[", 
+    RowBox[{"sx", ",", " ", "sx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Y", " ", "=", " ", 
+   RowBox[{"KroneckerProduct", "[", 
+    RowBox[{"sy", ",", " ", "sy"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.735994262393882*^9, 3.735994347112838*^9}, {
+  3.735996869892627*^9, 3.7359968846293993`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"coupling", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"g", "/", "2"}], ")"}], 
+   RowBox[{"(", 
+    RowBox[{"X", "+", "Y"}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.7359943837222223`*^9, 3.7359945094961357`*^9}, {
+  3.735994549568035*^9, 3.7359945774638367`*^9}, {3.7359946760914993`*^9, 
+  3.735994721378585*^9}, {3.7359968919174347`*^9, 3.7359968969567957`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"U", " ", "=", " ", 
+  RowBox[{"MatrixExp", "[", 
+   RowBox[{
+    RowBox[{"-", "\[ImaginaryI]"}], " ", "t", " ", "coupling"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.735994729498597*^9, 3.735994751190811*^9}}],
+
+Cell[BoxData[
+ RowBox[{"U", "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.7359947567837143`*^9, 3.735994759017538*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"psi", " ", "=", " ", 
+   RowBox[{
+    FractionBox["1", 
+     SqrtBox["2"]], 
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"},
+       {"1"},
+       {"0"},
+       {"0"}
+      }], "\[NoBreak]", ")"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.735999590557087*^9, 3.7359996463602533`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"psit", " ", "=", " ", 
+  RowBox[{"U", ".", "psi"}]}]], "Input",
+ CellChangeTimes->{{3.735999648944079*^9, 3.735999673819622*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rhot", " ", "=", " ", 
+   RowBox[{"KroneckerProduct", "[", 
+    RowBox[{"psit", ",", " ", 
+     RowBox[{"ConjugateTranspose", "[", "psit", "]"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.735999677496622*^9, 3.735999694781744*^9}, {
+  3.735999748659095*^9, 3.7359997677143173`*^9}, {3.735999885125125*^9, 
+  3.735999889945044*^9}, {3.7359999598736343`*^9, 3.735999965839602*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Simplify", "[", 
+   RowBox[{"rhot", ",", " ", 
+    RowBox[{"Assumptions", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"g", ">", "0"}], ",", " ", 
+       RowBox[{"t", ">", "0"}]}], "}"}]}]}], "]"}], "//", 
+  "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.735999967482813*^9, 3.735999989297599*^9}, {
+  3.7360002059563637`*^9, 3.736000209331587*^9}, {3.736000241190969*^9, 
+  3.7360002419701*^9}}]
+},
+WindowSize->{808, 899},
+WindowMargins->{{Automatic, 156}, {-47, Automatic}},
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (September 9, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 823, 23, 129, "Input"],
+Cell[1384, 45, 404, 9, 32, "Input"],
+Cell[1791, 56, 238, 6, 32, "Input"],
+Cell[2032, 64, 127, 2, 32, "Input"],
+Cell[2162, 68, 327, 12, 80, "Input"],
+Cell[2492, 82, 153, 3, 32, "Input"],
+Cell[2648, 87, 425, 9, 32, "Input"],
+Cell[3076, 98, 448, 12, 32, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
