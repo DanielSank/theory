@@ -1,6 +1,8 @@
 Consider an initial state of two qubits
 \begin{equation}
-  \ket{\psi(0)} = \frac{1}{\sqrt{2}} \left( \ket{0} + \ket{1} \right)\ket{0} \, .
+  \ket{\psi(0)} = \frac{1}{2}
+    \left( \ket{0} + \ket{1} \right) \otimes
+    \left( \ket{0} + \ket{1} \right)\, .
 \end{equation}
 Suppose the qubits interact through an interaction Hamiltonian
 \begin{equation}
@@ -31,10 +33,10 @@ U(t) =
 Applying $U(t)$ to the initial state $\ket{\Psi(0)}$, we get
 \begin{equation}
   \ket{\Psi(t)} =
-  \frac{1}{\sqrt{2}}
+  \frac{1}{2}
   \left(
     \begin{array}{c}
-      1 \\ 1 \\ 0 \\ 0
+      1 \\ e^{-gt} \\ e^{-gt} \\ 1
     \end{array}
   \right) \, .
 \end{equation}
@@ -43,22 +45,22 @@ The density matrix is therefore
   \rho(t) = \frac{1}{2}
   \left(
   \begin{array}{cccc}
-    1 & \cos(gt) & i \sin(gt) & 0 \\
-    \cos(gt) & \cos(gt)^2 & i \cos(gt) \sin(gt) & 0 \\
-    -i \sin(gt) & -i \cos(gt) \sin(gt) & \sin(gt)^2 & 0 \\
-    0 & 0 & 0 & 0
+    1         & e^{igt}  & e^{igt}  & 1        \\
+    e^{-igt}  & 1        & 1        & e^{-igt} \\
+    e^{-igt}  & 1        & 1        & e^{-igt} \\
+    1         & e^{igt}  & e^{igt}  & 1
   \end{array}
   \right) \, .
 \end{equation}
-We can take the partial trace over the second qubit (most significant bit) by keeping the right terms.
+We can take the partial trace over the second qubit (least significant bit) by keeping the right terms.
 Doing this leaves the density matrix of the first qubit as
 \begin{equation}
-  \rho =
+  \rho_A(t) =
   \frac{1}{2}
   \left(
     \begin{array}{cc}
-      1 + \sin(gt)^2 & \cos(gt) \\
-      \cos(gt) & \cos(gt)^2
+      1        & \cos(gt) \\
+      \cos(gt) & 1
     \end{array}
   \right)
   \, .

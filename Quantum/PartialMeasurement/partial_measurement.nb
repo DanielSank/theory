@@ -10,49 +10,79 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      4026,        132]
-NotebookOptionsPosition[      3528,        112]
-NotebookOutlinePosition[      3868,        127]
-CellTagsIndexPosition[      3825,        124]
+NotebookDataLength[      6192,        193]
+NotebookOptionsPosition[      5546,        168]
+NotebookOutlinePosition[      5883,        183]
+CellTagsIndexPosition[      5840,        180]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"sx", " ", "=", " ", 
-   RowBox[{"(", "\[NoBreak]", GridBox[{
-      {"0", "1"},
-      {"1", "0"}
-     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"sy", "=", 
-   RowBox[{"(", "\[NoBreak]", GridBox[{
-      {"0", 
-       RowBox[{"-", "\[ImaginaryI]"}]},
-      {"\[ImaginaryI]", "0"}
-     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"X", " ", "=", " ", 
-   RowBox[{"KroneckerProduct", "[", 
-    RowBox[{"sx", ",", " ", "sx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Y", " ", "=", " ", 
-   RowBox[{"KroneckerProduct", "[", 
-    RowBox[{"sy", ",", " ", "sy"}], "]"}]}], ";"}]}], "Input",
- CellChangeTimes->{{3.735994262393882*^9, 3.735994347112838*^9}, {
-  3.735996869892627*^9, 3.7359968846293993`*^9}}],
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Decoherence from partial entanglement\n",
+ StyleBox["In this notebook, we show what happens to the state of a qubit \
+when it partially entangles with another qubit.", "Text",
+  FontColor->GrayLevel[0]]
+}], "Title",
+ CellChangeTimes->{{3.737071798080587*^9, 3.737071860886129*^9}}],
 
 Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Pauli", " ", "operators"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"sx", " ", "=", " ", 
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"0", "1"},
+        {"1", "0"}
+       }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sy", "=", 
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"0", 
+         RowBox[{"-", "\[ImaginaryI]"}]},
+        {"\[ImaginaryI]", "0"}
+       }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Two", "-", 
+     RowBox[{"qubit", " ", "versions"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"X", " ", "=", " ", 
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{"sx", ",", " ", "sx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Y", " ", "=", " ", 
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{"sy", ",", " ", "sy"}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.735994262393882*^9, 3.735994347112838*^9}, {
+  3.735996869892627*^9, 3.7359968846293993`*^9}, {3.737071863302409*^9, 
+  3.73707186912566*^9}, {3.737071903195855*^9, 3.737071920414341*^9}}],
+
+Cell[BoxData[{
  RowBox[{"coupling", " ", "=", " ", 
   RowBox[{
    RowBox[{"(", 
     RowBox[{"g", "/", "2"}], ")"}], 
    RowBox[{"(", 
-    RowBox[{"X", "+", "Y"}], ")"}]}]}]], "Input",
+    RowBox[{"X", "+", "Y"}], ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "This", " ", "is", " ", "the", " ", "coupling", " ", "given", " ", "by", 
+      " ", "capacitive", " ", "coupling", " ", "between", " ", "two", " ", 
+      "on"}], "-", 
+     RowBox[{"resonance", " ", "qubits"}]}], ",", " ", 
+    RowBox[{"in", " ", "the", " ", "rotating", " ", "frame"}]}], " ", 
+   "*)"}]}]}], "Input",
  CellChangeTimes->{{3.7359943837222223`*^9, 3.7359945094961357`*^9}, {
   3.735994549568035*^9, 3.7359945774638367`*^9}, {3.7359946760914993`*^9, 
-  3.735994721378585*^9}, {3.7359968919174347`*^9, 3.7359968969567957`*^9}}],
+  3.735994721378585*^9}, {3.7359968919174347`*^9, 3.7359968969567957`*^9}, {
+  3.737071926855254*^9, 3.7370719527617083`*^9}}],
 
 Cell[BoxData[
  RowBox[{"U", " ", "=", " ", 
@@ -66,24 +96,49 @@ Cell[BoxData[
  RowBox[{"U", "//", "MatrixForm"}]], "Input",
  CellChangeTimes->{{3.7359947567837143`*^9, 3.735994759017538*^9}}],
 
+Cell[TextData[{
+ "The starting state is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox["1", "2"], 
+    RowBox[{"(", 
+     RowBox[{"|", 
+      RowBox[{"0", ">", "+"}], "|", 
+      RowBox[{"1", ">"}]}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"|", 
+      RowBox[{"0", ">", " ", "+"}], " ", "|", 
+      RowBox[{"1", ">"}]}], ")"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ". The state ordering is 00, 01, 10, 11."
+}], "Text",
+ CellChangeTimes->{{3.737072034693025*^9, 3.737072084216572*^9}}],
+
 Cell[BoxData[
  RowBox[{
   RowBox[{"psi", " ", "=", " ", 
    RowBox[{
-    FractionBox["1", 
-     SqrtBox["2"]], 
+    FractionBox["1", "2"], 
     RowBox[{"(", "\[NoBreak]", GridBox[{
        {"1"},
        {"1"},
-       {"0"},
-       {"0"}
+       {"1"},
+       {"1"}
       }], "\[NoBreak]", ")"}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.735999590557087*^9, 3.7359996463602533`*^9}}],
+ CellChangeTimes->{{3.735999590557087*^9, 3.7359996463602533`*^9}, {
+  3.736960898881008*^9, 3.7369609036311703`*^9}, {3.736961835822318*^9, 
+  3.7369618373986197`*^9}, {3.7369633068793373`*^9, 3.736963312662258*^9}, {
+  3.737071986796689*^9, 3.737072026852352*^9}}],
 
 Cell[BoxData[
  RowBox[{"psit", " ", "=", " ", 
   RowBox[{"U", ".", "psi"}]}]], "Input",
  CellChangeTimes->{{3.735999648944079*^9, 3.735999673819622*^9}}],
+
+Cell[BoxData[
+ RowBox[{"psit", "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.7369633223745337`*^9, 3.736963327790728*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -109,9 +164,10 @@ Cell[BoxData[
  CellChangeTimes->{{3.735999967482813*^9, 3.735999989297599*^9}, {
   3.7360002059563637`*^9, 3.736000209331587*^9}, {3.736000241190969*^9, 
   3.7360002419701*^9}}]
+}, Open  ]]
 },
-WindowSize->{808, 899},
-WindowMargins->{{Automatic, 156}, {-47, Automatic}},
+WindowSize->{1868, 986},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"10.0 for Linux x86 (64-bit) (September 9, 2014)",
 StyleDefinitions->"Default.nb"
 ]
@@ -126,17 +182,21 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 823, 23, 129, "Input"],
-Cell[1384, 45, 404, 9, 32, "Input"],
-Cell[1791, 56, 238, 6, 32, "Input"],
-Cell[2032, 64, 127, 2, 32, "Input"],
-Cell[2162, 68, 327, 12, 80, "Input"],
-Cell[2492, 82, 153, 3, 32, "Input"],
-Cell[2648, 87, 425, 9, 32, "Input"],
-Cell[3076, 98, 448, 12, 32, "Input"]
+Cell[CellGroupData[{
+Cell[580, 22, 299, 6, 113, "Title"],
+Cell[882, 30, 1209, 31, 173, "Input"],
+Cell[2094, 63, 867, 21, 55, "Input"],
+Cell[2964, 86, 238, 6, 32, "Input"],
+Cell[3205, 94, 127, 2, 32, "Input"],
+Cell[3335, 98, 513, 17, 43, "Text"],
+Cell[3851, 117, 511, 14, 80, "Input"],
+Cell[4365, 133, 153, 3, 32, "Input"],
+Cell[4521, 138, 130, 2, 32, "Input"],
+Cell[4654, 142, 425, 9, 32, "Input"],
+Cell[5082, 153, 448, 12, 32, "Input"]
+}, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
