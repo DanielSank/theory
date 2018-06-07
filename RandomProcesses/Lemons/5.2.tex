@@ -1,0 +1,34 @@
+\levelstay{Adding Uniform Variables}
+
+\leveldown{Problem}
+
+Prove that the sum $U_1(m_1, a_1) + U_2(m_2, a_2)$ of two statistically independent uniform variables $U_1(m_1, a_1)$ and $U_2(m_2, a_2)$ is not itself a uniform random variable by showing that the moment-generating function of $U_1(m_1, a_1) + U_2(m_2, a_2)$ is not in the form of a moment-generating function of a uniform random variable.
+
+\levelstay{Solution}
+
+Given two random variables $X$ and $Y$, the distribution of the sum $Z = X + Y$ is the convolution of the distributions of $X$ and $Y$
+\begin{equation*}
+  Z(z) = \int dx \, X(x) Y(z - x) \, .
+\end{equation*}
+The characteristic function of $Z$ is therefore
+\begin{align*}
+  M_Z(t)
+  &= \int dz \, Z(z) e^{zt} \\
+  &= \int dx \, dz \, X(x) Y(z-x) e^{zt} \\
+  &= \int dx \, dz \, X(x) e^{xt} Y(z-x) e^{(z-x)t} \\
+  &= M_X(t) \cdot M_Y(t) \, .
+\end{align*}
+
+The characteristic function of $U_1(m_1, a_1)$ is
+\begin{align*}
+  M_{U_1}(t)
+  &= \frac{1}{a_1} \int_{m_1 - a_1/2}^{m_1+a_1/2} dx \, e^{xt} \\
+  &= \frac{1}{a_1} \left. \frac{e^{xt}}{t} \right \rvert _{m_1 - a_1/2}^{m_1 + a_1/2} \\
+  &= \frac{1}{a_1} \frac{e^{mt} e^{a_1 t / 2} - e^{m_1 t} e^{-a_1 t / 2}}{t} \\
+  &= e^{m_1 t} \frac{\sinh(a_1 t / 2)}{a_1 t / 2} \, .
+\end{align*}
+Therefore,
+\begin{equation*}
+  M_Z(t) = e^{(m_1 + m_2) t} \frac{\sinh(a_1 t / 2) \sinh(a_2 t / 2)}{a_1 a_2 t^2 / 4} \, .
+\end{equation*}
+The form of $M_Z(t)$ is pretty clearly not the same as the form of $M_{U_1}$, so we've shown that the sum of two uniform variables does not have the same distribution as a uniform variable.
