@@ -1,0 +1,54 @@
+\levelstay{Dependent Normals}
+
+\leveldown{Problem}
+
+Given that $X = a N_1(0, 1)$ and $Y = b N_1(0, 1) + c N_2(0, 1)$ where $a$, $b$ and $c$ are constants and $N_1(0,1)$ and $N_2(0,1)$ are statisically independent unit normal variables, find
+\begin{itemize}
+  \item $\text{cov}\{ X, Y \}$
+  \item $\text{var} \{ X + Y \}$
+  \item $\text{var}\{ X \} + \text{var}\{ Y \}$
+  \item Show that $\text{var} \{ X + Y \} \neq \text{var} \{ X \} + \text{var} \{ Y \}$.
+\end{itemize}
+
+\levelstay{Solution}
+
+Covariance is defined as
+\begin{equation*}
+  \text{cov}(XY) \equiv \avg{XY} - \avg{X}\avg{Y} \, .
+\end{equation*}
+The averages of $X$ and $Y$ are both zero, so we just need to find $\avg{XY}$.
+Let $n_1$ parametrize the possible values of $N_1$ and $n_2$ parametrize the values of $N_2$.
+Then we have
+\begin{align*}
+  \avg{XY}
+  &= \frac{1}{2\pi} \int d n_1 \, d n_2 \, e^{-(n_1^2 + n_2^2) / 2} (a n_1) (b n_1 + c n_2) \\
+  &= \frac{1}{2\pi} \int d n_1 \, d n_2 \, e^{-(n_1^2 + n_2^2) / 2} (ab n_1^2 + c n_2) \\
+  &= ab \, .
+\end{align*}
+
+Now we need to find $\text{var}(X + Y)$.
+Again, we can think of the averages in terms of integration
+\begin{align*}
+  \text{var}(X + Y)
+  &\equiv \avg{(X + Y)^2} - \underbrace{\avg{X + Y}^2}_0 \\
+  &= \int dn_1 \, dn_2 \, ( a n_1 + b n_1 + c n_2)^2 e^{-(n_1^2 + n_2^2) / 2} \\
+  &= \int dn_1 \, dn_2 \, ( (a + b) n_1 + c n_2)^2 e^{-(n_1^2 + n_2^2) / 2} \\
+  &= \left( \int dn_1 \, (a + b)^2 n_1^2 \, e^{-n_1^2 / 2} \right)
+     \left( \int dn_2 \, c^2 n_2^2 \, e^{-n_2^2 / 2} \right) \\
+  &= (a + b)^2 + c^2 \\
+  &= a^2 + b^2 + c^2 + 2ab \, .
+\end{align*}
+We dropped terms in the integral that mix $n_1$ and $n_2$ because $N_1$ and $N_2$ are independent.
+
+Finally, we compute $\text{var}(X) + \text{var}(Y)$.
+We know that the variances of the sum of two independent normals is the sum of the variances, so $\text{var}(X) = a^2 + b^2$.
+It's obvious that $\text{var}(Y) = c^2$.
+Therefore,
+\begin{equation*}
+  \text{var}(X) + \text{var}(Y) = a^2 + b^2 + c^2 \, .
+\end{equation*}
+
+It's clear that if $a$ and $b$ are not zero, then
+\begin{equation*}
+  \text{var}(X + Y) \neq \text{var}(X) + \text{var}(Y) \, .
+\end{equation*}
