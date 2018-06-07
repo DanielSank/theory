@@ -1,0 +1,43 @@
+\levelstay{Uniform Linear Transformation}
+
+\leveldown{Problem}
+
+Prove $U(\alpha, \beta) = \alpha + \beta U(0, 1)$ by showing that
+\begin{equation*}
+  M_{U(\alpha, \beta)}(t) = M_{\alpha + \beta U(0, 1)}(t) \, .
+\end{equation*}
+Note: $U(\alpha, \beta)$ is a uniform distribution with mean $\alpha$ and width $\beta$.
+
+\levelstay{Solution}
+
+The characteristic function $M_{U(0, 1)}(t)$ is
+\begin{equation*}
+  M_{U(0, 1)}(t) = \int_{-1/2}^{1/2} e^{xt} \, dt = i \frac{\sin(t/2)}{t/2} \, .
+\end{equation*}
+
+Let us find $M_{U(0, \beta)}$.
+Consider a random variable $X$ and another random variable $Y$ defined by $y = Ax$.
+Using the change of variables theorem, we can show that $M_{AX}(t) = M_X(At)$.
+Therefore, we have
+\begin{equation*}
+  M_{\beta U(0, 1)}(t) = M_{U(0, 1)}(\beta t) = i \frac{\sin(\beta t / 2)}{\beta t / 2} \, .
+\end{equation*}
+
+Now consider $M_{U(\alpha, \beta)}(t)$.
+The effect of the $\alpha$ is to shift the distribution by $\alpha$ to the right.
+We can represent this by considering random variables $X$ and $Y$ related by $y = x + \alpha$.
+Then
+\begin{equation*}
+  M_Y(t)
+  =              \int P_Y(y) e^{yt} \, dy \\
+  =              \int P_X(y - \alpha) e^{yt} \, dy \\
+  =              \int P_X(x) e^{(x + \alpha)t} \, dx \\
+  = e^{\alpha t} M_X(t) \, .
+\end{equation*}
+Therefore,
+\begin{equation*}
+  M_{\alpha + \beta U(0, 1)}(t)
+  = e^{\alpha t} M_{\beta U(0, 1)}(t)
+  = e^{\alpha t} i \frac{\sin(\beta t/2)}{\beta t/2}\, ,
+\end{equation*}
+which matches the form of $M_{U(\alpha, \beta)}(t)$ that we can compute using direct integration.
