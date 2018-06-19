@@ -14,7 +14,7 @@
    height="88.582672"
    id="svg4834"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.92.2pre0 (973e216, 2017-07-25)"
    sodipodi:docname="reflection_circuit.svg">
   <sodipodi:namedview
      id="base"
@@ -23,16 +23,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8348869"
-     inkscape:cx="-13.859432"
-     inkscape:cy="131.28371"
+     inkscape:zoom="2.5949219"
+     inkscape:cx="80.209284"
+     inkscape:cy="61.161791"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g4173"
      showgrid="false"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:window-width="1870"
+     inkscape:window-height="1140"
+     inkscape:window-x="50"
+     inkscape:window-y="25"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -185,10 +185,16 @@
      inkscape:label="Layer 1">
     <g
        id="g4424"
-       transform="translate(26.704644,48.504353)">
+       transform="translate(26.704644,48.504353)"
+       inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150">
       <g
          id="g3967"
-         transform="matrix(0,1,-1,0,1135.9762,817.56933)">
+         transform="matrix(0,1,-1,0,1135.9762,817.56933)"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150">
         <path
            inkscape:connector-curvature="0"
            id="path3965"
@@ -204,17 +210,26 @@
          style="fill:none;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          d="m 167.44401,957.43074 -17.32682,0"
          id="path3961-8-8"
-         inkscape:connector-curvature="0" />
+         inkscape:connector-curvature="0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0.49999996"
          id="rect3963"
          width="23.037685"
          height="20.671652"
          x="168.44102"
-         y="947.09491" />
+         y="947.09491"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <g
          id="g5198"
-         transform="matrix(0.34867844,0,0,0.34867844,23.79036,858.20449)">
+         transform="matrix(0.34867844,0,0,0.34867844,23.79036,858.20449)"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150">
         <path
            id="path4099"
            title="t sin(5*t)"
@@ -229,7 +244,10 @@
       </g>
       <g
          id="g5198-4"
-         transform="matrix(-0.34867844,0,0,0.34867844,47.223765,890.76912)">
+         transform="matrix(-0.34867844,0,0,0.34867844,47.223765,890.76912)"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150">
         <path
            id="path4099-3"
            title="t sin(5*t)"
@@ -244,7 +262,10 @@
       </g>
       <g
          id="g3971"
-         transform="translate(-10,-2.0750658)">
+         transform="translate(-10,-2.0750658)"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150">
         <g
            id="g3975"
            transform="matrix(0,1,1,0,-835.55881,819.5661)">
@@ -257,7 +278,7 @@
              transform="matrix(0.18081965,0.01799771,-0.01881333,0.17298059,122.22244,1029.7408)"
              inkscape:transform-center-y="3.4830113"
              inkscape:transform-center-x="-0.010693258"
-             d="M 108.57143,102.36219 80.160721,63.05083 128.41071,58.102113 z"
+             d="M 108.57143,102.36219 80.160721,63.05083 128.41071,58.102113 Z"
              inkscape:randomized="-1.0269563e-15"
              inkscape:rounded="0"
              inkscape:flatsided="true"
@@ -281,21 +302,30 @@
          sodipodi:cy="274.03964"
          sodipodi:rx="47.477169"
          sodipodi:ry="27.779196"
-         d="m 77.607213,268.8507 c 4.897868,-15.072 29.750507,-24.9671 55.509917,-22.10132 25.75941,2.86577 42.67104,17.40721 37.77317,32.4792 -4.89787,15.072 -29.7505,24.9671 -55.50992,22.10133 -25.52842,-2.84008 -42.411415,-17.16056 -37.882016,-32.13226"
+         d="m 77.607213,268.8507 a 47.477169,27.779196 0 0 1 55.361807,-22.11766 47.477169,27.779196 0 0 1 37.97665,32.32217 47.477169,27.779196 0 0 1 -55.12069,22.32288 47.477169,27.779196 0 0 1 -38.326616,-32.18044"
          sodipodi:start="3.3294887"
          sodipodi:end="9.5999758"
          sodipodi:open="true"
-         transform="matrix(-0.15052874,0,0,0.25726461,142.44594,886.98637)" />
+         transform="matrix(-0.15052874,0,0,0.25726461,142.44594,886.98637)"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <path
          inkscape:connector-curvature="0"
          id="path3154"
          d="m 123.82223,950.33916 -62.209489,0"
-         style="fill:none;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:none;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <path
          inkscape:connector-curvature="0"
          id="path3154-8"
          d="m 123.29934,964.63498 -61.686599,0"
-         style="fill:none;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:none;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <path
          sodipodi:type="arc"
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:10.6310606;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0.49999996"
@@ -304,16 +334,22 @@
          sodipodi:cy="274.03964"
          sodipodi:rx="47.477169"
          sodipodi:ry="27.779196"
-         d="m 77.607213,268.8507 c 4.897868,-15.072 29.750507,-24.9671 55.509917,-22.10132 25.75941,2.86577 42.67104,17.40721 37.77317,32.4792 -4.89787,15.072 -29.7505,24.9671 -55.50992,22.10133 -25.52842,-2.84008 -42.411415,-17.16056 -37.882016,-32.13226"
+         d="m 77.607213,268.8507 a 47.477169,27.779196 0 0 1 55.361807,-22.11766 47.477169,27.779196 0 0 1 37.97665,32.32217 47.477169,27.779196 0 0 1 -55.12069,22.32288 47.477169,27.779196 0 0 1 -38.326616,-32.18044"
          sodipodi:start="3.3294887"
          sodipodi:end="9.5999758"
          sodipodi:open="true"
-         transform="matrix(-0.15052874,0,0,0.25726461,79.837407,886.98637)" />
+         transform="matrix(-0.15052874,0,0,0.25726461,79.837407,886.98637)"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <path
          style="fill:none;stroke:#000000;stroke-width:2.09207058;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          d="m 39.052104,957.43074 23.117417,0"
          id="path3961-2"
-         inkscape:connector-curvature="0" />
+         inkscape:connector-curvature="0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <g
          ns0:preamble="/home/daniel/.config/inkscape/extensions/tex_preamble.ini"
          ns0:text="$V_{\\text{in}}$"
@@ -328,7 +364,10 @@
          xml:space="preserve"
          transform="matrix(1.6021681,0,0,-1.6021681,-331.17949,2062.2355)"
          id="content"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"><path
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150"><path
            id="path3198"
            d="m 229.68,712.78 0.05,0.07 0.04,0.06 0.05,0.07 0.04,0.05 0.04,0.06 0.05,0.05 0.04,0.05 0.04,0.04 0.05,0.04 0.04,0.04 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.01 0.04,0.02 0.04,0.01 0.03,0.01 0.04,0.01 0.04,0 0.03,0.01 0.04,0 0.07,0.01 0.07,0.01 0.07,0 c 0.12,0.01 0.13,0.18 0.13,0.19 0,0.08 -0.05,0.12 -0.13,0.12 -0.25,0 -0.54,-0.03 -0.81,-0.03 -0.33,0 -0.67,0.03 -0.99,0.03 -0.06,0 -0.19,0 -0.19,-0.19 0,-0.11 0.09,-0.12 0.16,-0.12 0.27,-0.02 0.46,-0.12 0.46,-0.33 0,-0.15 -0.15,-0.36 -0.15,-0.37 l -3.05,-4.85 -0.68,5.25 c 0,0.17 0.23,0.3 0.69,0.3 0.14,0 0.25,0 0.25,0.2 0,0.09 -0.08,0.11 -0.14,0.11 -0.4,0 -0.83,-0.03 -1.24,-0.03 -0.18,0 -0.36,0.01 -0.55,0.01 -0.17,0 -0.36,0.02 -0.53,0.02 -0.07,0 -0.19,0 -0.19,-0.19 0,-0.12 0.09,-0.12 0.25,-0.12 0.55,0 0.56,-0.09 0.6,-0.34 l 0.78,-6.12 c 0.03,-0.2 0.07,-0.23 0.2,-0.23 0.16,0 0.2,0.05 0.28,0.18 z"
            inkscape:connector-curvature="0"
@@ -358,7 +397,10 @@
          word-spacing="normal"
          ns0:text="$V_d$"
          ns0:preamble="/home/daniel/.config/inkscape/extensions/tex_preamble.ini"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"><path
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150"><path
            style="fill:#000000;stroke-width:0"
            inkscape:connector-curvature="0"
            d="m 229.68,712.78 0.05,0.07 0.04,0.06 0.05,0.07 0.04,0.05 0.04,0.06 0.05,0.05 0.04,0.05 0.04,0.04 0.05,0.04 0.04,0.04 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.01 0.04,0.02 0.04,0.01 0.03,0.01 0.04,0.01 0.04,0 0.03,0.01 0.04,0 0.07,0.01 0.07,0.01 0.07,0 c 0.12,0.01 0.13,0.18 0.13,0.19 0,0.08 -0.05,0.12 -0.13,0.12 -0.25,0 -0.54,-0.03 -0.81,-0.03 -0.33,0 -0.67,0.03 -0.99,0.03 -0.06,0 -0.19,0 -0.19,-0.19 0,-0.11 0.09,-0.12 0.16,-0.12 0.27,-0.02 0.46,-0.12 0.46,-0.33 0,-0.15 -0.15,-0.36 -0.15,-0.37 l -3.05,-4.85 -0.68,5.25 c 0,0.17 0.23,0.3 0.69,0.3 0.14,0 0.25,0 0.25,0.2 0,0.09 -0.08,0.11 -0.14,0.11 -0.4,0 -0.83,-0.03 -1.24,-0.03 -0.18,0 -0.36,0.01 -0.55,0.01 -0.17,0 -0.36,0.02 -0.53,0.02 -0.07,0 -0.19,0 -0.19,-0.19 0,-0.12 0.09,-0.12 0.25,-0.12 0.55,0 0.56,-0.09 0.6,-0.34 l 0.78,-6.12 c 0.03,-0.2 0.07,-0.23 0.2,-0.23 0.16,0 0.2,0.05 0.28,0.18 z"
@@ -380,7 +422,10 @@
          word-spacing="normal"
          ns0:text="$C_{\\kappa}$"
          ns0:preamble="/home/daniel/.config/inkscape/extensions/tex_preamble.ini"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"><path
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150"><path
            style="fill:#000000;stroke-width:0"
            inkscape:connector-curvature="0"
            d="m 230.99,714.03 0,0 0,0.01 0,0 0,0 0,0.01 0,0 0,0 0,0.01 0,0 0,0.01 -0.01,0 0,0 0,0.01 0,0 -0.01,0.01 0,0 0,0 0,0.01 -0.01,0 0,0 -0.01,0.01 0,0 -0.01,0 0,0.01 -0.01,0 0,0 0,0 -0.01,0 0,0 0,0 -0.01,0 0,0.01 0,0 -0.01,0 0,0 0,0 -0.01,0 0,0 -0.01,0 c -0.03,0 -0.04,-0.01 -0.14,-0.12 l -0.7,-0.77 c -0.09,0.14 -0.55,0.89 -1.65,0.89 -2.22,0 -4.46,-2.2 -4.46,-4.5 0,-1.64 1.17,-2.72 2.7,-2.72 0.86,0 1.62,0.39 2.14,0.85 0.93,0.82 1.1,1.72 1.1,1.75 0,0.1 -0.1,0.1 -0.12,0.1 -0.06,0 -0.11,-0.02 -0.13,-0.1 -0.09,-0.29 -0.32,-0.99 -1,-1.57 -0.69,-0.56 -1.32,-0.73 -1.83,-0.73 -0.9,0 -1.95,0.52 -1.95,2.07 0,0.57 0.2,2.18 1.2,3.34 0.61,0.7 1.54,1.2 2.43,1.2 1.01,0 1.6,-0.77 1.6,-1.92 0,-0.39 -0.03,-0.4 -0.03,-0.5 0,-0.1 0.11,-0.1 0.15,-0.1 0.13,0 0.13,0.02 0.18,0.2 z"
@@ -402,7 +447,10 @@
          stroke-miterlimit="10.433"
          xml:space="preserve"
          transform="matrix(1.6021681,0,0,-1.6021681,-231.60651,2079.7097)"
-         id="g4764"><path
+         id="g4764"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150"><path
            id="path4766"
            d="m 229.68,712.78 0.05,0.07 0.04,0.06 0.05,0.07 0.04,0.05 0.04,0.06 0.05,0.05 0.04,0.05 0.04,0.04 0.05,0.04 0.04,0.04 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.01 0.04,0.02 0.04,0.01 0.03,0.01 0.04,0.01 0.04,0 0.03,0.01 0.04,0 0.07,0.01 0.07,0.01 0.07,0 c 0.12,0.01 0.13,0.18 0.13,0.19 0,0.08 -0.05,0.12 -0.13,0.12 -0.25,0 -0.54,-0.03 -0.81,-0.03 -0.33,0 -0.67,0.03 -0.99,0.03 -0.06,0 -0.19,0 -0.19,-0.19 0,-0.11 0.09,-0.12 0.16,-0.12 0.27,-0.02 0.46,-0.12 0.46,-0.33 0,-0.15 -0.15,-0.36 -0.15,-0.37 l -3.05,-4.85 -0.68,5.25 c 0,0.17 0.23,0.3 0.69,0.3 0.14,0 0.25,0 0.25,0.2 0,0.09 -0.08,0.11 -0.14,0.11 -0.4,0 -0.83,-0.03 -1.24,-0.03 -0.18,0 -0.36,0.01 -0.55,0.01 -0.17,0 -0.36,0.02 -0.53,0.02 -0.07,0 -0.19,0 -0.19,-0.19 0,-0.12 0.09,-0.12 0.25,-0.12 0.55,0 0.56,-0.09 0.6,-0.34 l 0.78,-6.12 c 0.03,-0.2 0.07,-0.23 0.2,-0.23 0.16,0 0.2,0.05 0.28,0.18 z"
            inkscape:connector-curvature="0"
@@ -410,7 +458,10 @@
          style="fill:none;stroke:#000000;stroke-width:2.09200001;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          d="m 125.76233,957.43074 17.57866,0"
          id="path3961-8"
-         inkscape:connector-curvature="0" />
+         inkscape:connector-curvature="0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
       <g
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
          ns0:preamble="/home/danielsank/lib/textext_preamble.tex"
@@ -429,23 +480,32 @@
            id="path4175"
            d="m 229.68,662.89 0.05,0.07 0.04,0.06 0.05,0.07 0.04,0.05 0.04,0.06 0.05,0.05 0.04,0.05 0.04,0.04 0.05,0.04 0.04,0.04 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.03 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.02 0.04,0.01 0.04,0.02 0.04,0.01 0.03,0.01 0.04,0.01 0.04,0 0.03,0.01 0.04,0 0.07,0.01 0.07,0.01 0.07,0 c 0.12,0.01 0.13,0.18 0.13,0.19 0,0.08 -0.05,0.12 -0.13,0.12 -0.25,0 -0.54,-0.03 -0.81,-0.03 -0.33,0 -0.67,0.03 -0.99,0.03 -0.06,0 -0.19,0 -0.19,-0.19 0,-0.11 0.09,-0.12 0.16,-0.12 0.27,-0.02 0.46,-0.12 0.46,-0.33 0,-0.15 -0.15,-0.36 -0.15,-0.37 l -3.05,-4.85 -0.68,5.25 c 0,0.17 0.23,0.3 0.69,0.3 0.14,0 0.25,0 0.25,0.2 0,0.09 -0.08,0.11 -0.14,0.11 -0.4,0 -0.83,-0.03 -1.24,-0.03 -0.18,0 -0.36,0.01 -0.55,0.01 -0.17,0 -0.36,0.02 -0.53,0.02 -0.07,0 -0.19,0 -0.19,-0.19 0,-0.12 0.09,-0.12 0.25,-0.12 0.55,0 0.56,-0.09 0.6,-0.34 l 0.78,-6.13 c 0.03,-0.19 0.07,-0.22 0.2,-0.22 0.16,0 0.2,0.05 0.28,0.18 z"
            inkscape:connector-curvature="0"
-           style="fill:#000000;stroke-width:0" /><path
-           id="path4177"
-           d="m 230.71,660.03 0,0.02 0,0.02 0,0.02 0,0.02 -0.01,0.01 0,0.02 -0.01,0.02 -0.01,0.02 0,0.02 -0.01,0.01 -0.01,0.02 -0.01,0.02 -0.01,0.01 -0.01,0.02 -0.02,0.01 -0.01,0.02 -0.01,0.01 -0.02,0.01 -0.01,0.01 -0.02,0.02 -0.01,0.01 -0.02,0.01 -0.02,0.01 -0.02,0 -0.02,0.01 -0.02,0.01 -0.01,0 -0.02,0.01 -0.03,0 -0.02,0.01 -0.02,0 -0.02,0 c -0.21,0 -0.4,-0.17 -0.4,-0.4 0,-0.25 0.21,-0.4 0.4,-0.4 0.22,0 0.4,0.17 0.4,0.4 z"
-           inkscape:connector-curvature="0"
-           style="fill:#000000;stroke-width:0" /><path
-           id="path4179"
-           d="m 229.65,658.73 v -0.25 c 0.44,0 0.51,-0.04 0.51,-0.38 v -1.81 c 0,-0.3 -0.07,-0.3 -0.53,-0.3 v -0.25 c 0.02,0 0.5,0.03 0.78,0.03 0.25,0 0.5,-0.01 0.74,-0.03 v 0.25 c -0.4,0 -0.47,0 -0.47,0.29 v 2.53 z"
-           inkscape:connector-curvature="0"
-           style="fill:#000000;stroke-width:0" /><path
-           id="path4181"
-           d="m 235.09,657.85 0,0.05 -0.01,0.06 0,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.04 -0.02,0.05 -0.02,0.04 -0.02,0.04 -0.02,0.04 -0.02,0.03 -0.03,0.04 -0.03,0.03 -0.03,0.03 -0.03,0.03 -0.03,0.03 -0.04,0.03 -0.04,0.02 -0.04,0.03 -0.05,0.02 -0.04,0.02 -0.05,0.01 -0.05,0.02 -0.06,0.01 -0.05,0.01 -0.06,0.01 -0.06,0.01 -0.06,0 -0.07,0.01 -0.07,0 c -0.57,0 -0.94,-0.32 -1.13,-0.68 h -0.01 v 0.68 l -1.02,-0.08 v -0.25 c 0.46,0 0.52,-0.05 0.52,-0.39 v -1.8 c 0,-0.3 -0.07,-0.3 -0.52,-0.3 v -0.25 c 0.01,0 0.5,0.03 0.79,0.03 0.26,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.45,0 -0.52,0 -0.52,0.3 v 1.25 c 0,0.73 0.58,1.07 1.04,1.07 0.48,0 0.55,-0.38 0.55,-0.73 v -1.59 c 0,-0.3 -0.07,-0.3 -0.53,-0.3 v -0.25 c 0.02,0 0.5,0.03 0.8,0.03 0.26,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.45,0 -0.52,0 -0.52,0.3 z"
-           inkscape:connector-curvature="0"
-           style="fill:#000000;stroke-width:0" /><path
+           style="fill:#000000;stroke-width:0"
+           inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150" /><path
            id="path4183"
            d="m 241.91,663.99 h -5.18 v -0.31 h 0.23 c 0.77,0 0.79,-0.11 0.79,-0.46 v -5.21 c 0,-0.36 -0.02,-0.47 -0.79,-0.47 h -0.23 v -0.31 c 0.34,0.04 1.12,0.04 1.51,0.04 0.41,0 1.31,0 1.67,-0.04 v 0.31 h -0.33 c -0.94,0 -0.94,0.13 -0.94,0.48 v 5.26 c 0,0.33 0.01,0.4 0.48,0.4 h 1.03 c 1.42,0 1.63,-0.58 1.79,-1.92 h 0.25 z"
            inkscape:connector-curvature="0"
-           style="fill:#000000;stroke-width:0" /></g>      <g
+           style="fill:#000000;stroke-width:0"
+           inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150" /><text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:5.12873936px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.62415421px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="221.91124"
+           y="-669.91193"
+           id="text78"
+           transform="scale(1.0228299,-0.97767965)"
+           inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150"><tspan
+             sodipodi:role="line"
+             id="tspan76"
+             x="221.91124"
+             y="-669.91193"
+             style="stroke-width:0.62415421px">out</tspan></text>
+</g>      <g
          id="g4333"
          transform="matrix(1.6021681,0,0,-1.6021681,-191.51906,2035.8331)"
          xml:space="preserve"
@@ -459,7 +519,10 @@
          word-spacing="normal"
          ns0:text="resonator"
          ns0:preamble=""
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"><path
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.21762915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         inkscape:export-filename="/usr/local/google/home/danielsank/Desktop/figure.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150"><path
            style="fill:#000000;stroke-width:0"
            inkscape:connector-curvature="0"
            d="m 225.09,660.53 v 1.1 l -1.38,-0.11 v -0.31 c 0.7,0 0.78,-0.07 0.78,-0.56 v -2.66 c 0,-0.45 -0.11,-0.45 -0.78,-0.45 v -0.31 c 0.39,0.01 0.86,0.04 1.14,0.04 0.39,0 0.86,0 1.26,-0.04 v 0.31 h -0.21 c -0.74,0 -0.76,0.11 -0.76,0.47 v 1.53 c 0,0.98 0.42,1.87 1.18,1.87 0.07,0 0.09,0 0.11,-0.01 -0.03,-0.01 -0.23,-0.13 -0.23,-0.39 0,-0.28 0.21,-0.43 0.43,-0.43 0.17,0 0.42,0.12 0.42,0.44 0,0.32 -0.31,0.61 -0.73,0.61 -0.73,0 -1.09,-0.67 -1.23,-1.1 z"
