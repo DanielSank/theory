@@ -1,7 +1,7 @@
 \documentclass{article}
 
-\input{../../TeX/packages.tex}
-\input{../../TeX/macros.tex}
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
 
 \title{Harmonic Oscillator}
 \author{Daniel Sank \\ \small{University of California Santa Barbara} \\ \small{Presently Google Quantum AI}}
@@ -172,6 +172,41 @@ We can re-express this approximately as
 
 \section{Phasor form}
 
+Consider the frequency domain equation of motion
+\begin{equation}
+  \phi(\omega) = \frac{-j(\omega)}{\omega^2 - 2 i \beta \omega - \omega_0^2}
+  = - \frac{j(\omega)}{(\omega - \omega_+)(\omega - \omega_-)} \, .
+\end{equation}
+Using the method of partial fractions, we can rewrite the double pole as a sum of single poles
+\begin{equation}
+  \frac{1}{(\omega - \omega_+)(\omega - \omega_-)}
+  = \frac{X}{\omega - \omega_+} + \frac{Y}{\omega - \omega_-}
+\end{equation}
+with unknown constants $X$ and $Y$.
+Multiplying through by $(\omega - \omega_+)(\omega - \omega_-)$ and solving gives
+\begin{align*}
+  X =& \frac{1}{\omega_+ - \omega_-} =   \frac{1}{2 \omega_0'} \\
+  Y =& \frac{1}{\omega_- - \omega_+} = - \frac{1}{2 \omega_0'} \, .
+\end{align*}
+Therefore
+\begin{equation}
+  \phi(\omega) = - \frac{j(\omega)}{2 \omega_0'}
+  \left[ \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-} \right] \, .
+\end{equation}
+For drive frequencies near resonance, we can throw away the second term on the grounds that it is much smaller than the first.
+This leaves
+\begin{align*}
+  \phi(\omega) =& -\frac{j(\omega)}{2 \omega_0'} \frac{1}{\omega - \omega_+} \\
+  \omega \phi(\omega) - i \beta \phi(\omega) - \omega_0' \phi(\omega) =& - \frac{j(\omega)}{2 \omega_0'} \, .
+\end{align*}
+Now using the fact that $\dot{\phi}(t)$ Fourier transforms to $i \omega \phi(\omega)$, we can \emph{invert} the Fourier transform to find
+\begin{align*}
+  -i \dot{\phi} - i \beta \phi - \omega_0' \phi &= - \frac{j(t)}{2 \omega_0'} \\
+  \dot{\phi}(t) &= i \omega_0' \phi(t) - \beta \phi(t) - i \frac{1}{2\omega_0'} j(t) \, .
+\end{align*}
+
+\subsection{Alternative approach for sinusoidal drive}
+
 Let us go back to the phasor form of the solution from Eq.\,(\ref{eq:phasor_form})
 \begin{equation}
 \phi(t) = \Re \left[ e^{i \Omega t} \frac{-A}{\Omega^2 - 2 i \beta \Omega - \omega_0^2} \right] \, .
@@ -216,8 +251,6 @@ Noting that $\dot{\alpha}(t) = i \Omega \alpha(t)$, we can write
 \begin{equation}
 \dot{\alpha}(t) = i \omega_0' \alpha(t) - \beta \alpha(t) - \frac{A}{2 \omega_0'} e^{i \Omega t} \, .
 \end{equation}
-
-
 
 \section{Rotating Mode Formalism}
 
