@@ -174,8 +174,8 @@ We can re-express this approximately as
 
 Consider the frequency domain equation of motion
 \begin{equation}
-  \phi(\omega) = \frac{-j(\omega)}{\omega^2 - 2 i \beta \omega - \omega_0^2}
-  = - \frac{j(\omega)}{(\omega - \omega_+)(\omega - \omega_-)} \, .
+  \phi(\omega) = \frac{-J(\omega)}{\omega^2 - 2 i \beta \omega - \omega_0^2}
+  = - \frac{J(\omega)}{(\omega - \omega_+)(\omega - \omega_-)} \, .
 \end{equation}
 Using the method of partial fractions, we can rewrite the double pole as a sum of single poles
 \begin{equation}
@@ -190,20 +190,65 @@ Multiplying through by $(\omega - \omega_+)(\omega - \omega_-)$ and solving give
 \end{align*}
 Therefore
 \begin{equation}
-  \phi(\omega) = - \frac{j(\omega)}{2 \omega_0'}
+  \phi(\omega) = - \frac{J(\omega)}{2 \omega_0'}
   \left[ \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-} \right] \, .
 \end{equation}
-For drive frequencies near resonance, we can throw away the second term on the grounds that it is much smaller than the first.
-This leaves
+If the drive is a narrow band signal naer the resonance, we can write it as
+\begin{equation}
+  J(t) = E(t) \cos(\omega_0' t) \, ,
+\end{equation}
+in which case we have
+\begin{equation}
+  \tilde{J}(\omega) = \frac{1}{2}
+  \left(
+    \tilde{E}(\omega - \omega_0') + \tilde{E}(\omega + \omega_0')
+    \right) \, .
+\end{equation}
+Keeping only the largest terms, we get
+\begin{equation}
+  \tilde{\phi}(\omega) =
+  - \frac{1}{4 \omega_0'} \left( \frac{\tilde{E}(\omega - \omega_0')}{\omega - \omega_+} - \frac{\tilde{E}(\omega + \omega_0')}{\omega - \omega_-} \right) \, .
+\end{equation}
+Note that $\tilde{\phi}(-\omega) = \tilde{\phi}(\omega)^*$ as appropriate for $\phi(t) \in \mathbb{R}$.
+Because $\phi(t)$ is real, we can write it as a Fourier transform over only positive frequencies:
 \begin{align*}
-  \phi(\omega) =& -\frac{j(\omega)}{2 \omega_0'} \frac{1}{\omega - \omega_+} \\
-  \omega \phi(\omega) - i \beta \phi(\omega) - \omega_0' \phi(\omega) =& - \frac{j(\omega)}{2 \omega_0'} \, .
+  \phi(t)
+  &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \tilde{\phi}(\omega) \\
+  &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \frac{-1}{4 \omega_0'}
+    \left(
+      \frac{\tilde{E}(\omega - \omega_0')}{\omega - \omega_+}
+    - \underbrace{\frac{\tilde{E}(\omega + \omega_0')}{\omega - \omega_-}}_\text{small}
+    \right) \\
+  (\text{define } \omega \equiv \omega_0' + \delta \omega)
+  &= \Re
+  \left(
+    e^{i \omega_0' t}
+    \int_{-\omega_0'}^\infty \frac{d \delta \omega}{2\pi} \,
+    e^{i \delta \omega t}
+    \frac{-1}{2 \omega_0'}
+    \frac{\tilde{E}(\delta \omega)}{\delta \omega - i \beta}
+  \right)
 \end{align*}
-Now using the fact that $\dot{\phi}(t)$ Fourier transforms to $i \omega \phi(\omega)$, we can \emph{invert} the Fourier transform to find
-\begin{align*}
-  -i \dot{\phi} - i \beta \phi - \omega_0' \phi &= - \frac{j(t)}{2 \omega_0'} \\
-  \dot{\phi}(t) &= i \omega_0' \phi(t) - \beta \phi(t) - i \frac{1}{2\omega_0'} j(t) \, .
-\end{align*}
+Suppose $\tilde{E}$ is band limited to $[-\Delta \omega, \Delta \omega]$ where $\Delta \omega \ll \omega_0'$.
+Then we can rewrite the limits of the integration as $\pm \infty$:
+\begin{equation}
+  \phi(t) = \Re
+  \left(
+    e^{i \omega_0' t}
+    \underbrace{
+      \int_{-\infty}^\infty \frac{d \delta \omega}{2\pi} \,
+      e^{i \delta \omega t}
+      \frac{-1}{2 \omega_0'}
+      \frac{\tilde{E}(\delta \omega)}{\delta \omega - i \beta}
+    }_{\psi(t)}
+  \right)
+\end{equation}
+The underbraced part $\psi(t)$ is the part of the oscillator's motion that comes on top of the usual free oscillation at frequency $\omega_0'$.
+By inspection, the time dynamics of $\psi(t)$ are governed by the equation
+\begin{align}
+  -i \dot{\psi}(t) - i \beta \psi(t) &= - \frac{E(t)}{2 \omega_0'} \\
+  \dot{\psi}(t) &= - \frac{i E(t)}{2 \omega_0'} - \beta \psi(t) \, .
+\end{align}
 
 \subsection{Alternative approach for sinusoidal drive}
 
