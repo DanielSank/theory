@@ -12,7 +12,6 @@ More information about submodules is available here: [git submodules](https://gi
 
 ## Contributing
 
-<<<<<<< HEAD
 * Directories names are `AllCapsCamelCase`.
 
 * File names are `lower_case_with_underscores`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
