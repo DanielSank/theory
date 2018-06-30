@@ -4,7 +4,7 @@
 \input{../TeX/macros.tex}
 
 \title{Harmonic Oscillator}
-\author{Daniel Sank \\ \small{University of California Santa Barbara} \\ \small{Presently Google Quantum AI}}
+\author{Daniel Sank \\ \small{University of California Santa Barbara} \\ \small{Presently Google Quantum AI} \\ \small{Last edited June 2018}}
 \date{23 February 2009}
 
 \begin{document}
@@ -172,6 +172,7 @@ We can re-express this approximately as
 
 \section{Phasor form}
 
+It is possible to find approximation equations of motion for the driven oscillator in the case that the spectral content of the drive is reasonably well localized around the resonance frequency.
 Consider the frequency domain equation of motion
 \begin{equation}
   \phi(\omega) = \frac{-J(\omega)}{\omega^2 - 2 i \beta \omega - \omega_0^2}
@@ -193,108 +194,85 @@ Therefore
   \phi(\omega) = - \frac{J(\omega)}{2 \omega_0'}
   \left[ \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-} \right] \, .
 \end{equation}
-If the drive is a narrow band signal naer the resonance, we can write it as
+If the drive is a narrow band signal near a central frequency $\Omega$, we can write it as
 \begin{equation}
-  J(t) = E(t) \cos(\omega_0' t) \, ,
+  J(t) = E(t) \cos(\Omega t + \theta) \, ,
 \end{equation}
 in which case we have
 \begin{equation}
   \tilde{J}(\omega) = \frac{1}{2}
   \left(
-    \tilde{E}(\omega - \omega_0') + \tilde{E}(\omega + \omega_0')
+    e^{i\theta} \tilde{E}(\omega - \Omega) + e^{-i \theta} \tilde{E}(\omega + \Omega)
     \right) \, .
 \end{equation}
+Combining results, we have
+\begin{align*}
+  \tilde{\phi}(\omega)
+  =& - \frac{1}{4 \omega_0'}
+  \left(
+    e^{i \theta} \tilde{E}(\omega - \Omega) + e^{-i \theta} \tilde{E}(\omega + \Omega)
+  \right)
+  \left(
+    \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-}
+  \right) \\
+  =& - \frac{1}{4 \omega_0'}
+  \left(
+      \frac{e^{ i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_+}
+    - \frac{e^{-i \theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_-}
+    + \frac{e^{-i \theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_+}
+    - \frac{e^{ i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_-}
+  \right)
+\end{align*}
+
 Keeping only the largest terms, we get
 \begin{equation}
   \tilde{\phi}(\omega) =
-  - \frac{1}{4 \omega_0'} \left( \frac{\tilde{E}(\omega - \omega_0')}{\omega - \omega_+} - \frac{\tilde{E}(\omega + \omega_0')}{\omega - \omega_-} \right) \, .
+  - \frac{1}{4 \omega_0'}
+  \left(
+      \frac{e^{i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_+}
+    - \frac{e^{-i\theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_-}
+  \right) \, .
 \end{equation}
 Note that $\tilde{\phi}(-\omega) = \tilde{\phi}(\omega)^*$ as appropriate for $\phi(t) \in \mathbb{R}$.
-Because $\phi(t)$ is real, we can write it as a Fourier transform over only positive frequencies:
+Furthermore, because $\phi(t)$ is real, we can write it as a Fourier transform over only positive frequencies:
 \begin{align*}
   \phi(t)
   &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \tilde{\phi}(\omega) \\
-  &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \frac{-1}{4 \omega_0'}
+  &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \left( \frac{-1}{4 \omega_0'} \right)
     \left(
-      \frac{\tilde{E}(\omega - \omega_0')}{\omega - \omega_+}
-    - \underbrace{\frac{\tilde{E}(\omega + \omega_0')}{\omega - \omega_-}}_\text{small}
+      \frac{e^{i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_+}
+    - \underbrace{\frac{e^{-i \theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_-}}_\text{small}
     \right) \\
-  (\text{define } \omega \equiv \omega_0' + \delta \omega)
+  (\text{define } \omega \equiv \Omega + \delta \omega)
   &= \Re
   \left(
-    e^{i \omega_0' t}
+    e^{i \Omega t}
     \int_{-\omega_0'}^\infty \frac{d \delta \omega}{2\pi} \,
     e^{i \delta \omega t}
-    \frac{-1}{2 \omega_0'}
-    \frac{\tilde{E}(\delta \omega)}{\delta \omega - i \beta}
+    \left( \frac{-1}{2 \omega_0'} \right)
+    \frac{e^{i \theta} \tilde{E}(\delta \omega)}{\delta \omega + \Delta \omega - i \beta}
   \right)
 \end{align*}
-Suppose $\tilde{E}$ is band limited to $[-\Delta \omega, \Delta \omega]$ where $\Delta \omega \ll \omega_0'$.
+where $\Delta \omega \equiv \Omega - \omega_0'$.
+Suppose $\tilde{E}$ is band limited to $[-B, B]$ where $B \ll \omega_0'$.
 Then we can rewrite the limits of the integration as $\pm \infty$:
 \begin{equation}
   \phi(t) = \Re
   \left(
-    e^{i \omega_0' t}
+    e^{i \Omega t}
     \underbrace{
       \int_{-\infty}^\infty \frac{d \delta \omega}{2\pi} \,
       e^{i \delta \omega t}
-      \frac{-1}{2 \omega_0'}
-      \frac{\tilde{E}(\delta \omega)}{\delta \omega - i \beta}
+      \left( \frac{-1}{2 \omega_0'} \right)
+      \frac{e^{i \theta} \tilde{E}(\delta \omega)}{\delta \omega +\Delta \omega - i \beta}
     }_{\psi(t)}
   \right)
 \end{equation}
-The underbraced part $\psi(t)$ is the part of the oscillator's motion that comes on top of the usual free oscillation at frequency $\omega_0'$.
+The underbraced part $\psi(t)$ is the part of the oscillator's motion that comes on top of a free oscillation at frequency $\Omega$.
+In other words, we're in the rotating frame of the drive.
 By inspection, the time dynamics of $\psi(t)$ are governed by the equation
-\begin{align}
-  -i \dot{\psi}(t) - i \beta \psi(t) &= - \frac{E(t)}{2 \omega_0'} \\
-  \dot{\psi}(t) &= - \frac{i E(t)}{2 \omega_0'} - \beta \psi(t) \, .
-\end{align}
-
-\subsection{Alternative approach for sinusoidal drive}
-
-Let us go back to the phasor form of the solution from Eq.\,(\ref{eq:phasor_form})
 \begin{equation}
-\phi(t) = \Re \left[ e^{i \Omega t} \frac{-A}{\Omega^2 - 2 i \beta \Omega - \omega_0^2} \right] \, .
-\end{equation}
-Factoring the denominator we get
-\begin{equation}
-\phi(t) = \Re \left[ e^{i \Omega t} \frac{-A}{(\Omega - \omega_+)(\Omega - \omega_-)} \right]
-\end{equation}
-where $\omega_{\pm}$ are defined by Eq.\,(\ref{eq:omega_plus_minus}).
-We now use the method of partial fractions to split the double-pole into a sum of two single poles.
-Assume the double pole can be written as
-\begin{equation}
-\frac{1}{(\Omega - \omega_+)(\Omega - \omega_-)}
-= \frac{x}{\Omega - \omega_+} + \frac{y}{\Omega - \omega_-} \, .
-\end{equation}
-Multiplying through by $(\Omega - \omega_+)(\Omega - \omega_-)$ and setting either $x$ or $y$ to 1 yields two equations:
-\begin{align}
-1 &= x (\omega_+ - \omega_-) = x 2 \omega_0' \\
-1 &= y (\omega_- - \omega_+) = -y 2 \omega_0'
-\end{align}
-from which we find
-\begin{equation}
-\phi(t) = -A \Re
-\left[ e^{i \Omega t} \left(
-\frac{1}{2 \omega_0' (\Omega - \omega_+)} -
-\frac{1}{2 \omega_0' (\Omega - \omega_-)}
-\right) \right] \, .
-\end{equation}
-If the drive frequency $\Omega$ is near the resonance we can drop the second term,
-\begin{equation}
-\phi(t) \approx -A \Re
-\left[
-\frac{e^{i \Omega t}}{2 \omega_0' (\Omega - i\beta - \omega_0')}
-\right] \, .
-\end{equation}
-Define $\alpha(t)$ as the complex quantity of which $\phi(t)$ is the real part,
-\begin{align}
-\alpha(t) &= \frac{-A e^{i \Omega t}}{2 \omega_0'(\Omega - i \beta - \omega_0')} \\
-(\Omega - i \beta - \omega_0') \alpha(t) &= - \frac{A}{2\omega_0'} e^{i \Omega t} \, .
-\end{align}
-Noting that $\dot{\alpha}(t) = i \Omega \alpha(t)$, we can write
-\begin{equation}
-\dot{\alpha}(t) = i \omega_0' \alpha(t) - \beta \alpha(t) - \frac{A}{2 \omega_0'} e^{i \Omega t} \, .
+  \dot{\psi}(t) = -i e^{i \theta} \frac{E(t)}{2 \omega_0'} - i \Delta \omega \psi(t) - \beta \psi(t)
 \end{equation}
 
 \section{Rotating Mode Formalism}
