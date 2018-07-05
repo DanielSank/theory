@@ -1,0 +1,40 @@
+\levelstay{Concentration Pulse}
+
+\leveldown{Problem}
+
+The problem statement in the book is needlessly convoluted.
+
+Consider a diffusion process where the initial condition is
+\begin{equation*}
+  p(x,t) = \delta(x) \, ,
+\end{equation*}
+i.e. all of the probability is at $x=0$.
+Now consider some other position $x_0$.
+At what time does the probability density at $x_0$ reach its maximum?
+
+\levelstay{Solution}
+
+The time and space dependent probability density is
+\begin{equation*}
+  p(x, t) =
+    \frac{1}{\sqrt{2 \pi \delta^2 t}}
+    \exp \left( x^2 / (2 \delta ^2 t) \right) \, .
+\end{equation*}
+We must solve
+\begin{equation*}
+  \frac{\partial p}{\partial t}(t_0, x_0) = 0
+\end{equation*}
+for $t_0$.
+Just turn the crank:
+\begin{align*}
+  0
+  =& \frac{\partial p}{\partial t}(t_0, x_0) \\
+  =&
+    \frac{1}{\sqrt{2 \pi \delta^2 t_0}} \exp \left( -x_0^2 / (2 \delta^2 t_0) \right)
+      \frac{x_0^2}{2 \delta^2 t_0^2} \\
+  &- \frac{1}{2 t_0 \sqrt{2 \pi \delta^2 t_0}} \exp \left( -x_0^2 / (2 \delta^2 t_0) \right) \\
+  =&
+    \frac{x_0^2}{\delta^2 t_0}
+  - 1 \\
+  t_0 =& x_0^2 / \delta^2 \, .
+\end{align*}
