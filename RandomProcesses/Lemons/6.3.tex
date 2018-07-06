@@ -1,0 +1,56 @@
+\levelstay{Brownian Motion with Drift}
+
+\leveldown{Problem}
+
+Consider the dynamical equation
+\begin{equation*}
+  X(t + dt) - X(t) = \alpha dt + \sqrt{\delta^2 dt}N_t^{t+dt}(0, 1) \, ,
+\end{equation*}
+describing Brownian motion superimposed on a steady drift of rate $\alpha$.
+\begin{itemize}
+  \item Given the initial condition $X(0)=0$, solve this equation using the method of section 6.3.
+  \item Find the associated probability density $p(x, t)$.
+  \item Show that the full width of $p(x, t)$ at half it's maximum value increases in time as $2 \sqrt{2 \delta^2 t \ln 2}$.
+\end{itemize}
+
+\levelstay{Solution}
+
+To solve the equation of motion, note that
+\begin{align*}
+  X(dt)
+  =& \underbrace{X(0)}_0 + \alpha dt + \sqrt{\delta^2 dt}N_0^{dt}(0, 1) \\
+  =& \alpha dt + N_0^{dt}(0, \delta^2 dt) \, .
+\end{align*}
+Iterating up to $X(n \, dt)$ would give
+\begin{equation*}
+  X(n\, dt) = \alpha n dt + N_0^{dt}(0, n \delta^2 dt)
+\end{equation*}
+which, when $n \, dt \rightarrow t$, gives
+\begin{equation*}
+  X(t) = \alpha t + N(0, \delta^2 t) \, .
+\end{equation*}
+
+The probability distribution is then
+\begin{equation*}
+  p(x, t) = \frac{1}{\sqrt{2\pi \delta^2 t}}
+    \exp \left( \frac{(x - \alpha t)^2}{2 \delta^2 t} \right) \, .
+\end{equation*}
+
+Now we wish to find the full width at half maximum.
+The largest value of $p(x, t)$ ocurrs at $x = \alpha t$, in which case
+\begin{equation*}
+  p(\alpha t, t) = \frac{1}{\sqrt{2 \pi \delta^2 t }}\, .
+\end{equation*}
+Now we solve for $x_\text{HM}$, the value of $x$ at which $p(x, t)$ acheives half it's maximum:
+\begin{align*}
+  p(x_\text{HM}, t) =& \frac{1}{2\sqrt{2 \pi \delta^2 t}} \\
+  \frac{1}{\sqrt{2 \pi \delta^2 t}} \exp \left(-\frac{(x_\text{HM} - \alpha t)^2}{2 \delta^2 t} \right)
+  =& \\
+  \exp \left(-\frac{(x_\text{HM}-\alpha t)^2}{2 \delta^2 t} \right) =& \frac{1}{2} \\
+  \frac{(x_\text{HM} - \alpha t)^2}{2 \delta^2 t} =& \ln 2 \\
+  \frac{x_\text{HM} - \alpha t}{\sqrt{2 \delta^2 t}} =& \pm \sqrt{\ln 2} \\
+  x_\text{HM} =& \alpha t \pm \sqrt{2 \delta^2 t \ln 2} \, .
+\end{align*}
+Therefore, the width is $2 \sqrt{2 \delta^2 t \ln 2}$.
+
+
