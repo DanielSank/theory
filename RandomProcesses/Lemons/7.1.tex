@@ -1,0 +1,29 @@
+\levelstay{Terminal Speed}
+
+\leveldown{Problem}
+
+One way to determine the viscous drag parameter $\gamma$ is to apply a steady force $F$ to a particle of mass $M$ and measure its mean terminal speed $v_d$.
+
+\begin{itemize}
+  \item Express $\gamma$ in terms of $F$, $M$ and $v_d$.
+  \item Use the fluctuation-dissipation theorem to express the fluctuation parameter $\beta^2$ in terms of $kT$, $F$, $M$, and $v_d$, where $T$ is the temperature.
+\end{itemize}
+
+\levelstay{Solution}
+
+The drag parameter $\gamma$ is defined by $\dot{v} = - \gamma v$.
+Newton's law says that $\text{Force} = \dot{p} = M \dot{v}$, so the drag force is $- M \gamma v$.
+Assuming the drag force to be in equilibrium with a driving force $F$, we get
+\begin{align}
+  F =& M \gamma v_d \\
+  \text{or} \qquad \gamma =& F / (M v_d) \, .
+\end{align}
+
+The fluctuation-dissipation theorem says
+\begin{displaymath}
+  \frac{M \beta^2}{4 \gamma} = \frac{kT}{2}
+\end{displaymath}
+so
+\begin{displaymath}
+  \beta^2 = \frac{2 F k T}{M^2 v_d} \, .
+\end{displaymath}
