@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      4443,        123]
-NotebookOptionsPosition[      4065,        105]
-NotebookOutlinePosition[      4403,        120]
-CellTagsIndexPosition[      4360,        117]
+NotebookDataLength[      4998,        135]
+NotebookOptionsPosition[      4620,        117]
+NotebookOutlinePosition[      4958,        132]
+CellTagsIndexPosition[      4915,        129]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -48,12 +48,7 @@ Cell[BoxData[{
    RowBox[{"LogPlot", "[", "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{"Abs", "[", 
-      FractionBox[
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{"1", "/", "2"}], ")"}], 
-        RowBox[{"(", 
-         RowBox[{"2", "\[Pi]"}], ")"}]}], 
+      FractionBox["1", 
        RowBox[{
         RowBox[{"L", "[", 
          RowBox[{"\[Omega]", ",", 
@@ -79,10 +74,24 @@ Cell[BoxData[{
      RowBox[{"{", 
       RowBox[{"\[Omega]", ",", "0", ",", 
        RowBox[{"2", " ", "\[Omega]0"}]}], "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], "]"}], ",", 
+     RowBox[{"GridLines", "\[Rule]", "Automatic"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\[Omega]0", "-", 
+           RowBox[{"2", 
+            RowBox[{"\[Omega]0", "/", "Q"}]}]}], ",", 
+          RowBox[{"\[Omega]0", "+", 
+           RowBox[{"2", 
+            RowBox[{"\[Omega]0", "/", "Q"}]}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0.01", ",", "5"}], "}"}]}], "}"}]}]}], "]"}], ",", 
    "\[IndentingNewLine]", 
    RowBox[{"{", 
-    RowBox[{"Q", ",", "1", ",", "10"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Q", ",", "1", ",", "100"}], "}"}], ",", "\[IndentingNewLine]", 
    RowBox[{"{", 
     RowBox[{"A", ",", 
      RowBox[{"-", "4"}], ",", "2"}], "}"}], ",", "\[IndentingNewLine]", 
@@ -100,7 +109,10 @@ Cell[BoxData[{
    3.742092259057951*^9, 3.742092268819996*^9}, {3.742092541445237*^9, 
    3.742092541714093*^9}, {3.742092696371348*^9, 3.7420927429611673`*^9}, 
    3.742092808491152*^9, 3.742092838652419*^9, {3.7420931343245573`*^9, 
-   3.7420931344759283`*^9}}]
+   3.7420931344759283`*^9}, {3.7420954095769777`*^9, 3.7420954108771772`*^9}, 
+   3.7420955907804832`*^9, {3.742096440894973*^9, 3.742096441746134*^9}, {
+   3.74209654909268*^9, 3.7420965774392233`*^9}, {3.742096717570722*^9, 
+   3.742096755103395*^9}}]
 }, Open  ]]
 },
 WindowSize->{934, 985},
@@ -123,11 +135,10 @@ Cell[CellGroupData[{
 Cell[580, 22, 103, 1, 93, "Title"],
 Cell[686, 25, 141, 1, 31, "Text"],
 Cell[830, 28, 569, 12, 34, "Input"],
-Cell[1402, 42, 2647, 60, 278, "Input"]
+Cell[1402, 42, 3202, 72, 300, "Input"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
