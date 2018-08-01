@@ -2,6 +2,7 @@
 
 filenames = [
     'response_balance',
+    'response',
 ]
 
 

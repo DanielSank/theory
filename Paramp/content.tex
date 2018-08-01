@@ -37,57 +37,105 @@ Making the transformation to frequency is easy using the following facts \begin{
 \cos(\Omega t + \theta) &\rightarrow& \frac{1}{2}(2\pi)\left(e^{i \theta}\delta(\omega - \Omega) + e^{-i \theta} \delta(\omega + \Omega) \right) \nonumber \\
 \phi(t)\cos(\Omega t) &\rightarrow& \frac{1}{2}\left( \tilde{\phi}(\omega-\Omega) + \tilde{\phi}(\omega+\Omega) \right) \nonumber \\
 \dot{\phi}(t) &\rightarrow& i\omega \tilde{\phi}(\omega) \nonumber \end{eqnarray}
-Using these equations and defining $L(\omega) \equiv (\omega_0^2 - \omega^2 +i2\omega\Gamma)$, we get \begin{equation}
-\underbrace{L(\omega) \tilde{\phi}}_{\text{linear response}}
-- \underbrace{\frac{1}{2} A \omega_0^2 \left[ \tilde{\phi}(\omega - \omega_p) + \tilde{\phi}(\omega + \omega_p) \right]}_{\text{modulated response}}
-= \underbrace{\frac{1}{2}J(2\pi)\left[e^{i \theta}\delta(\omega-\omega_s) + e^{-i\theta}\delta(\omega+\omega_s) \right]}_{\text{source}} . \label{eq:eqOfMotionFrequency} \end{equation}
-
-We want to find what $\tilde{\phi}(\omega)$ solves this equation.
+Using these equations and defining $L(\omega) \equiv (\omega_0^2 - \omega^2 +i2\omega\Gamma)$, we get
+\begin{equation*}
+  \underbrace{L(\omega) \tilde{\phi}(\omega)}_{\text{linear response}}
+  - \underbrace{\frac{1}{2} A \omega_0^2 \left[ \tilde{\phi}(\omega - \omega_p) + \tilde{\phi}(\omega + \omega_p) \right]}_{\text{modulated response}}
+  = \underbrace{\frac{1}{2}J(2\pi)\left[e^{i \theta}\delta(\omega-\omega_s) + e^{-i\theta}\delta(\omega+\omega_s) \right]}_{\text{source}} \, .
+\end{equation*}
+It's useful to use a simplified notation where $\ket{\omega}$ indicates a delta function peak at frequency $\omega$ and $T_{\omega}$ indicates a shift in frequency by an amount $\omega$.
+In this new notation, we have
+\begin{equation}
+  \left(
+      \underbrace{L(\omega)}_{\text{linear response}}
+    - \underbrace{
+        \frac{1}{2} A \omega_0^2
+        \left[
+          T_{\omega_p} + T_{-\omega_p}
+        \right]
+      }_{\text{modulated response}}
+  \right) \ket{\phi}
+  = \underbrace{\frac{1}{2} J (2\pi) \left[e^{i \theta} \ket{\omega_s} + e^{-i \theta} \ket{-\omega_s} \right]}_{\text{source}}
+  \, . \label{eq:eqOfMotionFrequency}
+\end{equation}
+We want to solve for $\ket{\phi}$.
 If the parametric modulation were absent ($A=0$), then we would get the standard driven harmonic oscillator equation and $\phi$ would be a single tone at $\omega_s$.
-However, the parametric drive produces frequency-shifted copies of $\tilde\phi$ so a single tone at $\omega_s$ does not work.
+To seed this, let us try the solution
+\begin{align*}
+  \phi(t) =& a \cos(\omega_s t + \varphi) \\
+  \rightarrow \ket{\phi} =& \frac{1}{2} \left( \alpha \ket{\omega_s} + \alpha^* \ket{-\omega_s} \right) \, .
+\end{align*}
+where $\alpha \equiv a e^{i \varphi}$.
+Plugging into Eq. (\ref{eq:eqOfMotionFrequency}) and equating coefficients of the like frequency components on either side gives
+\begin{displaymath}
+  L(\omega_s) \alpha = J (2 \pi) e^{i \theta}
+  \qquad \text{and} \qquad
+  L(-\omega_s) \alpha^* = J (2 \pi) e^{-i \theta} \, ,
+\end{displaymath}
+which solve for $\alpha$ in terms of the drive amplitude and phase, and the linear response function $L$.
+Note that the equations for $\alpha$ and $\alpha^*$ are degenerate because $L(-\omega) = L(\omega)^*$.
 
 \begin{figure}
 \begin{centering}
-\includegraphics[width=12cm]{response_balance.pdf} 
+\includegraphics[width=\textwidth]{response_balance.pdf}
 \par\end{centering}
 \caption{The three terms in Eq. (\ref{eq:eqOfMotionFrequency}).
-The source term is a pure tone at $\omega_s$.
-The modulated response produces a copy of $\phi$ shifted by $\omega_p$.
-a) Case where $\phi$ is a pure tone at $\omega_s$ with amplitude $\alpha$ (blue).
-In this case, the linear and modulated response terms do not sum up to match the source.
-b) Here $\phi$ includes another tone at $\omega_i$ with amplitude $\beta$ (red).
+a) The source term is a pure tone at $\omega_s$.
+Assuming $\ket{\phi}$ is also a pure tone at $\omega_s$ (shown in blue), the linear response term produces scaled peaks at $\pm \omega_s$.
+The modulated response produces a copy of $\ket{\phi}$ shifted by $\omega_p$; we show only the right-shifted part, and we ignore the high frequency peaks at $\pm (\omega_s + \omega_p)$.
+In this case, the linear and modulated response terms do not sum up to match the source because there's an ``extra'' peak to the left of $\omega_p/2$.
+b) Here $\ket{\phi}$ includes another tone at $\omega_i$ with amplitude $\beta$ (red).
 Now we can choose $\alpha$ and $\beta$ such that the linear and modulated responses sum to match the source.}
 \label{Fig:responseBalance}
 \end{figure}
 
+The parametric drive produces frequency-shifted copies of $\ket{\phi}$ so a single tone solution at $\omega_s$ does not solve Eq. (\ref{eq:eqOfMotionFrequency}).
 To understand how to fix this, we construct a diagram representing the right and left hand sides of Eq. (\ref{eq:eqOfMotionFrequency}), as shown in Figure \ref{Fig:responseBalance}.
-Figure \ref{Fig:responseBalance}\,a shows the frequency space representation of the source and response terms in Eq. \ref{eq:eqOfMotionFrequency}) assuming that $\tilde\phi$ were a single tone at $\omega_s$ with amplitude $\alpha$.
-Adding the linear and modulated responses gives a shifted tone with amplitude $\alpha^*$ that has no counterpart in the source.
-The only solution in this case is $\alpha=0$ which is trivial.
-Now suppose the response has another tone at frequency $\omega_i$ with amplitude $\beta$ as shown by the red peaks in Figure \ref{Fig:responseBalance}\,b.
+Figure \ref{Fig:responseBalance}a shows the frequency space representation of the source and response terms in Eq. \ref{eq:eqOfMotionFrequency}) assuming that $\ket{\phi}$ a single tone at $\omega_s$ with amplitude $\alpha$, and also assuming that $\omega_p \approx 2 \omega_s$.
+Adding the linear and modulated responses gives a tone with amplitude $\alpha^*$ at frequency $\omega_i \equiv \omega_p - \omega_s$ that has no counterpart in the source.
+The only solution in this case is $\alpha=0$, which is trivial.
+
+The diagram suggests solution: suppose the response has another tone at frequency $\omega_i$ with amplitude $\beta$ as shown by the red peaks in Figure \ref{Fig:responseBalance}b.
 Now the frequency shifted copies can add both to match the source at $\omega_s$ and, if the amplitudes are chosen correctly, to cancel at $\omega_i$.
 The response peak at $\omega_s$ is called the ``signal'' and the peak at $\omega_i$ is called the ``idler''.
 
-Balancing the terms yields two equations: \begin{eqnarray}
-L(\omega_s)\alpha - \frac{1}{2}A\omega_0^2 \beta^* &=& \frac{1}{2}J(2\pi)e^{i\phi} \\
-L(\omega_i)\beta - \frac{1}{2}A\omega_0^2 \alpha^* &=& 0 . \end{eqnarray}
+Let us now do the math carefully.
+We take the guess
+\begin{align*}
+  \phi(t) =& a \cos(\omega_s t + \varphi_a) + b \cos(\omega_i t + \varphi_b) \\
+  \rightarrow
+  \ket{\phi} =& \frac{1}{2}(2\pi)
+  \left(
+      \alpha \ket{\omega_s} + \alpha^* \ket{-\omega_s}
+    + \beta  \ket{\omega_i} + \beta^*  \ket{-\omega_i}
+    \right)
+\end{align*}
+Plugging into Eq. (\ref{eq:eqOfMotionFrequency}) and keeping only the positive frequency terms for simplicity\footnote{No generality is lost here.}, and \emph{dropping high frequency terms} we find
+\begin{equation*}
+    L(\omega_s) \alpha \ket{\omega_s}
+  + L(\omega_i) \beta  \ket{\omega_i}
+  - \frac{A \omega_0^2}{2} \alpha^* \ket{\omega_i}
+  - \frac{A \omega_0^2}{2} \beta^*  \ket{\omega_s}
+  = J e^{i \theta} \ket{\omega_s} \, .
+\end{equation*}
+Equating coefficients of like frequency terms yields two equations:
+\begin{align*}
+  L(\omega_s)\alpha - \frac{A \omega_0^2}{2} \beta^* =& J e^{i \theta} \\
+  L(\omega_i)\beta - \frac{A \omega_0^2}{2} \alpha^* =& 0 .
+\end{align*}
 Solving the two simultaneous equations gives
 \begin{equation}
-\beta^* = - \frac{1}{2}A\omega_0^2 \frac{J'}{\left(\frac{1}{2}A\omega_0^2 \right)^2 + L(\omega_s)^2} \qquad
-\alpha = L(\omega_s) \frac{J'}{\left(\frac{1}{2}A\omega_0^2 \right)^2 + L(\omega_s)^2} . \label{eq:alphabeta}
+  \alpha = \frac{L(\omega_i)^* J e^{i\theta}}{L(\omega_s)L(\omega_i)^* - (A \omega_0^2/2)^2}
+  \, . \label{eq:alphabeta}
 \end{equation}
-In order to use the circuit as an amplifier we need gain.
-From Eq. (\ref{eq:alphabeta}) we see that gain is achieved when
-\begin{equation}
-\left| \frac{1}{2}A\omega_0^2 + L(\omega_s)^2 \right| \ll 1 . \label{eq:gainCondition} \end{equation}
-Equation (\ref{eq:gainCondition}) is satisfied when $L(\omega_s)$ is approximately purely imaginary, which occurs for $\omega_s \approx \omega_0$.
-This makes sense, as we know the amplifier has large gain when the signal frequency is near the resonator mode center frequency.
-%This also implies that $\alpha$ and $\beta$ are related by complex conjugation and an approximately 90 degree phase shift, which is the same as reflection about the line $\Im z = \Re z$.
+In Figure \ref{Fig:response} we plot the magnitude of $\alpha$ for a few values of the pump amplitude.
 
-\subsection{Drive at $\omega_i$}
-If the drive is at the idler frequency the equations are \begin{eqnarray}
-L(\omega_i)\beta - \frac{1}{2}A\omega_0^2 \alpha^* &=& \frac{1}{2}J(2\pi)e^{i\phi} \\
-L(\omega_s)\alpha - \frac{1}{2}A\omega_0^2 \beta^* &=& 0 \end{eqnarray}
-Solving gives \begin{eqnarray}
-\beta^* &=& -\frac{1}{2}A\omega_0^2 \frac{J'}{\left( \frac{1}{2}A\omega_0^2 \right)^2 + L(\omega_s)^2} \\
-\alpha &=& L(\omega_s) \frac{J'}{\left( \frac{1}{2}A\omega_0^2 \right)^2 + L(\omega_s)^2} \end{eqnarray}
+\begin{figure}
+\begin{centering}
+\includegraphics[width=\textwidth]{response.pdf}
+\par\end{centering}
+\caption{Magnitude of $\alpha/J$ as a function of linear (not angular) drive frequency $\omega_s$ for a few values of the pump amplitude $A$.
+Here we have $\omega_0/2\pi = 4$, $\omega_p/2\pi = 8.1$, $Q = \omega_0/2\Gamma = 5.6$.
+}
+\label{Fig:response}
+\end{figure}
