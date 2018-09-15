@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 filenames = [
-    '4.1_maps'
+    '4.1_maps',
+    'random_walk_2d',
 ]
 
 
