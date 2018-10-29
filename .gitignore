@@ -1,4 +1,7 @@
 *.pdf
 build/
 *.pyc
-
+*.toc
+*.aux
+*.out
+*.log

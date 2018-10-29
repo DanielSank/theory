@@ -1,25 +1,21 @@
 \levelstay{IF noise}
 
-Now suppose that something injects noise onto the $I$ and $Q$ lines at the IF.
+Now suppose that something injects noise onto the ADC's directly (e.g. quantization noise).
 Let the noise on $I$ be $v_I(t)$ and the noise on $Q$ be $v_Q(t)$.
 Assume $v_I$ and $v_Q$ are uncorrelated with each other and for now assume they are also uncorrelated in time (i.e. they are white noise).
 We now calculate the effect of this nosie on the statistics of $Z$.
 
-Defining $v_z \equiv v_I + i v_Q$, we have
+Defining $v_z \equiv v_I + i v_Q$, contribution to $Z(\omega)$ from the IF noise is
 \begin{equation}
-Z(\omega) =
-\underbrace{\frac{A}{N}\sum_{n=0}^{N-1}\int_{-\infty}^\infty dt' \xi(t')
-e^{-i \Omega t'} h(n \delta t - t') e^{-i \omega n \delta t}
-}_\text{RF noise}
-+
-\underbrace{
-\frac{1}{N} \sum_{n=0}^{N-1} v_z(n \delta t) e^{-i \omega n \delta t}
-}_\text{IF noise}
-\, .
+  Z_\text{IF}(\omega) = \left( \frac{D}{V_\text{FS}} \right) \frac{1}{N}
+  \sum_{n=0}^{N-1} v_z(n \delta t) e^{-i \omega n \delta t}
+  \, .
 \end{equation}
-The real part of the IF contribution is
+The real part is
 \begin{equation}
-  \Re \left( Z_\text{IF} (\omega) \right) = \frac{1}{N} \sum_{n=0}^{N-1}
+  \Re \left( Z_\text{IF} (\omega) \right) = \left( \frac{D}{V_\text{FS}} \right)
+  \frac{1}{N}
+  \sum_{n=0}^{N-1}
       v_I(n \delta t) \cos(\omega n \delta t)
     - v_Q(n \delta t) \sin(\omega n \delta t)
   \, .
@@ -28,6 +24,8 @@ From \cite{Sank:whiteNoiseDFT} we know that the distribution of each term in the
 The sum, therefore, is also a Gaussian but with width $\sigma_\text{IF} / \sqrt{N}$.
 Taking $N = T / \delta t$, we have
 \begin{equation}
-  \sigma_{\Re Z_\text{IF}} = \sigma_\text{IF} \sqrt{\delta t / T} \, .
+  \sigma_{\Re Z_\text{IF}}
+  = \left( \frac{D}{V_\text{FS}} \right)
+    \sigma_\text{IF} \sqrt{\delta t / T} \, .
 \end{equation}
 Note that a faster sampling rate decreases the noise, which makes sense as the noise is uncorrelated in time.

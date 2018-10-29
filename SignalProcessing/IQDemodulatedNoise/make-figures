@@ -2,7 +2,8 @@
 
 filenames = [
     'IQ_clouds',
-    'signal_processing_chain'
+    'signal_processing_chain',
+    'signal_processing_chain_complete',
 ]
 
 
