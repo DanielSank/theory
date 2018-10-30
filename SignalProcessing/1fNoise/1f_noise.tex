@@ -1,210 +1,151 @@
-%% LyX 1.6.6 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[12pt,a4paper,english,aps,prl]{revtex4}
+\documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{esint}
 
-\makeatletter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\@ifundefined{textcolor}{}
-{%
- \definecolor{BLACK}{gray}{0}
- \definecolor{WHITE}{gray}{1}
- \definecolor{RED}{rgb}{1,0,0}
- \definecolor{GREEN}{rgb}{0,1,0}
- \definecolor{BLUE}{rgb}{0,0,1}
- \definecolor{CYAN}{cmyk}{1,0,0,0}
- \definecolor{MAGENTA}{cmyk}{0,1,0,0}
- \definecolor{YELLOW}{cmyk}{0,0,1,0}
- }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-
-%Some extra stuff to use in the document
 \newcommand{\bra}[1]{\langle #1|}
 \newcommand{\ket}[1]{|#1\rangle}
 \newcommand{\braket}[2]{\langle #1|#2\rangle}
 \newcommand{\norm}[1]{\| #1\|}
+\newcommand{\avg}[1]{\left \langle #1 \right \rangle}
 
-\makeatother
-
-\usepackage{babel}
+\title{1/f Noise from Telegraph Fluctuators}
+\author{Daniel Sank}
+\date{24 January 2011}
 
 \begin{document}
 
-\title{1/f Noise from Telegraph Fluctuators}
-
-
-\author{Daniel Sank}
-
-
-\date{24 January 2011}
-\begin{abstract}
-The purpose of this document is to show that $1/f$ noise arises from
-a system so simple that its ubiquity in physical measurements is unsurprising.
-The derivation treated here should also help understand why we often
-observe noise with a spectrum of $1/f^{\alpha}$ where $\alpha$ is
-not exactly equal to $1$.
-\end{abstract}
 \maketitle
 
-\section{Random Telegraph Signals}
+\begin{abstract}
+The purpose of this document is to show that $1/f$ noise arises from a system so simple that its ubiquity in physical measurements is unsurprising.
+The derivation treated here should also help understand why we often observe noise with a spectrum of $1/f^{\alpha}$ where $\alpha$ is not exactly equal to $1$.
+\end{abstract}
 
-Consider a system with two states. To each state we assign a value
-for a measured quantity $x$. Say that in one state $x=0$ while in
-the other $x=A$. Further assume that when $x$ is in state $0$ the
-probability per unit time of making a trasition into the $A$ state
-is $1/\tau$, and when in the state $A$ the probability per unit
-time of making a transition into the $0$ state is $1/\sigma$. It
-follows that $\tau$ and $\sigma$ are the mean lifetimes of the two
-states.
+\section{Random telegraph signals}
 
-We compute the autocorrelation function $<x(t)x(t+s)>_{\textrm{ensemble}}$
-of the random variable. $x$.
+Consider a system with two states. To each state we assign a value for a measured quantity $x$.
+Say that in one state $x=0$ while in the other $x=A$.
+Further assume that when $x$ is in state $0$ the probability per unit time of making a trasition into the $A$ state is $1/\tau$, and when in the state $A$ the probability per unit time of making a transition into the $0$ state is $1/\sigma$.
+It follows that $\tau$ and $\sigma$ are the mean lifetimes of the two states.
 
-\[
-<x(t)x(t+s)>_{\textrm{ensemble}}=\sum_{ij}x_{i}x_{j}*\{\textrm{Prob}(x(t)=x_{i})\}*\{\textrm{Prob}(x(t+s)=x_{j}~\textrm{given that}~x(t)=x_{i})\}\]
-where the sum is over all possible pairs of numbers for $x_{i}x_{j}$.
-Since we've chosen our states to have $x=A$ for one state and $x=0$
-for the other, only one term in this sum survives,
+We compute the autocorrelation function $\avg{x(t)x(t+s)}_{\textrm{ensemble}}$ of the random variable. $x$.
 
-\begin{eqnarray*}
-<x(t)x(t+s)>_{\textrm{ensemble}} & = & A^{2}\{\textrm{Prob}(x(t)=A)\}*\{\textrm{Prob. even number of transitions}\\
- & ~ & \textrm{in time s, starting in state A}\}\end{eqnarray*}
-We need to work out these two factors. The first one is easy: $\textrm{Prob}(x(t)=A)$,
-the probability of being in state $A$ at a time $t$, is just \[
-\textrm{Prob}(x(t)=A)=\frac{\sigma}{\sigma+\tau}\]
-Therefore
-
-\[
-<x(t)x(t+s)>_{\textrm{ensemble}}=A^{2}\frac{\sigma}{\sigma+\tau}P_{AA}(s)\]
-where $P_{AA}(s)$ is the probability of being in state $A$ after
-a time $s$ given that the system started in state $A$ (even number
-of transitions in time $s$). Also define
+\begin{equation}
+\avg{x(t)x(t+s)}_{\textrm{ensemble}}=\sum_{ij}x_{i}x_{j}*\{\textrm{Prob}(x(t)=x_{i})\}*\{\textrm{Prob}(x(t+s)=x_{j}~\textrm{given that}~x(t)=x_{i})\}
+\end{equation}
+where the sum is over all possible pairs of numbers for $x_i x_j$.
+Since we've chosen our states to have $x=A$ for one state and $x=0$ for the other, only one term in this sum survives, namely
 
 \begin{eqnarray*}
-P_{A0}(s) & = & \{\textrm{Prob. of an odd number of transitions in time s,}\\
- & ~ & \textrm{starting in state A}\}\end{eqnarray*}
-Then we have
-
-\[
-P_{AA}(s)+P_{A0}(s)=1\]
- We derive a differential equation for $P_{AA}(s)$ as follows. For
-a small increment $ds$ we have \[
-P_{AA}(s+ds)=P_{A0}(s)\frac{ds}{\tau}+P_{AA}(s) \left( 1-\frac{ds}{\sigma} \right) \]
- In English: The probability of an even number of transitions in time
-$s+ds$ starting in state $A$ is the sum of the probabilities of
-two mutually exclusive events: (1) There is an odd number of transitions
-in time $s$ and then one transition in $ds$, and (2) there are an
-even number of transitions in time $s$ and then none in $ds$. Using
-$P_{A0}(s)=1-P_{A1}(s)$ and taking $ds\rightarrow0$ we get
-
-\[
-\frac{dP_{AA}}{ds}+\frac{P_{AA}}{T} = \frac{1}{\tau}\]
-Where $1/T \equiv 1/\tau + 1/\sigma$. With the initial condition that $P_{AA}(0)=1$ we get
-
-\[
-P_{AA}(s)=\frac{1}{\sigma+\tau}\left[\tau\exp\left(-\frac{s}{T}\right)+\sigma\right]\]
-Plugging this into the formula for the autocorrelation function we
-get
-
-\[
-<x(t)x(t+s)>_{\textrm{ensemble}}=A^{2}\frac{\sigma}{(\sigma+\tau)^{2}}\left[\tau\exp\left(-\frac{s}{T}\right)+\sigma\right]\]
-Note that there is no dependence on $t$, ie. the process is \emph{stationary}.
-It may seem odd that this equation is not symmetric in $\tau$ and
-$\sigma$, but it's really not surprising given that we defined our
-possible values of $x$ asymmetrically, ie. as $0$ and $A$ instead
-of something symmetric like $+A$ and $-A$. We'll see that this asymmetry
-leads to a DC term in the power spectrum that would be absent in symmetrically
-defined systems.
-
-We calculate the power spectrum by Fourier transforming the autocorrelation
-function (Wiener Kinchein theorem):\begin{eqnarray*}
-S_{p}(\omega) & = & \int_{s=-\infty}^{\infty}e^{-is\omega}\langle x(t)x(t+s)\rangle ds\\
-S_{p}(\omega) & = & A^{2}\left[\frac{\sigma\tau}{(\sigma+\tau)^{2}}\frac{2T}{1+T^{2}\omega^{2}}+2\pi\left(\frac{\sigma}{\sigma+\tau}\right)^{2}\delta(\omega)\right]\end{eqnarray*}
-where we've defined $1/T=1/\sigma+1/\tau$. In the case that $\sigma=\tau$
-this reduces to\[
-S_{p}(\omega)=\frac{A^{2}}{4}\left[\frac{\tau}{1+(\omega\tau/2)^{2}}+2\pi\delta(\omega)\right]\]
-
-
-Note that the units of $S_{p}(\omega)$ are $[A]^{2}/[\textrm{Hz}]$
-as should be for a power spectral density. Therefore integrating $S_{p}(\omega)$
-over all frequencies should give the total \emph{power} of the signal.
-To check that we haven't made any mistakes we can integrate the power
-spectrum and see if we get the correct power,
-
-\begin{eqnarray*}
-\textrm{Power}=\int_{\omega=-\infty}^{\infty}S_{p}(\omega)~\frac{d\omega}{2\pi} & = & \frac{A^{2}\sigma\tau}{(\sigma+\tau)^{2}}\int\frac{2T}{1+T^{2}\omega^{2}}~\frac{d\omega}{2\pi}+A^{2}2\pi\left(\frac{\sigma}{\sigma+\tau}\right)^{2}\int\delta(\omega)\frac{d\omega}{2\pi}\\
- & = & \frac{A^{2}\sigma\tau}{(\sigma+\tau)^{2}}\cdot1+A^{2}\left(\frac{\sigma}{\sigma+\tau}\right)^{2}\\
- & = & A^{2}\frac{\sigma}{\sigma+\tau}\end{eqnarray*}
-Does this make sense? If $\tau=\sigma$ we get $\textrm{Power}=A^{2}/2$
-which makes sense because in this case the system spends an equal
-amount of time in the $x=A$ state and in the $x=0$ state. In the
-case where $\sigma$ and $\tau$ are not equal the formula for total
-power still can be seen to make sense because $\sigma/(\sigma+\tau)$
-is the fraction of time spent in the $x=A$ state.
-
-
-\section{Ensemble of Random Telegraph Fluctuators}
-
-Now that we have derived the power spectrum for a single random telegraph
-fluctuator we want to examine the case of an ensemble of many fluctuators.
-First we simplify to the case of $\sigma=\tau$. Then the power spectrum of one fluctuator is (I'm not sure what the prefactor is. It depends on the values of the switching states. I need to figure this out)
-
-\[
-S_{p}(\tau,\omega) \propto \frac{\tau}{1+\tau^{2}\omega^{2}/4}\]
-
-Now we imagine that we have an ensemble of fluctuators each with different
-values of $\tau$. What is the probability distribution of $\tau$?
-To answer this consider a typical physical system in which we would
-find these kind of fluctuations. Consider an atom trapped in a defect
-somewhere in a solid. Perhaps this atom can hop from one defect to
-another, but to do so it has to be thermally excited over some energy
-barrier of height $\Delta V$. In this case the average time it takes
-for the atom to hop will be exponentially dependent on $\Delta V$,
-for example $\tau=C_{0}~e^{\Delta V/kT}$ or something like that.
-The barrier $\Delta V$ depends on things like the distance between
-the defects which we'll assume to be uniformly distributed over some
-range. If $\Delta V$ is uniformly distributed, then the distribution
-of $\tau$, $g(\tau)$, will be,
-
-\[
-g(\tau)=kTC_{0}/\tau\]
-
-
-So in general we have $g(\tau)=K/\tau$ for some constant $K$. Of
-course, the barrier heights can't really go to infinity or to zero,
-so this distribution of $\tau$ should be taken only between two cutoff
-values, $\tau_{\textrm{min}}$ and $\tau_{\textrm{max}}$. Now, if
-each of our fluctuators is independent of the others then their power
-spectra add together so the total power spectrum is,
-
-\begin{eqnarray*}
-S_{p\textrm{,ensemble}}(\omega) & \propto & \int_{\tau=\tau_{\textrm{min}}}^{\tau_{\textrm{max}}}g(\tau)S_{p}(\tau,\omega)~d\tau\\
-S_{p\textrm{,ensemble}}(\omega) & \propto & \int_{\tau=\tau_{\textrm{min}}}^{\tau_{\textrm{max}}}\frac{d\tau}{1+\omega^{2}\tau^{2}/4} \\
-S_{p\textrm{,ensemble}}(\omega) & \propto &
-\frac{1}{\omega} \int_{\omega\tau_{\textrm{min}}}^{\omega\tau_{\textrm{max}}} \frac{dx}{1+x^2/4}
+  \avg{x(t)x(t+s)}_{\textrm{ensemble}} & = & A^{2}\{\textrm{Prob}(x(t)=A)\}*\{\textrm{Prob. even number of transitions} \\
+  & ~ & \textrm{in time s, starting in state A}\}
 \end{eqnarray*}
+We need to work out these two factors. The first one is easy: $\textrm{Prob}(x(t)=A)$, the probability of being in state $A$ at a time $t$, is just
+\begin{equation*}
+  \textrm{Prob}(x(t)=A)=\frac{\sigma}{\sigma+\tau}
+\end{equation*}
+Therefore
+\begin{equation*}
+  \avg{x(t)x(t+s)}_{\textrm{ensemble}}=A^{2}\frac{\sigma}{\sigma+\tau}P_{AA}(s)
+\end{equation*}
+where $P_{AA}(s)$ is the probability of being in state $A$ after a time $s$ given that the system started in state $A$ (even number of transitions in time $s$).
+Also define
+\begin{eqnarray*}
+  P_{A0}(s) & = & \{\textrm{Prob. of an odd number of transitions in time s,}\\
+  & ~ & \textrm{starting in state A}\}
+\end{eqnarray*}
+Then we have
+\begin{equation*}
+  P_{AA}(s)+P_{A0}(s)=1
+\end{equation*}
+We derive a differential equation for $P_{AA}(s)$ as follows.
+For a small increment $ds$ we have
+\begin{equation*}
+  P_{AA}(s+ds) = P_{A0}(s)\frac{ds}{\tau}+P_{AA}(s) \left( 1-\frac{ds}{\sigma} \right)
+\end{equation*}
+In English: The probability of an even number of transitions in time $s+ds$ starting in state $A$ is the sum of the probabilities of two mutually exclusive events:
+(1) There is an odd number of transitions in time $s$ and then one transition in $ds$, and
+(2) there are an even number of transitions in time $s$ and then none in $ds$.
+Using $P_{A0}(s)=1-P_{A1}(s)$ and taking $ds\rightarrow0$ we get
+\begin{equation*}
+  \frac{dP_{AA}}{ds}+\frac{P_{AA}}{T} = \frac{1}{\tau}
+\end{equation*}
+Where $1/T \equiv 1/\tau + 1/\sigma$. With the initial condition that $P_{AA}(0)=1$ we get
+\begin{equation*}
+  P_{AA}(s)=\frac{1}{\sigma+\tau}\left[\tau\exp\left(-\frac{s}{T}\right)+\sigma\right]
+\end{equation*}
+Plugging this into the formula for the autocorrelation function we get
+\begin{equation*}
+  \avg{x(t)x(t+s)}_{\textrm{ensemble}} = A^{2}\frac{\sigma}{(\sigma+\tau)^{2}}\left[\tau\exp\left(-\frac{s}{T}\right)+\sigma\right]
+\end{equation*}
+Note that there is no dependence on $t$, ie. the process is \emph{stationary}.
+It may seem odd that this equation is not symmetric in $\tau$ and $\sigma$, but it's really not surprising given that we defined our possible values of $x$ asymmetrically, ie. as $0$ and $A$ instead of something symmetric like $+A$ and $-A$.
+We'll see that this asymmetry leads to a DC term in the power spectrum that would be absent in symmetrically defined systems.
 
+We calculate the power spectrum by Fourier transforming the autocorrelation function (Wiener Kinchein theorem):
+\begin{eqnarray*}
+  S_{p}(\omega) & = & \int_{s=-\infty}^{\infty}e^{-is\omega}\langle x(t)x(t+s)\rangle ds\\
+                & = & A^{2}\left[\frac{\sigma\tau}{(\sigma+\tau)^{2}}\frac{2T}{1+T^{2}\omega^{2}}+2\pi\left(\frac{\sigma}{\sigma+\tau}\right)^{2}\delta(\omega)\right]
+\end{eqnarray*}
+where we've defined $1/T=1/\sigma+1/\tau$.
+In the case that $\sigma=\tau$ this reduces to
+\begin{equation*}
+  S_p (\omega)=\frac{A^{2}}{4}\left[\frac{\tau}{1+(\omega\tau/2)^{2}}+2\pi\delta(\omega)\right]
+\end{equation*}
 
-If we only look at values of $\omega$ such that $\omega\tau_{\textrm{min}}>>1$
-and $\omega\tau_{\textrm{max}}<<1$ then we can extend the limits
-of the integral to go from zero to infinity and we find
+Note that the dimensions of $S_{p}(\omega)$ are $[A]^{2}/[\textrm{Frequency}]$ as should be for a power spectral density.
+Therefore integrating $S_{p}(\omega)$ over all frequencies should give the total \emph{power} of the signal.
+To check that we haven't made any mistakes we can integrate the power spectrum and see if we get the correct power,
+\begin{eqnarray*}
+  \textrm{Power}=\int_{\omega=-\infty}^{\infty}S_{p}(\omega)~\frac{d\omega}{2\pi}
+  & = & \frac{A^{2}\sigma\tau}{(\sigma+\tau)^{2}}\int\frac{2T}{1+T^{2}\omega^{2}}~\frac{d\omega}{2\pi}+A^{2}2\pi\left(\frac{\sigma}{\sigma+\tau}\right)^{2}\int\delta(\omega)\frac{d\omega}{2\pi}\\
+  & = & \frac{A^{2}\sigma\tau}{(\sigma+\tau)^{2}}\cdot1+A^{2}\left(\frac{\sigma}{\sigma+\tau}\right)^{2}\\
+  & = & A^{2}\frac{\sigma}{\sigma+\tau}
+\end{eqnarray*}
+Does this make sense? If $\tau=\sigma$ we get $\textrm{Power}=A^{2}/2$ which makes sense because in this case the system spends an equal amount of time in the $x=A$ state and in the $x=0$ state.
+In the case where $\sigma$ and $\tau$ are not equal the formula for total power still can be seen to make sense because $\sigma/(\sigma+\tau)$ is the fraction of time spent in the $x=A$ state.
 
-\[
-S_{p\textrm{,ensemble}}(\omega) \propto \frac{1}{\omega}\]
+\section{Ensemble of random telegraph fluctuators}
 
-This shows that an ensemble of fluctuating systems with a distribution
-of characteristic times $\tau$ will exhibit 1/f noise so long as
-the individual fluctuators are uncorrelated and the times $\tau$
-are distributed according to $g(\tau)=K/\tau$ where $K$ is a constant.
+Now that we have derived the power spectrum for a single random telegraph fluctuator we want to examine the case of an ensemble of many fluctuators.
+First we simplify to the case of $\sigma=\tau$.
+Then the power spectrum of one fluctuator is (I'm not sure what the prefactor is. It depends on the values of the switching states. I need to figure this out)
 
-We made an approximation when we extended the limits of the integral
-on $\tau$ to go from zero to infinity. That approximation is good
-for mid ranged values of $\omega$ as evidenced by the inequalities
-mentioned above. For very low or high frequencies the approximation
-is not valied and the power spectrum cannot be expected to be 1/f.
+\begin{equation*}
+  S_{p}(\tau,\omega) \propto \frac{\tau}{1+\tau^{2}\omega^{2}/4}
+\end{equation*}
+
+Now we imagine that we have an ensemble of fluctuators each with different values of $\tau$.
+What is the probability distribution of $\tau$?
+To answer this consider a typical physical system in which we would find these kind of fluctuations.
+Consider an atom trapped in a defect somewhere in a solid.
+The atom can hop from one defect to another, but to do so it has to be thermally excited over some energy barrier of height $\Delta V$.
+In this case the average time it takes for the atom to hop will be exponentially dependent on $\Delta V$, for example $\tau=C_{0}~e^{\Delta V/kT}$.
+The barrier $\Delta V$ depends on things like the distance between the defects which we'll assume to be uniformly distributed over some range.
+If $\Delta V$ is uniformly distributed, then the distribution of $\tau$, $g(\tau)$, will be,
+\begin{equation*}
+  g(\tau)=kTC_{0}/\tau
+\end{equation*}
+So in general we have $g(\tau)=K/\tau$ for some constant $K$.
+Of course, the barrier heights can't really go to infinity or to zero, so this distribution of $\tau$ should be taken only between two cutoff values, $\tau_{\textrm{min}}$ and $\tau_{\textrm{max}}$.
+Now, if each of our fluctuators is independent of the others then their power spectra add together so the total power spectrum is,
+\begin{eqnarray*}
+  S_{p\textrm{,ensemble}}(\omega)
+  & \propto & \int_{\tau=\tau_{\textrm{min}}}^{\tau_{\textrm{max}}}g(\tau)S_{p}(\tau,\omega)~d\tau\\
+  & \propto & \int_{\tau=\tau_{\textrm{min}}}^{\tau_{\textrm{max}}}\frac{d\tau}{1+\omega^{2}\tau^{2}/4} \\
+) & \propto & \frac{1}{\omega} \int_{\omega\tau_{\textrm{min}}}^{\omega\tau_{\textrm{max}}} \frac{dx}{1+x^2/4}
+\end{eqnarray*}
+If we only look at values of $\omega$ such that $\omega\tau_{\textrm{min}} \gg 1$  and $\omega\tau_{\textrm{max}} \ll1$ then we can extend the limits of the integral to go from zero to infinity and we find
+\begin{equation*}
+  S_{p\textrm{,ensemble}}(\omega) \propto \frac{1}{\omega} \, .
+\end{equation*}
+
+This shows that an ensemble of fluctuating systems with a distribution of characteristic times $\tau$ will exhibit 1/f noise so long as the individual fluctuators are uncorrelated and the times $\tau$ are distributed according to $g(\tau)=K/\tau$ where $K$ is a constant.
+
+We made an approximation when we extended the limits of the integral on $\tau$ to go from zero to infinity.
+That approximation is good for mid ranged values of $\omega$ as evidenced by the inequalities mentioned above.
+For very low or high frequencies the approximation is not valied and the power spectrum cannot be expected to be 1/f.
 \end{document}
