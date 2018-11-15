@@ -1,0 +1,12 @@
+\levelstay{Clipping}
+
+The probability distribution of the Gaussian distributed IF noise voltage is
+\begin{equation*}
+  P_V(v) = \frac{1}{\sqrt{2 \pi \sigma_\text{IF}^2}} \exp\left(-v^2 / (2 \sigma_\text{IF}^2) \right) \, .
+\end{equation*}
+A clip happens when $V > V_\text{FS}$, so the probability of clipping is
+\begin{equation}
+  P_\text{clip}
+  = 2 \int_{V_\text{FS}}^\infty P_V(v) dv
+  = \text{erfc} \left( \frac{V_\text{FS}}{\sigma_\text{IF} \sqrt{2}} \right) \, .
+\end{equation}
