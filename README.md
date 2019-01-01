@@ -1,22 +1,18 @@
 # theory
 
 Welcome to my repository of math and physics theory.
-If something won't build, doesn't make sense, or if you would like to ask any questions at all about this repository, simply file an issue :D
+If something won't build, doesn't make sense, or if you would like to ask any questions at all about this repository, simply [file an issue](https://github.com/DanielSank/theory/issues) :D
 
-## How to download
+## Download
 
-`$ git clone --recursive https://github.com/DanielSank/theory.git`
+If you're not using Git, click the green "Clone or download" button and then choose "Download ZIP". If you are using Git, you know what to do.
 
-The `--recursive` flag ensures that git pulls down the necessary submodules (I use a submodule for my TeX packages and macros).
-More information about submodules is available here: [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+## Style guide
 
-## Contributing
+### Files
 
 * Directories names are `AllCapsCamelCase`.
 
 * File names are `lower_case_with_underscores`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
 
-## TeX style guide
-
-1. Label elements as `type:path.to.artifact`.
-Type is something like `eq`.
+### TeX
