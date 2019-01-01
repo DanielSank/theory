@@ -7,6 +7,13 @@ If something won't build, doesn't make sense, or if you would like to ask any qu
 
 If you're not using Git, click the green "Clone or download" button and then choose "Download ZIP". If you are using Git, you know what to do.
 
+## Building
+
+The LaTeX documents in this repository should build with any standard LaTeX installation, using `pdflatex`.
+Image files are stored mostly as SVG, but in order to build the documents, the images must first be converted to PDF.
+Each document's directory contains an executable Python script called `make-figures.py` which will convert the SVG files to PDF.
+This script requires [Python](https://www.python.org/) and the free image editor [Inkscape](https://inkscape.org/).
+
 ## Style guide
 
 ### Files
