@@ -1,0 +1,49 @@
+% General physics constructs
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ket}[1]{| #1 \rangle }
+\newcommand{\braket}[2]{\langle #1|#2\rangle}
+\newcommand{\bbraket}[3]{ \langle #1 | #2 | #3 \rangle }
+\newcommand{\norm}[1]{\| #1\|}
+\newcommand{\avg}[1]{\left \langle #1 \right \rangle}
+\newcommand{\abs}[1]{\left \lvert #1 \right \rvert}
+\newcommand{\VS}{\textit{\textbf{V}}}
+\newcommand{\Tr}{\textrm{Tr}}
+\renewcommand{\Re}{\textrm{Re}}
+\renewcommand{\Im}{\textrm{Im}}
+
+% Enable encapsulation of relative heading imports.
+% http://tex.stackexchange.com/questions/245348/recursively-import-sub-document-at-arbitrary-level
+\makeatletter
+\newcounter{currentimportdepth}
+\setcounter{currentimportdepth}{0}
+\newcommand{\subimportlevel}[3]{
+  \expandafter\edef\csname @currentlevel\thecurrentimportdepth\endcsname{\thecurrentlevel}
+  \addtocounter{currentimportdepth}{1}
+  \addtocounter{currentlevel}{-#3}
+  \subimport*{#1}{#2}
+  \addtocounter{currentimportdepth}{-1}
+  \setcounter{currentlevel}{\csname  @currentlevel\thecurrentimportdepth\endcsname}
+}
+\makeatother
+
+% Figures. Example usage:
+% \quickfig{\columnwidth}{my_image}{This is the caption}{fig:my_fig}
+\DeclareRobustCommand{\quickfig}[4]{
+\begin{figure}
+\begin{centering}
+\includegraphics[width=#1]{#2}
+\par\end{centering}
+\caption{#3}
+\label{#4}
+\end{figure}
+}
+
+\DeclareRobustCommand{\quickwidefig}[4]{
+\begin{figure*}[h]
+\begin{centering}
+\includegraphics[width=#1]{#2}
+\par\end{centering}
+\caption{#3}
+\label{#4}
+\end{figure*}
+}
