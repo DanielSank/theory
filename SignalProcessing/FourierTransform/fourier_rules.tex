@@ -1,43 +1,57 @@
 \documentclass{article}
-\usepackage[T1]{fontenc}
-\usepackage[latin1]{inputenc}
-\usepackage[letterpaper]{geometry}
-\geometry{verbose, tmargin=2cm, bmargin=2cm, lmargin=2cm, rmargin=2cm}
-\setcounter{secnumdepth}{2}
-\setcounter{tocdepth}{2}
 \usepackage{amstext}
-\usepackage{esint}
-
-\makeatother
-
+\usepackage{amsmath}
 
 \author{Daniel Sank}
 \title{Fourier Rules}
 \date{October 4, 2010}
 
-
 \begin{document}
-
 
 \maketitle
 
 \section*{Useful formulae}
 
-\begin{itemize}
-\item $\textbf{Trigonometry}$\begin{eqnarray*}
-A\cos(x)+B\sin(x) & = & M\cos(x+\phi)\\
-\textrm{if}\qquad M^{2}=A^{2}+B^{2} & \textrm{and} & \tan(\phi)=-\frac{B}{A}\end{eqnarray*}
- \begin{eqnarray*}
-\cos\left(\alpha+\beta\right) & = & \cos\left(\alpha\right)\cos\left(\beta\right)-\sin\left(\alpha\right)\sin\left(\beta\right)\\
-\sin\left(\alpha+\beta\right) & = & \sin\left(\alpha\right)\cos\left(\beta\right)+\cos\left(\alpha\right)\sin\left(\beta\right)\end{eqnarray*}
- \begin{eqnarray*}
-\sin\left(\alpha\right)\sin\left(\beta\right) & = & \frac{1}{2}\left[\cos\left(\alpha-\beta\right)-\cos\left(\alpha+\beta\right)\right]\\
-\cos\left(\alpha\right)\cos\left(\beta\right) & = & \frac{1}{2}\left[\cos\left(\alpha-\beta\right)+\cos\left(\alpha+\beta\right)\right]\\
-\sin\left(\alpha\right)\cos\left(\beta\right) & = & \frac{1}{2}\left[\sin\left(\alpha+\beta\right)+\sin\left(\alpha-\beta\right)\right]\end{eqnarray*}
- \begin{eqnarray*}
-\cos\left(x\right)=\sin\left(x+\frac{\pi}{2}\right) & \textrm{and} & \sin\left(x\right)=\cos\left(x-\frac{\pi}{2}\right)\end{eqnarray*}
+\begin{align*}
+  A \cos(x) + B \sin(x) &= M \cos(x+\phi) \\
+  \textrm{where} \qquad \qquad \qquad M^{2} &= A^{2}+B^{2} \\
+  \tan(\phi) &= -B / A
+\end{align*}
 
-\end{itemize}
+\begin{align*}
+  \cos ( \alpha + \beta ) & =
+    \cos ( \alpha ) \cos ( \beta ) - \sin ( \alpha ) \sin ( \beta ) \\
+  \sin ( \alpha + \beta ) & =
+    \sin ( \alpha ) \cos ( \beta ) + \cos ( \alpha ) \sin ( \beta )
+\end{align*}
+
+\begin{align*}
+  \sin(\alpha) \sin(\beta) & =
+    \frac{1}{2} \left[ \cos (\alpha - \beta) - \cos(\alpha + \beta) \right] \\
+  \cos(\alpha) \cos(\beta) & =
+    \frac{1}{2} \left[ \cos (\alpha - \beta) + \cos(\alpha + \beta) \right]\\
+  \sin(\alpha) \cos(\beta) &=
+    \frac{1}{2} \left[ \sin (\alpha + \beta) + \sin(\alpha - \beta) \right]
+\end{align*}
+
+\begin{equation*}
+  \cos(x) = \sin\left(x + \frac{\pi}{2} \right)
+  \quad \textrm{and} \quad
+  \sin(x) = \cos\left(x - \frac{\pi}{2} \right)
+\end{equation*}
+
+\begin{align*}
+  f(t) &= I(t) \cos(\Omega t) - Q(t) \sin(\Omega t) \\
+  \tilde{f}(\omega) &= \frac{1}{2} \left[
+    \tilde I(\omega - \Omega) + i \tilde Q(\omega - \Omega)
+    + \tilde I(\omega + \Omega) - i \tilde Q(\omega + \Omega)
+    \right]
+\end{align*}
+
+\begin{align*}
+  \cos(\Omega t) &\rightarrow \frac{1}{2} \left[ \delta(\omega - \Omega) + \delta(\omega + \Omega) \right] \\
+  \sin(\Omega t) &\rightarrow \frac{1}{2} \left[ -i \delta(\omega - \Omega) + i \delta(\omega + \Omega) \right] 
+\end{align*}
 
 \section*{Fourier transform rules in $t$ and $\nu$}
 
