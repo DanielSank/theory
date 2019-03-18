@@ -10,58 +10,102 @@
 \label{Fig:coupledCircuits_capacitive}
 \end{figure}
 
-The circuit shown in Fig.\,\ref{Fig:coupledCircuits_capacitive} has the following Lagrangian \begin{align}
-\mathcal{L} = & \frac{1}{2}C_1\dot{\Phi}_1^2 + \frac{1}{2}C_2\dot{\Phi}_2^2 \nonumber \\
-& + \frac{1}{2}C_g \left( \dot{\Phi}_1 - \dot{\Phi_2} \right)^2 \nonumber \\
-& - \frac{1}{2L_1}\Phi_1^2 - \frac{1}{2L_2}\Phi_2^2 \, . \end{align}
-The kinetic term can be rewritten as \begin{equation}
-T = \frac{1}{2}
-\left( \begin{array}{cc} \dot{\Phi}_1 & \dot{\Phi}_2 \end{array} \right)
-\left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
-\left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticInFlux} \end{equation}
-where $C_1' \equiv C_1+C_g$ and similarly for $C_2'$. The canonical momenta are \begin{eqnarray}
-p_1 = \frac{dL}{d\dot{\Phi}_1} = C_1'\dot{\Phi}_1 - C_g\dot{\Phi}_2 \nonumber \\
-p_2 = \frac{dL}{d\dot{\Phi}_2} = C_2'\dot{\Phi}_2 - C_g\dot{\Phi}_1 \end{eqnarray}
-which can be written as \begin{equation}
-\left( \begin{array}{c} p_1 \\ p_2 \end{array} \right) =
-\left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
-\left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \end{equation}
-Note the recurrence of the matrix from equation (\ref{eq:kineticInFlux}). Naming this matrix $M$ we can write \begin{eqnarray}
-T &=& \frac{1}{2}
-      \left( \begin{array}{cc} \dot{\Phi}_1&\dot{\Phi}_2 \end{array} \right)
-      M
-      \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticWithM} \\
-\left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) &=& M^{-1} \left( \begin{array}{c} p_1 \\ p_2 \end{array} \right) \label{eq:fluxToMomenta} \end{eqnarray}
+The circuit shown in Fig.\,\ref{Fig:coupledCircuits_capacitive} has the following Lagrangian
+\begin{align}
+  \mathcal{L} = & \frac{1}{2}C_1\dot{\Phi}_1^2 + \frac{1}{2}C_2\dot{\Phi}_2^2 \nonumber \\
+  & + \frac{1}{2}C_g \left( \dot{\Phi}_1 - \dot{\Phi_2} \right)^2 \nonumber \\
+  & - \frac{1}{2L_1}\Phi_1^2 - \frac{1}{2L_2}\Phi_2^2 \, .
+\end{align}
+The kinetic term can be rewritten as
+\begin{equation}
+  T = \frac{1}{2}
+  \left( \begin{array}{cc} \dot{\Phi}_1 & \dot{\Phi}_2 \end{array} \right)
+  \left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
+  \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticInFlux}
+\end{equation}
+where $C_i' \equiv C_i + C_g$.
+The canonical momenta are
+\begin{align}
+  Q_1 &= \frac{d \mathcal{L}}{d\dot{\Phi}_1} = C_1'\dot{\Phi}_1 - C_g\dot{\Phi}_2 \nonumber \\
+  Q_2 &= \frac{d \mathcal{L}}{d\dot{\Phi}_2} = C_2'\dot{\Phi}_2 - C_g\dot{\Phi}_1
+\end{align}
+which can be written as
+\begin{equation}
+  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) =
+  \left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
+  \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
+  \, .
+\end{equation}
+Note the recurrence of the matrix from equation (\ref{eq:kineticInFlux}).
+Naming this matrix $M$ we can write
+\begin{align}
+  T &=
+    \frac{1}{2}
+    \left( \begin{array}{cc} \dot{\Phi}_1 \dot{\Phi}_2 \end{array} \right)
+    M
+    \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
+    \label{eq:kineticWithM} \\
+  \text{and} \qquad
+  \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
+  &= M^{-1}
+  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \, .
+  \label{eq:fluxToMomenta}
+\end{align}
 Substituting equation (\ref{eq:fluxToMomenta}) into (\ref{eq:kineticWithM}) and using the facts that matrix transposition commutes with matrix inversion and that $M$ is symmetric we can rewrite the kinetic term as
 \begin{equation}
-T = \frac{1}{2} \left( \begin{array}{cc} p_1&p_2 \end{array} \right) M^{-1} \left( \begin{array}{c} p_1 \\ p_2 \end{array} \right) \, .
+  T =
+  \frac{1}{2} \left( \begin{array}{cc} Q_1 & Q_2 \end{array} \right)
+  M^{-1}
+  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \, .
 \end{equation}
 Finding the inverse of $M$ to be
 \begin{align}
-M^{-1} &= \frac{1}{C_1C_2 + C_g(C_1 + C_2)} \left( \begin{array}{cc} C_2' & C_g \\ C_g & C_1' \end{array} \right) \nonumber \\
-&\equiv \left( \begin{array}{cc} 1/C_1'' & 1/C_g'' \\ 1/C_g'' & 1/C_2'' \end{array} \right) \, .
+  M^{-1}
+  &= \frac{1}{C_1' C_2' - C_g^2}
+    \left( \begin{array}{cc} C_2' & C_g \\ C_g & C_1' \end{array} \right) \nonumber \\
+  &\equiv \left(
+    \begin{array}{cc} 1/C_1'' & 1/C_g'' \\ 1/C_g'' & 1/C_2'' \end{array}
+    \right) \, ,
 \end{align}
 we can write the kinetic term of the Langrangian as
-  \begin{equation}
-T = \frac{p_1^2}{2C_1''} + \frac{p_2^2}{2C_2''} + \frac{p_1p_2}{C_g''} \, . \label{eq:kineticInP}
+\begin{equation}
+  T =
+      \frac{Q_1^2}{2 C_1''}
+    + \frac{Q_2^2}{2 C_2''}
+    + \frac{Q_1 Q_2}{C_g''} \, . \label{eq:kineticInP} \, .
 \end{equation}
 
-Let us now understand the quantities $C_1''$ and $C_2''$ in a simple way.
+Let us understand the quantities $C_1''$ and $C_2''$ in a simple way.
 The capacitance to ground from the signal node of circuit 1 is
-  \begin{align*}
-  C_{1,\textrm{total}}
-    &= C_1||(C_g \textrm{ in series with } C_2) \\
-    &= C_1 + \frac{C_g C_2}{C_g+C_2} \\
-    &= \frac{C_1 C_2 + C_g(C_1+C_2)}{C_g+C_2}
+\begin{align*}
+  C_{1, \textrm{total}}
+  &= C_1 || (C_g \textrm{ in series with } C_2) \\
+  &= \frac{C_1 C_2 + C_g(C_1+C_2)}{C_g+C_2} \\
+  &= \frac{C_1' C_2' - C_g^2}{C_2'}
 \end{align*}
 which is exactly equal to our expression for $C_1''$.
-Therefore we've found that the effective capacitance associated with the canonical charge is just the capacitance to ground of the conjugate flux's signal node.
+Therefore we've found that the effective capacitance associated with the canonical charge is just the capacitance to ground of the conjugate flux's signal node!
 
-The quantities $p_1$ and $p_2$ have dimensions of charge so we will rename them $\tilde{Q}_1$ and $\tilde{Q}_2$.
-The tildes remind us that they are not the usual single qubit charges.
+The complete coupled Hamiltonian is therefore
+\begin{equation}
+  H =
+    \frac{\Phi_1^2}{2 L_1}
+  + \frac{\Phi_2^2}{2 L_2}
+  + \frac{Q_1^2}{2 C_1''}
+  + \frac{Q_2^2}{2 C_2''}
+  + \frac{Q_1 Q_2}{C_g''} \, .
+\end{equation}
+Note that in the limit $C_g \ll C_1, C_2$ the double-primed quantities are, to first order in $C_g / C_1$ or $C_g / C_2$,
+\begin{align*}
+  C_1'' & \approx C_1 + C_g \\
+  C_2'' & \approx C_2 + C_g \\
+  \frac{1}{C_g''} & \approx \frac{C_g}{C_1 C_2} \, .
+\end{align*}
 
-The coupling term in the Hamiltonian, eq.\,(\ref{eq:kineticInP}), is \begin{equation}
-H_g = \frac{ \tilde{Q}_1 \tilde{Q}_2} {C_g''}. \label{eq:sec:coupling:H_g} \end{equation}
+The coupling term in the Hamiltonian, eq.\,(\ref{eq:kineticInP}), is
+\begin{equation}
+  H_g = \frac{ Q_1 Q_2} {C_g''} \, . \label{eq:sec:coupling:H_g}
+\end{equation}
 We would like to re-express it in terms of Pauli operators.
 Using again the harmonic limit expression
 \begin{equation}
@@ -69,19 +113,26 @@ Using again the harmonic limit expression
 \end{equation}
 we get
 \begin{align*}
-H_g
-  &= \frac{Q_{1,\textrm{zpf}}Q_{2,\textrm{zpf}}}{C_g''}(-i)(a_1-a_1^{\dagger})(-i)(a_2-a_2^{\dagger}) \\
-  &= \frac{\hbar}{2}\sqrt{\omega_1\omega_2 C_1'' C_2''}\frac{C_g}{C_1C_2 + C_g(C_1+C_2)}(\sigma_y \otimes \sigma_y) \\
-  &= \frac{1}{2}\frac{C_g}{\sqrt{C_1' C_2'}} \hbar\sqrt{\omega_1\omega_2} (\sigma_y \otimes \sigma_y)
+  H_g
+  &= \frac{Q_{1,\textrm{zpf}}Q_{2,\textrm{zpf}}}{C_g''}
+    (-i)(a_1 - a_1^{\dagger}) (-i)(a_2 - a_2^{\dagger}) \\
+  &= \frac{\hbar}{2} \sqrt{\omega_1'' \omega_2'' C_1'' C_2''}
+    \frac{C_g}{C_1' C_2' - C_g^2} (\sigma_y \otimes \sigma_y) \\
+  &= \frac{1}{2}\frac{C_g}{\sqrt{C_1' C_2'}} \hbar
+    \sqrt{\omega_1'' \omega_2''} (\sigma_y \otimes \sigma_y)
 \end{align*}
-where we have again used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_y$}.
-We combine the prefactors into a parameter $g$ and write the Hamiltonian as \begin{equation}
-H_g = g \left( \sigma_y \otimes \sigma_y \right) \end{equation}
-where $g$, called the ``coupling strength'', is defined as \begin{equation}
-g \equiv \frac{1}{2} \frac{C_g}{\sqrt{C_1' C_2'}} \hbar\sqrt{\omega_1\omega_2} \, . \end{equation}
+where $\omega_i'' \equiv 1 / \sqrt{L_i C_i''}$ and where we have used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_y$}.
+Defining the ``coupling strength'' $g$ as
+\begin{equation}
+  g \equiv \frac{1}{2} \frac{C_g}{\sqrt{C_1' C_2'}} \hbar\sqrt{\omega_1\omega_2}
+\end{equation}
+we can rewrite the coupling Hamiltonian as
+\begin{equation}
+  H_g = g \left( \sigma_y \otimes \sigma_y \right) \, .
+\end{equation}
 Taking $C_1 \approx C_2$ and $\omega_1 \approx \omega_2$, then using $C = 1 / \omega Z_{LC}$ we find
 \begin{equation}
-g \propto Z_{LC} \, .
+  g \propto Z_{LC} \, .
 \end{equation}
 
 \levelstay{Summary - Simple derivation}
