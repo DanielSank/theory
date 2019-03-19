@@ -1,0 +1,40 @@
+Consider two LC oscillators coupled through a coupling capacitor $C_g$.
+Kirchhoff's equations of motion for this circuit can be written in matrix form
+as
+\begin{equation}
+  \left( \begin{array}{c} V_1 \\ V_2 \end{array} \right)
+  =
+  \left( \begin{array}{cc}
+    (1 + \epsilon_1)/\omega_1^2 & - \epsilon_1  \omega_1^2 \\
+    - \epsilon_2  \omega_2^2 & (1 + \epsilon_2)/\omega_2^2
+  \end{array} \right)
+  \left( \begin{array}{c} \ddot{V}_1 \\ \ddot{V}_2 \end{array} \right)
+\end{equation}
+where $\epsilon_i \equiv C_g / C_i$ and $\omega_i^2 \equiv 1 / L_i C_i$.
+The normal mode frequencies of the system are the square roots of the reciprocals of the eigenvalues of the matrix.
+We could compute those eigenvalues explicitly, but it's a mess and there's a better way to do it that we'll show below.
+However, in the particular case that $L_1 = L_2$ and $C_1 = C_2$, then $\epsilon_1 = \epsilon_2 \equiv \epsilon$, $\omega_1 = \omega_2 \equiv \omega_0$ and the matrix takes the form
+\begin{equation}
+  \frac{1}{\omega_0^2} \left( 
+    (1 + \epsilon) \mathbb{I} - \epsilon \sigma_x
+  \right)
+\end{equation}
+and the eigenvalues are
+\begin{equation}
+  \lambda_{\pm} = \frac{1}{\omega_0^2} ( 1 + \epsilon \pm \epsilon)
+\end{equation}
+so the normal mode frequencies are
+\begin{equation}
+  \omega_+ = \omega_0 \quad
+  \text{and} \quad
+  \omega_- = \frac{\omega_0}{\sqrt{1 + 2 \epsilon}}
+    \approx \omega_0 (1 - \epsilon) \, .
+\end{equation}
+Note that the difference bewteen the two normal mode frequencies is
+\begin{equation}
+  \omega_+ - \omega_- \approx \omega_0 \epsilon
+  = \omega_0 \frac{C_g}{C}
+  = 2 \times \underbrace{\left(\frac{\omega}{2} \frac{C_g}{C} \right)}_g
+  = 2 g
+\end{equation}
+which justifies our definition of the coupling strength $g$ because the frequency splitting of two oscillators on resonance is supposed to be $2g$.

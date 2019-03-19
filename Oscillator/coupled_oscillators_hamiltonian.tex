@@ -1,0 +1,77 @@
+The Hamiltonian for two LC oscillators coupled through a coupling capacitor $C_g$ is
+\begin{align}
+  H
+  &= \frac{\Phi_1^2}{2 L_1} + \frac{\Phi_2^2}{2 L_2} \\
+  &+ \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2} \\
+  &+ \frac{Q_1 Q_2}{C_g''}
+\end{align}
+where
+\begin{align}
+  C_g'' &\equiv \frac{C_1' C_2' - C_g^2}{C_g} \\
+  C_i' &\equiv C_i + C_g \, .
+\end{align}
+We transform the Hamiltonian in two steps.
+First we define
+\begin{align*}
+  X_i &\equiv \frac{1}{\sqrt{2 \hbar}} \frac{1}{\sqrt{Z_i}} \Phi_i \\
+  Y_i &\equiv \frac{1}{\sqrt{2 \hbar}} \sqrt{Z_i} Q_i
+\end{align*}
+where $Z_i \equiv \sqrt{L_i / C_i''}$.
+With these new variables, the Hamiltonian is
+\begin{equation}
+  H/\hbar =
+    \omega_1 \left(X_1^2 + Y_1^2) \right)
+  + \omega_2 \left(X_2^2 + Y_2^2) \right)
+  + 2 \left( \frac{C_1'' C_2''}{C_g''} \right) \sqrt{\omega_1'' \omega_2''} Y_1 Y_2 \, .
+\end{equation}
+Note that $[X, Y] = i/2$ so Hamilton's equations of motion are a little different than usual.
+Anyway, we next use $a = X + i Y$ and $a^\dagger = X - i Y$ to get
+\begin{equation}
+  H / \hbar =
+    \omega_1'' a_1^\dagger a_1
+  + \omega_2'' a_2^\dagger a_2
+  - g (a_1 - a_1^\dagger) (a_2 - a_2^\dagger)
+\end{equation}
+where
+\begin{equation}
+  g \equiv \frac{1}{2} \frac{\sqrt{C_1'' C_2''}}{C_g''} \sqrt{\omega_1'' \omega_2''} \, .
+\end{equation}
+Hamilton's equations of motion in this representation are
+\begin{equation*}
+  \dot{a} = -i \frac{\partial H/\hbar}{\partial a^\dagger}
+  \quad \text{and} \quad
+  \dot{a}^\dagger = i \frac{\partial H/\hbar}{\partial a} \, .
+\end{equation*}
+Therefore the equations of motion for the system are
+\begin{align*}
+  \dot a_1 &= -i \omega_1'' a_1 -i g a_2 + i g a_2^\dagger \\
+  \dot a_2 &= -i \omega_2'' a_2 -i g a_1 + i g a_1^\dagger
+\end{align*}
+and the equations for $a^\dagger$ follow by conjugation.
+These equations can be written in matrix form as
+\begin{equation}
+  \frac{d}{dt}
+  \left( \begin{array}{c}
+    a_1 \\ a_1^\dagger \\ a_2 \\ a_2^\dagger
+  \end{array} \right)
+  =
+  \left( \begin{array}{cccc}
+    -i \omega_1'' & 0 & -i g & i g \\
+    0 & i \omega_1'' & -i g & ig \\
+    -i g & i g & -i \omega_2'' & 0 \\
+    -i g & i g & 0 & i \omega_2''
+  \end{array} \right)
+  \left( \begin{array}{c}
+    a_1 \\ a_1^\dagger \\ a_2 \\ a_2^\dagger
+  \end{array} \right)
+  \, .
+\end{equation}
+The eigenvalues are
+\begin{equation}
+  \lambda^2 =
+  \pm \frac{1}{2}
+  \left(
+    \omega_1''^2 + \omega_2''^2
+    \pm \sqrt{(\omega_1''^2 - \omega_2''^2)^2 + 16 g^2 \omega_1'' \omega_2''}
+  \right)
+\end{equation}
