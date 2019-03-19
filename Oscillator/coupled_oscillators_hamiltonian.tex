@@ -25,12 +25,12 @@ With these new variables, the Hamiltonian is
   + 2 \left( \frac{C_1'' C_2''}{C_g''} \right) \sqrt{\omega_1'' \omega_2''} Y_1 Y_2 \, .
 \end{equation}
 Note that $[X, Y] = i/2$ so Hamilton's equations of motion are a little different than usual.
-Anyway, we next use $a = X + i Y$ and $a^\dagger = X - i Y$ to get
+Anyway, we next use $a = X_1 + i Y_1$ and $b = X_2 + i Y_2$ to get
 \begin{equation}
   H / \hbar =
-    \omega_1'' a_1^\dagger a_1
-  + \omega_2'' a_2^\dagger a_2
-  - g (a_1 - a_1^\dagger) (a_2 - a_2^\dagger)
+    \omega_1'' a^\dagger a
+  + \omega_2'' b^\dagger b
+  - g (a - a^\dagger) (b - b^\dagger)
 \end{equation}
 where
 \begin{equation}
@@ -40,32 +40,40 @@ Hamilton's equations of motion in this representation are
 \begin{equation*}
   \dot{a} = -i \frac{\partial H/\hbar}{\partial a^\dagger}
   \quad \text{and} \quad
-  \dot{a}^\dagger = i \frac{\partial H/\hbar}{\partial a} \, .
+  \dot{a}^\dagger = i \frac{\partial H/\hbar}{\partial a}
 \end{equation*}
+and similarly for $b$.
 Therefore the equations of motion for the system are
 \begin{align*}
-  \dot a_1 &= -i \omega_1'' a_1 -i g a_2 + i g a_2^\dagger \\
-  \dot a_2 &= -i \omega_2'' a_2 -i g a_1 + i g a_1^\dagger
+  \dot a &= -i \omega_1'' a -i g b + i g b^\dagger \\
+  \dot b &= -i \omega_2'' b -i g a + i g a^\dagger \, .
 \end{align*}
-and the equations for $a^\dagger$ follow by conjugation.
 These equations can be written in matrix form as
 \begin{equation}
   \frac{d}{dt}
   \left( \begin{array}{c}
-    a_1 \\ a_1^\dagger \\ a_2 \\ a_2^\dagger
+    a \\ b \\ a^\dagger \\ b^\dagger
   \end{array} \right)
   =
-  \left( \begin{array}{cccc}
-    -i \omega_1'' & 0 & -i g & i g \\
-    0 & i \omega_1'' & -i g & ig \\
-    -i g & i g & -i \omega_2'' & 0 \\
-    -i g & i g & 0 & i \omega_2''
+  -i \left( \begin{array}{cccc}
+    \omega_1'' & g & 0 & -g \\
+    g & \omega_2'' & -g & 0 \\
+    0 & g & - \omega_1'' & -g \\
+    g & 0 & -g & - \omega_2''
   \end{array} \right)
   \left( \begin{array}{c}
-    a_1 \\ a_1^\dagger \\ a_2 \\ a_2^\dagger
+    a \\ b \\ a^\dagger \\ b^\dagger
   \end{array} \right)
   \, .
 \end{equation}
+The matrix can be conveniently expressed as
+\begin{equation}
+  \sigma_z \otimes \left(
+    g \sigma_x + \frac{\Delta}{2} \sigma_z + \frac{S}{2} \mathbb{I}
+  \right)
+  -i g \left( \sigma_y \otimes \sigma_x \right)
+\end{equation}
+where $\Delta \equiv \omega_1'' - \omega_2''$ and $S \equiv \omega_1'' + \omega_2''$.
 The eigenvalues are
 \begin{equation}
   \lambda^2 =
@@ -74,4 +82,12 @@ The eigenvalues are
     \omega_1''^2 + \omega_2''^2
     \pm \sqrt{(\omega_1''^2 - \omega_2''^2)^2 + 16 g^2 \omega_1'' \omega_2''}
   \right)
+\end{equation}
+
+In the rotating wave approximation, we drop the $ab$ and $a^\dagger b^\dagger$ terms in the Hamilonian.
+Dropping those terms is equivalent to dropping the $-i g \left( \sigma_y \otimes \sigma_x \right)$ term in the algebraic representation!
+Doing that and computing the eigenvalues again gives
+\begin{equation}
+  \lambda_\pm =
+  \frac{1}{2} \left( S \pm \sqrt{\Delta^2 + 4 g^2} \right) \, .
 \end{equation}

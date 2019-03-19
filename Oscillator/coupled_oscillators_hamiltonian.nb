@@ -1,0 +1,212 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6662,        202]
+NotebookOptionsPosition[      6114,        180]
+NotebookOutlinePosition[      6458,        195]
+CellTagsIndexPosition[      6415,        192]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Sigma]x", "=", 
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"0", "1"},
+      {"1", "0"}
+     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]y", "=", 
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"0", 
+       RowBox[{"-", "\[ImaginaryI]"}]},
+      {"\[ImaginaryI]", "0"}
+     }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]z", "=", 
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"1", "0"},
+      {"0", 
+       RowBox[{"-", "1"}]}
+     }], "\[NoBreak]", ")"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.762020471305603*^9, 3.762020514168125*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"d", " ", "=", " ", 
+   RowBox[{"\[Omega]1", "-", "\[Omega]2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"s", " ", "=", " ", 
+   RowBox[{"\[Omega]1", " ", "+", " ", "\[Omega]2"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"H", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"KroneckerProduct", "[", 
+     RowBox[{"\[Sigma]z", ",", 
+      RowBox[{
+       RowBox[{"g", " ", "\[Sigma]x"}], " ", "+", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"d", "/", "2"}], ")"}], "\[Sigma]z"}], " ", "+", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"s", "/", "2"}], ")"}], 
+        RowBox[{"IdentityMatrix", "[", "2", "]"}]}]}]}], "]"}], "-", 
+    RowBox[{"\[ImaginaryI]", " ", "g", " ", 
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{"\[Sigma]y", ",", " ", "\[Sigma]x"}], "]"}]}]}], "//", 
+   "Simplify"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Hrwa", " ", "=", " ", 
+  RowBox[{"H", " ", "-", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", "\[ImaginaryI]"}], " ", "g", " ", 
+     RowBox[{"KroneckerProduct", "[", 
+      RowBox[{"\[Sigma]y", ",", " ", "\[Sigma]x"}], "]"}]}], 
+    ")"}]}]}]}], "Input",
+ CellChangeTimes->{{3.762020518242148*^9, 3.762020556671712*^9}, {
+  3.7620207964479847`*^9, 3.762021010061487*^9}, {3.762021045616473*^9, 
+  3.762021053344092*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\[Omega]1", ",", "g", ",", "0", ",", 
+     RowBox[{"-", "g"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"g", ",", "\[Omega]2", ",", 
+     RowBox[{"-", "g"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "g", ",", 
+     RowBox[{"-", "\[Omega]1"}], ",", 
+     RowBox[{"-", "g"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"g", ",", "0", ",", 
+     RowBox[{"-", "g"}], ",", 
+     RowBox[{"-", "\[Omega]2"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.762020962800021*^9, {3.762021000705249*^9, 3.762021054119639*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\[Omega]1", ",", "g", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"g", ",", "\[Omega]2", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "\[Omega]1"}], ",", 
+     RowBox[{"-", "g"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "g"}], ",", 
+     RowBox[{"-", "\[Omega]2"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.762020962800021*^9, {3.762021000705249*^9, 3.762021054121496*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Show", " ", "matrix", " ", "representations"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"MatrixForm", "[", "H", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"MatrixForm", "[", "Hrwa", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.76202105630399*^9, 3.7620210937592154`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{"Compute", " ", "eigenvalues"}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.76202109606954*^9, 3.762021101503031*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"evalsfull", " ", "=", " ", 
+   RowBox[{"Eigenvalues", "[", "H", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"evalsrwa", " ", "=", " ", 
+   RowBox[{"Eigenvalues", "[", "Hrwa", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7620211031608143`*^9, 3.7620211189749117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"g", "=", "0.5"}], ",", " ", 
+     RowBox[{"\[Omega]2", "=", "2"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Part", "[", 
+        RowBox[{"evalsfull", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Part", "[", 
+        RowBox[{"evalsfull", ",", " ", "3"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Part", "[", 
+        RowBox[{"evalsrwa", ",", " ", "1"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Part", "[", 
+        RowBox[{"evalsrwa", ",", " ", "3"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Omega]1", ",", " ", "1", ",", " ", "3"}], "}"}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.762006997437881*^9, 3.762007059639062*^9}, {
+   3.7620070931508923`*^9, 3.762007101653997*^9}, {3.762007136110623*^9, 
+   3.7620071425176888`*^9}, 3.7620071856383247`*^9, {3.7620073479899683`*^9, 
+   3.76200735670147*^9}, {3.762007438188669*^9, 3.762007472813615*^9}, 
+   3.7620075869412403`*^9, {3.762011458231269*^9, 3.7620114923503428`*^9}, {
+   3.76201164210257*^9, 3.762011721637974*^9}, {3.762014411329462*^9, 
+   3.762014428776713*^9}, {3.762017641457368*^9, 3.76201766232087*^9}, {
+   3.762021074896097*^9, 3.762021077367559*^9}, {3.762021125655367*^9, 
+   3.7620211525830812`*^9}}]
+},
+WindowSize->{959, 1165},
+WindowMargins->{{Automatic, -332}, {-274, Automatic}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 668, 21, 128, "Input"],
+Cell[CellGroupData[{
+Cell[1251, 45, 1349, 36, 125, "Input"],
+Cell[2603, 83, 618, 18, 34, "Output"],
+Cell[3224, 103, 576, 16, 34, "Output"]
+}, Open  ]],
+Cell[3815, 122, 338, 8, 77, "Input"],
+Cell[4156, 132, 165, 3, 32, "Input"],
+Cell[4324, 137, 323, 7, 57, "Input"],
+Cell[4650, 146, 1460, 32, 148, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
