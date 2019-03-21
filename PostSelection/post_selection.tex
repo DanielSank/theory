@@ -1,0 +1,108 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\newcommand{\ket}[1]{\left \lvert #1 \right \rangle}
+\newcommand{\SNR}{\text{SNR}}
+
+\DeclareRobustCommand{\quickfig}[4]{
+  \begin{figure}
+    \begin{centering}
+      \includegraphics[width=#1]{#2}
+      \par
+    \end{centering}
+    \caption{#3}
+    \label{#4}
+  \end{figure}
+}
+
+
+\author{Daniel Sank \\ \small{Google. LLC}}
+\title{Can post selection improve supremacy \\ \small{tl,dr: no, it can't}}
+\date{20 March 2019}
+
+\begin{document}
+\maketitle
+
+\quickfig{0.8\columnwidth}{setup.pdf}{Gaussian readout distributions.}{fig:setup}
+
+When we measure the state of a superconducting transmon qubit, we get a single number $x$ that is drawn from one of two probability distributions.
+If the qubit was in $\ket{0}$ then we draw from $P_+(x)$, and if the qubit was in $\ket{1}$ then we draw from $P_-(x)$.
+The probability distributions are Gaussian
+\begin{equation}
+  P_\pm (x) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left( \frac{(x \mp s/2)^2}{2 \sigma^2} \right)
+\end{equation}
+where $\sigma$ is the width of the Gaussians and $s$ is the separation between their centers.
+The error rate for the measurement is simply the fraction of each Gaussian curve on the ``wrong'' side of $x=0$, i.e.
+\begin{equation}
+  \epsilon_\text{raw} \equiv \int_{-\infty}^0 P_+(x) \, dx
+  = \frac{1}{2} \text{erfc} \left(
+    \frac{s}{2 \sqrt{2} \sigma}
+  \right)
+  = \frac{1}{2} \text{erfc} \left(
+    \frac{\sqrt{\SNR}}{2}
+  \right)
+  \, .
+\end{equation}
+See Figure \ref{fig:setup}.
+
+Now suppose we try to do some post-selection to remove measurement shots where the qubit state is uncertain.
+In particular, we throw out any values of $x$ that lie in a segment of length $r \, \sigma$ at the center of the two distributions.
+With this area excluded, if the qubit is in $\ket{0}$, then only points in the range $[-\infty, -r \sigma/2]$ are errors.
+Therefore the error rate is
+\begin{align}
+  \epsilon_\text{post-selected}
+  \int_{-\infty}^{-r \sigma/2} P_+(x) \, dx
+  &= \frac{1}{2} \text{erfc} \left(
+    \frac{s}{2 \sqrt{2} \sigma} + \frac{r}{2 \sqrt{2}}
+  \right) \\
+  &= \frac{1}{2} \text{erfc} \left(
+    \frac{\sqrt\SNR}{2} + \frac{r}{2 \sqrt{2}}
+  \right)
+  \, .
+\end{align}
+Of course, we are throwing away data.
+The fraction of data kept is
+\begin{align}
+  F
+  &= 1 - \int_{-r \sigma / 2}^{r \sigma / 2} P_+(x) \, dx \\
+  &= 1 - \frac{1}{2} \left(
+    \text{erf} \left(
+      \frac{s}{2 \sqrt{2} \sigma} + \frac{r}{2 \sqrt{2}}
+    \right)
+    + \text{erf} \left(
+      \frac{-s}{2 \sqrt{2} \sigma} + \frac{r}{2 \sqrt{2}}
+    \right)
+  \right) \\
+  &= 1 - \frac{1}{2} \left(
+    \text{erf} \left(
+      \frac{\sqrt{\SNR}}{2} + \frac{r}{2 \sqrt{2}}
+    \right)
+    + \text{erf} \left(
+      \frac{-\sqrt{\SNR}}{2} + \frac{r}{2 \sqrt{2}}
+    \right)
+  \right)
+  \, .
+\end{align}
+
+The measure of success for supremacy is the so-called ``supremacy SNR'' defined as
+\begin{equation}
+  \text{supremacy SNR} \equiv \text{Fidelity} \times \sqrt{N}
+\end{equation}
+where $N$ is the number of random circuits we run.
+The supremacy SNR gain by using post-selection is therefore
+\begin{equation}
+  G = \frac{1 - \epsilon_\text{post-selected}}{1 - \epsilon_\text{raw}} \sqrt{F} \, .
+\end{equation}
+Curves of $G$ versus $r$ for a few values of intrinsic SNR are shown in Figure \ref{fig:G}.
+
+\quickfig{0.9\columnwidth}{snr_gain.pdf}{Supremacy SNR gain versus $r$ for a few values of intrinsic SNR}{fig:G}
+
+It's also useful to look at the fidelity gain and fraction of data kept separately.
+These are shown in Figure \ref{fig:compare}.
+
+\quickfig{0.8\columnwidth}{compare.pdf}{Fractional fidelity gain (top) and fraction of data kept (bottom).}{fig:compare}
+
+\end{document}
