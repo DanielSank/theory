@@ -1,0 +1,83 @@
+% artifact header: coupled_lines
+WARNING: This discussion probably has errors. In particular, I'm not sure what the sign of the couopling inductance should be. I'm also worried that I messed up the definitions of $L$ and $C$ by somehow not taking into account the effects of coupling on each mode's ``canonical'' inductance and capacitance.
+
+Consider the coupled transmission lines shown in Figure \ref{fig:coupled_lines:circuit_diagram}.
+The capacitances $C_a$ and $C_b$ and the inductaces $L_1$ and $L_2$ are the capcitances and inductances \emph{per length} of each transmission line
+The coupling capacitance $C_g$ and coupling inductance $L_g$ are similarly per length quantities.
+
+\quickfig{\columnwidth}{coupled_lines.pdf}{Two coupled transmission lines.}{fig:coupled_lines:circuit_diagram}
+
+Of course, we can start an analysis via Kichhoff's laws, which for the illustrated section of line are
+\begin{align*}
+  V_a(x) - V_a(x + dx) =& L_a \dot I_a + L_g \dot I_b \\
+  I_a(x) - I_a(x + dx) =& \dot V_a C_a + \left( \dot V_a - \dot V_b \right) C_g \\
+  V_b(x) - V_b(x + dx) =& L_b \dot I_b + L_g \dot I_a \\
+  I_b(x) - I_b(x + dx) =& \dot V_b C_b + \left( \dot V_b - \dot V_a \right) C_g
+  \, .
+\end{align*}
+In the limit $dx \rightarrow 0$, these equations become differential equations
+\begin{align}
+  - \frac{\partial V_a}{\partial x} &= \frac{\partial}{\partial t}
+    \left( L_a I_a + L_g I_b \right) \nonumber \\
+  - \frac{\partial I_a}{\partial x} &= \frac{\partial}{\partial t}
+    \left( (C_a + C_g)V_a - C_g V_b \right) \nonumber \\
+  - \frac{\partial V_b}{\partial x} &= \frac{\partial}{\partial t}
+    \left( L_b I_b + L_g I_a \right) \nonumber \\
+  - \frac{\partial I_b}{\partial x} &= \frac{\partial}{\partial t}
+    \left( (C_b + C_g)V_b - C_g V_a \right)
+  \, .
+\end{align}
+Assuming sinusoidal time dependence at frequency $\omega$, and therefore converting time derivatives to $-i \omega$\footnote{The choice of sign in $-i \omega$ makes positive values of the wave vector correspond to right-moving waves.}, these equations can be written in matrix form as
+\begin{equation}
+  \frac{d}{dx} \left(
+    \begin{array}{c} V_a \\ I_a \\ V_b \\ I_b \end{array}
+  \right)
+  =
+  i \omega \left( \begin{array}{cccc}
+    0 & L_a & 0 & L_g \\
+    C_a & 0 & -C_g & 0 \\
+    0 & L_g & 0 & L_b \\
+    -C_g & 0 & C_b & 0
+  \end{array} \right)
+  \left(
+    \begin{array}{c} V_a \\ I_a \\ V_b \\ I_b \end{array}
+  \right) \, .
+\end{equation}
+If we convert to the ingoing and outcoming wave amplitudes
+\begin{align}
+  a_\pm \equiv& \frac{V_a}{\sqrt{Z_a}} \pm \sqrt{Z_a} I_a \\
+  b_\pm \equiv& \frac{V_b}{\sqrt{Z_b}} \pm \sqrt{Z_b} I_b \, ,
+\end{align}
+the equations of motion take on a particular nice form:
+\begin{equation}
+  \frac{d}{dx} \left(
+    \begin{array}{c}
+      a_+ \\ b_- \\ a_- \\ b_+
+    \end{array}
+  \right)
+  =
+  i \left(
+    \begin{array}{cccc}
+      \beta_a & -\chi & 0 & \kappa \\
+      \chi & - \beta_b & -\kappa & 0 \\
+      0 & -\kappa & -\beta_a & \chi \\
+      \kappa & 0 & - \chi & \beta_b
+    \end{array}
+  \right)
+  \left(
+    \begin{array}{c}
+      a_+ \\ b_- \\ a_- \\ b_+
+    \end{array}
+  \right)
+\end{equation}
+where $\beta \equiv \omega / v$ is the wave vector and
+\begin{align}
+  \kappa &\equiv \frac{\omega}{2} \left( \frac{L_g}{\sqrt{Z_a Z_b}} - C_g \sqrt{Z_a Z_b} \right) \\
+  \chi &\equiv \frac{\omega}{2} \left( \frac{L_g}{\sqrt{Z_a Z_b}} + C_g \sqrt{Z_a Z_b} \right) \, .
+\end{align}
+Note that the general structure of this matrix is very similar to the matrix we had for two coupled oscillators.
+We can learn a few important things just from this matrix representation:
+\begin{itemize}
+    \item If we want to make a directional coupler, i.e. remove the coupling between $a_\pm$ and $b_\pm$, then we must make $\kappa = 0$ which requires $\sqrt{L_g / C_g} = \sqrt{Z_a Z_b}$. In other words, to make a directional coupler, the coupling impedance must be the \emph{geometric mean} of the two line impedances.
+    \item We discussed above the connection between the anti-diagonal terms and the rotating wave approximation. Therefore, we can in fact ignore the anti-diagonal terms pricisely when the rotating wave approximation should be valid, i.e. when $\kappa \ll \{\beta_a, \beta_b\}$ which corresponds to the coupling inductance and capacitance being a small fraction of the lines' self-capacitance and self-inductance.
+\end{itemize}
