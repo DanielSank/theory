@@ -1,7 +1,9 @@
 #!/usr/bin/python
 
 filenames = [
+    'coupled_circuits',
     'coupled_lines',
+    'avoided_crossing',
 ]
 
 

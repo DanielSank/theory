@@ -1,0 +1,234 @@
+% Artifact header: coupled_resonators_L_and_C
+\documentclass{article}
+
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
+
+\author{Daniel Sank}
+\date{14 March 2019}
+\title{Coupled Oscillators}
+
+\begin{document}
+\maketitle
+
+\quickfig{\columnwidth}{coupled_circuits.pdf}{Two coupled resonators.}{fig:coupledOscillatorsLAndC:diagram}
+
+Consider two coupled LC oscillators as shown in Figure \ref{fig:coupledOscillatorsLAndC:diagram}.
+Kirchhoff's laws for this circuit give us four equations
+\begin{align}
+  I_{C_a} + I_{L_a} + I_g &= 0 \nonumber \\
+  I_{C_b} + I_{L_b} - I_g &= 0 \nonumber \\
+  L_a \dot I_{L_a} + L_g \dot I_{L_b} &= V_a \nonumber \\
+  L_b \dot I_{L_b} + L_g \dot I_{L_a} &= V_b
+  \, .
+\end{align}
+In order to get useful equations of motion, we need to work with all voltages or all currents.
+We'll use voltages.
+The capacitor currents are easily related to voltage via the constitutive equation for a capacitor: $C_i \dot V_i = I_i$.
+Note that for the coupling capacitor, the constitutive relation gives $I_g = C_g (\dot V_a - \dot V_b)$.
+Relating the inductor currents to voltages requires more work.
+The bottom two of the equations from Kirchhoff's laws can be written in matrix form as
+\begin{equation*}
+  \left( \begin{array}{c}
+    V_a \\ V_b
+  \end{array}\right)
+  = \underbrace{ \left( \begin{array}{cc}
+    L_a & L_g \\
+    L_g & L_b
+  \end{array} \right)}_{T_L}
+  \left( \begin{array}{c}
+    \dot I_a \\ \dot I_b
+  \end{array}\right)
+  \, .
+\end{equation*}
+Inverting $T_L$ gives
+\begin{align*}
+  T_L^{-1}
+  &= \frac{1}{L_a L_b - L_g^2} \left( \begin{array}{cc}
+    L_b & -L_g \\ -L_g & L_a
+  \end{array} \right) \\
+  & \equiv \left( \begin{array}{cc}
+    1 / L_a' & -1 / L_g' \\ -1 / L_g' & 1 / L_b'
+  \end{array} \right)
+\end{align*}
+so that
+\begin{align*}
+  \dot I_{L_a} &= \frac{V_a}{L_a'} - \frac{V_b}{L_g'} \\
+  \dot I_{L_b} &= \frac{V_b}{L_b'} - \frac{V_a}{L_g'} \, .
+\end{align*}
+Note that
+\begin{align*}
+  L_a' & \equiv L_a - \frac{L_g^2}{L_b} \\
+  \text{and} \quad
+  L_b' & \equiv L_b - \frac{L_g^2}{L_a}
+\end{align*}
+are the inductances to ground from each resonator's signal node, including the inductance through the mutual.
+Now we can rewrite all of the currents in the first two of Kirchhoff's laws entirely in terms of $V_a$ and $V_b$:
+\begin{align*}
+  C_a \ddot V_a + \frac{V_a}{L_a'} - \frac{V_b}{L_g'} + C_g (\ddot V_a - \ddot V_b) &= 0 \\
+  C_b \ddot V_b + \frac{V_b}{L_b'} - \frac{V_a}{L_g'} + C_g (\ddot V_b - \ddot V_a) &= 0 \, .
+\end{align*}
+Traditional analysis of circuits in the physics literature use flux and charge instead of current and voltage, so defining $\Phi = \int V \, dt$, we can write our equations of motion as
+\begin{align*}
+  \ddot \Phi_a (C_a + C_g) - C_g \ddot \Phi_b + \frac{\Phi_a}{L_a'} - \frac{\Phi_b}{L_g'} &= 0 \\
+  \ddot \Phi_b (C_b + C_g) - C_g \ddot \Phi_a + \frac{\Phi_b}{L_b'} - \frac{\Phi_a}{L_g'} &= 0 \, .
+\end{align*}
+By inspecition and a bit of fiddling around, you can check that these equations of motion come from the Lagrangian
+\begin{align}
+  \mathcal{L}
+  =& \underbrace{\frac{C_g}{2} \left(\dot \Phi_a - \dot \Phi_b \right)^2
+   + \frac{C_a}{2} \dot \Phi_a^2 + \frac{C_b}{2} \dot \Phi_b^2}_\text{kinetic} \nonumber \\
+  & \underbrace{- \frac{\Phi_a^2}{2 L_a'} - \frac{\Phi_b^2}{2 L_b'} + \frac{\Phi_a \Phi_b}{L_g'}}_\text{potential} \, .
+\end{align}
+The momenta conjugate to $\Phi_a$ and $\Phi_b$ are
+\begin{align*}
+  Q_a & \equiv \frac{\partial \mathcal{L}}{\partial \dot \Phi_a} = (C_a + C_g) \dot \Phi_a - C_g \dot \Phi_b \\
+  Q_b & \equiv \frac{\partial \mathcal{L}}{\partial \dot \Phi_b} = (C_b + C_g) \dot \Phi_b - C_g \dot \Phi_a
+  \, .
+\end{align*}
+or
+\begin{equation*}
+  \left( \begin{array}{c} Q_a \\ Q_b \end{array} \right)
+  =
+  \underbrace{
+    \left( \begin{array}{cc}
+       (C_a + C_g) & -C_g \\
+       -C_g & (C_b + C_g) \end{array} \right)
+  }_{T_C}
+  \left( \begin{array}{c} \dot \Phi_a \\ \dot \Phi_b \end{array} \right)
+  \, .
+\end{equation*}
+The inverse of $T_C$ is
+\begin{align*}
+  T_C^{-1} =& \frac{1}{C_a C_b + C_g (C_a + C_g)}
+  \left( \begin{array}{cc}
+    (C_b + C_g) & C_g \\
+    C_g & (C_a + C_g)
+  \end{array} \right) \\
+  \equiv& \left( \begin{array}{cc}
+    1 / C_a' & 1 / C_g' \\
+    1 / C_g' & 1 / C_b'
+  \end{array} \right)
+\end{align*}
+Note that $C_a'$ and $C_b'$ are the total capacitances to ground from each resonator's signal node.
+
+The Hamiltonian for the system is defined formally by the equation
+\begin{equation*}
+  H \equiv \left( \sum_{i = \{a, b\}} Q_i \dot \Phi_i \right) - \mathcal{L} \, .
+\end{equation*}
+Therefore, in order to find the Hamiltonian, we have to replace the $\dot \Phi$'s in both the $Q \dot \Phi$ terms and in Lagrangian itself with the appropriate combinations of $Q$'s.
+To do this, first note that the kinetic term in the Lagrangian can be expressed as\footnote{Because matrix transposition and inversion commute, and because the matrix $T_C$ is symmetric, we can bring $T_C^{-1}$ from the bra onto the ket for free.}
+\begin{align*}
+  \mathcal{L}_\text{kinetic}
+  =& \frac{1}{2} \bbraket{\dot \Phi}{T_C}{\dot \Phi} \\
+  =& \frac{1}{2} \bbraket{T_C^{-1} Q}{T_C}{T_C^{-1} Q} \\
+  =& \frac{1}{2} \bbraket{Q}{T_C^{-1}}{Q}
+  \, .
+\end{align*}
+Note also that $\sum_i \dot \Phi_i Q_i = \bbraket{Q}{T_C^{-1}}{Q}$, so we can write the Hamiltonian as
+\begin{align}
+  H
+  =& \left( \sum_{i = \{a, b\}} Q_i \dot \Phi_i \right) - \mathcal{L} \nonumber \\
+  =& \bbraket{Q}{T_C^{-1}}{Q} - \left( \mathcal{L}_\text{kinetic} + \mathcal{L}_\text{potential} \right) \nonumber \\
+  =& \bbraket{Q}{T_C^{-1}}{Q} - \left( \frac{1}{2} \bbraket{Q}{T_C^{-1}}{Q} + \mathcal{L}_\text{potential} \right) \nonumber \\
+  =& \frac{Q_a^2}{2 C_a'} + \frac{Q_b^2}{2 C_b'} + \frac{\Phi_a^2}{2 L_a'} + \frac{\Phi_b^2}{2 L_b'} \nonumber \\
+  &+ \underbrace{\frac{Q_a Q_b}{C_g'} - \frac{\Phi_a \Phi_b}{L_g'}}_{\text{coupling Hamiltonian }H_g}
+  \, .
+\end{align}
+We will now simplify this Hamiltonian so that we can easily find its normal modes.
+First, we define
+\begin{align*}
+  X_i &\equiv \frac{1}{\sqrt{2 \hbar}} \frac{1}{\sqrt{Z_i'}} \Phi_i \\
+  Y_i &\equiv \frac{1}{\sqrt{2 \hbar}} \sqrt{Z_i'} Q_i
+\end{align*}
+where $Z_i' \equiv \sqrt{L_i' / C_i'}$, and we've added the constant $\hbar$ with dimentions of action to make $X$ and $Y$ dimensionless.
+In these new variables, the Hamiltonian is
+\begin{align}
+  H / \hbar
+  =& \omega_a' \left(X_a^2 + Y_a^2 \right)
+  +  \omega_b' \left(X_b^2 + Y_b^2 \right) \nonumber \\
+  &+ 2 \frac{1}{C_g' \sqrt{Z_a' Z_b'}} Y_a Y_b
+   - 2 \frac{\sqrt{Z_a Z_b}}{L_g'} X_a X_b
+  \, .
+\end{align}
+Finally we define
+\begin{align}
+  a &\equiv X_a + i Y_a \nonumber \\
+  b &\equiv X_b + i Y_b
+\end{align}
+to arrive at
+\begin{align}
+  H / \hbar
+  &= \omega_a' a^* a + \omega_b' b^* b \nonumber \\
+  & - \frac{1}{2} \frac{1}{C_g' \sqrt{Z_a' Z_b'}} (ab + a^* b^* - a b^* - a^* b) \nonumber \\
+  &- \frac{1}{2} \frac{\sqrt{Z_a' Z_b'}}{L_g'} (ab + a^* b^* + a^* b + a b^*)
+  \, .
+\end{align}
+The two frequencies $\omega_a'$ and $\omega_b'$ are called the \textbf{partial frequencies} and play an important role in the analysis of the system, particularly when making approximations.
+The coupling term can be reorganized in a very useful form:
+\begin{align}
+  H_g / \hbar =
+  &- \left( a b + a^* b^* \right)
+    \frac{1}{2} \left(
+      \frac{1}{C_g' \sqrt{Z_a' Z_b'}} + \frac{\sqrt{Z_a' Z_b'}}{L_g'}
+    \right) \nonumber \\
+  &+ \left( a b^* + a^* b \right)
+    \frac{1}{2} \left(
+      \frac{1}{C_g' \sqrt{Z_a' Z_b'}} - \frac{\sqrt{Z_a' Z_b'}}{L_g'}
+    \right) \nonumber \\
+  &= -g_+ (ab + a^* b^*) + g_- (ab^* + a^* b)
+\end{align}
+where we defined
+\begin{align}
+  g_c \equiv \frac{1}{2} \frac{1}{C_g' \sqrt{Z_a' Z_b'}} &\qquad
+  g_l \equiv \frac{1}{2} \frac{\sqrt{Z_a' Z_b'}}{L_g'} \nonumber \\
+  \text{and} \qquad \qquad
+  g_+ \equiv g_c + g_l &\qquad g_- \equiv g_c - g_l
+  \, .
+\end{align}
+Hamilton's equations of motion can now be expressed in matrix form
+\begin{equation*}
+  \frac{d}{dt}
+  \left( \begin{array}{c} a \\ b \\ a^* \\ b^* \end{array} \right)
+  = -i \left( \begin{array}{cccc}
+    \omega_a' & g_- & 0 & -g_+ \\
+    g_- & \omega_b' & -g_+ & 0 \\
+    0 & g_+ & -\omega_a' & -g _- \\
+    g_+ & 0 & -g_- & -\omega_b'
+  \end{array} \right)
+  \left( \begin{array}{c} a \\ b \\ a^* \\ b^* \end{array} \right) \, .
+\end{equation*}
+The matrix in these equations of motion can be expressed algebraically as
+\begin{equation}
+  -i \left[
+    \sigma_z \otimes
+      \left(
+        g_- \sigma_x + \frac{\Delta}{2} \sigma_z + \frac{S}{2} \mathbb{I}
+      \right)
+    -i g_+ (\sigma_y \otimes \sigma_x)
+  \right]
+\end{equation}
+where $S \equiv \omega_a' + \omega_b'$ and $\Delta \equiv \omega_a' - \omega_b'$.
+The rotating wave approximation drops the $ab$ and $a^* b^*$ terms of the coupling Hamiltonian.
+That's equivalent to dropping the antidiagonal part of the matrix representation of Hamilton's equations of motion and therefore the $\sigma_y \otimes \sigma_x$ term in the algebraic representation.
+In the matrix, we can see that dropping these terms is precisely equivalent to decoupling the clockwise and counterclockwise rotating modes.
+In the rotating wave aproximation, the algebraic representation is reduced to
+\begin{equation*}
+  -i \sigma_z \otimes \left(
+    g_- \sigma_x + \frac{\Delta}{2} \sigma_z + \frac{S}{2} \mathbb{I}
+  \right)
+\end{equation*}
+which makes finding the eigenvalues particularly simple because the eigenvalues of a tensor product are just the products of the eigenvalues of the individual tensors being multiplied.
+The eigenvalues of $\sigma_z$ are $\pm 1$.
+The eigenvalues of the stuff in parentheses, and therefore the normal mode frequencies, are\footnote{The eigenvalues of the matrix are equal to $i$ times the normal mode frequencies.}
+\begin{equation}
+  \omega_\pm
+  = \frac{\omega_a' + \omega_b'}{2} \pm \sqrt{g_-^2 + (\Delta / 2)^2 } \, .
+\end{equation}
+These eigenvalues are shown in Figure \ref{Figure:coupled_resonators_L_and_C:avoided_crossing} as a function of both $g_-$ and $\omega_b$.
+There we can see the famous avoided level crossing of coupled resonators.
+\quickfig{0.8\columnwidth}{avoided_crossing.pdf}{Normal frequencies $\omega_+$ (red) and $\omega_-$ (blue) as a function of $\omega_b'$ for $\omega_a' = 10$. Dashed lines are for $g_-=0.02$ and solid lines are for $g_-=0.1$.}{Figure:coupled_resonators_L_and_C:avoided_crossing}
+
+The rotating wave approximation (RWA) works in the limit $g_+ \ll \omega_a', \omega_b'$.
+A major benefit of the Hamiltonian formalism and partial frequencies and impedances is that it affords us this systematic and accurate approximation for the normal mode frequencies.
+\end{document}
