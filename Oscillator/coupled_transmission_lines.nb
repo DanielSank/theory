@@ -1,0 +1,153 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4675,        143]
+NotebookOptionsPosition[      4181,        122]
+NotebookOutlinePosition[      4525,        137]
+CellTagsIndexPosition[      4482,        134]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Coupled transmission lines", "Title",
+ CellChangeTimes->{{3.762374503467244*^9, 3.762374521843227*^9}}],
+
+Cell["\<\
+Consider two transmission lines a and b. Each one has a certain capacitance \
+and inductance per length. Over some coupled section, we also have a coupling \
+capacitance and coupling inductance per length. Kirchhoff\[CloseCurlyQuote]s \
+laws for this structure give a set of coupled, first order differential \
+equations for Va, Ia, Vb, Ib with the Hamiltonian matrix M defined by\
+\>", "Text",
+ CellChangeTimes->{{3.7623745230098143`*^9, 3.76237458501938*^9}, {
+  3.762375224681796*^9, 3.762375320249811*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"M", "=", 
+   RowBox[{"\[ImaginaryI]", " ", "\[Omega]", 
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", "La", "0", "Lg"},
+       {"Ca", "0", 
+        RowBox[{"-", "Cg"}], "0"},
+       {"0", "Lg", "0", "Lb"},
+       {
+        RowBox[{"-", "Cg"}], "0", "Cb", "0"}
+      }], "\[NoBreak]", ")"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.762374144127664*^9, 3.762374408957111*^9}, {
+  3.762374631775056*^9, 3.762374633902264*^9}, {3.7623753287947903`*^9, 
+  3.7623753293547373`*^9}, {3.762378663565063*^9, 3.762378680044615*^9}, {
+  3.762379289756257*^9, 3.7623792950196867`*^9}}],
+
+Cell["\<\
+The math is easier if we use (a+, b-, a-, b+) as our variables instead of the \
+currents and voltages, where a+ = (1/sqrt(2)) (Va / sqrt(Za) + sqrt(Za) Ia), \
+and similarly for a-, b+, and b-. The transformation connecting these \
+variables is\
+\>", "Text",
+ CellChangeTimes->{{3.76237533772929*^9, 3.762375489049358*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Transform", "=", 
+   RowBox[{
+    FractionBox["1", 
+     SqrtBox["2"]], 
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        RowBox[{"1", "/", 
+         SqrtBox["Za"]}], 
+        SqrtBox["Za"], "0", "0"},
+       {"0", "0", 
+        RowBox[{"1", "/", 
+         SqrtBox["Zb"]}], 
+        RowBox[{"-", 
+         SqrtBox["Zb"]}]},
+       {
+        RowBox[{"1", "/", 
+         SqrtBox["Za"]}], 
+        RowBox[{"-", 
+         SqrtBox["Za"]}], "0", "0"},
+       {"0", "0", 
+        RowBox[{"1", "/", 
+         SqrtBox["Zb"]}], 
+        SqrtBox["Zb"]}
+      }], "\[NoBreak]", ")"}]}]}], ";"}]], "Input"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.762375492473536*^9, 3.762375511753255*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "\[ImaginaryI]"}], " ", 
+     RowBox[{"Transform", ".", "M", ".", 
+      RowBox[{"Inverse", "[", "Transform", "]"}]}]}], "//.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Ca", "\[Rule]", 
+       FractionBox["\[Beta]a", 
+        RowBox[{"\[Omega]", " ", "Za"}]]}], ",", 
+      RowBox[{"Cb", "\[Rule]", 
+       FractionBox["\[Beta]b", 
+        RowBox[{"\[Omega]", " ", "Zb"}]]}], ",", 
+      RowBox[{"La", "\[Rule]", 
+       FractionBox[
+        RowBox[{"Za", " ", "\[Beta]a"}], "\[Omega]"]}], ",", 
+      RowBox[{"Lb", "\[Rule]", " ", 
+       FractionBox[
+        RowBox[{"Zb", " ", "\[Beta]b"}], "\[Omega]"]}]}], "}"}]}], "//", 
+   "Simplify"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.762374450018772*^9, 3.7623744717954273`*^9}, {
+  3.7623746552115717`*^9, 3.7623746670192013`*^9}, {3.76237471439509*^9, 
+  3.762374761137068*^9}, {3.762374797179948*^9, 3.76237490007551*^9}, {
+  3.7623749772761927`*^9, 3.7623750083227997`*^9}, {3.762375101707494*^9, 
+  3.762375123178996*^9}, {3.762375188155051*^9, 3.7623751923868504`*^9}, {
+  3.762375914514461*^9, 3.762375930687482*^9}, {3.7623759606975*^9, 
+  3.762376006621907*^9}, {3.7623787311171103`*^9, 3.762378751547881*^9}}]
+}, Open  ]]
+},
+WindowSize->{959, 1165},
+WindowMargins->{{Automatic, -454}, {-208, Automatic}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 109, 1, 93, "Title"],
+Cell[692, 25, 520, 8, 71, "Text"],
+Cell[1215, 35, 619, 15, 84, "Input"],
+Cell[1837, 52, 332, 6, 51, "Text"],
+Cell[2172, 60, 637, 25, 142, "Input"],
+Cell[2812, 87, 82, 1, 30, "Text"],
+Cell[2897, 90, 1268, 29, 76, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
