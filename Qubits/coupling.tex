@@ -20,19 +20,19 @@ The kinetic term can be rewritten as
 \begin{equation}
   T = \frac{1}{2}
   \left( \begin{array}{cc} \dot{\Phi}_1 & \dot{\Phi}_2 \end{array} \right)
-  \left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
+  \left( \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right)
   \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticInFlux}
+  \, .
 \end{equation}
-where $C_i' \equiv C_i + C_g$.
 The canonical momenta are
 \begin{align}
-  Q_1 &= \frac{d \mathcal{L}}{d\dot{\Phi}_1} = C_1'\dot{\Phi}_1 - C_g\dot{\Phi}_2 \nonumber \\
-  Q_2 &= \frac{d \mathcal{L}}{d\dot{\Phi}_2} = C_2'\dot{\Phi}_2 - C_g\dot{\Phi}_1
+  Q_1 &= \frac{d \mathcal{L}}{d\dot{\Phi}_1} = (C_1 + C_g) \dot{\Phi}_1 - C_g\dot{\Phi}_2 \nonumber \\
+  Q_2 &= \frac{d \mathcal{L}}{d\dot{\Phi}_2} = (C_2 + C_g) \dot{\Phi}_2 - C_g\dot{\Phi}_1
 \end{align}
 which can be written as
 \begin{equation}
   \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) =
-  \left( \begin{array}{cc} C_1' & -C_g \\ -C_g & C_2' \end{array} \right)
+  \left( \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right)
   \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
   \, .
 \end{equation}
@@ -61,29 +61,28 @@ Substituting equation (\ref{eq:fluxToMomenta}) into (\ref{eq:kineticWithM}) and 
 Finding the inverse of $M$ to be
 \begin{align}
   M^{-1}
-  &= \frac{1}{C_1' C_2' - C_g^2}
-    \left( \begin{array}{cc} C_2' & C_g \\ C_g & C_1' \end{array} \right) \nonumber \\
+  &= \frac{1}{C_1 C_2 + C_1 C_g + C_2 C_g}
+    \left( \begin{array}{cc} C_2 + C_g & C_g \\ C_g & C_1 + C_g \end{array} \right) \nonumber \\
   &\equiv \left(
-    \begin{array}{cc} 1/C_1'' & 1/C_g'' \\ 1/C_g'' & 1/C_2'' \end{array}
+    \begin{array}{cc} 1/C_1' & 1/C_g' \\ 1/C_g' & 1/C_2' \end{array}
     \right) \, ,
 \end{align}
 we can write the kinetic term of the Langrangian as
 \begin{equation}
   T =
-      \frac{Q_1^2}{2 C_1''}
-    + \frac{Q_2^2}{2 C_2''}
-    + \frac{Q_1 Q_2}{C_g''} \, . \label{eq:kineticInP} \, .
+      \frac{Q_1^2}{2 C_1'}
+    + \frac{Q_2^2}{2 C_2'}
+    + \frac{Q_1 Q_2}{C_g'} \, . \label{eq:kineticInP}
 \end{equation}
 
-Let us understand the quantities $C_1''$ and $C_2''$ in a simple way.
+Let us understand the quantities $C_1'$ and $C_2'$ in a simple way.
 The capacitance to ground from the signal node of circuit 1 is
 \begin{align*}
   C_{1, \textrm{total}}
   &= C_1 || (C_g \textrm{ in series with } C_2) \\
-  &= \frac{C_1 C_2 + C_g(C_1+C_2)}{C_g+C_2} \\
-  &= \frac{C_1' C_2' - C_g^2}{C_2'}
+  &= \frac{C_1 C_2 + C_g(C_1+C_2)}{C_g+C_2}
 \end{align*}
-which is exactly equal to our expression for $C_1''$.
+which is exactly equal to our expression for $C_1'$.
 Therefore we've found that the effective capacitance associated with the canonical charge is just the capacitance to ground of the conjugate flux's signal node!
 
 The complete coupled Hamiltonian is therefore
@@ -91,20 +90,20 @@ The complete coupled Hamiltonian is therefore
   H =
     \frac{\Phi_1^2}{2 L_1}
   + \frac{\Phi_2^2}{2 L_2}
-  + \frac{Q_1^2}{2 C_1''}
-  + \frac{Q_2^2}{2 C_2''}
-  + \frac{Q_1 Q_2}{C_g''} \, .
+  + \frac{Q_1^2}{2 C_1'}
+  + \frac{Q_2^2}{2 C_2'}
+  + \frac{Q_1 Q_2}{C_g'} \, .
 \end{equation}
-Note that in the limit $C_g \ll C_1, C_2$ the double-primed quantities are, to first order in $C_g / C_1$ or $C_g / C_2$,
+Note that in the limit $C_g \ll C_1, C_2$ the primed quantities are, to first order in $C_g / C_1$ or $C_g / C_2$,
 \begin{align*}
-  C_1'' & \approx C_1 + C_g \\
-  C_2'' & \approx C_2 + C_g \\
-  \frac{1}{C_g''} & \approx \frac{C_g}{C_1 C_2} \, .
+  C_1' & \approx C_1 + C_g \\
+  C_2' & \approx C_2 + C_g \\
+  \frac{1}{C_g'} & \approx \frac{C_g}{C_1 C_2} \, .
 \end{align*}
 
 The coupling term in the Hamiltonian, eq.\,(\ref{eq:kineticInP}), is
 \begin{equation}
-  H_g = \frac{ Q_1 Q_2} {C_g''} \, . \label{eq:sec:coupling:H_g}
+  H_g = \frac{ Q_1 Q_2} {C_g'} \, . \label{eq:sec:coupling:H_g}
 \end{equation}
 We would like to re-express it in terms of Pauli operators.
 Using again the harmonic limit expression
@@ -114,17 +113,17 @@ Using again the harmonic limit expression
 we get
 \begin{align*}
   H_g
-  &= \frac{Q_{1,\textrm{zpf}}Q_{2,\textrm{zpf}}}{C_g''}
+  &= \frac{Q_{1,\textrm{zpf}}Q_{2,\textrm{zpf}}}{C_g'}
     (-i)(a_1 - a_1^{\dagger}) (-i)(a_2 - a_2^{\dagger}) \\
-  &= \frac{\hbar}{2} \sqrt{\omega_1'' \omega_2'' C_1'' C_2''}
-    \frac{C_g}{C_1' C_2' - C_g^2} (\sigma_y \otimes \sigma_y) \\
-  &= \frac{1}{2}\frac{C_g}{\sqrt{C_1' C_2'}} \hbar
-    \sqrt{\omega_1'' \omega_2''} (\sigma_y \otimes \sigma_y)
+  &= \frac{\hbar}{2} \sqrt{\omega_1' \omega_2' C_1' C_2'}
+    \frac{C_g}{C_1 C_2 + C_g(C_1 + C_2)} (\sigma_y \otimes \sigma_y) \\
+  &= \frac{1}{2}\frac{C_g}{\sqrt{(C_1 + C_g) (C_2 + C_g)}} \hbar
+    \sqrt{\omega_1' \omega_2'} (\sigma_y \otimes \sigma_y)
 \end{align*}
-where $\omega_i'' \equiv 1 / \sqrt{L_i C_i''}$ and where we have used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_y$}.
+where $\omega_i' \equiv 1 / \sqrt{L_i C_i'}$ and where we have used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_y$}.
 Defining the ``coupling strength'' $g$ as
 \begin{equation}
-  g \equiv \frac{1}{2} \frac{C_g}{\sqrt{C_1' C_2'}} \hbar\sqrt{\omega_1\omega_2}
+  g \equiv \frac{1}{2} \frac{C_g}{\sqrt{(C_1 + C_g) (C_2 + C_g)}} \hbar \sqrt{\omega_1' \omega_2'}
 \end{equation}
 we can rewrite the coupling Hamiltonian as
 \begin{equation}
@@ -215,17 +214,18 @@ p = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q \, .
 \end{equation}
 The Hamiltonian is
 \begin{align}
-H &= \sum_i Q_i \dot{\Phi}_i - \mathcal{L} \nonumber \\
-&= \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2} \nonumber \\
-&+ \left( \frac{1}{1 - M^2 / L_1L_2} \right)
-\left( \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \right) \nonumber \\
-&+ \left( \frac{1}{1 - M^2 / L_1 L_2} \right) \frac{M}{L_1 L_2} \Phi_1 \Phi_2 \, .
+  H
+  &= \sum_i Q_i \dot{\Phi}_i - \mathcal{L} \nonumber \\
+  &= \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2} \nonumber \\
+  &+ \left( \frac{1}{1 - M^2 / L_1L_2} \right)
+    \left( \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \right) \nonumber \\
+  &- \left( \frac{1}{1 - M^2 / L_1 L_2} \right) \frac{M}{L_1 L_2} \Phi_1 \Phi_2 \, .
 \end{align}
 In the practical limit $L_1,L_2 \gg M$, this simplifies to
-\begin{align}
-  H =&
-      \frac{Q_1^2}{2C_1} + \frac{Q_2^2}{2C_2} \nonumber \\
-  & + \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \nonumber \\
-  & + \frac{M}{L_1 L_2} \Phi_1 \Phi_2
-\end{align}
+\begin{equation}
+  H =
+    \frac{Q_1^2}{2C_1} + \frac{Q_2^2}{2C_2}
+  + \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2}
+  - \frac{M}{L_1 L_2} \Phi_1 \Phi_2
+\end{equation}
 where the first two terms are the usual potential and kinetic energies of two harmonic oscillators, and the final term is the coupling.
