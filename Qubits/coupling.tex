@@ -10,20 +10,13 @@
 \label{Fig:coupledCircuits_capacitive}
 \end{figure}
 
-The circuit shown in Fig.\,\ref{Fig:coupledCircuits_capacitive} has the following Lagrangian
+The circuit shown in Fig.\,\ref{Fig:coupledCircuits_capacitive} has the Lagrangian
 \begin{align}
-  \mathcal{L} = & \frac{1}{2}C_1\dot{\Phi}_1^2 + \frac{1}{2}C_2\dot{\Phi}_2^2 \nonumber \\
-  & + \frac{1}{2}C_g \left( \dot{\Phi}_1 - \dot{\Phi_2} \right)^2 \nonumber \\
-  & - \frac{1}{2L_1}\Phi_1^2 - \frac{1}{2L_2}\Phi_2^2 \, .
+  \mathcal{L}
+  =& \frac{1}{2}C_1\dot{\Phi}_1^2 + \frac{1}{2}C_2\dot{\Phi}_2^2
+   + \frac{1}{2}C_g \left( \dot{\Phi}_1 - \dot{\Phi_2} \right)^2 \nonumber \\
+  -& \frac{1}{2L_1}\Phi_1^2 - \frac{1}{2L_2}\Phi_2^2 \, .
 \end{align}
-The kinetic term can be rewritten as
-\begin{equation}
-  T = \frac{1}{2}
-  \left( \begin{array}{cc} \dot{\Phi}_1 & \dot{\Phi}_2 \end{array} \right)
-  \left( \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right)
-  \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \label{eq:kineticInFlux}
-  \, .
-\end{equation}
 The canonical momenta are
 \begin{align}
   Q_1 &= \frac{d \mathcal{L}}{d\dot{\Phi}_1} = (C_1 + C_g) \dot{\Phi}_1 - C_g\dot{\Phi}_2 \nonumber \\
@@ -32,50 +25,63 @@ The canonical momenta are
 which can be written as
 \begin{equation}
   \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) =
-  \left( \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right)
+  \underbrace{
+    \left( \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right)}_{T_C}
   \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
   \, .
 \end{equation}
-Note the recurrence of the matrix from equation (\ref{eq:kineticInFlux}).
-Naming this matrix $M$ we can write
+Note that the inverse of $T_C$ is
 \begin{align}
-  T &=
-    \frac{1}{2}
-    \left( \begin{array}{cc} \dot{\Phi}_1 \dot{\Phi}_2 \end{array} \right)
-    M
-    \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
-    \label{eq:kineticWithM} \\
-  \text{and} \qquad
-  \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
-  &= M^{-1}
-  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \, .
-  \label{eq:fluxToMomenta}
-\end{align}
-Substituting equation (\ref{eq:fluxToMomenta}) into (\ref{eq:kineticWithM}) and using the facts that matrix transposition commutes with matrix inversion and that $M$ is symmetric we can rewrite the kinetic term as
-\begin{equation}
-  T =
-  \frac{1}{2} \left( \begin{array}{cc} Q_1 & Q_2 \end{array} \right)
-  M^{-1}
-  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \, .
-\end{equation}
-Finding the inverse of $M$ to be
-\begin{align}
-  M^{-1}
-  &= \frac{1}{C_1 C_2 + C_1 C_g + C_2 C_g}
+  T_C^{-1}
+  &= \frac{1}{C_1 C_2 + C_g (C_1 + C_2)}
     \left( \begin{array}{cc} C_2 + C_g & C_g \\ C_g & C_1 + C_g \end{array} \right) \nonumber \\
   &\equiv \left(
     \begin{array}{cc} 1/C_1' & 1/C_g' \\ 1/C_g' & 1/C_2' \end{array}
-    \right) \, ,
+    \right) \, .
 \end{align}
-we can write the kinetic term of the Langrangian as
-\begin{equation}
-  T =
-      \frac{Q_1^2}{2 C_1'}
-    + \frac{Q_2^2}{2 C_2'}
-    + \frac{Q_1 Q_2}{C_g'} \, . \label{eq:kineticInP}
-\end{equation}
+The formal definition of the Hamiltonian is $H = \sum_i \dot \Phi_i Q_i - \mathcal{L}$, so in order to find the Hamiltonian as a function of $\Phi$ and the conjugate momentum $Q$ we need to solve for $\dot \Phi$ in terms of $Q$.
+Fortunately, that's easy because
+\begin{equation*}
+  \left( \begin{array}{c} \dot \Phi_1 \\ \dot \Phi_2 \end{array} \right)
+  =
+  T_C^{-1}
+  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \, .
+\end{equation*}
+The sum term can be expressed in terms of $Q$\footnote{Here we're using the fact that matrix inversion and transposition commute, and that $T_C$ is symmetric.}
+\begin{align*}
+  \sum_i \dot \Phi_i Q_i
+  =& \left( \begin{array}{cc} Q_1 & Q_2 \end{array} \right)
+  T_C^{-1}
+  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right)
+\end{align*}
+and the kinetic part of the Lagrangian can be written as
+\begin{align*}
+  \mathcal{L}_\text{kinetic}
+  &= \frac{1}{2}
+    \left( \begin{array}{cc} \dot{\Phi}_1 & \dot{\Phi}_2 \end{array} \right)
+    T_C
+    \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right) \\
+  &= \frac{1}{2} 
+    \left( \begin{array}{cc} Q_1 & Q_2 \end{array} \right)
+    T_C^{-1}
+    \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \\
+  &= \frac{1}{2} \sum_i \dot \Phi_i Q_i
+    \, .
+\end{align*}
+Therefore the Hamiltonian is simply
+\begin{align*}
+  H
+  &= \sum_i \dot \Phi_i Q_i - \mathcal{L} \\
+  &= \sum_i \dot \Phi_i Q_i - \frac{1}{2} \sum_i \dot \Phi_i Q_i - \mathcal{L}_\text{potential} \\
+  &=
+    \frac{\Phi_1^2}{2 L_1}
+  + \frac{\Phi_2^2}{2 L_2}
+  + \frac{Q_1^2}{2 C_1'}
+  + \frac{Q_2^2}{2 C_2'}
+  + \frac{Q_1 Q_2}{C_g'} \, .
+\end{align*}
 
-Let us understand the quantities $C_1'$ and $C_2'$ in a simple way.
+The capacitances $C_1'$ and $C_2'$ are actually quite natural.
 The capacitance to ground from the signal node of circuit 1 is
 \begin{align*}
   C_{1, \textrm{total}}
@@ -83,17 +89,8 @@ The capacitance to ground from the signal node of circuit 1 is
   &= \frac{C_1 C_2 + C_g(C_1+C_2)}{C_g+C_2}
 \end{align*}
 which is exactly equal to our expression for $C_1'$.
-Therefore we've found that the effective capacitance associated with the canonical charge is just the capacitance to ground of the conjugate flux's signal node!
+Therefore, the effective capacitance associated with the canonical charge is just the capacitance to ground of the conjugate flux's signal node!
 
-The complete coupled Hamiltonian is therefore
-\begin{equation}
-  H =
-    \frac{\Phi_1^2}{2 L_1}
-  + \frac{\Phi_2^2}{2 L_2}
-  + \frac{Q_1^2}{2 C_1'}
-  + \frac{Q_2^2}{2 C_2'}
-  + \frac{Q_1 Q_2}{C_g'} \, .
-\end{equation}
 Note that in the limit $C_g \ll C_1, C_2$ the primed quantities are, to first order in $C_g / C_1$ or $C_g / C_2$,
 \begin{align*}
   C_1' & \approx C_1 + C_g \\
@@ -101,7 +98,7 @@ Note that in the limit $C_g \ll C_1, C_2$ the primed quantities are, to first or
   \frac{1}{C_g'} & \approx \frac{C_g}{C_1 C_2} \, .
 \end{align*}
 
-The coupling term in the Hamiltonian, eq.\,(\ref{eq:kineticInP}), is
+The coupling term in the Hamiltonian is
 \begin{equation}
   H_g = \frac{ Q_1 Q_2} {C_g'} \, . \label{eq:sec:coupling:H_g}
 \end{equation}
