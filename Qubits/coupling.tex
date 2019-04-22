@@ -40,14 +40,14 @@ Note that the inverse of $T_C$ is
     \right) \, .
 \end{align}
 The formal definition of the Hamiltonian is $H = \sum_i \dot \Phi_i Q_i - \mathcal{L}$, so in order to find the Hamiltonian as a function of $\Phi$ and the conjugate momentum $Q$ we need to solve for $\dot \Phi$ in terms of $Q$.
-Fortunately, that's easy because
+Fortunately, that's easy because using
 \begin{equation*}
   \left( \begin{array}{c} \dot \Phi_1 \\ \dot \Phi_2 \end{array} \right)
   =
   T_C^{-1}
-  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) \, .
+  \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right)
 \end{equation*}
-The sum term can be expressed in terms of $Q$\footnote{Here we're using the fact that matrix inversion and transposition commute, and that $T_C$ is symmetric.}
+the sum term can be expressed in terms of $Q$\footnote{Here we're using the fact that matrix inversion and transposition commute, and that $T_C$ is symmetric.}
 \begin{align*}
   \sum_i \dot \Phi_i Q_i
   =& \left( \begin{array}{cc} Q_1 & Q_2 \end{array} \right)
@@ -151,79 +151,94 @@ This matches Eq.\,(\ref{eq:sec:coupling:H_g}), up to the sign, in the practical 
 \label{Fig:coupledCircuits_inductive}
 \end{figure}
 
-
 Consider the circuit shown in Figure \ref{Fig:coupledCircuits_inductive}.
 From Kirchhoff's laws we find that the equations of motion for the system are
-\begin{align}
+\begin{align*}
   \omega_1^2 Q_1 &= -\ddot{Q}_1 - \left(M/L_1\right) \ddot{Q}_2 \\
   \omega_2^2 Q_2 &= -\ddot{Q}_2 - \left(M/L_2\right) \ddot{Q}_1
   \, .
-\end{align}
+\end{align*}
 These equations of motion can be derived from the following Lagrangian
-\begin{equation}
-  \mathcal{L} = \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2}
-  - \frac{L_1}{2}\dot{Q}_1^2
-  - \frac{L_2}{2}\dot{Q}_2^2
-  - M \dot{Q}_1 \dot{Q}_2 \, . \label{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}
-\end{equation}
-
+\begin{align*}
+  \mathcal{L} =
+  \underbrace{
+      \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2}
+  }_{\mathcal{L}_\text{kinetic}}
+  \underbrace{
+    - \frac{L_1}{2}\dot{Q}_1^2
+    - \frac{L_2}{2}\dot{Q}_2^2
+    - M \dot{Q}_1 \dot{Q}_2
+  }_{\mathcal{L}_\text{potential}}
+  \, . \label{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}
+\end{align*}
 In this Lagrangian the charges have appeared as the coordinate variables.
 This is annoying because in all of our previous analysis we regarded the fluxes as the coordinates and the charges as the conjugate momenta.
 To convert to using flux as the coordinate, we note that the $\dot{Q}$ are the loop currents, and we relate the currents to the fluxes using the definition of inductance and mutual inductance:
-\begin{align}
-\Phi_1 &= L_1 I_1 + M I_2 \\
-\Phi_2 &= M I_1 + L_2 I_2 \, .
-\end{align}
-These equations are rewritten as a matrix equation
-\begin{align}
-\left( \begin{array}{c} \Phi_1 \\ \Phi_2 \end{array} \right) &=
-\left[ \begin{array}{cc} L_1 & M \\ M & L_2 \end{array} \right]
-\left( \begin{array}{c} I_1 \\ I_2 \end{array} \right) \\
-\ket{\Phi} &= \mathbf{M} \ket{I} \label{eq:sec.coupling.subsec.inductiveCoupling:fluxToI} \, .
-\end{align}
-Next, using $\dot{Q}=I$, note that the dotted terms in Eq.\,(\ref{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}) can also be written as a matrix expression:
-\begin{equation}
--\frac{1}{2} \bbraket{I}{\mathbf{M}}{I} \, .
-\end{equation}
-Therefore, by using Eq.\,(\ref{eq:sec.coupling.subsec.inductiveCoupling:fluxToI}) in Eq.\,(\ref{eq:sec.coupling.subsec.inductiveCoupling:Lagrangian}) we can rewrite the Lagrangian as
-\begin{equation}
-\mathcal{L} =
-\frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2}
-- \frac{1}{2} \bbraket{\Phi}{\mathbf{M}^{-1}}{\Phi} \, .
-\end{equation}
-To get a true Lagrangian we have to express the charges in terms of flux.
-Using the definition of capacitance, $C = Q/V$, and noting that the \emph{total} flux through each inductor is the time integral of the voltage, we have
-\begin{equation}
-\frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}C \dot{\Phi}^2 \, .
-\end{equation}
-Using this and expanding $\mathbf{M}^{-1}$ we finally arrive at
-\begin{align}
-\mathcal{L} &=
-\frac{1}{2}C_1 \dot{\Phi}_1^2 + \frac{1}{2}C_2 \dot{\Phi}_2^2 \\
-&- \left( \frac{1}{1 - M^2 / L_1L_2} \right)
-\left( \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \right) \\
-&+ \left( \frac{1}{1 - M^2 / L_1 L_2} \right) \frac{M}{L_1 L_2} \Phi_1 \Phi_2 \, .
-\end{align}
+\begin{align*}
+  \Phi_1 &= L_1 I_1 + M I_2 \\
+  \Phi_2 &= M I_1 + L_2 I_2 \, .
+\end{align*}
+These two equations can be rewritten in matrix form as
+\begin{equation*}
+  \left( \begin{array}{c} \Phi_1 \\ \Phi_2 \end{array} \right)
+  =
+  \underbrace{
+    \left[ \begin{array}{cc} L_1 & M \\ M & L_2 \end{array} \right]
+  }_{T_L}
+  \left( \begin{array}{c} I_1 \\ I_2 \end{array} \right) \, . \label{eq:sec.coupling.subsec.inductiveCoupling:fluxToI}
+\end{equation*}
+Note that the inverse of $T_L$ is
+\begin{align*}
+  T_L^{-1}
+  &= \frac{1}{L_1 L_2 - M^2}
+  \left[ \begin{array}{cc}
+    L_2 & -M \\ -M & L_1
+  \end{array} \right] \nonumber \\
+  &\equiv \left[ \begin{array}{cc}
+    1/L_1' & -1/M' \\ -1/M' & 1/L_2'
+  \end{array} \right]
+  \, .
+\end{align*}
+Next, using $\dot{Q}=I$, note that the dotted terms in $\mathcal{L}_\text{potential}$ can be written as
+\begin{align*}
+  \mathcal{L}_\text{potential}
+  &= -\frac{1}{2}
+    \begin{pmatrix} I_1 & I_2 \end{pmatrix} T_L \begin{pmatrix} I_1 \\ I_2 \end{pmatrix} \\
+  &= -\frac{1}{2}
+    \begin{pmatrix} \Phi_1 & \Phi_2 \end{pmatrix}
+    T_L^{-1}
+    \begin{pmatrix} \Phi_1 \\ \Phi_2 \end{pmatrix} \\
+  &= - \frac{\Phi_1^2}{2 L_1'} - \frac{\Phi_2^2}{2 L_2'} + \frac{\Phi_1 \Phi_2}{M'}
+  \, .
+\end{align*}
+We've gotten $\mathcal{L}_\text{potential}$ in terms of $\Phi$ which is good, but we still have $\mathcal{L}_\text{kinetic}$ in terms of $Q$.
+A proper Lagrangian has to be a function of a coordinate and it's time derivative, so we have to get rid of the $Q$'s in favor of $\dot \Phi$'s.
+Using the definition of capacitance, $C = Q/V$, and noting that the total flux through an inductor is the time integral of the voltage across that inductor, we have
+\begin{equation*}
+  \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}C \dot{\Phi}^2
+\end{equation*}
+which gives us the link between $Q$ and $\dot \Phi$ that we need.
+Using this relation we finally arrive at
+\begin{equation*}
+  \mathcal{L} =
+  \frac{1}{2}C_1 \dot{\Phi}_1^2 + \frac{1}{2}C_2 \dot{\Phi}_2^2
+  - \frac{\Phi_1^2}{2L_1'} - \frac{\Phi_2^2}{2L_2'}
+  + \frac{\Phi_1 \Phi_2}{M'}
+  \, .
+\end{equation*}
 Thus we have reformulated the Lagrangian with the fluxes as the coordinates.
 
-The conjugate momenta are
+The conjugate momenta in this case are
 \begin{equation}
-p = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q \, .
+  p = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q \, .
 \end{equation}
-The Hamiltonian is
+and so the Hamiltonian is
 \begin{align}
   H
   &= \sum_i Q_i \dot{\Phi}_i - \mathcal{L} \nonumber \\
-  &= \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2} \nonumber \\
-  &+ \left( \frac{1}{1 - M^2 / L_1L_2} \right)
-    \left( \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2} \right) \nonumber \\
-  &- \left( \frac{1}{1 - M^2 / L_1 L_2} \right) \frac{M}{L_1 L_2} \Phi_1 \Phi_2 \, .
+  &=
+    \frac{Q_1^2}{2 C_1} + \frac{Q_2^2}{2 C_2}
+    + \frac{\Phi_1^2}{2L_1'} + \frac{\Phi_2^2}{2L_2'}
+    - \frac{\Phi_1 \Phi_2}{M'}
+  \, .
 \end{align}
-In the practical limit $L_1,L_2 \gg M$, this simplifies to
-\begin{equation}
-  H =
-    \frac{Q_1^2}{2C_1} + \frac{Q_2^2}{2C_2}
-  + \frac{\Phi_1^2}{2L_1} + \frac{\Phi_2^2}{2L_2}
-  - \frac{M}{L_1 L_2} \Phi_1 \Phi_2
-\end{equation}
-where the first two terms are the usual potential and kinetic energies of two harmonic oscillators, and the final term is the coupling.
