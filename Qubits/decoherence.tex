@@ -80,7 +80,7 @@ Therefore, this equation is quantum, but does not involve the internal structure
 
 If the qubit with Hamiltonian
 \begin{equation*}
-  H_q / \hbar = - \frac{\Omega}{2} \sigma_z \, ,
+  H_q / \hbar = - \frac{\omega_q}{2} \sigma_z \, ,
 \end{equation*}
 interacts with some other system through an interaction term
 \begin{equation*}
@@ -88,11 +88,11 @@ interacts with some other system through an interaction term
 \end{equation*}
 then the qubit experiences up and down transition rates due to noise in the $F$ operator with rate (REFERENCE)
 \begin{equation*}
-  \Gamma_\uparrow = g^2 S_F(- \Omega) \qquad \Gamma_\downarrow = g^2 S_F(\Omega)
+  \Gamma_\uparrow = g^2 S_F(- \omega_q) \qquad \Gamma_\downarrow = g^2 S_F(\omega_q)
 \end{equation*}
-where $S_F(\Omega)$ is the (two sided) spectral density of $F$ defined as
+where $S_F(\omega)$ is the (two sided) spectral density of $F$ defined as
 \begin{equation*}
-  S_F(\Omega) \equiv \int_{-\infty}^\infty dt \avg{F(t) F(0)} e^{i \Omega t} \, .
+  S_F(\omega) \equiv \int_{-\infty}^\infty dt \avg{F(t) F(0)} e^{i \omega t} \, .
 \end{equation*}
 In the case that $F$ is classical, e.g. the driving voltage or current used for controlling the qubit, it is common to work with the ``engineer's'' spectral density defined as $\Seng_F \equiv 2 S_F$, defined only for positive frequencies.
 $\Seng$ is the quantity one measures with e.g. a spectrum analyzer.
