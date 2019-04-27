@@ -26,7 +26,7 @@ which can be written as
 \begin{equation}
   \left( \begin{array}{c} Q_1 \\ Q_2 \end{array} \right) =
   \underbrace{
-    \left( \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right)}_{T_C}
+    \left[ \begin{array}{cc} C_1 + C_g & -C_g \\ -C_g & C_2 + C_g \end{array} \right]}_{T_C}
   \left( \begin{array}{c} \dot{\Phi}_1 \\ \dot{\Phi}_2 \end{array} \right)
   \, .
 \end{equation}
@@ -34,10 +34,10 @@ Note that the inverse of $T_C$ is
 \begin{align}
   T_C^{-1}
   &= \frac{1}{C_1 C_2 + C_g (C_1 + C_2)}
-    \left( \begin{array}{cc} C_2 + C_g & C_g \\ C_g & C_1 + C_g \end{array} \right) \nonumber \\
-  &\equiv \left(
+    \left[ \begin{array}{cc} C_2 + C_g & C_g \\ C_g & C_1 + C_g \end{array} \right] \nonumber \\
+  &\equiv \left[
     \begin{array}{cc} 1/C_1' & 1/C_g' \\ 1/C_g' & 1/C_2' \end{array}
-    \right) \, .
+    \right] \, .
 \end{align}
 The formal definition of the Hamiltonian is $H = \sum_i \dot \Phi_i Q_i - \mathcal{L}$, so in order to find the Hamiltonian as a function of $\Phi$ and the conjugate momentum $Q$ we need to solve for $\dot \Phi$ in terms of $Q$.
 Fortunately, that's easy because using

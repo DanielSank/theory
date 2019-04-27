@@ -61,16 +61,18 @@ H_d
 \end{equation*}
 Restricting to the lowest two levels, we can rewrite $H_d$ as
 \begin{align}
-H_d
-&= \frac{V_d(t)}{1 + C/C_d} \left(
-{\begin{array}{cc}\bbraket{0}{Q}{0} & \bbraket{0}{Q}{1} \\ \bbraket{1}{Q}{0} & \bbraket{1}{Q}{1}\end{array}}
-\right) \\
-&= \frac{V_d(t)}{1 + C/C_d} \times \nonumber \\
-&\left[
-\left| Q_{01} \right| \sigma_y
-+ \frac{\left( Q_{00} - Q_{11} \right)}{2} \sigma_z
-+ \frac{\left( Q_{00} + Q_{11} \right)}{2} \mathbf{I}
-\right]
+  H_d
+  &= \frac{V_d(t)}{1 + C/C_d}
+  \left[ \begin{array}{cc}
+    \bbraket{0}{Q}{0} & \bbraket{0}{Q}{1} \\
+    \bbraket{1}{Q}{0} & \bbraket{1}{Q}{1}
+  \end{array} \right] \\
+  &= \frac{V_d(t)}{1 + C/C_d} \times \nonumber \\
+  &\left[
+    \left| Q_{01} \right| \sigma_y
+    + \frac{\left( Q_{00} - Q_{11} \right)}{2} \sigma_z
+    + \frac{\left( Q_{00} + Q_{11} \right)}{2} \mathbf{I}
+  \right]
 \end{align}
 where $Q_{ij} \equiv \bbraket{i}{Q}{j}$.
 Another way to look at it is that if the circuit is nearly harmonic then $Q_{ii}\approx 0$ and we can re-express $Q$ as (see \citeinternaltype \citeinternalref{quantumOscillator})
@@ -140,16 +142,18 @@ Note that adding a parallel junction to the circuit does \emph{not} change the f
 
 Restricting to the lowest two levels, $H_d$ becomes
 \begin{align}
-H_d
-&= - \frac{M}{L} I_d(t) \left(
-{\begin{array}{cc} \bbraket{0}{\Phi}{0} & \bbraket{0}{\Phi}{1} \\ \bbraket{1}{\Phi}{0} & \bbraket{1}{\Phi}{1} \end{array}}
-\right) \\
-&= - \frac{M}{L} I_d(t) \times \nonumber \\
-&\left[
-\left| \Phi_{10} \right| \sigma_x
-+ \frac{(\Phi_{00} - \Phi_{11})}{2} \sigma_z
-+ \frac{(\Phi_{00} + \Phi_{11})}{2} \mathbf{I}
-\right] \, .
+  H_d
+  &= - \frac{M}{L} I_d(t)
+  \left[ \begin{array}{cc}
+    \bbraket{0}{\Phi}{0} & \bbraket{0}{\Phi}{1} \\
+    \bbraket{1}{\Phi}{0} & \bbraket{1}{\Phi}{1} 
+  \end{array} \right] \\
+  &= - \frac{M}{L} I_d(t) \times \nonumber \\
+  &\left[
+    \left| \Phi_{10} \right| \sigma_x
+    + \frac{(\Phi_{00} - \Phi_{11})}{2} \sigma_z
+    + \frac{(\Phi_{00} + \Phi_{11})}{2} \mathbf{I}
+  \right] \, .
 \end{align}
 If the circuit is nearly harmonic then $\Phi_{ii} \approx 0$ and we can re-express $\Phi$ as (see \citeinternaltype \citeinternalref{quantumOscillator})
 \begin{equation}

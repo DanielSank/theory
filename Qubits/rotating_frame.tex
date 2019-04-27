@@ -84,13 +84,22 @@ Multiplying everything in Eq. (\ref{eq:drivingH}) together and throwing out the 
 \end{align}
 where $\delta\omega \equiv \omega_d - \omega_r$. In matrix form this reads
 \begin{equation}
-RH_dH^{\dagger}/h_d = \frac{e(t)}{2} \left( \begin{array}{cc} 0 & e^{i(\delta\omega t + \phi_d)} \\ e^{-i(\delta\omega t + \phi_d)} & 0 \end{array}\right) \, . \label{eq:drivingH_matrixForm}
+  RH_dH^{\dagger}/h_d =
+  \frac{e(t)}{2}
+  \left[ \begin{array}{cc}
+    0 & e^{i(\delta\omega t + \phi_d)} \\
+    e^{-i(\delta\omega t + \phi_d)} & 0
+  \end{array} \right]
+  \, . \label{eq:drivingH_matrixForm}
 \end{equation}
 If the drive is on resonance with the frame, and therefore on resonance with the qubit, then we are left with
 \begin{align}
-RH_dR^{\dagger}/h_d
-&= \frac{e(t)}{2}\left( \begin{array}{cc} 0 & e^{i\phi_d} \\ e^{-i\phi_d} & 0 \end{array}\right) \\
-&= \frac{e(t)}{2} \left[ I \sigma_x + Q \sigma_y \right] .
+  RH_dR^{\dagger}/h_d
+  &= \frac{e(t)}{2}
+  \left[ \begin{array}{cc}
+    0 & e^{i\phi_d} \\ e^{-i\phi_d} & 0
+  \end{array} \right] \\
+  &= \frac{e(t)}{2} \left[ I \sigma_x + Q \sigma_y \right] .
 \end{align}
 This is a rotation about a time independent axis in the xy plane of the Bloch sphere.
 If the rotating frame frequency is the same as the qubit frequency, then the qubit Hamiltonian is zero and our on-resonance drive leads to a purely latitudinal rotation on the Bloch sphere with the angle of the rotation axis in the xy plane given by $\phi_d$.
