@@ -1,0 +1,61 @@
+\subsection{State vector approach}
+
+Suppose the system begins in a pure state
+\begin{displaymath}
+\ket{\Psi(0)} = \ket{m} \otimes \ket{\phi(0)}
+\end{displaymath}
+where $\ket{m}$ is the initial state of the environment and $\ket{\phi(0)}$ is the initial state of the qubit.
+Schrodinger's equation of motion is formally solved by the implicit equation
+\begin{equation}
+\ket{\Psi(t)} = \ket{\Psi(0)} - \frac{i}{\hbar} \int_0^t \tilde{V}(t') \ket{\Psi(t')} \, dt' \, .
+\end{equation}
+Plugging the expression for $\ket{\Psi(t)}$ into the right hand side and keeping only terms first order in $\int dt' \, \tilde{V}(t') / \hbar$ gives
+\begin{equation}
+\ket{\Psi(t)} = \ket{\Psi(0)} - \frac{i}{\hbar} \int_0^t \tilde{V}(t') \ket{\Psi(0)} \, dt' \, .
+\end{equation}
+We now suppose the system starts in the ground state, i.e. $\ket{\psi(0)}=\ket{g}$ and compute the amplitude to be in the excited state $\ket{e}$:
+\begin{align}
+\ket{E(t)}\braket{e}{\phi(t)}
+&= -\frac{i}{\hbar} \int_0^t \bbraket{e}{\tilde{V}(t')}{\Psi(0)} \, dt' \\
+&= - ig \int_0^t F(t')\ket{m} \otimes \bbraket{e}{e^{i \Omega t'} \sigma_+ + e^{-i \Omega t'} \sigma_-}{g} \, dt' \\
+&= - ig \int_0^t F(t')\ket{m} e^{i \Omega t'} \, dt' \, .
+\end{align}
+
+So far we have considered only a single initial environment state.
+In order to average over the states of the environment we form the density operator (already conditioned such that the qubit is in the excited state):
+\begin{equation}
+\rho(t) = g^2 \int_0^t \int_0^t \, dt' \, dt'' \, F(t')\ket{m}\bra{m}F(t'') e^{i \Omega (t'-t'')} \, .
+\end{equation}
+We actually only care about the state of the qubit, so we trace over the states of the environment.
+We also now average over the possible initial states of the environment by the replacement
+\begin{displaymath}
+\ket{m}\bra{m} \rightarrow \sum_m \rho_{mm} \ket{m}\bra{m}
+\end{displaymath}
+which gives us
+\begin{align}
+p_e(t)
+&= g^2 \sum_{nm} \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{n}{F(t')}{m} \bbraket{m}{F(t'')}{n} e^{i \Omega (t' - t'')} \\
+&= g^2 \sum_{nm} \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{m}{F(t'')}{n} \bbraket{n}{F(t')}{m} e^{i \Omega (t' - t'')} \\
+&= g^2 \sum_m \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{m}{F(t'') F(t')}{m} e^{i \Omega (t' - t'')} \\
+&= g^2 \int_0^t \int_0^t \, dt' \, dt'' \, \langle F(t'') F(t') \rangle e^{i \Omega (t' - t'')} \, .
+\end{align}
+Changing variables to $\tau \equiv t'' - t'$ and assuming the average of $F$ is stationary gives
+\begin{equation}
+p_e(t)
+= g^2 \int_0^t \int_{-t'}^{t-t'} \, dt' \, d\tau \, \langle F(\tau) F(0) \rangle e^{-i \Omega \tau} \, .
+\end{equation}
+If the correlation function of $F$ is very short then we can extend the limits of integration of $\tau$ to positive and negative infinity.
+Doing this and defining the spectral density as
+\begin{equation}
+S_{FF}(\Omega) \equiv \int_{-\infty}^\infty \, dt \, \langle F(t) F(0) \rangle e^{i \Omega t}
+\end{equation}
+we find
+\begin{align}
+p_e(t) 
+&= g^2 \int_0^t S_{FF}(-\Omega) \\
+\Gamma_{\uparrow} = \frac{dp_e}{dt} &= g^2 S_{FF}(-\Omega) \, .
+\end{align}
+Similar arguments can be used to find
+\begin{equation}
+\Gamma_\downarrow = g^2 S_{FF}(\Omega) \, . \label{eq:ch.decoherence.sec.noise_from_a_quantum_environment:gamma_down}
+\end{equation}

@@ -1,0 +1,34 @@
+\documentclass{article}
+
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
+%\input{internal_refs.tex}
+
+\author{Daniel Sank}
+\title{Loss in Quantum Mechanics}
+\date{5 May 2015}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\subimport*{./}{caldeira-leggett}
+
+\subimport*{./}{correlation_function.tex}
+
+\subimport*{./}{noise_from_a_quantum_environment}
+
+\subimport*{./}{decay_rate_for_an_arbitrary_circuit.tex}
+
+\subimport*{./}{microwave_noise_induced_transitions.tex}
+
+% APPENDICES
+
+%\subimport*{./}{appendix}
+
+\bibliographystyle{plain}
+\bibliography{../references,references_local}
+
+
+\end{document}

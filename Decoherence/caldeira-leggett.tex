@@ -1,0 +1,147 @@
+\section{Caldeira-Leggett model of a resistor} \label{sec:ch.decoherence:caldeira-leggett}
+
+
+Treating dissipation in Hamiltonian mechanics is somewhat unnatural because the energy of the system is conserved by construction.
+The Caldeira-Leggett model works around this problem by treating a dissipative element as an infinite set of lossless harmonic oscillators.
+In this section we give an intuitive description of this idea, and then provide detailed mathematical analysis showing how to model an arbitrary admittance as a collection of $LC$ oscillators.
+
+\subsection{Intuitive idea}
+
+Consider a resonant circuit attached to a length of transmission line as shown in Fig. \ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,a.
+If the resonant circuit is initially excited with some energy, that energy leaks into the transmission line over a period of time.
+The energy pulse emitted by the resonant circuit travels down the line, reflects off the end, and eventually comes back to the resonator.
+If the time for the pulse to travel away, reflect, and return is much longer than any time scales relevant to an experiment, then from the point of view of observations made only on the resonator, the transmission line is a lossy channel: energy radiated into it never comes back.
+
+Consider now an infinitely long transmission line as shown in Fig. \ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,c.
+Energy emitted into such a line \emph{never} comes back, so the line appears to offer a loss channel no matter how long we watch the resonator.
+This is interesting: the lossless line becomes a loss channel as its length is extended to infinity.
+The appearance of loss as a lossless line is extended to infinite length is observed also in the lumped element ladder model of the transmission line.
+The infinite lossless line can be modeled as an infinite ladder of inductors and capacitors.
+Although any finite inductor-capacitor ladder has, by construction, a finite set of lossless harmonic modes and therefore a purely imaginary impedance, the impedance of the infinite ladder is purely real!
+Therefore, the infinite ladder (and the infinitely long transmission line) are equivalent to a resistor.
+This is the basis of the Caldeira-Leggett model; the resistor is replaced with an infinite set of lossless harmonic modes.
+When faced with a Hamiltonian mechanics problem involving resistors, we can instead use a set of harmonic oscillators.
+By taking the number of harmonic oscillator modes to infinite at the end of the calculation we recover the dynamics of the system in the presence of a truly lossy element like a resistor.
+
+Before we move onto the mathematics, we offer two comments on the correspondence between resistor and the infinite set of oscillators.
+
+As indicated in Fig.\,\ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line} b and c, loss can be understood as a case where the time for the emitted pulse to reflect and come back to the resonator is longer than any time scale on which the system is observed.
+Energy is never really lost, but rather transfers away from the system of interest into the surrounding environment.
+In fact, this picture works even without the emission-reflection-return picture.
+In quantum mechanics, each mode (state) $n$ has a time dependence $\exp [ i \omega_n t]$ where $\omega_n = E_n/\hbar$.
+Therefore, any system with a finite number of modes has a ``recurrence time'' after which it returns to its original state.
+However, as the number of occupied modes increases, the recurrence time also increases, and in a macroscopically large system the recurrence time becomes astronomically large and exceeds all practical observation time scales.\footnote{I think Schlosshauer's book shows this quantitatively.}
+
+The second comment regards the passage from the finite $LC$ ladder with purely imaginary impedance to the infinite ladder with purely real impedance.
+Denoting the impedance of the finite ladder with $n$ sections as $Z_n$, we have a sequence of purely imaginary numbers $\{ Z_1, Z_2, \ldots \}$.
+That the limit of this sequence of imaginary numbers should be \emph{real} boggles the mind.
+However, note that the notion of impedance only makes sense in a system where time can be taken to infinity.\footnote{This is especially obvious if we think about the impedance $Z(\omega)$ as the Fourier transform of a time response function: $Z(\omega) = \int_0^\infty Z(t) e^{i \omega t} \, dt$. In making this note I should mention that the Laplace transform is actually the better tool for this type of discussion but it's less familiar to physicists so I won't get into it.}
+So, when we we talk about the impedance of an infinitely long $LC$ ladder, we actually have two infinities: infinite time and infinite number of modes.
+The infinite time limit is taken first when we invoke impedance arguments, and the infinite modes limit is taken second when we consider an infinitely long $LC$ ladder.
+Mathematically, infinities are always represented as limits; here we have the limits $n\rightarrow \infty$ and $t \rightarrow \infty$ where $n$ is the number of modes in the system.
+The paradox of the imaginary sequence converging to a real number is resolved by switching the order of the $n$ and $t$ limits.
+We will point out how this happens in the mathematical discussion below.
+
+\quickfig{0.8\columnwidth}{transmission_line}
+{A lossless transmission line appears lossy as its length is taken to infinity.
+a) Energy emitted from a resonator into a transmission line eventually reflects and returns to the resonator.
+b) If the experiment (grey shaded region) only lasts long enough to see the emission, but not the re-absorption, the transmission line appears to have irrevocably removed energy from the resonator.
+c) An infinite line never reflects the emitted energy, so is a truly lossy element.
+The infinite line is modelled as an infinite $LC$ ladder which has a purely real impedance just like a resistor.
+}
+{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}
+
+
+\subsection{Calculation}
+
+Here we give full mathematical details of the connection between an infinite set of harmonic oscillators and an arbitrary lossy admittance $Y(\omega)$.
+The oscillator model is shown in Fig. \ref{fig:ch.decoherence.sec.caldeira-leggett:admittance}.
+Because it is easy to deal with harmonic oscillators in Hamiltonian mechanics, this model will allow us to include loss in a Hamiltonian theory.
+
+\quickfig{0.8\columnwidth}{caldeira-leggett}{The Caldeira-Leggett model of an admittance.}{fig:ch.decoherence.sec.caldeira-leggett:admittance}
+
+We first compute an expression for the admittance of a single oscillator.
+Defining $\omega_n \equiv 1/\sqrt{L_n C_n}$, $y_n \equiv \sqrt{C_n / L_n}$ and $x \equiv \omega / \omega_n$, the admittance of the $n^{\text{th}}$ series $LRC$ oscillator is
+\begin{align}
+Y_n^{-1}(\omega) &= \frac{1}{j \omega C} + j \omega L + R \\
+Y_n(\omega) &= \frac{j x y_n}{1 - x^2 + j x y_n R} \, .
+\end{align}
+
+In using the usual expressions for impedance and admittance of a capacitor and inductor we have already gone to a $t \rightarrow \infty$ limit.
+However, because we have resistance, the time response function of the oscillator decays exponentially (with time constant $RC$).
+The exponential time decay means that the response of the system can be approximated to arbitrary precision with a time response function truncated to a \emph{finite} maximum time value.
+Mathematically this means we may move the $t \rightarrow \infty$ limit around freely and in particular we can take the $t \rightarrow \infty$ limit at the end of the calculation.\footnote{In Devoret's seminal Les Houches course on quantum fluctuations in electrical circuits, he introduces the exponentially decaying time response function without any explanation. Here we have shown that it arises naturally in a system with \emph{dissipation}. This kind of mathematical construction in which decay is introduced to regularize a limit and allow switching the order of two limits is used all the time in mathematics and physics, although it is frequency not really explained.}
+Another way to visualize what we are doing here is to note that including resistance in the oscillators has moved the poles of their impedance off of the real line.
+Taking the limit $Q \rightarrow \infty$ later is equivalent to moving the poles back to the real line.
+
+Expanding around the resonance by defining $\delta x \equiv x - 1$ and taking leading order in $\delta x$ we find
+\begin{equation}
+Y_n(\omega) = \frac{y_n}{2j} \frac{1}{\delta x - j/2 Q_n}
+\end{equation}
+where $Q = 1 / R_n y_n$.
+This admittance is appropriate for the engineering Fourier transform convention wherein
+\begin{equation}
+f(t) = \int \frac{d\omega}{2 \pi} \tilde{f}(\omega) e^{i \omega t} \, .
+\end{equation}
+Unfortunately, physics literature usually uses the opposite convention wherein
+\begin{equation}
+f(t) = \int \frac{d\omega}{2 \pi} \tilde{f}(\omega) e^{-i \omega t} \, .
+\end{equation}
+Therefore, we convert the admittance to the physics language by taking $j \rightarrow -i$, yielding
+\begin{equation}
+Y_n(\omega) = \frac{i y_n}{2} \frac{1}{\delta x + i/2 Q_n} \, . \label{eq:ch.decoherence.sec.caldeira-leggett:LC_admittance}
+\end{equation}
+
+We now consider the limit in which we take the dissipation to zero, i.e. $Q \rightarrow \infty$.
+From Eq.\,(\ref{eq:ch.decoherence.sec.caldeira-leggett:LC_admittance}) we see that on resonance the admittance is
+\begin{equation}
+Y_n(\omega = \omega_n) = y_n Q_n
+\end{equation}
+which is real.\footnote{In fact, resonance is \emph{defined} as the frequency at which the impedance or admittance is purely real.}
+As $Q$ becomes large, this real admittance increases, and the bandwidth of the resonance decreases.
+Therefore, it seems that in the limit $Q \rightarrow \infty$ the admittance is going to something like a delta function with a real coefficient.
+In fact, the Caldeira-Leggett model uses the infinite set of oscillators in the $Q\rightarrow \infty$ limit to produce a dense comb of real delta functions which, as we will see, approximate an arbitrary real function.
+
+The general arguments of the previous paragraph are made mathematically rigorous via the Sokhotski-Plemelj theorem which says
+\begin{equation}
+\lim_{\epsilon \rightarrow 0} \frac{1}{x \pm i \epsilon} = \mp i \pi \delta(x) + \mathcal{P} \frac{1}{x} \, .
+\end{equation}
+Think of this theorem as a way of reminding yourself that some expression you have involving a parameter $\epsilon$ becomes a delta function plus a principle part integral when $\epsilon \rightarrow 0$.
+In the case of our resonator, $1/Q$ plays the role of $\epsilon$.
+Using the Sokhotski-Plemelj theorem on Eq.\,(\ref{eq:ch.decoherence.sec.caldeira-leggett:LC_admittance}) gives
+\begin{align}
+Y_n(\omega)
+&= \frac{\pi y_n}{2} \delta (\delta x) + \frac{i y_n}{2} \mathcal{P} \frac{1}{\delta x} \\
+&= \frac{\pi y_n \omega_n}{2} \delta(\omega - \omega_n) + \frac{i y_n}{2} \mathcal{P} \frac{\omega_n}{\omega - \omega_n} \\
+\Re Y_n(\omega)
+&= \frac{\pi y_n \omega_n}{2} \delta(\omega - \omega_n) \, .
+\end{align}
+In this analysis we expanded only around the resonance at $+\omega_n$.
+Adding the contribution at $-\omega_n$ gives us
+\begin{equation}
+\Re Y_n(\omega) = \frac{\pi y_n \omega_n}{2} \left[ \delta(\omega - \omega_n) + \delta(\omega + \omega_n) \right] \, . \label{eq:ch.decoherence.sec.caldeira-leggett:ReY_as_delta_functions}
+\end{equation}
+
+Now we consider how to arrange these lossless oscillators such that their parallel combination reproduces an arbitrary admittance.
+Note that any function $f$ can be approximated by delta functions as follows:
+\begin{equation}
+f(x) \approx \sum_n f(x_n) \Delta x \delta(x - x_n)
+\end{equation}
+where $x_n \equiv n \Delta x$ and $\Delta x$ is understood to be sufficiently small that $f$ does not vary much over one $\Delta x$ width.
+Therefore, writing $\Re Y(\omega)$ as
+\begin{equation}
+\Re Y(\omega)
+= \sum_n \Re Y(\omega_n) \Delta \omega \delta(\omega - \omega_n)
+= \sum_n \Re Y(\omega_n) \frac{\omega_n}{n} \delta(\omega - \omega_n)
+\end{equation}
+we see that our infinite collection of oscillators approximates $\Re Y(\omega)$ as long as we take
+\begin{equation}
+y_n = \frac{2}{\pi n} \Re Y(\omega_n) \, .
+\end{equation}
+With this choice we can write
+\begin{equation}
+\Re Y(\omega) \approx \Re \sum_n Y_n(\omega) \, .
+\end{equation}
+Thus we have approximated an arbitrary admittance as a dense set of delta functions, each arising from the $Q \rightarrow \infty$ limit of a harmonic oscillator.
+Recall at this point that although we have taken the $t \rightarrow \infty$ limit (by taking $Q \rightarrow \infty$), we did not have to do that yet.
+The delta functions in $\Re Y_n(\omega)$ can be thought of as the result of the $Q \rightarrow \infty$ limit which we are actually allowed to do an the end of the calculation if it should suit us.

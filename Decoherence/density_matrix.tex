@@ -1,0 +1,140 @@
+\subsection{Density matrix approach}
+
+The difference here is that we use density matrices in order to handle the environment, and we will have to work to second order in the interaction.
+
+We assume the environment starts in a state which is diagonal in its own energy basis:
+\begin{equation}
+\rho_E(0) = \sum_n \rho_{nn} \ket{n}\bra{n}
+\end{equation}
+and we assume that $S$ begins in the ground state
+\begin{equation}
+\rho_S(0) = \ket{0}\bra{0}
+\end{equation}
+giving an initial state
+\begin{equation}
+\rho(0) = \sum_n \rho_{nn} \ket{n}\bra{n} \otimes \ket{0}\bra{0} \, .
+\end{equation}
+The equation of motion for the density matrix, in the rotating frame, is
+\begin{equation}
+i \hbar \dot{\rho} = \left[ \tilde{V}(t), \rho(t) \right]
+\end{equation}
+This equation is formally solved as follows:
+\begin{align}
+\rho(t)
+&= \rho(0) - \frac{i}{\hbar}
+\int_0^t dt' \, \left[ \tilde{V}(t'), \rho(t') \right] \\
+&= \rho(0) - \frac{i}{\hbar}
+\int_0^t dt' \, \left[ \tilde{V}(t'), \rho(0) - \frac{i}{\hbar} \int_0^{t'} dt'' \, \left[ \tilde{V}(t''), \rho(t'') \right] \right] \\
+&= \rho(0) - \frac{i}{\hbar} \int_0^{t} dt' \, \left[ \tilde{V}(t'), \rho(0) \right]
+- \frac{1}{\hbar^2} \int_0^{t} \int_0^{t'} dt' \, dt'' \nonumber \\
+& \qquad \left[ \tilde{V}(t'), \left[ \tilde{V}(t''), \rho(t'') \right] \right] \, .
+\end{align}
+Note that this equation is exact.
+In order to compute a transition rate we differentiate with respect to $t$:
+\begin{equation}
+\dot{\rho}(t)
+= -\frac{i}{\hbar} \left[ \tilde{V}(t), \rho(0) \right]
+- \frac{1}{\hbar^2} \int_0^t dt' \, \left[ \tilde{V}(t), \left[ \tilde{V}(t'), \rho(t') \right] \right] \, .
+\end{equation}
+As we are interested in the transition rates of the two level system we trace over the environment:
+\begin{align}
+\dot{\rho}_S(t) = 
+\Tr_E \dot{\rho}(t) =
+&-\frac{i}{\hbar} \underbrace{ \Tr_E \left[ \tilde{V}(t), \rho(0) \right] }_{A} \nonumber \\
+&- \frac{1}{\hbar^2} \underbrace{ \int_0^t dt' \, \Tr_E \left[ \tilde{V}(t), \left[ \tilde{V}(t'), \rho(t') \right] \right]}_{B} \, .
+\end{align}
+
+
+\subsubsection{Term $A$}
+
+This term is actually identically zero as long as $F$ has no diagonal terms.
+This is the case for most coupling operators which are usually something like the $x \propto a + a^\dagger$ operator of a harmonic oscillator.
+To see this we just write everything out
+\begin{align}
+A
+&= \sum_{n,m} \rho_{mm} \bra{n} \left[ \tilde{V}(t), \ket{m}\bra{m}\otimes \rho_S(0) \right] \ket{n} \\
+= \sum_{n,m} &\rho_{mm}
+\bbraket{n}{T^\dagger_E(t) F T_E(t)}{m}\braket{m}{n}
+\otimes \tilde{V}_S(t) \rho_S(0) \nonumber \\
+- &\rho_{mm} \braket{n}{m} \bbraket{m}{T_E^\dagger(t) F T_E(t)}{n} \otimes \rho_S(0) \tilde{V}_S(t) \\
+= \sum_n &\rho_{nn} \bbraket{n}{T_E^\dagger(t) F T_E(t)}{n} \otimes \tilde{V}_S(t) \rho_S(0) \nonumber \\
+- &\rho_{nn} \bbraket{n}{T_E^\dagger(t) F T_E(t)}{n} \otimes \rho_S(0) \tilde{V}_S(t) \\
+= \sum_n &\rho_{nn} F_{nn} \left[ \tilde{V}_S(t), \rho_S(0) \right] \, .
+\end{align}
+Assuming $F_{nn}=0$ we have $A = 0$.
+
+
+\subsubsection{Term $B$}
+
+\begin{align}
+B
+&= \int_0^t \Tr_E \left[ \tilde{V}(t), \left[ \tilde{V}(t-t'), \rho(t-t') \right] \right] \\
+&= \hbar g \int_0^t \Tr_E \left[ \tilde{V}(t),
+\left[ F(t-t') \right. \right. \nonumber \\
+& \left. \left. \qquad \otimes (e^{i \Omega (t-t')} \sigma_+ + e^{-i \Omega (t-t')} \sigma_-), 
+\rho_E \otimes \ket{0}\bra{0} ) \right] \right] \\
+&= \hbar g \int_0^t \Tr_E \left[ \tilde{V}(t),
+\left( F(t-t')\rho_E \otimes e^{i \Omega (t-t')} \ket{1}\bra{0} \right) \right. \nonumber \\
+& \left. \qquad - \left( \rho_E F(t-t') \otimes e^{-i \Omega (t-t')} \ket{0}\bra{1} \right)
+\right] \, . 
+\end{align}
+Now we expand the second commutator, keeping only terms which put the system in $\ket{1}\bra{1}$.
+\begin{align}
+B_{11}
+&= - (\hbar g)^2 \int_0^t dt' \, \Tr_E \left(
+F(t) \rho_E F(t-t') e^{i \Omega t'} \right. \nonumber \\
+& \left. \qquad + F(t-t') \rho_e F(t) e^{-i \Omega t'}
+\right) \otimes \ket{1}\bra{1} \, .
+\end{align}
+Next we insert the diagonal form of $\rho_E$ and expand the $Tr_E$ operation
+\begin{align}
+B_{11}
+&= - (\hbar g)^2 \sum_{m,n} \rho_{nn} \int_0^t dt' \,
+\left(
+\bbraket{m}{F(t)}{n} \bbraket{n}{F(t-t')}{m}e^{i \Omega t'} \right. \nonumber \\
+& \left. \qquad \qquad + \bbraket{m}{F(t-t')}{n} \bbraket{n}{F(t)}{m} e^{-i \Omega t'}
+\right) \ket{1}\bra{1} \\
+&= - (\hbar g)^2 \sum_n \rho_{nn} \int_0^t dt' \, \left(
+\bbraket{n}{F(t-t')F(t)}{n} e^{i \Omega t'} \right. \nonumber \\
+& \left. \qquad \qquad + \bbraket{n}{F(t)F(t-t')}{n} e^{-i \Omega t'}
+\right) \ket{1}\bra{1} \\
+&= - (\hbar g)^2 \int_0^t dt' \, \left(
+\langle F(t-t') F(t) \rangle_E e^{i \Omega t'} \right. \nonumber \\
+& \left. \qquad \qquad \langle F(t) F(t-t') \rangle_E e^{-i \Omega t'}
+\right) \ket{1}\bra{1} \, .
+\end{align}
+If we now assume that the quantum-thermal averages over the bath are stationary in time, we can rewrite \mbox{$\langle F(t) F(t-t') \rangle_E$} as \mbox{$\langle F(t')F(0) \rangle_E$}.
+Doing this and switching the sign of the integration variable in the first term gives
+\begin{equation}
+B_{11} = - 2 (\hbar g)^2 \int_0^t \left(
+\langle F(t')F(0) \rangle_E e^{-i \Omega t'} \right)
+\ket{1}\bra{1} \, .
+\end{equation}
+
+
+\subsubsection{Transition rate}
+
+Plugging $B$ into the expression for $\dot{\rho}$ we get
+\begin{equation}
+\dot{\rho}_{S,11} =
+2 g^2 \int_0^t dt' \, \langle F(t') F(0) \rangle_E \, e^{-i \Omega t'} \, .
+\end{equation}
+If the correlation time of $F$ is very short compared to $t$ we can extending the limits of integration to positive infinity.
+Also extending to negative infinity requires multiplying by $1/2$.
+Doing this and defining the spectral density as
+\begin{equation}
+S_{FF}(\omega) \equiv \int_{-\infty}^\infty dt \, \langle F(t) F(0) \rangle
+\end{equation}
+we get
+\begin{equation}
+\dot{\rho}_{S,11} = g^2 S_{FF}(-\Omega) \, .
+\end{equation}
+This is interpreted as a transition rate, giving us the often cited formula
+\begin{equation}
+\Gamma_\uparrow = g^2 S_{FF}(-\Omega) \, .
+\end{equation}
+Entirely similar arguments show
+\begin{equation}
+\Gamma_\downarrow = g^2 S_{FF}(\Omega) \, .
+\end{equation}
+This calculation shows that the positive and negative frequency parts of the spectral density of the environment correspond to absorption and emission of a quantum of energy by the environment from the qubit.

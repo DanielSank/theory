@@ -1,0 +1,46 @@
+\section{Correlation functions}
+
+In this section we compute the charge-charge correlation function for our collection of oscillators.
+For a single oscillator we have simply
+\begin{align}
+\langle Q_n(t) Q_n(0) \rangle
+&= Q_{n,\text{zpf}}^2 \left( \langle a^\dagger a \rangle e^{i \omega_n t} + \langle a^\dagger a \rangle e^{-i \omega_n t} \right) \\
+&= Q_{n,\text{zpf}}^2 \left( 2\langle a^\dagger a \rangle \cos(\omega_n t) + e^{-i \omega_n t} \right)
+\end{align}
+where $Q_{n,\text{zpf}}^2 \equiv \hbar y_n / 2$.
+Using the thermal-quantum average
+\begin{equation}
+\langle a^\dagger a \rangle = \langle n \rangle = \frac{1}{2} \left( \coth \left( \frac{\beta \hbar \omega_n}{2} \right) - 1 \right)
+\end{equation}
+we find
+\begin{equation}
+\langle Q_n(t) Q_n(0) \rangle
+= Q_{n,\text{zpf}}^2 \left[ \coth \left( \frac{\beta \hbar \omega_n}{2} \right) \cos(\omega_n t) -i \sin ( \omega_n t) \right] \, .
+\end{equation}
+Using Eq.\,(\ref{eq:ch.decoherence.sec.caldeira-leggett:ReY_as_delta_functions}) we can rewrite this as
+\begin{align}
+\langle Q_n(t) Q_n(0) \rangle
+&= Q_{n,\text{zpf}}^2
+\int \frac{d\omega}{2 \pi} e^{-i \omega t} \frac{2 (2\pi)}{\pi \omega y_n} \Re Y_n(\omega) \frac{1}{2} \left( \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right) \\
+&= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y_n (\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, .
+\end{align}
+The total charge correlation is just the sum of the correlations of the independent oscillators, giving us
+\begin{align}
+\langle Q(t) Q(0) \rangle
+&= \sum_n \langle Q_n(t) Q_n(0) \rangle \\
+&= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \sum_n \Re Y_n (\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \\
+&= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y(\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, .
+\end{align}
+In the last line we replaced our sum of admittances from the collection of discrete oscillators with the smooth admittance which the discrete oscillators were designed to approximate.
+As shown in the previous section, this replacement is only strictly correct in the limit that the number of oscillators goes to infinity.
+So here we have our second limit.
+By adding resistance to the system and then taking the limit $Q \rightarrow \infty$, we have allowed ourselves to make this $n \rightarrow \infty$ limit while still using the implicitly  $t \rightarrow \infty$ expressions for impedance.
+
+Finally, using the definition of the spectral density $S_{QQ}(\omega)$ we find
+\begin{equation}
+S_{QQ}(\omega) = \hbar \frac{\Re Y(\omega)}{\omega} \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, .
+\end{equation}
+We can also easily write the current spectral density
+\begin{equation}
+S_{II}(\omega) = \hbar \omega \Re Y(\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, . \label{eq:ch.decoherence.sec.correlation_functions:S_II}
+\end{equation}

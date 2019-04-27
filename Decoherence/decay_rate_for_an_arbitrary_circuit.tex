@@ -1,0 +1,27 @@
+\section{Decay rate for an arbitrary circuit}
+
+The current $I(t)$ from a parallel resistor leads to an interaction Hamiltonian with the qubit
+\begin{equation}
+V / \hbar = \underbrace{\frac{\bbraket{0}{\Phi}{1}}{\hbar}}_g  I(t) \sigma_x \, .
+\end{equation}
+Using Eqs. (\ref{eq:ch.decoherence.sec.noise_from_a_quantum_environment:gamma_down}) and (\ref{eq:ch.decoherence.sec.correlation_functions:S_II}) we find the decay rate from state $\ket{1}$ to $\ket{0}$
+\begin{align}
+\Gamma_{\downarrow}
+&= g^2 S_{II}(\omega_{10}) \\
+% &= \frac{\bbraket{0}{\Phi}{1}^2}{\hbar^2} S_{II}(\omega_{10}) \\
+&= \frac{\omega_{10}}{\hbar} \bbraket{0}{\Phi}{0}^2 \Re Y(\omega_{10}) \left[ \coth \left( \frac{\beta \hbar \omega_{10}}{2} \right) +1 \right] \, .
+\end{align}
+In the low temperature limit the $\coth$ function is unity and we have
+\begin{equation}
+\Gamma_\downarrow = \frac{2\omega_{10}}{\hbar} \bbraket{0}{\Phi}{1}^2 \Re Y(\omega_{10}) \, .
+\end{equation}
+Comparing this equation to the usual form of Fermi's golden rule, we see that $\Re Y(\omega)$ is proportional to the density of environmental states presented to the qubit.
+In the case that the admittance is a simple resistor, then $Y = 1/R$ and we have
+\begin{equation}
+\Gamma_\downarrow = \frac{2\omega_{10}}{\hbar R} \bbraket{0}{\Phi}{1}^2 \, .
+\end{equation}
+In the case of a harmonic oscillator we have
+\begin{equation}
+\bbraket{0}{\Phi}{1}^2 = \frac{\hbar Z_{LC}}{2}
+\end{equation}
+which gives $\Gamma_\downarrow = 1 / RC$ as expected.

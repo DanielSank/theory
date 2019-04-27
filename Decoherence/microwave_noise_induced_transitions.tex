@@ -1,0 +1,93 @@
+\section{Microwave noise induced transitions}
+
+Consider a qubit subjected to microwave driving.
+The driving Hamiltonian (in this case assumed to be charge coupled) can be written as
+\begin{equation}
+H_d = h_d \, f(t) \, \sigma_x \, .
+\end{equation}
+Write the drive function $f(t)$ as
+\begin{equation}
+f(t) = I(t) \cos (\omega_{10} t) + Q(t) \sin(\omega_{10} t)
+\end{equation}
+With these definitions, the Hamiltonian, in the rotating frame of the qubit, is
+\begin{equation}
+R H_d R^\dagger = \frac{h_d}{2} \left[ I(t) \sigma_x + Q(t) \sigma_y \right] \, .
+\end{equation}
+Now suppose we have a certain signal $I(t)$ while $Q(t) = 0$.
+Then the Hamiltonian is
+\begin{equation}
+R H_d R^\dagger = \frac{h_d}{2} I(t) \sigma_x \, .
+\end{equation}
+How much does this signal rotate the qubit state?
+We find the transformation of the qubit as
+\begin{align}
+U(t)
+&= \exp \left[ \frac{-i}{\hbar} \int_0^t (R H_d R^\dagger)(t') \, dt' \right] \\
+&= \exp \left[ \frac{-i h_d}{2 \hbar} \sigma_x \int_0^t I(t')\,dt' \right] \\
+&= \cos \left( \frac{h_d}{2 \hbar} \int_0^t I(t')\,dt' \right) \mathbf{1}
+- i \sin \left( \frac{h_d}{2 \hbar} \int_0^t I(t')\,dt' \right) \sigma_x \, .
+\end{align}
+The angular rotation on the Bloch sphere is therefore
+\begin{equation}
+\theta = \frac{h_d}{\hbar} \int_0^t I(t')\,dt' \, .
+\end{equation}
+Now suppose the control signal is actually noise.
+We can no longer compute the rotation angle $\theta$, but rather only its statistics.
+\begin{align}
+\langle \theta(t)^2 \rangle
+&= \left( \frac{h_d}{\hbar} \right)^2 \int_0^t \int_0^t \langle I(t')I(t'') \rangle \,
+dt' \, dt'' \\
+&= \left( \frac{h_d}{\hbar} \right)^2 t^2
+\int_0^\infty \frac{d\omega}{2 \pi} S^e_I(\omega) \frac{\sin(\omega t / 2)^2}{(\omega t/2)^2} \\
+&= \left( \frac{d \dot{\theta}}{d I} \right)^2 \frac{t \, S_I^e}{2} \label{eq:ch.decoherence.sec.microwave_noise_induced_transitions:theta_squared}
+\end{align}
+where we've assumed $S_I^e(\omega)$ is constant and have re-written the sensitivity of the qubit rotational speed to drive amplitude, $h_d/\hbar$, in the more general form $d \dot{\theta} / dI$.
+
+\subsection{Probability of transition}
+
+Supposing the qubit begins in $\ket{0}$, the probability of measuring it in $\ket{0}$ is
+$P_0 = \cos(\theta / 2)^2$.
+Therefore, the probability of measuring the qubit in the excited state is
+\begin{align}
+P_0 &= \langle \cos(\theta / 2)^2 \rangle \\
+&= \frac{1}{2} \left( 1 + \langle \cos(\theta) \rangle \right) \\
+&= \frac{1}{2} \left( 1 + \langle e^{i \theta} \rangle \right) \, .
+\end{align}
+Using the well-known relation
+\begin{equation}
+\langle \exp [ Ax ] \rangle = \exp \left[ \frac{1}{2} A^2 \langle x^2 \rangle \right]
+\end{equation}
+for Gaussian distributions, we find
+\begin{equation}
+P_0 = \frac{1}{2} \left( 1 + \exp \left[ -\frac{1}{2} \langle \theta^2 \rangle \right] \right) \, .
+\end{equation}
+The angle $\theta$ here is the \emph{total} rotation angle.
+The mean square angle we found in Eq.\,(\ref{eq:ch.decoherence.sec.microwave_noise_induced_transitions:theta_squared}) was for the special case in which $Q(t)=0$.
+With that constraint lifted we have rotations about both $X$ and $Y$ coming from signals in $I$ and $Q$.
+This leads to a much more complicated dynamics which I don't know how to treat in general.
+However, for small rotations angles we can approximate the total angle as
+\begin{equation}
+\theta^2 = \theta_I^2 + \theta_Q^2
+\end{equation}
+where $\theta_I$ is the angle we would have in the case $Q(t)=0$, and similarly for $\theta_Q$.
+Using this approximation we find
+\begin{align}
+P_0
+&= \frac{1}{2} \left( 1 + \exp \left[ - \frac{1}{2} \langle \theta^2 \rangle \right] \right) \\
+&= \frac{1}{2} \left( 1 + \exp \left[ - \frac{1}{2} \langle \theta_I^2 + \theta_Q^2 \rangle \right] \right) \\
+&= \frac{1}{2} \left( 1 + \exp \left[ - \frac{1}{2} \left( \frac{d \dot{\theta}}{dI}\right)^2 t S_{I,Q}^e \right] \right) \, .
+\end{align}
+We therefore have a transition rate
+\begin{equation}
+\Gamma = \frac{1}{2} \left( \frac{d\dot{\theta}}{dI}\right)^2 S_{I,Q}^e \, .
+\end{equation}
+The transition rate here is expressed in terms of the spectral densities of $I$ and $Q$, but those were just convenient quantities used to make the math easier.
+The real quantity, and the one whose spectral density we can measure in the lab, is $f$.
+Assuming that the spectral densities of $I$ and $Q$ are equal and that $I$ and $Q$ are uncorrelated, it turns out that
+\begin{equation}
+S_f(\Omega + \omega) = \frac{1}{2}S_{I,Q}(\omega)
+\end{equation}
+so in the end
+\begin{equation}
+\Gamma = \left( \frac{d \dot{\theta}}{dI} \right)^2 S_f(\omega_{10}) \, .
+\end{equation}
