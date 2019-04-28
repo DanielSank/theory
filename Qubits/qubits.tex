@@ -12,34 +12,12 @@
 \small Formerly Department of Physics, UCSB}
 \date{19 August 2012}
 
-%\hypersetup{draft}
 \begin{document}
 
 \maketitle
 \tableofcontents
 
-\section{Introduction - statement of purpose}
-
-Working with superconducting qubits is a lot of fun.
-The design process offers a single focal point through which one can learn and apply quantum mechanics, electromagnetism, statistical physics, circuit theory, and several aspects of practical engineering.
-The intended application of the qubit is often described mathematically.
-For example, superconducting qubits used for quantum annealing are described in terms of various forms of the Ising model, while those used for gate-based computation may be described in terms of their capacity for single- and two-qubit gates.
-In all cases, to work with superconducting qubits, one must understand how the mathematical representations of control pulses and qubit-qubit coupling arise from the qubits' physical properties like inductance and capacitance.
-For example, one must know how to relate the coupling strength $g$ between two capacitively coupled qubits to those qubits' circuit parameters and the capacitance of the coupling capacitor.
-
-Uri Vool has written an excellent paper on the quantization of arbitrary lumped-element electrical circuits, including a discussion of dissipative elements \cite{Vool:quantumCircuits}, and that work must be considered prerequisite reading for this one.\footnote{Vool's paper is a spiritual rewrite of an earlier \mbox{\href{http://qulab.eng.yale.edu/documents/reprints/Houches_fluctuations.pdf}{set of course notes}} for the Les Houches school, written by Michel Devoret. Among other things, the rewrite corrects several unfortunate typos from the original.}
-In other words, Reference \cite{Vool:quantumCircuits} tells you how to write the Hamiltonian for a given electrical circuit.
-The next step toward a practical understanding of qubit control and coupling is to apply the Hamiltonian technique to the most common qubit circuits, examine how controls and coupling work, and arrive at useful design formulae.
-One can imagine a sort of ``superconducting qubit builder's and user's guide'' which provides a list of useful and important design formulae, as well as enough of a demonstration of where those formulae come from such that the designer can break new ground on their own, knowing well what practical considerations must be taken into account.
-This document intends to be such a guide.
-
-\subsection{Extensibility}
-
-This document is not, nor can it even be, comprehensive.
-However, it does offer a route to ensure that important missing elements are added as time goes on and that the quality is always increasing: this document's source code lives in a \href{https://github.com/danielsank/theory}{publicly accessible repository} on GitHub.
-Typos, identification of unclear sections, and requests for additional information reported on the \href{https://github.com/danielsank/theory/issues}{issue tracker} will lead to improvements in the document.
-In this way, readers become authors, shared knowledge grows, and we all learn what need to know faster than we could before.
-
+\subimportlevel{./}{introduction.tex}{0}
 \input{qubits_content.tex}
 
 \bibliographystyle{plain}
