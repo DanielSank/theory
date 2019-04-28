@@ -114,38 +114,40 @@ This matches the full result up to the sign, in the practical limit $C \gg C_d$.
 \label{fig:qubits.inductive_drive}
 \end{figure}
 
-We now consider the case in which we drive by applying current into an inductor which is coupled to the qubit inductor through a mutual inductance $M$, as shown in Figure \ref{fig:qubits.inductive_drive}.
+We now consider the case in which we drive by applying current into an inductor which is coupled to the qubit inductor through a mutual inductance $M_d$, as shown in Figure \ref{fig:qubits.inductive_drive}.
 With a drive current $I_d(t)$ Kirchhoff's law for the circuit yields the equation of motion
 \begin{equation}
-\ddot{\Phi} + \omega_{LC}^2 \Phi = I_d \omega_{LC}^2 M \, .
+  \ddot{\Phi} + \omega_{LC}^2 \Phi = I_d \, \omega_{LC}^2 M_d \, .
 \end{equation}
 This equation is reproduced by the Lagrangian
 \begin{equation}
-\mathcal{L} = \frac{1}{2}C \dot{\Phi}^2 - \frac{1}{2L} \Phi^2 + \frac{M}{L}I_d(t) \Phi \, .
+  \mathcal{L} = \frac{1}{2}C \dot{\Phi}^2 - \frac{1}{2L} \Phi^2 + \frac{M_d}{L}I_d(t) \Phi \, .
 \end{equation}
 The momentum conjugate to $\Phi$ is
 \begin{equation}
-p = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q
+  \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q
 \end{equation}
 and the Hamiltonian is
 \begin{equation}
-H = p \dot{\Phi} - \mathcal{L} = \frac{Q^2}{2C} + \frac{\Phi^2}{2L} - \frac{M}{L} I_d(t) \Phi
+  H
+  = Q \dot{\Phi} - \mathcal{L}
+  = \frac{Q^2}{2C} + \frac{\Phi^2}{2L} - \frac{M_d}{L} I_d(t) \Phi
 \end{equation}
 so the driving Hamiltonian is
 \begin{equation}
-H_d = - \frac{M}{L}I_d(t) \Phi \, .
+  H_d = - \frac{M_d}{L}I_d(t) \Phi \, .
 \end{equation}
 Note that adding a parallel junction to the circuit does \emph{not} change the form of $H_d$; the junction adds a term $(I_c \Phi_0 / 2\pi)\cos(\pi \Phi / \Phi_0)$ to the Lagrangian, but this term does not couple to $I_d$.
 
 Restricting to the lowest two levels, $H_d$ becomes
 \begin{align}
   H_d
-  &= - \frac{M}{L} I_d(t)
+  &= - \frac{M_d}{L} I_d(t)
   \left[ \begin{array}{cc}
     \bbraket{0}{\Phi}{0} & \bbraket{0}{\Phi}{1} \\
     \bbraket{1}{\Phi}{0} & \bbraket{1}{\Phi}{1} 
   \end{array} \right] \\
-  &= - \frac{M}{L} I_d(t) \times \nonumber \\
+  &= - \frac{M_d}{L} I_d(t) \times \nonumber \\
   &\left[
     \left| \Phi_{10} \right| \sigma_x
     + \frac{(\Phi_{00} - \Phi_{11})}{2} \sigma_z
@@ -154,14 +156,14 @@ Restricting to the lowest two levels, $H_d$ becomes
 \end{align}
 If the circuit is nearly harmonic then $\Phi_{ii} \approx 0$ and we can re-express $\Phi$ as (see \citeinternaltype \citeinternalref{quantumOscillator})
 \begin{equation}
-\Phi = \Phi_{\text{zpf}} \left( a + a^\dagger \right)
+  \Phi = \Phi_{\text{zpf}} \left( a + a^\dagger \right)
 \end{equation}
 where $\Phi_{\text{zpf}} \equiv \sqrt{\hbar Z_{LC} / 2}$ and $Z_{LC} \equiv \sqrt{L/C}$.
 Inserting this into $H_d$ gives
 \begin{equation}
-H_d = -\frac{M}{L} I_d(t) \Phi_{\text{zpf}} (a + a^\dagger) \, .
+  H_d = -\frac{M_d}{L} I_d(t) \Phi_{\text{zpf}} (a + a^\dagger) \, .
 \end{equation}
 In a two level approximation for the qubit, $(a + a^\dagger)\rightarrow \sigma_x$ and $H_d$ becomes
 \begin{equation}
-\text{(harmonic limit)} \quad H_d = - \frac{M}{L} I_d(t) \Phi_{\text{zpf}} \sigma_x \, .
+  \text{(harmonic limit)} \quad H_d = - \frac{M_d}{L} I_d(t) \Phi_{\text{zpf}} \sigma_x \, .
 \end{equation}
