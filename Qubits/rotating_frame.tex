@@ -7,21 +7,25 @@ In this section we show how to re-express the driving and coupling Hamiltonians 
 
 The single qubit Hamiltonian for single nearly harmonic qubits like the transmon is \begin{equation}
 H_q/\hbar = -\frac{\omega_q}{2}\sigma_z \end{equation}
-where $\omega_q = \omega_0 + \delta\omega$. Think of $\omega_0$ as an idle point frequency and $\delta \omega$ as a dynamic detuning.
+where $\omega_q = \omega_r + \delta\omega$.
+Think of $\omega_r$ as a ``reference'' frequency.
+For example, $\omega_r$ could be the qubit's idle frequency in which case $\delta \omega$ could be seen as a dynamic detuning.
 The Schrodinger picture time evolution operator is $T=\exp \left[-i H/\hbar \right]$.
 In order to remove the idle point precession of the qubit state, we take as the rotation operator \begin{equation}
-R = T^{\dagger} = \exp \left[ -i \frac{\omega_0}{2} t \sigma_z \right], \end{equation}
-eg. we rotate the frame by the idle frequency of the qubit.
+  R = T^{\dagger} = \exp \left[ -i \frac{\omega_r}{2} t \sigma_z \right] \, ,
+\end{equation}
+e.g. we rotate the frame by the idle frequency of the qubit.
 We compute the remaining effective Hamiltonian $H'$ according to \citeinternalref{quantumMechanics}
 \begin{align}
   H'/\hbar
   =& i\dot{R}R^{\dagger} + R \frac{H_q}{\hbar} R^\dagger \nonumber \\
-  =& i \left(-i \frac{\omega_0}{2} \right)\sigma_z RR^{\dagger} + R\frac{H_q}{\hbar}R^{\dagger} \nonumber \\
+  =& i \left(-i \frac{\omega_r}{2} \right)\sigma_z RR^{\dagger}
+    + R\frac{H_q}{\hbar}R^{\dagger} \nonumber \\
   =& -\frac{\delta\omega}{2}\sigma_z.
 \end{align}
 This is precisely the Hamiltonian of a qubit with frequency $\delta\omega$.
 In other words, if we go into a frame rotating at the idle frequency of the qubit, what remains is just the qubit precession at the detuning frequency.
-In particular if the frame rotates at the same frequency as the qubit the Hamiltonian becomes zero.
+Noet that if the frame rotates at the same frequency as the qubit, the Hamiltonian is zero.
 
 \leveldown{Operators}
 
@@ -41,7 +45,7 @@ The rotation operator is $R=\exp \left[-i \frac{1}{2} \omega_r t \sigma_z \right
 We now consider the driving Hamiltonian in the rotating frame.
 From section \ref{sec:driving} we have the general driving Hamiltonian in the lab frame
 \begin{equation}
-H_d = h_d f(t) \sigma
+  H_d = h_d f(t) \sigma
 \end{equation}
 where $h_d$ and $\sigma$ are defined for the charge and flux coupled cases as in the following table:
 \begin{center}
@@ -61,44 +65,60 @@ In this table, $V_d$ and $I_d$ are arbitrary voltage and current scales, introdu
 $C_q$ and $L_q$ refer to the qubit capacitance and inductance, which we assume to be much larger than the drive capacitance $C_d$ and the drive inductance $M_d$.
 
 We now work through the flux coupled case.
-We use the rotation operator \begin{equation}
-R = \exp \left[ -i \frac{\omega_r}{2} t \sigma_z \right] \end{equation}
+We use the rotation operator
+\begin{equation}
+  R = \exp \left[ -i \frac{\omega_r}{2} t \sigma_z \right]
+\end{equation}
 to find the transformed driving Hamiltonian \begin{align}
-RH_d R^{\dagger}/h_d
-&= e^{-i \frac{\omega_r}{2} t \sigma_z} f(t)\sigma_x e^{i \frac{\omega_r}{2} t \sigma_z} \nonumber \\
-&= f(t)\left[ \cos\left(\omega_r t\right)\sigma_x + \sin\left(\omega_r t\right)\sigma_y \right]. \label{eq:drivingH}
+  RH_d R^{\dagger}/h_d
+  &=
+    \exp\left(-i \frac{\omega_r}{2} t \sigma_z \right)
+    f(t) \sigma_x
+    \exp\left( i \frac{\omega_r}{2} t \sigma_z \right) \nonumber \\
+  &= f(t)
+    \left[
+      \cos\left(\omega_r t\right)\sigma_x + \sin\left(\omega_r t\right)\sigma_y
+    \right]. \label{eq:drivingH}
 \end{align}
 Now suppose $f(t)$ is a sinusoid with an envelope $e(t)$,
 \begin{align}
-& f(t)
-= e(t)\cos \left( \omega_d t + \phi_d \right) \\
-&= e(t) \left[ \cos \left( \phi_d \right) \cos \left( \omega_d t \right) - \sin \left( \phi_d \right) \sin \left( \omega_d t \right) \right] \\
-&= e(t) \left[ I \cos\left(\omega_d t\right) + Q \sin \left(\omega_d t\right) \right] \label{eq:drivingFunctionIQ}
+  & f(t)
+    = e(t)\cos \left( \omega_d t + \phi_d \right) \nonumber \\
+  &= e(t)
+    \left[
+      \cos(\phi_d) \cos(\omega_d t) - \sin(\phi_d) \sin(\omega_d t)
+    \right] \nonumber \\
+  &= e(t)
+    \left[
+      I \cos\left(\omega_d t\right) + Q \sin \left(\omega_d t\right)
+    \right] \label{eq:drivingFunctionIQ}
 \end{align}
 where $I \equiv \cos(\phi_d)$ and $Q \equiv - \sin(\phi_d)$.
-Multiplying everything in Eq. (\ref{eq:drivingH}) together and throwing out the high frequency terms (rotating wave approximation), we get
+Multiplying everything in Eq. (\ref{eq:drivingH}) together and throwing out the high frequency terms\footnote{Throwing away the high frequency terms is the so-called Rotating Wave Approximation (RWA). Overzealous use of the RWA has caused much confusion in the field of quantum control.}, we get
 \begin{align}
-& RH_dR^{\dagger}/h_d \\
-&= \frac{e(t)}{2} \left[ \cos(\delta\omega t + \phi_d)\sigma_x - \sin(\delta\omega t + \phi_d)\sigma_y \right] \\
-&= \frac{e(t)}{2} \left[ e^{-i(\delta \omega t + \phi_d)} \sigma_+ + e^{i(\delta \omega t + \phi_d)} \sigma_- \right]
-\end{align}
-where $\delta\omega \equiv \omega_d - \omega_r$. In matrix form this reads
-\begin{equation}
-  RH_dH^{\dagger}/h_d =
-  \frac{e(t)}{2}
+& RH_dR^{\dagger}/h_d \nonumber \\
+  &= \frac{e(t)}{2}
+  \left(
+    \cos(\delta\omega t + \phi_d)\sigma_x - \sin(\delta\omega t + \phi_d)\sigma_y
+  \right) \nonumber \\
+  &= \frac{e(t)}{2}
+  \left(
+    e^{-i(\delta \omega t + \phi_d)} \sigma_+ + e^{i(\delta \omega t + \phi_d)} \sigma_-
+  \right) \nonumber \\
+  &= \frac{e(t)}{2}
   \left[ \begin{array}{cc}
     0 & e^{i(\delta\omega t + \phi_d)} \\
     e^{-i(\delta\omega t + \phi_d)} & 0
-  \end{array} \right]
-  \, . \label{eq:drivingH_matrixForm}
-\end{equation}
-If the drive is on resonance with the frame, and therefore on resonance with the qubit, then we are left with
+  \end{array} \right] \label{eq:drivingH_matrixForm}
+\end{align}
+where $\delta\omega \equiv \omega_d - \omega_r$.
+If the drive is on resonance with the frame then the drive Hamiltonian simplifies to
 \begin{align}
   RH_dR^{\dagger}/h_d
   &= \frac{e(t)}{2}
   \left[ \begin{array}{cc}
     0 & e^{i\phi_d} \\ e^{-i\phi_d} & 0
-  \end{array} \right] \\
+  \end{array} \right] \nonumber \\
   &= \frac{e(t)}{2} \left[ I \sigma_x + Q \sigma_y \right] .
 \end{align}
 This is a rotation about a time independent axis in the xy plane of the Bloch sphere.
@@ -110,12 +130,22 @@ See below for a discussion of the relationship between drive voltage $V_d$ and t
 \leveldown{Programming for experiment}
 
 Now that we know what the driving Hamiltonian looks like in the rotating frame we can investigate how to program our IF inputs to the IQ mixer to acheive a rotation on the Bloch sphere.
-From \citeinternalref{IQMixer} we know that an input IQ signal $e(t)\exp\left[i\omega t + \phi\right]$ produces an RF signal $ e(t)\cos\left[(\omega_c+\omega)t + \phi \right]$, where $\omega_c$ is the carrier frequency. Using trig identities we can rewrite this RF signal as \begin{equation}
-e(t) \left[ I\cos(\left[\omega_c+\omega\right] t) + Q\sin(\left[\omega_c+\omega\right]t)\right] \nonumber \end{equation}
+From \citeinternalref{IQMixer} we know that an input IQ signal $e(t)\exp\left[i\omega t + \phi\right]$ produces an RF signal $ e(t)\cos\left[(\omega_c+\omega)t + \phi \right]$, where $\omega_c$ is the carrier frequency.
+Using trig identities we can rewrite this RF signal as
+\begin{equation}
+  e(t)
+  \left[
+      I \cos(\left[\omega_c + \omega \right] t)
+    + Q \sin(\left[\omega_c + \omega \right] t)
+  \right]
+  \nonumber
+\end{equation}
 where $I=\cos(\phi)$ and $Q=-\sin(\phi)$.
 This exactly matches the form we assumed for $f(t)$ in eq. (\ref{eq:drivingFunctionIQ}) if we take $\omega_c + \omega = \omega_d$.
-Therefore if we choose $\omega$ such that $\omega + \omega_c = \omega_q$ and work in the rotating frame of the qubit, the driving Hamiltonian is \begin{equation}
-H_d/h_d = \frac{e(t)}{2}\left[I\sigma_x + Q\sigma_y\right]. \end{equation}
+Therefore if we choose $\omega$ such that $\omega + \omega_c = \omega_q$ and work in the rotating frame of the qubit, the driving Hamiltonian is
+\begin{equation}
+  H_d/h_d = \frac{e(t)}{2}\left[I\sigma_x + Q\sigma_y\right] \, .
+\end{equation}
 In practice we don't want to have to remember to account for the carrier frequency when programming a pulse so we define a mix function which multiplies our complex signal by $\exp\left[i(\omega_{q} - \omega_c)\right]$.
 That way if we program a signal $\exp\left[i\phi\right]$ the driving Hamiltonian in the frame of the qubit is produced in the following steps
 \begin{align*}
@@ -140,7 +170,7 @@ where $\sigma$ and $g$ are defined as in the following table:
     \hline \hline
     $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
     \hline
-    $2g/\hbar \sqrt{\omega_1 \omega_2}$ & $C_g / \sqrt{C_1 C_2}$ & $M/\sqrt{L_1L_2}$ \\
+    $2g / \hbar \sqrt{\omega_1 \omega_2}$ & $C_g / \sqrt{C_1 C_2}$ & $M/\sqrt{L_1L_2}$ \\
     \hline
   \end{tabular}
 \end{center}
@@ -151,13 +181,23 @@ In the charge case, the coupling Hamiltonian can be expanded as
     =& g \left(-\sigma^+ \sigma^+ - \sigma^- \sigma^- \right. \nonumber \\
      & \left. + \sigma^+ \sigma^- + \sigma^- \sigma^+ \right) \, .
 \end{align}
-Rotating the qubits' frames at $\omega_{r1}$ and $\omega_{r2}$ respectively and throwing away high frequency terms we get \begin{equation}
-H_g = g \left( e^{i \delta\omega_{r12} t} \sigma^+ \sigma^- + e^{-i \delta\omega_{r12} t} \sigma^- \sigma^+ \right) \end{equation}
+Rotating the qubits' frames at $\omega_{r1}$ and $\omega_{r2}$ respectively and throwing away high frequency terms we get
+\begin{equation}
+  H_g = g
+  \left(
+      e^{ i \delta\omega_{r12} t} \sigma^+ \sigma^-
+    + e^{-i \delta\omega_{r12} t} \sigma^- \sigma^+
+  \right)
+\end{equation}
 where $\delta\omega_{r12}\equiv \omega_{r1} - \omega_{r2}$.
-If both frames rotate at the same frequency the interaction simplifies to \begin{equation}
-H_g = g \left( \sigma^+ \sigma^- + \sigma^- \sigma^+ \right). \end{equation}
-The matrix form, with basis states \begin{equation}
-\left[ \ket{00}, \ket{01}, \ket{10}, \ket{11} \right] \nonumber \end{equation}
+If both frames rotate at the same frequency the interaction simplifies to
+\begin{equation}
+  H_g = g \left( \sigma^+ \sigma^- + \sigma^- \sigma^+ \right).
+\end{equation}
+The matrix form, with basis states
+\begin{equation*}
+  \left[ \ket{00}, \ket{01}, \ket{10}, \ket{11} \right]
+\end{equation*}
 (i.e. the states defined by Kronecker product) is
 \begin{equation}
   H_g =
