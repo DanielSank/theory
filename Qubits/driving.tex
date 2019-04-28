@@ -12,7 +12,7 @@ Q_d = R_d / Z_{LC} .
 With typical circuit impedances in the range 10's to 100's of Ohms, and RF source resistances of $50\,\Omega$\,\footnote{Commercial RF devices essentially \emph{all} use 50 \, $\Omega$ output impedance. This is simply due to the fact that a coaxial transmission line of reasonable size has near $50 \, \Omega$ impedance. The impedance depends logarithmically on geometric parameters and so cannot be significantly varied. 50$ \, \Omega$ has been chosen as a common standard.}, we have $Q_d \approx 1$ which is far too low to be useful in a quantum device.\footnote{The energy relaxation time of the circuit is $T_1 = Q_d / \omega$, so for a 1 GHz device $Q_l=1$ corresponds to $T_1=0.16 \, \text{ns}$.}
 
 The coupling capacitor $C_d$ helps preserve the circuit coherence.
-If $C_d$ is sufficiently small, its impedance $Z_{C_d} = 1/i\omega C_d$ is large and so the current flowing through $R_d$ is reduced.
+If $C_d$ is sufficiently small, its impedance $Z_{C_d} = 1/i\omega C_d$ is large and the current flowing through $R_d$ is reduced.
 Therefore, $C_d$ prevents the process by which energy from the oscillator gets into $R_d$ and is lost.
 To be specific, in the limit $Z_{C_d} \gg R_d$ the loaded quality factor of the oscillator is \citeinternalref{loadedMode}
 \begin{equation}
@@ -20,10 +20,9 @@ Q_l = \left( \frac{C}{C_d} \right)^2 \frac{Z_{LC}}{R_d} .
 \end{equation}
 Therefore, a small $C_d$ preserves the circuit's coherence.
 However, decoupling the drive line from the driving voltage source with a small $C_d$ also limits the speed with which we can control the circuit, so a balance must be struck.
-This issue is discussed in detail below.
+This balance is discussed in full quantitative detail later.
 
-We now turn back to formal analysis of the driven circuit.
-Even before doing any formal analysis, we can make a qualitative prediction.
+Let's now turn back to formal analysis of the driven circuit, starting with a qualitative prediction.
 The main capacitor $C$ is shunted by the series combination of the coupling capacitor $C_d$, and the resistor $R_d$.
 Because  $Z_{C_d} \gg R_d$ the impedance of the driving circuit is dominated by $C_d$ which simply adds in parallel with $C$.
 Therefore, we expect the effective capacitance of the mode to be $C+C_d$.
@@ -40,7 +39,7 @@ For the sake of identifying canonical coordinates we consider the case $V_d=0$, 
 \begin{equation*}
   \Phi
   \qquad \textrm{and} \qquad
-  p \equiv \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = \left( C + C_d \right) \dot{\Phi} \equiv Q
+  \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = \left( C + C_d \right) \dot{\Phi} \equiv Q
 \end{equation*}
 just as before, except that now the capacitance associated to the momentum $Q$ is $C+C_d$ instead of just $C$.
 The Hamiltonian is
@@ -98,13 +97,11 @@ Assuming fixed $\omega_{LC}$ and $C \gg C_d$, we find that the drive Hamiltonian
 which increases for \emph{increasing} impedance.
 These same arguments apply to qubit-qubit coupling, as will be described below.
 
-\levelstay{Summary - Simple derivation}
-
-The energy stored in the drive capacitor is $E_d = \frac{1}{2}C_d\left( V_d - V_q \right)^2$.
+\textbf{Summary - Simple derivation:} The energy stored in the drive capacitor is $E_d = \frac{1}{2}C_d\left( V_d - V_q \right)^2$.
 Keeping only the terms involving both the qubit and drive voltages yields \begin{equation}
 E_d = - C_d V_d V_q = - C_d V_d \frac{Q}{C} \end{equation}
 where $Q$ is the qubit charge.
-This matches Eq.\,(\ref{eq:sec:driving:H_dVsCircuitParams}), up to the sign, in the practical limit $C \gg C_d$.
+This matches the full result up to the sign, in the practical limit $C \gg C_d$.
 
 
 \levelstay{Inductive driving}
