@@ -11,21 +11,6 @@
 \renewcommand{\Re}{\textrm{Re}}
 \renewcommand{\Im}{\textrm{Im}}
 
-% Enable encapsulation of relative heading imports.
-% http://tex.stackexchange.com/questions/245348/recursively-import-sub-document-at-arbitrary-level
-\makeatletter
-\newcounter{currentimportdepth}
-\setcounter{currentimportdepth}{0}
-\newcommand{\subimportlevel}[3]{
-  \expandafter\edef\csname @currentlevel\thecurrentimportdepth\endcsname{\thecurrentlevel}
-  \addtocounter{currentimportdepth}{1}
-  \addtocounter{currentlevel}{-#3}
-  \subimport*{#1}{#2}
-  \addtocounter{currentimportdepth}{-1}
-  \setcounter{currentlevel}{\csname  @currentlevel\thecurrentimportdepth\endcsname}
-}
-\makeatother
-
 % Figures. Example usage:
 % \quickfig{\columnwidth}{my_image}{This is the caption}{fig:my_fig}
 \DeclareRobustCommand{\quickfig}[4]{
