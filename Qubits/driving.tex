@@ -58,41 +58,30 @@ H_d
   = C_d \dot{\Phi}V_d(t)
   = \frac{1}{1+C/C_d} Q V_d(t) \, . \label{eq:sec:driving:H_dVsCircuitParams}
 \end{equation*}
-Restricting to the lowest two levels, we can rewrite $H_d$ as
-\begin{align}
+Now going back to our definition of the $a$ operator, we can rewrite $Q$ as
+\begin{equation*}
+  Q = -i Q_\text{zpf} (a - a^\dagger)
+\end{equation*}
+Note that this equation holds regardless of whether or not we're dealing with a harmonic system.
+In other words, it is not necessary to have $H \propto a^\dagger a$ in order to write $Q$ in this form.
+Now if we restrict to any particular two levels $\ket{n}$ and $\ket{n+1}$, then the drive Hamiltonian becomes
+\begin{align*}
   H_d
-  &= \frac{V_d(t)}{1 + C/C_d}
-  \left[ \begin{array}{cc}
-    \bbraket{0}{Q}{0} & \bbraket{0}{Q}{1} \\
-    \bbraket{1}{Q}{0} & \bbraket{1}{Q}{1}
-  \end{array} \right] \\
-  &= \frac{V_d(t)}{1 + C/C_d} \times \nonumber \\
-  &\left[
-    \left| Q_{01} \right| \sigma_y
-    + \frac{\left( Q_{00} - Q_{11} \right)}{2} \sigma_z
-    + \frac{\left( Q_{00} + Q_{11} \right)}{2} \mathbf{I}
-  \right]
-\end{align}
-where $Q_{ij} \equiv \bbraket{i}{Q}{j}$.
-Another way to look at it is that if the circuit is nearly harmonic then $Q_{ii}\approx 0$ and we can re-express $Q$ as (see \citeinternaltype \citeinternalref{quantumOscillator})
-\begin{equation}
-Q = -iQ_{\textrm{zpf}}(a-a^{\dagger})
-\end{equation}
-where $Q_{\textrm{zpf}}\equiv \sqrt{\hbar/2Z_{LC}}$ and $Z_{LC} \equiv \sqrt{L/(C+C_d)}$.
-Inserting this into the driving Hamiltonian gives
-\begin{equation}
-H_d = \frac{-iQ_{\textrm{zpf}}}{1+C/C_d}V_d(t) (a-a^{\dagger}) \, .
-\end{equation}
-In a two level approximation for a qubit, $(a-a^{\dagger}) \rightarrow i \sigma_y$ and the driving Hamiltonian becomes \begin{equation}
-\text{(harmonic limit)} \quad H_d = \frac{Q_{\textrm{zpf}}}{1+C/C_d}V_d(t) \sigma_y \, . \label{eq:drivingHamiltonianLabFrame}
-\end{equation}
+  &= \frac{V_d(t)}{1 + C / C_d}
+    \left[ \begin{array}{cc}
+      \bbraket{n}{Q}{n} & \bbraket{n}{Q}{n+1} \\
+      \bbraket{n+1}{Q}{n} & \bbraket{n+1}{Q}{n+1}
+    \end{array}\right] \\
+  &= \frac{V_d(t)}{1 + C / C_d} \sqrt{n+1} \, Q_\text{zpf} \, \sigma_y
+  \, .
+\end{align*}
 Later, we will express this driving Hamiltonian in the rotating frame of the qubit.
 However, we can already see one important point: the coupling of the drive signal to the circuit scales with the zero point fluctuations in the circuit's charge, and therefore inversely with $\sqrt{Z_{LC}}$.
 In other words, low impedance would appear to give stronger coupling.
 However, one must be careful about what is being held constant.
 Assuming fixed $\omega_{LC}$ and $C \gg C_d$, we find that the drive Hamiltonian is proportional to
 \begin{equation}
-\omega_{LC} \sqrt{Z_{LC}}
+  \omega_{LC} \sqrt{Z_{LC}}
 \end{equation}
 which increases for \emph{increasing} impedance.
 These same arguments apply to qubit-qubit coupling, as will be described below.
@@ -138,32 +127,18 @@ so the driving Hamiltonian is
   H_d = - \frac{M_d}{L}I_d(t) \Phi \, .
 \end{equation}
 Note that adding a parallel junction to the circuit does \emph{not} change the form of $H_d$; the junction adds a term $(I_c \Phi_0 / 2\pi)\cos(\pi \Phi / \Phi_0)$ to the Lagrangian, but this term does not couple to $I_d$.
-
-Restricting to the lowest two levels, $H_d$ becomes
-\begin{align}
+Just as in the capacitive case, we can rewrite $\Phi$ in terms of the raising and lower operators
+\begin{equation*}
+  \Phi = \Phi_\text{zpf} (a + a^\dagger) \, .
+\end{equation*}
+Again restricting to two levels $\ket{n}$ and $\ket{n+1}$, the drive Hamiltonian becomes
+\begin{align*}
   H_d
   &= - \frac{M_d}{L} I_d(t)
-  \left[ \begin{array}{cc}
-    \bbraket{0}{\Phi}{0} & \bbraket{0}{\Phi}{1} \\
-    \bbraket{1}{\Phi}{0} & \bbraket{1}{\Phi}{1} 
-  \end{array} \right] \\
-  &= - \frac{M_d}{L} I_d(t) \times \nonumber \\
-  &\left[
-    \left| \Phi_{10} \right| \sigma_x
-    + \frac{(\Phi_{00} - \Phi_{11})}{2} \sigma_z
-    + \frac{(\Phi_{00} + \Phi_{11})}{2} \mathbf{I}
-  \right] \, .
-\end{align}
-If the circuit is nearly harmonic then $\Phi_{ii} \approx 0$ and we can re-express $\Phi$ as (see \citeinternaltype \citeinternalref{quantumOscillator})
-\begin{equation}
-  \Phi = \Phi_{\text{zpf}} \left( a + a^\dagger \right)
-\end{equation}
-where $\Phi_{\text{zpf}} \equiv \sqrt{\hbar Z_{LC} / 2}$ and $Z_{LC} \equiv \sqrt{L/C}$.
-Inserting this into $H_d$ gives
-\begin{equation}
-  H_d = -\frac{M_d}{L} I_d(t) \Phi_{\text{zpf}} (a + a^\dagger) \, .
-\end{equation}
-In a two level approximation for the qubit, $(a + a^\dagger)\rightarrow \sigma_x$ and $H_d$ becomes
-\begin{equation}
-  \text{(harmonic limit)} \quad H_d = - \frac{M_d}{L} I_d(t) \Phi_{\text{zpf}} \sigma_x \, .
-\end{equation}
+    \left[ \begin{array}{cc}
+      \bbraket{n}{\Phi}{n} & \bbraket{n}{\Phi}{n+1} \\
+      \bbraket{n+1}{\Phi}{n} & \bbraket{n+1}{\Phi}{n+1} \\
+    \end{array} \right] \\
+  &= - \frac{M_d}{L} I_d(t) \sqrt{n+1} \, \Phi_\text{zpf} \, \sigma_x
+  \, .
+\end{align*}
