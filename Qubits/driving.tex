@@ -44,7 +44,7 @@ For the sake of identifying canonical coordinates we consider the case $V_d=0$, 
 just as before, except that now the capacitance associated to the momentum $Q$ is $C+C_d$ instead of just $C$.
 The Hamiltonian is
 \begin{equation}
-H = \frac{Q^2}{2 (C + C_d)} + \frac{\Phi^2}{2L} \, .
+  H = \frac{Q^2}{2 (C + C_d)} + \frac{\Phi^2}{2L} \, .
 \end{equation}
 Now we consider what happens when the drive turns on.
 The term added to the Lagrangian by the drive is
@@ -58,13 +58,9 @@ H_d
   = C_d \dot{\Phi}V_d(t)
   = \frac{1}{1+C/C_d} Q V_d(t) \, . \label{eq:sec:driving:H_dVsCircuitParams}
 \end{equation*}
-Now going back to our definition of the $a$ operator, we can rewrite $Q$ as
-\begin{equation*}
-  Q = -i Q_\text{zpf} (a - a^\dagger)
-\end{equation*}
-Note that this equation holds regardless of whether or not we're dealing with a harmonic system.
-In other words, it is not necessary to have $H \propto a^\dagger a$ in order to write $Q$ in this form.
-Now if we restrict to any particular two levels $\ket{n}$ and $\ket{n+1}$, then the drive Hamiltonian becomes
+Now suppose the drive is on resonance with one particular transition $\ket{n} \rightarrow \ket{n+1}$ and far off resonance from any other transition.
+In this case we can restrict the analysis to just the states involved in the driven transition.\footnote{The restriction to two levels whose transition is on resonance with the drive is properly justified in the rotating frame, discussed later.}
+Noting that the wave functions of a one-dimensional quantum Hamiltonian are real and that $Q = -i \hbar d/d\Phi$, we can express the drive Hamiltonian as
 \begin{align*}
   H_d
   &= \frac{V_d(t)}{1 + C / C_d}
@@ -72,9 +68,22 @@ Now if we restrict to any particular two levels $\ket{n}$ and $\ket{n+1}$, then 
       \bbraket{n}{Q}{n} & \bbraket{n}{Q}{n+1} \\
       \bbraket{n+1}{Q}{n} & \bbraket{n+1}{Q}{n+1}
     \end{array}\right] \\
-  &= \frac{V_d(t)}{1 + C / C_d} \sqrt{n+1} \, Q_\text{zpf} \, \sigma_y
-  \, .
+  &= \frac{V_d(t)}{1 + C / C_d} \left(
+      \frac{S}{2} \mathbb{I}
+    + \frac{\Delta}{2} \sigma_z
+    + \abs{\bbraket{n}{Q}{n+1}} \sigma_y
+  \right)
 \end{align*}
+where $S \equiv \bbraket{0}{Q}{0} + \bbraket{1}{Q}{1}$ and $\Delta \equiv \bbraket{0}{Q}{0} - \bbraket{1}{Q}{1}$.
+Going back to our definition of the $a$ operator, we can rewrite $Q$ as
+\begin{equation*}
+  Q = -i Q_\text{zpf} (a - a^\dagger)
+\end{equation*}
+and if the system is approximately harmonic, then
+\begin{equation*}
+  H_d = \frac{V_d(t)}{1 + C / C_d} \sqrt{n+1} \, Q_\text{zpf} \, \sigma_y
+  \, .
+\end{equation*}
 Later, we will express this driving Hamiltonian in the rotating frame of the qubit.
 However, we can already see one important point: the coupling of the drive signal to the circuit scales with the zero point fluctuations in the circuit's charge, and therefore inversely with $\sqrt{Z_{LC}}$.
 In other words, low impedance would appear to give stronger coupling.
