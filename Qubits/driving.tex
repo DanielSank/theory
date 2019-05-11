@@ -60,7 +60,11 @@ H_d
 \end{equation*}
 Now suppose the drive is on resonance with one particular transition $\ket{n} \rightarrow \ket{n+1}$ and far off resonance from any other transition.
 In this case we can restrict the analysis to just the states involved in the driven transition.\footnote{The restriction to two levels whose transition is on resonance with the drive is properly justified in the rotating frame, discussed later.}
-Noting that the wave functions of a one-dimensional quantum Hamiltonian are real and that $Q = -i \hbar d/d\Phi$, we can express the drive Hamiltonian as
+Because the wave functions of a one-dimensional quantum Hamiltonian are real and because $Q = -i \hbar d/d\Phi$, we can write
+\begin{equation*}
+  \bbraket{n}{Q}{n+1} = -i \abs{\bbraket{n}{Q}{n+1}} \, ,
+\end{equation*}
+and using that we can write $H_d$ as
 \begin{align*}
   H_d
   &= \frac{V_d(t)}{1 + C / C_d}
@@ -69,17 +73,17 @@ Noting that the wave functions of a one-dimensional quantum Hamiltonian are real
       \bbraket{n+1}{Q}{n} & \bbraket{n+1}{Q}{n+1}
     \end{array}\right] \\
   &= \frac{V_d(t)}{1 + C / C_d} \left(
-      \frac{S}{2} \mathbb{I}
-    + \frac{\Delta}{2} \sigma_z
+      \frac{S_Q}{2} \mathbb{I}
+    + \frac{\Delta_Q}{2} \sigma_z
     + \abs{\bbraket{n}{Q}{n+1}} \sigma_y
   \right)
 \end{align*}
-where $S \equiv \bbraket{0}{Q}{0} + \bbraket{1}{Q}{1}$ and $\Delta \equiv \bbraket{0}{Q}{0} - \bbraket{1}{Q}{1}$.
+where $S_Q \equiv \bbraket{n}{Q}{n} + \bbraket{n+1}{Q}{n+1}$ and $\Delta_Q \equiv \bbraket{n}{Q}{n} - \bbraket{n+1}{Q}{n+1}$.
 Going back to our definition of the $a$ operator, we can rewrite $Q$ as
 \begin{equation*}
   Q = -i Q_\text{zpf} (a - a^\dagger)
 \end{equation*}
-and if the system is approximately harmonic, then
+and if the system is approximately harmonic, then $\bbraket{n}{Q}{n} \approx 0$, $\bbraket{n+1}{Q}{n+1} \approx 0$, and $\bbraket{n}{Q}{n+1} \approx Q_\text{zpf} \sqrt{n+1}$, so
 \begin{equation*}
   H_d = \frac{V_d(t)}{1 + C / C_d} \sqrt{n+1} \, Q_\text{zpf} \, \sigma_y
   \, .
@@ -136,18 +140,21 @@ so the driving Hamiltonian is
   H_d = - \frac{M_d}{L}I_d(t) \Phi \, .
 \end{equation}
 Note that adding a parallel junction to the circuit does \emph{not} change the form of $H_d$; the junction adds a term $(I_c \Phi_0 / 2\pi)\cos(\pi \Phi / \Phi_0)$ to the Lagrangian, but this term does not couple to $I_d$.
-Just as in the capacitive case, we can rewrite $\Phi$ in terms of the raising and lower operators
+Just as we did for the capacitive drive, we can express the restriction of the inductive drive Hamiltonian two a two-level subspace as
 \begin{equation*}
-  \Phi = \Phi_\text{zpf} (a + a^\dagger) \, .
+  H_d = -\frac{M_d}{L} I_d(t) \left(
+      \frac{S_\Phi}{2} \mathbb{I}
+    + \frac{\Delta_\Phi}{2} \sigma_z
+    + \abs{\bbraket{n}{\Phi}{n+1}} \sigma_x
+  \right)
 \end{equation*}
-Again restricting to two levels $\ket{n}$ and $\ket{n+1}$, the drive Hamiltonian becomes
-\begin{align*}
-  H_d
-  &= - \frac{M_d}{L} I_d(t)
-    \left[ \begin{array}{cc}
-      \bbraket{n}{\Phi}{n} & \bbraket{n}{\Phi}{n+1} \\
-      \bbraket{n+1}{\Phi}{n} & \bbraket{n+1}{\Phi}{n+1} \\
-    \end{array} \right] \\
-  &= - \frac{M_d}{L} I_d(t) \sqrt{n+1} \, \Phi_\text{zpf} \, \sigma_x
+where $S_\Phi = \bbraket{n}{\Phi}{n} + \bbraket{n+1}{\Phi}{n+1}$ and $\Delta_\Phi = \bbraket{n}{\Phi}{n} - \bbraket{n+1}{\Phi}{n+1}$.
+Just as in the capacitive case, we can rewrite $\Phi$ in terms of the raising and lowering operators
+\begin{equation*}
+  \Phi = \Phi_\text{zpf} (a + a^\dagger)
+\end{equation*}
+and if the system is approximately harmonic then
+\begin{equation*}
+  H_d = - \frac{M_d}{L} I_d(t) \sqrt{n+1} \, \Phi_\text{zpf} \, \sigma_x
   \, .
-\end{align*}
+\end{equation*}
