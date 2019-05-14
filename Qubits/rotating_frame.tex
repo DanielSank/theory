@@ -49,15 +49,13 @@ From section \ref{sec:driving} we have the general driving Hamiltonian in the la
 \end{equation}
 where $h_d$ and $\sigma$ are defined for the charge and flux coupled cases as in the following table:
 \begin{center}
-  \begin{tabular}{|r|c|c|}
+  \begin{tabular}{r|cc}
     \hline
     & \textbf{Charge} & \textbf{Flux} \\
-    \hline \hline
+    \hline
     $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
-    \hline
     $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
-    \hline
-    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $\Phi_\text{zpf} I_d (M_d/L_q)$ \\
+    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $-\Phi_\text{zpf} I_d (M_d/L_q)$ \\
     \hline
   \end{tabular}
 \end{center}
@@ -158,19 +156,19 @@ Thus our choice of angle $\phi$ directly maps to the angle of the rotation on th
 
 \levelup{Coupling}
 
-We found that the coupling Hamiltonian in the Schro-dinger picture is
+We found that the coupling Hamiltonian in the Schrodinger picture is
 \begin{equation}
-H_g = g \left( \sigma \otimes \sigma \right)
+  H_g = g \left( \sigma \otimes \sigma \right)
 \end{equation}
 where $\sigma$ and $g$ are defined as in the following table:
 \begin{center}
-  \begin{tabular}{|r|c|c|}
+  \begin{tabular}{r|cc}
     \hline
-    & \textbf{Charge} & \textbf{Flux} \\
-    \hline \hline
+    \textbf{Quantity} & \textbf{Charge} & \textbf{Flux} \\
+    \hline
     $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
-    \hline
-    $2g / \hbar \sqrt{\omega_1 \omega_2}$ & $C_g / \sqrt{C_1 C_2}$ & $M/\sqrt{L_1L_2}$ \\
+
+    $2g / \hbar \sqrt{\omega_1 \omega_2}$ & $C_g / \sqrt{C_1 C_2}$ & $-M/\sqrt{L_1L_2}$ \\
     \hline
   \end{tabular}
 \end{center}

@@ -8,15 +8,13 @@ As mentioned previously, for both capacitive and inductive driving, we can write
 \end{equation*}
 with
 \begin{center}
-  \begin{tabular}{|r|c|c|}
+  \begin{tabular}{r|cc}
     \hline
     & \textbf{Charge} & \textbf{Flux} \\
-    \hline \hline
+    \hline
     $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
-    \hline
     $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
-    \hline
-    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $\Phi_\text{zpf} I_d (M_d/L_q)$ \\
+    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $-\Phi_\text{zpf} I_d (M_d/L_q)$ \\
     \hline
   \end{tabular}
 \end{center}
@@ -33,7 +31,8 @@ where $Z_q$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, gi
 
 For a resonant drive with envelope $f(t) = \cos(\omega t + \phi)$, we found in the rotating frame
 \begin{equation*}
-  H_d \, (\text{rotating frame}) = \frac{h_d}{2} \left( \cos(\phi) \sigma_x + \sin(\phi) \sigma_y \right) \, .
+  H_d \, (\text{rotating frame})
+  = \frac{h_d}{2} \left( \cos(\phi) \sigma_x - \sin(\phi) \sigma_y \right) \, .
 \end{equation*}
 The angle $\phi$ is a phase reference for the drive signal and we can choose it to be whatever want.
 For convenience, we choose $\phi=0$ for the flux case and $\phi=\pi/2$ for the charge case, allowing us to write the unitary operator driving the qubit as
