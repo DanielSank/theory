@@ -17,6 +17,14 @@
   \mathcal{F}(f)(\omega) = \tilde{f}(\omega) = \int f(t) e^{-i \omega t} \, dt
 \end{equation*}
 
+\begin{equation*}
+  (f \otimes g)(\tau) \equiv \int f(t) g(\tau - t) \, dt
+\end{equation*}
+
+\begin{equation*}
+  (f \star g)(\tau) \equiv \int f(t)^* g(t + \tau) \, dt
+\end{equation*}
+
 \section{Trigonometric formulae}
 
 \subsection*{Phase / amplitudes}
@@ -69,7 +77,7 @@ Given two modulation functions $I$ and $Q$ both band limited in the frequency ra
   \right]
 \end{align*}
 
-\section{Some other stuff}
+\subsection{Some other stuff}
 
 \begin{align*}
   \cos(\Omega t) &\rightarrow \frac{1}{2} \left[ \delta(\omega - \Omega) + \delta(\omega + \Omega) \right] \\
@@ -95,44 +103,47 @@ Given two modulation functions $I$ and $Q$ both band limited in the frequency ra
 
 \subsection{Convolution}
 \begin{align*}
-  \widetilde{(fg)}
+  \mathcal{F}(f \cdot g)
   &= \int f(t) g(t) \, e^{-i 2 \pi N t} \, dt
   =  \int \tilde{f}(\nu) \tilde{g}(N - \nu) \, d\nu
   = (\tilde{g} \otimes \tilde{f}) \\
-  \widetilde{(f \otimes g)}
+  \mathcal{F}(f \otimes g)
   &= \int (f \otimes g)(t) \, e^{-i 2 \pi \nu t} \, dt
   = \tilde{f}(\nu) \tilde{g}(\nu)
-  = \tilde{f} \tilde{g} \\
-  \mathcal{F}^{-1}(\tilde{f} \tilde{g})
-  &= \int_{\nu} \tilde{f}(\nu) \tilde{g}(\nu) e^{i 2 \pi \nu \tau} \, d\nu
-  = \int_{t} f(t) g(\tau - t) \, dt
+  = \tilde{f} \cdot \tilde{g} \\
+  \mathcal{F}^{-1}(\tilde{f} \cdot \tilde{g})
+  &= \int \tilde{f}(\nu) \tilde{g}(\nu) e^{i 2 \pi \nu \tau} \, d\nu
+  = \int f(t) g(\tau - t) \, dt
   = (f \otimes g) \\
-  \mathcal{F}^{-1}(\tilde{f} \otimes \tilde{f})
-  &= \int_{\nu}(\tilde{f} \otimes \tilde{g})(\nu) \, e^{i 2 \pi \nu t} \, d\nu
+  \mathcal{F}^{-1}(\tilde{f} \otimes \tilde{g})
+  &= \int \tilde{f} \otimes \tilde{g})(\nu) \, e^{i 2 \pi \nu t} \, d\nu
   = f(t) g(t)
+  = f \cdot g
+\end{align*}
+
+\subsection{Cross correlation}
+
+\begin{equation*}
+  \int d\tau \, e^{-i 2 \pi \nu \tau} \left( f \star g \right)(\tau)
+  = \int d\tau e^{-i 2 \pi \nu \tau}
+    \left( \int f(t)^{*} g(t + \tau) \, dt \right)
+  = \tilde{f}(\nu)^* \tilde{g}(\nu)
+\end{equation*}
+
+\subsection{Weiner Kinchein}
+
+Consider the cross correlation theorem with $f=g$.
+Defining the physicist's power spectrum as $S_{p}(\nu)=\tilde{f}^{*}(\nu)\tilde{f}(\nu)$ we have
+\begin{align*}
+  \int e^{-i 2 \pi N \tau}(f \star f)(\tau) \, d\tau
+  &= \int e^{-i 2\pi \nu \tau}
+    \left( \int_{t} f(t)^* f(t + \tau) dt \right) d\tau
+  =\tilde{f}(\nu)^* \tilde{f}(\nu) = S_{p}(\nu) \\
+  \int S_{p}(\nu) e^{i 2 \pi \nu \tau} \, d\nu
+  &= \int f(t)^* f(t + \tau) \, dt = (f \star f)(\tau)
 \end{align*}
 
 Edited to here
-
-\subsection{Cross Correlation}
-
-\begin{equation}
-  \int_{\tau} d\tau e^{-i 2 \pi N \tau}
-  \left(f \star g\right)(\tau)
-  = \int_{\tau} d\tau e^{-i 2 \pi N \tau}
-  \left(\int_{t}f(t)^{*}g(t+\tau)dt\right)
-  =\tilde{f}(N)^{*}\tilde{g}(N)
-\end{equation}
-
-\subsection{Weiner Kinchein}
-Consider the cross correlation theorem
-with $f=g$.
-Defining the physicist's power spectrum as $S_{p}(\nu)=\tilde{f}^{*}(\nu)\tilde{f}(\nu)$
-we have
-\begin{eqnarray*}
-  \int_{\tau}e^{-i2\pi N\tau}(f\star f)(\tau)d\tau & = & \int_{\tau}e^{-i2\pi N\tau}\left(\int_{t}f(t)^{*}f(t+\tau)dt\right)d\tau=\tilde{f}(N)^{*}\tilde{f}(N)=S_{p}(N)\\
-  \int_{N}S_{p}(N)e^{i2\pi N\tau}dN & = & \int_{t}f(t)^{*}f(t+\tau)\: dt
-  \end{eqnarray*}
 
 \subsection*{Real Signals}
 
