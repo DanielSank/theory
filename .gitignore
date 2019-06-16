@@ -5,3 +5,7 @@ build/
 *.aux
 *.out
 *.log
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
