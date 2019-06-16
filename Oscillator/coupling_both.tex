@@ -10,6 +10,9 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
+
+\section{Kirchhoff's laws}
 
 \quickfig{\columnwidth}{coupled_circuits.pdf}{Two coupled resonators.}{fig:coupledOscillatorsLAndC:diagram}
 
@@ -73,7 +76,10 @@ Traditional analysis of circuits in the physics literature use flux and charge i
   \ddot \Phi_a (C_a + C_g) - C_g \ddot \Phi_b + \frac{\Phi_a}{L_a'} - \frac{\Phi_b}{L_g'} &= 0 \\
   \ddot \Phi_b (C_b + C_g) - C_g \ddot \Phi_a + \frac{\Phi_b}{L_b'} - \frac{\Phi_a}{L_g'} &= 0 \, .
 \end{align*}
-By inspecition and a bit of fiddling around, you can check that these equations of motion come from the Lagrangian
+
+\section{Hamiltonian form}
+
+By inspection and a bit of fiddling around, you can check that these equations of motion come from the Lagrangian
 \begin{align}
   \mathcal{L}
   =& \underbrace{\frac{C_g}{2} \left(\dot \Phi_a - \dot \Phi_b \right)^2
@@ -135,6 +141,9 @@ Note also that $\sum_i \dot \Phi_i Q_i = \bbraket{Q}{T_C^{-1}}{Q}$, so we can wr
   &+ \underbrace{\frac{Q_a Q_b}{C_g'} - \frac{\Phi_a \Phi_b}{L_g'}}_{\text{coupling Hamiltonian }H_g}
   \, .
 \end{align}
+
+\subsection{Dimensionless variables}
+
 We will now simplify this Hamiltonian so that we can easily find its normal modes.
 First, we define
 \begin{align*}
@@ -151,6 +160,10 @@ In these new variables, the Hamiltonian is
    - 2 \frac{\sqrt{Z_a Z_b}}{L_g'} X_a X_b
   \, .
 \end{align}
+
+
+\subsection{Rotating modes}
+
 Finally we define
 \begin{align}
   a &\equiv X_a + i Y_a \nonumber \\
@@ -198,6 +211,10 @@ Hamilton's equations of motion can now be expressed in matrix form
   \end{array} \right)
   \left( \begin{array}{c} a \\ b \\ a^* \\ b^* \end{array} \right) \, .
 \end{equation*}
+
+
+\section{Rotating wave approximation}
+
 The matrix in these equations of motion can be expressed algebraically as
 \begin{equation}
   -i \left[
@@ -209,7 +226,8 @@ The matrix in these equations of motion can be expressed algebraically as
   \right]
 \end{equation}
 where $S \equiv \omega_a' + \omega_b'$ and $\Delta \equiv \omega_a' - \omega_b'$.
-The rotating wave approximation drops the $ab$ and $a^* b^*$ terms of the coupling Hamiltonian.
+The rotating wave approximation drops the $ab$ and $a^* b^*$ terms of the coupling Hamiltonian, i.e. the terms proportional to $g_+$.
+
 That's equivalent to dropping the antidiagonal part of the matrix representation of Hamilton's equations of motion and therefore the $\sigma_y \otimes \sigma_x$ term in the algebraic representation.
 In the matrix, we can see that dropping these terms is precisely equivalent to decoupling the clockwise and counterclockwise rotating modes.
 In the rotating wave aproximation, the algebraic representation is reduced to
@@ -230,5 +248,22 @@ There we can see the famous avoided level crossing of coupled resonators.
 \quickfig{0.8\columnwidth}{avoided_crossing.pdf}{Normal frequencies $\omega_+$ (red) and $\omega_-$ (blue) as a function of $\omega_b'$ for $\omega_a' = 10$. Dashed lines are for $g_-=0.02$ and solid lines are for $g_-=0.1$.}{Figure:coupled_resonators_L_and_C:avoided_crossing}
 
 The rotating wave approximation (RWA) works in the limit $g_+ \ll \omega_a', \omega_b'$.
-A major benefit of the Hamiltonian formalism and partial frequencies and impedances is that it affords us this systematic and accurate approximation for the normal mode frequencies.
+This analysis has demonstrated the usefulness of the Hamiltonian formalism.
+by working with and Hamiltonian, with its partial frequencies and impedances, we found the systematic and accurate approximation, namely the RWA, for the normal mode frequencies.
+The lovely symmetry of Figure \ref{Figure:coupled_resonators_L_and_C:avoided_crossing} exists because we plot the normal frequencies against the partial frequency $\omega_b'$ rather than the uncoupled frequency $\omega_b$.
+
+As shown above, the RWA is equivalent to dropping the Hamiltonian terms proportional to $g_+$.
+Therefore, in a device where $g_+$ is constructed to be exactly zero the RWA would be exact!
+
+\section{Relation between coupling and damping}
+
+Consider the case of two resonators coupled through a coupling capacitor $C_g$.
+The coupling gives rise to a coupling strength $g_c$ as described above.
+If we replace resonator $b$ by a resistor $R$, then resonator $a$ would experience damping described by a quality factor $Q_a$.
+Similarly, if we were to replace resonator $a$ by resistor $R$, then resonator $b$ would experience damping described by a quality factor $Q_b$.
+Interestingly, the quality factors are related to the coupling strength $g_c$ via
+\begin{equation*}
+  \frac{(2 g_c)^2}{\omega_a' \omega_b'} \frac{R}{\sqrt{Z_a' Z_b'}} \sqrt{Q_a Q_b} = 1 \, .
+\end{equation*}
+
 \end{document}

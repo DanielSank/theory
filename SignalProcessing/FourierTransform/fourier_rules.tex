@@ -9,14 +9,31 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
 
-\section*{Useful formulae}
+\section{Notation}
 
-\begin{align*}
-  A \cos(x) + B \sin(x) &= M \cos(x+\phi) \\
-  \textrm{where} \qquad \qquad \qquad M^{2} &= A^{2}+B^{2} \\
-  \tan(\phi) &= -B / A
-\end{align*}
+\begin{equation*}
+  \mathcal{F}(f)(\omega) = \tilde{f}(\omega) = \int f(t) e^{-i \omega t} \, dt
+\end{equation*}
+
+\begin{equation*}
+  (f \otimes g)(\tau) \equiv \int f(t) g(\tau - t) \, dt
+\end{equation*}
+
+\begin{equation*}
+  (f \star g)(\tau) \equiv \int f(t)^* g(t + \tau) \, dt
+\end{equation*}
+
+\section{Trigonometric formulae}
+
+\subsection*{Phase / amplitudes}
+\begin{equation}
+  A \cos(x) + B \sin(x) = M \cos(x+\phi)
+\end{equation}
+where $M^{2} = A^{2}+B^{2}$ and $\tan(\phi) = -B / A$.
+
+\subsection*{Addition formulae}
 
 \begin{align*}
   \cos ( \alpha + \beta ) & =
@@ -24,6 +41,8 @@
   \sin ( \alpha + \beta ) & =
     \sin ( \alpha ) \cos ( \beta ) + \cos ( \alpha ) \sin ( \beta )
 \end{align*}
+
+\subsection*{Product formulae}
 
 \begin{align*}
   \sin(\alpha) \sin(\beta) & =
@@ -34,53 +53,97 @@
     \frac{1}{2} \left[ \sin (\alpha + \beta) + \sin(\alpha - \beta) \right]
 \end{align*}
 
+\subsection*{sine cosine equivalence}
+
 \begin{equation*}
   \cos(x) = \sin\left(x + \frac{\pi}{2} \right)
   \quad \textrm{and} \quad
   \sin(x) = \cos\left(x - \frac{\pi}{2} \right)
 \end{equation*}
 
+\subsection*{Modulation}
+
+Given two modulation functions $I$ and $Q$ both band limited in the frequency range from $[0, B]$, and a carrier at frequency $\Omega$, the following relations are true:
 \begin{align*}
   f(t) &= I(t) \cos(\Omega t) - Q(t) \sin(\Omega t) \\
   \tilde{f}(\omega) &= \frac{1}{2} \left[
-    \tilde I(\omega - \Omega) + i \tilde Q(\omega - \Omega)
+      \tilde I(\omega - \Omega) + i \tilde Q(\omega - \Omega)
     + \tilde I(\omega + \Omega) - i \tilde Q(\omega + \Omega)
-    \right]
+    \right] \\
+  f(t) &= \Re \left[
+    e^{i \Omega t} \int_{-B}^B \left(
+      \tilde{I}(\omega) + i \tilde{Q}(\omega)
+    \right) e^{i \omega t} \frac{d \omega}{2 \pi}
+  \right]
 \end{align*}
+
+\subsection{Some other stuff}
 
 \begin{align*}
   \cos(\Omega t) &\rightarrow \frac{1}{2} \left[ \delta(\omega - \Omega) + \delta(\omega + \Omega) \right] \\
-  \sin(\Omega t) &\rightarrow \frac{1}{2} \left[ -i \delta(\omega - \Omega) + i \delta(\omega + \Omega) \right] 
+  \sin(\Omega t) &\rightarrow \frac{1}{2} \left[ -i \delta(\omega - \Omega) + i \delta(\omega + \Omega) \right]
 \end{align*}
 
-\section*{Fourier transform rules in $t$ and $\nu$}
+\section{Fourier transform rules in $t$ and $\nu$}
 
-Checked every line in this section February 2014.
 
-\begin{itemize}
-\item \textbf{Fourier transform pair} \begin{eqnarray*}
-\tilde{f}(\nu) & = & \int f(t)e^{-i2\pi\nu t}~dt\\
-f(t) & = & \int\tilde{f}(\nu)e^{i2\pi\nu t}~d\nu\end{eqnarray*}
+\subsection{Fourier transform pair}
 
-\item \textbf{Delta function} \begin{eqnarray*}
-\int dt\: e^{i2\pi(\nu-\nu')t} & = & \delta(\nu-\nu')\\
-\int d\nu\: e^{i2\pi(t-t')\nu} & = & \delta(t-t')\end{eqnarray*}
+\begin{align*}
+  \tilde{f}(\nu) &= \int f(t) e^{-i 2 \pi \nu t} \, dt \\
+  f(t) &= \int \tilde{f}(\nu) e^{i 2 \pi \nu t} \, d\nu
+\end{align*}
 
-\item \textbf{Convolution} \begin{eqnarray*}
-\int_{t}f(t)g(t)~e^{-i2\pi Nt}~dt & = & \int_{\nu}\tilde{f}(\nu)\tilde{g}(N-\nu)~d\nu=(\tilde{g}*\tilde{f})(N)\\
-\int_{t}(f*g)(t)~e^{-i2\pi\nu t}~dt & = & \tilde{f}(\nu)\tilde{g}(\nu)\\
-\int_{\nu}\tilde{f}(\nu)\tilde{g}(\nu)~e^{i2\pi\nu\tau}~d\nu & = & \int_{t}f(t)g(\tau-t)~dt=(f*g)(\tau)\\
-\int_{\nu}(\tilde{f}*\tilde{g})(\nu)~e^{i2\pi\nu t}~d\nu & = & f(t)g(t)\end{eqnarray*}
+\subsection{Delta function}
 
-\item $\textbf{Cross Correlation}$\[
-\int_{\tau}d\tau e^{-i2\pi N\tau}\left(f\star g\right)(\tau)=\int_{\tau}d\tau e^{-i2\pi N\tau}\left(\int_{t}f(t)^{*}g(t+\tau)dt\right)=\tilde{f}(N)^{*}\tilde{g}(N)\]
+\begin{align*}
+  \int dt \, e^{i 2 \pi(\nu - \nu') t} &= \delta(\nu - \nu') \\
+  \int d\nu \, e^{i 2 \pi(t - t') \nu} &= \delta(t - t')
+\end{align*}
 
-\item $\textbf{Weiner Kinchein}$ Consider the cross correlation theorem
-with $f=g$. Defining the physicist's power spectrum as $S_{p}(\nu)=\tilde{f}^{*}(\nu)\tilde{f}(\nu)$
-we have\begin{eqnarray*}
-\int_{\tau}e^{-i2\pi N\tau}(f\star f)(\tau)d\tau & = & \int_{\tau}e^{-i2\pi N\tau}\left(\int_{t}f(t)^{*}f(t+\tau)dt\right)d\tau=\tilde{f}(N)^{*}\tilde{f}(N)=S_{p}(N)\\
-\int_{N}S_{p}(N)e^{i2\pi N\tau}dN & = & \int_{t}f(t)^{*}f(t+\tau)\: dt\end{eqnarray*}
-\end{itemize}
+\subsection{Convolution}
+\begin{align*}
+  \mathcal{F}(f \cdot g)
+  &= \int f(t) g(t) \, e^{-i 2 \pi N t} \, dt
+  =  \int \tilde{f}(\nu) \tilde{g}(N - \nu) \, d\nu
+  = (\tilde{g} \otimes \tilde{f}) \\
+  \mathcal{F}(f \otimes g)
+  &= \int (f \otimes g)(t) \, e^{-i 2 \pi \nu t} \, dt
+  = \tilde{f}(\nu) \tilde{g}(\nu)
+  = \tilde{f} \cdot \tilde{g} \\
+  \mathcal{F}^{-1}(\tilde{f} \cdot \tilde{g})
+  &= \int \tilde{f}(\nu) \tilde{g}(\nu) e^{i 2 \pi \nu \tau} \, d\nu
+  = \int f(t) g(\tau - t) \, dt
+  = (f \otimes g) \\
+  \mathcal{F}^{-1}(\tilde{f} \otimes \tilde{g})
+  &= \int \tilde{f} \otimes \tilde{g})(\nu) \, e^{i 2 \pi \nu t} \, d\nu
+  = f(t) g(t)
+  = f \cdot g
+\end{align*}
+
+\subsection{Cross correlation}
+
+\begin{equation*}
+  \int d\tau \, e^{-i 2 \pi \nu \tau} \left( f \star g \right)(\tau)
+  = \int d\tau e^{-i 2 \pi \nu \tau}
+    \left( \int f(t)^{*} g(t + \tau) \, dt \right)
+  = \tilde{f}(\nu)^* \tilde{g}(\nu)
+\end{equation*}
+
+\subsection{Weiner Kinchein}
+
+Consider the cross correlation theorem with $f=g$.
+Defining the physicist's power spectrum as $S_{p}(\nu)=\tilde{f}^{*}(\nu)\tilde{f}(\nu)$ we have
+\begin{align*}
+  \int e^{-i 2 \pi N \tau}(f \star f)(\tau) \, d\tau
+  &= \int e^{-i 2\pi \nu \tau}
+    \left( \int_{t} f(t)^* f(t + \tau) dt \right) d\tau
+  =\tilde{f}(\nu)^* \tilde{f}(\nu) = S_{p}(\nu) \\
+  \int S_{p}(\nu) e^{i 2 \pi \nu \tau} \, d\nu
+  &= \int f(t)^* f(t + \tau) \, dt = (f \star f)(\tau)
+\end{align*}
+
+Edited to here
 
 \subsection*{Real Signals}
 
