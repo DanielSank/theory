@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 filenames = [
+    'distributed_resonator_quarter_wave',
     'mutual_inductance',
     'parallel_series_equivalent',
     'loaded_mode'

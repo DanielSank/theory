@@ -11,6 +11,10 @@
 
 \maketitle
 
+\tableofcontents
+
+\section{Conventions}
+
 In this document we make the following notation conventions: \begin{eqnarray*}
 Z_0 &=& \textrm{characteristic impedance of a transmission line} \\
 \gamma &=& \alpha+i\beta = \textrm{propagation constant. eg. a right moving wave is } e^{-i\gamma} \\
@@ -80,4 +84,50 @@ E &=& \frac{1}{4} Lc V_0^2 \\
 &=& \frac{1}{2}C V_0^2 \end{eqnarray*}
 In the last line we took $\omega \approx \omega_0$ and substituted the expression for the $\lambda/4$ resonator's equivalent capacitance $C$. This shows that the usual formula for the energy stored in a lumped parallel LRC resonator is correct for the $\lambda/4$ resonator when using the equivalent lumped quantities.
 
+\subsection{Impedance}
+
+\quickfig{0.5\columnwidth}{distributed_resonator_quarter_wave}{A quarter wave resonator}{fig:resonator_quarter_wave}
+
+Now we compute the impedance to ground from a point a distance $x L$ away from the shorted end of a quarter wave resonator.
+The impedance is the parallel combination of two stubs, one open and one short:
+\begin{equation}
+  Z_\text{short}(x) = i Z_0 \tan \left( \beta x L \right)
+  \qquad 
+  Z_\text{open}(x) = -i Z_0 \cot \left( \beta (1-x) L \right)
+\end{equation}
+so
+\begin{align}
+  Z(x)
+  &= Z_\text{short}(x) \lvert \lvert Z_\text{open}(x) \nonumber \\
+  &= -i Z_0 \frac{\tan(\beta x L) \cot(\beta (1 - x) L)}{\tan(\beta x L) - \cot(\beta x L)} \, .
+\end{align}
+We can simplify this expression by introducing more useful variables.
+First, the length $L$ of the line is related to to the resonance frequency $\omega_r$ via $L = (1/4)2 \pi v / \omega_r$ where $v$ is the propogation speed.
+Second, $\beta$ is related to the drive frequency $\omega_d$ via $\beta = \omega_d / v$.
+Finally, we introduce the dimensionless detuning $\delta = \omega_d - \omega_r / \omega_r$.
+Putting that all in, and taking the limit $\delta \ll 1$, we find
+\begin{align}
+  Z(x)
+  &= i Z_0 \frac{
+    \cos \left( \frac{\pi}{2} (x - 1) (1 + \delta) \right)
+    \sin \left( \frac{\pi}{2} x (1 + \delta) \right)}
+  {\cos \left( \frac{\pi}{2} (1 + \delta) \right)} \nonumber \\
+  &\approx i Z_0 \frac{
+    \left[
+      \cos\left(\frac{\pi}{2}(x-1)\right) - \sin\left(\frac{\pi}{2}(x-1)\right) \frac{\pi}{2}(x-1)\delta
+  \right]
+  \left[
+    \sin\left(\frac{\pi}{2}x\right) + \cos\left(\frac{\pi}{2}x\right)\frac{\pi}{2}x\delta
+  \right]
+  }{-\delta \frac{\pi}{2}} \nonumber \\
+  &\approx - \frac{2}{\pi} i Z_0 \frac{\sin \left(\frac{\pi}{2} x \right)^2}{\delta}
+\end{align}
+Comparing to the impedance (near resonance) of a parallel LC resonator
+\begin{equation*}
+  \frac{-i Z_{LC}}{2 \delta} \, ,
+\end{equation*}
+we see the equivalence
+\begin{equation}
+  Z_{LC} = \frac{4}{\pi} Z_0 \sin\left(\frac{\pi}{2} x \right)^2 \, .
+\end{equation}
 \end{document}
