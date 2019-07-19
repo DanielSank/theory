@@ -104,8 +104,8 @@ The coupling term in the Hamiltonian is
 \end{equation}
 To re-express it in terms of Pauli operators we use the harmonic limit expressions
 \begin{align}
-  \tilde{Q}_a = -i Q_{\textrm{zpf}, a} (a - a^{\dagger}) \nonumber \\
-  \tilde{Q}_b = -i Q_{\textrm{zpf}, b} (b - b^{\dagger}) \nonumber \, ,
+  Q_a = -i Q_{\textrm{zpf}, a} (a - a^{\dagger}) \nonumber \\
+  Q_b = -i Q_{\textrm{zpf}, b} (b - b^{\dagger}) \nonumber \, ,
 \end{align}
 we get
 \begin{align*}
@@ -120,7 +120,7 @@ we get
 where $\omega_i' \equiv 1 / \sqrt{L_i C_i'}$ and where we have used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_{y,a}$}.
 Defining the ``coupling strength'' $g$ as
 \begin{equation}
-  g \equiv \frac{1}{2} \frac{C_g}{\sqrt{(C_a + C_g) (C_b + C_g)}} \hbar \sqrt{\omega_1' \omega_2'}
+  g/\hbar \equiv \frac{1}{2} \frac{C_g}{\sqrt{(C_a + C_g) (C_b + C_g)}} \sqrt{\omega_1' \omega_2'}
 \end{equation}
 we can rewrite the coupling Hamiltonian as
 \begin{equation}
@@ -243,3 +243,8 @@ and so the Hamiltonian is
     - \frac{\Phi_a \Phi_b}{M'}
   \, .
 \end{align}
+Writing the coupling term as $g (\sigma_{x,a} \, \sigma_{x,b})$, we find
+\begin{equation}
+  g/\hbar \equiv - \frac{1}{2} \frac{M}{\sqrt{L_a L_b}} \sqrt{\omega_a' \omega_b'}
+  \, .
+\end{equation}
