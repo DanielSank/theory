@@ -43,14 +43,14 @@ For the sake of identifying canonical coordinates we consider the case $V_d=0$, 
 \end{equation*}
 just as before, except that now the capacitance associated to the momentum $Q$ is $C+C_d$ instead of just $C$, which makes sense because $C_d$ is in parallel with $C$.
 The Hamiltonian is
-\begin{equation}
+\begin{equation*}
   H = \frac{Q^2}{2 (C + C_d)} + \frac{\Phi^2}{2L} \, .
-\end{equation}
+\end{equation*}
 Now we consider what happens when the drive turns on.
 The term added to the Lagrangian by the drive is
-\begin{equation}
+\begin{equation*}
   \mathcal{L}_d = \frac{1}{2}C_d V_d(t)^2 - C_d \dot{\Phi} V_d(t) \, .
-\end{equation}
+\end{equation*}
 The first term is of no consequence as it does not involve the dynamical variables.
 The second term couples the drive to the momentum $Q$, resulting in a Hamiltonian term
 \begin{equation*}
@@ -58,13 +58,13 @@ H_d
   = C_d \dot{\Phi}V_d(t)
   = \frac{1}{1+C/C_d} Q V_d(t) \, . \label{eq:sec:driving:H_dVsCircuitParams}
 \end{equation*}
-Now suppose the drive is on resonance with one particular transition $\ket{n} \rightarrow \ket{n+1}$ and far off resonance from any other transition.
+Now in the quantum mechanical case, suppose the drive is on resonance with one particular transition $\ket{n} \rightarrow \ket{n+1}$ and far off resonance from any other transition.
 In this case we can restrict the analysis to just the states involved in the driven transition.\footnote{The restriction to two levels whose transition is on resonance with the drive is properly justified in the rotating frame, discussed later.}
 Because the wave functions of a one-dimensional quantum Hamiltonian are real and because $Q = -i \hbar d/d\Phi$, we can write
 \begin{equation*}
   \bbraket{n}{Q}{n+1} = -i \abs{\bbraket{n}{Q}{n+1}} \, ,
 \end{equation*}
-and using that we can write $H_d$ as
+which lets us write $H_d$ as
 \begin{align*}
   H_d
   &= \frac{V_d(t)}{1 + C / C_d}
@@ -79,7 +79,13 @@ and using that we can write $H_d$ as
   \right)
 \end{align*}
 where $S_Q \equiv \bbraket{n}{Q}{n} + \bbraket{n+1}{Q}{n+1}$ and $\Delta_Q \equiv \bbraket{n}{Q}{n} - \bbraket{n+1}{Q}{n+1}$.
-Going back to our definition of the $a$ operator, we can rewrite $Q$ as
+The identity term can be ignored, and the $\sigma_z$ term is negligible when $\Delta_Q$ is small or when $V_d(t)$ is a high frequency drive near the resonance frequency of the resonator.\footnote{We're not justifying this here, but we will in the section on the rotating frame.}
+With only the $\sigma_y$ term remaining, we have
+\begin{equation}
+  H_d = \frac{V_d(t)}{1 + C/C_d} \abs{Q_{n,n+1}} \, \sigma_y \, .
+\end{equation}
+
+In the limit that the matrix elements are harmonic we can rewrite $Q$ as
 \begin{equation*}
   Q = -i Q_\text{zpf} (a - a^\dagger)
 \end{equation*}
@@ -88,7 +94,7 @@ and if the system is approximately harmonic, then $\bbraket{n}{Q}{n} \approx 0$,
   H_d = \frac{V_d(t)}{1 + C / C_d} \sqrt{n+1} \, Q_\text{zpf} \, \sigma_y
   \, .
 \end{equation*}
-Later, we will express this driving Hamiltonian in the rotating frame of the qubit.
+Later, we will express this driving Hamiltonian in the rotating frame of the resonator.
 However, we can already see one important point: the coupling of the drive signal to the circuit scales with the zero point fluctuations in the circuit's charge, and therefore inversely with $\sqrt{Z_{LC}}$.
 In other words, low impedance would appear to give stronger coupling.
 However, one must be careful about what is being held constant.
@@ -97,12 +103,14 @@ Assuming fixed $\omega_{LC}$ and $C \gg C_d$, we find that the drive Hamiltonian
   \omega_{LC} \sqrt{Z_{LC}}
 \end{equation}
 which increases for \emph{increasing} impedance.
-These same arguments apply to qubit-qubit coupling, as will be described below.
+These same arguments apply to resonator-resonator coupling, as will be described below.
 
 \textbf{Summary - Simple derivation:} The energy stored in the drive capacitor is $E_d = \frac{1}{2}C_d\left( V_d - V_q \right)^2$.
-Keeping only the terms involving both the qubit and drive voltages yields \begin{equation}
-E_d = - C_d V_d V_q = - C_d V_d \frac{Q}{C} \end{equation}
-where $Q$ is the qubit charge.
+Keeping only the terms involving both the resonator and drive voltages yields
+\begin{equation}
+  E_d = - C_d V_d V_q = - V_d \frac{C_d}{C} Q
+\end{equation}
+where $Q$ is the resonator charge.
 This matches the full result up to the sign, in the practical limit $C \gg C_d$.
 
 
@@ -116,7 +124,7 @@ This matches the full result up to the sign, in the practical limit $C \gg C_d$.
 \label{fig:qubits.inductive_drive}
 \end{figure}
 
-We now consider the case in which we drive by applying current into an inductor which is coupled to the qubit inductor through a mutual inductance $M_d$, as shown in Figure \ref{fig:qubits.inductive_drive}.
+We now consider the case in which we drive by applying current into an inductor which is coupled to the resonator's inductor through a mutual inductance $M_d$, as shown in Figure \ref{fig:qubits.inductive_drive}.
 With a drive current $I_d(t)$ Kirchhoff's law for the circuit yields the equation of motion
 \begin{equation}
   \ddot{\Phi} + \omega_{LC}^2 \Phi = I_d \, \omega_{LC}^2 M_d \, .
