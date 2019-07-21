@@ -147,10 +147,11 @@ Therefore if we choose $\omega$ such that $\omega + \omega_c = \omega_q$ and wor
 In practice we don't want to have to remember to account for the carrier frequency when programming a pulse so we define a mix function which multiplies our complex signal by $\exp\left[i(\omega_{q} - \omega_c)\right]$.
 That way if we program a signal $\exp\left[i\phi\right]$ the driving Hamiltonian in the frame of the qubit is produced in the following steps
 \begin{align*}
-  (\text{program}) & \quad e(t) e^{i\phi} \\
-  (\text{mix function}) & \quad e(t) e^{i([\omega_q-\omega_c]t + \phi)} \\
-  (\text{physical mixer}) & \quad \Re \left[ e(t) e^{i(\omega_q t + \phi)} \right] = e(t) \cos\left(\omega_q t + \phi \right) \\
-  (\text{Hamiltonian}) & \quad \frac{e(t)}{2}\left[ I \sigma_x + Q \sigma_y \right] \, .
+  (\text{program}) \quad & e(t) e^{i\phi} \\
+  (\text{mix function}) \quad & e(t) e^{i([\omega_q-\omega_c]t + \phi)} \\
+  (\text{physical mixer}) \quad & \Re \left[ e(t) e^{i(\omega_q t + \phi)} \right] \\
+  = & e(t) \cos\left(\omega_q t + \phi \right) \\
+  (\text{Hamiltonian}) \quad & \frac{e(t)}{2}\left[ I \sigma_x + Q \sigma_y \right] \, .
 \end{align*}
 Thus our choice of angle $\phi$ directly maps to the angle of the rotation on the Bloch sphere.
 
