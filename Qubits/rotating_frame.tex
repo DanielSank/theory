@@ -5,10 +5,10 @@ This non-commutativity is the mathematical manifestation of the physical fact th
 For this reason, it is much easier to reason in a frame that rotates about that axis at a frequency near or equal to the resonance frequency of the device, i.e. in a rotating frame.
 In this section we show how to re-express the driving and coupling Hamiltonians in a rotating frame.
 
-The single qubit Hamiltonian for single nearly harmonic qubits like the transmon is \begin{equation}
+The Hamiltonian for a single two level quantum system (qubit) is \begin{equation}
 H_q/\hbar = -\frac{\omega_q}{2}\sigma_z \end{equation}
-where $\omega_q = \omega_r + \delta\omega$.
-Think of $\omega_r$ as a ``reference'' frequency.
+where $\omega_a$ is the qubit frequency.
+To use a rotating frame, we write $\omega_q = \omega_r + \delta\omega$ where $\omega_r$ is the rotating frame's rotation frequency.
 For example, $\omega_r$ could be the qubit's idle frequency in which case $\delta \omega$ could be seen as a dynamic detuning.
 The Schrodinger picture time evolution operator is $T=\exp \left[-i H/\hbar \right]$.
 In order to remove the idle point precession of the qubit state, we take as the rotation operator \begin{equation}
@@ -64,9 +64,9 @@ $C_q$ and $L_q$ refer to the qubit capacitance and inductance, which we assume t
 
 We now work through the flux coupled case.
 We use the rotation operator
-\begin{equation}
+\begin{equation*}
   R = \exp \left[ -i \frac{\omega_r}{2} t \sigma_z \right]
-\end{equation}
+\end{equation*}
 to find the transformed driving Hamiltonian \begin{align}
   RH_d R^{\dagger}/h_d
   &=
@@ -173,12 +173,12 @@ where $\sigma$ and $g$ are defined as in the following table:
   \end{tabular}
 \end{center}
 In the charge case, the coupling Hamiltonian can be expanded as
-\begin{align}
+\begin{align*}
   H_g
-    =& -g (\sigma^+ - \sigma^-) \otimes (\sigma^+ - \sigma^-) \nonumber \\
-    =& g \left(-\sigma^+ \sigma^+ - \sigma^- \sigma^- \right. \nonumber \\
+    =& -g (\sigma^+ - \sigma^-) \otimes (\sigma^+ - \sigma^-) \\
+    =& g \left(-\sigma^+ \sigma^+ - \sigma^- \sigma^- \right. \\
      & \left. + \sigma^+ \sigma^- + \sigma^- \sigma^+ \right) \, .
-\end{align}
+\end{align*}
 Rotating the qubits' frames at $\omega_{r1}$ and $\omega_{r2}$ respectively and throwing away high frequency terms we get
 \begin{equation}
   H_g = g

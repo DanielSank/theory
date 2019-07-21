@@ -5,10 +5,7 @@
 We next consider driving signals applied to the circuit.
 We attach a driving voltage source to our parallel LC through a capacitor $C_d$, as shown by the dotted elements in Fig.\,\ref{Fig:singleCircuit}.
 The capacitor $C_d$ is required to prevent the driving circuit from completely ruining the coherence of the main circuit.
-Without the capacitor, the loaded quality factor $Q_d$ of the main circuit due to the drive circuit would be \citeinternalref{loadedMode}
-\begin{equation}
-Q_d = R_d / Z_{LC} .
-\end{equation}
+Without the capacitor, the loaded quality factor $Q_d$ of the main circuit due to the drive circuit would be $Q_d = R_d / Z_{LC}$ \citeinternalref{loadedMode}.
 With typical circuit impedances in the range 10's to 100's of Ohms, and RF source resistances of $50\,\Omega$\,\footnote{Commercial RF devices essentially \emph{all} use 50 \, $\Omega$ output impedance. This is simply due to the fact that a coaxial transmission line of reasonable size has near $50 \, \Omega$ impedance. The impedance depends logarithmically on geometric parameters and so cannot be significantly varied. 50$ \, \Omega$ has been chosen as a common standard.}, we have $Q_d \approx 1$ which is far too low to be useful in a quantum device.\footnote{The energy relaxation time of the circuit is $T_1 = Q_d / \omega$, so for a 1 GHz device $Q_l=1$ corresponds to $T_1=0.16 \, \text{ns}$.}
 
 The coupling capacitor $C_d$ helps preserve the circuit coherence.
@@ -99,17 +96,17 @@ However, we can already see one important point: the coupling of the drive signa
 In other words, low impedance would appear to give stronger coupling.
 However, one must be careful about what is being held constant.
 Assuming fixed $\omega_{LC}$ and $C \gg C_d$, we find that the drive Hamiltonian is proportional to
-\begin{equation}
+\begin{equation*}
   \omega_{LC} \sqrt{Z_{LC}}
-\end{equation}
+\end{equation*}
 which increases for \emph{increasing} impedance.
 These same arguments apply to resonator-resonator coupling, as will be described below.
 
 \textbf{Summary - Simple derivation:} The energy stored in the drive capacitor is $E_d = \frac{1}{2}C_d\left( V_d - V_q \right)^2$.
 Keeping only the terms involving both the resonator and drive voltages yields
-\begin{equation}
+\begin{equation*}
   E_d = - C_d V_d V_q = - V_d \frac{C_d}{C} Q
-\end{equation}
+\end{equation*}
 where $Q$ is the resonator charge.
 This matches the full result up to the sign, in the practical limit $C \gg C_d$.
 
@@ -134,19 +131,19 @@ This equation is reproduced by the Lagrangian
   \mathcal{L} = \frac{1}{2}C \dot{\Phi}^2 - \frac{1}{2L} \Phi^2 + \frac{M_d}{L}I_d(t) \Phi \, .
 \end{equation}
 The momentum conjugate to $\Phi$ is
-\begin{equation}
-  \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q
-\end{equation}
-and the Hamiltonian is
-\begin{equation}
+\begin{equation*}
+  \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C \dot{\Phi} = Q \, .
+\end{equation*}
+The full Hamiltonian is
+\begin{equation*}
   H
   = Q \dot{\Phi} - \mathcal{L}
   = \frac{Q^2}{2C} + \frac{\Phi^2}{2L} - \frac{M_d}{L} I_d(t) \Phi
-\end{equation}
+\end{equation*}
 so the driving Hamiltonian is\footnote{Note that adding a Josephson junction in parallel with the circuit would \emph{not} change the form of $H_d$; the junction adds a term $(I_c \Phi_0 / 2\pi)\cos(\pi \Phi / \Phi_0)$ to the Lagrangian, but this term does not couple to $I_d$.}
-\begin{equation}
+\begin{equation*}
   H_d = - \frac{M_d}{L}I_d(t) \Phi \, .
-\end{equation}
+\end{equation*}
 Just as we did for the capacitive drive, we can express the restriction of the inductive drive Hamiltonian two a two-level subspace as
 \begin{equation*}
   H_d = -\frac{M_d}{L} I_d(t) \left(
@@ -158,9 +155,8 @@ Just as we did for the capacitive drive, we can express the restriction of the i
 where $\Sigma_\Phi = \bbraket{n}{\Phi}{n} + \bbraket{n+1}{\Phi}{n+1}$ and $\Delta_\Phi = \bbraket{n}{\Phi}{n} - \bbraket{n+1}{\Phi}{n+1}$.
 The identity term can be ignored, and wnder the same assumptions described in the capacitive case the $\sigma_z$ term can also be ignored, leaving
 \begin{equation}
-  H_d = - \frac{M_d}{L} I_d(t) \Phi_{n,n+1} \, \sigma_x \, .
+  H_d = - \frac{M_d}{L} I_d(t) \abs{\Phi_{n,n+1}} \, \sigma_x \, .
 \end{equation}
-
 When the matrix element is nearly harmonic, we write $\Phi$ in terms of raising and lowering operators
 \begin{equation*}
   \Phi = \Phi_\text{zpf} (a + a^\dagger)
