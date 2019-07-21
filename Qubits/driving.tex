@@ -73,12 +73,12 @@ which lets us write $H_d$ as
       \bbraket{n+1}{Q}{n} & \bbraket{n+1}{Q}{n+1}
     \end{array}\right] \\
   &= \frac{V_d(t)}{1 + C / C_d} \left(
-      \frac{S_Q}{2} \mathbb{I}
+      \frac{\Sigma_Q}{2} \mathbb{I}
     + \frac{\Delta_Q}{2} \sigma_z
     + \abs{\bbraket{n}{Q}{n+1}} \sigma_y
   \right)
 \end{align*}
-where $S_Q \equiv \bbraket{n}{Q}{n} + \bbraket{n+1}{Q}{n+1}$ and $\Delta_Q \equiv \bbraket{n}{Q}{n} - \bbraket{n+1}{Q}{n+1}$.
+where $\Sigma_Q \equiv \bbraket{n}{Q}{n} + \bbraket{n+1}{Q}{n+1}$ and $\Delta_Q \equiv \bbraket{n}{Q}{n} - \bbraket{n+1}{Q}{n+1}$.
 The identity term can be ignored, and the $\sigma_z$ term is negligible when $\Delta_Q$ is small or when $V_d(t)$ is a high frequency drive near the resonance frequency of the resonator.\footnote{We're not justifying this here, but we will in the section on the rotating frame.}
 With only the $\sigma_y$ term remaining, we have
 \begin{equation}
@@ -143,25 +143,29 @@ and the Hamiltonian is
   = Q \dot{\Phi} - \mathcal{L}
   = \frac{Q^2}{2C} + \frac{\Phi^2}{2L} - \frac{M_d}{L} I_d(t) \Phi
 \end{equation}
-so the driving Hamiltonian is
+so the driving Hamiltonian is\footnote{Note that adding a Josephson junction in parallel with the circuit would \emph{not} change the form of $H_d$; the junction adds a term $(I_c \Phi_0 / 2\pi)\cos(\pi \Phi / \Phi_0)$ to the Lagrangian, but this term does not couple to $I_d$.}
 \begin{equation}
   H_d = - \frac{M_d}{L}I_d(t) \Phi \, .
 \end{equation}
-Note that adding a parallel junction to the circuit does \emph{not} change the form of $H_d$; the junction adds a term $(I_c \Phi_0 / 2\pi)\cos(\pi \Phi / \Phi_0)$ to the Lagrangian, but this term does not couple to $I_d$.
 Just as we did for the capacitive drive, we can express the restriction of the inductive drive Hamiltonian two a two-level subspace as
 \begin{equation*}
   H_d = -\frac{M_d}{L} I_d(t) \left(
-      \frac{S_\Phi}{2} \mathbb{I}
+      \frac{\Sigma_\Phi}{2} \mathbb{I}
     + \frac{\Delta_\Phi}{2} \sigma_z
     + \abs{\bbraket{n}{\Phi}{n+1}} \sigma_x
   \right)
 \end{equation*}
-where $S_\Phi = \bbraket{n}{\Phi}{n} + \bbraket{n+1}{\Phi}{n+1}$ and $\Delta_\Phi = \bbraket{n}{\Phi}{n} - \bbraket{n+1}{\Phi}{n+1}$.
-Just as in the capacitive case, we can rewrite $\Phi$ in terms of the raising and lowering operators
+where $\Sigma_\Phi = \bbraket{n}{\Phi}{n} + \bbraket{n+1}{\Phi}{n+1}$ and $\Delta_\Phi = \bbraket{n}{\Phi}{n} - \bbraket{n+1}{\Phi}{n+1}$.
+The identity term can be ignored, and wnder the same assumptions described in the capacitive case the $\sigma_z$ term can also be ignored, leaving
+\begin{equation}
+  H_d = - \frac{M_d}{L} I_d(t) \Phi_{n,n+1} \, \sigma_x \, .
+\end{equation}
+
+When the matrix element is nearly harmonic, we write $\Phi$ in terms of raising and lowering operators
 \begin{equation*}
   \Phi = \Phi_\text{zpf} (a + a^\dagger)
 \end{equation*}
-and if the system is approximately harmonic then
+to find
 \begin{equation*}
   H_d = - \frac{M_d}{L} I_d(t) \sqrt{n+1} \, \Phi_\text{zpf} \, \sigma_x
   \, .

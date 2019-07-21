@@ -1,5 +1,7 @@
 \levelstay{Coupling}
 
+In this section we analyze two resonant circuits coupled to either other.
+
 \leveldown{Capacitive coupling}
 
 \begin{figure}
@@ -22,7 +24,7 @@ The canonical momenta are
   Q_a &= \frac{d \mathcal{L}}{d\dot{\Phi}_a} = (C_a + C_g) \dot{\Phi}_a - C_g\dot{\Phi}_b \nonumber \\
   Q_b &= \frac{d \mathcal{L}}{d\dot{\Phi}_b} = (C_b + C_g) \dot{\Phi}_b - C_g\dot{\Phi}_a
 \end{align}
-which can be written as
+which can be expressed in matrix form as
 \begin{equation}
   \left( \begin{array}{c} Q_a \\ Q_b \end{array} \right) =
   \underbrace{
@@ -30,15 +32,31 @@ which can be written as
   \left( \begin{array}{c} \dot{\Phi}_a \\ \dot{\Phi}_b \end{array} \right)
   \, .
 \end{equation}
-Note that the inverse of $T_C$ is
+The inverse of $T_C$ is
 \begin{align}
   T_C^{-1}
   &= \frac{1}{C_a C_b + C_g (C_a + C_b)}
     \left[ \begin{array}{cc} C_b + C_g & C_g \\ C_g & C_a + C_g \end{array} \right] \nonumber \\
   &\equiv \left[
     \begin{array}{cc} 1/C_a' & 1/C_g' \\ 1/C_g' & 1/C_b' \end{array}
-    \right] \, .
+    \right]
 \end{align}
+where we've defined the so-called \textbf{partial capacitances} $C_a'$, $C_b'$, and $C_g'$, which are actually quite natural.
+The capacitance to ground from the signal node of circuit $a$ is
+\begin{align*}
+  C_{a, \text{total}}
+  &= C_a || (C_g \text{ in series with } C_b) \\
+  &= \frac{C_a C_b + C_g(C_a+C_b)}{C_g+C_b}
+\end{align*}
+which is exactly equal to our expression for $C_a'$.
+Therefore, the partial capacitance is just the capacitance to ground!
+In the limit $C_g \ll C_a, C_b$ the partial capacitances are, to first order in $C_g / C_a$ or $C_g / C_b$,
+\begin{align*}
+  C_a' & \approx C_a + C_g \\
+  C_b' & \approx C_b + C_g \\
+  \frac{1}{C_g'} & \approx \frac{C_g}{C_a C_b} \, .
+\end{align*}
+
 The formal definition of the Hamiltonian is $H = \sum_i \dot \Phi_i Q_i - \mathcal{L}$, so in order to find the Hamiltonian as a function of $\Phi$ and the conjugate momentum $Q$ we need to solve for $\dot \Phi$ in terms of $Q$.
 Fortunately, that's easy because using
 \begin{equation*}
@@ -78,47 +96,29 @@ Therefore the Hamiltonian is simply
   + \frac{\Phi_b^2}{2 L_b}
   + \frac{Q_a^2}{2 C_a'}
   + \frac{Q_b^2}{2 C_b'}
-  + \frac{Q_a Q_b}{C_g'} \, .
+  + \frac{Q_a Q_b}{C_g'}
 \end{align*}
-
-The capacitances $C_a'$ and $C_b'$ are actually quite natural.
-The capacitance to ground from the signal node of circuit a is
-\begin{align*}
-  C_{1, \textrm{total}}
-  &= C_a || (C_g \textrm{ in series with } C_b) \\
-  &= \frac{C_a C_b + C_g(C_a+C_b)}{C_g+C_b}
-\end{align*}
-which is exactly equal to our expression for $C_a'$.
-Therefore, the effective capacitance associated with the canonical charge is just the capacitance to ground of the conjugate flux's signal node!
-
-Note that in the limit $C_g \ll C_a, C_b$ the primed quantities are, to first order in $C_g / C_a$ or $C_g / C_b$,
-\begin{align*}
-  C_a' & \approx C_a + C_g \\
-  C_b' & \approx C_b + C_g \\
-  \frac{1}{C_g'} & \approx \frac{C_g}{C_a C_b} \, .
-\end{align*}
-
-The coupling term in the Hamiltonian is
+and the coupling term is
 \begin{equation}
   H_g = \frac{ Q_a Q_b} {C_g'} \, . \label{eq:sec:coupling:H_g}
 \end{equation}
-To re-express it in terms of Pauli operators we use the harmonic limit expressions
+Following the same reasoning we used in driving section, we can re-express the charge operators in terms of raising and lowering operators
 \begin{align}
-  Q_a = -i Q_{\textrm{zpf}, a} (a - a^{\dagger}) \nonumber \\
-  Q_b = -i Q_{\textrm{zpf}, b} (b - b^{\dagger}) \nonumber \, ,
+  Q_a = -i Q_{\text{zpf}, a} (a - a^{\dagger}) \nonumber \\
+  Q_b = -i Q_{\text{zpf}, b} (b - b^{\dagger}) \nonumber \, ,
 \end{align}
-we get
+to get
 \begin{align*}
-  H_g
-  &= \frac{Q_{\textrm{zpf},a}Q_{\textrm{zpf},b}}{C_g'}
+  H_g / \hbar
+  &= \frac{1}{\hbar} \frac{Q_{\text{zpf},a}Q_{\text{zpf},b}}{C_g'}
     (-i)(a - a^\dagger) (-i)(b - b^\dagger) \\
-  &= \frac{\hbar}{2} \sqrt{\omega_1' \omega_2' C_a' C_b'}
+  &= \frac{1}{2} \sqrt{\omega_1' \omega_2' C_a' C_b'}
     \frac{C_g}{C_a C_b + C_g(C_a + C_b)} (\sigma_{y,a} \, \sigma_{y,b}) \\
-  &= \frac{1}{2}\frac{C_g}{\sqrt{(C_a + C_g) (C_b + C_g)}} \hbar
+  &= \frac{1}{2}\frac{C_g}{\sqrt{(C_a + C_g) (C_b + C_g)}}
     \sqrt{\omega_1' \omega_2'} (\sigma_{y,a} \, \sigma_{y,b})
 \end{align*}
-where $\omega_i' \equiv 1 / \sqrt{L_i C_i'}$ and where we have used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_{y,a}$}.
-Defining the ``coupling strength'' $g$ as
+where $\omega_i' \equiv 1 / \sqrt{L_i C_i'}$ are the \textbf{partial frequencies} and where we have used a two level approximation \mbox{$a - a^\dagger \rightarrow i \sigma_{y,a}$} (and similarly for $\sigma_{y, b}$).
+Defining the \textbf{coupling strength} $g$ as
 \begin{equation}
   g/\hbar \equiv \frac{1}{2} \frac{C_g}{\sqrt{(C_a + C_g) (C_b + C_g)}} \sqrt{\omega_1' \omega_2'}
 \end{equation}
@@ -127,10 +127,7 @@ we can rewrite the coupling Hamiltonian as
   H_g = g \left( \sigma_{y,a} \sigma_{y,b} \right) \, .
 \end{equation}
 It's interesting to look at how the coupling scales with the resonators' impedances.
-Taking $C_a \approx C_b$ and $\omega_1 \approx \omega_2$, then using $C = 1 / \omega Z_{LC}$ we find
-\begin{equation}
-  g \propto Z_{LC} \, .
-\end{equation}
+Taking $C_a \approx C_b$ and $\omega_1 \approx \omega_2$, then using $C = 1 / \omega Z_{LC}$ we find $g \propto Z_{LC}$.
 
 \textbf{Summary - Simple derivation:} The energy in the coupling capacitor is
 \begin{equation*}
@@ -198,8 +195,8 @@ Note that the inverse of $T_L$ is
   &\equiv \left[ \begin{array}{cc}
     1/L_a' & -1/M' \\ -1/M' & 1/L_b'
   \end{array} \right]
-  \, .
 \end{align*}
+where we've defined the \textbf{partial inductances} $L_a'$, $L_b'$, and $M'$.
 Next, using $\dot{Q}=I$, note that the dotted terms in $\mathcal{L}_\text{potential}$ can be written as
 \begin{align*}
   \mathcal{L}_\text{potential}
@@ -220,14 +217,13 @@ Using the definition of capacitance, $C = Q/V$, and noting that the total flux t
 \end{equation*}
 which gives us the link between $Q$ and $\dot \Phi$ that we need.
 Using this relation we finally arrive at
-\begin{equation*}
+\begin{equation}
   \mathcal{L} =
   \frac{1}{2}C_a \dot{\Phi}_a^2 + \frac{1}{2}C_b \dot{\Phi}_b^2
   - \frac{\Phi_a^2}{2L_a'} - \frac{\Phi_b^2}{2L_b'}
   + \frac{\Phi_a \Phi_b}{M'}
-  \, .
-\end{equation*}
-Thus we have reformulated the Lagrangian with the fluxes as the coordinates.
+\end{equation}
+which is the proper Lagrangian with the fluxes as the coordinates.
 
 The conjugate momenta in this case are
 \begin{equation}
