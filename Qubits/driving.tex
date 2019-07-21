@@ -5,15 +5,15 @@
 We next consider driving signals applied to the circuit.
 We attach a driving voltage source to our parallel LC through a capacitor $C_d$, as shown by the dotted elements in Fig.\,\ref{Fig:singleCircuit}.
 The capacitor $C_d$ is required to prevent the driving circuit from completely ruining the coherence of the main circuit.
-Without the capacitor, the loaded quality factor $Q_d$ of the main circuit due to the drive circuit would be $Q_d = R_d / Z_{LC}$ \citeinternalref{loadedMode}.
-With typical circuit impedances in the range 10's to 100's of Ohms, and RF source resistances of $50\,\Omega$\,\footnote{Commercial RF devices essentially \emph{all} use 50 \, $\Omega$ output impedance. This is simply due to the fact that a coaxial transmission line of reasonable size has near $50 \, \Omega$ impedance. The impedance depends logarithmically on geometric parameters and so cannot be significantly varied. 50$ \, \Omega$ has been chosen as a common standard.}, we have $Q_d \approx 1$ which is far too low to be useful in a quantum device.\footnote{The energy relaxation time of the circuit is $T_1 = Q_d / \omega$, so for a 1 GHz device $Q_l=1$ corresponds to $T_1=0.16 \, \text{ns}$.}
+Without the capacitor, the loaded quality factor of the resonator due to the drive circuit, denoted $Q_d$ would be $Q_d = R_d / Z_{LC}$ \citeinternalref{loadedMode}.
+With typical circuit impedances in the range 10's to 100's of Ohms, and RF source resistances of $50\,\Omega$\,\footnote{Commercial RF devices essentially \emph{all} use 50 \, $\Omega$ output impedance. This is simply due to the fact that a coaxial transmission line of reasonable size has near $50 \, \Omega$ impedance. The impedance depends logarithmically on geometric parameters and so cannot be significantly varied. 50$ \, \Omega$ has been chosen as a common standard.}, we have $Q_d \approx 1$ which is far too low to be useful in a quantum device.\footnote{The energy relaxation time of the circuit is $T_1 = Q_d / \omega$, so for a 1 GHz device $Q_d=1$ corresponds to $T_1=0.16 \, \text{ns}$.}
 
 The coupling capacitor $C_d$ helps preserve the circuit coherence.
 If $C_d$ is sufficiently small, its impedance $Z_{C_d} = 1/i\omega C_d$ is large and the current flowing through $R_d$ is reduced.
 Therefore, $C_d$ prevents the process by which energy from the oscillator gets into $R_d$ and is lost.
 To be specific, in the limit $Z_{C_d} \gg R_d$ the loaded quality factor of the oscillator is \citeinternalref{loadedMode}
 \begin{equation}
-Q_l = \left( \frac{C}{C_d} \right)^2 \frac{Z_{LC}}{R_d} .
+  Q_d = \left( \frac{C}{C_d} \right)^2 \frac{Z_{LC}}{R_d} .
 \end{equation}
 Therefore, a small $C_d$ preserves the circuit's coherence.
 However, decoupling the drive line from the driving voltage source with a small $C_d$ also limits the speed with which we can control the circuit, so a balance must be struck.
