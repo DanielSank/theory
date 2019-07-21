@@ -14,16 +14,16 @@ with
     \hline
     $\sigma$ & $\sigma_y$ & $\sigma_x$ \\
     $f(t)$ & $V_d(t)/V_d$ & $I_d(t) / I_d$ \\
-    $h_d$ & $Q_\text{zpf} V_d(C_d/C_q)$ & $-\Phi_\text{zpf} I_d (M_d/L_q)$ \\
+    $h_d$ & $Q_\text{zpf} V_d(C_d/C)$ & $-\Phi_\text{zpf} I_d (M_d/L)$ \\
     \hline
   \end{tabular}
 \end{center}
 Using the forms of $Q_\text{zpf}$ and $\Phi_\text{zpf}$ given above, we can rewrite $h_d$ as
 \begin{align*}
   \text{(charge)} \quad \frac{h_d}{\hbar} &=
-  \frac{1}{\sqrt{2}} \left(\frac{C_d}{C_q} \right) \sqrt{\frac{(R_K / 8\pi)}{Z_q}} \frac{V_d}{\Phi_0/2\pi} \\
+  \frac{1}{\sqrt{2}} \left(\frac{C_d}{C} \right) \sqrt{\frac{(R_K / 8\pi)}{Z_q}} \frac{V_d}{\Phi_0/2\pi} \\
   \text{(flux)} \quad \frac{h_d}{\hbar} &=
-  \frac{1}{\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z_q}{(R_K/8\pi)}} \frac{I_d}{2e}
+  \frac{1}{\sqrt{2}} \left( \frac{M_d}{L} \right) \sqrt{\frac{Z_q}{(R_K/8\pi)}} \frac{I_d}{2e}
 \end{align*}
 where $Z_q$ is the qubit impedance and $R_K \equiv h/e^2 = 25,812 \, \Omega$, giving $R_K/8\pi = 1,027 \, \Omega$.
 
@@ -48,8 +48,8 @@ A $\pi$-pulse occurs when the argument of the exponent is equal to $\pm i \sigma
 \end{equation*}
 Using the forms of $h_d/\hbar$ given above, we get the condition for a pi pulse as
 \begin{align*}
-  \text{(charge)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{C_d}{C_q} \right) \sqrt{\frac{(R_K/8\pi)}{Z_q}} \frac{V_d \Delta t}{\Phi_0/2\pi} &= 1 \\
-  \text{(flux)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{M_d}{L_q} \right) \sqrt{\frac{Z_q}{(R_K/8\pi)}} \frac{I_d \Delta t}{2e} &= 1 \, .
+  \text{(charge)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{C_d}{C} \right) \sqrt{\frac{(R_K/8\pi)}{Z_q}} \frac{V_d \Delta t}{\Phi_0/2\pi} &= 1 \\
+  \text{(flux)} \, \frac{1}{\pi\sqrt{2}} \left( \frac{M_d}{L} \right) \sqrt{\frac{Z_q}{(R_K/8\pi)}} \frac{I_d \Delta t}{2e} &= 1 \, .
 \end{align*}
 Note that $V_d$ is just the amplitude of the sinusoidal drive voltage at the qubit's drive capacitor, and similarly for $I_d$.
 
@@ -58,8 +58,8 @@ Note that $V_d$ is just the amplitude of the sinusoidal drive voltage at the qub
 In the case of a nearly harmonic qubit like the transmon, the effect of dissipation from the drive line can be computed from classical electronics arguments.
 The quality factor $Q_d$ induced by the driving circuit is
 \begin{align*}
-  Q_d (\text{capacitive}) &= \left( \frac{C_q}{C_d} \right)^2 \frac{Z_q}{R_e} \\
-  Q_d (\text{inductive}) &= \left( \frac{L_q}{M_d} \right)^2 \frac{R_e}{Z_q}
+  Q_d (\text{capacitive}) &= \left( \frac{C}{C_d} \right)^2 \frac{Z_q}{R_e} \\
+  Q_d (\text{inductive}) &= \left( \frac{L}{M_d} \right)^2 \frac{R_e}{Z_q}
 \end{align*}
 where $R_e$ is the external line resistance, usually $50 \, \Omega$.
 Using these formulae, we can eliminate the capacitances and inductances from the formulae for the pi pulse length, arriving at
@@ -107,10 +107,10 @@ the up/down transition rate due to drive noise is therefore
 Plugging in the values for $h_d/\hbar$ for each case gives
 \begin{align*}
   \text{(charge)} \, \Gamma =&
-    \frac{1}{4} \left( \frac{C_d}{C_q} \right)^2
+    \frac{1}{4} \left( \frac{C_d}{C} \right)^2
     \left( \frac{R_K/8\pi}{Z_q} \right) \frac{\Seng_{V_d}(\omega_q)}{(\Phi_0/2\pi)^2} \\
   \text{(flux)} \, \Gamma =&
-    \frac{1}{4} \left( \frac{M_d}{L_q} \right)^2
+    \frac{1}{4} \left( \frac{M_d}{L} \right)^2
     \left( \frac{Z_q}{R_K/8\pi} \right) \frac{\Seng_{I_d}(\omega_q)}{(2e)^2} \, .
 \end{align*}
 Eliminating the coupling capacitance and inductance in favor of $Q_d$ gives
@@ -198,5 +198,5 @@ The results of this section are summarized in the table.
       \\
     \hline
   \end{tabular}
-  \caption{Summary of results for a qubit driven by charge or flux. In this table, $z\equiv Z_q/(R_K/8\pi)$ and $r_e \equiv R_e / (R_K/8\pi)$. We denote by $\xi$ the dimensionless coupling, i.e. $\xi \equiv C_d/C_q$ for charge and $\xi \equiv M_d/L_q$ for flux. Similarly, $D$ denotes a drive \emph{amplitude} with dimensions of 1/time, i.e. $D \equiv V_d/(\Phi_0 / 2\pi)$ for charge and $I_d/2e$ for flux. $\Seng_D$ indicates drive spectral density at the qubit, and also has dimensions of 1/time. For the ``General'' column, $\Seng_a$ and $P_a$ denote \emph{available} noise power spectral density and signal power ($\Seng_a$ has dimensions of energy and $P_a$ has dimensions of power). Note that $D$ and $\Seng_D$ are not available quantities; they correspond to the current/voltage at the drive capacitor or inductor.}
+  \caption{Summary of results for a qubit driven by charge or flux. In this table, $z\equiv Z_q/(R_K/8\pi)$ and $r_e \equiv R_e / (R_K/8\pi)$. We denote by $\xi$ the dimensionless coupling, i.e. $\xi \equiv C_d/C$ for charge and $\xi \equiv M_d/L$ for flux. Similarly, $D$ denotes a drive \emph{amplitude} with dimensions of 1/time, i.e. $D \equiv V_d/(\Phi_0 / 2\pi)$ for charge and $I_d/2e$ for flux. $\Seng_D$ indicates drive spectral density at the qubit, and also has dimensions of 1/time. For the ``General'' column, $\Seng_a$ and $P_a$ denote \emph{available} noise power spectral density and signal power ($\Seng_a$ has dimensions of energy and $P_a$ has dimensions of power). Note that $D$ and $\Seng_D$ are not available quantities; they correspond to the current/voltage at the drive capacitor or inductor.}
 \end{table*}
