@@ -71,7 +71,7 @@ Now we can rewrite all of the currents in the first two of Kirchhoff's laws enti
   C_a \ddot V_a + \frac{V_a}{L_a'} - \frac{V_b}{L_g'} + C_g (\ddot V_a - \ddot V_b) &= 0 \\
   C_b \ddot V_b + \frac{V_b}{L_b'} - \frac{V_a}{L_g'} + C_g (\ddot V_b - \ddot V_a) &= 0 \, .
 \end{align*}
-Traditional analysis of circuits in the physics literature use flux and charge instead of current and voltage, so defining $\Phi = \int V \, dt$, we can write our equations of motion as
+Traditional analysis of circuits in the physics literature uses flux and charge instead of current and voltage, so defining $\Phi = \int V \, dt$, we can write our equations of motion as
 \begin{align*}
   \ddot \Phi_a (C_a + C_g) - C_g \ddot \Phi_b + \frac{\Phi_a}{L_a'} - \frac{\Phi_b}{L_g'} &= 0 \\
   \ddot \Phi_b (C_b + C_g) - C_g \ddot \Phi_a + \frac{\Phi_b}{L_b'} - \frac{\Phi_a}{L_g'} &= 0 \, .
@@ -106,7 +106,7 @@ or
 \end{equation*}
 The inverse of $T_C$ is
 \begin{align*}
-  T_C^{-1} =& \frac{1}{C_a C_b + C_g (C_a + C_g)}
+  T_C^{-1} =& \frac{1}{C_a C_b + C_g (C_a + C_b)}
   \left( \begin{array}{cc}
     (C_b + C_g) & C_g \\
     C_g & (C_a + C_g)
@@ -116,13 +116,13 @@ The inverse of $T_C$ is
     1 / C_g' & 1 / C_b'
   \end{array} \right)
 \end{align*}
-Note that $C_a'$ and $C_b'$ are the total capacitances to ground from each resonator's signal node.
+Note that $C_a'$ and $C_b'$ are simply the total capacitances to ground for each resonator!
 
-The Hamiltonian for the system is defined formally by the equation
+The Hamiltonian function $H$ for the system is defined formally by the equation
 \begin{equation*}
-  H \equiv \left( \sum_{i = \{a, b\}} Q_i \dot \Phi_i \right) - \mathcal{L} \, .
+  H \equiv \left( \sum_{i = \{a, b\}} Q_i \dot \Phi_i \right) - \mathcal{L}
 \end{equation*}
-Therefore, in order to find the Hamiltonian, we have to replace the $\dot \Phi$'s in both the $Q \dot \Phi$ terms and in Lagrangian itself with the appropriate combinations of $Q$'s.
+where $\Phi_i$ are the coordinates and $Q_i$ are the conjugate momenta, but where we have to replace the $\dot \Phi$'s in both the $Q \dot \Phi$ terms and in $\mathcal{L}$ with $\Phi$'s and $Q$'s.
 To do this, first note that the kinetic term in the Lagrangian can be expressed as\footnote{Because matrix transposition and inversion commute, and because the matrix $T_C$ is symmetric, we can bring $T_C^{-1}$ from the bra onto the ket for free.}
 \begin{align*}
   \mathcal{L}_\text{kinetic}
