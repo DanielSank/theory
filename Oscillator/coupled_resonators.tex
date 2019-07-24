@@ -9,7 +9,16 @@
 \title{Coupled Oscillators}
 
 \begin{document}
+
 \maketitle
+
+\begin{abstract}
+  This note provides mathematical analysis of coupled electrical resonators.
+  We demonstrate the path from Kirchhoff's laws to the the Lagrangian and finally to the Hamiltonian in terms of the canonical position $\Phi$ and momentum $Q$ of each resonator.
+  We express the Hamiltonian in terms of rotating modes (raising and lowering operators) and show how the rotating wave approximation yields simple expressions for the normal mode frequencies of the coupled system.
+  Finally, we show a striking new discovery: in a system with both capacitive and inductive coupling, the coupling Hamiltonian can be designed such that the rotating wave approximation is \emph{exact}.
+\end{abstract}
+
 \tableofcontents
 
 \section{Kirchhoff's laws}
@@ -150,17 +159,19 @@ First, we define
   X_i &\equiv \frac{1}{\sqrt{2 \hbar}} \frac{1}{\sqrt{Z_i'}} \Phi_i \\
   Y_i &\equiv \frac{1}{\sqrt{2 \hbar}} \sqrt{Z_i'} Q_i
 \end{align*}
-where $Z_i' \equiv \sqrt{L_i' / C_i'}$, and we've added the constant $\hbar$ with dimentions of action to make $X$ and $Y$ dimensionless.
-In these new variables, the Hamiltonian is
+where $Z_i' \equiv \sqrt{L_i' / C_i'}$, and we've added the constant $\hbar$ with dimensions of action to make $X$ and $Y$ dimensionless.
+This entire analysis has been classical, and in the classical case $\hbar$ can be thought of as \emph{anything} with dimensions of action.
+Of course, in the quantum case, we should simply think of $\Phi$, $Q$, $X$, and $Y$ as operators and $\hbar$ as Planck's constant.
+
+In the new variables, the Hamiltonian is
 \begin{align}
   H / \hbar
   =& \omega_a' \left(X_a^2 + Y_a^2 \right)
   +  \omega_b' \left(X_b^2 + Y_b^2 \right) \nonumber \\
   &+ 2 \frac{1}{C_g' \sqrt{Z_a' Z_b'}} Y_a Y_b
    - 2 \frac{\sqrt{Z_a Z_b}}{L_g'} X_a X_b
-  \, .
 \end{align}
-
+where $\omega_i' \equiv \sqrt{L_i' / C_i'}$ are called \textbf{partial frequencies} and play an important role in the analysis of the system, particularly when making approximations.
 
 \subsection{Rotating modes}
 
@@ -177,7 +188,7 @@ to arrive at
   &- \frac{1}{2} \frac{\sqrt{Z_a' Z_b'}}{L_g'} (ab + a^* b^* + a^* b + a b^*)
   \, .
 \end{align}
-The two frequencies $\omega_a'$ and $\omega_b'$ are called the \textbf{partial frequencies} and play an important role in the analysis of the system, particularly when making approximations.
+The stars indictate Hermitian conjugation, which in the classical case reduces to complex conjugation.
 The coupling term can be reorganized in a very useful form:
 \begin{align}
   H_g / \hbar =
@@ -238,7 +249,7 @@ In the rotating wave aproximation, the algebraic representation is reduced to
 \end{equation*}
 which makes finding the eigenvalues particularly simple because the eigenvalues of a tensor product are just the products of the eigenvalues of the individual tensors being multiplied.
 The eigenvalues of $\sigma_z$ are $\pm 1$.
-The eigenvalues of the stuff in parentheses, and therefore the normal mode frequencies, are\footnote{The eigenvalues of the matrix are equal to $i$ times the normal mode frequencies.}
+The eigenvalues of the stuff in parentheses, and therefore the normal mode frequencies, are\footnote{The eigenvalues of the matrix are equal to $i$ times the normal mode frequencies. Note also that we give only two normal mode frequencies, whereas there are actually four, namely $\pm \omega_\pm$.}
 \begin{equation}
   \omega_\pm
   = \frac{\omega_a' + \omega_b'}{2} \pm \sqrt{g_-^2 + (\Delta / 2)^2 } \, .
@@ -248,13 +259,13 @@ There we can see the famous avoided level crossing of coupled resonators.
 \quickfig{0.8\columnwidth}{avoided_crossing.pdf}{Normal frequencies $\omega_+$ (red) and $\omega_-$ (blue) as a function of $\omega_b'$ for $\omega_a' = 10$. Dashed lines are for $g_-=0.02$ and solid lines are for $g_-=0.1$.}{Figure:coupled_resonators_L_and_C:avoided_crossing}
 
 The rotating wave approximation (RWA) works in the limit $g_+ \ll \omega_a', \omega_b'$.
-This analysis has demonstrated the usefulness of the Hamiltonian formalism.
-by working with and Hamiltonian, with its partial frequencies and impedances, we found the systematic and accurate approximation, namely the RWA, for the normal mode frequencies.
+This analysis has demonstrated the usefulness of the Hamiltonian formalism: by working with and Hamiltonian, with its partial frequencies and impedances, we found the systematic and accurate approximation, namely the RWA, for the normal mode frequencies.
 The lovely symmetry of Figure \ref{Figure:coupled_resonators_L_and_C:avoided_crossing} exists because we plot the normal frequencies against the partial frequency $\omega_b'$ rather than the uncoupled frequency $\omega_b$.
 
 As shown above, the RWA is equivalent to dropping the Hamiltonian terms proportional to $g_+$.
 Therefore, in a device where $g_+$ is constructed to be exactly zero the RWA would be exact!
 
+\iffalse
 \section{Relation between coupling and damping}
 
 Consider the case of two resonators coupled through a coupling capacitor $C_g$.
@@ -265,5 +276,6 @@ Interestingly, the quality factors are related to the coupling strength $g_c$ vi
 \begin{equation*}
   \frac{(2 g_c)^2}{\omega_a' \omega_b'} \frac{R}{\sqrt{Z_a' Z_b'}} \sqrt{Q_a Q_b} = 1 \, .
 \end{equation*}
+\fi
 
 \end{document}
