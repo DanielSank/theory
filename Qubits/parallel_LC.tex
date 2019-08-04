@@ -9,12 +9,12 @@ Moreover, for weakly anharmonic qubits like the transmon, we can find good appro
   a - a^\dagger \rightarrow i \sigma_y \, .
 \end{equation*}
 
-From Kirchhoff's laws, one can derive the equations of motion for the flux through the LC oscillator's inductor:
+From Kirchhoff's laws, one can derive the equations of motion for the flux $\Phi$ through the LC oscillator's inductor:
 \begin{equation*}
   \ddot{\Phi} + \omega_{LC}^2 \Phi = 0
 \end{equation*}
 where $\omega_{LC}=1/\sqrt{LC}$.
-This equation of motion is reproduced by the Lagrangian \footnote{Lagrange's equation of motion is $\frac{d}{dt}\left( \frac{\partial L}{\partial \dot{\Phi}} \right) - \frac{\partial L}{\partial \Phi} = 0$.}
+This equation of motion is reproduced by the Lagrangian \footnote{Lagrange's equation of motion is $\frac{d}{dt}\left( \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} \right) - \frac{\partial \mathcal{L}}{\partial \Phi} = 0$.}
 \begin{equation*}
   \mathcal{L} = \frac{1}{2}C\dot{\Phi}^2 - \frac{1}{2L}\Phi^2
 \end{equation*}
@@ -22,10 +22,11 @@ The momentum conjugate to the flux $\Phi$ is, by definition,
 \begin{equation*}
   \text{momentum} \equiv \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} = C\dot{\Phi} = Q \, .
 \end{equation*}
-We denote the canonical momentum as $Q$ because $\dot{\Phi}$ is the voltage across the LC circuit (remember that inductance is defined by $V = L \dot{I} = \dot{\Phi}$), so $C \dot{\Phi} = Q$ is the charge on the capacitor.
-Therefore, $\Phi$ and $Q$ are so-called canonically conjugate variables.
+This canonical momentum is simply the charge because $\dot{\Phi}$ is the voltage across the LC circuit (remember that inductance is defined by $V = L \dot{I} = \dot{\Phi}$), so $C \dot{\Phi} = C V = Q$.
+Therefore, flux and charge are so-called canonically conjugate variables.
 
-The Hamiltonian is, again by definition,
+The Hamiltonian is the total energy expressed in terms of the coordinate $\Phi$ and it's conjugate momentum $Q$.
+Formally, the Hamiltonian is given by
 \begin{equation}
   H
   = \frac{\partial \mathcal{L}}{\partial \dot{\Phi}} \dot{\Phi} - \mathcal{L}
@@ -54,6 +55,7 @@ and
 \begin{equation}
   Z_{LC} \equiv \sqrt{L/C} \, .
 \end{equation}
+In these equations, $\Phi_\text{zpf}$ and $Q_\text{zpf}$ are the variance in the flux and charge in the quantum system's ground state, also known as the ``zero point fluctuation'', and $R_K \equiv h / e^2$ is the so-called ``resistance quantum'', so that $R_K / 8 \pi = 1,027 \, \Omega$.
 
 \begin{figure}
 \begin{centering}
