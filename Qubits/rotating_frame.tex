@@ -25,7 +25,7 @@ We compute the remaining effective Hamiltonian $H'$ according to \citeinternalre
 \end{align}
 This is precisely the Hamiltonian of a qubit with frequency $\delta\omega$.
 In other words, if we go into a frame rotating at the idle frequency of the qubit, what remains is just the qubit precession at the detuning frequency.
-Noet that if the frame rotates at the same frequency as the qubit, the Hamiltonian is zero.
+Note that if the frame rotates at the same frequency as the qubit, the Hamiltonian is zero.
 
 \leveldown{Operators}
 
@@ -119,8 +119,8 @@ If the drive is on resonance with the frame then the drive Hamiltonian simplifie
   \end{array} \right] \nonumber \\
   &= \frac{e(t)}{2} \left[ I \sigma_x + Q \sigma_y \right] .
 \end{align}
-This is a rotation about a time independent axis in the xy plane of the Bloch sphere.
-If the rotating frame frequency is the same as the qubit frequency, then the qubit Hamiltonian is zero and our on-resonance drive leads to a purely latitudinal rotation on the Bloch sphere with the angle of the rotation axis in the xy plane given by $\phi_d$.
+This is a rotation about a time independent axis in the xy plane of the Bloch sphere with the angle of the rotation axis given by $\phi_d$.
+If the rotating frame frequency is the same as the qubit frequency, then the qubit Hamiltonian is zero and the total motion is the rotation about that axis.
 If the qubit frequency does not match the rotating frame then the qubit Hamiltonian has a residual $\sigma_z$ component and the rotation axis will be out of the xy plane.
 
 See below for a discussion of the relationship between drive voltage $V_d$ and the length of a pi-pulse applied to the qubit.
@@ -129,7 +129,7 @@ See below for a discussion of the relationship between drive voltage $V_d$ and t
 
 Now that we know what the driving Hamiltonian looks like in the rotating frame we can investigate how to program our IF inputs to the IQ mixer to acheive a rotation on the Bloch sphere.
 From \citeinternalref{IQMixer} we know that an input IQ signal $e(t)\exp\left[i\omega t + \phi\right]$ produces an RF signal $ e(t)\cos\left[(\omega_c+\omega)t + \phi \right]$, where $\omega_c$ is the carrier frequency.
-Using trig identities we can rewrite this RF signal as
+Using trigonometry identities we can rewrite this high frequency signal as
 \begin{equation}
   e(t)
   \left[
@@ -195,7 +195,7 @@ If both frames rotate at the same frequency the interaction simplifies to
 \end{equation}
 The matrix form, with basis states
 \begin{equation*}
-  \left[ \ket{00}, \ket{01}, \ket{10}, \ket{11} \right]
+  \left\{ \ket{00}, \ket{01}, \ket{10}, \ket{11} \right\}
 \end{equation*}
 (i.e. the states defined by Kronecker product) is
 \begin{equation}
