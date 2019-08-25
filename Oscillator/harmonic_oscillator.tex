@@ -126,7 +126,9 @@ Our expression for $\phi(t)$ has this form if we take
 \hat{\phi} = \frac{-A}{\Omega^{2} - 2i\beta\Omega - \omega_0^2} \, .
 \end{equation}
 Therefore, \begin{equation}
-\langle\phi(t)^{2}\rangle_{t} = \frac{1}{2} \frac{A^{2}}{(\Omega^{2}-\omega_0^{2})^{2}+(2\beta\Omega)^{2}} \, .
+  \langle\phi(t)^{2}\rangle_{t}
+  = \frac{1}{2} \frac{A^{2}}{(\Omega^{2}-\omega_0^{2})^{2}+(2\beta\Omega)^2}
+  \, .
 \end{equation}
 This function maximizes for $\Omega=\pm\sqrt{\omega_{0}^{2}-2\beta^{2}}$.
 Note that this is not the same as the free oscillation frequency found from the impulse response.
@@ -187,75 +189,79 @@ with unknown constants $X$ and $Y$.
 Multiplying through by $(\omega - \omega_+)(\omega - \omega_-)$ and solving gives
 \begin{align*}
   X =& \frac{1}{\omega_+ - \omega_-} =   \frac{1}{2 \omega_0'} \\
-  Y =& \frac{1}{\omega_- - \omega_+} = - \frac{1}{2 \omega_0'} \, .
+  Y =& \frac{1}{\omega_- - \omega_+} = - \frac{1}{2 \omega_0'}
 \end{align*}
-Therefore
+so
 \begin{equation}
   \phi(\omega) = - \frac{J(\omega)}{2 \omega_0'}
   \left[ \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-} \right] \, .
 \end{equation}
 If the drive is a narrow band signal near a central frequency $\Omega$, we can write it as
 \begin{equation}
-  J(t) = E(t) \cos(\Omega t + \theta) \, ,
+  J(t) = I(t) \cos(\Omega t) - i Q(t) \sin(\Omega t) \, ,
 \end{equation}
 in which case we have
-\begin{equation}
-  \tilde{J}(\omega) = \frac{1}{2}
-  \left(
-    e^{i\theta} \tilde{E}(\omega - \Omega) + e^{-i \theta} \tilde{E}(\omega + \Omega)
-    \right) \, .
-\end{equation}
+\begin{align*}
+  \tilde{J}(\omega)
+  &= \frac{1}{2} \left(
+      \tilde{I}(\omega - \Omega) + i \tilde{Q}(\omega - \Omega)
+    + \tilde{I}(\omega + \Omega) - i \tilde{Q}(\omega + \Omega)
+  \right) \\
+  &= \frac{1}{2} \left(
+      \tilde{z}(\omega - \Omega) + \tilde{z}(-\omega - \Omega)^*
+  \right)
+\end{align*}
+where $z(t) \equiv I(t) - i Q(t)$ and we've used the fact that $\tilde{I}(\omega)^* = \tilde{I}(-\omega)$ and $\tilde{Q}(\omega)^* = \tilde{Q}(-\omega)$ because $I(t)$ and $Q(t)$ are real.
 Combining results, we have
 \begin{align*}
   \tilde{\phi}(\omega)
   =& - \frac{1}{4 \omega_0'}
-  \left(
-    e^{i \theta} \tilde{E}(\omega - \Omega) + e^{-i \theta} \tilde{E}(\omega + \Omega)
-  \right)
+  \left( \tilde{z}(\omega - \Omega) + \tilde{z}(-\omega - \Omega)^* \right)
   \left(
     \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-}
   \right) \\
   =& - \frac{1}{4 \omega_0'}
   \left(
-      \frac{e^{ i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_+}
-    - \frac{e^{-i \theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_-}
-    + \frac{e^{-i \theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_+}
-    - \frac{e^{ i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_-}
+      \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_+}
+    - \frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_-}
+    \underbrace{
+      - \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_-}
+      + \frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_+}
+    }_\text{small}
   \right)
 \end{align*}
-
-Keeping only the largest terms, we get
+The second two terms in parentheses are small because e.g. $\tilde{z}(\omega - \Omega)$ is large when $\omega$ is near $+\Omega$, but $1 / (\omega - \omega_-)$ is large for $\omega$ near $-\Omega$.
+Keeping only the larger terms, we get
 \begin{equation}
   \tilde{\phi}(\omega) =
   - \frac{1}{4 \omega_0'}
   \left(
-      \frac{e^{i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_+}
-    - \frac{e^{-i\theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_-}
+      \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_+}
+    - \frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_-}
   \right) \, .
 \end{equation}
 Note that $\tilde{\phi}(-\omega) = \tilde{\phi}(\omega)^*$ as appropriate for $\phi(t) \in \mathbb{R}$.
-Furthermore, because $\phi(t)$ is real, we can write it as a Fourier transform over only positive frequencies:
+Because of that symmetry, we can write it as a Fourier transform over only positive frequencies:
 \begin{align*}
   \phi(t)
   &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \tilde{\phi}(\omega) \\
   &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \left( \frac{-1}{4 \omega_0'} \right)
     \left(
-      \frac{e^{i \theta} \tilde{E}(\omega - \Omega)}{\omega - \omega_+}
-    - \underbrace{\frac{e^{-i \theta} \tilde{E}(\omega + \Omega)}{\omega - \omega_-}}_\text{small}
+      \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_+}
+      - \underbrace{\frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_-}}_\text{small}
     \right) \\
   (\text{define } \omega \equiv \Omega + \delta \omega)
   &= \Re
   \left(
     e^{i \Omega t}
-    \int_{-\omega_0'}^\infty \frac{d \delta \omega}{2\pi} \,
+    \int_{-\Omega}^\infty \frac{d \delta \omega}{2\pi} \,
     e^{i \delta \omega t}
     \left( \frac{-1}{2 \omega_0'} \right)
-    \frac{e^{i \theta} \tilde{E}(\delta \omega)}{\delta \omega + \Delta \omega - i \beta}
+    \frac{\tilde{z}(\delta \omega)}{\delta \omega - \Delta - i \beta}
   \right)
 \end{align*}
-where $\Delta \omega \equiv \Omega - \omega_0'$.
-Suppose $\tilde{E}$ is band limited to $[-B, B]$ where $B \ll \omega_0'$.
-Then we can rewrite the limits of the integration as $\pm \infty$:
+where $\Delta \equiv \omega_0' - \Omega$.
+If $\tilde{z}$ is band limited to $[-B, B]$ where $B \ll \omega_0'$, then we can rewrite the limits of the integration as $\pm \infty$:
 \begin{equation}
   \phi(t) = \Re
   \left(
@@ -264,7 +270,7 @@ Then we can rewrite the limits of the integration as $\pm \infty$:
       \int_{-\infty}^\infty \frac{d \delta \omega}{2\pi} \,
       e^{i \delta \omega t}
       \left( \frac{-1}{2 \omega_0'} \right)
-      \frac{e^{i \theta} \tilde{E}(\delta \omega)}{\delta \omega +\Delta \omega - i \beta}
+      \frac{\tilde{z}(\delta \omega)}{\delta \omega - \Delta - i \beta}
     }_{\psi(t)}
   \right)
 \end{equation}
@@ -272,7 +278,7 @@ The underbraced part $\psi(t)$ is the part of the oscillator's motion that comes
 In other words, we're in the rotating frame of the drive.
 By inspection, the time dynamics of $\psi(t)$ are governed by the equation
 \begin{equation}
-  \dot{\psi}(t) = -i e^{i \theta} \frac{E(t)}{2 \omega_0'} - i \Delta \omega \psi(t) - \beta \psi(t)
+  \dot{\psi}(t) = \left(\frac{-i}{2 \omega_0'}\right) z(t) + (i \Delta - \beta ) \psi(t)
 \end{equation}
 
 \section{Rotating Mode Formalism}
