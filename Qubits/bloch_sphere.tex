@@ -1,0 +1,76 @@
+Consider the driven resonator from Fig.~\ref{LCXMON}(c).
+
+\leveldown{Kirchoff's laws}
+In the practical limit $\driveC \ll C$ (i.e. the limit where $\driveQ \gg 1$), Kirchhoff's equations give a second-order differential equation for the flux $\Phi$ in the inductor ($\Phi = LI$):
+\begin{equation}
+  \ddot{\Phi}(t) + \frac{\omega_r}{Q} \dot{\Phi}(t) + \omega_r^2 \Phi(t)
+  = \frac{C_d}{C} \dot{V}_d(t) \, .
+\end{equation}
+We have chosen the inductor flux $\Phi$ as our dynamical variable because it is the most common choice in the superconducting qubit literature, but the analysis is the same if we use current, voltage, or charge.\footnote{One reason for the use of $\Phi$ in the physics literature is that Josephson junctions are conveniently described via the superconducting phase $\delta$ which is directly related to the magnetic flux via $\Phi = \Phi_0 \delta / 2\pi$.}
+
+\levelstay{Rotating frame}
+If the drive voltage is a slow modulation $V_m(t)$ of a carrier, i.e. $V_d(t) = V_m(t) \sin(\Omega t + \theta)$, then we can write the resonator flux in phasor form as
+\begin{equation}
+  \Phi(t) = \Re \left[ \alpha(t) \exp(j \Omega t) \right]
+\end{equation}
+
+\begin{equation}
+  \frac{d\alpha (t)}{dt}
+  = \underbrace{e(t)\frac{C_d}{C} \frac{\exp \left\{ i\theta\right\} }{2}}_\text{drive}
+ - \underbrace{i \Delta \omega \alpha (t)}_\text{free oscillation} \, ,
+\end{equation}
+where $\Delta \omega \equiv \Omega - \omega_r$ is the detuning between the drive carrier frequency and the resonator's resonance frequency, and $A$ is a dimensionless constant that captures the strength of coupling between the drive voltage and the resonator.\footnote{$A \equiv (\driveC / C) \exp(j \theta)/2$}
+The variable $\alpha(t)$ can be intuitively understood as $\Phi(t)$ expressed in a coordinate system that is rotating at the drive's carrier frequency $\Omega$.
+This new coordinate system is known in physics literature as the ``rotating frame''\footnote{Particularly in quantum mechanics, the rotating frame is called the ``interaction picture''.} and of course in the electrical engineering literature, $\alpha(t)$ is called a ``baseband representation'' or just a ``phasor''.
+
+Equation~(\ref{eq:xy:baseband_dynamics}) allows us to understand how the drive changes the resonator's state.
+For instance, consider the case in which the drive signal is turned off a at $t=0$.
+Since we are just talking about an LC resonator here, one would expect the circuit to keep oscillating at its resonant frequency. As expected, equation (\ref{eq:xy:baseband_dynamics}) predicts $\alpha(t) = \alpha (0) \exp \left\{-i \Delta\omega \, t \right\}$, which simply says that the baseband phasor maintains constant amplitude while rotating in the complex plane at the difference frequency $\Delta\omega$, as shown conceptually in Fig.~\ref{fig:xy:IQ_trajectories}(a).
+
+A more interesting case occurs when the drive is turned  on at $t=0$.
+If the drive signal is on resonance ($\Delta\omega=0$), then the envelope amplitude grows linearly in time: $\alpha (t) = e_\text{0} t \left(C_d/ 2 C \right) \exp \left\{i\theta\right\}$ (See Fig.~\ref{fig:xy:IQ_trajectories}(b)).
+Intuitively, this makes sense; if we pump a lossless resonator on resonance, the amplitude of the oscillation will grow linearly with time and the angle of this oscillation will be determined by the phase of the drive signal.
+
+What happens if we drive the resonator off resonance?
+In this case, it can be shown that the envelope traces out a circle  in the IQ plane of radius $r=\left( E_0 C_d \right) / \left(2\Delta\omega \, C\right)$ and center $c = \exp\left\{i\left(\theta - \pi/2\right)\right\} \left(E_0 C_d \right) / \left(2 \Delta\omega \, C \right)$.
+The angular frequency of the envelope oscillation is the difference frequency, $\Delta\omega$ (see Fig.~\ref{fig:xy:IQ_trajectories}(c)).
+These dynamics can be understood as follows.
+If the resonator is initially discharged, the excitation immediately causes the envelope amplitude to increase along a direction in the IQ plane determined by the drive phase.
+However, since the resonator frequency differs from the drive frequency, a relative phase will begin to accumulate between the drive signal and the oscillation within the resonator.
+This relative phase results in the complex envelope tracing out a circular trajectory, and once the phase difference reaches 180$^\circ$, the drive tone actually serves to remove energy from the resonator.
+The rate at which all this happens depends on $\Delta\omega$, so the diameter of the circle in the IQ plane is inversely proportional to the frequency detuning.
+
+\levelstay{Nonlinearity}
+The transmon qubit is a non-linear resonator and intuition into its behavior requires a simple extension of the discussion above. 
+We model the non-linear resonator's response to an applied drive signal by letting the detuning depend on the magnitude of oscillation $\lvert \alpha \rvert$.
+ Letting $\Delta\omega(\alpha) = \abs{\alpha}$ in Eq.\,(\ref{eq:xy:baseband_dynamics}) and taking two 90-degree shifted phases of the drive results in the trajectories shown in Figure \ref{fig:xy:IQ_trajectories}\,c.
+Intuitively, as the driven resonator's energy increases, its frequency shifts out of the rotating frame, so it begins to shift in phase relative to the drive.
+As the phase shift passes 90 degress, the drive begins \emph{removing} energy.
+Then as the resonator energy decreases, the resonator's frequency comes back into resonance with the drive and the cycle repeats.
+Note that both trajectories pass through the origin but at right angles to each other, and form closed paths in the IQ plane.
+
+\quickfig{\columnwidth}{figures/figure_iq_trajectories}{IQ plane trajectories of a driven oscillator circuit.
+In the IQ plane diagrams, the black circle represents the set of points with energy $\hbar \omega_r$.
+a) Trajectory of the oscillator with no drive.
+b) Trajectory of the oscillator with on-resonance driving.
+c) Trajectory of an \emph{anharmonic} oscillator under resonant drive.}{fig:xy:IQ_trajectories}
+
+\levelup{Control in the quantum case: The Bloch sphere}
+
+\quickfig{\columnwidth}{figures/figure_bloch_sphere}{IQ trajectories mapped to the Bloch sphere. The center of the IQ point, which represents the resonator at rest, maps to the north pole of the Bloch sphere and the quantum state $\ket{0}$. A ring corresponding to the resonator's internal energy of $\hbar \omega_r$ is folded over the sphere, mapping to the south pole and quantum state $\ket{1}$. The free oscillation trajectory shown by the green circle is a Z-axis rotation on the Bloch sphere. The driven trajectories shown by the blue and red circles are X- and Y-axis rotations on the Bloch sphere respectively.}{fig:xy:bloch_sphere}
+
+Now that we've seen how the nonlinear resonator responds to drive signals we can make the connection to the quantum mechanical case.
+The key is that, in quantum mechanics, all states of the resonator with the same energy are identical; there is no meaning to the phase of the resonator's motion when it is in a quantum state of specific energy.
+Therefore, the black circles in the IQ planes of Figure \ref{fig:xy:LCR} represent \emph{one} single quantum state.
+Since the whole circle corresponds to a single state, we should contract that circle to a single point.
+Doing that, the disk bounded by that circle takes the topology of a \emph{sphere}, as shown in Figure \ref{fig:xy:bloch_sphere}.
+This is the ``Bloch sphere'' representing a two-level quantum system.
+The $\ket{0}$ state (zero energy), which was at the center of the IQ plane, is now at the north pole of the sphere.
+The $\ket{1}$ state (one quantum of energy), which was the black circle in the IQ plane is now at the south pole of the sphere.
+Trajectories of the classical resonator state in the IQ plane map qualitatively to trajectories of the qubit state on the Bloch sphere.
+
+We showed previously in Figure \ref{fig:xy:IQ_trajectories}\,c that resonant drive of an anharmonic oscillator leads to closed paths in the IQ plane, and that the oritentation of those curves depends on the phase of the drive.
+Mapping those curves to the Bloch sphere, they form great circles traversing the sphere from pole to pole as shown by the blue and red curves in Figure \ref{fig:xy:bloch_sphere}.
+Therefore we see that resonant driving leads to rotations about the X and Y axes of the Bloch sphere, and the azimuthal angle of those rotations is determined by the phase of the drive.
+Similarly, mapping the free rotation curve from Figure \ref{fig:xy:IQ_trajectories}\,a to the Bloch sphere produces circles of constant latitude.
+Therefore, free oscillation of a qubit detuned from the rotating frame is represented on the Bloch sphere by rotation about the Z-axis.
