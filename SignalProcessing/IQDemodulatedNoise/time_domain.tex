@@ -1,0 +1,52 @@
+\levelstay{SNR in the time domain - transient}
+
+Now consider the case where, as before, we want to distinguish between two different voltage signals, but now where those signals have time dependent magnitude and phase.
+We showed above that for two voltage waves of equal magnitude $V$ the signal to noise ratio is
+\begin{equation*}
+  \text{SNR} = \frac{g^2 (V^2 / 2) T}{S_\xi^e}
+\end{equation*}
+Thinking of these voltage waves in their phasor representations
+\begin{equation*}
+  V_j(t)
+  = \Re \left[ V_j \exp(i \phi_j) \exp(\Omega t) \right]
+  \, ,
+\end{equation*}
+we can understand the quantity $(g V)^2$ as the square of the distance between the phasors.
+Therefore, defining the distance between two phasors as $\delta V$, we can reinterpret our formula as
+\begin{equation*}
+  \text{SNR} = \frac{\left( T \delta V \right)^2 }{2 T S_\xi^e} \, .
+\end{equation*}
+Suppose now that the voltage phasors are time dependent, i.e. they have time varying magnitude and phase.
+In that case, it's somewhat obvious that the SNR formula becomes
+\begin{equation*}
+  \text{SNR} = \frac{\abs{\int_0^T \delta V(t) \, dt}^2}{2 T S_\xi^e} \, .
+\end{equation*}
+Now suppose we multiply the voltage signals by a time dependent window $w(t)$ before integration.
+The SNR formula is modified to
+\begin{equation*}
+  \text{SNR} = \frac{\abs{\int_0^T \delta V(t) \, w(t) \, dt}^2}{2 S_\xi^e \int_0^T \abs{w(t)}^2 \, dt} \, .
+\end{equation*}
+
+\leveldown{Quantum variables}
+One final useful modification to our SNR formula is to convert to variables suited to quantum mechanical applications.
+Instead of voltage amplitudes we use wave amplitudes $A$ normalized such that $\abs{A}$ is the flux of photons travelling through the coaxial cable.
+The power corresponding to a voltage phasor $V$ is $P = V^2 / 2 Z_0$ where $Z_0$ is the transmission line impedance, but we can also express the power in terms of photon flux as $P = \abs{A}^2 \hbar \omega$.
+Therefore, $\abs{V}^2 = 2 Z_0 \hbar \omega \abs{A}^2$.
+Furthermore, the noise power spectral density in a quantum system is $\hbar \omega / 2 \eta$ where $\eta < 1$ is the so-called ``quantum efficiency'', which can be though of as the fraction of photons captured by the detector.
+The voltage noise spectral density is therefore $S_\xi^e = Z_0 \hbar \omega / 2 \eta$.
+Using these relations, we can write the SNR as
+\begin{equation}
+  \text{SNR}
+  = \frac
+    {2 \eta \abs{\int_0^T \delta A(t) \, w(t) \, dt}^2}
+    {\int_0^T \abs{w(t)}^2 \, dt} \, .
+\end{equation}
+and the separation error as
+\begin{equation}
+  \epsilon = \frac{1}{2} \, \text{erfc} \left(
+    \sqrt{\frac{\eta}{2}} \frac
+      {\abs{\int_0^T \delta A(t) \, w(t) \, dt }}
+      {\sqrt{\int_0^T \abs{w(t)}^2 \, dt}}
+  \right)
+  \, .
+\end{equation}
