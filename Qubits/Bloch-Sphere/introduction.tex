@@ -1,0 +1,15 @@
+\levelstay{Introduction}
+
+Superconducting resonant circuits have become important elements for quantum computation.
+When the circuits are cooled to temperatures such that the thermal energy is significantly smaller (approximately $5\times$) than the quantum energy, i.e. $T \ll \hbar \omega / k_b$, their energy levels become quantized and they can be used as quantum bits, known as ``qubits''.
+Commercial dilution refrigerators can cool to about $10\,\text{mK}$.
+Noting that $(2\pi) \hbar / k_b = 48\,\text{mK} / \text{GHz}$, we can see that we need a qubit resonance frequency of
+\begin{equation}
+  \omega / 2 \pi > 5 \times \frac{k_b}{2\pi \hbar} \, 10\,\text{mK} \approx 1 \, \text{GHz}
+\end{equation}
+so superconducting qubits are necessarily microwave devices.
+Therefore, the logic state of the qubit is manipulated by microwave pulses applied to the circuit.
+This technical note explains how the qubit state depends on the applied microwaves.
+
+However, we're going to do this a bit differently.
+The entire discussion will be classical.

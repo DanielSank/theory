@@ -1,0 +1,26 @@
+\documentclass[twocolumn]{article}
+
+\input{../../TeX/macros.tex}
+\input{../../TeX/packages.tex}
+\input{../../TeX/citeinternalnote.tex}
+
+\newcommand{\driveC}{C_d}
+\newcommand{\driveQ}{Q_d}
+
+\title{Drive a Superconducting Qubit}
+\author{Daniel Sank}
+\date{22 January 2020}
+
+\begin{document}
+
+\maketitle
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\subimportlevel{./}{introduction.tex}{0}
+\subimportlevel{./}{bloch_sphere.tex}{0}
+
+\bibliographystyle{plain}
+\bibliography{../../Bibliography/references_main,../../Bibliography/references_local}
+
+\end{document}
