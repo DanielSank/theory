@@ -24,7 +24,8 @@ The canonical momenta are
   Q_a &= \frac{d \mathcal{L}}{d\dot{\Phi}_a} = (C_a + C_g) \dot{\Phi}_a - C_g\dot{\Phi}_b \nonumber \\
   Q_b &= \frac{d \mathcal{L}}{d\dot{\Phi}_b} = (C_b + C_g) \dot{\Phi}_b - C_g\dot{\Phi}_a
 \end{align}
-which can be expressed in matrix form as
+which are simply the total charges that have flowed through each junction.
+These momenta can be expressed in matrix form as
 \begin{equation*}
   \left( \begin{array}{c} Q_a \\ Q_b \end{array} \right) =
   \underbrace{
@@ -32,6 +33,7 @@ which can be expressed in matrix form as
   \left( \begin{array}{c} \dot{\Phi}_a \\ \dot{\Phi}_b \end{array} \right)
   \, .
 \end{equation*}
+Here the matrix $T_C$ is the capacitance matrix of the coupled system.
 The inverse of $T_C$ is
 \begin{align}
   T_C^{-1}
@@ -102,7 +104,7 @@ and the coupling term is
 \begin{equation}
   H_g = \frac{ Q_a Q_b} {C_g'} \, . \label{eq:sec:coupling:H_g}
 \end{equation}
-Following the same reasoning we used in driving section, we can re-express the charge operators in terms of raising and lowering operators
+Following the same reasoning we used in the driving section, we can re-express the charge operators in terms of raising and lowering operators
 \begin{align}
   Q_a = -i Q_{\text{zpf}, a} (a - a^{\dagger}) \nonumber \\
   Q_b = -i Q_{\text{zpf}, b} (b - b^{\dagger}) \nonumber \, ,
