@@ -1,0 +1,91 @@
+\levelstay{Coupling}
+
+\quickfig{\columnwidth}{coupled_circuits.pdf}{Two resonators coupled capacitively and inductively.}{fig:coupledOscillatorsLAndC:diagram}
+
+Consider two coupled LC oscillators as shown in Figure \ref{fig:coupledOscillatorsLAndC:diagram}.
+Kirchhoff's laws for this circuit give us four equations
+\begin{align}
+  I_{C_a} + I_{L_a} + I_g &= 0 \nonumber \\
+  I_{C_b} + I_{L_b} - I_g &= 0 \nonumber \\
+  L_a \dot I_{L_a} + L_g \dot I_{L_b} &= V_a \nonumber \\
+  L_b \dot I_{L_b} + L_g \dot I_{L_a} &= V_b
+  \, .
+\end{align}
+Going through the usual process of finding the Lagrangian and then converting to the Hamiltonian, we find the Hamiltonian
+\begin{align}
+  H_g / \hbar
+  &= \omega_a' a^* a + \omega_b' b^* b \nonumber \\
+  &- g_+ (ab + a^* b^*) + g_- (ab^* + a^* b)
+\end{align}
+where we defined
+\begin{align}
+  g_c \equiv \frac{1}{2} \frac{1}{C_g' \sqrt{Z_a' Z_b'}} &\qquad
+  g_l \equiv \frac{1}{2} \frac{\sqrt{Z_a' Z_b'}}{L_g'} \nonumber \\
+  \text{and} \qquad \qquad
+  g_+ \equiv g_c + g_l &\qquad g_- \equiv g_c - g_l
+\end{align}
+where $\omega'$, $Z'$, $C'$, and $L'$ are normalized frequency, impedance, capacitance, and inductance of the coupled resonators.
+Details are given in Appendix \ref{appendix:coupling}.
+Hamilton's equations of motion can now be expressed in matrix form
+\begin{equation*}
+  \frac{d}{dt}
+  \left( \begin{array}{c} a \\ b \\ a^* \\ b^* \end{array} \right)
+  = -i \underbrace{\left( \begin{array}{cccc}
+    \omega_a' & g_- & 0 & -g_+ \\
+    g_- & \omega_b' & -g_+ & 0 \\
+    0 & g_+ & -\omega_a' & -g _- \\
+    g_+ & 0 & -g_- & -\omega_b'
+  \end{array} \right)}_M
+  \left( \begin{array}{c} a \\ b \\ a^* \\ b^* \end{array} \right) \, .
+\end{equation*}
+Here we can see that there are two \emph{aspects} to the coupling.
+The coupling $g_-$ connects $a$ to $b$ and $a^*$ to $b^*$, i.e. it acts within the upper and lower 2x2 sub-blocks of $M$.
+On the other hand, the coupling $g_+$ lies entirely on the anti-diagonal coupling $a$ to $b^*$ and $b$ to $a^*$.
+The structure of $M$ and the roles of the two aspects of coupling can be clearly seen by writing $M$ in algebraic form as
+\begin{equation}
+  M = -i \left[
+    \sigma_z \otimes
+      \left(
+        g_- \sigma_x + \frac{\Delta}{2} \sigma_z + \frac{S}{2} \mathbb{I}
+      \right)
+    -i g_+ (\sigma_y \otimes \sigma_x)
+  \right]
+\end{equation}
+where $S \equiv \omega_a' + \omega_b'$ and $\Delta \equiv \omega_a' - \omega_b'$.
+
+\leveldown{Rotating wave approximation}
+
+The RWA drops the $ab$ and $a^* b^*$ terms of the coupling Hamiltonian, i.e. it drops the terms proportional to $g_+$.
+Therefore, if we engineer the coupling such that $g_+$ is identically zero, then the RWA will be exact!
+The condition that $g_+ = 0$ means that $g_c = -g_l$, i.e. the capacitive and inductive coupling must be of equal magnitude but opposite sign.
+
+Dropping those terms is equivalent to dropping the antidiagonal of $M$ and therefore the $\sigma_y \otimes \sigma_x$ term in $M$'s algebraic representation.
+In the matrix, we can see that dropping these terms is precisely equivalent to decoupling the clockwise and counterclockwise rotating modes.
+In other words, the RWA drops the part of the dynamics coupling the clockwise-rotating modes to the anti-clockwise-rotating modes.
+
+
+\levelstay{Eigenvalues}
+
+The rotating wave approximation provides a convenient approximation for the eigenvalues of $M$.
+In the rotating wave aproximation, the algebraic representation of $M$ reduces to
+\begin{equation}
+  M_\text{RWA} = -i \sigma_z \otimes \left(
+    g_- \sigma_x + \frac{\Delta}{2} \sigma_z + \frac{S}{2} \mathbb{I}
+  \right)
+  \, .
+  \label{eq:matrix_algebra_rwa}
+\end{equation}
+Equation (\ref{eq:matrix_algebra_rwa}) makes finding the eigenvalues particularly simple because the eigenvalues of a tensor product are just the products of the eigenvalues of the individual factors.
+The eigenvalues of the quantity in parentheses, and therefore the normal mode frequencies, are
+\begin{equation}
+  \pm \omega_\pm
+  = \pm \left(
+    \frac{\omega_a' + \omega_b'}{2} \pm \sqrt{g_-^2 + (\Delta / 2)^2 }
+  \right)
+  \, .
+\end{equation}
+These eigenvalues are shown in Figure \ref{Figure:coupled_resonators_L_and_C:avoided_crossing} as a function of both $g_-$ and $\omega_b'$.
+There we can see the famous avoided level crossing of coupled resonators.
+\quickfig{0.8\columnwidth}{avoided_crossing.pdf}{Normal frequencies $\omega_+$ (red) and $\omega_-$ (blue) as a function of $\omega_b'$ for $\omega_a' = 10$. Dashed lines are for $g_-=0.02$ and solid lines are for $g_-=0.1$.}{Figure:coupled_resonators_L_and_C:avoided_crossing}
+Note that the rotating wave approximation for the eigenvalues works in the limit $g_+ \ll \omega_a', \omega_b'$.
+Note also that the symmetry of Figure \ref{Figure:coupled_resonators_L_and_C:avoided_crossing} exists because we plot the normal frequencies against the frequency $\omega_b'$ rather than the uncoupled frequency $\omega_b$.

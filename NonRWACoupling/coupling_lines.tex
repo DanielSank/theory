@@ -1,0 +1,64 @@
+\levelstay{Coupled transmission lines}
+
+\quickfig{\columnwidth}{coupled_lines.pdf}
+{a) A directional coupler.
+A wave incident on the top left port (blue) is mostly transmitted to the top right port  (large blue), while a small fraction is coupled into the bottom left port (small blue).
+Similarly, a wave injected into the bottom right port (red) is mostly transmitted to the bottom left port (large red) while a small fraction is coupled into the top right port (small red).
+b) Capacitively and inductively coupled transmission lines.
+Each line is modelled as an infinite ladder of lumped capacitors and inductors. Coupling capacitance per length $C_g$ and coupling inductance per length $L_g$ coupling the two lines.
+}
+{fig:directional_coupler}
+
+Our investigation into electromagnetic resonators with simultaneous electric and magnetic coupling was motivated by an attempt to understand how a directional coupler works.
+A directional coupler is a four port microwave device that directs signal flow as shown in Fig.~\ref{fig:directional_coupler}\,a.
+A wave injected into the top left port is mostly transmitted through to the top right port, while a small fraction is coupled to the lower left port and none is coupled to the bottom right port.
+The key element in a directional coupler is a pair of coupled transmission lines which we model as an infinite ladder of lumped capacitances and inductances as illustrated in Fig.~\ref{fig:directional_coupler}\,a.
+The coupled lines act as a directional coupler if the right-moving wave in the top line, represented by $a_+$ and analogous to the blue wave in Fig.~\ref{fig:directional_coupler}, couples only to the left moving wave in the bottom line, represented by $b_+$.
+Our original goal was to understand how to realize the desired couplings between the travelling wave amplitudes by proper choice of the coupling capacitance $C_g$ and coupling inductance $L_g$.
+Expecting that analysis to be difficult, we instead first studied the case of coupled lumped element resonators first, as a warm-up problem.
+We found that the travelling wave amplitudes in the case of coupled lines are analogous to the rotating mode amplitudes in the case of coupled resonators; making the RWA exact and eliminate the coupling between $a$ and $b^*$ in the case of coupled resonators corresponds to eliminating the coupling between $a_+$ and $b_-$ in the case of coupled transmission lines.
+In other words, the same electri-magnetic balance required to make the RWA exact in the case of coupled resonators is what is required to make a pair of coupled transmission lines act as a directional coupler.
+
+We now analyze the coupled lines in detail.
+Line $a$ has inductance and capacitance \emph{per length} $L_a$ and $C_a$, and similarly for line $b$.
+The lines have characteristic impedances $Z_a$ and $Z_b$.
+The lines are coupled by a coupling inductance and capacitance per length $L_g$ and $C_g$.
+We define amplitudes $a$ and $b$ by
+\begin{align}
+  a_\pm \equiv & \frac{V_a}{\sqrt{Z_a}} \pm \sqrt{Z_a} I_a \nonumber \\
+  b_\pm \equiv & \frac{V_b}{\sqrt{Z_b}} \mp \sqrt{Z_b} I_b
+  \, .
+\end{align}
+Note the similarity to the definitions of $a$ and $b$ in the case of coupled resonators.
+Assuming a sinusoidal time dependence with frequency $\omega$, Kirchhoff's laws for the coupled line circuit can be expressed in matrix form
+\begin{equation}
+  \frac{d}{dx}
+  \begin{pmatrix}
+    a_+ \\ b_+ \\ a_- \\ b_-
+  \end{pmatrix}
+  = i
+  \begin{pmatrix}
+    \beta_a & -\chi & 0 & \kappa \\
+    \chi & -\beta_b & -\kappa & 0 \\
+    0 & - \kappa & -\beta_a & \chi \\
+    \kappa & 0 & -\chi & \beta_b
+  \end{pmatrix}
+  \begin{pmatrix}
+    a_+ \\ b_+ \\ a_- \\ b_-
+  \end{pmatrix}
+\end{equation}
+where $\beta = \omega / v$ is the wave vector and
+\begin{align}
+  \kappa =& \frac{\omega}{2}
+    \left( \frac{L_g}{\sqrt{Z_a Z_b}} - C_g \sqrt{Z_a Z_b} \right) \nonumber \\
+  \chi =& \frac{\omega}{2}
+    \left( \frac{L_g}{\sqrt{Z_a Z_b}} + C_g \sqrt{Z_a Z_b} \right)
+  \, .
+\end{align}
+See Appendix \ref{appendix:coupled_lines} for details.
+Note the resemblance between the matrix here and the matrix $M$ that arose in the analysis of coupled resonators: Each one has approximately block-diagonal form where the anti-diagonal contains only a single paramter, in this case $\kappa$.
+Waves $a_+$ and $b_-$ decouple and the lines behave as a directional coupler if $\kappa=0$, which ocurs when
+\begin{equation}
+  Z_g \equiv \sqrt{\frac{L_g}{C_g}} = \sqrt{Z_a Z_b}
+\end{equation}
+i.e. when the coupling impedance is equal to the geometric mean of characteristic impedances of the twoi lines.
