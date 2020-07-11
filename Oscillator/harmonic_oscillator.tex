@@ -198,9 +198,12 @@ so
 \end{equation}
 If the drive is a narrow band signal near a central frequency $\Omega$, we can write it as
 \begin{equation}
-  J(t) = I(t) \cos(\Omega t) - i Q(t) \sin(\Omega t) \, ,
+  J(t)
+  = I(t) \cos(\Omega t) - Q(t) \sin(\Omega t)
+  = \Re \left[ z(t) \exp \left( i \Omega t \right) \right] \, ,
 \end{equation}
-in which case we have
+where $z(t) \equiv I(t) + i Q(t)$.
+In this case we have
 \begin{align*}
   \tilde{J}(\omega)
   &= \frac{1}{2} \left(
@@ -211,7 +214,7 @@ in which case we have
       \tilde{z}(\omega - \Omega) + \tilde{z}(-\omega - \Omega)^*
   \right)
 \end{align*}
-where $z(t) \equiv I(t) - i Q(t)$ and we've used the fact that $\tilde{I}(\omega)^* = \tilde{I}(-\omega)$ and $\tilde{Q}(\omega)^* = \tilde{Q}(-\omega)$ because $I(t)$ and $Q(t)$ are real.
+where we've used the fact that $\tilde{I}(\omega)^* = \tilde{I}(-\omega)$ and $\tilde{Q}(\omega)^* = \tilde{Q}(-\omega)$ because $I(t)$ and $Q(t)$ are real.
 Combining results, we have
 \begin{align*}
   \tilde{\phi}(\omega)

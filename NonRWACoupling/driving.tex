@@ -1,0 +1,119 @@
+\levelstay{Driving}
+
+\quickfig{\columnwidth}{drive.pdf}{Capacitively and inductively driven resonator.}{fig:driven_resonator}
+The circuit shown in Figure~\ref{fig:driven_resonator} has the Hamiltonian
+\begin{align}
+  H
+  &= \underbrace{\frac{Q^2}{2C'} + \frac{\Phi^2}{2L}}_{H_0} \nonumber \\
+  &+ \underbrace{\frac{C_d}{C'}V_d(t) Q
+  - \frac{M_d}{L} I_d(t) \Phi}_{H_d} \label{eq:drive_hamiltonian_lab_frame}
+\end{align}
+where $C' \equiv C + C_d$.
+Defining the impedance $Z' \equiv \sqrt{L / C'}$, flux and charge scales $\phizpf \equiv \sqrt{\hbar Z' / 2}$ and $\qzpf \equiv \sqrt{\hbar / 2 Z'}$, and dimensionless variables $X \equiv \Phi / 2 \phizpf$ and $Y \equiv Q / 2 \qzpf$ results in the form
+\begin{equation}
+  H = \underbrace{\hbar \omega_0' (X^2 + Y^2)}_{H_0}
+  + \underbrace{2 \, G_y y(t) Y - 2 G_x \, x(t) X}_{H_d}
+\end{equation}
+where
+\begin{align*}
+  G_x & \equiv (M_d / L) \phizpf I_d \\
+  G_y & \equiv (C_d / C') \qzpf V_d
+\end{align*}
+and
+\begin{align*}
+  I_d(t) & = I_d \, x(t) \\
+  V_d(t) & = V_d \, y(t)
+\end{align*}
+renormalize the drive magnitudes.
+Here $V_d$ and $I_d$ are arbitrary constants with dimensions of voltage and current introduced so that $x(t)$ and $y(t)$ are dimensionless.
+The equations of motion are
+\begin{equation}
+  \dot{X} =  \frac{i}{2 \hbar} \frac{\partial H}{\partial Y}
+  \qquad
+  \dot{Y} = -\frac{i}{2 \hbar} \frac{\partial H}{\partial X}
+  \, ,
+\end{equation}
+and in the absence of the drive the solutions are $X(t) =   X(0) \cos(\omega_0 t)$ and $Y(t) = - Y(0) \sin(\omega_0 t)$ where $\omega_0 = 1 / \sqrt{L C'}$.
+This motion is analogous to Eq. (\ref{eq:moment_free_motion}), and just as we did with the magnetic moment, it's convenient to use a coordinate frame rotating with this intrinsic motion.
+The algebra is easier with the rotating variables $a$ and $a^*$ defined by $X = (a + a^*)/2$ and $Y = -i(a - a^*)/2$.
+With these variables, the Hamiltonian is
+\begin{equation}
+  H = \underbrace{\hbar \omega_0 a^* a}_{H_0}
+  \underbrace{- z(t) a - z(t)^* a^*}_{H_d}
+\end{equation}
+where $z(t) \equiv G_x \, x(t) + i G_y \, y(t)$, the equations of motion are
+\begin{equation}
+  \dot{a} = -\frac{i}{\hbar} \frac{\partial H}{\partial a^*}
+  \qquad
+  \dot{a}^* = \frac{i}{\hbar} \frac{\partial H}{\partial a}
+  \, ,
+\end{equation}
+and in the absence of the drive the solution is $a(t) = a(0) \exp(-i \omega_0 t)$.
+We switch to the rotating frame by defining $\bar{a}(t) \equiv a(t) \exp(i \omega_r t)$ and the Hamiltonian in the rotating frame is
+\begin{equation}
+  H_r
+  =
+  \underbrace{\hbar(\omega_0 - \omega_r) \bar{a}\bar{a}^*}_{H_{0,r}}
+  \underbrace{- z(t) \bar{a} e^{-i \omega_r t} - z(t)^* \bar{a}^* e^{i \omega_r t}}_{H_{d,r}} \, .
+\end{equation}
+In typical experiments either the electric or the magnetic part of the drive is present, but not both.
+For example, the electric part may be absent, $V_d(t) = 0$, and the magnetic part may be sinusoidal, $I_d(t) = I_d \cos(\omega_d t)$.
+In this case,
+\begin{align}
+  H_{d,r}
+  =& - G_x \cos(\omega_d t) e^{-i \omega_r t} \bar{a} + \text{c.c.} \nonumber \\
+  =& - (G_x / 2)
+  \left(
+    e^{-i(\omega_r - \omega_d)t} \bar{a} + e^{i(\omega_r - \omega_d)t} \bar{a}^*
+  \right. \nonumber \\
+  & \left.
+   + e^{-i(\omega_r + \omega_d)t} \bar{a} + e^{i(\omega_r + \omega_d)t} \bar{a}^*
+  \right)
+\end{align}
+and the RWA drops the final two fast-oscillating terms.
+However, if $z(t) = G_d \exp(i (\omega_d t + \phi_d))$, then the drive Hamiltonian is
+\begin{equation}
+  H_{d,r} = - G_d \left( e^{-i ( \omega_r - \omega_d)t} e^{i \phi_d} \bar{a} + \text{c.c.} \right)
+\end{equation}
+and the fast terms have vanished exactly!
+In other words, the RWA is exact if the drive satisfies the following conditions:
+\begin{align}
+  G_x &= G_y \equiv G_d \nonumber \\
+  x(t) &= \cos(\omega_d t + \phi_d) \nonumber \\
+  y(t) &= \sin(\omega_d t + \phi_d) \, . \label{eq:drive_condition}
+\end{align}
+Condition (\ref{eq:drive_condition}) says that for the RWA to be exact, the electric and magnetic drive strengths must be equal, and the charge drive must lag the flux drive by one quarter of a cycle ($\pi/2$ radians).
+This is the first main result of the paper: true rotating drive fields can be constructed in electromagnetic resonators by balancing the electric and magnetic parts of the drive.
+Of course, the result applies to any one dimensional system so long as the drive can be coupled to both quadratures, but the electromagnetic case is particularly interesting because simultaneous electric and magnetic drive coupling is experimentally realizable.
+
+\levelstay{Two-level system}
+
+The analysis so far has been entirely classical with $\hbar$ an arbitrary constant with dimensions of action.
+However, an important case is when the driven resonator is both anharmonic and quantum mechanical, such as with superconducting qubits.
+If the drive frequency is set on or near resonance for only a single quantum transition $\ket{n} \rightarrow \ket{m}$, then the projection of $H_d$ (see Eq.~(\ref{eq:drive_hamiltonian_lab_frame})) onto the two-level subspace spanned by those two states is approximately\footnote{This approximation leaves out terms proportional to $\sigma_z$ which can usually be ignored under assumptions similar to the RWA.}
+\begin{align}
+  H_d
+  =&
+      \frac{C_d}{C_\Sigma} V_d(t) \abs{Q_{n,m}} \sigma_y
+    - \frac{L_d}{L} I_d(t) \abs{\Phi_{n,m}} \sigma_x \nonumber \\
+  =& - z(t) \sigma_- - z(t)^* \sigma_+
+  \, .
+\end{align}
+where $Q_{n,m} = \bbraket{n}{Q}{m}$, $\Phi_{n,m} = \bbraket{n}{\Phi}{m}$, and $z(t)$ has the same meaning as before except that now
+\begin{align*}
+  G_x =& \, (L_d / L) \abs{\Phi_{n,m}} I_d \\
+  G_y =& \, (C_d / C_\Sigma) \abs{Q_{n,m}} V_d
+  \, .
+\end{align*}
+With the drive $z(t) = G_d \exp(i (\omega_d t + \phi_d)$ and in the frame rotating at frequency $\omega_d$,
+\begin{align}
+  H_{d,r}
+  =& - G_d \left( e^{-i \phi_d} \sigma_+ + e^{i \phi_d} \sigma_- \right) \nonumber \\
+  =& - G_d \begin{pmatrix}
+    0 & e^{i \phi_d} \\ e^{-i \phi_d} & 0
+  \end{pmatrix} \nonumber \\
+  =& - G_d \left( \cos(\phi_d) \sigma_x - \sin(\phi_d) \sigma_y \right)
+\end{align}
+which is completely analogous to Eq.~(\ref{eq:moment_rotating_drive})
+This result has a simple and well known interpretation:
+a two-level quantum system acts like a magnetic moment (a point on the Bloch sphere) and in the rotating frame, a drive resonant with that two-level system's transition acts like two perpedicular components of a ficticious three dimensional drive field in the xy-plane.

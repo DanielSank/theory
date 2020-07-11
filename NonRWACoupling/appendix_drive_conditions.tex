@@ -1,0 +1,51 @@
+\section{Drive conditions} \label{appendix:drive_conditions}
+
+Here we study the more general case where the two drive terms do not satisfy conditions (\ref{eq:drive_condition}).
+We parametrize $x(t)$ and $y(t)$ by quadratures as
+\begin{align*}
+  x(t) =& I_x \cos(\omega_r t) - Q_x \sin(\omega_r t) = \cos(\omega_r t + \phi_x) \\
+  y(t) =& I_y \cos(\omega_r t) - Q_y \sin(\omega_r t) = \cos(\omega_r t + \phi_y)
+  \, .
+\end{align*}
+Note that $I_x = \cos(\phi_x)$, $Q_x = \sin(\phi_x)$, and similarly for $I_y$ and $Q_y$.
+With this parametrization, the drive Hamiltonian in the rotating frame becomes
+\begin{align*}
+  H_{d,r}
+  =& \frac{1}{2}
+  \left( (G_x I_x - G_y Q_y) + i (G_y I_y + G_x Q_x) \right) a \nonumber \\
+  & \frac{1}{2}
+  \left( (G_x I_x + G_y Q_y) + i (G_y I_y - G_x Q_x) \right) e^{-i 2 \omega_r t} a \nonumber \\
+  & + \text{h.c.}
+\end{align*}
+The counter-rotating term vanishes if
+\begin{align}
+  G_x I_x + G_y Q_y &= 0 \nonumber \\
+  \text{and} \quad
+  G_x Q_x - G_y I_y &= 0
+\end{align}
+which can be written in the matrix form
+\begin{align*}
+  \begin{pmatrix}
+    I_x & Q_y \\
+    Q_x & -I_y
+  \end{pmatrix} \begin{pmatrix}
+    G_x \\ G_y
+  \end{pmatrix}
+  = 0
+  \, .
+\end{align*}
+The matrix equation has nontrivial solutions only when the matrix's determinant is zero, i.e. when
+\begin{align*}
+  \cos\phi_x \cos\phi_y + \sin\phi_x \sin\phi_y &= 0 \\
+  \cos(\phi_x - \phi_y) &= 0
+\end{align*}
+with solution
+\begin{equation*}
+  \phi_y = \phi_x - \pi/2, \qquad G_x = G_y
+\end{equation*}
+which is equivalent to conditions (\ref{eq:drive_condition}), i.e. the charge and flux drives must have equal strength, and the charge drive must lag the flux drive by one quarter cycle.
+Note that there's technically a second solution
+\begin{equation*}
+  \phi_y = \phi_x + \pi/2, \qquad G_x = -G_y
+\end{equation*}
+but it is exactly equivalent to the first.

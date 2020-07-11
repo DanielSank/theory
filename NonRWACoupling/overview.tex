@@ -1,0 +1,65 @@
+\levelstay{Review of the RWA}
+
+Consider a magnetic moment represented by a unit vector $\vec{\rho} = (\rho_x, \rho_y, \rho_z)$.
+If the moment is subjected to a magnetic field $\vec{\Omega} = \gamma \vec{B} = (\Omega_x, \Omega_y, \Omega_z)$ \footnote{$\vec{\Omega} = \gamma \vec{B}$ where $\gamma$ is the gyromagnetic ratio, so $\vec{\Omega}$ has dimensions of frequency.} then it precesses according to 
+\begin{align*}
+  \frac{d}{dt} \vec{\rho} = \vec{\rho} \times \vec{\Omega}
+  \, .
+\end{align*}
+In the typical case, the magnetic field is dominated by a large static component $\vec{\Omega}_0$ which we take to lie along the z-axis, $\vec{\Omega}_0 = \Omega_0 \hat{z}$.
+In the presence of just this static field and taking $\vec{\rho}(0) = \hat{x}$, the solution is
+\begin{equation}
+  \vec \rho (t) = \cos(\Omega_0 t) \hat{x} - \sin(\Omega_0 t) \hat{y} \, ,
+  \label{eq:moment_free_motion}
+\end{equation}
+i.e. the moment rotates clockwise about the axis of the static magnetic field with frequency proportional to the field strength.
+
+The moment can be visualized as a point on a sphere with coordinates $\theta$ and $\phi$ such that $\rho_x = \sin\theta \cos\phi$, $\rho_y = \sin\theta \sin\phi$, and $\phi_z = \cos\phi$.
+Suppose that we wish to control the angle $\theta$ by application of an additional drive field $\vec{\Omega}_d(t)$.
+In the absence of $\vec{\Omega}_0$ we could rotate $\vec\rho$ about the x-axis with a static field oriented along $\hat{x}$, but when $\Omega_0 \neq 0$ precession about the z-axis causes the relative azimuth angle between $\vec\rho$ and $\hat{x}$ to oscillate in time.
+To get a pure rotation of $\theta$ when $\Omega_0 \neq 0$, the axis of the drive field needs to rotate along with the precession induced by $\vec{\Omega}_0$, i.e.
+\begin{equation*}
+  \vec{\Omega}_d(t)
+  \propto \cos(\phi_d + \Omega_0 t) \hat{x} - \sin(\phi_d + \Omega_0 t) \hat{y}
+  \, .
+\end{equation*}
+In the coordinate frame rotating with the precession induced by $\vec{\Omega}_0$, the time dependence of $\vec{\Omega}_d$ vanishes and we're left with (the subscript $r$ indicates the rotating coordinate frame)
+\begin{equation}
+  \vec{\Omega}_{d, r} \propto \cos(\phi_d) \hat{x} + \sin(\phi_d) \hat{y}
+  \label{eq:moment_rotating_drive}
+\end{equation}
+corresponding to a rotation about an axis in the xy plane with azimuth angle $\phi_d$.
+
+Frequently in real life situations, we don't have access to true rotating fields.
+Instead, we may have a linearly polarized field
+\begin{equation*}
+  \vec{\Omega}_{d,\text{linear}} \propto \cos(\Omega_0 t + \phi_d) \hat{x}
+  \, .
+\end{equation*}
+The linear field can be expressed as a \emph{pair} of rotating fields, one rotating along with the rotating frame and one rotating against the rotating frame:
+\begin{align*}
+  \vec{\Omega}_{d, \text{linear}}
+  &\propto \frac{1}{2} \underbrace{
+    \left( \cos(\Omega_0 t + \phi_d) \hat{x} - \sin(\Omega_0 t + \phi_d) \hat{y} \right)
+  }_\text{with frame} \\
+  &+ \frac{1}{2} \underbrace{
+    \left( \cos(\Omega_0 t + \phi_d) \hat{x} + \sin(\Omega_0 t + \phi_d) \hat{y} \right)
+  }_\text{against frame}
+\end{align*}
+In the rotating frame, these fields become
+\begin{align*}
+  \vec{\Omega}_{d, \text{linear}, r}
+  \propto& \frac{1}{2} \underbrace{
+    \left( \cos(\phi_d) \hat{x} + \sin(\phi_d) \hat{y} \right)
+    }_\text{static} \\
+    +& \frac{1}{2} \underbrace{
+      \left( \cos(2 \Omega_0 t + \phi_d) \hat{x} + \sin(2 \Omega_0 t + \phi_d) \hat{y} \right)
+    }_\text{counter-rotating}
+  \, .
+\end{align*}
+The static part is exactly half of what we had with a true rotating field, but now there's an extra counter-rotating term rotating at frequency $2 \Omega$ in the direction opposite the free precession induced by $\vec{\Omega_0}$.
+This inconvenient counter-rotating term is precisely what is neglected in the RWA on the grounds that, because it rotates at such a high frequency, its influence on the dynamics integrates to nearly zero.
+When the RWA is used to drop the counter-rotating term from $\vec{\Omega}_{d, \text{linear}, r}$, then $\vec{\Omega}_{d, \text{linear}, r} \propto \vec{\Omega}_{d,r}$.
+In the context of a magnetic moment suspended in space, the meaning of the term ``rotating wave approximation'' is clear as the RWA essentially replaces a linearly polarized drive field with a rotating one.
+With that in mind, it may seem that the use of the RWA in the context of electrical circuits, where there is no real three dimentional space in which to construct rotating drive fields, would be inevitable.
+However, we will see that drives completely analogous to $\vec{\Omega}_d(t)$ can be designed in electrical circuits by proper balance of electric and magnetic aspects of the drive.
