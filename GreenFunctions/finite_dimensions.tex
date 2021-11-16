@@ -1,0 +1,192 @@
+\levelstay{Finite dimensions}
+
+Consider the generic linear problem
+\begin{equation}
+  T \ket{x} = \ket{y}
+\end{equation}
+where given the vector $\ket{y}$ we want to find $\ket{x}$.
+Formally the solution is simple:
+\begin{equation}
+  \ket{x} = T^{-1} \ket{y}
+  \, .
+\end{equation}
+but of course, inverting $T$ is the entire problem.
+There are plenty of methods for inverting linear transformations, including explicit formulae in the cases of 2 and 3 dimensions.
+Here, as mentioned in the introduction, we decompose $\ket{y}$ in a basis and solve the problem separately for each basis component.
+Choose an arbitrary set of orthonormal vectors $\basis{E_i}$, which we refer to as the ``$E$ basis''.
+We resolve $\ket{y}$ into that basis, giving the formal solution for $\ket{x}$:
+\begin{equation}
+  \ket{x} = \sum_i T^{-1} \ket{E_i} \braket{E_i}{y}
+  = \sum_i \braket{E_i}{y} \left( T^{-1} \ket{E_i} \right)
+  \, .
+\end{equation}
+Noting that $\braket{E_i}{y} \equiv y_i^e$ is the $i^\text{th}$ component of $\ket{y}$ in the $E$ basis, we can now make a useful observation: the general solution $T^{-1}\ket{y}$ can be expressed as a linear combination of the simpler solutions $T^{-1}\ket{E_i}$, each weighted by $y_i^e$.
+We name the vectors $T^{-1}\ket{E_i}$ the ``\textbf{Green vectors} for $T$ relative to basis $E$'' and denote them\footnote{The notation here is intentionally explicit.
+Once familiar with the concepts, it is possible to use more compact notation without making mistakes. For example, we could drop the basis labels. However, as we will see in the infinite dimensional case, we will often work with two different bases at the same time, in which case the explicit basis labels become indespensable.}
+\begin{equation}
+  T^{-1} \ket{E_i} \equiv \ket{G^{T,E}_i}
+  \, .
+\end{equation}
+So now the formal solution to the problem can be expressed in terms of the Green vectors as
+\begin{equation}
+  \ket{x} = \sum_i \braket{E_i}{y} \ket{G_i^{T,E}}
+  \label{eq:green_vector_expansion}
+  \, .
+\end{equation}
+The components of $\ket{x}$ in the $E$ basis are just
+\begin{equation}
+  x_j^E = \braket{E_j}{x} = \sum_i y_i^E \braket{E_j}{G_i^{T, E}}
+\end{equation}
+which says that each component $x_j^E$ is the a linear combination of the components of the Green vectors weighted by the components $y_i^E$.
+Expanding the definition of the Green vectors,
+\begin{equation}
+  x_j^E = \sum_i \bbraket{E_j}{T^{-1}}{E_i} y_i^E = \sum_i \left[ T^{-1} \right]^E_{ji} y^E_i \label{eq:matrix_multiplication}
+\end{equation}
+where here
+\begin{equation}
+  \left[ T^{-1} \right]^E_{ji} \equiv \bbraket{E_j}{T^{-1}}{E_i} = \braket{E_j}{G_i^{T,E}}
+  \label{eq:matrix_elements_vs_green_vector_elements}
+\end{equation}
+means ``the $ji^\text{th}$ element of the matrix representation of $T^{-1}$ in basis $E$''.
+Equation (\ref{eq:matrix_multiplication}) is just the usual formula for matrix multiplication, but with explicit basis labels.
+Note that the $i^\text{th}$ column of $\left[ T^{-1} \right]^E$ is the components of $\ket{G_i^{T,E}}$.
+
+\leveldown{Example}
+
+In this example, we work in a single basis, so we drop the basis notation.
+Let's use Green vectors to invert
+\begin{equation}
+  \left[ T \right] =
+  \begin{pmatrix}
+    1 & 2 \\ 0 & 1
+  \end{pmatrix}
+  \, .
+\end{equation}
+The Green vectors are defined by
+\begin{align*}
+  T \ket{G_1} &= \ket{E_1} \\
+  T \ket{G_2} &= \ket{E_2}
+  \, .
+\end{align*}
+Letting $\ket{G_1} = a \ket{E_1} + b \ket{E_2}$, the first equation in component form is
+\begin{equation}
+  \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix}
+    = \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+\end{equation}
+which has the solution $a=1$ and $b=0$.
+Similarly, letting $\ket{G_2} = c \ket{E_1} + d \ket{E_2}$, we find $c=-2$ and $d=1$.
+Referring back to Eq.~(\ref{eq:matrix_elements_vs_green_vector_elements}), we get
+\begin{equation}
+  \left[ T ^{-1} \right]
+  = \begin{pmatrix}
+    \braket{E_1}{G_1} & \braket{E_1}{G_2} \\ \braket{E_2}{G_1} & \braket{E_2}{G_2}
+  \end{pmatrix}
+  = \begin{pmatrix}
+    1 & -2 \\ 0 & 1
+  \end{pmatrix}
+  \, .
+\end{equation}
+Let's check that we got it right by explicit matrix multiplication:
+\begin{equation}
+  \begin{pmatrix} 1 & -2 \\ 0 & 1 \end{pmatrix}
+  \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}
+  = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+  \, .
+\end{equation}
+Therefore we successfully inverted $T$ using Green vectors.
+Take a moment to appreciate the value of the Green vector method: we inverted a 2x2 matrix by solving two independent equations, each with only two variables and two unknowns.
+
+\levelstay{Multiple bases and diagonalization}
+
+It is often useful to work in a basis that diagonalizes $T$, because in that basis its matrix representation is trivial.
+Suppose $T$ is diagonal in the $F$ basis, i.e. $T\ket{F_j} = t_j \ket{F_j}$ where $t_j$ is the $j^\text{th}$ eigenvalue of $T$ under basis $F$.
+Keep in mind throughout this discussion that $T^{-1}$ can be represented as
+\begin{equation}
+  T^{-1} = \sum_k T^{-1} \ket{F_k}\bra{F_k} = \sum_k \frac{\ket{F_k}\bra{F_k}}{t_k}
+\end{equation}
+where $t_k$ is the $k^\text{th}$ eigenvalue of $T$.
+
+Let's inspect the components of $\ket{x}$ in this new basis:
+\begin{align}
+  \ket{x} &= T^{-1} \ket{y} \nonumber \\
+  &= \sum_j T^{-1} \ket{F_j}\braket{F_j}{y} \nonumber \\
+  &= \sum_j \frac{1}{t_j} \ket{F_j}\braket{F_j}{y} \nonumber \\
+  \braket{F_i}{x} &= \frac{\braket{F_i}{y}}{t_i}
+  \, .
+\end{align}
+The meaning of this equation is simple: in basis $F$, the components of $\ket{x}$ are one-to-one proportional to the components of $\ket{y}$, just scaled by the eigenvalues of $T$.
+However, we often want to know the components of $\ket{x}$ in a basis which is not necessarily the one that diagonalizes $T$, and our knowledge of $\ket{y}$ typically comes in the form of components in a basis $E$ which is different from $F$.
+Let us explicitly write out two different formulas for the components of $\ket{x}$ in basis $E$ and study their interpretations.
+For both cases, we start by inserting two resolutions of identity into $\ket{x} = T^{-1} \ket{y}$:
+\begin{equation}
+  \ket{x} = \sum_{ij} T^{-1} \ket{F_j} \braket{F_j}{E_i}\braket{E_i}{y}
+  \, .
+  \label{eq:master}
+\end{equation}
+For the first formula, we push the sum over $i$ inside, yielding
+\begin{equation}
+  \ket{x} = \sum_j \ket{F_j} \underbrace{\frac{1}{t_j} \overbrace{\sum_i \braket{F_j}{E_i} \braket{E_i}{y}}^{y_j}}_{\braket{F_j}{x}}
+\end{equation}
+or taking the components of $\ket{x}$,
+\begin{equation}
+  \braket{E_m}{x}
+  =
+    \underbrace{\sum_j \braket{E_m}{F_j}}_\text{step 3}
+    \underbrace{\frac{1}{t_j}}_\text{step 2}
+    \underbrace{\sum_i \braket{F_j}{E_i} \braket{E_i}{y}}_\text{step 1}
+  \, . \label{eq:three_step_process_a}
+\end{equation}
+This formula encodes three-step process that accounts for a huge chunk of what we do in solving physics problems.
+When we know the components of $\ket{y}$ in basis $E$ but $T$ is diagonal in basis $F$, we solve for the components of $\ket{x}$ in basis $E$ as follows:
+\begin{itemize}
+  \item[1:] Convert the components $y^E_i = \braket{E_i}{y}$ into components $y_j$ in the basis $F$ which diagonalizes $T$.
+  \item[2:] Scale each $y_j$ by the eigenvalues $t_j$, resulting in the components $x_j$ of $\ket{x}$ in basis $F$.
+  \item[3:] Convert the components of $\ket{x}$ from basis $F$ to basis $E$.
+\end{itemize}
+You've probably followed this procedure dozens of times in your physics classes.
+Any time you've expand a solution in special functions (Bessel, Laguerre, etc.), used Clebsch-Gordon coefficients to go from independent angular momenta to total angular momenta, used the Fourier or Laplace transforms, or switched to the normal coordinates of a coupled oscillator system, you're probably following this three-step procedure.
+It should be pointed out that the numbers $\braket{E_i}{F_j}$ are components of a unitary ``change of basis'' matrix $U$ defined by $U \ket{E_i} = \ket{F_i}$ with which Equation~(\ref{eq:three_step_process_a}) can be expressed as\footnote{Remember that $U$ is unitary, so $U^\dagger = U^{-1}$. Also notice that we omitted the basis labels on $U$; this is ok because it's components are the same in the $E$ and $F$ bases.}
+\begin{equation}
+  x^E_m
+  =
+    \underbrace{\sum_j U_{mj}}_\text{step 3}
+    \underbrace{\frac{1}{t_j}}_\text{step 2}
+    \underbrace{\sum_i U^{-1}_{ji} y^E_i}_\text{step 1}
+    \, .
+\end{equation}
+
+In the next section we give an example of this procedure using the Fourier transform.
+But first, let's see what happens if we push the $j$ sum to the inside in Eq.~(\ref{eq:master}):
+\begin{equation}
+  \ket{x}
+  = \sum_i \braket{E_i}{y}
+  \left(
+    \underbrace{\sum_j \frac{\ket{F_j} \bra{F_j}}{t_j}}_{T^{-1}} \ket{E_i}
+  \right)
+  \, . \label{eq:three_step_process_b}
+\end{equation}
+The formal similarity between Eq.~(\ref{eq:green_vector_expansion}) and Eq.~(\ref{eq:three_step_process_b}) tells us that the object in parentheses is $\ket{G_i^{T,E}}$, i.e.
+\begin{equation}
+  \ket{G_i^{T,E}} = \sum_j \frac{\ket{F_j}\bra{F_j}}{t_j} \ket{E_i}
+\end{equation}
+which is simple to demonstrate directly:
+\begin{align}
+  \ket{G_i^{T,E}}
+  &= T^{-1} \ket{E_i} \nonumber \\
+  &= \sum_j T^{-1} \ket{F_j} \braket{F_j}{E_i} \nonumber \\
+  &= \sum_j \frac{\ket{F_j} \braket{F_j}{E_i}}{t_j}
+  \, .
+\end{align}
+The ideology encoded in Eq.~(\ref{eq:three_step_process_b}) is different than in Equation (\ref{eq:three_step_process_a}).
+The procedure given here is to first solve the problem in the case that $\ket{y} = \ket{E_i}$, in which case the solution is $\ket{x} = \ket{G_i^{T, E}}$, and then sum over $i$ weighting by the components $y_i^E$.
+
+Taking components in Eq.~(\ref{eq:three_step_process_b}) gives
+\begin{equation}
+  \braket{E_m}{x}
+  = \sum_i \braket{E_i}{y}
+  \underbrace{ \left( \sum_j \frac{\braket{E_m}{F_j} \braket{F_j}{E_i}}{t_j} \right)}_{\braket{E_m}{G_i^{T,E}}}
+  \, . \label{eq:three_step_process_c}
+\end{equation}
+Equation \ref{eq:three_step_process_c}) is the most common approach to using Green vectors.
+We first solve for $\braket{E_m}{G_i^{T,E}}$ by doing the sum over $j$ in parentheses, and then we weight the result with $\ket{y}$ by doing the sum over $i$.
+In the next section, we use that approach to solve a differential equation, in which case the two sums result in a convolution.

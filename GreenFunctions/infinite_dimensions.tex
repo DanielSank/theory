@@ -1,0 +1,157 @@
+\levelstay{Infinite dimensions}
+
+Consider the differential equation
+\begin{equation}
+  \frac{d}{dt} u(t) = - \gamma u(t) + J(t)
+  \, .
+\end{equation}
+We're going to solve this using the idea of Green vectors, although now that we're handling functions we'll call what we're doine the ``method of Green functions''.
+Remember that a function can be thought of as a representation of a vector in a specific basis.
+Given a function $f:\mathbb{R} \rightarrow \mathbb{R}$, the numbers $f(x)$ can be thought of as the components of a vector $\ket{f}$ in a basis made up of vectors whose components, in their own basis, are zero everywhere except for at one $x'$.
+That sounds a lot like delta functions.
+Think of it like this:
+\begin{align*}
+  \ket{f} &= \ket{f} \\
+  &= \sum_{x'} \ket{x'}\braket{x'}{f} \\
+  &= \sum_{x'} \ket{x'} f(x')
+  \, .
+\end{align*}
+Of course, this sum is really an integral,
+\begin{equation}
+  \ket{f} = \int dx' \ket{x'} f(x')
+\end{equation}
+and taking components
+\begin{equation}
+  \braket{x}{f} = \int dx' \braket{x}{x'} f(x')
+\end{equation}
+we see that $\braket{x}{x'}$ must be equal to $\delta(x - x')$.
+
+Returning to the differential equation, we can now appreciate that $u(t)$ and $J(t)$ are components of vectors $\ket{u}$ and $\ket{J}$, i.e. the differential equation can be written as
+\begin{equation*}
+  \bbraket{t}{\frac{d}{dt}}{u} = - \gamma \braket{t}{u} + \braket{t}{J}
+\end{equation*}
+and peeling off the $\bra{t}$ from the left of each term, we're left with
+\begin{equation}
+  \left( \frac{d}{dt} + \gamma \right) \ket{u} = \ket{J}
+\end{equation}
+which is the same equation we studied in the finite dimensional case where now our linear transformation is\footnote{It's easy to see that this is indeed a linear transformation because the derivative is linear, i.e. $(d/dt)(f + g) = df/dt + dg/dt$.}
+\begin{equation}
+  T = \frac{d}{dt} + \gamma \, .
+\end{equation}
+Therefore, we can write down the solution using Eq.~(\ref{eq:three_step_process_c}):
+\begin{equation}
+  u(t) \equiv \braket{t}{u} = \int dt' J(t')
+  \underbrace{\sum_j \frac{\braket{t}{F_j}\braket{F_j}{t'}}{t_j}}_{\braket{t}{G_{t'}}}
+  \, .
+  \label{eq:green_function_solution_mixed}
+\end{equation}
+The notation for the Green vector $\ket{G_{t'}}$ means ``the Green vector when the source is a delta function at time $t$''.
+We've dropped the basis label because it's obvious that a source ``at time $t$'' is in the time basis.
+Speaking of bases, we wrote the sum over $k$ as an integral because we know that the $E$ basis is the set of delta functions in time, but we haven't said yet what the $F$ basis is.
+As discussed above, the $F$ basis is that which diagonalizes $T$.
+In our present case, $T$ involves a time derivative, so it's reasonable to try exponential functions, as they are eigenfunctions of the derivative:
+\begin{equation*}
+  \frac{d}{dt} \exp(i \omega t) = (i \omega) \exp(i\omega t)
+  \, .
+\end{equation*}
+Now of course, here we're expressing our $F$ basis vectors \emph{in the E basis} because we described them by giving their components.
+We can infer, then, that an $F$ basis vector $\ket{\omega}$ should satisfy $\braket{t}{\omega} = \exp(i \omega t)$.
+Taking that inference seriously, we convert the sum to an integral:\footnote{The factor of $2\pi$ in the integration measure corresponds to a choice about Fourier transform normalization. This is a somewhat subtle point that we're not getting into now.}
+\begin{equation}
+  u(t) = \int dt' J(t') \int \frac{d \omega}{2\pi} \frac{e^{i \omega (t - t')}}{t_\omega}
+  \label{eq:green_function_solution_eigenvalues}
+\end{equation}
+where we relabled $t_j^F \rightarrow t_\omega$ for reasons that should be obvious.
+So, what is $t_\omega$?
+It supposed to be the eigenvalue of $T$ acting on basis vector $\ket{\omega}$, which we can evaluate in the $T$ basis (a.k.a the time basis):
+\begin{align*}
+  T \ket{\omega}
+  &= \left( \frac{d}{dt} + \gamma \right) e^{i \omega t} \\
+  &= ( i \omega + \gamma ) e^{i \omega t} \\
+  \rightarrow t_\omega &= i\omega + \gamma
+  \, .
+\end{align*}
+Therefore, our Green function is
+\begin{equation*}
+  \braket{t}{G_{t'}} = \int \frac{d \omega}{2\pi} \frac{e^{i \omega (t - t')}}{i \omega + \gamma}
+\end{equation*}
+and
+\begin{equation}
+  u(t) = \int dt' J(t') \int \frac{d\omega}{2\pi} \frac{e^{i \omega (t - t')}}{i \omega + \gamma}
+\end{equation}
+The integral over $\omega$ can be done easily by contour integration, with result
+\begin{equation}
+  \braket{t}{G_{t'}} = \left\{
+    \begin{array}{rl}
+      e^{-\gamma (t - t')} & \text{for } t > t' \\
+      0 & \text{otherwise}
+    \end{array}
+  \right.
+  \, .
+\end{equation}
+Therefore, the solution to our differential equation is the convolution
+\begin{equation}
+  u(t) = \int dt' J(t') G_{t'}(t) = \int_{-\infty}^t dt' J(t') e^{-\gamma (t - t')}
+  \, .
+\end{equation}
+What does this solution mean intuitively?
+It says that the value of $x$ at time $t$ is built up of contributions from all times $t' < t$.
+For each $t'$, we weight the source value $J(t')$ by the Green's function $G_{t'}(t)$, which tells us how much the source at $t'$ influences the result at time $t$.
+
+\leveldown{Discussion}
+Equation (\ref{eq:green_function_solution_eigenvalues}) is an integral representation of the solutio to \emph{any} time invariant linear differential equation with a source term.
+Other such equations include the wave equation and the diffusion equation.
+So now you know how to solve two of the most important equations in physics, and find their Green functions.
+The eigenvalue denominators are found just by converting all derivatives to $(i \omega)$.
+Let's practice on the diffusion equation, which also gives us a chance to see how this works with \emph{partial} differential equations.
+
+\levelstay{Partial differential equation}
+
+The diffusion equation is
+\begin{equation}
+  \frac{\partial u}{\partial t} - \diffusionconst \frac{\partial^2 u}{\partial x^2} = J(x, t)
+\end{equation}
+or in a basis-independent form,
+\begin{equation}
+  \left( D_t - \diffusionconst D_x^2 \right) \ket{u} = \ket{J}
+  \, .
+\end{equation}
+We use Eq.~(\ref{eq:green_function_solution_mixed}) to find the solution.
+First, the Green's function is
+\begin{align}
+  \braket{t, x}{G_{t', x'}}
+  &= \int \frac{dk}{2\pi}\frac{d\omega}{2\pi} \frac{\braket{t, x}{\omega, k} \braket{\omega, k}{t', x'}}{\text{eigenvalue}(\omega, k)} \nonumber \\
+  &= \int \frac{dk}{2\pi}\frac{d\omega}{2\pi} \frac{e^{i\omega (t-t')} e^{i k(x - x')}}{\text{eigenvalue}(\omega, k)}
+  \, .
+\end{align}
+The eigenvalue of our linear transformation $(D_t - \diffusionconst D_x^2)$ is, by reasoning explained above, equal to $(i \omega + \diffusionconst k^2)$, so the Green function is
+\begin{align}
+  \braket{t, x}{G_{t', x'}}
+  &= -i \int \frac{dk}{2\pi}\frac{d\omega}{2\pi} \frac{e^{i\omega (t-t')} e^{i k(x - x')}}{\omega - i \alpha k^2} \nonumber \\
+  &= -i \int \frac{dk}{2\pi} e^{i k(x - x')}
+  \int \frac{d\omega}{2\pi} \frac{e^{i\omega (t - t')}}{\omega - i \alpha k^2} \nonumber
+  \, .
+\end{align}
+The integral over $\omega$ can be done via contour integration.
+There's a pole at $\omega = i \alpha k^2$ which we pick up if we close the contour in the upper half plane, which is appropriate when $t > t'$.
+When $t < t'$ we close the contour in the lower half plane where there are no poles and the integral is zero.
+This makes sense, because the solution at time $t$ should be influenced only by sources at earlier times.
+Doing the integral we get
+\begin{align}
+  \braket{t, x}{G_{t', x'}}
+  &= -i \int \frac{dk}{2\pi} e^{i k(x - x') - \diffusionconst k^2 (t - t')} \nonumber \\
+  &= \frac{\Theta(t-t')}{\sqrt{4 \pi \diffusionconst (t - t')}} \exp \left(
+    - \frac{(x - x')^2}{4 \diffusionconst (t - t')}
+  \right)
+  \, . \nonumber
+\end{align}
+This is the famous spreading Gaussian characteristic of diffusion.
+The width of the distribution evolves as $\sigma(t) = \sqrt{2 \diffusionconst} \sqrt{t - t'}$.
+Plugging this function into Eq.~(\ref{eq:green_function_solution_mixed}) gives the solution
+\begin{align}
+  u(x, t)
+  & = \int_{-\infty}^\infty dx' \int_{-\infty}^t dt' \nonumber \\
+  &\frac{J(x', t')}{\sqrt{4 \pi \diffusionconst (t - t')}} \exp
+    \left( - \frac{(x - x')^2}{4 \diffusionconst (t - t')} \right)
+\end{align}
+which says that we have a spreading Gaussian centered at each point in space-time that the source $J$ acts.

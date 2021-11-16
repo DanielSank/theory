@@ -1,0 +1,23 @@
+\levelstay{Introduction}
+
+``Green functions'' refers to a method for solving inhomogeneous linear differential equations, i.e. an equation of the form
+\begin{equation}
+  Tf(t) = J(t)
+\end{equation}
+where $T$ is any linear operation including differentiation.\footnote{Differentiation is linear in the sense that $D (f + g)) = Df + Dg$.}
+A simple example would be
+\begin{equation}
+  \left(D + \gamma \right) f = J
+\end{equation}
+or in more common notation
+\begin{equation}
+  \frac{df}{dt}(t) + \gamma f(t) = J(t) \, .
+\end{equation}
+The basic idea is to break $J$ up into components in a certain basis, solve the problem for each component, and then sum the results.
+Most treatments break $J(t)$ into a superposition of delta functions
+\begin{equation}
+  J(t) = \int dt' \, \delta(t' - t) J(t') \, ,
+\end{equation}
+solve the equation for a single delta function, and then sum the results.
+In this treatment, we study the concept of Green functions in more generality, looking at the situation where we work in more than one basis, and connecting the method of Green functions to another common approach to solving linear equations.
+We start with an illustration in finite dimensions to establish the concepts, and then go to infinite dimensions.
