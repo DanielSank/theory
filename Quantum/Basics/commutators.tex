@@ -1,6 +1,6 @@
-\section{Commutators}
+\levelstay{Commutators and equations of motion}
 
-\subsection{Products}
+\leveldown{Products}
 
 \begin{eqnarray}
 \left[A,BC\right] & = & ABC-BCA \\
@@ -8,15 +8,54 @@
 & = & [A,B]C+B[A,C]. \end{eqnarray}
 This can be remembered by noting that $[A,\cdot]$ is like a derivative with respect to $A$.
 
-\subsection{Translation by an operator}
+\levelstay{Conjugation by an operator}
 
-A very common expression involves the translation of an operator $A$ by another operator $B$. The translation can be expressed as a sum\begin{equation}
-e^{A}Be^{-A}=\sum_{n=0}^{\infty}\frac{1}{n!}\underbrace{[A,[A,[A,\ldots[A,B]]]]}_{n\textrm{ times}}. \label{eq:translationSum} \end{equation}
-We can also derive a differential equation that helps in evaluating this sort of expression. Define \begin{equation}
-\mathcal{O}(\lambda) = e^{\lambda A} B e^{-\lambda A}. \end{equation}
-Differentiating both sides with respect to $\lambda$ gives \begin{equation}
-\frac{d\mathcal{O}}{d\lambda} = [A,\mathcal{O}(\lambda)]. \label{eq:translationDiffEq} \end{equation}
-It is sometimes useful to solve equation (\ref{eq:translationDiffEq}) and then set $\lambda=1$ instead of evaluating (\ref{eq:translationSum}) directly.
+A very common expression involves the translation of an operator $A$ by another operator $B$.
+The translation can be expressed as a sum
+\begin{equation}
+  e^{A}Be^{-A}=\sum_{n=0}^{\infty}\frac{1}{n!}\underbrace{[A,[A,[A,\ldots[A,B]]]]}_{n\textrm{ times}}. \label{eq:translationSum}
+\end{equation}
+
+\levelstay{Translation}
+
+Suppose we have a linear differential equation
+\begin{equation}
+  i \partial_t \ket{\Psi(t)} = H(t) \ket{\Psi(t)} \, .
+\end{equation}
+The resemblance of this equation to the Schrodinger equation is obvious, but we remain agnostic about applications for now.
+This equation has a formal solution
+\begin{equation}
+  \ket{\Psi(t)} = T(t) \ket{\Psi(0)}
+\end{equation}
+for some linear transformation $T(t)$, called the ``time translation operator'' or ``propagator''.
+By differentiating this formal soluation with respect to time, we find
+\begin{equation}
+  i \partial_t T(t) = H(t) T(t)
+\end{equation}
+i.e. the time translation operator satisfies the same equation of motion as the original vector $\ket{\Psi(t)}$.
+Suppose we'd like to compute a matrix element
+\begin{align}
+  \mathcal{O}(t)_{\Psi,\Phi}
+  &= \bbraket{\Psi(t)}{\mathcal{O}}{\Phi(t)} \nonumber \\
+  &= \bbraket{\Psi(0)}{T^\dagger(t) \mathcal{O}T(t)}{\Phi(0)}
+  \, .
+\end{align}
+Therefore, rather than computing the time evolution of the vectors, we can compute the time evolution of the matrix\footnote{The subscript $H$ here intentionally suggests a relation to the Heisenberg picture of quantum mechanics.}
+\begin{equation}
+  \mathcal{O}_H(t) \equiv T^\dagger(t) \mathcal{O} T(t)
+  \, .
+\end{equation}
+In the case that $H(t)$ is Hermitian, $T(t)$ is unitary and we can differente both sides with respect to $t$ to get
+\begin{align}
+  i \partial_t \mathcal{O}_H(t)
+  &= -T^\dagger(t) H(t) \mathcal{O}(0) T(t)
+     + T^\dagger(t) \mathcal{O}(0) H(t) T(t) \nonumber \\
+  &= \left[ \mathcal{O}_H(t), H_H(t) \right]
+  \, .
+\end{align}
+In a common case where $H(t) = H$ is constant, $T(t) = \exp(-i t H)$ and $H_H(t) = H$.
+We will see later that this overall structure of going from a linear differential equation for a vector, to an equation of motion for matrices in a different coordinate frame (like $\mathcal{O}_H$), is the idea behind the so called ``interaction'' and ``Heisenberg'' pictures of quantum mechanics.
+
 
 \subsection{Baker-Campbell-Hausdorff}
 
