@@ -2,10 +2,11 @@
 
 \leveldown{Products}
 
-\begin{eqnarray}
-\left[A,BC\right] & = & ABC-BCA \\
-& = & ABC-BAC+BAC-BCA \\
-& = & [A,B]C+B[A,C]. \end{eqnarray}
+\begin{align}
+  \left[A,BC\right] &= ABC - BCA \nonumber \\
+  & = ABC - BAC + BAC - BCA \nonumber \\
+  & = [A,B]C + B[A,C].
+\end{align}
 This can be remembered by noting that $[A,\cdot]$ is like a derivative with respect to $A$.
 
 \levelstay{Conjugation by an operator}
@@ -15,6 +16,16 @@ The translation can be expressed as a sum
 \begin{equation}
   e^{A}Be^{-A}=\sum_{n=0}^{\infty}\frac{1}{n!}\underbrace{[A,[A,[A,\ldots[A,B]]]]}_{n\textrm{ times}}. \label{eq:translationSum}
 \end{equation}
+Defining
+\begin{equation}
+  B(\lambda) = e^{\lambda A} B e^{-\lambda A}
+  \, ,
+\end{equation}
+differentiation by $\lambda$ we find
+\begin{equation}
+  \frac{d}{d\lambda}B(\lambda) = [A, B(\lambda)]
+\end{equation}
+which again shows a relationship between $[A, \cdot]$ and differentiation.
 
 \levelstay{Translation}
 
@@ -48,8 +59,8 @@ Therefore, rather than computing the time evolution of the vectors, we can compu
 In the case that $H(t)$ is Hermitian, $T(t)$ is unitary and we can differente both sides with respect to $t$ to get
 \begin{align}
   i \partial_t \mathcal{O}_H(t)
-  &= -T^\dagger(t) H(t) \mathcal{O}(0) T(t)
-     + T^\dagger(t) \mathcal{O}(0) H(t) T(t) \nonumber \\
+  &= -T^\dagger(t) H(t) \mathcal{O} T(t)
+     + T^\dagger(t) \mathcal{O} H(t) T(t) \nonumber \\
   &= \left[ \mathcal{O}_H(t), H_H(t) \right]
   \, .
 \end{align}

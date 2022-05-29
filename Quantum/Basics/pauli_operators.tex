@@ -18,18 +18,18 @@ From the product and anticommutation follows the commutation relation \begin{equ
 
 The problem of translating one Pauli operator by another arises frequently when analyzing qubit systems.
 We wish to evaluate \begin{equation}
-S(Q) = e^{-iQ\sigma_i}\sigma_j e^{iQ\sigma_i}. \end{equation}
-We use the differential equation (\ref{eq:translationDiffEq}) with $A=-iQ\sigma_i$ to get \begin{equation}
-\frac{dS}{dQ} = i[S(Q),\sigma_i]. \end{equation}
+S(\lambda) = e^{-i\lambda\sigma_i}\sigma_j e^{i\lambda\sigma_i}. \end{equation}
+We use the differential equation (\ref{eq:translationDiffEq}) with $A=-i\lambda\sigma_i$ to get \begin{equation}
+\frac{dS}{d\lambda} = i[S(\lambda),\sigma_i]. \end{equation}
 We postulate the solution \begin{equation}
-S(Q) = \alpha(Q)\sigma_j + \beta(Q)\sigma_k. \end{equation}
-First work out the commutator $i[S(Q),\sigma_i]$ \begin{eqnarray*} 
-i[S(Q),\sigma_i] &=& i[\alpha\sigma_j + \beta\sigma_k, \sigma_i] \\
+S(\lambda) = \alpha(\lambda)\sigma_j + \beta(\lambda)\sigma_k. \end{equation}
+First work out the commutator $i[S(\lambda),\sigma_i]$ \begin{eqnarray*}
+i[S(\lambda),\sigma_i] &=& i[\alpha\sigma_j + \beta\sigma_k, \sigma_i] \\
 &=& i \left( -2i\alpha \sigma_k + 2i\beta \sigma_j \right) \\
 &=& 2\alpha \sigma_k - 2\beta \sigma_j. \end{eqnarray*}
 Equating the right hand side with the explicit derivative of $S$ yields \begin{equation}
-\dot{\alpha}(Q) = -2\beta(Q) \qquad \dot{\beta}(Q) = 2\alpha(Q) \nonumber \end{equation}
+\dot{\alpha}(\lambda) = -2\beta(\lambda) \qquad \dot{\beta}(\lambda) = 2\alpha(\lambda) \nonumber \end{equation}
 with solution \begin{equation}
-\alpha(Q) = \cos \left( 2Q \right) \qquad \beta(Q) = \sin \left( 2Q \right). \nonumber \end{equation}
+\alpha(\lambda) = \cos \left( 2\lambda \right) \qquad \beta(\lambda) = \sin \left( 2\lambda \right). \nonumber \end{equation}
 Therefore \begin{equation}
-e^{-iQ\sigma_i}\sigma_j e^{iQ\sigma_i} = \cos \left( 2Q \right) \sigma_j + \sin \left( 2Q \right) \sigma_k. \end{equation}
+e^{-i\lambda\sigma_i}\sigma_j e^{i\lambda\sigma_i} = \cos \left( 2\lambda \right) \sigma_j + \sin \left( 2\lambda \right) \sigma_k. \end{equation}
