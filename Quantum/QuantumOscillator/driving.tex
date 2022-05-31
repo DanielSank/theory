@@ -1,22 +1,53 @@
-\section{Driven Oscillator}
+\levelstay{Driven Oscillator}
 
-Coherent states exist in nature because a classical harmonic drive applied to a harmonic oscillator system results in a coherent state. Consider the driving energy associated with applicatin of a spatially uniform force field: energy = -force{*}distance. Therefore, the term in the Hamiltonian is $H_{\textrm{drive}}=-\hat{x}*F(t)$. In dimensionless units we can just write this as $H_{\textrm{drive}}=-(a+a^{\dagger})*f_{x}(t)$ where $f_{x}$ has units of energy (we can do this because $\hat{x}\propto X\propto a+a^{\dagger}$). This kind of driving is called a {}``linear'' drive. We can also add a term proportional to the conjugate variable giving\begin{eqnarray*}
-H_{\textrm{drive}} & = & -(a+a^{\dagger})f_{x}(t)-(-i)(a-a^{\dagger})f_{y}(t)\\
-H_{\textrm{drive}} & = & a(-f_{x}+if_{y})+a^{\dagger}(-f_{x}-if_{y})\end{eqnarray*}
-If we define \begin{equation}
-f(t)=-f_{x}(t)+if_{y}(t) \end{equation}
-we can write the drive Hamiltonian as\begin{eqnarray*}
-H_{\textrm{drive}} & = & af(t)+a^{\dagger}f(t)^{*}\\
-H_{\textrm{drive}} & = & af(t)+\textrm{H.C.}\end{eqnarray*}
-The full Hamiltonian in the Heisenberg picture is \begin{equation}
-H(t)=\hbar\Omega\left[a^{\dagger}(t)a(t)+\frac{1}{2}\right]+f(t)a(t)+f^{*}(t)a^{\dagger}(t) \end{equation}
-Heisenberg's equation of motion for $a(t)$ is\begin{eqnarray*}
-i\hbar\dot{a}(t) & = & \left[a(t),H(t)\right]\\
-i\hbar\dot{a}(t) & = & \frac{\partial H(t)}{\partial a^{\dagger}(t)}\\
-i\hbar\dot{a}(t) & = & \hbar\Omega a(t)+f^{*}(t)\textrm{I}\\
-\textrm{or}\qquad\left(d_{t}+i\Omega\right)a(t) & = & -\frac{i}{\hbar}f^{*}(t)\textrm{I}\end{eqnarray*}
+Coherent states exist in nature because a classical harmonic drive applied to a harmonic oscillator system results in a coherent state.
+Consider the energy associated with application of a spatially uniform force field: energy = -force $\times$ distance.
+Therefore, the Hamiltonian term associated with this force is
+\begin{equation}
+  H_{\textrm{drive}}
+  = -x F(t)
+  = -(a + a^\dagger) f_x(t)
+\end{equation}
+where $f_{x} = x_\text{zpf} F(t)$ has dimensions of energy.
+This kind of driving is called a ``linear'' or ``dipole'' drive.
+We can, for free, add a term proportional to the conjugate variable:
+\begin{align*}
+  H_{\textrm{drive}}
+  &=  -(a+a^{\dagger})f_{x}(t)-(-i)(a-a^{\dagger})f_{y}(t)\\
+  &= a(-f_{x}+if_{y})+a^{\dagger}(-f_{x}-if_{y})
+\end{align*}
+so that defining
+\begin{equation}
+  f(t) = -f_x(t) + i f_y(t)
+\end{equation}
+the drive Hamiltonian is
+\begin{equation*}
+  H_{\textrm{drive}} = af(t)+a^{\dagger}f(t)^{*} = af(t)+\textrm{H.C.}
+\end{equation*}
+The full Hamiltonian in the Schrodinger picture is
+\begin{equation}
+  H_S(t)
+  = \hbar\Omega\left[a^{\dagger} a + \frac{1}{2} \right] + f(t) a(t) + f^*(t) a^\dagger(t)
+  \, .
+\end{equation}
+and in the Heisenberg picture it is
+\begin{equation}
+  H_H(t)
+  = \hbar\Omega\left[a_H^{\dagger}(t)a_H(t) + \frac{1}{2}\right] + f(t)a_H(t) + f^{*}(t)a_H^{\dagger}(t)
+  \, .
+\end{equation}
+From now on, we drop the subscript $H$'s and denote $a_H(t) = a(t)$.
+Heisenberg's equation of motion for $a(t)$ is
+\begin{align*}
+  i\hbar\dot{a}(t)
+  &= \left[ a(t), H(t) \right] \\
+  &= \frac{\partial H(t)}{\partial a^{\dagger}(t)} \\
+  &= \hbar\Omega a(t) + f^{*}(t) \\
+  \textrm{or} \qquad
+  \left(d_{t}+i\Omega\right)a(t) &= -\frac{i}{\hbar}f^{*}(t)
+\end{align*}
 
-\subsection{Solution by Green's function: Heisenberg Picutre (Merzbacher 335)}
+\leveldown{Solution by Green's function: Heisenberg Picutre (Merzbacher 335)}
 
 Fourier convention: \begin{equation}
 f(t)=\int e^{i\omega t}\tilde{f}(t)d\omega \end{equation}
@@ -63,6 +94,6 @@ In the case $\Omega T\gg1$ this becomes \begin{equation}
 The phase of the drive determines the direction of the displacement, and the amplitude and time of the drive determine its magnitude.
 
 
-\subsection{Solution by propogator: Interaction Picture (Mezbacher 338)}
+\levelstay{Solution by propogator: Interaction Picture (Mezbacher 338)}
 
 Coming soon.
