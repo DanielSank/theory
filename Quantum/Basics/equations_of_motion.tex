@@ -1,49 +1,172 @@
-\section{Equations of Motion}
+\levelstay{Equations of Motion}
 
-\subsection{Schrodinger Picture}
+\leveldown{Schrodinger Picture}
 
+The time evolution of the quantum state $\ket{\Psi(t)}$ is determined by
 \begin{equation}
-i\hbar\partial_{t}\ket{\Psi}=H_{S}(t)\ket{\Psi} \end{equation}
-For a Hamiltonian that commutes with itself at different times a
-formal solution to this equation is \begin{equation}
-\ket{\Psi(t)}=\exp[\frac{-i}{\hbar}\int_{t_{0}}^{t}H_{S}(t')~dt']\ket{\Psi(0)} \end{equation}
-Define \begin{equation}
-T(t,t_{0})=\exp[\frac{-i}{\hbar}\int_{t_{0}}^{t}H_{S}(t')~dt'] \end{equation}
-Note that \begin{equation}
-i\hbar\partial_{t}T(t,t_{0})=H_{S}(t)T(t,t_{0}) \end{equation}
-Also \begin{equation}
-T^{\dagger}(t,t_{0})=T^{-1}(t,t_{0})=T(t_{0},t). \end{equation}
+  i \hbar \partial_t \ket{\Psi_S(t)} = H_S(t) \ket{\Psi_S(t)}
+  \, .
+\end{equation}
+called the ``Schrodinger equation''.
+$H_S(t)$ is the Hamiltonian, here written with a subscript $S$ to mean ``Schrodinger'', which will distinguish it from other versions of the Haniltonian to be described below.
+If $H_S(t)$ is Hermitian, then there is a formal solution to the Schrodinger equation
+\begin{equation}
+  \ket{\Psi_S(t)} = T_S(t,t_0) \ket{\Psi_S(t_0)}
+\end{equation}
+where $T_S(t, t_0)$, called the ``propogator'', is unitary, meaning that $T_S(t, t_0)^{-1} = T_S(t, t_0)^\dagger$.
+In the special case that $H_S(t)$ commutes with itself at different times, it is easily verified that
+\begin{equation}
+  \ket{\Psi_S(t)}
+  = \exp \left[ \frac{-i}{\hbar}\int_{t_0}^{t}H_S(t') \, dt' \right] \ket{\Psi_S(t_0)}
+\end{equation}
+meaning that
+\begin{equation}
+  T(t,t_0) = \exp \left[\frac{-i}{\hbar}\int_{t_0}^t H_{S}(t') \, dt' \right]
+  \, .
+\end{equation}
+In any case, the Schrodinger equation has the same form as our generic differential equation treated earlier, so we know that
+\begin{equation}
+  i \hbar \partial_t T_S(t, t_0) = H_S(t) T_S(t, t_0) \, .
+\end{equation}
 
-\subsection{Heisenberg Picture}
+\levelstay{Rotating frames}
 
-Define \begin{equation}
-\ket{\Psi_{H}(t)}=T^{-1}(t,t_{0})\ket{\Psi_{S}(t)} \end{equation}
-Then \begin{equation}
-\ket{\Psi_{H}(t)}=\ket{\Psi_{S}(0)} \end{equation}
-so $\ket{\Psi_{H}}$ is constant. Now, we want matrix elements to be the same in either picture \begin{eqnarray*}
-\braket{\Psi_{S}(t)}{A_{S}|\Psi_{S}(t)} & = & \braket{\Psi_{H}}{A_{H}(t)|\Psi_{H}}\\
-\rightarrow A_{H}(t) & = & T^{\dagger}(t)A_{S}T(t)\end{eqnarray*}
-We can use this relation to find the equation of motion for $A_{H}(t)$. Differentiate the previous relation with respect to time to get \emph{Heisenberg's equation}, \begin{equation}
-i\hbar\partial_{t}A_{H}(t)=[A_{H}(t),H_{S}(t)] \end{equation}
-It is very important to note here that the Hamiltonian in Heisenberg's equation is the same Hamiltonian appearing in Schrodinger's equation. This is because \begin{equation}
-H_{H}(t)=T^{\dagger}(t)H_{S}(t)T(t)=H_{S}(t) \end{equation}
+Consider a spin with a magnetic field oriented along the z axis.
+The Hamiltonian is
+\begin{equation}
+  H_{0, S}/\hbar = -\frac{\omega_0}{2}\sigma_z
+\end{equation}
+where we've added a subscript $0$ to denote that this is the Hamiltonian with just the z-axis field and no extra x or y fields.
+In particular, there is no time dependent drive.
+Under $H_{0, S}$ the problem is simple and we can find that the spin precesses around the z axis.
+However, suppose we add a driving term so that the Hamiltonian is
+\begin{equation}
+  H_S(t) = H_{0, S} + V \cos(\omega t) \sigma_x \, .
+\end{equation}
+How do we analyze this case?
+Intuitively, the motion of the spin may be simpler if we go into a frame of reference that is rotating along with the precession induced by $H_{0, S}$.
+Indeed, this idea of a ``rotating frame'' is pervasive.
+The basic idea is to ``rotate'' the state vector backwards in time at the cost of rotating the operators forwards in time.
+Some problems become much easier to solve, and the associated equations of motion look a lot like classical equaitons of motion, in the rotating frame.
 
-\subsection{Interaction Picture}
+\leveldown{Heisenberg Picture}
 
-In this case we have a Hamiltonian with two parts \begin{equation}
-H_{S}(t)=H_{0}+V_{S}(t) \end{equation}
-Define \begin{equation}
-T(t)=\exp[\frac{-i}{\hbar}\int H_{0}(t')dt'] \end{equation}
-and \begin{equation}
-\ket{\Psi_{I}(t)}=T(t)^{-1}\ket{\Psi_{S}(t)} \end{equation}
-where \begin{equation}
-\ket{\Psi_{S}(t)}=\exp[\frac{-i}{\hbar}\int H_{S}(t)]\ket{\Psi_{S}(0)} \end{equation}
-Then we have \begin{equation}
-i\hbar\partial_{t}\ket{\Psi_{I}(t)}=V_{I}(t)\ket{\Psi_{I}(t)} \end{equation}
-where for any operator $A_{S}(t)$ in the Schrodinger picture we have defined \begin{equation}
-A_{I}(t)=T^{\dagger}(t)A_{S}(t)T(t) \end{equation}
-In the case of a time independent operator $A_S(t)=A_S$, we can take the time derivative of the previous equation to get, \begin{equation}
-i\hbar\partial_{t}A_{I}(t)=[A_{I}(t),H_{0}]=[A_{S}(t),H_{0}]_{I} \end{equation}
-More generally, for an operator which is time dependant in the Schrodinger picture we get \begin{equation}
-i\hbar\partial_t A_I(t) = [A_I(t),H_0]+i \hbar (\dot{A}_S(t))_I \end{equation}
-where $(\dot{A}_S(t))_I \equiv T^{\dagger}(t) (dA_S(t)/dt)T(t)$.
+Recall the Schrodinger equation
+\begin{equation}
+  i \hbar \partial_t \ket{\Psi_S(t)} = H_S(t) \ket{\Psi_S(t)}
+\end{equation}
+with formal solution
+\begin{equation}
+  \ket{\Psi_S(t)} = T_S(t, t_0) \ket{\Psi_S(t_0)} \, .
+\end{equation}
+Intuitively, if we want to undo the ``rotating'' motion of $\ket{\Psi_S}$ we should just apply the inverse of the evolution, i.e. we define a new vector
+\begin{equation}
+  \ket{\Psi_H} = T_S(t, t_0)^{-1} \ket{\Psi_S(t)} = \ket{\Psi_S(t_0)}
+\end{equation}
+which is constant.
+Now consider a matrix element:
+\begin{align}
+  \mathcal{O}_{S,\Psi\Phi} =
+  \bbraket{\Psi_{S}(t)}{\mathcal{O}_S}{\Phi_{S}(t)}
+  =& \bbraket{T_S(t, t_0) \Psi_S(t_0)}{\mathcal{O}_S}{T_S(t, t_0) \Phi_S(t_0)} \nonumber \\
+  =& \bbraket{\Psi_H}{\underbrace{T_S(t, t_0)^\dagger \mathcal{O}_S T_S(t, t_0)}_{\mathcal{O}_H(t)}}{\Phi_H}
+\end{align}
+As we can see, time evolved expectation values can be computed using the constant vector $\ket{\Psi_H} = \ket{\Psi_S(t_0)}$ and the time evelved operator $\mathcal{O}_H(t)$ defined as
+\begin{equation}
+  \mathcal{O}_H(t) = T_S(t, t_0)^\dagger \mathcal{O}_S T_S(t, t_0) \, .
+\end{equation}
+Just as we did in the for the general differential equation treated earlier, we can differentiate this definition of $\mathcal{O}_H$ with respect to time and using the fact that $T(t, t_0)$ obeys the Schrodinger equation to reveal \emph{Heisenberg's equation}
+\begin{equation}
+  i \hbar \partial_t \mathcal{O}_H(t)
+  = \left[ \mathcal{O}_H(t), H_H(t) \right]
+  = \left[ \mathcal{O}_S, H_S(t) \right]_H
+  \, .
+\end{equation}
+This equation defines one of the several ``pictures'' of quantum mechanics.
+In the Heisenberg picture, the quantum states are static but the operators evolve in time.
+This picture is much more similar to classical physics where dynamical variables such as $x$ and $p$ evolve in time, and there is no notion of a quantum state.
+
+\levelstay{The general rotating frame}
+
+In the Heisenberg picture, we de-rotate our state vectors completely so that the are constant in time and all the time dependence is in the operators.
+However, more generally we can de-rotate only part of the state vector evolution.
+Define a rotating frame vector
+\begin{equation}
+  \ket{\Psi_R(t)} = R(t) \ket{\Psi_S(t)}
+\end{equation}
+where $R(t)$ is an arbitrary unitary operator with $R(0) = \mathbb{I}$ ($R(t) = T_S(t)^{-1}$ in the Heisenberg picture).
+Computing the time evolution of this new state we get
+\begin{align}
+  i\hbar\partial_t \ket{\Psi_R(t)} &= i\hbar \dot{R}(t) \ket{\Psi_S(t)} + R(t) i \hbar\partial_t\ket{\Psi_S(t)} \nonumber \\
+  &= i\hbar \dot{R}(t)R^{\dagger}(t) \ket{\Psi_R(t)} + R(t) H_S(t) R^{\dagger}(t) \ket{\Psi_R(t)} \nonumber \\
+  &= \left( i\hbar \dot{R}(t)R^\dagger(t) + R(t) H_S(t) R^{\dagger}(t) \right) \ket{\Psi_R(t)}.
+\end{align}
+This can be interpreted as a Schrodinger equation for a system with Hamiltonian
+\begin{equation}
+  H_R(t) = i\hbar \dot{R}(t)R^{\dagger}(t) + R(t) H_S(t) R^{\dagger}(t) \, .
+\end{equation}
+Note that this result is correct for any unitary $R$.
+Note also that we have made no assumptions at all about $H_S(t)$; in particular we haven't assumed that it commutes with itself at different times.
+Matrix elements are computed as
+\begin{align}
+  \mathcal{O}_{S,\Psi\Phi}(t) = \bbraket{\Psi_S(t)}{\mathcal{O}_S}{\Phi_S(t)}
+  &= \bbraket{\Psi_R(t)}{R(t) \mathcal{O}_S R^\dagger(t)}{\Phi_R(t)} \nonumber \\
+  &= \bbraket{\Psi_R(t)}{\mathcal{O}_R}{\Phi_R(t)}
+\end{align}
+where we defined $\mathcal{O}_R(t) = R(t) \mathcal{O}_S R^\dagger(t)$.
+Of course, $\mathcal{O}_R(t)$ obeys a Heisenberg type equation of motion, but with what Hamiltonian?
+Differentiating the definition of $\mathcal{O}_R(t)$ gives us an equation involving $\dot{R}$ and $\dot{R}^\dagger$, which can be solved in principle but doesn't reveal useful structure.
+In most practical applications, $R$ is chosen to unwind some part of the original Hamiltonian $H_S$.
+Various common choices of which part to unwind are called ``pictures'' of quantum mechanics.
+As we already noted, unwinding all of $H_S$ is called the Heisenberg picture.
+More generally, we can choose $R$ to unwind any Hamiltonian $\tilde{H}_S(t)$, so that
+\begin{equation}
+  R(t) = \tilde{T}(t)^{-1}
+  \quad \text{where} \quad
+  i \hbar \partial_t \tilde{T}(t) = \tilde{H}_S(t) \tilde{T}(t)
+  \, .
+\end{equation}
+The equation of motion for $R$ is
+\begin{equation}
+  i \hbar \partial_t R(t) = - R(t) \tilde{H}_S(t)
+\end{equation}
+from which it follows that the equation of motion for $\mathcal{O}_R(t)$ is
+\begin{equation}
+  i \hbar \partial_t \mathcal{O}_R(t)
+  = \left[ \mathcal{O}_R(t), \tilde{H}_R(t) \right]
+  = \left[ \mathcal{O}_S, \tilde{H}_S(t) \right]_R
+  \, .
+\end{equation}
+Note that the equation of motion for $\mathcal{O}_R$ is formally identical to the equation of motion for $\mathcal{O}_H$.
+In this rotated frame, matrix element computation takes place in two steps: 1) We solve the Schrodinger equation with Hamiltonian $H_R(t)$ to find the states $\ket{\Psi_R(t)}$, and then 2) We solve the Heisenberg equation for $\mathcal{O}_R(t)$.
+
+\levelstay{Interaction picture}
+
+The ``interaction picture'' typically describes a situation where the Schrodinger frame Hamiltonian is
+\begin{equation}
+  H_S(t) = H_0 + V_S(t)
+\end{equation}
+and we take
+\begin{equation}
+  R(t) = \exp(i H_0 t / \hbar)
+\end{equation}
+i.e. $R(t)$ unwinds the evolution generated by $H_0$.
+Note that this choice of $R$ implies that $\tilde{H}_S = H_0$.
+The rotating frame Hamiltonian, here denoted $H_I$, is then
+\begin{align}
+  H_I(t)
+  &= i \hbar \dot{R}(t) R^\dagger(t) + R(t) H_S(t) R^\dagger(t) \nonumber \\
+  &= i \hbar (i H_0 / \hbar) e^{i H_0 t / \hbar} e^{-i H_0 t / \hbar}
+    + e^{i H_0 t / \hbar} \left( H_0 + V(t) \right) e^{-i H_0 t/ \hbar} \nonumber \\
+  &= - H_0 + H_0 +
+    \underbrace{\exp \left(i H_0 t / \hbar \right) V_S(t) \exp \left(-i H_0 t / \hbar \right)}_{V_I(t)} \nonumber \\
+  H_I(t) &= V_I(t)
+  \, .
+\end{align}
+Therefore, in the interaction picture, the two equations of motion are
+\begin{equation}
+  i \hbar \partial_t \ket{\Psi_I(t)} = V_I(t)
+  \qquad
+  i \hbar \partial_t \mathcal{O}_I(t) = \left[ \mathcal{O}_I(t), H_0 \right]
+  \, .
+\end{equation}

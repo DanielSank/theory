@@ -56,12 +56,14 @@ Therefore, rather than computing the time evolution of the vectors, we can compu
   \mathcal{O}_H(t) \equiv T^\dagger(t) \mathcal{O} T(t)
   \, .
 \end{equation}
-In the case that $H(t)$ is Hermitian, $T(t)$ is unitary and we can differente both sides with respect to $t$ to get
+In the case that $H(t)$ is Hermitian, $T(t)$ is unitary and we can differentiate both sides with respect to $t$ to get
 \begin{align}
   i \partial_t \mathcal{O}_H(t)
   &= -T^\dagger(t) H(t) \mathcal{O} T(t)
      + T^\dagger(t) \mathcal{O} H(t) T(t) \nonumber \\
-  &= \left[ \mathcal{O}_H(t), H_H(t) \right]
+  &= \left[ \mathcal{O}_H(t), H_H(t) \right] \\
+  \text{or} \qquad
+  &= \left[ \mathcal{O}, H(t) \right]_H
   \, .
 \end{align}
 In a common case where $H(t) = H$ is constant, $T(t) = \exp(-i t H)$ and $H_H(t) = H$.

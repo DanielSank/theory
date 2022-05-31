@@ -1,20 +1,70 @@
 \section{Rotating Frame}
 
-The basic qubit Hamiltonian is \begin{equation}
-H_q/\hbar = -\frac{\omega_q}{2}\sigma_z \end{equation}
-A quantum state under this Hamiltonian precesses around the Z axis. In the lab we are used to thinking about a rotating frame in which this precession is absent. We now show how do we do this mathematically.
+Consider a spin with a magnetic field oriented along the z-axis.
+The Hamiltonian is
+\begin{equation}
+  H_0/\hbar = -\frac{\omega_q}{2}\sigma_z
+  \, .
+\end{equation}
+Under this Hamiltonian, the spin precesses around the Z axis.
 
-In the Schrodinger picture the time evolution operator for a Hamiltonian $H_0$ is \begin{equation}
-T = \exp \left[ -\frac{i}{\hbar}H_0 t \right]. \end{equation}
-Intuitively, we should just apply the inverse of this evolution to the Schrodinger state vector in order to remove the precession. We can then define a state in the rotating frame as \begin{equation}
-\ket{\Psi'(t)} = R\ket{\Psi(t)} \end{equation}
-where $R=T^{\dagger}$. Computing the time evolution of this new state we get \begin{eqnarray}
-i\hbar\partial_t \ket{\Psi'(t)} &=& i\hbar \dot{R}\ket{\Psi(t)} + Ri\hbar\partial_t\ket{\Psi(t)} \\
-&=& i\hbar \dot{R}R^{\dagger} \ket{\Psi'(t)} + R H_0 R^{\dagger} \ket{\Psi'(t)} \\
-&=& \left( i\hbar \dot{R}R^{\dagger} + RH_0R^{\dagger} \right) \ket{\Psi'(t)}. \end{eqnarray}
-This can be interpreted as a Schrodinger equation for a system with Hamiltonian \begin{equation}
-H_0' = i\hbar \dot{R}R^{\dagger} + RH_0R^{\dagger}. \end{equation}
+Consider a Schrodinger equation
+\begin{equation}
+  i \hbar (d/dt) \ket{\Psi_S(t)} = H_S(t) \ket{\Psi_S(t)}
+\end{equation}
+with formal solution
+\begin{equation}
+  \ket{\Psi_S(t)} = U_S(t) \ket{\Psi_S(0)} \, .
+\end{equation}
+Intuitively, we should just apply the inverse of this evolution to the Schrodinger state vector in order to remove the precession.
+So, we define a new vector
+\begin{equation}
+  \ket{\Psi_R(t)} = U_S(t)^{-1} \ket{\Psi_S(t)}
+\end{equation}
+and we then study the behavior of $\ket{\Psi_R(t)}$.
+However, before proceding, let's generalize a bit and instead define
+\begin{equation}
+  \ket{\Psi_R(t)} = R(t) \ket{\Psi_S(t)}
+\end{equation}
+where $R(t)$ is an arbitrary unitary operator ($R(t) = U_S(t)^{-1}$ in the special case mentioned above).
+Computing the time evolution of this new state we get
+\begin{align}
+  i\hbar\partial_t \ket{\Psi_R(t)} &= i\hbar \dot{R}(t) \ket{\Psi_S(t)} + R(t) i \hbar\partial_t\ket{\Psi_S(t)} \nonumber \\
+  &= i\hbar \dot{R}(t)R^{\dagger}(t) \ket{\Psi_R(t)} + R(t) H_S(t) R^{\dagger}(t) \ket{\Psi_R(t)} \nonumber \\
+  \text{($t$'s dropped for brevity)} \qquad
+  &= \left( i\hbar \dot{R}R^{\dagger} + R H_S R^{\dagger} \right) \ket{\Psi_R}.
+\end{align}
+This can be interpreted as a Schrodinger equation for a system with Hamiltonian
+\begin{equation}
+  H_R(t) = i\hbar \dot{R}(t)R^{\dagger}(t) + R(t) H_S(t) R^{\dagger}(t) \, .
+\end{equation}
 Note that this result is correct for \emph{any} $R$, not necessarily inverse of the Schrodinger evolution operator.
+Note also that we have made no assumptions at all about $H_S(t)$; in particular we haven't assumed that it commutes with itself at different times.
+We have an equation of motion for $\ket{\Psi_R(t)}$, but so what... what can we do with it?
+Some times, physics can be extracted from $\ket{\Psi_R(t)}$ directly.
+In other cases, we may want to compute matrix elements explicitly, so let's see how to do that.
+Suppose we have a Schrodinger frame operator $\mathcal{O}_S$ and states $\ket{m_S(t)}$ and $\ket{n_S(t)}$ and we want to find
+\begin{equation*}
+  \mathcal{O}_{m n}(t) = \bbraket{m_S(t)}{\mathcal{O}_S}{n_S(t)} \, .
+\end{equation*}
+Direct substitution shows
+\begin{equation*}
+  \mathcal{O}_{m n}(t) = \bbraket{m_R(t)}{R(t) \mathcal{O}_S R(t)^{-1}}{n_R(t)}
+\end{equation*}
+so it's natural to define
+\begin{equation*}
+  \mathcal{O}_R(t) = R(t) \mathcal{O}_S R(t)^{-1}
+\end{equation*}
+so that matrix elements have the same form in the original and rotated frames:
+\begin{equation}
+  \mathcal{O}_{mn}(t)
+  = \bbraket{m_S(t)}{\mathcal{O}_S}{n_S(t)}
+  = \bbraket{m_R(t)}{\mathcal{O}_R(t)}{n_R(t)}
+  \, .
+\end{equation}
+
+Now let's study the evolution of $\mathcal{O}_R(t)$.
+
 
 In the case that $R=T^{\dagger}$ the resulting Hamiltonian is particularly simple, as expected \begin{eqnarray}
 H_0' &=& i\hbar (iH_0/\hbar)RR^{\dagger} + H_0 \\
