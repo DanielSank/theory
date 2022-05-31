@@ -75,7 +75,7 @@ Another useful expression of the Hamiltonian for the electrical oscillator case 
       \left( \frac{Z}{R_K / 8 \pi} \right) \frac{q^2}{2}
     + \left( \frac{R_K / 8 \pi}{Z} \right) \frac{\varphi^2}{2}
 \end{equation*}
-where $q \equiv Q / 2 e$ and $\varphi \equiv 2\pi \Phi / \Phi_0$.
+where $q \equiv Q / 2 e$, $\varphi \equiv 2\pi \Phi / \Phi_0$, and $[\varphi, q] = 1$.
 
 \section{Algebra}
 
@@ -86,20 +86,24 @@ This is extremely useful when computing dynamics in the Heisenberg or interactio
 
 \section{Equations of Motion}
 
-The Heisenberg equation of motion for the $a$ operator is \begin{eqnarray*}
-i\hbar d_{t}a & = & [a,H] \\
-& = & \gamma\sqrt{\alpha\beta}[a,a^{\dagger}a+\frac{1}{2}] \\
-& = & \gamma\sqrt{\alpha\beta}\frac{\partial(aa^{\dagger})}{\partial a^{\dagger}} \\
-& = & \gamma\sqrt{\alpha\beta}\,a \end{eqnarray*}
-giving \begin{equation}
-\dot{a} = -i\frac{\gamma\sqrt{\alpha\beta}}{\hbar}a .\end{equation}
-Solving this simple differential equation yields
+The Heisenberg equation of motion for the $a$ operator is
+\begin{align*}
+  i\hbar d_{t}a
+  &= [a,H] \\
+  &= \hbar \omega [a,a^{\dagger}a+\frac{1}{2}] \\
+  &= \hbar \omega \frac{\partial(aa^{\dagger})}{\partial a^{\dagger}} \\
+  &= \hbar \omega \,a
+\end{align*}
+giving
+\begin{equation*}
+  \dot{a} = -i \omega a
+\end{equation*}
+with solution
 \begin{equation}
 a(t) = a(0)\exp\left[-i \omega t \right],
 \quad
 a^{\dagger}(t) = a^{\dagger}(0)\exp\left[i \omega t \right] \, .
 \end{equation}
-where $\omega \equiv \gamma\sqrt{\alpha\beta}/\hbar$ as claimed above.
 Note that the evolution of $a$ in the phase plane is $\emph{clockwise}$, ie. the phasor convention we inherit from Schrodinger's (Heisenberg's) equation has a $-i$.
 This is important interpreting the meaning of positive and negative energy in a quantum calculation.
 
