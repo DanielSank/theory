@@ -3,11 +3,11 @@
 Coherent states exist in nature because a classical harmonic drive applied to a harmonic oscillator system results in a coherent state.
 Consider the energy associated with application of a spatially uniform force field: energy = -force $\times$ distance.
 Therefore, the Hamiltonian term associated with this force is
-\begin{equation}
+\begin{equation*}
   H_{\textrm{drive}}
   = -x F(t)
   = -(a + a^\dagger) f_x(t)
-\end{equation}
+\end{equation*}
 where $f_{x} = x_\text{zpf} F(t)$ has dimensions of energy.
 This kind of driving is called a ``linear'' or ``dipole'' drive.
 We can, for free, add a term proportional to the conjugate variable:
@@ -16,28 +16,28 @@ We can, for free, add a term proportional to the conjugate variable:
   &=  -(a+a^{\dagger})f_{x}(t)-(-i)(a-a^{\dagger})f_{y}(t)\\
   &= a(-f_{x}+if_{y})+a^{\dagger}(-f_{x}-if_{y})
 \end{align*}
-so that defining
+and define
 \begin{equation}
   f(t) = -f_x(t) + i f_y(t)
 \end{equation}
-the drive Hamiltonian is
+so that the drive Hamiltonian is
 \begin{equation*}
-  H_{\textrm{drive}} = af(t)+a^{\dagger}f(t)^{*} = af(t)+\textrm{H.C.}
+  H_{\textrm{drive}} = af(t)+a^{\dagger}f(t)^{*} \, .
 \end{equation*}
 The full Hamiltonian in the Schrodinger picture is
 \begin{equation}
   H_S(t)
-  = \hbar\Omega\left[a^{\dagger} a + \frac{1}{2} \right] + f(t) a(t) + f^*(t) a^\dagger(t)
+  = \hbar \Omega \left( a^{\dagger} a + \frac{1}{2} \right) + f(t) a(t) + f^*(t) a^\dagger(t)
   \, .
 \end{equation}
 
 
-\levelstay{Solution by Green's function: Heisenberg Picutre (Merzbacher 335)}
+\levelstay{Solution by Green's function: Heisenberg Picture (Merzbacher 335)}
 
 The Hamiltonian in the Heisenberg picture is
 \begin{equation}
   H_H(t)
-  = \hbar\Omega\left[a_H^{\dagger}(t)a_H(t) + \frac{1}{2}\right] + f(t)a_H(t) + f^{*}(t)a_H^{\dagger}(t)
+  = \hbar \Omega \left( a_H^{\dagger}(t)a_H(t) + \frac{1}{2} \right) + f(t)a_H(t) + f^{*}(t)a_H^{\dagger}(t)
   \, .
 \end{equation}
 From now on, we drop the subscript $H$'s and denote $a_H(t) = a(t)$.
