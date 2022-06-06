@@ -27,75 +27,196 @@ so that the drive Hamiltonian is
 The full Hamiltonian in the Schrodinger picture is
 \begin{equation}
   H_S(t)
-  = \hbar \Omega \left( a^{\dagger} a + \frac{1}{2} \right) + f(t) a(t) + f^*(t) a^\dagger(t)
+  = \hbar \omega_0 \left( a^{\dagger} a + \frac{1}{2} \right) + f(t) a(t) + f^*(t) a^\dagger(t)
   \, .
 \end{equation}
 
+\leveldown{Solution in the Heisenberg picture}
 
-\levelstay{Solution by Green's function: Heisenberg Picture (Merzbacher 335)}
-
+In this section we solve the driven oscillator problem in the Heisenberg.
+We follow the approach in Merzbacher, starting at page 335.
 The Hamiltonian in the Heisenberg picture is
 \begin{equation}
   H_H(t)
-  = \hbar \Omega \left( a_H^{\dagger}(t)a_H(t) + \frac{1}{2} \right) + f(t)a_H(t) + f^{*}(t)a_H^{\dagger}(t)
+  = \hbar \omega_0 \left( a_H^{\dagger}(t)a_H(t) + \frac{1}{2} \right) + f(t)a_H(t) + f^{*}(t)a_H^{\dagger}(t)
   \, .
 \end{equation}
-From now on, we drop the subscript $H$'s and denote $a_H(t) = a(t)$.
+For the rest of this section, we drop the subscript $H$'s and denote $a_H(t) = a(t)$.
 Heisenberg's equation of motion for $a(t)$ is
 \begin{align*}
   i\hbar\dot{a}(t)
   &= \left[ a(t), H(t) \right] \\
   &= \frac{\partial H(t)}{\partial a^{\dagger}(t)} \\
-  &= \hbar\Omega a(t) + f^{*}(t) \\
+  &= \hbar\omega_0 a(t) + f^{*}(t) \\
   \textrm{or} \qquad
-  \left(d_{t}+i\Omega\right)a(t) &= -\frac{i}{\hbar}f^{*}(t)
+  \left(d_{t}+i\omega_0\right)a(t) &= -\frac{i}{\hbar}f^{*}(t)
+  \, .
 \end{align*}
-
-Fourier convention: \begin{equation}
-f(t)=\int e^{i\omega t}\tilde{f}(t)d\omega \end{equation}
-The equation for the Green's function is \begin{eqnarray*}
-\left(d_{t}+i\Omega\right)|G_{t_{0}}\rangle & = & -\frac{i}{\hbar}|\delta_{t_{0}}\rangle\\
-\int\left(d_{t}+i\Omega\right)|\omega\rangle\langle\omega|G_{t_{0}}\rangle\frac{d\omega}{2\pi} & = & -\frac{i}{\hbar}\int|\omega\rangle\langle\omega|\delta_{t_{0}}\rangle\frac{d\omega}{2\pi}\\
-\int i\left(\omega+\Omega\right)\tilde{G}_{t_{0}}(\omega)|\omega\rangle\frac{d\omega}{2\pi} & = & -\frac{i}{\hbar}\int|\omega\rangle e^{-i\omega t_{0}}\frac{d\omega}{2\pi}\\
-\left(\omega+\Omega\right)\tilde{G}_{t_{0}}(\omega) & = & -\frac{1}{\hbar}e^{-i\omega t_{0}}\\
-\tilde{G}_{t_{0}}(\omega) & = & -\frac{1}{\hbar\left(\omega+\Omega\right)}e^{-i\omega t_{0}}\\
-G_{t_{0}}(t) & = & -\int_{-\infty}^{\infty}\frac{e^{i\omega(t-t_{0})}}{\hbar\left(\omega+\Omega\right)}\frac{d\omega}{2\pi}\end{eqnarray*}
-There's a pole on the real line which means we have to impose damping to get a sensible result. We want the $\emph{retarded}$ Green's function to be zero if $t<t_{0}$ which means we want the poles to exist only when the imaginary part of $\omega$ is in the upper half plane. Therefore we add to the denominator a term $-i\epsilon$, \begin{eqnarray*}
-G_{t_{0}}^{R}(t) & = & -\int_{-\infty}^{\infty}\frac{e^{i\omega(t-t_{0})}}{\hbar\left(\omega+\Omega-i\epsilon\right)}\frac{d\omega}{2\pi}\\
-G_{\textrm{t}_{0}}^{R}(t) & = & -i2\pi\frac{1}{\hbar2\pi}e^{i(-\Omega+i\epsilon)(t-t_{0})}\Theta(t-t_{0})\\
-G_{\textrm{t}_{0}}^{R}(t) & = & -\frac{i}{\hbar}e^{-i\Omega(t-t_{0})}\Theta(t-t_{0}) \end{eqnarray*}
-You can check that the advanced Green's function, which you get by using $+i\epsilon$, is \begin{equation}
-G_{\textrm{t}_{0}}^{A}(t)=\frac{i}{\hbar}e^{-i\Omega(t-t_{0})}\Theta(t_{0}-t) \end{equation}
-The inhomogenious part of the solution is \begin{equation}
-\int_{-\infty}^{\infty}G_{t'}^{R}(t)f^{*}(t')dt' \end{equation}
+Note that this equation of motion is \emph{exactly} the same as the classical equation of motion for the resonator's action-angle variable (also called ``mode amplitude'' and a variety of other names).
+That's one of the points of the Heisenberg picture: we solve for time dependence of the dynamical variables, just as we do in classical mechanics, instead of solving for the time dependence of the mysterios wave function.
+The homogeneous solution, i.e. when $f(t) = 0$, is
 \begin{equation}
-a(t)=-\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\Omega(t-t')}f^{*}(t')dt' \end{equation}
-Note that the retarded Green's function has the effect of including influence from the driving force at intermittent times $t'$ only less than the evaluation time $t$. In words this means that the system cannot be affected by influences from the future.
+  a_\text{hom.}(t) = a(0) \exp(-i \omega_0 t) \, .
+\end{equation}
+For the inhomogenous part, we convert to the frequency domain using the Fourier transform convention
+\begin{equation}
+  f(t) = \int e^{i\omega t} \tilde{f}(t) \frac{d\omega}{2\pi}
+  \, .
+\end{equation}
+The equation for the Green's function can then be rewritten as
+\begin{align*}
+  \left(d_{t} + i \omega_0 \right) \ket{G_{t_0}}
+  =& -\frac{i}{\hbar} \ket{\delta_{t_0}} \\
+  \int \left(d_{t} + i \omega_0 \right) \ket{\omega} \braket{\omega}{G_{t_0}} \frac{d\omega}{2\pi}
+  =& -\frac{i}{\hbar} \int \ket{\omega}\braket{\omega}{\delta_{t_0}} \frac{d\omega}{2\pi} \\
+  \int i\left(\omega + \omega_0 \right) \tilde{G}_{t_0}(\omega) \ket{\omega} \frac{d\omega}{2\pi}
+  =& -\frac{i}{\hbar} \int \ket{\omega} e^{-i\omega t_0} \frac{d\omega}{2\pi} \\
+  \left(\omega + \omega_0 \right) \tilde{G}_{t_0}(\omega)
+  =& -\frac{1}{\hbar} e^{-i\omega t_0} \\
+  \tilde{G}_{t_0}(\omega)
+  =& -\frac{1}{\hbar \left( \omega + \omega_0 \right)} e^{-i \omega t_0} \\
+  G_{t_0}(t)
+  =& -\int_{-\infty}^{\infty}\frac{e^{i\omega(t - t_0)}}{\hbar \left(\omega + \omega_0 \right)}\frac{d\omega}{2\pi}
+  \, .
+\end{align*}
+There's a pole on the real line which means we have to impose damping to get a sensible result. We want the $\emph{retarded}$ Green's function to be zero if $t<t_0$ which means we want the poles to exist only when the imaginary part of $\omega$ is in the upper half plane. Therefore we add to the denominator a term $-i\epsilon$,
+\begin{align*}
+  G_{t_0}^{R}(t)
+  =& -\int_{-\infty}^{\infty} \frac{e^{i\omega(t - t_0)}}{\hbar \left(\omega + \omega_0 -i \epsilon\right)} \frac{d\omega}{2\pi} \\
+  =& -i \left( 2\pi \right) \frac{1}{\hbar 2\pi} e^{i(-\omega_0 + i \epsilon)(t - t_0)} \Theta(t-t_0) \\
+  =& -\frac{i}{\hbar} e^{-i\omega_0(t - t_0)} \Theta(t - t_0)
+  \, .
+\end{align*}
+You can check that the advanced Green's function, which you get by using $+i\epsilon$, is
+\begin{equation}
+  G_{t_0}^{A}(t) = \frac{i}{\hbar} e^{-i\omega_0 (t - t_0)} \Theta(t_0 - t)
+  \, .
+\end{equation}
+Using the retarded Green's function, we can write the inhomogenious part of the solution as
+\begin{align*}
+  a_\text{inhom.}(t)
+  &= \int_{-\infty}^{\infty}G_{t'}^{R}(t)f^{*}(t')dt' \\
+  &= -\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\omega_0(t-t')}f^{*}(t')dt'
+\end{align*}
+Note that the retarded Green's function has the effect of including influence from the driving force at times $t'$ only earlier than the evaluation time $t$.
+In words: the system is affected only by influences from the past.
 
-Consider the case that the driving force turns on at $T_{1}$ and turns off again at $T_{2}$. We can then write the full solution (homogeneous plus inhomogeneous) during the driving period as \begin{equation}
-a(t)=a(T_{1})e^{-i\Omega(t-T_{1})}-\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\Omega(t-t')}f^{*}(t')dt' \end{equation}
-This can be understood in a nice way in the context of coherent states. Recall that a coherent state has the property $a|\phi\rangle=\phi|\phi\rangle$. In free evolution $a(t)=a(0)e^{-i\Omega t}$ so $a(t)|\phi\rangle=\phi e^{-i\Omega t}|\phi\rangle$, which means that the eigenvalue associated to the coherent state is travelling in circles in the phase plane. If we drive the system then $a(t)$ gets the usual free evolution part, but also picks up the additional integral term which is just a complex number. Therefore the influence of driving is to translate the coherent state by an amount equal to the integral term we just derived.
+Consider the case that the driving force turns on at $t_1$.
+We can then write the full solution (homogeneous plus inhomogeneous) for $t > t_1$ as
+\begin{equation}
+  a(t)
+  = a(t_1) e^{-i\omega_0(t - t_1)} \underbrace{- \frac{i}{\hbar} \int_{t_1}^t e^{-i \omega_0(t - t')} f^{*}(t') \, dt'}_{\zeta(t)} \, .
+\end{equation}
+This relation shows explicitly that during the driving period $a$ acquires the usual $e^{-i\omega_0(t - t_1)}$ dynamical phase from free oscillation, plus an added effect, namely the Fourier transform, of the driving.
 
-Another way to phrase this is found through the use of the advanced Green's function. Using it we can write a new expression for $a(t)$,\begin{eqnarray*}
-a(t) & = & a(T_{2})e^{-i\Omega(t-T_{2})}+\int_{-\infty}^{\infty}G_{t'}^{A}(t)f^{*}(t')dt'\\
-a(t) & = & a(T_{2})e^{-i\Omega(t-T_{2})}+\frac{i}{\hbar}\int_{t}^{\infty}e^{-i\Omega(t-t')}f^{*}(t')dt'\end{eqnarray*}
-Equating this with our previous expression for $a(t)$ yields\begin{eqnarray*}
-a(T_{2})e^{-i\Omega(t-T_{2})}+\frac{i}{\hbar}\int_{t}^{\infty}e^{-i\Omega(t-t')}f^{*}(t')dt' & = & a(T_{1})e^{-i\Omega(t-T_{1})}-\frac{i}{\hbar}\int_{-\infty}^{t}e^{-i\Omega(t-t')}f^{*}(t')dt'\\
-a(T_{2})e^{i\Omega T_{2}} & = & a(T_{1})e^{i\Omega T_{1}}-\frac{i}{\hbar}\int_{-\infty}^{\infty}e^{i\Omega t'}f^{*}(t')dt'\\
-a(T_{2}) & = & a(T_{1})e^{-i\Omega(T_{2}-T_{1})}-\frac{i}{\hbar}\int_{-\infty}^{\infty}e^{i\Omega t'}f^{*}(t')dt'\end{eqnarray*}
-This relation shows explicitly that during the driving period $a$ acquires the usual $e^{-i\Omega(T_{2}-T_{1})}$ dynamical phase we expect from free oscillation, plus the added effect of the driving.
+\leveldown{Evolution of a coherent state}
 
-As a useful special case let's look at what happens if we drive only the $X$ quadrature with a sinusoidal drive, \begin{equation}
-f(t)=A\sin\left(\Omega t+\theta\right) \end{equation}
-from time $0$ to time $T$. The translation of the coherent state is then\begin{eqnarray*}
-\zeta & = & -\frac{i}{\hbar}\frac{A}{2i}\int_{0}^{T}e^{i\Omega t'}\left[e^{i(\Omega t'+\theta)}-e^{-i(\Omega t'+\theta)}\right]dt'\\
-\zeta & = & -\frac{A}{2\hbar}\int_{0}^{T}\left[e^{i(2\Omega t'+\theta)}-e^{-i\theta}\right]dt'\\
-\zeta & = & -\frac{A}{2\hbar}T\left[\frac{1}{\Omega T}\left(e^{i(\Omega T+\theta)}\sin\left(\Omega T\right)\right)-e^{-i\theta}\right]\end{eqnarray*}
-In the case $\Omega T\gg1$ this becomes \begin{equation}
-\zeta=\frac{1}{2}\frac{AT}{\hbar}e^{-i\theta} \end{equation}
-The phase of the drive determines the direction of the displacement, and the amplitude and time of the drive determine its magnitude.
+We can now show that a coherent state, subject to driving, remains a coherent state.
+If the system is in coherent state $\ket{\phi}$ at time $t=0$, then $a\ket{\Psi(0)} = \phi \ket{\Psi(0)}$, and we compute
+\begin{align*}
+  a \ket{\Psi(t)}
+  &= a T_S(t) \ket{\Psi(0)} \\
+  &= T_S(t) \underbrace{\left( T_S^\dagger(t) a T_S(t) \right)}_{a(t)} \ket{\Psi(0)} \\
+  &= T_S(t) \left( a e^{-i \omega_0 t} + \zeta(t) \right) \ket{\Psi(0)} \\
+  &= \left( \phi e^{-i \omega_0 t} + \zeta(t) \right) T_S(t) \ket{\Psi(0)} \\
+  &= \left( \phi e^{-i \omega_0 t} + \zeta(t) \right) \ket{\Psi(t)} \\
+\end{align*}
+which shows that under the effect of driving, a coherent state evolves as
+\begin{equation}
+  \ket{\phi} \Rightarrow \ket{\phi e^{-i \omega_0 t} + \zeta(t)}
+  \, .
+\end{equation}
 
+\levelup{Solution in a rotating frame}
 
-\levelstay{Solution by propogator: Interaction Picture (Mezbacher 338)}
+In the Heisenberg picture, the equation of motion for the lowering operator was
+\begin{equation*}
+  \left( d_t + i \omega_0 \right) a(t) = -\frac{i}{\hbar} f^*(t)
+  \, .
+\end{equation*}
+This equation involves two potentially large frequencies: the resonance frequency $\omega_0$ of the oscillator, and the time dependence $f^*(t)$.
+In the typical case where the spectral content of $f^*$ is centered near $\omega_0$, we can use the rotating frame to remove the fast time dependence.
+Consider the rotating frame defined by
+\begin{equation*}
+  R(t) = \exp(i \omega_R \, t \, n)
+\end{equation*}
+which implies $\tilde{H}_S = \hbar \omega_R n$.
+The equation of motion for $a_R(t)$ is
+\begin{align*}
+  i \hbar \dot{a}_R(t)
+  &= \left[ a, \tilde{H}_S \right]_R \\
+  &= \left(
+    \frac{\partial}{\partial a^\dagger} \left( \hbar \omega_R a^\dagger a \right)
+    \right)_R \\
+  &= \hbar \omega_R a_R(t) \\
+  \dot{a}_R(t)
+  &= -i \omega_R a_R(t)
+\end{align*}
+with solution $a_R(t) = \exp(-i \omega_R t) a$.
+Meanwhile, the kets evolve in time according to the rotating frame Hamiltonian
+\begin{align}
+  H_R(t)
+  &= i \hbar \dot{R}(t) R^\dagger(t) + R(t) H_S(t) R^\dagger(t) \nonumber \\
+  &= \hbar \Delta \, n + \frac{1}{2} \hbar \omega_0 + f(t) a_R(t) + f^*(t) a_R^\dagger(t)
+  \label{eq:rotating_frame_hamiltonian}
+\end{align}
+where $\Delta \equiv \omega_0 - \omega_R$ and we dropped the subscript on $n$ because $n_R(t) = n$.
+Since we already solved for $a_R(t)$, it remains only to solve the Schrodinger equation for $H_R(t)$, and then we would be able to find all matrix elements of interest.
+However, it's more convenient to take the point of view that Eq.~(\ref{eq:rotating_frame_hamiltonian}) itself is a Schrodinger equation whos matrix elements can be found in the Heisenberg picture.
+We can do this by lumping the time dependence of $a_R(t)$ into the drive terms, re-expressing the Hamiltonian as
+\begin{equation}
+  H_R(t) = \hbar \Delta n + \frac{1}{2}\hbar \omega_0 + f(t)e^{-i \omega_R t} a + f^*(t) e^{i \omega_r t} a^\dagger
+\end{equation}
+which looks just like the Hamiltonian in the Schrodinger picture (here we write $a$ instead of $a_S$), but with modified time dependence in the drive.
+Formally, this Hamiltonian has a propagator $T_R$, and to solve for the time dependence of the kets we'd have to compute $T_R$.
+But of course, we can apply the Heisenberg picture to \emph{this} Hamiltonian instead.
+Formally, and matrix element can be computed as
+\begin{align*}
+  \bbraket{\Psi_S(t)}{\mathcal{O}_S}{\Phi_S(t)}
+  &= \bbraket{\Psi_R(t)}{R(t) \mathcal{O}_S R^\dagger(t)}{\Phi_R(t)} \\
+  &= \bbraket{\Psi_R(0)}{T_R^\dagger(t) R(t) \mathcal{O}_S R^\dagger(t) T_R(t)}{\Phi_R(0)}
+  \, .
+\end{align*}
+In the present case, we have $R(t) a R^\dagger(t) = \exp(-i \omega_R t) a$, and of course $\ket{\Psi_R(0} = \ket{\Psi_S(0)}$, so
+\begin{align*}
+  \bbraket{\Psi_S(t)}{\mathcal{O}_S}{\Phi_S(t)}
+  &= \exp(-i \omega_R t) \bbraket{\Psi_S(0)}{T_R^\dagger(t) a T_R(t)}{\Phi_S(0)}
+  \, .
+\end{align*}
+Therefore, to find matrix elements, we can solve the Heisenberg equation for $a(t)$ with respect to $H_R$, and add the time dependent phase $\exp(-i \omega_R t)$ arising from the rotating frame to that result.
+The form of $H_R(t)$ is exactly the same as $H_S(t)$ with the modifications $\omega_0 \rightarrow \Delta$ and $f(t) \rightarrow f(t) e^{-i \omega_R t}$, so the equation of motion is
+\begin{equation}
+  (d_t + i \Delta) a(t) = - \frac{i}{\hbar} f^*(t) e^{i \omega_R t}
+\end{equation}
+and the solution for $a(t)$, in the case that the drive turns on at time $t_1$ is
+\begin{equation}
+  a(t) = a(t_1) e^{-i \Delta (t - t_1)}
+  \underbrace{- \frac{i}{\hbar} \int_{t_1}^t e^{-i \Delta (t - t')} f^*(t') e^{i \omega_R t'} \, dt'}_{\zeta_R(t)}
+  \, .
+\end{equation}
+Now we come to the main advantage of the rotating frame.
+If the complex function $f(t)$ has spectral weight over a limited band centered at frequency $\omega_d$, then it can be written as $f(t) = \varepsilon(t) \exp(i \omega_t t)$ where $\varepsilon(t)$ has a limited bandwidth.
+If we take our rotating frame frequency $\omega_R = \omega_d$, then our equation of motion is
+\begin{equation}
+  \left( d_t + i \Delta \right) a(t) = - \frac{i}{\hbar} \varepsilon^*(t)
+  \, .
+\end{equation}
+The point of this is that $\Delta = \omega_0 - \omega_d$ and $\varepsilon(t)$ are both slow, so numerics, plots, etc. are easier to understand.
 
-Coming soon.
+\leveldown{Evolution of a coherent state}
+
+Suppose the state at $t=0$ is a coherent state $\ket{\Psi_S(0)} = \ket{\phi}$.
+Then
+\begin{align*}
+  a \ket{\Psi_S(t)}
+  &= a R^\dagger(t) \ket{\Psi_R(t)} \\
+  &= a R^\dagger(t) T_R(t) \ket{\Psi_R(0)} \\
+  &= R^\dagger(t) \underbrace{R(t) a R^\dagger(t)}_{\exp(-i \omega_R t) a} T_R(t) \ket{\Psi_R(0)} \\
+  &= e^{-i \omega_R t} R^\dagger(t) T_R(t) \left(T^\dagger(t) a T_R(t) \right) \ket{\Psi_R(0)} \\
+  &= e^{-i \omega_R t} R^\dagger(t) T_R(t) \left(a e^{-i \Delta t} + \zeta_R(t) \right) \ket{\Psi_R(0)} \\
+  &= e^{-i \omega_R t} R^\dagger(t) T_R(t) \left(\phi e^{-i \Delta t} + \zeta_R(t) \right) \ket{\Psi_R(0)} \\
+  &= \left(\phi e^{-i \omega_0 t} + e^{-i \omega_R t} \zeta_R(t) \right) \ket{\Psi_S(t)} \\
+  &= \left(\phi e^{-i \omega_0 t} + \zeta(t) \right) \ket{\Psi_S(t)}
+\end{align*}
+which is identical to our result in the Heisenberg picture.
+So once again we have shown that under the effect of driving, a coherent state remains a coherent state, and the eigenvalue of that coherent state evolves according to the classical equation of motion of the action-angle variable.
