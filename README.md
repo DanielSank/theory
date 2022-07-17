@@ -23,3 +23,21 @@ This script requires [Python](https://www.python.org/) and the free image editor
 * File names are `lower_case_with_underscores`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
 
 ### TeX
+
+
+#### Equations
+```
+\begin{equation}
+  f(x) = \int_0^x \cos(y) \, dy = \sin(x) \, .
+\end{equation}
+```
+
+#### Aligned equation blocks
+```
+begin{align}
+  f(x)
+  &= \int_0^x \cos(y) \, dy \\
+  &= \sin(x)
+  \, .
+\end{align}
+```
