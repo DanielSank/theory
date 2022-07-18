@@ -25,14 +25,14 @@ This script requires [Python](https://www.python.org/) and the free image editor
 ### TeX
 
 
-#### Equations
+#### Equation formatting
 ```
 \begin{equation}
   f(x) = \int_0^x \cos(y) \, dy = \sin(x) \, .
 \end{equation}
 ```
 
-#### Aligned equation blocks
+#### Aligned equation formatting
 ```
 begin{align}
   f(x)
@@ -40,4 +40,17 @@ begin{align}
   &= \sin(x)
   \, .
 \end{align}
+```
+
+#### Labelling and referring to equations
+Label equations like this:
+```
+\begin{equation}
+  f(x) = \sinx(x) \label{eq:source.name}
+\end{equation}
+```
+Refer to equations like this
+```
+Let's refer to Eq.~(\ref{eq:source.name})
+
 ```
