@@ -1,18 +1,10 @@
-#!/usr/bin/python
+import os
 
 filenames = [
-    'baseband',
-    'leakage',
-    'power',
-]
+        'baseband',
+        'leakage',
+        'power',
+        ]
 
-
-command = ''
-for name in filenames:
-    command += "echo {}.svg --export-pdf={}.pdf;\n".format(name, name)
-command = "({}) |\nDISPLAY= inkscape --shell".format(command)
-
-
-import os
-os.system(command)
-
+for filename in filenames:
+    os.system(f"inkscape {filename}.svg --export-filename={filename}.pdf")
