@@ -10,9 +10,9 @@ If you're not using Git, click the green "Clone or download" button and then cho
 ## Building
 
 The LaTeX documents in this repository should build with any standard LaTeX installation, using `pdflatex`.
-Image files are stored mostly as SVG, but in order to build the documents, the images must first be converted to PDF.
-Each document's directory contains an executable Python script called `make-figures.py` which will convert the SVG files to PDF.
-This script requires [Python](https://www.python.org/) and the free image editor [Inkscape](https://inkscape.org/).
+Image files are stored mostly as SVG, and in order to build the documents the images must first be converted to PDF.
+To do this, while in the directory continaing the document you want to build, run `/bin/make-figures`.
+It may be convenient to add this repository's `/bin/` directory to your `PATH`.
 
 ## Style guide
 
