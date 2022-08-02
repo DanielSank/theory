@@ -1,5 +1,4 @@
 *.pdf
-build/
 *.pyc
 *.toc
 *.aux
