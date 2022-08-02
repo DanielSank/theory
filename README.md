@@ -18,7 +18,7 @@ It may be convenient to add this repository's `/bin/` directory to your `PATH`.
 
 ### Files
 
-* Directories names are `AllCapsCamelCase`.
+* Directory names are `AllCapsCamelCase`.
 
 * File names are `lower_case_with_underscores`. Acronyms are fine in file names, e.g. `SNR_calculation.tex`.
 
