@@ -9,7 +9,7 @@ def main():
     svg_files = [f for f in files if f.endswith('svg')]
     for file in svg_files:
         print(file)
-        os.system(f"inkscape --export-filename {file.split('.')[0]}.pdf")
+        os.system(f"inkscape --export-filename={file.split('.')[0]}.pdf {file}")
 
 
 if __name__ == "__main__":
