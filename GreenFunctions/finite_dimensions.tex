@@ -34,9 +34,11 @@ So now the formal solution to the problem can be expressed in terms of the Green
   \, .
 \end{equation}
 The components of $\ket{x}$ in the $E$ basis are just
-\begin{equation}
-  x_j^E = \braket{E_j}{x} = \sum_i y_i^E \braket{E_j}{G_i^{T, E}}
-\end{equation}
+\begin{align}
+  x_j^E = \braket{E_j}{x}
+  & = \sum_i \braket{E_i}{y} \braket{E_j}{G_i^{T, E}} \nonumber \\
+  & = \sum_i y_i^E \braket{E_j}{G_i^{T, E}}
+\end{align}
 which says that each component $x_j^E$ is the a linear combination of the components of the Green vectors weighted by the components $y_i^E$.
 Expanding the definition of the Green vectors,
 \begin{equation}
