@@ -15,33 +15,48 @@ The IV equation for a diode is
 I_{d}=I_{0}(e^{V_{d}/V_{0}}-1)
 \end{equation}
 The input diode on the Vishay IL66/ILD66/ILQ66 photocouplers have values $I_{0}=5.1$ nA and $V_{0}=0.076$ V, giving a current of 10 mA for 1.1 V forward voltage drop.
-
-From the diode IV we can compute the diode's current dependent resistance,
+From the IV equation, we can compute the diode's current dependent resistance,
 \begin{align}
-dI_{d}/dV_{d} &= \frac{I_{0}}{V_{0}}e^{V_{d}/V_{0}}=\frac{1}{V_{0}}(I_{d}+I_{0}) \\
-R(I_{d}) &= dV_{d}/dI_{d} \\
-&= \frac{V_{0}}{I_{d}+I_{0}} \, .
+  dI_{d}/dV_{d}
+  &= \frac{I_{0}}{V_{0}}e^{V_{d}/V_{0}} \nonumber \\
+  R_d \equiv dV_{d}/dI_{d} &= \frac{V_0}{I_0} e^{-V_d / V_0} \nonumber \\
+  &= R_{d,0} e^{-V_d / V_0} = R_{d,0} \frac{1}{I_d / I_0 + 1}
 \end{align}
-Consider a diode in series with a resistor.
-A source voltage $V$ is applied to this series circuit.
+where $R_{d,0} = V_0 / I_0$ is the diode resistance at zero current.
+$R_{d,0}$ is typically large; for the Vishay diodes mentioned above it is on the order of $10 \, \text{M}\Omega$.
+This is why diodes can be thought of as current limiters.
+As their voltage drop passes $V_0$, the differential resistance drops exponentially, meaning that increasing voltage would lead to exponentially rising current.
+As this happens, something else in the circuit will limit the current.
+As a specific example, consider a diode in series with a resistor and a voltage $V$ applied across both elements.
 The currents through the resistor and diode are
 \begin{equation}
-I_{d} = I_{0}(e^{V_d / V_0} - 1) \qquad I_R = (V - V_d) / R \, .
+  I_{d} = I_{0}(e^{V_d / V_0} - 1) \qquad I_R = (V - V_d) / R \, .
 \end{equation}
 Since the circuit is series, these currents must be the same, so
 \begin{equation}
-\frac{V - V_d}{R} = I_0 (e^{V_d / V_0} - 1)
+  \frac{V - V_d}{R} = I_0 (e^{V_d / V_0} - 1)
+  \, .
+  \label{eq:equal_currents}
 \end{equation}
-The interesting questions is, what are the diode current and voltage as a function of source voltage for a given resistor?
-Pick a value of $V$.
-Then, as a function of $V_{d}$ the left side of the equation defines a line with negative slope and y intercept of $V/R$.
+What are the diode current and voltage as a function of source voltage for a given resistor?
+As a function of $V_d$ the left side of Eq.~(\ref{eq:equal_currents}) defines a line with negative slope and y intercept of $V/R$.
 The right side defines an exponential curve with y-intercept of zero.
 These curves obviously cross for some value of $V_{d}$, and we can see that due to the exponential curve's large slope, the value of $V_{d}$ for which the curves cross is insensitive to $V$ once $V$ is above a certain value.
 This is why diodes can be though of having a fixed forward voltage drop once they are ``on''.
-Let's look at $dV_d / dV$,
+
+Let's take a quantitative look.
+Look at $dV_d / dV$ by differentiating Eq.~(\ref{eq:equal_currents}) with respect to $V$
 \begin{align}
-\frac{1}{R} \left( 1 - \frac{dV_d}{dV} \right) &= \frac{I_0}{V_0} e^{V_d / V_{0}} \frac{dV_d}{dV} \\
-\frac{d V_d}{dV} &= \frac{1}{1 + (I_d + I_0) R / V_0} \, .
+  \frac{1}{R} \left( 1 - \frac{dV_d}{dV} \right) &= \frac{I_0}{V_0} e^{V_d / V_{0}} \frac{dV_d}{dV} \nonumber \\
+  \frac{d V_d}{dV}
+  &= \left( \frac{R}{R_{d,0}} e^{V_d / V_0} + 1 \right)^{-1} \nonumber \\
+  &= \frac{R_{d,0}}{R \, e^{V_d / V_0} + R_{d,0}} \nonumber
+  \, .
 \end{align}
+Except for the exponential, this would be the usual voltage division equation for the voltage drop across a resistor $R_{d,0}$ in series with a resistor $R$.
+At zero bias $(V_d = 0)$, we do in fact have the usual voltage division equation.
+Becuase $R_{d,0} \gg R$, most of the voltage is dropped across the resistor.
+However, once $V_d$ significantly exceeds $V_0$, $dV_d / dV$ tends to zero.
+In other words, as we crank up $V$, we see an initial voltage rise on the diode until the diode voltage exceeds $V_0$ at which point the diode voltage is mostly constant.
 
 \end{document}
