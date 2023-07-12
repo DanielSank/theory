@@ -1,10 +1,11 @@
 \section{Pauli operators}
 
 \subsection{Representation}
-The Pauli operators can be represented as \begin{eqnarray}
-\sigma_x &=& \left( \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right) \\
-\sigma_y &=& \left( \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \right) \\
-\sigma_z &=& \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) \end{eqnarray}
+The Pauli operators can be represented as \begin{align}
+  \sigma_x &= \left( \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right) \nonumber \\
+  \sigma_y &= \left( \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \right) \nonumber \\
+  \sigma_z &= \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right)
+\end{align}
 
 \subsection{Products and commutators}
 The Pauli operators anticommute \begin{equation}
@@ -17,19 +18,42 @@ From the product and anticommutation follows the commutation relation \begin{equ
 \subsection{Translation}
 
 The problem of translating one Pauli operator by another arises frequently when analyzing qubit systems.
-We wish to evaluate \begin{equation}
-S(\lambda) = e^{-i\lambda\sigma_i}\sigma_j e^{i\lambda\sigma_i}. \end{equation}
-We use the differential equation (\ref{eq:translation_diff_eq}) with $A=-i\lambda\sigma_i$ to get \begin{equation}
-\frac{dS}{d\lambda} = i[S(\lambda),\sigma_i]. \end{equation}
-We postulate the solution \begin{equation}
-S(\lambda) = \alpha(\lambda)\sigma_j + \beta(\lambda)\sigma_k. \end{equation}
-First work out the commutator $i[S(\lambda),\sigma_i]$ \begin{eqnarray*}
-i[S(\lambda),\sigma_i] &=& i[\alpha\sigma_j + \beta\sigma_k, \sigma_i] \\
-&=& i \left( -2i\alpha \sigma_k + 2i\beta \sigma_j \right) \\
-&=& 2\alpha \sigma_k - 2\beta \sigma_j. \end{eqnarray*}
-Equating the right hand side with the explicit derivative of $S$ yields \begin{equation}
-\dot{\alpha}(\lambda) = -2\beta(\lambda) \qquad \dot{\beta}(\lambda) = 2\alpha(\lambda) \nonumber \end{equation}
-with solution \begin{equation}
-\alpha(\lambda) = \cos \left( 2\lambda \right) \qquad \beta(\lambda) = \sin \left( 2\lambda \right). \nonumber \end{equation}
-Therefore \begin{equation}
-e^{-i\lambda\sigma_i}\sigma_j e^{i\lambda\sigma_i} = \cos \left( 2\lambda \right) \sigma_j + \sin \left( 2\lambda \right) \sigma_k. \end{equation}
+We wish to evaluate
+\begin{equation}
+  \mathcal{O}(\lambda) = e^{-i\lambda\sigma_i}\sigma_j e^{i\lambda\sigma_i}.
+\end{equation}
+We use the differential equation (\ref{eq:translation_diff_eq}) with $A=-i\lambda\sigma_i$ to get
+\begin{equation}
+  \frac{d\mathcal{O}}{d\lambda} = i[\mathcal{O}(\lambda),\sigma_i].
+\end{equation}
+Think of the Pauli matrices as the $x$, $y$, and $z$ axes in three dimensional space.
+The geometric meaning of this differential equation is that we're rotating a vector aligned along $j$-axis about the $i$-axis.
+It's clear then that as we rotate, the original vector along $j$ should pick up a component along $k$.
+For example, if you rotate a vector aligned along the $x$-axis about the $y$-axis, you start to get some contribution along the $z$-axis.
+With this in mind, we postulate the solution
+\begin{equation}
+  \mathcal{O}(\lambda) = \alpha(\lambda)\sigma_j + \beta(\lambda)\sigma_k \, .
+\end{equation}
+This solution is trivially correct for $\lambda = 0$.
+To make progress, we work out the commutator $i[\mathcal{O}(\lambda),\sigma_i]$
+\begin{align*}
+  i[\mathcal{O}(\lambda),\sigma_i]
+    &= i[\alpha(\lambda) \sigma_j + \beta(\lambda) \sigma_k, \sigma_i] \\
+    &= i \left( -2i\alpha(\lambda) \sigma_k + 2i\beta(\lambda) \sigma_j \right) \\
+    &= 2\alpha(\lambda) \sigma_k - 2\beta(\lambda) \sigma_j \, .
+\end{align*}
+Now we have
+\begin{align*}
+  \frac{d\mathcal{O}}{d\lambda}
+    &= i \left[ \mathcal{O}(\lambda), \sigma_i \right] \\
+  \dot{\alpha}(\lambda)\sigma_j + \dot{\beta}(\lambda) \sigma_k
+    &= 2 \alpha(\lambda)\sigma_k - 2 \beta(\lambda) \sigma_j \, .
+\end{align*}
+Matching terms gives $\dot{\alpha}(\lambda) = -2\beta(\lambda)$ and $\dot{\beta}(\lambda) = 2\alpha(\lambda)$, with solution
+\begin{equation}
+  \alpha(\lambda) = \cos \left( 2\lambda \right) \qquad \beta(\lambda) = \sin \left( 2\lambda \right). \nonumber
+\end{equation}
+Therefore
+\begin{equation}
+  e^{-i\lambda\sigma_i}\sigma_j e^{i\lambda\sigma_i} = \cos \left( 2\lambda \right) \sigma_j + \sin \left( 2\lambda \right) \sigma_k \, .
+\end{equation}
