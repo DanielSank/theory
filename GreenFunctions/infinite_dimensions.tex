@@ -1,4 +1,10 @@
+% -- begin imports --
+% import finite_dimensions as fd
+% -- end imports --
+
 \levelstay{Infinite dimensions}
+
+\leveldown{Ordinary differential equation}
 
 Consider the differential equation
 \begin{equation}
@@ -38,7 +44,7 @@ which is the same equation we studied in the finite dimensional case where now o
 \begin{equation}
   T = \frac{d}{dt} + \gamma \, .
 \end{equation}
-Therefore, we can write down the solution using Eq.~(\ref{eq:three_step_process_c}):
+Therefore, we can write down the solution using Eq.~(\ref{fd.eq:three_step_process_c}):
 \begin{equation}
   u(t) \equiv \braket{t}{u} = \int dt' J(t')
   \underbrace{\sum_j \frac{\braket{t}{F_j}\braket{F_j}{t'}}{t_j}}_{\braket{t}{G_{t'}}}
@@ -98,7 +104,7 @@ What does this solution mean intuitively?
 It says that the value of $x$ at time $t$ is built up of contributions from all times $t' < t$.
 For each $t'$, we weight the source value $J(t')$ by the Green's function $G_{t'}(t)$, which tells us how much the source at $t'$ influences the result at time $t$.
 
-\leveldown{Discussion}
+\levelstay{Discussion}
 Equation (\ref{eq:green_function_solution_eigenvalues}) is an integral representation of the solutio to \emph{any} time invariant linear differential equation with a source term.
 Other such equations include the wave equation and the diffusion equation.
 So now you know how to solve two of the most important equations in physics, and find their Green functions.

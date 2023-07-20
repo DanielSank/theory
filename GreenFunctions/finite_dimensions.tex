@@ -30,7 +30,7 @@ Once familiar with the concepts, it is possible to use more compact notation wit
 So now the formal solution to the problem can be expressed in terms of the Green vectors as
 \begin{equation}
   \ket{x} = \sum_i \braket{E_i}{y} \ket{G_i^{T,E}}
-  \label{eq:green_vector_expansion}
+  \label{eq:green_vector_expansion}  % export
   \, .
 \end{equation}
 The components of $\ket{x}$ in the $E$ basis are just
@@ -42,12 +42,12 @@ The components of $\ket{x}$ in the $E$ basis are just
 which says that each component $x_j^E$ is the a linear combination of the components of the Green vectors weighted by the components $y_i^E$.
 Expanding the definition of the Green vectors,
 \begin{equation}
-  x_j^E = \sum_i \bbraket{E_j}{T^{-1}}{E_i} y_i^E = \sum_i \left[ T^{-1} \right]^E_{ji} y^E_i \label{eq:matrix_multiplication}
+  x_j^E = \sum_i \bbraket{E_j}{T^{-1}}{E_i} y_i^E = \sum_i \left[ T^{-1} \right]^E_{ji} y^E_i \label{eq:matrix_multiplication}  % export
 \end{equation}
 where here
 \begin{equation}
   \left[ T^{-1} \right]^E_{ji} \equiv \bbraket{E_j}{T^{-1}}{E_i} = \braket{E_j}{G_i^{T,E}}
-  \label{eq:matrix_elements_vs_green_vector_elements}
+  \label{eq:matrix_elements_vs_green_vector_elements}  % export
 \end{equation}
 means ``the $ji^\text{th}$ element of the matrix representation of $T^{-1}$ in basis $E$''.
 Equation (\ref{eq:matrix_multiplication}) is just the usual formula for matrix multiplication, but with explicit basis labels.
@@ -123,7 +123,7 @@ For both cases, we start by inserting two resolutions of identity into $\ket{x} 
 \begin{equation}
   \ket{x} = \sum_{ij} T^{-1} \ket{F_j} \braket{F_j}{E_i}\braket{E_i}{y}
   \, .
-  \label{eq:master}
+  \label{eq:master}  % export
 \end{equation}
 For the first formula, we push the sum over $i$ inside, yielding
 \begin{equation}
@@ -136,7 +136,7 @@ or taking the components of $\ket{x}$,
     \underbrace{\sum_j \braket{E_m}{F_j}}_\text{step 3}
     \underbrace{\frac{1}{t_j}}_\text{step 2}
     \underbrace{\sum_i \braket{F_j}{E_i} \braket{E_i}{y}}_\text{step 1}
-  \, . \label{eq:three_step_process_a}
+  \, . \label{eq:three_step_process_a}  % export
 \end{equation}
 This formula encodes three-step process that accounts for a huge chunk of what we do in solving physics problems.
 When we know the components of $\ket{y}$ in basis $E$ but $T$ is diagonal in basis $F$, we solve for the components of $\ket{x}$ in basis $E$ as follows:
@@ -165,7 +165,7 @@ But first, let's see what happens if we push the $j$ sum to the inside in Eq.~(\
   \left(
     \underbrace{\sum_j \frac{\ket{F_j} \bra{F_j}}{t_j}}_{T^{-1}} \ket{E_i}
   \right)
-  \, . \label{eq:three_step_process_b}
+  \, . \label{eq:three_step_process_b}  % export
 \end{equation}
 The formal similarity between Eq.~(\ref{eq:green_vector_expansion}) and Eq.~(\ref{eq:three_step_process_b}) tells us that the object in parentheses is $\ket{G_i^{T,E}}$, i.e.
 \begin{equation}
@@ -187,8 +187,8 @@ Taking components in Eq.~(\ref{eq:three_step_process_b}) gives
   \braket{E_m}{x}
   = \sum_i \braket{E_i}{y}
   \underbrace{ \left( \sum_j \frac{\braket{E_m}{F_j} \braket{F_j}{E_i}}{t_j} \right)}_{\braket{E_m}{G_i^{T,E}}}
-  \, . \label{eq:three_step_process_c}
+  \, . \label{eq:three_step_process_c}  % export
 \end{equation}
-Equation \ref{eq:three_step_process_c}) is the most common approach to using Green vectors.
+Equation~(\ref{eq:three_step_process_c}) is the most common approach to using Green vectors.
 We first solve for $\braket{E_m}{G_i^{T,E}}$ by doing the sum over $j$ in parentheses, and then we weight the result with $\ket{y}$ by doing the sum over $i$.
 In the next section, we use that approach to solve a differential equation, in which case the two sums result in a convolution.
