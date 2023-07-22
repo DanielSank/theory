@@ -1,58 +1,59 @@
 \section{Caldeira-Leggett model of a resistor} \label{sec:ch.decoherence:caldeira-leggett}
 
 
-Treating dissipation in Hamiltonian mechanics requires special attention.
-The Caldeira-Leggett model is essentially a constructive proof by example that dissipation can be represented by an infinite set of \emph{non}-dissipative (i.e. lossless) harmonic oscillators.
+Treating dissipation in Hamiltonian mechanics (classical and quantum) requires special attention.
+The Caldeira-Leggett model is essentially a constructive proof by example that dissipation can be represented by an infinite set of \emph{non}-dissipative harmonic oscillators.
 In this section we give an intuitive description of the Caldeira-Leggett model, and then show the constrcution in mathematical detail.
 
 \subsection{Intuitive idea}
 
-Consider a resonant circuit attached to a length of transmission line as shown in Fig. \ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,a.
+Consider a resonant circuit attached to a length of transmission line as shown in Fig.~\ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,a.
 If the resonant circuit is initially excited with some energy, that energy leaks into the transmission line over a certain period of time.
-The energy pulse emitted by the resonant circuit travels down the line, reflects off the end, and eventually comes back to the resonator.
+The emitted energy pulse travels down the line, reflects off the end, and eventually comes back to the resonator.
 If the time for the pulse to travel away, reflect, and return is much longer than any time scales relevant to a given experiment, then from the point of view of observations made only on the resonator in that experiment, the transmission line is a lossy channel: energy radiated into it never comes back.
-
-Now consider an infinitely long transmission line as shown in Fig. \ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,c.
-Energy emitted into such a line \emph{never} comes back, so the line appears to be a loss channel no matter how long we watch the resonator.
+Now consider an infinitely long transmission line as shown in Fig.~\ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,c.
+Energy emitted into such a line really never comes back, so the line appears to be a loss channel no matter how long we watch the resonator.
 This is interesting: the lossless line becomes a loss channel as its length is extended to infinity.
-The transition from a finite length lossless line to an infinite length lossy line is also seen in the lumped element ladder model of the transmission line.
-A transmission line has a certain inductance $\mathcal{l}$ and capacitance $\mathcal{c}$ per length, so we approximate it as a ladder of capacitors and inductors as shown in Fig.~\ref{fig:ch.decoherence:caldeira-leggett:transmission_line}\,c.
-The impedance of the infinite ladder can be solved as follows:
+The transition from a finite length lossless line to an infinite length lossy can be seen by modelling the transmission line as a lumped element ladder of inductors and capacitors.
+The transmission line has a certain inductance $\mathit{l}$ and capacitance $\mathit{c}$ per length, so we approximate it as a ladder of capacitors $C = \mathit{c} \, dx$ and inductors $L = \mathit{l} \, dx$ as shown in Fig.~\ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line}\,c.
+The impedance of the infinite ladder can be solved self-consistently as
 \begin{align}
-  Z &= Z_{\mathcal{L}} + \left( Z_\mathcal{C} || Z \right) \nonumber \\
-  Z &= j \omega \mathcal{L} + \frac{Z / j \omega \mathcal{C}}{Z + 1/ j \omega \mathcal{C}} \nonumber \\
-  Z^2 &= j \omega \mathcal{L} Z + \mathcal{L} / \mathcal{C}
+  Z
+  &= Z_L + \left( Z_C || Z \right) \nonumber \\
+  &= j \omega L + \frac{Z / j \omega C}{Z + 1/ j \omega C} \nonumber \\
+  0 &= Z^2 - j \omega L Z - L / C \nonumber \\
+  \text{(quadratic formula)} \quad Z &= j \omega L \pm \frac{1}{2} \sqrt{-(\omega L)^2 + 4 L / C}
+  \, .
 \end{align}
-
-
-
-The infinite lossless line can be modeled as an infinite ladder of inductors and capacitors.
-Although any finite inductor-capacitor ladder has, by construction, a finite set of lossless harmonic modes and therefore a purely imaginary impedance, the impedance of the infinite ladder is purely real!
-Therefore, the infinite LC ladder and the infinitely long transmission line are both equivalent to a resistor.
+Remembering that $L$ and $C$ here are the inductance and capacitance of infinitessimally small elements, for any frequency $\omega$ we can choose the element size $dx$ sufficiently small such that $\omega L = \omega \mathit{l} dx \ll L/C$, which results in the known result\footnote{An astute reader will note that we drop the negative solution here. Some authors would say that we drop the negative solution ``becuase it's unphysical'', but that's lazy nonsense. If the system is properly described by the mathematical starting point, all solutions should be valid. The fact that we're clandestinely ignoring the negative solution here is a clear sign that we've done something terrible. Don't worry, we're going to explain precisely what terrible thing we did below.}
+\begin{equation}
+  Z = \sqrt{\frac{L}{C}} = \sqrt{ \frac{\mathit{l} \, dx}{\mathit{c} \, dx}} = \sqrt{\frac{\mathit{l}}{\mathit{c}}} \, .
+\end{equation}
+Mathematically, this is result is shocking and disturbing.
+Whereas any finite inductor-capacitor circuit has a purely imaginary impedance, the impedance of the infinite ladder turns out to be purely real!
+How can an infinite sequence of imaginary numbers have a nonzero real limit?
+Of course, physically we already explained what's going on: as the ladder gets infinitely long, energy radiated into it never comes back, so the infinite LC ladder (like the infinitely long transmission line) is equivalent to a resistor with resistance $\sqrt{\mathit{l}/\mathit{c}}$.
 This equivalence is the basis of the Caldeira-Leggett model; the resistor is replaced with an infinite set of lossless harmonic modes.
-When faced with a Hamiltonian mechanics problem involving resistors, we can instead use a set of harmonic oscillators.
-By taking the number of harmonic oscillator modes to infinite at the end of the calculation we recover the dynamics of the system in the presence of a truly lossy element like a resistor.
+When faced with a system involving resistors, we can make Hamiltonian mechanics work by replacing the resistor with a set of harmonic oscillators.
+By taking the number of harmonic oscillator modes to infinite at the end of the calculation we recover the dynamics with the resistor.
 
-Before we move onto the mathematics, we offer two comments on the correspondence between resistor and the infinite set of oscillators.
-
-As indicated in Fig.~\ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line} b and c, loss can be understood as a case where the time for the emitted pulse to reflect and come back to the resonator is longer than any time scale on which the system is observed.
-Energy is never really lost, but rather transfers away from the system of interest into the surrounding environment.
-In fact, this picture works even without the emission-reflection-return picture.
-In quantum mechanics, each mode (state) $n$ has a time dependence $\exp [ i \omega_n t]$ where $\omega_n = E_n/\hbar$.
+Before we get to the details of the Caldeira-Leggett model, we offer two comments on the correspondence between resistor and the infinite set of oscillators.
+First, as indicated in Fig.~\ref{fig:ch.decoherence.sec.caldeira-leggett:transmission_line} b and c, loss can be understood as a case where the time for the emitted pulse to reflect and come back to the resonator is longer than any time scale on which the system is observed.
+Of course energy is never really lost, but rather transfers away from the system of interest into the surrounding environment.
+This idea works in general.
 A system with a finite number of modes has a ``recurrence time'' after which it returns to its original state.
-However, as the number of occupied modes increases, the recurrence time also increases, and in a macroscopically large system the recurrence time becomes astronomically large and exceeds all practical observation time scales.\footnote{I think Schlosshauer's book shows this quantitatively.}
-
+This is manifest clearly in quantum mechanics where each mode $n$ has a time dependence $\exp [ i \omega_n t]$ where $\omega_n = E_n/\hbar$.
+As the number of occupied modes increases, the recurrence time also increases, and in a macroscopically large system the recurrence time becomes astronomically large and exceeds all practical observation time scales (see the exercises).
 The second comment regards the passage from the finite $LC$ ladder with purely imaginary impedance to the infinite ladder with purely real impedance.
 Denoting the impedance of the finite ladder with $n$ sections as $Z_n$, we have a sequence of purely imaginary numbers $\{ Z_1, Z_2, \ldots \}$.
-That the limit of this sequence of imaginary numbers should be a nonzero \emph{real} number is surprising.
-However, note that the notion of impedance only makes sense in a system where time can be taken to infinity.\footnote{This is especially obvious if we think about the impedance $Z(\omega)$ as the Fourier transform of a time response function: $Z(\omega) = \int_0^\infty Z(t) e^{i \omega t} \, dt$. In making this note I should mention that the Laplace transform is actually the better tool for this type of discussion but it's less familiar to physicists so I won't get into it.}
-So, when we we talk about the impedance of an infinitely long $LC$ ladder, we actually have two infinities: infinite time and infinite number of modes.
+As mentioned above, it's surprising that the limit of this sequence of imaginary numbers should be a nonzero real number.
+However, the notion of impedance only makes sense in a system where time can be taken to infinity.\footnote{This is especially obvious if we think about the impedance $Z(\omega)$ as the Fourier transform of a time response function: $Z(\omega) = \int_0^\infty Z(t) e^{i \omega t} \, dt$. In making this note I should mention that the Laplace transform is actually the better tool for this type of discussion but it's less familiar to physicists so I won't get into it.}
+So when we we talk about the impedance of an infinitely long $LC$ ladder, we actually have two infinities: infinite time and infinite number of modes.
 The infinite time limit is taken first when we invoke impedance arguments, and the infinite modes limit is taken second when we consider an infinitely long $LC$ ladder.
-Mathematically, infinities are always represented as limits; here we have the limits $n\rightarrow \infty$ and $t \rightarrow \infty$ where $n$ is the number of modes in the system.
-The paradox of the imaginary sequence converging to a real number is resolved by switching the order of the $n$ and $t$ limits.
+The paradox of the sequence of imaginary numbers converging to a real number is resolved by switching the order of the limits.
 We will point out how this happens in the mathematical discussion below.
 
-\quickfig{0.8\columnwidth}{transmission_line}
+\quickfig{0.8\columnwidth}{transmission_line.pdf}
 {A lossless transmission line appears lossy as its length is taken to infinity.
 a) Energy emitted from a resonator into a transmission line eventually reflects and returns to the resonator.
 b) If the experiment (grey shaded region) only lasts long enough to see the emission, but not the re-absorption, the transmission line appears to have irrevocably removed energy from the resonator.
@@ -68,7 +69,7 @@ Here we give full mathematical details of the connection between an infinite set
 The oscillator model is shown in Fig. \ref{fig:ch.decoherence.sec.caldeira-leggett:admittance}.
 Because it is easy to deal with harmonic oscillators in Hamiltonian mechanics, this model will allow us to include loss in a Hamiltonian theory.
 
-\quickfig{0.8\columnwidth}{caldeira-leggett}{The Caldeira-Leggett model of an admittance.}{fig:ch.decoherence.sec.caldeira-leggett:admittance}
+\quickfig{0.8\columnwidth}{caldeira-leggett.pdf}{The Caldeira-Leggett model of an admittance.}{fig:ch.decoherence.sec.caldeira-leggett:admittance}
 
 We first compute an expression for the admittance of a single oscillator.
 Defining $\omega_n \equiv 1/\sqrt{L_n C_n}$, $y_n \equiv \sqrt{C_n / L_n}$ and $x \equiv \omega / \omega_n$, the admittance of the $n^{\text{th}}$ series $LRC$ oscillator is
