@@ -1,0 +1,18 @@
+\levelstay{Exercises}
+
+\begin{enumerate}
+  \item \textbf{Diffusion on a finite interval}
+    \begin{enumerate}
+      \item Consider diffusion in a bounded interval $[-L/2, L/2]$. Denote the density of the diffusing material as $p(x, t)$. Find the green function in the case that the boundaries are reflecting, i.e. $(\partial p / \partial x)(x=\pm L/2) = 0$.
+      \item Using the Green function that you've found, make an animation of the diffusion process where the initial distribution is $p(x, t) = \delta(x-0.1) \delta(t)$, i.e. the material is all concentrated at $x=0.1$ at initial time $t=0$.
+    \end{enumerate}
+  \item \textbf{The wave equation}
+    \begin{enumerate}
+      \item Try to find the Green function for the wave equation in one dimension
+        \begin{equation}
+          \left( c^2 \partial_x^2 - \partial_t^2 \right) \psi = J
+        \end{equation}
+        where $\psi$ is the wave amplitude, $J$ is the source, and $c$ is the wave propagation velocity.
+      \item You will have encountered a difficulty in finding this Green function. Trace the origin of this mathematical difficulty to the physics represented by the wave equation. Hint: compare the the integral you need to do for the wave equation against the one we did for the one-dimensional diffusion equation in the text. How are the denominators of the integrands different, and what is the physical origin of the difference?
+    \end{enumerate}
+\end{enumerate}
