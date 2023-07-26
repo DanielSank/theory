@@ -1,0 +1,84 @@
+\levelstay{Frequency Response}
+
+Now we investigate the case in which $j(t)=A\cos(\Omega t)$.
+In this case
+\begin{equation}
+  j(\omega)=\frac{A}{2}(2\pi)\left[\delta(\omega-\Omega)+\delta(\omega+\Omega)\right] \, .
+\end{equation}
+Therefore, by modifying equations from the previous section we have
+\begin{align}
+  \phi(\omega)
+  & = \frac{-A}{2}(2\pi) \int \frac{d\omega}{2\pi} e^{i \omega t} \frac{\delta(\omega-\Omega)+\delta(\omega+\Omega)}{\omega^{2} - 2i\beta\omega - \omega_0^2} \nonumber \\
+  & =
+    \frac{-A}{2}
+    \left[
+      \frac{e^{i \Omega t}}{\Omega^{2} - 2i\beta\Omega - \omega_0^2} +
+      \frac{e^{-i \Omega t}}{\Omega^2 + 2i\beta\Omega - \omega_0^2}
+    \right] \nonumber \\
+  &= \Re \left[ e^{i \Omega t} \frac{-A}{\Omega^2 - 2i\beta\Omega - \omega_0^2} \right]
+  \label{eq:phasor_form}
+\end{align}
+This is a very special form known as {}``phasor'' form.
+The idea of phasors is that in a linear system driven by a sinusoidal drive, all variables will oscillate with the same frequency as the drive.
+Any dynamical variable, in our case $\phi$, differs from the drive only in amplitude and phase.
+We see this here: the time dependence of $\phi$ is sinusoidal at angular frequency $\Omega$.
+The crucial relation is that if we have two signals at the same frequency expressed as phasors
+\begin{equation}
+  f(t) = \Re[ e^{i\omega t} \hat{f}] \qquad
+  g(t) = \Re[ e^{i\omega t} \hat{g}]
+\end{equation}
+where $\hat{f}$ and $\hat{g}$ are complex numbers, then we have
+\begin{equation}
+  \langle f(t)g(t)\rangle_{t}=\frac{1}{2}\Re[\hat{f}^{*}\hat{g}]
+\end{equation}
+where the left hand is a time average.
+Our expression for $\phi(t)$ has this form if we take
+\begin{equation}
+  \hat{\phi} = \frac{-A}{\Omega^{2} - 2i\beta\Omega - \omega_0^2} \, .
+\end{equation}
+Therefore,
+\begin{equation}
+  \langle\phi(t)^{2}\rangle_{t}
+  = \frac{1}{2} \frac{A^{2}}{(\Omega^{2}-\omega_0^{2})^{2}+(2\beta\Omega)^2}
+  \, .
+\end{equation}
+This function maximizes for $\Omega=\pm\sqrt{\omega_{0}^{2}-2\beta^{2}}$.
+Note that this is not the same as the free oscillation frequency found from the impulse response.
+
+\leveldown{Resonance}
+
+We define the resonance frequency as that frequency at which power flow from the drive to the system is unidirectional.
+This happens when $\dot{\phi}(t)$ is in phase with $j(t)$.
+Velocity and position are a quarter cycle out of phase, so the resonance occurs when the position is a quarter cycle shifted from the drive.
+In other words, the resonance happens when the denominator of the phasor is imaginary, which occurs for
+\begin{equation}
+(\text{resonance}) \qquad \Omega = \pm \omega_0 \, .
+\end{equation}
+
+\levelstay{Phase shift}
+
+It is useful to look at the relative phase shift between the drive and the response.
+To do this we need to find the argument of $\hat{\phi}$.
+Note that
+\begin{equation}
+f(t)
+= \Re[e^{i \Omega t}\hat{f}]
+= \Re[e^{i \Omega t}|f|e^{i\theta}]
+=|f|\cos(\Omega t + \theta)]
+\end{equation}
+where $\theta$ is the phase of $\hat{f}$.
+Therefore, a positive $\theta$ indicates that the response leads the source, and a negative $\theta$ indicates that the response lags the source.
+
+\levelstay{Lorentzian approximation}
+
+We now express the resonance in the so-called Lorentzian form.
+\begin{align}
+\phi(t)
+&= \Re \left[ e^{i\Omega t} \frac{-A}{\Omega^2 - \omega_0^2 - 2i\beta \Omega} \right] \nonumber \\
+&= \frac{A \cos \left( \Omega t + \delta \right)}{\sqrt{\left( \Omega^2 - \omega_0^2 \right)^2 + (2 \beta \Omega)^2}}
+\end{align}
+where $\delta$ is a phase we don't care about.
+We can re-express this approximately as
+\begin{equation}
+\phi(t) \approx \frac{(A \beta / \Omega) \cos(\Omega t + \delta)}{\left( \Omega - \omega_0 \right)^2 + 2\beta^2} \, .
+\end{equation}

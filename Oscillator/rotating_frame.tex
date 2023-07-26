@@ -1,0 +1,114 @@
+\levelstay{Driven resonator in a rotating frame}
+
+It is possible to find approximation equations of motion for the driven oscillator in the case that the spectral content of the drive is reasonably well localized around the resonance frequency.
+Consider the frequency domain equation of motion
+\begin{equation}
+  \phi(\omega) = \frac{-J(\omega)}{\omega^2 - 2 i \beta \omega - \omega_0^2}
+  = - \frac{J(\omega)}{(\omega - \omega_+)(\omega - \omega_-)} \, .
+\end{equation}
+Using the method of partial fractions, we can rewrite the double pole as a sum of single poles
+\begin{equation}
+  \frac{1}{(\omega - \omega_+)(\omega - \omega_-)}
+  = \frac{X}{\omega - \omega_+} + \frac{Y}{\omega - \omega_-}
+\end{equation}
+with unknown constants $X$ and $Y$.
+Multiplying through by $(\omega - \omega_+)(\omega - \omega_-)$ and solving gives
+\begin{align*}
+  X =& \frac{1}{\omega_+ - \omega_-} =   \frac{1}{2 \omega_0'} \\
+  Y =& \frac{1}{\omega_- - \omega_+} = - \frac{1}{2 \omega_0'}
+\end{align*}
+so
+\begin{equation}
+  \phi(\omega) = - \frac{J(\omega)}{2 \omega_0'}
+  \left[ \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-} \right] \, .
+\end{equation}
+If the drive is a narrow band signal near a central frequency $\Omega$, we can write it as
+\begin{equation}
+  J(t)
+  = I(t) \cos(\Omega t) - Q(t) \sin(\Omega t)
+  = \Re \left[ z(t) \exp \left( i \Omega t \right) \right] \, ,
+\end{equation}
+where $z(t) \equiv I(t) + i Q(t)$.
+In this case we have
+\begin{align*}
+  \tilde{J}(\omega)
+  &= \frac{1}{2} \left(
+      \tilde{I}(\omega - \Omega) + i \tilde{Q}(\omega - \Omega)
+    + \tilde{I}(\omega + \Omega) - i \tilde{Q}(\omega + \Omega)
+  \right) \\
+  &= \frac{1}{2} \left(
+      \tilde{z}(\omega - \Omega) + \tilde{z}(-\omega - \Omega)^*
+  \right)
+\end{align*}
+where we've used the fact that $\tilde{I}(\omega)^* = \tilde{I}(-\omega)$ and $\tilde{Q}(\omega)^* = \tilde{Q}(-\omega)$ because $I(t)$ and $Q(t)$ are real.
+Combining results, we have
+\begin{align*}
+  \tilde{\phi}(\omega)
+  =& - \frac{1}{4 \omega_0'}
+  \left( \tilde{z}(\omega - \Omega) + \tilde{z}(-\omega - \Omega)^* \right)
+  \left(
+    \frac{1}{\omega - \omega_+} - \frac{1}{\omega - \omega_-}
+  \right) \\
+  =& - \frac{1}{4 \omega_0'}
+  \left(
+      \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_+}
+    - \frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_-}
+    \underbrace{
+      - \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_-}
+      + \frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_+}
+    }_\text{small}
+  \right)
+  \, .
+\end{align*}
+The second two terms in parentheses are small because e.g. $\tilde{z}(\omega - \Omega)$ is large when $\omega$ is near $+\Omega$, but $1 / (\omega - \omega_-)$ is large for $\omega$ near $-\Omega$.
+Keeping only the larger terms, we get
+\begin{equation}
+  \tilde{\phi}(\omega) =
+  - \frac{1}{4 \omega_0'}
+  \left(
+      \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_+}
+    - \frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_-}
+  \right) \, .
+\end{equation}
+Note that $\tilde{\phi}(-\omega) = \tilde{\phi}(\omega)^*$ because $\phi(t)$ is real, so we can write it as a Fourier transform over only positive frequencies:
+\begin{align*}
+  \phi(t)
+  &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \tilde{\phi}(\omega) \\
+  &= 2 \Re \int_0^\infty \frac{d\omega}{2\pi} \, e^{i \omega t} \left( \frac{-1}{4 \omega_0'} \right)
+    \left(
+      \frac{\tilde{z}(\omega - \Omega)}{\omega - \omega_+}
+      - \underbrace{\frac{\tilde{z}(-\omega - \Omega)^*}{\omega - \omega_-}}_\text{small}
+    \right) \\
+  (\text{define } \omega \equiv \omega_f + \delta \omega)
+  &= \Re
+  \left(
+    e^{i \omega_f t}
+    \int_{-\omega_f}^\infty \frac{d \delta \omega}{2\pi} \,
+    e^{i \delta \omega t}
+    \left( \frac{-1}{2 \omega_0'} \right)
+    \frac{\tilde{z}(\omega_f - \Omega + \delta \omega)}{\delta \omega - \Delta - i \beta}
+  \right)
+\end{align*}
+where $\omega_f$ is the ``frame frequency'' typically chosen to be close to $\Omega$, and $\Delta \equiv \omega_0' - \omega_f$.
+If $\tilde{z}$ is band limited to $[-B, B]$ where $B \ll \omega_0'$, then we can rewrite the limits of the integration as $\pm \infty$:
+\begin{equation}
+  \phi(t) = \Re
+  \left(
+    e^{i \omega_f t}
+    \underbrace{
+      \int_{-\infty}^\infty \frac{d \delta \omega}{2\pi} \,
+      e^{i \delta \omega t}
+      \left( \frac{-1}{2 \omega_0'} \right)
+      \frac{\tilde{z}(\omega_f - \Omega + \delta \omega)}{\delta \omega - \Delta - i \beta}
+    }_{\alpha(t)}
+  \right)
+  \label{eq:equation_of_motion_phasor_integral}
+\end{equation}
+The underbraced part $\alpha(t)$ is the part of the oscillator's motion that comes on top of a free oscillation at the frame frequency $\omega_f$.
+Equation~(\ref{eq:equation_of_motion_phasor_integral}) is in the phasor form discussed above, but now the phasor $\alpha(t)$ is time dependent.
+By inspection, the integral representation of $\alpha$ given in Eq.~(\ref{eq:equation_of_motion_phasor_integral} corresponds with the first order differential equation (remember $Q = \omega_0 / 2 \beta = \omega_0 / \kappa$)
+\begin{equation}
+  \dot{\alpha}(t) = \left(\frac{-i}{2 \omega_0'}\right) z(t) e^{i (\omega_f - \Omega) t} + (i \Delta - \kappa/2) \alpha(t)
+  \, .
+  \label{eq:equation_of_motion_phasor}  % export
+\end{equation}
