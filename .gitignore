@@ -1,3 +1,4 @@
+texbuild-out/
 *.pdf
 *.pyc
 *.toc
