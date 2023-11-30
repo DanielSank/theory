@@ -1,0 +1,153 @@
+\levelstay{The transmission line model of a noisy resistor and the concept of available power} \label{available_power}
+
+Superconducting qubits are microwave devices and the signals we use to control them have wavelengths smaller than the physical size of the cables.
+Therefore, we must consider the wave nature of the signals and noise.
+The wave nature of the system introduces certain opportunities to make mistakes with factors of 2.
+This section introduces a concept called ``available power'' and shows how this concept is used to get all the factors of 2 right without thinking very hard.
+The main idea is to think of a resistor as a semi-infinite transmission line carrying a noise wave with rms magnitude $\vright = \sqrt{\poweravailable \resistorsource}$ where $\poweravailable$ is the ``available noise power'' and $\resistorsource$ is the resistor's resistance..
+
+\quickfig{\columnwidth}{unbalanced_resistor.pdf}{a) A model of a resistor at temperature $T$ in the classical limit. b) The noisy resistor connected to another load resistor of the same resistance.}{fig:unbalanced_resistor}
+
+Consider the diagram shown in Fig.~\ref{fig:unbalanced_resistor}a which shows the model of a noisy ``source'' resistor at temperature $T$.
+The model includes an ideal voltage noise source in series with an ideal resistor of resistance $\resistorsource$.
+The voltage source has a certain spectral density $S_{\vsource}$.
+In the classical limit, the meaning of the spectral density is that if we were to filter this noisy voltage with a filter of bandwidth $B$ and measure its mean square, we would find $\angavg{\vsource^2} = S_{\vsource} B$.
+We could equivalently measure the root mean square value $\vsourcerms = \sqrt{\angavg{\vsource^2}}=\sqrt{S_{\vsource} B}$.
+We're going to come back to the details of $S_{\vsource}$ in the classical and quantum limits in  moment, but for now we focus on how the voltage fluctuations arrive at a load connected in series with our source resistor.
+Notice that in Fig.~\ref{fig:unbalanced_resistor} the voltage we've described here is the voltage across the voltage noise source in series with the ideal resistor, not the voltage across the resistor to ground.
+This detail is often forgotten and is the source of many factor of 2 mistakes.
+The model of a noisy resistor must be this way, because the voltage across the source resistor itself to ground depends on the impedance of any load connected to the source resistor.
+This is obvious when we look at an extreme limit: if we connect the resistor directly to ground, then the voltage across the source resistor to ground has to be zero.
+
+Let us now use our model to compute the voltage and power delivered to a load connected in series with the source resistor.
+Figure~\ref{fig:unbalanced_resistor}b shows the noisy resistor connected to a load.
+The voltage at the load is related to the source voltage via voltage division, i.e.
+\begin{equation}
+    \vloadrms = \vsourcerms \frac{Z_l}{\resistorsource + Z_l} \, .
+\end{equation}
+The average power delivered to the load is
+\begin{equation}
+  P_l
+  = \abs{I \times \vloadrms^*}
+  = \abs{
+    \frac{\vsourcerms}{\resistorsource + Z_l}
+    \times \vsourcerms^* \frac{Z_l^*}{\resistorsource + Z_l^*}}
+  = \abs{\vsourcerms}^2 \abs{\frac{Z_l}{(\resistorsource + Z_l)^2}}
+  \nonumber
+\end{equation}
+In the classical limit where
+\begin{equation}
+  \spectralengineer_{\vsource} = 4 \boltzmann T \resistorsource \quad \text{(classical ``Johnson noise'')}
+\end{equation}
+we have
+\begin{equation}
+  P_l = 4 \boltzmann T B \abs{\frac{\resistorsource Z_l}{(\resistorsource + Z_l)^2}} \label{eq:available_power_unenlightening}
+  \, .
+\end{equation}
+The power $P_l$ is maximized when the source and load impedances are matched, i.e. when $Z_l = \resistorsource$, in which case $P_l = \boltzmann T B$.\footnote{If the source impedance is complex, i.e. $Z_s$, then the matching condition is $Z_l = Z_s^*$.}
+This maximum power $\boltzmann T B$ is aptly called the ``available power'' because it is the largest amount of power available to be delivered to the load.
+We denote the available power as $\poweravailable$.
+The spectral density of available power in the classical limit is $\spectralengineer_{\poweravailable} = \boltzmann T$ where here the superscript $e$ reminds us that we're talking about an ``engineer's'' spectral density with only positive frequencies.
+Notice that while the Johnson noise formula $\spectralengineer_V = 4 \boltzmann T \resistorsource$ for the spectral density of voltage fluctuations across our ideal noise source involves a factor of 4 while the spectral density of available power does not.
+In particular,
+\begin{equation}
+  \boxed{
+    \spectralengineer_{\poweravailable} = \frac{\spectralengineer_{\vsource}}{4 \resistorsource}
+  } \label{eq:power_available_versus_source_voltage}
+  \, .
+\end{equation}
+For this reason, and for another reason discussed in the next few paragraphs, it can be helpful to think about noise analysis problems in terms of the available power instead of the the circuit model with a voltage source shown in Fig.~\ref{fig:unbalanced_resistor}a.
+
+Indeed, equation (\ref{eq:available_power_unenlightening}) is not particularly englightening; how do we interpret the factor of $4$ and the dimensionless ratio of impedances?
+\quickfigcentered{1.4\columnwidth}{resistor_as_tline.pdf}{a) Our noisy resistor connected through a transmission line to a load resistor. The transmission line and load resistor each have impedance $\resistorsource$. b) Now the load resistor is replaced by an arbitrary load with impedance $Z_l$. c) We have transformed the noisy resistor to a semi-infinite tranmission line carrying a noise voltage wave with amplitude $\vright$.}{fig:resistor_as_tline}
+The situation becomes clear if we transform our model of the noisy resistor from Fig.~\ref{fig:unbalanced_resistor} to an equivalent transmission line model.
+We do this in three logical steps illustrated in Fig.~\ref{fig:resistor_as_tline}.
+First, we load the noisy resistor by a bit of transmission line with characteristic impedance $Z=\resistorsource$ terminated by a resistor with resistance $\resistorsource$, as shown in Fig.~\ref{fig:resistor_as_tline}a.
+The impedance looking into the transmission line from the left is just $\resistorsource$.
+Therefore, by voltage division, the voltage at the node connecting the source resistor to the transmission line must be $\vsourcerms/2$, as noted in the figure.
+Inside the transmission line there must be a wave travelling to the right; we denote its amplitude $\vright$.
+Because the transmission line is impedance matched on the right, there is no reflected left-moving wave.
+Therefore, the voltage at the node connecting the source resistor and transmission line must be equal to $\vright$, i.e.
+\begin{equation}
+    \vright = \frac{\vsourcerms}{2} = \sqrt{\boltzmann T \resistorsource B} \quad \text{(classical limit)}
+    \, .
+\end{equation}
+Note that the factor of 4 from the Johnson noise formula is gone.
+Because all of the right-moving wave is absorbed by the load resistor, the power carried by this wave is the maximum power available to the load, so
+\begin{equation}
+    \poweravailable = \frac{\abs{\vright}^2}{\resistorsource} = \boltzmann T B \quad \text{(classical limit)}
+\end{equation}
+which is an intuitive result.
+
+Now suppose that instead of a matched load on the right of the transmission line, we have an arbitrary load $Z_l$.
+In this situation, some of the ingoing wave $\vright$ is reflected into a left-moving wave denoted $\vleft$.
+However, because the transmission line is still terminated by a matched resistor on the left, there is no reflection on the left and the left-moving wave dissipates entirely into the source resistor.
+Therefore, $\vright$ is the \emph{same} as it is in the configuration in Fig.~\ref{fig:resistor_as_tline}a and $\vleft$ is given by 
+\begin{equation}
+  \vleft = \vright \Gamma \qquad \Gamma = \frac{Z_l - Z_s}{Z_l + Z_s}
+\end{equation}
+where here we allow the source to have an arbitrary (complex) impedance $Z_s$ (in the discussion up to here, we assumed $Z_s = \resistorsource$).
+The fact that $\vright$ doesn't depend on the load impedance is the critical observation that allows us to take the final step.
+In Fig.~\ref{fig:resistor_as_tline}c, we drop the ideal noise source and source resistor and replace them with a transmission line extending infintely to the left, but carrying a right-moving voltage noise wave with amplitude $\vright = \sqrt{\poweravailable \resistorsource}$.
+The model of Fig.~\ref{fig:resistor_as_tline}c has the same electrical properties as the original one from Fig.~\ref{fig:unbalanced_resistor}a, but with several advantages:
+\begin{itemize}
+    \item There are no factors of 2 or 4.
+    \item We do not have to remember where to put the noise source relative to the ideal source resistor. It is a common mistake for engineers and physicists to remember the Johnson noise formula $\vsourcerms = \sqrt{4 \boltzmann T R B}$ but not where to put the noise voltage relative to the resistor they're trying to model. With the transmission line model, there's no circuit topology to remember.
+    \item The transmission line model is naturally suited to including attenuators and other elements.
+    \item We have to remember only two numbers: the spectral density of available power $\spectralengineer_{\poweravailable}$, which is equal to $\boltzmann T$ in the classical limit, and the impedance of the source. Everything can be derived from those.
+\end{itemize}
+
+To check that we get the same results with the transmission line model and the noisy resistor model, let us compute the power delivered to the load using the transmission line model and compare with Eq.~(\ref{eq:available_power_unenlightening}).
+The voltage at the load is
+\begin{equation}
+  V_l = \vright + \vleft = \vright (1 + \Gamma) = \sqrt{\poweravailable \resistorsource}(1 + \Gamma) 
+\end{equation}
+and the power delivered to the load in the classical limit is
+\begin{equation}
+  P_l
+  = \frac{\abs{V_l}^2}{\abs{Z_l}}
+  = \poweravailable \frac{\resistorsource}{\abs{Z_l}} \abs{1 + \Gamma}^2
+  = 4 \boltzmann T B \abs{\frac{\resistorsource Z_l}{(\resistorsource + Z_l)^2}}
+\end{equation}
+which agrees with Eq.~(\ref{eq:available_power_unenlightening}).
+
+\leveldown{Summary}
+
+Entirely similar arguments can be made in terms of the current wave instead of the voltage wave.
+Including formulae for both current and voltage waves and summarizing the results of this section, we have
+\begin{align}
+    \vright &= \sqrt{\poweravailable \resistorsource} \\
+    \iright &= \sqrt{\poweravailable / \resistorsource}
+\end{align}
+and
+\begin{align}
+    V_l &= \vright \left( 1 + \Gamma \right) = \sqrt{\poweravailable \resistorsource} \left( 1 + \Gamma \right) \\
+    I_l &= \iright \left( 1 - \Gamma \right) = \sqrt{\poweravailable / \resistorsource} \left( 1 - \Gamma \right)
+\end{align}
+with
+\begin{equation}
+    \Gamma = \frac{Z_l - Z_s}{Z_l + Z_s}
+    \, .
+\end{equation}
+In practical superconducting qubit systems, voltage-coupled (charge) drive lines use very small coupling capacitance  so $Z_l \approx \infty$ and $\Gamma \approx 1$, whereas current-coupled (flux) drive lines use very small inductance so $Z_l \approx 0$ and $\Gamma \approx -1$.
+Therefore, in these typical cases, we have
+\begin{align}
+  \text{voltage coupled (charge)} \qquad
+  V_l &= 2 \sqrt{\poweravailable \resistorsource} \\
+  \text{current coupled (flux)} \qquad
+  I_l &= 2 \sqrt{\poweravailable / \resistorsource}
+  \, .
+\end{align}
+
+\levelstay{Quantum case}
+
+In the quantum case, the circuit models in Fig.~(\ref{fig:unbalanced_resistor}) and Fig.~(\ref{fig:resistor_as_tline}) still work.
+The only difference from the classical case is that we have to modify the voltage spectral density.
+Whereas in the classical limit we have $\spectralengineer_{\vsource} = 4 \boltzmann T \resistorsource$, in the quantum case we have
+\begin{equation}
+  S_{\vsource} = 2 \resistorsource \hbar \omega \frac{1}{1 - \exp \left(-\hbar \omega / \boltzmann T \right)}
+  \, .
+\end{equation}
+However, even with this modification, one must take care when applying Eq.~(\ref{eq:power_available_versus_source_voltage}) because in the quantum case not all of the voltage noise carries available power.
+The next two sections illuminate this point.
+

@@ -1,0 +1,31 @@
+\newcommand{\noiseavailable}{S_{p,a}^e}
+\newcommand{\nboseeinstein}{n_{BE}}
+\newcommand{\impedance}{Z_0}
+\newcommand{\kappadrive}{\kappa_d}
+\newcommand{\gammaup}{\Gamma_\uparrow}
+\newcommand{\gammadown}{\Gamma_\downarrow}
+\newcommand{\gammaemission}{\Gamma_\text{loss}}
+\newcommand{\qualityfactoremission}{Q_\text{loss,d}}
+\newcommand{\gammaupdown}{\Gamma_\text{noise}}
+\newcommand{\boltzmann}{k_b}
+\newcommand{\resistorsource}{R_s}
+\newcommand{\vsource}{V_s}
+\newcommand{\poweravailable}{P_a}
+\newcommand{\vsourcerms}{V_{s,\text{rms}}}
+\newcommand{\vloadrms}{V_{l,\text{rms}}}
+\newcommand{\vright}{V_+}
+\newcommand{\vleft}{V_-}
+\newcommand{\iright}{I_+}
+\newcommand{\ileft}{I_-}
+\newcommand{\spectralengineer}{S^e}
+\newcommand{\spectralsymmetric}{S^\text{symm}}
+\newcommand{\spectralattenuator}{\spectralengineer_{\poweravailable, \text{att.}}}
+
+% \quickfig{\columnwidth}{my_image}{This is the caption}{fig:my_fig}
+\DeclareRobustCommand{\quickfigcentered}[4]{
+  \begin{figure}
+  \makebox[\textwidth][c]{\includegraphics[width=#1]{#2}}
+  \caption{#3}
+  \label{#4}
+  \end{figure}
+}
