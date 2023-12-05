@@ -1,25 +1,6 @@
 \section{Quantum noise with classical intuition}
 
-This section follows closely \cite{Sank:decoherence:2015}.
-
-Consider a two level system $S$ coupled to an environment $E$.
-The two level system has resonance frequency $\omegaqubit$ and is coupled to the environment's degree of freedom $F$
-\begin{equation}
-  H/\hbar = \underbrace{- \frac{\omegaqubit}{2} \sigma_z}_{H_S} + \underbrace{g (F \otimes \sigma_x)}_{H_{SE}} + H_E \label{eq:noise_hamiltonian}
-\end{equation}
-where $H_S$ is the two level system Hamiltonian, $H_{SE}$ is the interaction between $S$ and $E$, and $H_E$ represents the internal dynamics of $E$.
-It can be shown that under certain practical conditions
-\begin{align}
-    \gammaup &= g^2 S_{FF}(-\omegaqubit) \label{eq:gamma_up} \\
-    \gammadown &= g^2 S_{FF}(\omegaqubit) \label{eq:gamma_down}
-\end{align}
-where
-\begin{equation}
-  S_{FF}(\omega) = \int_{-\infty}^\infty dt \, \langle F(t) F(0) \rangle \, e^{i \omegaqubit t}
-\end{equation}
-is the two-sided spectral density of $F$.
-
-In a wide class of problems, notably circuits coupled with noisy resistors as we'll see shortly,\footnote{See Reference \cite{Nyquist:noise:1928} for an excellent explanation of why resistors produce noise according to the Bose-Einstein distribution.} the noise spectrum and Hamiltonian have forms such that
+In a wide class of problems, notably circuits coupled with noisy resistors as we'll see shortly,\footnote{See Reference \cite{Nyquist:noise1928} for an excellent explanation of why resistors produce noise according to the Bose-Einstein distribution.} the noise spectrum and Hamiltonian have forms such that
 \begin{equation}
   g^2 S_{FF}(\omega) = A^2 \omega (\nboseeinstein(\omega, T) + 1) \label{eq:noise_standard_form}
 \end{equation}
