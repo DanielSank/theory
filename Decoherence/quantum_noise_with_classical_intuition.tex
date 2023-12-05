@@ -1,0 +1,66 @@
+\section{Quantum noise with classical intuition}
+
+This section follows closely \cite{Sank:decoherence:2015}.
+
+Consider a two level system $S$ coupled to an environment $E$.
+The two level system has resonance frequency $\omegaqubit$ and is coupled to the environment's degree of freedom $F$
+\begin{equation}
+  H/\hbar = \underbrace{- \frac{\omegaqubit}{2} \sigma_z}_{H_S} + \underbrace{g (F \otimes \sigma_x)}_{H_{SE}} + H_E \label{eq:noise_hamiltonian}
+\end{equation}
+where $H_S$ is the two level system Hamiltonian, $H_{SE}$ is the interaction between $S$ and $E$, and $H_E$ represents the internal dynamics of $E$.
+It can be shown that under certain practical conditions
+\begin{align}
+    \gammaup &= g^2 S_{FF}(-\omegaqubit) \label{eq:gamma_up} \\
+    \gammadown &= g^2 S_{FF}(\omegaqubit) \label{eq:gamma_down}
+\end{align}
+where
+\begin{equation}
+  S_{FF}(\omega) = \int_{-\infty}^\infty dt \, \langle F(t) F(0) \rangle \, e^{i \omegaqubit t}
+\end{equation}
+is the two-sided spectral density of $F$.
+
+In a wide class of problems, notably circuits coupled with noisy resistors as we'll see shortly,\footnote{See Reference \cite{Nyquist:noise:1928} for an excellent explanation of why resistors produce noise according to the Bose-Einstein distribution.} the noise spectrum and Hamiltonian have forms such that
+\begin{equation}
+  g^2 S_{FF}(\omega) = A^2 \omega (\nboseeinstein(\omega, T) + 1) \label{eq:noise_standard_form}
+\end{equation}
+where here $A^2$ is a dimensionless constant describing the strength of the noise multiplied by the coupling between the noise and the system of interest, and $\nboseeinstein$ is the \href{https://en.wikipedia.org/wiki/Bose\%E2\%80\%93Einstein_statistics}{Bose-Einstein distribution} for the number of quanta in a mode at frequency $\omega$ and temperature $T$
+\begin{align}
+  \nboseeinstein(\omega, T)
+  &= \frac{1}{\exp(\hbar \omega / \boltzmann T) - 1} \\
+  & = \frac{1}{2} \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) - 1 \right] \\
+  (\boltzmann T \gg \hbar \omega) \quad & \approx \frac{\boltzmann T}{\hbar \omega} - \frac{1}{2}
+  \, .
+\end{align}
+In this case, the up and down rates are
+\begin{align}
+    \gammaup & = A^2 \omegaqubit ~ \nboseeinstein(\omegaqubit, T) \\
+    \gammadown &= A^2 \omegaqubit ~ (\nboseeinstein(\omegaqubit, T) + 1)
+    \, .
+\end{align}
+These equations express the up and down rates in terms of physical parameters of the system.
+Interestingly, we can express the rates in terms of each other.
+Notice that $\gammadown = \gammaup + A^2 \omegaqubit$ so we can interpret $\gammadown$ as having two contributions.
+The first contribution is the ``noise'' contribution $A^2 \omegaqubit ~ \nboseeinstein(\omegaqubit, T)$, which goes to zero at zero temperature and contributes equally to $\gammaup$ and $\gammadown$.
+The second contribution is ``spontaneous emission'' contribution $A^2 \omegaqubit$ which contributes only to $\gammadown$ and is independent of temperature.
+Renaming the common noise contribution as $\gammaupdown$ and the loss contribution as $\gammaemission$, we can re-express the up and down rates as
+\begin{align}
+  \gammaup &= \gammaupdown \\
+  \gammadown &= \gammaupdown + \gammaemission \\
+  \text{where} \qquad
+  \gammaupdown &= \gammaemission ~ \nboseeinstein(\omegaqubit, T) \label{eq:fluctuation_dissipation} \\
+  \text{and} \qquad
+  \gammaemission &= A^2 \omegaqubit
+  \, .
+\end{align}
+The value in expressing the rates this way is that it admits an intuitive interpretation.
+It makes sense that ``noise'' should give the quantum system equally up and down, while ``loss'' should lead only to transitions down.
+Furthermore, it's sensible that ``noise'' should depend on temperature while ``loss'' should not.
+
+Equation (\ref{eq:fluctuation_dissipation}) is an expression of the fluctuation dissipation law\footnote{More common terminology would be ``the fluctuation dissipation theorem''. However, Michel Devoret has rightly pointed out that a theorem is an inevitable logical consequence of a set of axioms, while a law is a fundamental pattern in physics, and what is usually called the fluctuation dissipation theorem is an example of the latter.} relating the motion of a system due to contact with a noisy environment to the loss of energy from the system into that environment.
+Another useful expression of Eq.~(\ref{eq:fluctuation_dissipation}) is
+\begin{equation}
+  \gammaupdown = \frac{\omegaqubit}{\qualityfactoremission} ~ \nboseeinstein(\omegaqubit, T)
+  \label{eq:fluctuation_dissipation_quality_factor}
+\end{equation}
+where we've introduced the quality factor $\qualityfactoremission = \omegaqubit / \gammaemission$.
+Note that $A^2 = 1 / \qualityfactoremission$.
