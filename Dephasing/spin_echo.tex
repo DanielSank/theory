@@ -38,10 +38,10 @@ Plugging this into the formula for $p(t)$ yields
 
 \levelstay{1/f noise spectrum}
 
-In the case of 1/f noise where $S(f)=S^{*}/f$ the integral becomes
+In the case of 1/f noise where $S_\lambda(f)=S^*_\lambda / f$ the integral becomes
 \begin{equation}
-  S^* \frac{t}{2} \underbrace{\int_{t f_{\textrm{min}}/2}^{\infty} \left[ \frac{\sin\left(\pi z\right)^2}{\left(\pi z\right)^2} \left(1 - \cos\left(2\pi z\right)\right) \right] \frac{dz}{z}}_I
-  = \frac{1}{2} t S^{*} \times I \, .
+  S^*_\lambda \frac{t}{2} \underbrace{\int_{t f_{\textrm{min}}/2}^{\infty} \left[ \frac{\sin\left(\pi z\right)^2}{\left(\pi z\right)^2} \left(1 - \cos\left(2\pi z\right)\right) \right] \frac{dz}{z}}_I
+  = \frac{1}{2} t S^*_\lambda \times I \, .
 \end{equation}
 Making the change of variables $x=\ln z$ we get
 \begin{equation}
@@ -61,7 +61,7 @@ Inspection of a plot of the integrand shows that this is sufficiently far to the
 We therefore numerically integrate in $\textit{Mathematica}$ from $-10$ to with result $I_1 \approx 1.35$.
 The spin-echo decay curve for 1/f noise is therefore
 \begin{equation}
-  p_0(t) = \frac{1}{2} + \frac{1}{2} \exp \left(-\frac{1.38}{4} \left( \frac{\partial\omega}{\partial\lambda} \right)^2 t^2 S^* \right) \, .
+  p_0(t) = \frac{1}{2} + \frac{1}{2} \exp \left(-\frac{1.38}{4} \left( \frac{\partial\omega}{\partial\lambda} \right)^2 t^2 S^*_\lambda \right) \, .
 \end{equation}
 So we have a Gaussian envelope, as in the case of the Ramsey sequence with $1/f$ noise, but now with a different decay constant.
 Defining the decay constant by the equation
@@ -71,7 +71,7 @@ Defining the decay constant by the equation
 we find
 \begin{equation}
   T_{1/f,\textrm{echo}}
-  = \left( \frac{\partial\omega}{\partial\lambda} \right)^{-1} \frac{2}{\sqrt{1.35 \, S^*}}
+  = \left( \frac{\partial\omega}{\partial\lambda} \right)^{-1} \frac{2}{\sqrt{1.35 \, S^*_\lambda}}
   \, .
 \end{equation}
 The echo time is therefore calculated to be approximately $1.72/0.289=6$ times larger than the Ramsey decay times.
