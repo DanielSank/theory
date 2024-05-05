@@ -1,0 +1,201 @@
+\levelstay{Ramsey}
+
+In this section, we study the time dependence of the $p_\ket{0}$ for the sequence
+\begin{equation}
+  X_{\pi/2} \longrightarrow \text{Wait time }t \longrightarrow X_{-\pi/2}
+\end{equation}
+which is known as a ``Ramsey sequence''.
+
+\leveldown{General noise spectrum}
+
+The phase accumulated due to noise during the wait period is
+\begin{align}
+\phi(t)
+  &= \int_0^t \left( \omega_0 + \delta \omega (t') \right) \, dt' \nonumber \\
+  &= \omega_0 t + \int_0^t \delta \omega (t') \, dt' \nonumber \\
+  &= \omega_0 t + \frac{\partial \omega}{\partial \lambda} \int_0^t \delta \lambda(t') \, dt' \label{eq:sure_and_random}
+\end{align}
+where $\lambda$ is the physical quantity that is actually causing the qubit frequency noise, ie. $\lambda$ could be a magnetic flux controlling the frequency of an electron transition in an atom.
+There are two terms: the sure term depending on $\omega_0$ and the random term depending on $\delta \lambda$.
+If $\lambda(t)$ is Gaussian process then $\phi(t)$ is Gaussian distributed, roughly because the distribution of the sum of random variables is usually Gaussian distributed.\footnote{This is called the ``central limit theorem''.}
+Note that when we say that $\phi$ is ``distributed'' in here we're implicitly referring to an ensemble of experiments.
+In other words, if we were to measure $\phi(t)$ many times and make a histogram, that histrogram would have a Gaussian shape.
+For the rest of this discussion, we focus only on the random term because in practical applications the pulse phases are adjusted so that we are effectively working in a rotating frame where $\omega_0 = 0$.
+
+Denote as $p_0(\phi)$ the probability, as a function of $\phi$, to measure $\ket{0}$ at the end of the Ramsey sequence.
+If $\phi = 0$, then the first and second rotations cancel to send the qubit to $\ket{0}$, so $p_0(0) = 1$.
+On the other hand, if $\phi = \pm \pi$, then the two rotations combine to send the qubit to $\ket{1}$, so $p_0(\pm \pi) = 0$.
+For other values of $\phi$, the probability must oscillate sinusoidally, so
+\begin{equation}
+  p_0 (\phi) = \frac{1}{2}\left(1 + \cos(\phi) \right) \, .
+\end{equation}
+For each certain wait time $t$, we repeat the experiment many times, measuring the qubit each time and computing the probability $p_0$.
+Therefore, we sample the probability distribution of $\phi$, so
+\begin{equation}
+  p_0(t)
+  = \langle\frac{1}{2}\left(1+\cos(\phi)\right)\rangle
+  = \frac{1}{2}+\frac{1}{2}\langle\cos(\phi)\rangle
+\end{equation}
+where $\langle \cdot \rangle$ denotes an average of the ensemble of experiments.
+Denote the probability distribution of $\phi$ by $\Phi(\phi)$.
+Then we have
+\begin{align}
+  \langle\cos\left(\phi\right)\rangle
+  & \equiv \int_{-\infty}^{\infty}\cos(\phi)\Phi(\phi)\, d\phi \nonumber \\
+  & = \int_{-\infty}^{\infty}\exp(i\phi)\Phi(\phi)\, d\phi\qquad\textrm{because }\Phi\textrm{ is even} \nonumber \\
+  & = \langle\exp(i\phi)\rangle \, .
+\end{align}
+
+To proceed we need to develop a mathematical identity concerning Gaussian distributions.
+Consider a variable $x$ with Gaussian distribution.
+Averages of function of $x$ are given by
+\begin{equation}
+  \langle f(x)\rangle
+  = \frac{\int f(x)\exp(-\frac{1}{2}ax^{2})\, dx}{\int\exp(-\frac{1}{2}ax^{2})\, dx} \, .
+\end{equation}
+It is straightforward to show that $\langle x^{2}\rangle = 1 / a$, and that $\langle\exp(Ax)\rangle = \exp(A^2 / 2 a)$.
+Therefore,
+\begin{equation}
+  \langle \exp(Ax)\rangle
+  = \exp\left(\frac{1}{2}A^{2}\frac{1}{a}\right)
+  = \exp \left( \frac{1}{2}\langle(Ax)^{2}\rangle \right) \, .
+\end{equation}
+
+Coming now back to the main calculation, we have
+\begin{equation}
+  \langle \cos\left(\phi\right) \rangle
+  = \langle \exp(i\phi) \rangle
+  = \exp\left( -\frac{1}{2} \langle \phi^{2} \rangle \right)
+\end{equation}
+and
+\begin{equation}
+  p_0(t) = \frac{1}{2} + \frac{1}{2} \exp \left( - \frac{1}{2} \angavg{\phi^2} \right) \, .
+\end{equation}
+Finally, we find $\angavg{\phi^2}$ using Eq.~(\ref{eq:sure_and_random}) as
+\begin{align}
+  \langle \phi^2 \rangle
+  &= \left( \frac{\partial \omega}{\partial\lambda} \right)^2 \left\langle \int_{0}^{t}\lambda(t')\, dt' \, \int_0^t \lambda(t'') \, dt'' \right\rangle \nonumber \\
+  &= \left( \frac{\partial\omega} {\partial\lambda} \right)^2 \int_0^t dt' \int_0^t dt'' \langle\lambda(t') \lambda(t'') \rangle \nonumber \\
+  &= \left(\frac{\partial\omega} {\partial\lambda}\right)^2 \int_0^t dt' \int_0^t dt'' \int_0^{\infty} S_{\lambda}(f) \cos \left( 2\pi f(t''-t') \right) \, df \nonumber \\
+  &= \left(\frac{\partial\omega}{\partial\lambda} \right)^2 \int_0^{\infty} S_{\lambda}(f) \frac{\sin\left(\pi ft\right)^{2}}{\left(\pi f\right)^2} \, df \nonumber \\
+  &= \left(\frac{\partial\omega}{\partial\lambda} \right)^2 t^2 \int_0^{\infty} S_{\lambda}(f) \, \text{sinc} \left(\pi f t \right)^2 \, df
+\end{align}
+where $\text{sinc}(x) = \sin(x) / x$.
+Putting it all together we get
+\begin{equation}
+  p_0(t) = \frac{1}{2} + \frac{1}{2} \exp \left(-\frac{1}{2} \left(\frac{\partial\omega_{01}}{\partial\lambda}\right)^2 t^2 \int_0^{\infty} S_\lambda (f) \, \text{sinc}(\pi f t)^2\, df \right)
+\end{equation}
+or writing $z = f t$
+\begin{equation}
+  p_0(t) = \frac{1}{2} + \frac{1}{2} \exp \left( -\frac{1}{2} \left( \frac{\partial\omega_{01}}{\partial\lambda} \right)^2 t \int_0^\infty S_{\lambda} \left( z/t \right) \, \text{sinc}(\pi z)^2 \, dz \right) \, .
+\end{equation}
+
+
+\levelstay{White noise spectrum}
+
+Consider the case $S_{\lambda}(f) = S_{\lambda}$ over a frequency range $0$ to $f_\text{max}$.
+In thise case,
+\begin{equation}
+  p_0(t) = \frac{1}{2} + \frac{1}{2}\exp \left( -\frac{1}{2}\left( \frac{d\omega_{10}}{d\lambda} \right)^2 t S_{\lambda} \int_0^{f_\text{max}t} \left( \frac{\sin(\pi z)} {\pi z} \right)^2 dz \right) \, .
+\end{equation}
+The integral can be approximated as
+\begin{equation}
+  \int_0^{f_\text{max}t} \left( \frac{\sin(\pi z)}{\pi z} \right)^2 dz \approx \frac{1}{2+(f_{\text{max}}t)^{-1}} \, .
+\end{equation}
+The approximation has a maximum error of 20\% occuring near $f_{\text{max}}t = 1$. 
+Finally, we have for white noise in the Ramsey sequence
+\begin{equation}
+  p_0(t) \approx \frac{1}{2} + \frac{1}{2} \exp \left( -\frac{1}{2} \left( \frac{d\omega_{01}}{d\lambda} \right)^2 t S_{\lambda} \frac{1}{2 + (f_{\text{max}}t)^{-1}} \right) \, .
+\end{equation}
+
+
+\levelstay{1/f noise spectrum}
+
+Now consider the case where $S_{\lambda}(f)=S^{*}/f$.
+The integral we have to do is then
+\begin{equation}
+  \int_{z_\text{min}}^{z_\text{max}}S^{*}\frac{t}{z}\text{sinc}^2 \left(\pi z \right) dz
+  = t S^*_lambda \times I
+\end{equation}
+where $I$ is the integral over frequency,
+\begin{equation}
+  I = \int_{z_{\text{min}}}^{z_{\text{max}}} \text{sinc}(\pi z)^{2}\frac{dz}{z} \, .
+\end{equation}
+Making the substitution $x=\log z$ we get
+\begin{equation}
+  I = \int_{x_\text{min}}^{x_\text{max}}\text{sinc}^2(\pi e^{x})\, dx \, .
+\end{equation}
+We assume that $x_\text{min}$ is a large negative number because $z_\text{min}$ typically much less than 1.
+For example, the $1/f$ noise spectrum may continue below $1\,\text{mHz}$, while $t$ ranges from $0$ to perhaps $1\,\text{ms}$.
+Changing variables again $x \rightarrow -x$ we get
+\begin{align}
+  I & = \int_{-x_\text{max}}^{-x_\text{min}}\text{sinc}^2 \left(\pi e^{-x}\right) \, dx\\
+  & = \underbrace{\int_{-x_\text{max}}^0\text{sinc}^{2}\left(\pi e^{-x}\right)\, dx}_{I_1} + \underbrace{\int_0^{-x_{min}}\text{sinc}^2 \left(\pi e^{-x}\right) \, dx}_{I_2} \, .
+\end{align}
+Let's look at $I_1$.
+What value do we take for $x_\text{max}$?
+We work in the limit that the upper cutoff frequency of the $1/f$ spectrum is high compared to the times in the experiment, i.e. we take $x_\text{max}=\infty$.
+In thise case we have
+\begin{equation}
+  I_1 = \int_{-\infty}^{0}\textrm{sinc}^{2}\left(e^{-x}\right)\, dx = -\text{Ci}(2\pi)=0.0226
+\end{equation}
+where $\text{Ci}(x) = -\int_{x}^{\infty}\cos(x')/x'\, dx'$.
+
+The second integral is
+\begin{align*}
+  I_2 = \int_0^{N}\text{sinc}^2 \left(\pi e^{-x}\right)\, dx
+  & = -\text{Ci}(2\pi e^{-x})|_0^N \\
+  &+ \frac{1}{4\pi^{2}}e^{2x}\left[1-\cos\left(2\pi e^{-x}\right)\right]|_{0}^{N} \\
+  &+ \frac{1}{2\pi}e^{x}\sin\left(2\pi e^{-x}\right)|_{0}^{N}
+\end{align*}
+where $N = -x_\text{min} = -\log(f_\text{min} t) \gg 1$.
+We have to look at each of these three terms for $x=0$ and as $x=N\rightarrow\infty$.
+
+\begin{itemize}
+
+  \item $-\text{Ci}(2\pi e^{-x})$: For $x=0$ we have just $-\text{Ci}(2\pi)$.
+  For $x \rightarrow \infty$, we have $-\left[\gamma+\log\left[2\pi e^{-N}\right]+O^{2}(e^{-N})\right]$ where $\gamma$ is Euler's constant.
+
+  \item $(1/4\pi^2) e^{2x}\left(1-\cos(2\pi e^{-x})\right)$: For $x=0$ we get just 0.
+    For $x \rightarrow \infty$ we get
+    \begin{equation*}
+      \frac{1}{4 \pi^2} e^{2x} \left[ 1 - \left( 1 - \frac{1}{2} 4 \pi^2 e^{-2x} + O^4 (e^{-x}) \right) \right] \approx \frac{1}{2} \, .
+    \end{equation*}
+
+  \item $\sin \left(2 \pi e^{-x}\right) / (2\pi)$: For $x=0$ this terms goes to 0.
+    For $x \rightarrow \infty$ we have
+    \begin{equation*}
+      \frac{1}{2 \pi} \left(2 \pi e^{-x} + O^3(e^{-x}) \right) = 1 + O^3(e^{-x}) \approx 1 \, .
+    \end{equation*}
+\end{itemize}
+Putting this all together we get for the second integral,
+\begin{equation}
+  I_2 = \int_0^{-x_\text{min}}\text{sinc}^2 \left( \pi e^{-x} \right)\, dx
+  = \frac{3}{2} -\gamma -\log \left(2\pi \right) - \log\left( e^{-N} \right) + \text{Ci}\left(2\pi\right) \, .
+\end{equation}
+Adding $I_1 + I_2$, the $\text{Ci}(2\pi)$ terms cancel and we're left with
+\begin{align}
+  I
+  & = \frac{3}{2}-\gamma - \log\left(2\pi\right) + N \nonumber \\
+  \text{substitute } N = - \log\left(f_\text{min}t\right) \qquad
+  & = \frac{3}{2} - \gamma - \log\left(2\pi\right) - \log\left( f_\text{min}t \right) \nonumber \\
+  & = \log\left(\frac{\exp((3/2) - \gamma) / 2\pi}{f_\text{min} t} \right) \nonumber \\
+  & = \log\left(\frac{0.4005}{f_\text{min}t}\right)
+\end{align}
+This matches the result obtained numerically in Ref.~\cite{Martinis:bias_noise:2003}.
+Putting everything together the Ramsey decay envelope is
+\begin{equation}
+  p_0(t)
+  = \frac{1}{2} + \frac{1}{2} \exp \left( -\frac{1}{2} \left( \frac{\partial\omega}{\partial\lambda} \right)^2 t^2 S^*_\lambda \ln\left(\frac{0.4005}{f_{\text{min}} t} \right) \right) \, .
+\end{equation}
+The log factor is in the neighborhood of 24 for values of $t$ encountered in real experiments.
+Defining the decay constant by the equation
+\begin{equation}
+  p_0(t) \propto \exp \left[ - \left( t / T_{1/f,\text{Ramsey}} \right)^2 \right]
+\end{equation}
+we find
+\begin{equation}
+  T_{1/f,\text{Ramsey}}
+  = \left( \frac{\partial\omega}{\partial\lambda} \right)^{-1} \frac{1}{\sqrt{12 S^*_\lambda}}
+  \, .
+\end{equation}

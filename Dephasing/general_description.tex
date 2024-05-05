@@ -1,0 +1,34 @@
+\levelstay{Introduction}
+
+The sequence for a Ramsey experiment is
+\begin{equation}
+X_{\pi/2}\rightarrow\textrm{wait for time }t\rightarrow X_{-\pi/2} \, .
+\end{equation}
+The first pulse rotates the qubit from $\ket{0}$ to a point on the equator of the Bloch sphere.
+The qubit state then idles on the equator for time $t$.
+In the absence of noise the state is unchanged during this time, so the final pulse rotates the state back to $\ket{0}$.
+When there is noise the final state is not exactly $\ket{0}$.
+It is shown elsewhere that energy relaxation effects ($T_1$) and frequency fluctuation effects $(T_2)$ can be considered separately because their effects on the decay envelopes of various experiments factor apart; for example the decay of a Ramsey fringe for a qubit under the influence of energy decay with time constant $T_1$ and phase decay with time constant $T_\phi$ is $\exp(-t(2T_1 + T_\phi)$.
+Therefore, we consider only the effect of dephasing, ie. no energy relaxation.
+
+During the part of the sequence in which the qubit idles at the equator of the Bloch sphere, the $\ket{0}\rightarrow\ket{1}$ transition frequency, and therefore the precession frequency, fluctuates and causes the qubit state to diffuse (make a random walk)
+on the equator.
+Therefore, the second rotation results in a qubit state different from $|0\rangle$ and so the measured probability of finding $\ket{0}$ is not 1.
+The probability is what we can measure, and the decrease away from 1 is what we call the decay of the Ramsey curve.
+
+If the qubit state is completely diffused on the equator then the expected value of the zero state probability after the second pulse is $\frac{1}{2}$.
+Therefore, we expect our calculations to yield a curve that goes from 1 to $1/2$ as the wait time goes from zero to infinity.
+
+\leveldown{Note on conventions}
+
+In this document, spectral densities, e.g. $S(\omega)$, are single sided spectral densities.
+This is the thing you read off of a spectrum analyzer, and it is defined for positive frequencies only.
+The single sided spectral density $S$ satisfies the Wiener-Khinchin theorem
+\begin{equation}
+  \langle f(t) f(0) \rangle = \int_0^\infty \frac{d\omega}{2\pi} S_f(\omega) \cos(\omega t)
+\end{equation}
+and conversely
+\begin{equation}
+  S(\omega) = 2 \int_{-\infty}^\infty dt \, \langle f(0) f(t) \rangle \cos(\omega t) \, .
+\end{equation}
+

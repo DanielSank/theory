@@ -1,0 +1,78 @@
+\levelstay{Spin Echo}
+
+\leveldown{General noise spectrum}
+
+The spin echo sequence works similarly to the Ramsey except that the
+qubit experiences a $\pi$-pulse halfway through.
+This means that any frequency detuning essentially switches sign halfway through the sequence.
+Therefore, the total phase noise experienced during the sequence is
+\begin{equation}
+  \phi = \frac{\partial\omega}{\partial\lambda} \left( \int_0^{t/2} \delta \lambda(t_1) dt_1 -\int_{t/2}^t \delta \lambda(t_2) dt_2 \right) \, .
+\end{equation}
+Using the same arguments as for the Ramsey sequence we can write down the measured probability at the end of the sequence
+\begin{equation}
+  p_0(t) = \frac{1}{2}+\frac{1}{2}\exp\left[-\frac{1}{2}\langle\phi^{2}\rangle \right] \, .
+\end{equation}
+The computation of $\langle\phi^2 \rangle_\phi$ proceeds similarly to the Ramsey case:
+\begin{align}
+  \langle\phi^{2}\rangle
+  &= \left( \frac{\partial\omega}{\partial\lambda} \right)^2 \left\langle \left( \int_0^{t/2} \lambda(t_1) dt_1 - \int_{t/2}^t \lambda(t_2) dt_2 \right) \times \right. \nonumber \\
+  & \quad \left. \left( \int_0^{t/2} \lambda(t_3) dt_{3} - \int_{t/2}^t \lambda(t_4) dt_4 \right) \right \rangle \nonumber \\
+  & = \left( \frac{\partial \omega_{10}}{\partial\lambda} \right)^2
+  \int_{f_{\textrm{min}}}^{\infty} df S_{\lambda}(f)
+  \left[
+  \int_0^{t/2} \int_0^{t/2} dt_1 \, dt_3 \cos[2\pi f (t_1 - t_3)] \right. \nonumber \\
+  & \quad + \int_{t/2}^t \int_{t/2}^t dt_{2} \, dt_{4} \cos[2\pi f (t_2-t_4)] \nonumber \\
+  & \quad - 2 \left. \int_{0}^{t/2}\int_{t/2}^{t} dt'dt'' \cos[2\pi f (t'-t'')] \right] \nonumber \\
+  & = \left( \frac{\partial\omega}{\partial\lambda} \right)^2 2 \int_{f_{\text{min}}}^\infty S_\lambda (f) \left[ \left(\frac{\sin\left(\pi ft/2\right)}{\left(\pi f\right)}\right)^2 \left( 1 - \cos \left( \pi f t \right) \right) \right]df
+  \label{eq:spinEchoRawIntegral} \\
+  & = \left( \frac{\partial\omega}{\partial\lambda}\right)^2 t \int_{t f_{\text{min}}/2}^{\infty} S_\lambda \left( \frac{2 z}{t} \right) \left[ \left( \frac{\sin\left(\pi z\right)}{\left(\pi z\right)} \right)^2 \left(1 - \cos\left(2 \pi z \right) \right) \right] dz \, .
+\end{align}
+Note that Eq.~(\ref{eq:spinEchoRawIntegral}) matches Eq.~(35b) in Ref.~\cite{Martinis:bias_noise:2003}.
+Plugging this into the formula for $p(t)$ yields
+\begin{align}
+  p_0(t)
+  &= \frac{1}{2} + \frac{1}{2} \exp \left( - \frac{1}{2} \left( \frac{\partial\omega_{10}}{\partial\lambda} \right)^{2} t \int_{t f_{\text{min}}/2}^{\infty} S_\lambda \left( \frac{2z}{t} \right) \left[ \frac{\sin\left(\pi z\right)^{2}}{\left(\pi z\right)^{2}} \left(1 - \cos\left(2\pi z\right)\right) \right] dz \right) \, .
+\end{align}
+
+
+\levelstay{1/f noise spectrum}
+
+In the case of 1/f noise where $S(f)=S^{*}/f$ the integral becomes
+\begin{equation}
+  S^* \frac{t}{2} \underbrace{\int_{t f_{\textrm{min}}/2}^{\infty} \left[ \frac{\sin\left(\pi z\right)^2}{\left(\pi z\right)^2} \left(1 - \cos\left(2\pi z\right)\right) \right] \frac{dz}{z}}_I
+  = \frac{1}{2} t S^{*} \times I \, .
+\end{equation}
+Making the change of variables $x=\ln z$ we get
+\begin{equation}
+  I = \int_{\ln\left(tf_{\textrm{min}}/2\right)}^{\ln\left(tf_{\textrm{max}}/2\right)}\left(\frac{\sin\left(\pi e^{x}\right)}{\left(\pi e^{x}\right)}\right)^{2}\left(1-\cos\left(2\pi e^{x}\right)\right)dx \, .
+\end{equation}
+We now break the integral into two pieces
+\begin{align}
+I &=
+\underbrace{\int_{\ln\left(tf_{\textrm{min}}/2\right)}^{0}\left(\frac{\sin\left(\pi e^{x}\right)}{\left(\pi e^{x}\right)}\right)^{2}\left(1-\cos\left(2\pi e^{x}\right)\right)dx}_{I_{1}} \nonumber \\
+&+ \underbrace{\int_{0}^{\ln\left(tf_{\textrm{max}}/2\right)}\left(\frac{\sin\left(\pi e^{x}\right)}{\left(\pi e^{x}\right)}\right)^{2}\left(1-\cos\left(2\pi e^{x}\right)\right)dx}_{I_{2}} \, .
+\end{align}
+The second term $I_{2}$ is very small even if the upper limit of integration is extended to infinity.
+Numerically we find $I_{2}\approx0.032$.
+The first term requires only slightly more attention.
+Taking the experiment times $t$ to be in the range $10\,\text{ns}$ to $1\,\text{ms}$ and the total time of the experiment to be on the order of minutes or an hour\footnote{This is the total time over which all points in the experiment are averaged}, we find $\ln(t f_{\text{min}} / 2) < -18$.
+Inspection of a plot of the integrand shows that this is sufficiently far to the left of zero that the integral is completely insensitive to the value of this lower limit.
+We therefore numerically integrate in $\textit{Mathematica}$ from $-10$ to with result $I_1 \approx 1.35$.
+The spin-echo decay curve for 1/f noise is therefore
+\begin{equation}
+  p_0(t) = \frac{1}{2} + \frac{1}{2} \exp \left(-\frac{1.38}{4} \left( \frac{\partial\omega}{\partial\lambda} \right)^2 t^2 S^* \right) \, .
+\end{equation}
+So we have a Gaussian envelope, as in the case of the Ramsey sequence with $1/f$ noise, but now with a different decay constant.
+Defining the decay constant by the equation
+\begin{equation}
+  p_0(t) \propto \exp \left[ - \left( t / T_{1/f,\text{echo}} \right)^2 \right]
+\end{equation}
+we find
+\begin{equation}
+  T_{1/f,\textrm{echo}}
+  = \left( \frac{\partial\omega}{\partial\lambda} \right)^{-1} \frac{2}{\sqrt{1.35 \, S^*}}
+  \, .
+\end{equation}
+The echo time is therefore calculated to be approximately $1.72/0.289=6$ times larger than the Ramsey decay times.
+
