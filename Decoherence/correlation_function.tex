@@ -3,14 +3,14 @@
 In this section we compute the charge-charge correlation function for our collection of oscillators.
 For a single oscillator we have simply
 \begin{align}
-\langle Q_n(t) Q_n(0) \rangle
-&= Q_{n,\text{zpf}}^2 \left( \langle a^\dagger a \rangle e^{i \omega_n t} + \langle a^\dagger a \rangle e^{-i \omega_n t} \right) \\
-&= Q_{n,\text{zpf}}^2 \left( 2\langle a^\dagger a \rangle \cos(\omega_n t) + e^{-i \omega_n t} \right)
+  \langle Q_n(t) Q_n(0) \rangle
+  &= Q_{n,\text{zpf}}^2 \left( \langle a^\dagger a \rangle e^{i \omega_n t} + \langle a^\dagger a \rangle e^{-i \omega_n t} \right) \nonumber \\
+  &= Q_{n,\text{zpf}}^2 \left( 2\langle a^\dagger a \rangle \cos(\omega_n t) + e^{-i \omega_n t} \right)
 \end{align}
 where $Q_{n,\text{zpf}}^2 \equiv \hbar y_n / 2$.
-Using the thermal-quantum average
+Using the thermal-quantum average, i.e. the Bose-Einstein distribution,
 \begin{equation}
-\langle a^\dagger a \rangle = \langle n \rangle = \frac{1}{2} \left( \coth \left( \frac{\beta \hbar \omega_n}{2} \right) - 1 \right)
+  \langle a^\dagger a \rangle = \langle n \rangle = \nboseeinstein = \frac{1}{2} \left( \coth \left( \frac{\beta \hbar \omega_n}{2} \right) - 1 \right)
 \end{equation}
 we find
 \begin{equation}
@@ -19,28 +19,43 @@ we find
 \end{equation}
 Using Eq.\,(\ref{eq:ch.decoherence.sec.caldeira-leggett:ReY_as_delta_functions}) we can rewrite this as
 \begin{align}
-\langle Q_n(t) Q_n(0) \rangle
-&= Q_{n,\text{zpf}}^2
-\int \frac{d\omega}{2 \pi} e^{-i \omega t} \frac{2 (2\pi)}{\pi \omega y_n} \Re Y_n(\omega) \frac{1}{2} \left( \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right) \\
-&= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y_n (\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, .
+  \langle Q_n(t) Q_n(0) \rangle
+  &= Q_{n,\text{zpf}}^2
+  \int \frac{d\omega}{2 \pi} e^{-i \omega t} \frac{2 (2\pi)}{\pi \omega y_n} \Re Y_n(\omega) \frac{1}{2} \left( \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right) \nonumber \\
+  &= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y_n (\omega) \left( \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right) \nonumber \\
+  &= 2 \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y_n (\omega) \left( \nboseeinstein(\omega, T) + 1 \right)
+  \, .
 \end{align}
 The total charge correlation is just the sum of the correlations of the independent oscillators, giving us
 \begin{align}
-\langle Q(t) Q(0) \rangle
-&= \sum_n \langle Q_n(t) Q_n(0) \rangle \\
-&= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \sum_n \Re Y_n (\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \\
-&= \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y(\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, .
-\end{align}
+  \langle Q(t) Q(0) \rangle
+  &= \sum_n \langle Q_n(t) Q_n(0) \rangle \nonumber \\
+  &= 2 \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \sum_n \Re Y_n (\omega) \left( \nboseeinstein(\omega, T) + 1 \right) \nonumber \\
+  &= 2 \hbar \int \frac{d\omega}{2 \pi} \frac{e^{-i \omega t}}{\omega} \Re Y(\omega) \left( \nboseeinstein(\omega, T) + 1 \right)
+  \, .
+  \end{align}
 In the last line we replaced our sum of admittances from the collection of discrete oscillators with the smooth admittance which the discrete oscillators were designed to approximate.
 As shown in the previous section, this replacement is only strictly correct in the limit that the number of oscillators goes to infinity.
 So here we have our second limit.
 By adding resistance to the system and then taking the limit $Q \rightarrow \infty$, we have allowed ourselves to make this $n \rightarrow \infty$ limit while still using the implicitly  $t \rightarrow \infty$ expressions for impedance.
-
 Finally, using the definition of the spectral density $S_{QQ}(\omega)$ we find
+\begin{align}
+  S_{QQ}(\omega)
+  &= 2 \hbar \frac{\Re Y(\omega)}{\omega} \left( \nboseeinstein(\omega, T) + 1 \right)
+  \, .
+\end{align}
+The current spectral density is
+\begin{align}
+S_{II}(\omega)
+  &= 2 \hbar \omega \Re Y(\omega) \left( \nboseeinstein(\omega, T) + 1 \right)
+  \, .
+\end{align}
+
+The charge and current spectral densities we found are for an admittance that has been shorted, i.e. we have calculated the charge and current transported through the short.
+The voltage spectral density for an open circuited admittance is
 \begin{equation}
-S_{QQ}(\omega) = \hbar \frac{\Re Y(\omega)}{\omega} \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, .
+  S_{VV}(\omega) = 2 \frac{\hbar \omega}{\Re Y(\omega)} \left( \nboseeinstein(\omega, T) + 1 \right)
+  \, .
 \end{equation}
-We can also easily write the current spectral density
-\begin{equation}
-S_{II}(\omega) = \hbar \omega \Re Y(\omega) \left[ \coth \left( \frac{\beta \hbar \omega}{2} \right) + 1 \right] \, . \label{eq:ch.decoherence.sec.correlation_functions:S_II}
-\end{equation}
+Notice that as temperature goes to zero and $\nboseeinstein \rightarrow 0$, the voltage spectral density does not go to zero.
+This is the famous ``zero point motion'' or ``quantum noise''.

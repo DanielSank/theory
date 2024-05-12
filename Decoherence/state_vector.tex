@@ -32,10 +32,11 @@ We also now average over the possible initial states of the environment by the r
 which gives us
 \begin{align}
 p_e(t)
-&= g^2 \sum_{nm} \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{n}{F(t')}{m} \bbraket{m}{F(t'')}{n} e^{i \Omega (t' - t'')} \\
-&= g^2 \sum_{nm} \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{m}{F(t'')}{n} \bbraket{n}{F(t')}{m} e^{i \Omega (t' - t'')} \\
-&= g^2 \sum_m \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{m}{F(t'') F(t')}{m} e^{i \Omega (t' - t'')} \\
-&= g^2 \int_0^t \int_0^t \, dt' \, dt'' \, \langle F(t'') F(t') \rangle e^{i \Omega (t' - t'')} \, .
+  &= g^2 \sum_{nm} \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{n}{F(t')}{m} \bbraket{m}{F(t'')}{n} e^{i \Omega (t' - t'')} \nonumber \\
+  &= g^2 \sum_{nm} \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{m}{F(t'')}{n} \bbraket{n}{F(t')}{m} e^{i \Omega (t' - t'')} \nonumber \\
+  &= g^2 \sum_m \int_0^t \int_0^t \, dt' \, dt'' \, \rho_{mm} \bbraket{m}{F(t'') F(t')}{m} e^{i \Omega (t' - t'')} \nonumber \\
+  &= g^2 \int_0^t \int_0^t \, dt' \, dt'' \, \langle F(t'') F(t') \rangle e^{i \Omega (t' - t'')}
+  \, .
 \end{align}
 Changing variables to $\tau \equiv t'' - t'$ and assuming the average of $F$ is stationary gives
 \begin{equation}
@@ -55,5 +56,7 @@ p_e(t)
 \end{align}
 Similar arguments can be used to find
 \begin{equation}
-\Gamma_\downarrow = g^2 S_{FF}(\Omega) \, . \label{eq:ch.decoherence.sec.noise_from_a_quantum_environment:gamma_down}
+  \Gamma_\downarrow
+  = g^2 S_{FF}(\Omega) \, . \label{eq:ch.decoherence.sec.noise_from_a_quantum_environment:gamma_down}
 \end{equation}
+These equations relating $\Gamma_\uparrow$ and $\Gamma_\downarrow$ to the spectral density are known as ``Fermi's golden rule''.
