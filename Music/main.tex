@@ -3,6 +3,9 @@
 \date{2024 August 7}
 \title{The Mathematics and Physics of Music Theory}
 
+\input{../TeX/packages.tex}
+\input{../TeX/macros.tex}
+
 \begin{document}
 
 \maketitle
@@ -20,9 +23,40 @@ When we play recorded music, it is the vibration of the membrane of a speaker or
 In each of these cases, the sound originates from a vibrating object.
 So let's study how objects vibrate.
 
-Figure \ref{fig:guitar} illustrates a guitar, which is a musical instrument with six strings.
-The bottom part of the figure focuses on a single string, and the shape it makes when it vibrates.
-The three different colors show three of natural the shapes the string can make.
-Each of these shapes vibrates at a single frequency, i.e. a single musical note.
+Figure \ref{fig:guitar} (a) illustrates guitar, which is a musical instrument with six strings.
+Each string is flexible and can bend, but the ends are attached to the guitar and cannot move.
+When a string vibrates, it shape can be understood as a combination of simpler shapes as shown by the black, blue, and orange curves in Fig.~\ref{fig:guitar} (b).
+Notice that each curve has the same wave-like shape, but each one has a different \emph{number of waves} between the to fixed points.
+The black curve has one wave, the blue curve has two waves, and the orange curve has three waves.
+
+These three shapes have a profound and important property: if the strings is initially put into one of those shapes, it will remain in that exact same overall shape as it vibrates, moving up and down as time goes on.
+Figure \ref{fig:guitar} (c) shows the vibration of the black shape.
+Suppose the string is started in the shape labelled ``1'', and then we let it go.
+It moves downward and after some time it arrives in shape ``2''.
+Notice that shape 2 is the same as shape 1, just shrunk a bit.
+As time goes on, the string goes to shape 3, 4, and then 5 which is the same as 1 but upside down.
+As the string gets to step 5, it comes to rest, and then start moving in the other direction going to steps 6, 7, 8, 9.
+Step 9 is identical to step 1, so the process starts all over.
+
+The blue and orange shapes do the same thing.
+For example, if the string is initially in the blue shape, it vibrates as shown in Fig.~\ref{fig:guitar} (c).
+But how fast do these vibrations happen?
+It turns out that the frequency of vibration is proportional to the number of waves in the string.
+So, the frequency $f_n$ of the shape with $n$ waves is
+\begin{equation}
+  f_n = A \times n
+\end{equation}
+where $A$ is a number that depends on a few things, like how much tension is in the string and how heave the string is.
+To be clear, in our examples above, the black curve vibrates with frequency $f_1$, the blue curve vibrates with frequency $f_2$, and the orange curve vibrates with frequency $f_3$.
+Here we see the physical principle underlying all of music: when things in Nature vibrate, the frequencies of vibration come in fixed \emph{ratios}.
+For example the blue shape vibrates with twice the frequency of the black one, the orange shape vibrates with three times the frequecy of the black one, and the orange shape vibrates with $3/2$ the frequency of the blue one.
+We can see that because $f_3 = A \times 3$ and $f_2 = A \times 2$, so $f_3 / f_2 = (A \times 3) / (A \times 2) = 3/2$.
+These ratios are called ``intervals'' in music theory.
+For example, if we go from a certain note to a note with two times higher frequency, that interval is called an ``octave''.\footnote{The reason for the word ``octave'' is that in Western music there are eight frequencies in the scale between the root frequency and the one at twice higher frequency.}
+If you play a note on piano and then play another note one octave higher, the frequency of the higher note is two times larger than the frequency of the lower note.
+
+
+\quickfig{\columnwidth}{guitar.pdf}{Caption}{fig:guitar}
+
 
 \end{document}
