@@ -1,0 +1,85 @@
+\levelstay{Covariance}
+
+This section has not been carefully checked.
+
+Here we compute the covariance of two sampled points in the sampled I and/or Q channels.
+As computed previously
+\begin{equation}
+  I_n = C_\text{RF} \int_{-\infty}^\infty dt' \, \xi(t') \cos \left( \Omega t' \right) h(n \delta t - t')
+\end{equation}
+so
+\begin{align}
+  \avg{I_n I_m^*}
+  =& C_\text{RF}^2 \int_{-\infty}^\infty dt' \int_{-\infty}^\infty dt''
+    \avg{\xi(t') \xi(t'')} \cos \left( \Omega t' \right) \cos \left(\Omega t'' \right) h(n \delta t - t') h(m \delta t - t'')^*
+    \nonumber \\
+  =& \frac{C_\text{RF}^2}{2} \int_{-\infty}^\infty dt' \int_{-\infty}^\infty dt''
+    \int_{-\infty}^\infty \frac{d\omega}{2\pi} \int_{-\infty}^\infty \frac{d\omega'}{2\pi} \int_{-\infty}^\infty \frac{d\omega''}{2\pi} \nonumber \\
+    & S_{\xi}^e(\omega) \cos \left( \Omega t' \right) \cos \left(\Omega t'' \right) \tilde{h}(\omega') \tilde{h}(\omega'')^*
+    e^{i \omega (t' - t'')} e^{i \omega'(n \delta t - t')} e^{-i \omega''(m \delta t - t'')}
+    \, .
+\end{align}
+Inspect the integral over $t'$:
+\begin{align}
+  (t' \text{ integral})
+  &= \int_{-\infty}^\infty dt' \cos(\Omega t') e^{i (\omega - \omega') t'} \nonumber \\
+  &= \frac{1}{2} \int_{-\infty}^\infty dt'
+    \left( e^{i (\Omega + \omega - \omega') t'} + e^{i  (-\Omega + \omega - \omega') t'} \right) \nonumber \\
+  &= \frac{(2\pi)}{2} \left( \delta(\Omega + \omega - \omega') + \delta(-\Omega + \omega - \omega') \right)
+  \, .
+\end{align}
+Similarly
+\begin{align}
+  (t'' \text{ integral})
+  &= \frac{(2\pi)}{2} \left( \delta(\Omega - \omega + \omega'') + \delta(-\Omega - \omega + \omega'') \right)
+  \, .
+\end{align}
+When we put these expressions for the $t'$ and $t''$ integrals back into the main expression, we get four terms.
+Remembering that $h$ is a lowpass filter, $\tilde{h}(\omega)$ is only nonzero when $\omega \\ \Omega$.
+Therefore, only two of the terms survive, namely the ones with
+\begin{equation}
+  \omega' = \omega'' = \Omega + \omega
+  \quad \text{and} \quad
+  \omega' = \omega'' = - \Omega + \omega
+  \, .
+\end{equation}
+Therefore
+\begin{align}
+  \avg{I_n I_m^*}
+  =& \frac{C_\text{RF}^2}{8}
+    \int_{-\infty}^\infty \frac{d\omega}{2\pi} S_{\xi}^e(\omega) \\ \nonumber
+  & \abs{\tilde{h}(\Omega + \omega)}^2 e^{i (\Omega + \omega) (n - m) \delta t}
+  + \abs{\tilde{h}(-\Omega + \omega)}^2 e^{i (-\Omega + \omega) (n - m) \delta t}
+  \nonumber \\
+  =& \frac{C_\text{RF}^2}{4}
+    \int_{-\infty}^\infty \frac{d\omega}{2\pi} S_{\xi}^e(\omega)
+    \abs{\tilde{h}(\Omega + \omega)}^2 \cos \left((\Omega + \omega) (n - m) \delta t \right)
+    \nonumber \\
+  =& \frac{C_\text{RF}^2}{4}
+    \int_{-\infty}^\infty \frac{d\omega}{2\pi} S_{\xi}^e(\Omega + \omega)
+    \abs{\tilde{h}(\omega)}^2 \cos \left(\omega (n - m) \delta t \right)
+  \, .
+\end{align}
+In the typical case, the noise spectrum $S_\xi^e$ is flat in the relatively narrow band over which $\tilde{h}$ is nonzero, so
+\begin{align}
+  \avg{I_n I_m^*}
+  =& \frac{S_\xi^e C_\text{RF}^2}{4}
+    \int_{-\infty}^\infty \frac{d\omega}{2\pi} \abs{\tilde{h}(\omega)}^2 \cos \left(\omega (n - m) \delta t \right)
+  \, .
+\end{align}
+Suppose that $\tilde{h}(\omega) = 1$ when $\abs{\omega} < \omega_\text{max}$ and is otherwise zero.
+Then
+\begin{align}
+  \avg{I_n I_m^*}
+  =& \frac{S_\xi^e C_\text{RF}^2}{4}
+    \int_{-\omega_\text{max}}^{\omega_\text{max}} \frac{d\omega}{2\pi} \cos \left(\omega (n - m) \delta t \right)
+    \nonumber \\
+  =& \frac{S_\xi^e \omega_\text{max} C_\text{RF}^2}{2 (2\pi)}
+    \left( \frac{\sin \left( \omega_\text{max} \delta t \, (n - m) \right)}{\omega_\text{max} \delta t \, (n - m)} \right)
+  \, .
+\end{align}
+I think the $(2\pi)$ here comes from the fact that we've defined the spectral density so that
+\begin{equation}
+  \int \frac{d\omega}{2\pi} S(\omega)
+\end{equation}
+is the power over a band.
