@@ -3,17 +3,53 @@
 \newcommand{\ket}[1]{| #1 \rangle }
 \newcommand{\braket}[2]{\langle #1|#2\rangle}
 \newcommand{\bbraket}[3]{ \langle #1 | #2 | #3 \rangle }
-\newcommand{\norm}[1]{\| #1\|}
-\newcommand{\avg}[1]{\left \langle #1 \right \rangle}
+\newcommand{\boltzmann}{k_b}
+
+% Common math
+\newcommand{\norm}[1]{\left \lvert #1 \right \rvert}
+\newcommand{\abs}[1]{\left \lvert #1 \right \rvert}  % These two are redundant. Consider removing one.
+
+\newcommand{\avg}[1]{\left \langle #1 \right \rangle}  % Should get rid of this, as "average" isn't specific.
 \newcommand{\angavg}[1]{\left \langle #1 \right \rangle}
-\newcommand{\abs}[1]{\left \lvert #1 \right \rvert}
+
 \newcommand{\VS}{\textit{\textbf{V}}}
 \newcommand{\Tr}{\textrm{Tr}}
 \renewcommand{\Re}{\textrm{Re}}
 \renewcommand{\Im}{\textrm{Im}}
 \newcommand{\basis}[1]{\{\ket{#1}\}}
 
+% Quantum
+\newcommand{\nboseeinstein}{n_\text{BE}}
+\newcommand{\gammaup}{\Gamma_\uparrow}
+\newcommand{\gammadown}{\Gamma_\downarrow}
+\newcommand{\gammaupdown}{\Gamma_{\uparrow \downarrow}}
+\newcommand{\gammaemission}{\Gamma_\text{loss}}
+\newcommand{\qualityfactoremission}{Q_{d,\text{loss}}}
+
+% Qubits
 \newcommand{\omegaqubit}{\omega_{10}}
+
+% Circuits
+\newcommand{\impedance}{Z_0}
+\newcommand{\resistorsource}{R_s}
+\newcommand{\vsource}{V_s}
+\newcommand{\vsourcerms}{V_{s,\text{rms}}}
+\newcommand{\vloadrms}{V_{l,\text{rms}}}
+
+% Signals and noise
+\newcommand{\psdsingle}{S_\text{ss}}
+\newcommand{\psddouble}{S_\text{ds}}
+\newcommand{\noiseavailable}{S_{p,a}^e}
+\newcommand{\spectralengineer}{S^e}
+\newcommand{\spectralsymmetric}{S^\text{symm}}
+\newcommand{\spectralattenuator}{\spectralengineer_{\poweravailable, \text{att.}}}
+
+% Microwaves
+\newcommand{\vright}{V_+}
+\newcommand{\vleft}{V_-}
+\newcommand{\iright}{I_+}
+\newcommand{\ileft}{I_-}
+\newcommand{\poweravailable}{P_a}
 
 % Figures. Example usage:
 % \quickfig{\columnwidth}{my_image}{This is the caption}{fig:my_fig}
@@ -35,4 +71,12 @@
 \caption{#3}
 \label{#4}
 \end{figure*}
+}
+
+\DeclareRobustCommand{\quickfigcentered}[4]{
+  \begin{figure}
+  \makebox[\textwidth][c]{\includegraphics[width=#1]{#2}}
+  \caption{#3}
+  \label{#4}
+  \end{figure}
 }

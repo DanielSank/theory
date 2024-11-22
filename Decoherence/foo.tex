@@ -1,0 +1,207 @@
+\levelstay{Requirements on XY noise}
+
+This section follows closely the development in Ref.~\cite{Sank:qubits101:2012}.
+
+Superconducting qubits are typically driven by a flux or charge coupled input line, as shown in Fig.~(\ref{fig:driven_transmon}).
+The drive circuit, namely a voltage source in series with a resistor and transmission line, is precisely the same as the model of the noisy resistor we studied above.
+Our objective is to calculate the rate of transitions between the qubit's energy states, in terms of the properties of the circuit.
+
+% subsection
+\leveldown{Guessing the right answer}
+
+Professor Steven Girvin said that a good theorist never does a calculation until they already know the answer.
+Let's take that advice and guess the result before doing any calculation.
+First, it seems reasonable that only the part of the noise spectrum with frequency near the qubit's transition frequency should cause the qubit state to transition $\ket{0} \leftrightarrow \ket{1}$.
+Second, transitions driven by noise should be random, i.e. during a short time step, each individual realization of the noise should drive the qubit with random angle and displacement about a control vector in the XY plane, and on average the qubit state should relax from either of the polar states $\ket{0}$ or $\ket{1}$ along the Z-axis (i.e. inside the Bloch sphere) eventually to the fully mixed state $(1/2)\left(\ket{0} \bra{0} + \ket{1} \bra{1} \right)$.
+Third, more noise should lead to a faster transition rate.
+Fourth, stronger coupling between the drive line and the qubit should lead to a faster rate.
+
+\quickfig{0.8\columnwidth}{driven_transmon.pdf}{A transmon with drive circuit.}{fig:driven_transmon}
+
+Noise power spectral density has dimensions of energy, so to get a transition rate, we should probably just add in a factor of $\hbar$; we can then guess that the up/down transition rate for a qubit connected to a noise source with spectral density of available noise power $\spectralengineer_{\poweravailable}$ should be
+\begin{equation}
+    \gammaupdown \stackrel{?}{=} \spectralengineer_{\poweravailable} (\omegaqubit) / \hbar \nonumber
+\end{equation}
+where here $\omegaqubit$ is the $\ket{0} \leftrightarrow \ket{1}$ transition frequency and the superscript $e$ reminds us that we're talking about an ``engineer's spectral density'' with only positive frequencies (i.e. for classical noise it is twice the two-sided physicist's spectral density).
+However, this equation ignores our fourth consideration, namely the drive coupling.
+How do we include the drive coupling without changing the dimensions of the relationship?
+The coupling between the drive line and the qubit leads to a certain loss rate $\gammaemission$ (i.e. transition rate $\ket{1} \rightarrow \ket{0}$) due to ``spontaneous emission'' of energy from the qubit into the drive line, just like an excited atom in space spontaneously decaying with the emission of a photon.\footnote{The notation $\text{loss,d}$ means ``loss from the drive line''.}
+This loss rate is also described by the \emph{dimensionless} parameter $\qualityfactoremission \equiv \omegaqubit / \gammaemission$.
+Intuitively, a larger value of $\qualityfactoremission$ means that the coupling between the drive line and qubit is weaker.
+So, we include the effect of the coupling strength between the drive line and the qubit by including a factor of $\qualityfactoremission$ like so,
+\begin{equation}
+  \boxed{
+    \gammaupdown = \frac{\spectralengineer_{\poweravailable} (\omegaqubit)}{\hbar \, \qualityfactoremission}
+    \label{eq:gamma_up_down_noise}
+  }
+  \, .
+\end{equation}
+This formula, which we found via scaling arguments and dimensional analysis, is actually exactly correct, even in the quantum limit, so long as $\spectralengineer_{\poweravailable}$ is given proper interpretation as we now discuss.
+
+\levelstay{Formal calculation}
+
+To prove Eq.~(\ref{eq:gamma_up_down_noise}) formally, we go back to Fig.~\ref{fig:driven_transmon} where we have a resistive voltage source connected to the qubit through a capacitor $C_d$.
+The Hamiltonian is
+\begin{equation}
+  H_{SE} / \hbar = \underbrace{\left( \frac{C_d}{C} \right) \frac{Q_{10}}{\hbar}}_g \underbrace{V(t)}_{F(t)} \sigma_y
+\end{equation}
+where $Q_{10} \equiv \bbraket{1}{\hat Q}{0}$.
+The voltage $V$ here is the voltage at the input coupling capacitor which is related to the noise source voltage as $V = \vright \left( 1 + \Gamma \right)$.
+Therefore,
+\begin{equation}
+    S_V(\omega) = S_{\vright} \abs{1 + \Gamma}^2 = S_{V_s}(\omega) \frac{\abs{1 + \Gamma}^2}{4}
+    \, .
+\end{equation}
+In the typical case where $C_d$ is weak, $\Gamma \approx 1$ and $S_V \approx S_{\vsource}$.
+Intuitively, this is just saying that when $C_d$ is weak, the noise source is connected to an approximately open circuit so the load voltage is the same as the voltage across the ideal noise source in the model of Fig.~\ref{fig:unbalanced_resistor}.
+
+The spectral density of voltage fluctuations in the voltage noise source is\footnote{This spectral density can be found via the Caldeira-Leggett model. See for example Ref.~\cite{Vool:2017:quantum_electromagnetics}.}\footnote{A hint that something suble is going on with quantum noise is the $+1$ in Eq.~(\ref{eq:voltage_spectral_density_in_terms_of_n}). This $+1$ means that there is nonzero voltage noise even at absolute zero temperature. How can we have nonzero voltage fluctuations at zero temperature where there ought to be no energy? Some people will say that there's ``vacuum'' energy or ``zero point energy'', but this is very misleading. The Bose-Einstein occupation factor goes to zero at zero temperature so there is no energy in any usual sense. The resolution of this paradox is that detecting voltage and detecting energy are fundamentally different and the usual relationship from classical physics that $\text{P} = V^2/R$ is just not quite true. The next few paragraphs should clarify this subtlety.}
+\begin{align}
+  S_{V_s}(\omega)
+  &= 2 R_s \hbar \omega \frac{1}{1 - \exp(-\beta \hbar \omega)} \\
+  &= R_s \hbar \omega \left( \coth \left(\frac{\beta \hbar \omega}{2} \right) + 1 \right) \\
+  &= 2 R_s \hbar \omega \left( \nboseeinstein(\omega, T) + 1 \right)
+  \, .
+  \label{eq:voltage_spectral_density_in_terms_of_n}
+\end{align}
+Writing out $g^2 S_V$ 
+\begin{equation}
+  g^2 S_V(\omega) = \underbrace{\left( \frac{C_d}{C} \right)^2 \frac{\abs{Q_{01}}^2}{\hbar} 2 R_s \left( \frac{\abs{1 + \Gamma}^2}{4}\right)}_{A^2 = 1 / \qualityfactoremission} \omega \left( \nboseeinstein(\omega, T) + 1 \right) 
+\end{equation}
+we see that our system has the form of Eq.~(\ref{eq:noise_standard_form})
+so we can use Eq.~(\ref{eq:fluctuation_dissipation_quality_factor}).
+Doing so, we have
+\begin{equation}
+    \gammaupdown
+    = \frac{\omegaqubit}{\qualityfactoremission} ~ \nboseeinstein(\omegaqubit, T)
+    = \frac{\hbar \omegaqubit~ \nboseeinstein(\omegaqubit, T)}{\hbar \qualityfactoremission}
+    = \frac{\spectralengineer_{\poweravailable}}{\hbar \qualityfactoremission}
+\end{equation}
+in agreement with Eq.~(\ref{eq:gamma_up_down_noise}) as long as the engineer's spectral density of available noise power can be sensibly said to be equal to $\hbar \omegaqubit \nboseeinstein$ in the quantum case.
+But this makes perfect sense, as $\hbar \omegaqubit \nboseeinstein$ should be precisely the amount of thermal energy available in the environment.
+Notice how the details of voltage division between the source and load (i.e. the qubit) are neatly packaged into $\qualityfactoremission$.
+
+\levelstay{Discussion}
+
+Equation (\ref{eq:gamma_up_down_noise}) is the first main result of this section and is worth committing to memory.
+Let us make some comments about it with our discussion about available power and the model of a noisy resistor in mind.
+First, the equation makes no reference to the drive line impedance or qubit circuit parameters.
+Of course, the drive line impedance does affect $\qualityfactoremission$ as\footnote{This equation is valid only in the limit $\qualityfactoremission \gg 1$.}
+\begin{equation}
+  \qualityfactoremission = \left( \frac{C}{C_d} \right)^2 \frac{Z_\text{qubit}}{R_s}
+\end{equation}
+where $Z_\text{qubit}$ is the characteristic impedance of the qubit resonance, and this formula for $\qualityfactoremission$ is important when choosing $C_d$, but for the sake of system design we work directly with $\qualityfactoremission$ and can abstract over the detailed parameters of the drive line and qubit.
+Second, because we worked with available power, there are no factors of 2 or any need to think about voltage division.
+It is true that, in a typical system where the drive line coupling to the qubit is very weak such that $\qualityfactoremission \gg 1$, most of the incoming control pulse voltage is reflected, and so the voltage at the drive capacitor is twice larger than the travelling wave voltage, but this is already taken into account by working with $\spectralengineer_{\poweravailable}$ and $\qualityfactoremission$.
+Third and finally, as mentioned above $\spectralengineer_{\poweravailable}$ is independent of the load impedance as long as the source impedance is matched.
+In typical systems with absorptive filters or attenuators in the line, this assumption is pretty good even if there's an impedance mismatch upstream of the attenuator.
+So, for most practical systems, we can take $\spectralengineer_{\poweravailable} = \hbar \omegaqubit \, \nboseeinstein$, or in the classical limit $\boltzmann T$, and again this is true regardless of the strength of the coupling between the qubit and drive line and regardless of the impedance of the transmission line.
+
+Now, if you see a ripple in the coupling of your control pulses to the qubit as a function of frequency, then your source is \emph{not} matched.
+However, even in this case we just have a frequency dependence in $\qualityfactoremission$ and all of the results we've discussed are still correct.
+
+\levelstay{The voltage spectral density}
+
+Let's take a look at how our notion of $\spectralengineer_{\poweravailable}$ relates to the voltage spectral density itself.
+The quantum voltage spectral density is defined for both positive and negative frequencies, but our classical and quantum notions of $\spectralengineer_{\poweravailable}$ are defined only for positive frequencies.
+A connection between the two-sided quantum spectral density and the available power can be made through the symmetrized quantum spectral density\footnote{A useful relation here is $\nboseeinstein(-\omega) = -\nboseeinstein(\omega) - 1$.}
+\begin{align}
+    \spectralsymmetric_{V_s}(\omega)
+    & \equiv S_V(\omega) + S_V(-\omega) \nonumber \\
+    &= 4 R_s \hbar \omega \, \nboseeinstein(\omega, T) + 2 R \hbar \omega \nonumber \\
+    &= 4 R_s \spectralengineer_{\poweravailable} + 2 R_s \hbar \omega \label{eq:symmetric_voltage_psd}
+    \, .
+\end{align}
+Now remember that here we're dealing with the spectral density of voltage across the ideal voltage source in our model of the noisy resistor from Fig.~\ref{fig:unbalanced_resistor}, and recall Eq.~(\ref{eq:power_available_versus_source_voltage}) which said $\spectralengineer_{\poweravailable} = S_{V_s} / 4 R_s$.
+Attempting to make the left hand side look like the available power, divide Eq.~(\ref{eq:symmetric_voltage_psd}) through by $4 R_s$ and rearrange to find
+\begin{equation}
+  \spectralengineer_{\poweravailable} = \frac{\spectralsymmetric_{V_s}(\omega)}{4 R_s} - \frac{\hbar \omega}{2}
+  \, .
+\end{equation}
+As we see, the symmetrized quantum voltage spectral density almost functions like the classical voltage spectral density in the sense that dividing it by four times the source resistance almost gives the available power (remember Eq.~(\ref{eq:power_available_versus_source_voltage})).
+However, the symmetrized quantum spectral density overcounts the energy by the famous $\hbar \omega / 2$.
+This is telling us that not all quantum fluctuations correspond to energy.
+It's ironic that this $\hbar \omega / 2$ term is conventionally called the ``vacuum energy'' or ``zero point energy''.
+
+\levelstay{Control pulse length}
+
+Based on Eq.~(\ref{eq:gamma_up_down_noise}) it seems we can choose $\qualityfactoremission$ to be as large as we want so that, for any $\spectralengineer_{\poweravailable}$, the rate $\gammaupdown$ is small and doesn't bound the qubit lifetime.
+However, making $\qualityfactoremission$ large means decoupling the qubit from the drive line, which we intuit should increase the required duration of control pulses.
+This intuition is born out by the formula for the duration $\tau_\pi$ of a pi rotation pulse with constant pulse envelope magnitude \cite{Sank:qubits101:2012}
+\begin{equation}
+  \boxed{
+    \tau_\pi = \frac{\pi}{2} \sqrt{\frac{\qualityfactoremission \hbar}{\poweravailable}} \label{eq:pi_pulse_duration}
+  }
+\end{equation}
+where here $\poweravailable$ is the available power of the incoming signal wave.
+Note that everything scales as expected: larger $\qualityfactoremission$ leads to longer pulse length, and more signal power leads to shorter pulse length.
+The square root comes in because pi rotations are coherent, i.e. the rotation rate is proportional to voltage, while both $\qualityfactoremission$ and $\poweravailable$ are proportional to power.
+Equation (\ref{eq:pi_pulse_duration}) is the second main result of this section and should be committed to memory along with Eq.~(\ref{eq:gamma_up_down_noise}).
+Putting equations (\ref{eq:gamma_up_down_noise}) and (\ref{eq:pi_pulse_duration}) together, we see two somewhat obvious guidelines for designing a qubit drive line: The noise spectral density $\spectralengineer_{\poweravailable}$ should be small and the available drive power $\poweravailable$ should be large.
+Additionally, it seems like increasing $\qualityfactoremission$ is an overall win because $\gammaupdown$ decreases linearly while the pi pulse duration increases only as the square root.
+This is pretty good intuition and indeed in practical designs we couple weakly (large $\qualityfactoremission$) and drive hard (large $\poweravailable$).
+However, physics is ultimately about numbers, so let's take a look at the numbers in a practical qubit system.
+
+\levelstay{Practical numbers}
+
+Our ideology for designing the drive line is goes as follows.
+First, we pick $\qualityfactoremission$ large enough such that $1 / \gammaemission$ is much larger than the qubit lifetime we need.
+In other words, we decouple the drive line sufficiently such that loss into the drive line is not a major contributor to the qubit lifetime.
+Then we determine what maximum value of noise power spectral density $\spectralengineer_{\poweravailable}$ is allowed such that $\gammaupdown = \gammaemission$, with the idea being that there's no point in making $\gammaupdown$ much smaller than $\gammaemission$.
+Wit this ideology in mind, we ask at what value of noise spectral density do $\gammaupdown$ and $\gammaemission$ become equal?
+Using Eq.~(\ref{eq:gamma_up_down_noise}) and the definition $\qualityfactoremission \equiv \omegaqubit / \gammaemission$ we have
+\begin{align}
+    \gammaupdown
+    &= \gammaemission \frac{\spectralengineer_{\poweravailable}}{\hbar \omegaqubit} \nonumber
+\end{align}
+so $\gammaupdown$ and $\gammaemission$ are equal when
+\begin{equation}
+    \spectralengineer_{\poweravailable} = \hbar \omegaqubit \, . \label{eq:xy_noise_one_photon}
+\end{equation}
+In other words, the rates are equal when the noise is ``one qubit photon'', which is easy to remember.
+
+Now we re-express Eq.~(\ref{eq:gamma_up_down_noise}) in terms of practical numbers.
+Choosing to express $\gammaupdown$ in $1/\text{us}$, expressing the noise power in terms of a temperature $T$ via $\spectralengineer_{\poweravailable} = \boltzmann T_\text{noise}$, and using the fact that $\boltzmann / \hbar = (2 \pi) / (48\,\text{mK} \, \text{ns})$ we find
+\begin{equation}
+  T_1\text{ limit from noise}[\mu \text{s}] = \frac{1}{\gammaupdown[1 / \mu \text{s}]}
+  = \left( 7.6 \times 10^{-6} \right) \, \frac{\qualityfactoremission}{T_\text{noise}[\text{K}]} \, .
+\end{equation}
+In English, the lifetime due to noise, in microseconds, is $7.6 \times 10^{-6}$ times the drive line coupling quality factor divided by the noise temperature in Kelvin.
+Another way to write the same thing is
+\begin{equation}
+  \boxed{
+    \frac{T_1 \text{ limit from noise}[\mu \text{s}]}{T_1 \text{ limit from drive line loss}[\mu \text{s}]} = 0.0478 \times \frac{(\omegaqubit / (2\pi))[\text{GHz]}}{T_\text{noise}[\text{K}]} \label{eq:T1_ratio_rule}
+   }
+   \, .
+\end{equation}
+This is just a re-expression of Eq.~(\ref{eq:xy_noise_one_photon}) where we've written $\hbar / \boltzmann$ in practical units.
+
+Suppose we'd like our drive line loss and noise-induced transition lifetimes to each be $2 \, \text{ms}$ so that their combined upper bound on the qubit lifetime is $1 \, \text{ms}$.
+Then the left hand side of Eq.~(\ref{eq:T1_ratio_rule}) is equal to one.
+At $\omegaqubit / (2\pi) = 5 \, \text{GHz}$ we would then have
+\begin{displaymath}
+  T_\text{noise}[K] = 0.0478 \times 5 = 0.239
+\end{displaymath}
+i.e. we're allowed to hit the qubit with $239\,\text{mK}$ equivalent noise temperature.
+
+It may seem weird that the drive coupling $\qualityfactoremission$ doesn't show up here; shouldn't the drive coupling figure into how much noise we're allowed to have?
+But remember, we're in the case where $\gammaupdown = \gammaemission$, and $\qualityfactoremission$ affects both of those quantities in the same way, so the drive coupling drops out.
+This is why Eq.~(\ref{eq:xy_noise_one_photon}) is useful to remember: it gives one practical value that we can use as a guide for how much noise is allowed to hit the qubit. 
+
+How much power do we need for our pi pulses?
+Re-expressing Eq.~(\ref{eq:pi_pulse_duration}) in terms of practical units, we have
+\begin{equation}
+  \tau_\pi[\text{ns}] = 5.1\times 10^{-7} \sqrt{\qualityfactoremission} \, 10^{-P[\text{dBm}]/20}
+\end{equation}
+or equivalently
+\begin{equation}
+  \boxed{
+    \tau_\pi[\text{ns}] = 4 \times 10^{-5} \sqrt{(\omegaqubit/(2\pi))[\text{GHz}] \, T_{1, \text{loss}}[\text{us}]} \, 10^{-P[\text{dBm}]/20}
+  }
+  \, .
+\end{equation}
+We wanted $T_{1, \text{loss}} = 2\,\text{ms}$ and $\omegaqubit/(2\pi) = 5\,\text{GHz}$, so if we want $\tau_\pi = 20 \, \text{ns}$ then we find $P = -74 \, \text{dBm}$.
+This is another result worth remembering: for a typical superconducting qubit system with pi pulse duration on the order of $20\,\text{ns}$ and the drive line coupled weakly such that the $T_1$ limit imposed by the drive line is $2\,\text{ms}$, the available power in the control pulses at the point that they hit the qubit input must be approximately $-74\,\text{dBm}$.  
+Remember that this result is for a pulse with constant envelope.
+With a shaped pulse the pulse magnitude would need to be increased by a factor of order 1, and so the power would increase by a few dB.
+
