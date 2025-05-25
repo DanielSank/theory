@@ -1,7 +1,5 @@
 \levelstay{Signals and noise in a quantum system}
 
-This section follows closely the development in Ref.~\cite{Sank:qubits101:2012}.
-
 Superconducting qubits are typically driven by a flux or charge coupled input line, as shown in Fig.~(\ref{fig:driven_transmon}).
 The drive circuit, namely a voltage source in series with a resistor and transmission line, is precisely the same as the model of the noisy resistor we studied above.
 Our objective is to calculate the rate of transitions between the qubit's energy states, in terms of the properties of the circuit.
@@ -55,7 +53,7 @@ Therefore,
 In the typical case where $C_d$ is weak, $\Gamma \approx 1$ and $S_V \approx S_{\vsource}$.
 Intuitively, this is just saying that when $C_d$ is weak, the noise source is connected to an approximately open circuit so the load voltage is the same as the voltage across the ideal noise source in the model of Fig.~\ref{fig:unbalanced_resistor}.
 
-The spectral density of voltage fluctuations in the voltage noise source is\footnote{This spectral density can be found via the Caldeira-Leggett model. See for example Ref.~\cite{Vool:2017:quantum_electromagnetics}.}\footnote{A hint that something suble is going on with quantum noise is the $+1$ in Eq.~(\ref{eq:voltage_spectral_density_in_terms_of_n}). This $+1$ means that there is nonzero voltage noise even at absolute zero temperature. How can we have nonzero voltage fluctuations at zero temperature where there ought to be no energy? Some people will say that there's ``vacuum'' energy or ``zero point energy'', but this is very misleading. The Bose-Einstein occupation factor goes to zero at zero temperature so there is no energy in any usual sense. The resolution of this paradox is that detecting voltage and detecting energy are fundamentally different and the usual relationship from classical physics that $\text{P} = V^2/R$ is just not quite true. The next few paragraphs should clarify this subtlety.}
+The spectral density of voltage fluctuations in the voltage noise source is\footnote{This spectral density can be found via the Caldeira-Leggett model. See for example Ref.~\cite{Vool:quantum_electromagnetics:2017}.}\footnote{A hint that something suble is going on with quantum noise is the $+1$ in Eq.~(\ref{eq:voltage_spectral_density_in_terms_of_n}). This $+1$ means that there is nonzero voltage noise even at absolute zero temperature. How can we have nonzero voltage fluctuations at zero temperature where there ought to be no energy? Some people will say that there's ``vacuum'' energy or ``zero point energy'', but this is very misleading. The Bose-Einstein occupation factor goes to zero at zero temperature so there is no energy in any usual sense. The resolution of this paradox is that detecting voltage and detecting energy are fundamentally different and the usual relationship from classical physics that $\text{P} = V^2/R$ is just not quite true. The next few paragraphs should clarify this subtlety.}
 \begin{align}
   S_{V_s}(\omega)
   &= 2 R_s \hbar \omega \frac{1}{1 - \exp(-\beta \hbar \omega)} \\
