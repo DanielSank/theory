@@ -121,52 +121,5 @@ To get this right use the following \textbf{rules for computing DFTs}
 Then, if $q$ is outside the baseband, at the end of the calculation find the corresponding $p$ inside the baseband and make the replacement
 \begin{equation}
   \delta_{k,q} \rightarrow \delta_{k,p} \quad q=p+mN \, . \label{eq:aliasReplacement}
+  \, .
 \end{equation}
-
-
-\section{Appendix - Sums for Fourier Series power analysis}
-
-The sum we want to compute is\begin{eqnarray*}
-S & = & \frac{1}{4}\sum_{k}\left[\textrm{sinc}(\xi-k)+\textrm{sinc}(\xi+k)\right.\\
- & + & \left.2\cos(2\pi\xi)\textrm{sinc}(\xi-k)\textrm{sinc}(\xi+k)\right]\end{eqnarray*}
-We write this as\[
-S=\frac{1}{4}\left[S_{1}+S_{1}+2\cos(2\pi\xi)S_{2}\right]\]
-The first sum we need to do is\[
-S_{1}=\sum_{k=-\infty}^{\infty}\textrm{sinc}(\xi-k)^{2}\]
-This is easy if we use the Poisson summation formula which states
-that\[
-\sum_{n}f(n-\xi)=\sum_{m}\tilde{f}(m)e^{-i2\pi\xi m}\]
-Using this formula we get\begin{eqnarray*}
-S_{1} & = & \sum_{m}\widetilde{\textrm{sinc}^{2}\left(m\right)}e^{-i2\pi\xi m}\\
-S_{1} & = & \sum_{m}\textrm{tri}(m)e^{-i2\pi\xi m}\end{eqnarray*}
-where $\textrm{tri}(x)$ is a triangle function; ie, $\textrm{tri}(x)=x+1$
-for $-1<x<0$ and $\textrm{tri}(x)=-x+1$ for $0<x<1$, and $\textrm{tri}(x)=0$
-elsewhere. Since $\textrm{tri}(m)$ is only nonzero for $m=0$ the
-sum is simply\[
-S_{1}=1\]
-The second sum we need to do is\[
-S_{2}=\sum_{k=-\infty}^{\infty}\textrm{sinc}(\xi-k)\textrm{sinc}(\xi+k)\]
-For now we just write $f$ instead of $\textrm{sinc}$ to tidy up
-notation. Since $\textrm{sinc}$ is an even function we can stick
-a minus sign in the first function like so,\[
-S_{2}=\sum_{k}f(k-\xi)f(k+\xi)\]
-From here we just crank,\begin{eqnarray*}
-S_{2} & = & \sum_{k}\int_{q}\int_{q'}\tilde{f}(q)e^{i2\pi q(k-\xi)}\tilde{f}(q')e^{i2\pi q'(k+\xi)}\\
-S_{2} & = & \int_{q}\int_{q'}\tilde{f}(q)\tilde{f}(q')e^{-i2\pi\xi(q-q')}\sum_{k}e^{i2\pi k(q+q')}\\
-S_{2} & = & \int_{q}\int_{q'}\tilde{f}(q)\tilde{f}(q')e^{-i2\pi\xi(q-q')}\sum_{n}\delta(n-q-q')\\
-S_{2} & = & \sum_{n}\int_{q}\tilde{f}(q)\tilde{f}(n-q)e^{-i2\pi\xi(2q-n)}\\
-S_{2} & = & \sum_{n}e^{i2\pi\xi n}\int_{q}\tilde{f}(q)\tilde{f}(n-q)e^{i2\pi q(-2\xi)}\end{eqnarray*}
-Now we have to pay attention to what $\tilde{f}$ actually is. It
-turns out that the Fourier transform of the sinc function is simply
-a constant function from -1/2 to +1/2 with unit amplitude. This means
-that $\tilde{f}(q)\tilde{f}(n-q)$ is only nonzero for $n=0$, in
-which case it is equal to $\tilde{f}(q)$. Therefore we get\begin{eqnarray*}
-S_{2} & = & \int_{q}\tilde{f}(q)e^{i2\pi q(-2\xi)}\\
-S_{2} & = & f(-2\xi)\\
-S_{2} & = & \textrm{sinc}(-2\xi)\\
-S_{2} & = & \textrm{sinc}(2\xi)\end{eqnarray*}
-Plugging into the original expression gives\begin{eqnarray*}
-S & = & \frac{1}{4}\left[1+1+2\cos(2\pi\xi)\textrm{sinc}(2\xi)\right]\\
-S & = & \frac{1}{2}\left[1+\cos(2\pi\xi)\textrm{sinc}(2\xi)\right]\\
-S & = & \frac{1}{2}\left[1+\textrm{sinc}(4\xi)\right]\end{eqnarray*}
-as stated in the main text.
