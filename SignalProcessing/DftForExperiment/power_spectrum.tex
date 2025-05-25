@@ -1,0 +1,29 @@
+\levelstay{Power Spectrum}
+
+We now finally come to the computation of physical power spectra. The question is, if we sample a real time signal and then compute the DFT, how do we turn this into a physical power spectrum? To find the answer we just compute the DFT of a real sinusoid and compare it to the known power of a sinusoid. Consider the signal $x(t) = A \cos (2 \pi f t)$ where $f$ is in the baseband and corresponds to the Fourier frequency $q$. Such a signal has total power $P=A^2/2$. If the signal has a finite linewidth $B$ then the power spectral density would be $S=A^2/2B$. This is the known reference against which we compare the result of the DFT. We already computed the DFT of a cosine with the result
+\begin{displaymath}
+X(k) = \frac{AN}{2} \left[ \delta_{k,q} + \delta_{k,N-q} \right]
+\end{displaymath}
+Since the power spectrum doesn't depend on phase, and should be proportional to $A^2$ it's clear that we should take the modulus square,
+\begin{displaymath}
+|X(k)|^2 = \frac{A^2N^2}{4} \left[ \delta_{k,q} + \delta_{k,N-q} \right]
+\end{displaymath}
+Throw out the aliased component since it doesn't have any extra information. Then, in order to get rid of the $N$ dependence and to get the correct numerical factor, multiply by $2/N^2$,
+\begin{displaymath}
+\frac{2}{N^2}|X(k)|^2 = \frac{A^2}{2} \delta_{k,q}
+\end{displaymath}
+A spectral density $S$ should have the property that $S$ multiplied by a span in frequency space gives the correct total power. The real frequency span between each point in DFT frequency space is $1/T$, so the total power ought to be $P=\frac{1}{T}\sum_k S(k)$. Applying this formula to our expression so far yields
+\begin{displaymath}
+\frac{1}{T}\frac{2}{N^2}\sum_k |X(k)|^2 = \frac{1}{T}\frac{A^2}{2}
+\end{displaymath}
+This differs from the correct power by a factor of $1/T$. Therefore, the correct power spectral density is
+\begin{equation}
+S(f) = \frac{2T}{N^2}|X(k=fT)|^2 \label{eq:powerSpectralDensity}
+\end{equation}
+Equation (\ref{eq:powerSpectralDensity}) is our most important result.
+It tells you how to convert from a DFT computed from a measured time series, to a physical power spectral density.
+Note that the units are exactly what they should be, $A^2/\textrm{Hz}$.
+This formula is only exactly correct if you can be sure that there is no aliasing contaminating the baseband.
+If this is not the case, then the spectral density you compute at a given frequency will be different from what was actually at that frequency.
+If the measured signals are coherent then the measured spectral density may be too low or too high.
+If the signal is noise, then the computed spectral density will always be greater than what actually existed in the measured signal.

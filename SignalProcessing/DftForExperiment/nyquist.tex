@@ -1,0 +1,55 @@
+\levelstay{The Nyquist frequency}
+
+Next we consider the maximum measureable frequency.
+The maximum value of $k$ is $N-1\approx N$. This suggests that the maximum measured frequency in index units is
+\begin{displaymath}
+  f_{max}=\frac{k_{max}}{N}=\frac{N}{N}=1
+\end{displaymath}
+ie, the maximum measured frequency corresponds to an exponential that goes through 1 cycle per index. In physical units this frequency is given by
+\begin{displaymath}
+  f_{max}=\frac{\text{1 cycle}}{\text{index}}\rightarrow\frac{\text{1 cycle}}{\Delta t}=f_{s}
+\end{displaymath}
+which says that the maximum measured frequency is just the sampling frequency.
+This is wrong.
+There are several different ways of understanding why, but it is essentially due to the fact that all of the signals we measure in the lab are made up of real numbers.
+Real sines and cosines have $\emph{negative}$ frequency components which are outside the baseband, and this leads to aliasing.
+
+It turns out that the maximum measurable frequency is actually $f_s/2$, or $N/2T$ in index units.
+This frequency, located halfway up the baseband, is called the \textbf{Nyquist frequency}.
+To understand this we compute the DFT of a cosine signal. Take $x(n)=A\cos (2\pi nq/N+\phi)$ with $q$ in the baseband and compute the DFT coefficients,
+\begin{eqnarray*}
+  x(n) & = & A\cos\left(2\pi nq/N+\phi \right)\\
+  x(n) & = & \frac{A}{2}\left[e^{i\phi}e^{i2\pi nq/N}+e^{-i\phi}e^{-i2\pi nq/N}\right]\\
+  \text{so}\qquad X(k) & = & \frac{AN}{2}\left[e^{i\phi}\delta_{k,q}+e^{-i\phi}\delta_{k,-q}\right]\\
+  X(k) & = & \frac{AN}{2}\left[e^{i\phi}\delta_{k,q}+e^{-i\phi}\delta_{k,N-q}\right]
+  \, .
+\end{eqnarray*}
+
+We have weight at $q$ and, because of the negative frequency, also at $N-q$. The negative frequency component of the sinusoid has been aliased! Now compare this to the DFT of a sinusoid at $N-q$, $y(n)=\cos(2\pi n[N-q]/N)$,
+\begin{eqnarray*}
+  y(n) & = & A\cos\left(2\pi n[N-q]/N+\phi\right)\\
+  y(n) & = & \frac{A}{2}\left[e^{i\phi}e^{-i2\pi nq/N}+e^{-i\phi}e^{i2\pi nq/N}\right]\\
+  \text{so}\qquad Y(k) & = & \frac{AN}{2}\left[e^{i\phi}\delta_{k,q}+e^{-i\phi}\delta_{k,-q}\right]\\
+  Y(k) & = & \frac{AN}{2}\left[e^{i\phi}\delta_{k,q}+e^{-i\phi}\delta_{k,N-q}\right]
+  \, .
+\end{eqnarray*}
+Because of the aliased terms, $X(k)$ and $Y(k)$ are identical, even though they come from cosines at different frequencies which are \emph{both in the baseband}.
+Each cosine shows up at the ``correct'' frequency and also at an aliased frequency which is the reflection of $q$ about the Nyquist frequency.
+The upshot is that when you're dealing with real time signals, their complex form always has negative frequency components which are aliased by the DFT.
+Therefore, the lower and upper halves of the baseband are dependent on one another.
+The exact dependence is a complex conjugate symmetry. You can easily prove for any \textbf{real time series} $x(n)$,
+\begin{equation}
+  X(k)^* = X(N-k) \label{eq:conjugateSymmetry}
+  \, .
+\end{equation}
+Therefore, only half of the baseband contains unique information, as manifest in our examples $x(n)$ and $y(n)$.
+
+The situation is now that only the first half of the baseband is uniquely determined. Therefore, in order to ensure that a DFT is a faithful representation of the measured time series, one must be sure that the measured signal has frequency components no higher than the Nyquist frequency.
+If this condition is satisfied, then the DFT coefficients found in the lower half of the baseband exactly match those present in the original signal \footnote{Actually, in this case it's possible to reconstruct the \emph{continuous} time signal just from the DFT coefficients.
+This fact is sometimes referred to as the Shannon Sampling Theorem.
+A nice proof is given in the optics book by J. Goodman.}.
+Of course if you know that the signal's frequency components are contained entirely in just the upper half of the baseband, then the coefficients in the lower half are still a faithful representation if you take into account the reflection and complex conjugate symmetry.
+
+In practice, signal processing equipment usually uses a lowpass filter on the input to kill off everything above the Nyquist frequency.
+This is called an \textbf{anti-aliasing filter}.
+In that case, the lower half of the baseband can be read off without worrying about aliasing.

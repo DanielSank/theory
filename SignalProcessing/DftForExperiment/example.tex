@@ -1,0 +1,22 @@
+\levelstay{Example}
+
+We now give an example to tie everything together. Consider a signal
+\begin{displaymath}
+  s(t) = \exp (i 2\pi f t)
+\end{displaymath}
+for $f=120\textrm{Hz}$, and imagine we measure it for one second with one hundred sample points,
+\begin{displaymath}
+  N=100 \qquad T=1\mathrm{s}
+  \, .
+\end{displaymath}
+The sampled function is
+\begin{displaymath}
+  s(n) = \exp(i2\pi fnT/N) = \exp(i2\pi 120n/N)
+  \, .
+\end{displaymath}
+The DFT is simply $X(k)=\delta_{k,120}$, but since the baseband only runs from 0 to 99, the result is aliased and we pick up the signal at $k=20$, or in frequency units $f=20/T=20\mathrm{Hz}$.
+Note that if we somehow knew that the signal only had frequency components in the range say from 100Hz to 150Hz, then we would be able to interpret the DFT peak at 20Hz as the alias of the real signal at 120Hz.
+That's how aliasing works: if you have knowledge about where your signal might be, then you can figure out where the DFT weight is coming from, but otherwise you only know that there's signal at one of the equivalent frequencies from the various Brillouin zones.
+Signal analysis equipment generally deals with this problem by filtering the input so that it's guaranteed that the incoming signal resides only in the baseband.
+Of course, in real life you don't have complex signals (unless you're using an IQ mixer!) so the situation is a little different.
+This explained in the next section.

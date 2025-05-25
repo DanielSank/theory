@@ -1,0 +1,25 @@
+\levelstay{Physical Frequencies}
+
+Our mathematical time series was parametrized by only the number of points $N$. Physically, however, we have another parameter associated to the time series, the total time spanned by the experiment $T$, or equivalently either the time step between points $\Delta t$, or its inverse, the sampling rate $f_{\textrm{s}}$. These quantities are related by
+\begin{displaymath}
+  T = N\Delta t = \frac{N}{f_{\textrm{s}}}
+\end{displaymath}
+so that only $N$ and one of the three equivalent time scales are independent.
+
+A data point at time $t$ is given by $x(n=t/\Delta t)$. We use this formula to go between the purely mathematical formulas involving $N$ to those involving physical quantities. Using these relations we can re-express an exponential at Fourier frequency $k$ as
+\begin{displaymath}
+  \exp \left(i2\pi\frac{nk}{N}\right)
+  = \exp\left(i 2 \pi \frac{tk}{\Delta t N} \right)
+  = \exp \left( i 2\pi t\frac{k}{T} \right)
+  \, .
+\end{displaymath}
+It is now clear that the physical Fourier frequencies are $k/T$, and since $k$ goes in integer steps the frequency resolution is $1/T$.
+This means that the frequency resolution of our transform is determined by the total measurement time.
+Longer measurement time gives better frequency resolution.
+This also means that the lowest frequency we can measure above DC is $1/T$.
+
+To summarize, the physical frequencies that result in a DFT performed on a time series with $N$ points taken over a total time $T$ are
+\begin{displaymath}
+  \frac{1}{T}\left[0,1,\ldots,N-1\right]\quad\textrm{or}\quad\frac{f_{s}}{N}\left[0,1,\ldots,N-1\right]
+  \, .
+\end{displaymath}
