@@ -55,11 +55,11 @@ The bands and equality of $X(\nu)$ within each band are illustrated in Figure \r
 % {fig:bands}
 
 \begin{figure*}[t]
-\begin{centering}
-\includegraphics[width=\textwidth]{bands.pdf}
-\par\end{centering}
-\caption{The DTFT produces bands of with $1/\Delta t$. For \emph{any} $x_n$, the values of $X(\nu)$ within each band are identical.}
-\label{fig:bands}
+  \begin{centering}
+    \includegraphics[width=\textwidth]{bands.pdf}
+  \par\end{centering}
+  \caption{The DTFT produces bands of with $1/\Delta t$. For \emph{any} $x_n$, the values of $X(\nu)$ within each band are identical.}
+  \label{fig:bands}
 \end{figure*}
 
 Second, consider a signal $x(t) = \exp(i 2 \pi f t)$ which is sampled to $x_n = \exp( i 2 \pi f n \Delta t)$.
@@ -132,7 +132,7 @@ Therefore, real sinusoids at frequencies $\mu + p/\Delta t$ and $(p+1)/\Delta t 
 
 \begin{figure*}[h]
   \begin{centering}
-    \includegraphics[width=1.75\columnwidth]{aliasing_real.pdf}
+    \includegraphics[width=\widewidth\columnwidth]{aliasing_real.pdf}
   \par\end{centering}
   \caption{Aliasing of a real valued sinusoid.
 Solid vertical arrows indicate the analog components while dotted vertical arrows represent their images.
@@ -155,7 +155,7 @@ In this case there is no way to recover the original analog spectrum from the DT
 
 \begin{figure*}[h]
   \begin{centering}
-    \includegraphics[width=1.75\columnwidth]{aliasing_real_spectra.pdf}
+    \includegraphics[width=\widewidth\columnwidth]{aliasing_real_spectra.pdf}
   \par\end{centering}
   \caption{Aliasing of real valued signals.
 Solid curves indicate the original analog spectra, while the dotted curves indicate the images produced by the DTFT.
