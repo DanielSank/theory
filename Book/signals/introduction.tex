@@ -1,0 +1,55 @@
+A central concept in signal processing is that a signal can be expressed as a linear superposition of sinusoids.\footnote{More generally, functions can be thought of as vectors and expressed as linear superpositions of basis vectors, where the basis is chosen to suit the problem at hand. In problems with translation invariance, sinusoids are convenient because they are eigenvectors of translation. For example, defining $E: \reals \rightarrow \complexes$ by the equation $E(t) = \exp(i \omega t)$, we have $E(t + \delta t) = \exp(i \omega \delta t) E(t)$.}
+The usual Fourier transform expresses a function $f: \reals \rightarrow \complexes$ as a continuous superposition i.e. integral
+\begin{equation}
+  f(t) = \int \frac{d \omega}{2\pi} \tilde{f}(\omega) e^{i \omega t} \, .
+\end{equation}
+The utility and properties of the Fourier transform should be at least somewhat familiar to the audience of this book; if not, see ??.
+However, the Fourier transform pertains to function defined over a domain of infinite extent and with infinite resolution.
+In real life applications with e.g. experimental data, discrete time digital devices such as digital-to-analog converters (DAC) and analog-to-digital (ADC) converters, or in crystals with discrete unit cells, we have either finite domains, finite resolution, or both.
+What we imagine to be less familar to readers here, is how to handle the subtleties introduced in those cases.
+
+As suggested above, there are four major Fourier transforms, each characterized by the extent of its domain and the resolution on that domain.
+These transforms are listed in Table~\ref{tab:four_transforms}.
+\begin{table}
+  \begin{center}
+    \caption{The four Fourier transforms}
+    \label{tab:four_transforms}
+    \begin{tabular}{|r|c|c|c|c|}
+      \hline
+      \textbf{Name}                   & \textbf{Extent}  & \textbf{Resolution}  & \textbf{Transformed extent}   & \textbf{Transformed resolution} \\
+      \hline
+      \hline
+      Fourier transform               & infinite                & continuous                  & infinite                & continuous \\
+      \hline
+      Discrete time Fourier transform & infinite                & discrete                    & finite                  & continuous \\
+      \hline
+      Fourier series                  & finite                  & continuous                  & infinite                & discrete \\
+      \hline
+      Discrete Fourier transform      & finite                  & discrete                    & finite                  & discrete \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+Let's go through the cases in table one at time.
+To clarify the language, we talk about functions (i.e. signals) of time whose transforms are functions of frequency.
+However these considerations apply to functions defined over space, or anything else.
+As illustrated above, the Fourier transform (FT) maps a continous function over the full real line to another continous function over the full real line.
+That is, given an infinite extent of time with infinite time resolution, we have a transform defined over infinite extent of frequency with infinite frequency resolution.
+
+\textbf{DTFT:} Now suppose that our function is defined over the integers, i.e. the time samples run infinitely far into the past and future, but with discrete instead of continous resolution $\delta t$.
+Intuitively, this function cannot have frequency components with frequencies beyond $1/\delta t$, so we should expect the transformed function to be defined only within a finite range $[0, 1/\delta t]$.
+This is the case with the discrete time Fourier transform (DTFT), which maps a function $f: \integers \rightarrow \complexes$ defined on the integers to a function $\tilde f: [0, 1] \rightarrow \complexes$ defined on a finite but continuous interval.
+Compared to the Fourier transform, the DTFT has limited frequency extent because the original signal is not known with enough time resolution to resolve frequencies beyond $1/\delta t$.
+
+\textbf{FS:} Suppose that our function is defined over a continous but finite interval $[0, T]$, i.e. the time runs over a limited range but with infinite resolution.
+Intuitively, this function cannot have frequency components distinguished more finely than $1/T$, so we should expect the transformed function to be defined over a discrete set of frequencies separated by $\delta f = 1 / T$.
+This is the case with the Fourier series (FS), which maps a function $f: [0, 1] \rightarrow \complexes$ defined over a finite continous interval to a function $\tilde f: \integers \rightarrow \complexes$ defined over the integers.
+Compared to the Fourier transform, the FS has limited frequency resolution because the original signal is not known for long enough time to resolve the difference between two frequencies closer together than $\delta f = 1 / T$.
+Notice that the DTFT and FS are opposites.
+
+\textbf{DFT:} Now suppose that our function is defined over a finite set of discrete samples $\{0, \delta t, 2 \delta t,\ldots T = (N-1) \delta t\}$.
+In this case, we have the limitations of both the DTFT and the FS, i.e. we expect our transformed function to be defined only up to a maximum frequency $1 / \delta t$ and only with frequency resolution $\delta f = 1 / T$.
+This is the case with the discrete Fourier transform (DFT), which maps a function $f: \{0, 1,\ldots N-1\} \rightarrow \complexes$ to a function $\tilde f: \{0, 1,\ldots N-1\}$.
+Compared to the Fourier transform, the DFT has both limited freuqency range and limited frequency resolution.
+
+From the above discussion it is apparent that infinite range in one domain implies infinite resolution in the other, while fininte range in one domain implies finite resolution in the other.
