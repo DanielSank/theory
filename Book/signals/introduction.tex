@@ -12,8 +12,6 @@ As suggested above, there are four major Fourier transforms, each characterized 
 These transforms are listed in Table~\ref{tab:four_transforms}.
 \begin{table}
   \begin{center}
-    \caption{The four Fourier transforms}
-    \label{tab:four_transforms}
     \begin{tabular}{|r|c|c|c|c|}
       \hline
       \textbf{Name}                   & \textbf{Extent}  & \textbf{Resolution}  & \textbf{Transformed extent}   & \textbf{Transformed resolution} \\
@@ -28,6 +26,8 @@ These transforms are listed in Table~\ref{tab:four_transforms}.
       Discrete Fourier transform      & finite                  & discrete                    & finite                  & discrete \\
       \hline
     \end{tabular}
+    \caption{The four Fourier transforms}
+    \label{tab:four_transforms}
   \end{center}
 \end{table}
 Let's go through the cases in table one at time.
@@ -36,20 +36,43 @@ However these considerations apply to functions defined over space, or anything 
 As illustrated above, the Fourier transform (FT) maps a continous function over the full real line to another continous function over the full real line.
 That is, given an infinite extent of time with infinite time resolution, we have a transform defined over infinite extent of frequency with infinite frequency resolution.
 
-\textbf{DTFT:} Now suppose that our function is defined over the integers, i.e. the time samples run infinitely far into the past and future, but with discrete instead of continous resolution $\delta t$.
+\leveldown{Discrete time Fourier transform (DTFT)}
+Suppose that our function is defined over the integers, i.e. the time samples run infinitely far into the past and future, but with discrete instead of continous resolution $\delta t$.
 Intuitively, this function cannot have frequency components with frequencies beyond $1/\delta t$, so we should expect the transformed function to be defined only within a finite range $[0, 1/\delta t]$.
-This is the case with the discrete time Fourier transform (DTFT), which maps a function $f: \integers \rightarrow \complexes$ defined on the integers to a function $\tilde f: [0, 1] \rightarrow \complexes$ defined on a finite but continuous interval.
+This is the case with the discrete time Fourier transform (DTFT), which maps a function $f: \integers \rightarrow \complexes$ defined on the integers to a function $F: [0, 1] \rightarrow \complexes$ defined on a finite but continuous interval:
+\begin{equation}
+  f_n = \int_0^1 d\nu \, F (\nu) e^{i 2 \pi \nu n}
+  \qquad
+  F(\nu) = \sum_{n=-\infty}^\infty f_n e^{-i 2\pi \nu n}
+  \, .
+\end{equation}
 Compared to the Fourier transform, the DTFT has limited frequency extent because the original signal is not known with enough time resolution to resolve frequencies beyond $1/\delta t$.
 
-\textbf{FS:} Suppose that our function is defined over a continous but finite interval $[0, T]$, i.e. the time runs over a limited range but with infinite resolution.
+\levelstay{Fourier series (FS)}
+Suppose that our function is defined over a continous but finite interval $[0, T]$, i.e. the time runs over a limited range but with infinite resolution.
 Intuitively, this function cannot have frequency components distinguished more finely than $1/T$, so we should expect the transformed function to be defined over a discrete set of frequencies separated by $\delta f = 1 / T$.
-This is the case with the Fourier series (FS), which maps a function $f: [0, 1] \rightarrow \complexes$ defined over a finite continous interval to a function $\tilde f: \integers \rightarrow \complexes$ defined over the integers.
+This is the case with the Fourier series (FS), which maps a function $f: [0, 1] \rightarrow \complexes$ defined over a finite continous interval to a function $F: \integers \rightarrow \complexes$ defined over the integers:
+\begin{equation}
+  f(t) = \sum_{k=-\infty}^\infty F_k e^{i 2 \pi t k}
+  \qquad
+  F_k = \int dt \, f(t) e^{-i 2 \pi t k}
+  \, .
+\end{equation}
 Compared to the Fourier transform, the FS has limited frequency resolution because the original signal is not known for long enough time to resolve the difference between two frequencies closer together than $\delta f = 1 / T$.
 Notice that the DTFT and FS are opposites.
 
-\textbf{DFT:} Now suppose that our function is defined over a finite set of discrete samples $\{0, \delta t, 2 \delta t,\ldots T = (N-1) \delta t\}$.
+\levelstay{Discrete Fourier transform (DFT)}
+Now suppose that our function is defined over a finite set of discrete samples $\{0, \delta t, 2 \delta t,\ldots, T = (N-1) \delta t\}$.
 In this case, we have the limitations of both the DTFT and the FS, i.e. we expect our transformed function to be defined only up to a maximum frequency $1 / \delta t$ and only with frequency resolution $\delta f = 1 / T$.
-This is the case with the discrete Fourier transform (DFT), which maps a function $f: \{0, 1,\ldots N-1\} \rightarrow \complexes$ to a function $\tilde f: \{0, 1,\ldots N-1\}$.
+This is the case with the discrete Fourier transform (DFT), which maps a function $f: \{0, 1,\ldots N-1\} \rightarrow \complexes$ to a function $\tilde f: \{0, 1,\ldots N-1\}$:
+\begin{equation}
+  f_n = \sum_{k=0}^{N-1} \tilde{f}_k e^{i 2 \pi n k}
+  \qquad
+  \tilde{f}_k = \sum_{n=0}^{N-1} f_n e^{-i 2 \pi n k}
+  \, .
+\end{equation}
 Compared to the Fourier transform, the DFT has both limited freuqency range and limited frequency resolution.
 
-From the above discussion it is apparent that infinite range in one domain implies infinite resolution in the other, while fininte range in one domain implies finite resolution in the other.
+\levelstay{Outline}
+
+In the remainder of this chapter, we investigate the consequences of the finite and infinite time resolution and extent of these transforms.
