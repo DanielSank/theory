@@ -1,0 +1,107 @@
+\levelstay{Basics}
+
+Consider a noise process $X$.
+The mean power over a time interval $\{-T/2,T/2\}$ is defined as
+\begin{equation}
+P = \frac{1}{T} \avg{\int_{-T/2}^{T/2} \abs{x(t)}^2 \, dt}
+\end{equation}
+where the average is taken over realizations $x(t)$ of the noise.
+A given realization can be written as a Fourier transform,
+\begin{equation}
+x(t) \equiv
+\int \tilde{x}(\omega) e^{i \omega t} \, \frac{d \omega}{2\pi} \, .
+\end{equation}
+Let's use this to rewrite the mean power:
+\begin{align}
+P
+&= \frac{1}{T}\avg{
+\int_{-T/2}^{T/2} dt
+\int \frac{d\omega}{2\pi}
+\int \frac{d\omega'}{2\pi}
+\tilde{x}(\omega) \tilde{x}(\omega')^*
+e^{i(\omega - \omega')t}} \nonumber \\
+&= \int \int \frac{d\omega}{2\pi} \frac{d\omega'}{2\pi}
+\avg{\tilde{x}(\omega)\tilde{x}(\omega')^*}
+\frac{\sin(T(\omega - \omega')/2)}{T (\omega - \omega')/2} \, .
+\end{align}
+Suppose we filter the signal so that only frequencies near $\pm \Omega$ remain, which we represent by restricting the frequency integrals to a range, say, of $\{\Omega-\Delta \omega, \Omega+\Delta \omega\}$ and $\{-\Omega - \Delta \omega, -\Omega + \Delta \omega\}$.
+This gives four little squares in the $\omega/\omega'$ plane over which we ned to do the integral.
+However the $\sin(x)/x$ function is strongly peaked at $x=0$, so we actually only need to integrate over the patches where $\omega$ and $\omega'$ are both positive or both negative.
+Focusing on the positive patch and defining $\omega = \Omega + p$ and $\omega' = \Omega + q$, we have
+\begin{align}
+P_+ &=
+  \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \frac{dp}{2\pi} \frac{dq}{2\pi}
+  \avg{\tilde{x}(\Omega+p)\tilde{x}(\Omega+q)^*} \frac{\sin(T(p-q)/2)}{T(p-q)/2} \nonumber \\
+  (\Delta \omega \ll T) \quad &=
+  \frac{1}{T} \int_{-\Delta \omega/2}^{\Delta \omega / 2}
+  \frac{dp}{2\pi} \avg{\tilde{x}(\Omega + p) \tilde{x}(\Omega + p)^*} \nonumber \\
+  &= \frac{\avg{\abs{\tilde{x}(\Omega)}^2}}{T} \frac{\Delta \omega}{2 \pi}
+\end{align}
+where in the last line we assumed that $\tilde{x}$ is relatively constant over frequency width $\Delta \omega$.
+Now we repeat the computation for the $-\Omega$.
+Assuming $x(t) \in \mathbb{R}$, then $\tilde{x}(-\omega) = \tilde{x}(\omega)^*$, so we get
+\begin{align*}
+  P_- &=
+  \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \frac{dp}{2\pi} \frac{dq}{2\pi}
+  \avg{\tilde{x}(-\Omega+p)\tilde{x}(-\Omega+q)^*} \frac{\sin(T(p-q)/2)}{T(p-q)/2} \\
+  &= \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \frac{dp}{2\pi} \frac{dq}{2\pi}
+  \avg{\tilde{x}(\Omega-p)^* \tilde{x}(\Omega-q)} \frac{\sin(T(p-q)/2)}{T(p-q)/2} \\
+  (p \leftrightarrow -q) &= \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \int_{-\Delta \omega/2}^{\Delta\omega/2}
+  \frac{dp}{2\pi} \frac{dq}{2\pi}
+  \avg{\tilde{x}(\Omega+q)^* \tilde{x}(\Omega+p)} \frac{\sin(T(p-q)/2)}{T(p-q)/2} \\
+  &= P_+ \, .
+\end{align*}
+Therefore, the power is
+\begin{equation}
+P = P_- + P_+ = 2 \frac{\avg{\abs{\tilde{x}(\Omega)}^2}}{T} \frac{\Delta \omega}{2\pi} \, .
+\end{equation}
+Therefore, we can \emph{estimate} the power in a certain frequency band as twice the mod square of the Fourier transform of the acquired signal, divided by the acquisition time.
+The factor of two comes in because we're used a double sided Fourier transform.
+
+If we define a spectral density $S$ as the power per bandwidth of the signal at frequency $\Omega$, then we've shown that
+\begin{equation}
+2 \frac{\abs{\tilde{x}(\Omega)}^2}{T} \text{ is an estimator for } S(\Omega) \, .
+\end{equation}
+Note that when we imagined filtering a small frequency band of our signal, we included both positive and negative frequencies at the same time.
+Therefore, The symbol $S$ we just defined is the \textbf{single sided spectral density} defined only for $0 < \Omega < \infty$.
+
+Note we implicitly assumed that $\Omega \gg 1/T$ when we said that the four frequency regions could be considered separately.
+Our analysis fails at frequencies lower than $1/T$.
+This is a recurring theme in signal analysis: the acquisition time sets the frequency resolution.
+We'll see more about this later one when we study spectral leakage.
+
+\levelstay{Weiner Kinchein}
+
+Now that we've defined the power spectral density $S$, let's relate it to the time domain properties of $f(t)$.
+The Fourier transform of $S$ turns out to be interesting:
+\begin{align*}
+  \int_{-\infty}^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau}
+  =& \int_{-\infty}^\infty \frac{d\Omega}{2\pi} \frac{2}{T} e^{i \Omega \tau} \left\lvert \tilde{x}(\Omega) \right \rvert^2 \\
+  =& \int_{-\infty}^\infty \frac{d\Omega}{2\pi} \frac{2}{T} e^{i \Omega \tau}
+    \left( \int_{-T/2}^{T/2} dt f(t) e^{-i \Omega t} \right)
+    \left( \int_{-T/2}^{T/2} dt' f(t')^* e^{i \Omega t'} \right) \\
+  =& \frac{2}{T} \int_{-T/2}^{T/2} dt \int_{-T/2}^{T/2} dt' f(t) f(t')^* \delta(\tau + t' - t) \\
+  T \to \infty \qquad =& \frac{2}{T} \int_{-T/2}^{T/2} dt f(t) f(t - \tau)^* \\
+  =& 2 \avg{f(0)f(-\tau)^*} \\
+  =& 2 \avg{f(\tau) f(0)^*}
+\end{align*}
+For $f(t) \in \mathbb{R}$, we have $S(-\omega) = S(\omega)$, we can rewrite this as
+\begin{align*}
+  \int_{-\infty}^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau}
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} + \int_{-\infty}^0 \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} \\
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} + \int_{\infty}^0 - \frac{d\Omega}{2\pi} S(-\Omega) e^{-i \Omega \tau} \\
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{i \Omega \tau} + \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) e^{-i \Omega \tau} \\
+  =& \int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) 2 \cos(\Omega \tau) \\
+\end{align*}
+so (Weiner-Kinchein for real signals)
+\begin{equation*}
+\int_0^\infty \frac{d\Omega}{2\pi} S(\Omega) \cos(\Omega \tau) = \avg{f(0) f(\tau)}
+\end{equation*}
+where $S$ is the single sided spectral density.
