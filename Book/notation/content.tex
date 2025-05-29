@@ -1,0 +1,104 @@
+\levelstay{Notation and other conventions}
+
+This chapter is about notation.
+
+\leveldown{Functions versus values}
+Physics literature frequency conflates the idea of a function with the values attained by that function.
+For example, consider a function that maps one real number to another, i.e. $f: \reals \rightarrow \reals$.
+The function $f$ is a map.
+However, physicists write phrases like ``the function $f(t)$''.
+The idea here is that $f(t)$ is to be understood as something like ``the set of all values $f(t)$ for all $t \in \reals$''.
+But this is profoundly confusing, because for any actual value, such as $1.2$, the symbol $f(1.2)$ represents a single number, not a function.
+We encounter this overloaded notation so early in our education (typically as soon as we learn about functions), that we become proficient at navigating our own thought despite the lack of clarity, but a tax is paid.
+Especially in situations requiring subtlety or in cases where our mind is burdened learning something new, that extra mental tax can be the difference between new comprehension and frustration.
+In this book, we only write $f(t)$ when referring to a number, with one exception.
+We write integrals in the way commonly found in physics and engineering literature, as
+\begin{equation*}
+  \int f(t) \, dt
+\end{equation*}
+despite the fact that this expression needlessly invokes the numbers $f(t)$ and the somewhat meaningless symbol $dt$.
+A better notation might be
+\begin{equation*}
+  \int f
+\end{equation*}
+which means exactly the same thing and dispenses with the distracting parentheses that suggest single numbers.
+The reader may point out that expressions such as
+\begin{equation*}
+  \int dt \, f(t) e^{i \omega t}
+\end{equation*}
+would be impossible to write in our proposed notation, but we counter with the perfectly reasonable notation
+\begin{equation*}
+  \int f \, \text{expi}(\omega, \cdot)
+\end{equation*}
+where $\text{expi}: \reals \times \reals \rightarrow \complexes$ is defined by the equation $\text{expi}(\omega, t) = e^{i \omega t}$ and $\text{expi}(\omega, \cdot): \reals \rightarrow \complexes$ is defined by the equation $\text{expi}(\omega, \cdot)(t) = \text{expi}(\omega, t)$.
+We do not insist on this point in this book, and write integrals in the way typically encountered in physics literature.
+Nevertheless we do encourage readers to think carefully about this issue as it can lead to clarified understanding.
+
+\levelstay{Vectors versus components}
+A similar and perhaps more severe confusion arises when handling vectors.
+A vector can be thought of as something like an arrow in space, with a direction and length.
+However, physicists have adopted the insane habit of writing e.g. ``$v_i$'' to denote a vector.
+Similarly to how $f(t)$ should denote a specific number, $v_i$ should denote a single component of a vector expressed in a particular basis, which is again just a number.
+In this book, we always write $\ket{v}$ to denote a vector, and when we wish to refer to a component of a vector, we write $v^E_i$ meaning ``the $i^\text{th}$ component of vector $\ket{v}$ when expressed in basis $E$''.
+In other words, given a set of basis vectors $\{\ket{E_i}\}$, we would have
+\begin{equation*}
+  \ket{v} = \sum_i v^E_i \ket{E_i} \, .
+\end{equation*}
+
+The issues of function and vector notations, and confusion between functions/vectors and numbers come together when we do linear algebra with functions.
+In particular, the Fourier transform can be thought of as a change of basis in representing a vector.
+Consider a function $f: \reals \rightarrow \complexes$.
+This function is a perfectly valid vector, because vectors can be summed and multipled by scalars.
+In this picture, the number $f(t)$ is the component of the vector $\ket{f}$ for basis vector $\ket{t}$, i.e. $f(t) = \braket{t}{f}$.
+Here $\ket{t}$ can be visualized as a delta function peak at time $t$ and we could write the unsurprising equation
+\begin{equation*}
+  f(t)
+  = \braket{t}{f}
+  = \int \underbrace{\braket{t}{t'}}_{\delta(t - t')} \underbrace{\braket{t'}{f}}_{f(t')} \, dt'
+  = \int \delta(t' - t) f(t') \, dt'
+  \, .
+\end{equation*}
+The Fourier transform can be viewed as a component of $f$ in a different basis:
+\begin{equation*}
+  \tilde f(\omega) = \braket{\omega}{f} = \int \braket{\omega}{t} \braket{t}{f} \, dt = \int f(t) e^{-i \omega t} \, dt
+\end{equation*}
+where we defined the basis vectors $\ket{\omega}$ via their inner products with time spikes $\braket{t}{\omega} = \exp(i \omega t)$.
+Why bother with all of this?
+The point is that using this notation makes clear the fact that $\ket{f}$ is the same object everwhere, and that our transforms are just expressing it in different ways.
+Notation making that thought clear at all times is as powerful ally when working with Fourier and other transforms.
+
+\levelstay{Miscillaneous}
+\begin{enumerate}
+  \item \textbf{Integral without limits:} An integral $\int$ without explicitly written limits of integration is assumed to have limits $(-\infty, \infty)$.
+\end{enumerate}
+
+\levelstay{Averages}
+\begin{enumerate}
+  \item \textbf{Ensemble average:} $\angavg{\cdot}$ denotes an ensemble average. For example, when we write $\angavg{\phi^2}$ we imagine an ensemble of experiments, each of which involving where some phase $\phi$, and we take the average of the square of that phase over all of those experiments.
+\end{enumerate}
+
+\levelstay{Signal transforms}
+
+\begin{enumerate}
+  \item \textbf{Fourier transform:} Given a function $f: \reals \rightarrow \complexes$, $\tilde f$ denotes the Fourier transform of $f$, i.e.
+  \begin{displaymath}
+    f(t) = \int \frac{d \omega}{2\pi} \, \tilde f (\omega) e^{i \omega t}
+    \quad \tilde f(\omega) = \int dt \, f(t) e^{-i \omega t}
+    \, .
+  \end{displaymath}
+  Another common convention for the Fourier transform, which we will use occasionally, is
+  \begin{displaymath}
+    f(t) = \int d\nu \, \tilde f (\nu) e^{i 2 \pi \nu t}
+    \quad \tilde f(\nu) = \int dt \, f(t) e^{-i 2 \pi \nu t}
+    \, .
+  \end{displaymath}
+  Whether we're using the angular frequency or cyclic frequency variant will be clear from the position of the $2\pi$ factors and also from the use of the variable $\omega$, which only appears when working with angular frequencies.
+  \item \textbf{Discrete time Fourier transform:} Given a function $x: \integers \rightarrow \complexes$, i.e. a signal sampled at discrete times, we denote the discrete time Fourier transform by $X$, i.e.
+    \begin{displaymath}
+      x_n = \int_0^1 X(\nu) e^{i 2\pi \nu n}
+      \quad
+      X(\nu) = \sum_{n=-\infty}^\infty x_n e^{-i 2 \pi \nu n}
+      \, .
+    \end{displaymath}
+  \item \textbf{Fourier series:} Given a function $x: [0, 1] \rightarrow \complexes$, i.e. a signal defined over a continuous interval, we denote the Fourier series by $X$, i.e.
+\end{enumerate}
