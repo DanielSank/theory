@@ -22,6 +22,11 @@ class change_dir:
 
 
 def main() -> None:
+    for path in pathlib.Path(".").rglob("make-figures"):
+        with change_dir(path.parent.absolute()):
+            print(path.parent)
+            os.system("./make-figures")
+
     for path in pathlib.Path(".").rglob("*.svg"):
         print(path)
         with change_dir(path.parent.absolute()):
