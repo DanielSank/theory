@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import matplotlib
+matplotlib.rcParams["mathtext.fontset"] = "cm"
+import schemdraw
+import schemdraw.elements as elm
+
+
+def driven_transmon():
+    d = schemdraw.Drawing()
+    voltage_source = d.add(elm.sources.SourceSin().label(r"$V_s$").length(2))
+    resistor = d.add(elm.Resistor().label(r"$R_s$").length(2).at(xy=voltage_source.end))
+    tline = d.add(elm.Coax().label("$Z=R_s$", ofst=-0.55).at(resistor.end).right())
+    capacitor_drive = d.add(elm.Capacitor().at(tline.end).label("$C_d$").right().length(1))
+    capacitor = d.add(elm.Capacitor().label(r"$C$").down().length(4))
+    wire_top = d.add(elm.Line().right().at(capacitor_drive.end).length(2))
+    junction = d.add(elm.Josephson().at(wire_top.end).down().length(4))
+    d.add(elm.Line().at(junction.end).to(voltage_source.start))
+    d.add(elm.GroundSignal().at(voltage_source.start))
+    return d
+
+
+if __name__ == "__main__":
+    driven_transmon().save("driven_transmon.pdf")

@@ -24,11 +24,11 @@ class change_dir:
 def main() -> None:
     for path in pathlib.Path(".").rglob("make-figures"):
         with change_dir(path.parent.absolute()):
-            print(path.parent)
+            print(f"Executing {path.parent}/make-figures")
             os.system("./make-figures")
 
     for path in pathlib.Path(".").rglob("*.svg"):
-        print(path)
+        print(f"Converting {path}")
         with change_dir(path.parent.absolute()):
             os.system(f"inkscape --export-filename={path.stem}.pdf {path.name}")
 
