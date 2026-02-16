@@ -80,20 +80,20 @@ Notation making that thought clear at all times is as powerful ally when working
 \levelstay{Signal transforms}
 
 \begin{enumerate}
-  \item \textbf{Fourier transform:} Given a function $f: \reals \rightarrow \complexes$, $\tilde f$ denotes the Fourier transform of $f$, i.e.
+  \item \textbf{Fourier transform:} Given a function $x: \reals \rightarrow \complexes$, $\tilde x$ denotes the Fourier transform of $x$, i.e.
   \begin{displaymath}
-    f(t) = \int \frac{d \omega}{2\pi} \, \tilde f (\omega) e^{i \omega t}
-    \quad \tilde f(\omega) = \int dt \, f(t) e^{-i \omega t}
+    x(t) = \int \frac{d \omega}{2\pi} \, \tilde x (\omega) e^{i \omega t}
+    \quad \tilde x(\omega) = \int dt \, x(t) e^{-i \omega t}
     \, .
   \end{displaymath}
   Another common convention for the Fourier transform, which we will use occasionally, is
   \begin{displaymath}
-    f(t) = \int d\nu \, \tilde f (\nu) e^{i 2 \pi \nu t}
-    \quad \tilde f(\nu) = \int dt \, f(t) e^{-i 2 \pi \nu t}
+    x(t) = \int d\nu \, \tilde x (\nu) e^{i 2 \pi \nu t}
+    \quad \tilde x(\nu) = \int dt \, x(t) e^{-i 2 \pi \nu t}
     \, .
   \end{displaymath}
-  Whether we're using the angular frequency or cyclic frequency variant will be clear from the position of the $2\pi$ factors and also from the use of the variable $\omega$, which only appears when working with angular frequencies.
-  \item \textbf{Discrete time Fourier transform:} Given a function $x: \integers \rightarrow \complexes$, i.e. a signal sampled at discrete times, we denote the discrete time Fourier transform by $X$, i.e.
+  Whether we're using the angular frequency or cyclic frequency variant will be clear from the position of the $2\pi$ factors.
+\item \textbf{Discrete time Fourier transform:} Given a function $x: \integers \rightarrow \complexes$, i.e. a signal sampled at discrete times, we denote the discrete time Fourier transform by $X: \mathbb{R} \rightarrow \mathbb{C}$, i.e.
     \begin{displaymath}
       x_n = \int_0^1 X(\nu) e^{i 2\pi \nu n}
       \quad
