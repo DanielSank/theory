@@ -1,18 +1,4 @@
-\documentclass{article}
-
-\input{../TeX/packages.tex}
-\input{../TeX/macros.tex}
-
-\title{Harmonic Oscillator}
-\author{Daniel Sank \\ \small{University of California Santa Barbara} \\ \small{Presently Google Quantum AI}}
-\date{23 February 2009}
-
-\begin{document}
-\maketitle
-
-\input{content.tex}
-
-\section{Rotating Mode Formalism}
+\levelstay{Rotating Mode Formalism}
 
 There's an interesting way to write down the equations for a harmonic oscillator that's useful when you have coupled problems or problems with time varied parameters.
 An as example consider a parallel LRC circuit.
@@ -95,16 +81,3 @@ a^-(t) = a^-(0) \exp \left[ \omega_0 \left(-i - \frac{\epsilon}{2}\right) t \rig
 a^+(t) = a^+(0) \exp \left[ \omega_0 \left( i - \frac{\epsilon}{2}\right) t \right] \end{eqnarray}
 Note that the time evolution has the same sense from what is typically used in quantum mechanics for the $a$ and $a^{\dagger}$ operators.
 
-\section{Coupled oscillators}
-
-\input{coupled_oscillators.tex}
-
-\subsection{Hamiltonian approach}
-
-\input{coupled_oscillators_hamiltonian.tex}
-
-\section{Coupled transmission lines}
-
-\input{coupled_lines.tex}
-
-\end{document}
