@@ -5,9 +5,35 @@
 
 \levelstay{Exercises}
 
-\leveldown{Solutions for the driven oscillator}
+\leveldown{Impulse response}
+\begin{enumerate}[label=\alph*.]
+  \item (Critical damping) Find the impulse response in the case $\omega_0 = \kappa / 2$.
+  \item (Overdamping) Find the impulse response in the case $\omega_0 < \kappa / 2$.
+  \item In this exercise, we prove statements from the text about the energy in the oscillator in the underdamped case.
+    \begin{enumerate}[label=\roman*.]
+      \item Write Newton's equation for a drivem damped mechanical harmonic oscillator with position $x$, mass $m$, spring constant $k$, coefficiency of friction $\mu$, and driving force $F(t)$.
+        By comparison to the equations in the text, show that $\phi = x$, $\omega_0^2 = k/m$, $\kappa = \mu / m$, and $J(t) = F(t) / m$.
+      \item Suppose the driving force is a delta function at time $t = t_0$, so the force is written $F(t) = \Delta P \, \delta(t - t_0)$ where $\Delta P$ is the impulse imparted to the system at time $t_0$.
+        The driving term then has the form $J(t) = \Delta P \delta(t - t_0) / m$.
+        By comparing with the main text where we write $J(t) = A \delta(t - t_0)$, interpret the meaning of $A$.
+      \item Calculate the total energy
+        \begin{equation*}
+          E(t) = \frac{1}{2} k x(t)^2 + \frac{1}{2} m \dot{x}(t)^2
+          \, .
+        \end{equation*}
+        Show that, in the limit $\kappa \ll \omega_0$, the energy is approximately
+        \begin{equation*}
+          E(t) = E_0 \exp \left( - \kappa t \right)
+        \end{equation*}
+        as stated in the main text.
+        Show that $E_0 = m v_0^2 / 2$ where $v_0$ is the velocity immediately after time $t_0$.
+    \end{enumerate}
+\end{enumerate}
 
-\begin{enumerate}[label=(\alph*)]
+
+\levelstay{Solutions in the rotating frame}
+
+\begin{enumerate}[label=\alph*.]
   \item Find the Green function for the driven oscillator described by Eq.~(\ref{rf.eq:equation_of_motion_phasor}).
   \item Solve for $\alpha(t)$ in the case that $J(t) = J_0 \delta(t)$. In this case, it's convenient to choose $\omega_f = \omega_0'$.
   \item Write down $\phi(t)$ for your solution to the previous part.
@@ -17,7 +43,7 @@
 
 \levelstay{Coupled oscillators}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=\alph*.]
   \item Derive Eqs.~(\ref{eq:coupled_oscillators_kirchhoff}) by application of Kirchhoff's laws.
   \item Check Eqs.~(\ref{coh.eq:coupled_oscillators_lagrangian}) by showing that Lagrange's equations of motion reproduce the equations of motion we got from Kirchhoff's laws.
 \end{enumerate}

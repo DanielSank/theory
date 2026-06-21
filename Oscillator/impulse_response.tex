@@ -2,82 +2,81 @@
 
 The equation for a damped harmonic oscillator is
 \begin{equation}
-  \ddot{\phi}(t)+2\beta\dot{\phi}(t)+\omega_{0}^{2}\phi(t)=j(t)
+  \ddot{\phi}(t) + \kappa \dot{\phi}(t) + \omega_0^2 \phi(t) = J(t)
 \end{equation}
-In the usual way we turn this into an abstract equation \begin{equation}
-(D_{t}^{2}+2\beta D_{t}+\omega_{0}^{2})\ket{\phi}=\ket{j} \end{equation}
+where $\kappa$ has dimensions of $1 / [\text{Time}]$ and the forcing term $J(t)$ has dimensions of $[\phi]/[\text{Time}]^2$.
+In the usual way we turn this into an abstract equation
+\begin{equation}
+  \left( D_t^2 + \kappa D_t + \omega_0^2 \right) \ket{\phi} = \ket{J}
+\end{equation}
 Our Fourier convention will be
 \begin{equation}
-  \braket{t}{\omega}=e^{i\omega t}
+  \braket{t}{\omega} = e^{i\omega t}
 \end{equation}
-which is the common choice in electrical engineering.
-However, it is the \emph{opposite} of what is normally used in physics, notably in Schrodinger's equation.
 With this convention $-iD_t$ is Hermitian.
 Going to the $\ket{\omega}$ basis we get
 \begin{align}
-  \bbraket{\omega}{D_t^2 + 2\beta D_t + \omega_0^2}{\phi} &= \braket{\omega}{j} \nonumber \\
-  (-\omega^{2} + 2 i \beta\omega + \omega_{0}^{2}) \phi(\omega) & = j(\omega) \nonumber \\
-  \phi(\omega) & = \frac{j(\omega)}{-\omega^{2} + 2 i \beta \omega + \omega_{0}^{2}}
+  \bbraket{\omega}{D_t^2 + \kappa D_t + \omega_0^2}{\phi} &= \braket{\omega}{J} \nonumber \\
+  \left( -\omega^2 + i \kappa \omega + \omega_0^2 \right) \ft \phi(\omega) & = \ft J(\omega) \nonumber \\
+  \ft \phi(\omega) & = \frac{\ft J(\omega)}{-\omega^2 + i \kappa \omega + \omega_0^2}
   \, .
 \end{align}
-Taking $j(t)=A\delta(t-t_{0})$ we get $\braket{\omega}{j} = A e^{-i \omega t_{0}}$.
-We can factor the denominator as $-(\omega-\omega_{+})(\omega-\omega_{-})$
-where
+We study the case where the drive is a single delta function at time $t_0$.
+Taking $J(t) = A \delta(t - t_0)$ we get $\ft J(\omega) = A e^{-i \omega t_0}$.
+Observe that $A$ has dimensions of $[J] \times [\text{Time}]$.
+The denominator factors into $-(\omega - \omega_+)(\omega - \omega_-)$ where
 \begin{equation}
-  \omega_{+} = i \beta + \omega_0' \qquad \omega_{-} = i \beta - \omega_0' \label{eq:omega_plus_minus}
+  \omega_+ = i \frac{\kappa}{2} + \omega_0' \qquad \omega_{-} = i \frac{\kappa}{2} - \omega_0' \label{eq:omega_plus_minus}
 \end{equation}
 and
 \begin{equation}
-  \omega_0' = \omega_0 \sqrt{ 1 - \left( \beta / \omega_0 \right) ^2 } \, .
+  \omega_0' = \omega_0 \sqrt{ 1 - \left( \kappa / 2 \omega_0 \right)^2 } \, .
 \end{equation}
 Therefore we have
 \begin{equation}
-  \phi(\omega) = \frac{-A e^{-i \omega t_0}}{(\omega - \omega_{+})(\omega-\omega_{-})} \, .
+  \ft \phi(\omega) = \frac{-A e^{-i \omega t_0}}{(\omega - \omega_{+})(\omega-\omega_{-})} \, .
 \end{equation}
+In the underdamped case where $\kappa / (2 \omega_0) < 1$, $\omega_0'$ is real.
 Upon Fourier transform
 \begin{equation}
   \phi(t) = 
-  \int\frac{-Ae^{i \omega(t - t_0)}}{(\omega-\omega_{+})(\omega-\omega_{-})} \,
-  \frac{d\omega}{2\pi} \, .
+  \int_{- \infty}^\infty \frac{d\omega}{2\pi} \ft \phi(\omega) e^{i \omega t}
+  = \int \frac{d \omega}{2 \pi} \frac{-Ae^{i \omega(t - t_0)}}{(\omega-\omega_{+})(\omega-\omega_{-})} \,
+  \, .
 \end{equation}
-Consider the case $t < t_0$.
+This integral can be evaluated via contour integration.
+Consider first the case $t < t_0$.
 In that case we close the contour in the lower half plane.
-Since both poles $\omega_\pm$ are in the upper half plane the integral is zero.
+Since both poles $\omega_\pm$ are in the upper half plane, the integral is zero.
 This reflects causality: the oscillator can't know about the impulse before it happens.
-For the case $t > t_{0}$ we close in the upper half plane.
-Now the contour encloses the poles and we will get a nonzero result.
+For the case $t > t_{0}$ we close in the upper half plane, the contour encloses the poles, and we will get a nonzero result.
 Let $\tau \equiv t - t_0$.
 Then the residue theorem gives
 \begin{align}
   \phi(t) &=
-  \frac{-A 2\pi i}{2 \pi}
+  -A \frac{(2\pi) i }{2 \pi}
   \left(
   \frac{e^{i \omega_+ \tau}}{\omega_+ - \omega_-} +
   \frac{e^{i \omega_- \tau}}{\omega_- - \omega_+}
   \right) \\
-  &= \frac{A}{\omega_0'} e^{- \beta \tau} \sin(\omega_0' \tau)
+  &= \frac{A}{\omega_0'} e^{- \kappa \tau / 2} \sin(\omega_0' \tau)
 \end{align}
-We see that the system oscillates with a frequency close to $\omega_0$ and decays with a rate given by the amplitude damping parameter $\beta$.
-Note that this solution is valid only when $\omega_0 > \beta$.
+We see that the system oscillates with frequency $\omega_0'$ and decays with a rate given by the amplitude damping parameter $\kappa$.
 
-In the limit $\beta \ll \omega_0$ we find $E(t) = E_{0}e^{-2 \beta t}$, where $E_0=\frac{1}{2} m A^{2}$ is the initial energy of the system.
-Note that $A$ is the initial velocity.
+\leveldown{Energy decay in the underdamped limit}
 
-Defining the quality factor $Q$ by
+In the limit $\kappa \ll \omega_0$ the energy in the system obeys $E(t) = E_0 e^{- \kappa (t - t_0)}$, where $E_0$ is the energy in the system immediately following the drive at time $t_0$.\footnote{See the exercises.}
+We define the \newword{quality factor} $Q$ for an oscillating system by
 \begin{equation}
-  Q \equiv \frac{\textrm{Energy stored}}{\textrm{Energy dissipated per radian}} \, ,
+  Q \equiv \frac{\textrm{Energy stored}}{\textrm{Energy dissipated per radian}} \, .
 \end{equation}
-we find
+With this definition, we find
 \begin{equation}
   Q
-  = \frac{E(t)}{dE/d\textrm{rad}}
-  = \frac{E(t)}{-(dE/dt)(dt/d\textrm{rad})}
-  = \frac{E(t)}{2\beta E(t)\frac{1}{\Delta\omega}}
-  = \frac{\Delta\omega}{2\beta}\approx\frac{\omega_{0}}{2\beta} \, .
+  = \frac{E(t)}{-dE/d\,\textrm{radian}}
+  = \frac{E(t)}{-(dE/dt)(dt/d\,\textrm{radian})}
+  = \frac{E(t)}{\kappa E(t) / \omega_0'}
+  \approx \frac{\omega_0}{\kappa}
 \end{equation}
-This relation is also written
-\begin{equation}
-  Q \approx \omega_0 / \kappa
-\end{equation}
-where $\kappa$ is the energy decay rate of the oscillator.
+where we used the fact that, when $\kappa \ll \omega_0$, $\omega_0' \approx \omega_0$.
 
